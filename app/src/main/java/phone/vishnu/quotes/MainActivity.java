@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import phone.vishnu.quotes.data.QuoteData;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getFragments());
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
-        tv=findViewById(R.id.tv);
+        tv = findViewById(R.id.tv);
 
 
         tv.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void processFinished(ArrayList<Quote> quotes) {
+
+                Collections.shuffle(quotes);
 
                 for (int i = 0; i < quotes.size(); i++) {
 

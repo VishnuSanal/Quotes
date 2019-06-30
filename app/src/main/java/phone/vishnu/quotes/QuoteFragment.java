@@ -1,8 +1,8 @@
 package phone.vishnu.quotes;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +27,7 @@ public class QuoteFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View quoteView = inflater.inflate(R.layout.fragment_quote, container, false);
 
@@ -36,8 +36,11 @@ public class QuoteFragment extends Fragment {
 
         String quote = getArguments().getString("quote");
         String author = getArguments().getString("author");
+
+
         quoteText.setText(quote);
         authorText.setText("-" + author);
+
 
         return quoteView;
     }

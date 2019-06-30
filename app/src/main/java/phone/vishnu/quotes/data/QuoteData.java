@@ -21,7 +21,7 @@ public class QuoteData {
 
     public void getQuotes(final QuoteListAsyncResponse callBack) {
 
-        String url = "https://raw.githubusercontent.com/pdichone/UIUX-Android-Course/master/Quotes.json%20";
+        String url = "https://raw.githubusercontent.com/VishnuSanal/Quotes/master/Quotes.json";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
 
