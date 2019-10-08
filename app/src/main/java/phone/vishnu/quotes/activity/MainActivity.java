@@ -1,6 +1,7 @@
 package phone.vishnu.quotes.activity;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 BlankFragment fragment = BlankFragment.newInstance();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
@@ -57,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpNotification() {
 
-
         new QuoteData().getQuotes(new QuoteListAsyncResponse() {
             @Override
             public void processFinished(ArrayList<Quote> quotes) {
 
                 Calendar calendar = Calendar.getInstance();
+
 //                calendar.setTimeInMillis(System.currentTimeMillis());
 
                 calendar.set(Calendar.HOUR_OF_DAY, 7);
@@ -75,13 +77,17 @@ public class MainActivity extends AppCompatActivity {
                 author = quotes.get(0).getAuthor();
 
                 Intent intent = new Intent(MainActivity.this, AlarmReceiver.class);
+                intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
 
                 intent.putExtra("message", message);
                 intent.putExtra("author", author);
 
-                AlarmManager alarmManager = (AlarmManager) MainActivity.this.getSystemService(ALARM_SERVICE);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, calendar.getTimeInMillis(), (AlarmManager.INTERVAL_DAY / 4), null);
+                AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(ALARM_SERVICE);
+
+                alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, calendar.getTimeInMillis(), (AlarmManager.INTERVAL_DAY / 4), pendingIntent);
+
             }
         });
     }
