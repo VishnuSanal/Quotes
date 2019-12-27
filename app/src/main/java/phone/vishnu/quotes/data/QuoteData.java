@@ -1,5 +1,7 @@
 package phone.vishnu.quotes.data;
 
+import android.os.AsyncTask;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -15,50 +17,63 @@ import phone.vishnu.quotes.controller.AppController;
 import phone.vishnu.quotes.model.Quote;
 
 public class QuoteData {
-
     ArrayList<Quote> quoteArrayList = new ArrayList<>();
-
 
     public void getQuotes(final QuoteListAsyncResponse callBack) {
 
-        String url = "https://raw.githubusercontent.com/VishnuSanal/Quotes/master/Quotes.json";
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+        final String url = "https://raw.githubusercontent.com/VishnuSanal/Quotes/master/Quotes.json";
 
-                Request.Method.GET,
-                url,
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
 
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject quoteObject = response.getJSONObject(i);
 
-                                Quote quote = new Quote();
-                                quote.setQuote(quoteObject.getString("quote"));
-                                quote.setAuthor(quoteObject.getString("name"));
-                                quoteArrayList.add(quote);
+                final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                        Request.Method.GET,
+                        url,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                for (int i = 0; i < response.length(); i++) {
+                                    try {
+                                        JSONObject quoteObject = response.getJSONObject(i);
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                        Quote quote = new Quote();
+                                        quote.setQuote(quoteObject.getString("quote"));
+                                        quote.setAuthor(quoteObject.getString("name"));
+                                        quoteArrayList.add(quote);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                if (null != callBack) {
+                                    callBack.processFinished(quoteArrayList);
+                                }
+                            }
+                        },
+
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
                             }
                         }
-                        if (null != callBack) {
-                            callBack.processFinished(quoteArrayList);
-                        }
-                    }
-                },
+                );
 
-                new Response.ErrorListener() {
+                AsyncTask.execute(new Runnable() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }
-        );
+                    public void run() {
 
-        AppController.getInstance().addToRequestQueue(jsonArrayRequest);
+                        AppController.getInstance().addToRequestQueue(jsonArrayRequest);
+                    }
+                });
+
+
+            }
+        });
+        thread.start();
 
     }
 

@@ -2,15 +2,18 @@ package phone.vishnu.quotes.activity;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-import android.view.View;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,33 +25,61 @@ import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.data.QuoteListAsyncResponse;
 import phone.vishnu.quotes.data.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.fragment.BlankFragment;
+import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.QuoteFragment;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.AlarmReceiver;
 
 public class MainActivity extends AppCompatActivity {
-
-    ViewPager viewPager;
-    TextView tv;
-    QuoteViewPagerAdapter adapter;
-    String message, author;
+    private ViewPager viewPager;
+    private TextView aboutTV,favoriteTV;
+    private QuoteViewPagerAdapter adapter;
+    private String message = "Quote not found", author = "Author not found";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getFragments());
         viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(adapter);
-        tv = findViewById(R.id.tv);
+        aboutTV = findViewById(R.id.aboutTextView);
+        favoriteTV = findViewById(R.id.favoritesTextView);
 
-        setUpNotification();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getFragments());
+                viewPager.setAdapter(adapter);
+            }
+        });
+        SharedPreferences settings = getSharedPreferences("phone.vishnu.quotes.activity.isNotificationSetPrefs", MODE_PRIVATE); // Get preferences file (0 = no option flags set)
+        boolean isNotificationSet = settings.getBoolean("isNotificationSet", false); // Is it first run? If not specified, use "true"
 
-        tv.setOnClickListener(new View.OnClickListener() {
+        if (!isNotificationSet) {
+            SharedPreferences.Editor editor = settings.edit(); // Open the editor for our settings
+            editor.putBoolean("isNotificationSet", true); // It is no longer the first run
+            editor.apply(); // Save all changed settings
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    setUpNotification();
+                }
+            });
+        }
+        aboutTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 BlankFragment fragment = BlankFragment.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .add(R.id.constraintLayout, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        favoriteTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FavoriteFragment fragment = FavoriteFragment.newInstance();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .add(R.id.constraintLayout, fragment)
@@ -59,36 +90,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpNotification() {
-
         new QuoteData().getQuotes(new QuoteListAsyncResponse() {
+
             @Override
             public void processFinished(ArrayList<Quote> quotes) {
 
-                Calendar calendar = Calendar.getInstance();
-
-//                calendar.setTimeInMillis(System.currentTimeMillis());
-
-                calendar.set(Calendar.HOUR_OF_DAY, 7);
-                calendar.set(Calendar.MINUTE, 30);
-                calendar.set(Calendar.SECOND, 0);
+                final long INTERVAL = (AlarmManager.INTERVAL_DAY / 3);
+                final int REQ_CODE = 2222;
+                Calendar cal = Calendar.getInstance();
+//                cal.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DATE)+1);
+                cal.setTimeInMillis(System.currentTimeMillis());
+                cal.set(Calendar.HOUR_OF_DAY, 7);
+                cal.set(Calendar.MINUTE, 30);
+                cal.add(Calendar.SECOND, 0);
 
                 Collections.shuffle(quotes);
-
                 message = quotes.get(0).getQuote();
                 author = quotes.get(0).getAuthor();
 
                 Intent intent = new Intent(MainActivity.this, AlarmReceiver.class);
-                intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-
                 intent.putExtra("message", message);
                 intent.putExtra("author", author);
 
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(ALARM_SERVICE);
-
-                alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, calendar.getTimeInMillis(), (AlarmManager.INTERVAL_DAY / 4), pendingIntent);
-
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager) MainActivity.this.getSystemService(Context.ALARM_SERVICE);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis() + INTERVAL, INTERVAL, pendingIntent);
             }
         });
     }
@@ -96,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
     public List<Fragment> getFragments() {
 
         final List<Fragment> fragments = new ArrayList<>();
-
         new QuoteData().getQuotes(new QuoteListAsyncResponse() {
             @Override
             public void processFinished(ArrayList<Quote> quotes) {

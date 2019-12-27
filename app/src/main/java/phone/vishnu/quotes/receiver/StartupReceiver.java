@@ -1,3 +1,4 @@
+/*
 package phone.vishnu.quotes.receiver;
 
 import android.content.BroadcastReceiver;
@@ -15,3 +16,4 @@ public class StartupReceiver extends BroadcastReceiver {
         }
     }
 }
+*/

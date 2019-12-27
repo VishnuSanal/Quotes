@@ -3,11 +3,7 @@ package phone.vishnu.quotes.fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +12,28 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.model.Quote;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class QuoteFragment extends Fragment {
 
-
+    private static final String PREFERENCE_NAME = "favPreference";
     ImageView shareIcon, favIcon;
     TextView quoteText, authorText;
-//    private String MY_PREFS_NAME= "phoneVishnuQuotesFragmentFavoritePreference";
 
     public QuoteFragment() {
     }
@@ -58,7 +66,6 @@ public class QuoteFragment extends Fragment {
         quoteText.setText(quote);
         authorText.setText("-" + author);
 
-
         return quoteView;
     }
 
@@ -80,17 +87,57 @@ public class QuoteFragment extends Fragment {
         favIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
                 favIcon.startAnimation(shake);
 
-                //TODO: Add this feature
+                SharedPreferences sharedPref = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+
+                Gson gson = new Gson();
 /*
-                SharedPreferences.Editor editor = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                editor.putString("name", "Elena");
-                editor.putInt("idName", 12);
-                editor.apply();
+                String json_old = sharedPref.getString(PREFERENCE_NAME, "{\"author\":\"-Babe Ruth\",\"quote\":\"Every strike brings me closer to the next home run.\"}");
+                ArrayList<Quote> arrayList = gson.fromJson(json_old,new TypeToken<List<Quote>>() {}.getType() );
+                arrayList.add(new Quote(quoteText.getText().toString(), authorText.getText().toString()));
+
+//                String json = gson.toJson(new Quote(quoteText.getText().toString(), authorText.getText().toString()));
+                String json = gson.toJson(arrayList);
+                Log.e("vishnu",String.valueOf(json));
 */
+                String jsonSaved = sharedPref.getString(PREFERENCE_NAME, "");
+                String jsonNewProductToAdd = gson.toJson(new Quote(quoteText.getText().toString(), authorText.getText().toString()));
+                //TODO: Check for Duplication
+                JSONArray jsonArrayProduct = new JSONArray();
+
+                try {
+                    if (jsonSaved.length() != 0) {
+                        jsonArrayProduct = new JSONArray(jsonSaved);
+
+                        ArrayList<String> listdata = new ArrayList<>();
+                        JSONArray jArray = (JSONArray) jsonArrayProduct;
+                        if (jArray != null) {
+                            for (int i = 0; i < jArray.length(); i++) {
+                                listdata.add(jArray.getString(i));
+                            }
+                        }
+                        listdata.add(jsonNewProductToAdd);
+                    }
+                    jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                editor.putString(PREFERENCE_NAME, String.valueOf(jsonArrayProduct));
+                Log.e("vishnu", String.valueOf(jsonArrayProduct));
+                editor.apply();
+
+            /*  RETRIEVING
+
+              SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                 gson = new Gson();
+                String json2 = sharedPrefs.getString(PREFERENCE_NAME, "");
+                Type type = new TypeToken<List<Quote>>() {}.getType();
+                List<Quote> arrayList = gson.fromJson(json, type);
+                */
+
             }
         });
 

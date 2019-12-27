@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:orientation="vertical"
+    tools:context=".fragment.FavoriteFragment">
+
+    <ImageView
+        android:id="@+id/favoriteSampleIconImageView"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/colorAccent"
+        android:contentDescription="@string/app_name"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_favorite" />
+
+    <ListView
+        android:id="@+id/favoriteListView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+</LinearLayout>
