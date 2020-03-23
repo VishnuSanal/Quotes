@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
@@ -12,13 +13,43 @@
         android:id="@+id/quoteTextSingleItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall" />
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/authorTextSingleItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="#9C9C9C" />
+        android:textColor="#9C9C9C"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quoteTextSingleItem" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/singleItemViewImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_slideshow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/singleItemRemoveImageView"
+        android:contentDescription="@string/app_name" />
+
+    <ImageView
+        android:id="@+id/singleItemRemoveImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_remove"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/app_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>

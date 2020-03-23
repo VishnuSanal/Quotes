@@ -2,8 +2,9 @@ package phone.vishnu.quotes.fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
@@ -53,19 +57,37 @@ public class QuoteFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View quoteView = inflater.inflate(R.layout.fragment_quote, container, false);
+        final View quoteView = inflater.inflate(R.layout.fragment_quote, container, false);
 
         quoteText = quoteView.findViewById(R.id.quoteTextView);
         authorText = quoteView.findViewById(R.id.authorTextView);
         shareIcon = quoteView.findViewById(R.id.shareImageView);
         favIcon = quoteView.findViewById(R.id.favoriteImageView);
 
-        String quote = getArguments().getString("quote");
+        final String quote = getArguments().getString("quote");
         String author = getArguments().getString("author");
 
         quoteText.setText(quote);
         authorText.setText("-" + author);
-
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    SharedPreferences sharedPref = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+                    Gson gson = new Gson();
+                    String jsonSaved = sharedPref.getString(PREFERENCE_NAME, "");
+                    Type type = new TypeToken<ArrayList<Quote>>() {
+                    }.getType();
+                    ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
+                    for (Quote tempQuote : productFromShared) {
+                        if (Objects.equals(quote, tempQuote.getQuote()))
+                            favIcon.setColorFilter(Color.RED);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         return quoteView;
     }
 
@@ -89,59 +111,48 @@ public class QuoteFragment extends Fragment {
             public void onClick(View v) {
                 final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
                 favIcon.startAnimation(shake);
+                favIcon.setColorFilter(Color.RED);
 
                 SharedPreferences sharedPref = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
 
                 Gson gson = new Gson();
-/*
-                String json_old = sharedPref.getString(PREFERENCE_NAME, "{\"author\":\"-Babe Ruth\",\"quote\":\"Every strike brings me closer to the next home run.\"}");
-                ArrayList<Quote> arrayList = gson.fromJson(json_old,new TypeToken<List<Quote>>() {}.getType() );
-                arrayList.add(new Quote(quoteText.getText().toString(), authorText.getText().toString()));
-
-//                String json = gson.toJson(new Quote(quoteText.getText().toString(), authorText.getText().toString()));
-                String json = gson.toJson(arrayList);
-                Log.e("vishnu",String.valueOf(json));
-*/
                 String jsonSaved = sharedPref.getString(PREFERENCE_NAME, "");
                 String jsonNewProductToAdd = gson.toJson(new Quote(quoteText.getText().toString(), authorText.getText().toString()));
-                //TODO: Check for Duplication
                 JSONArray jsonArrayProduct = new JSONArray();
 
-                try {
-                    if (jsonSaved.length() != 0) {
-                        jsonArrayProduct = new JSONArray(jsonSaved);
+                Type type = new TypeToken<ArrayList<Quote>>() {
+                }.getType();
+                ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
 
-                        ArrayList<String> listdata = new ArrayList<>();
-                        JSONArray jArray = (JSONArray) jsonArrayProduct;
-                        if (jArray != null) {
-                            for (int i = 0; i < jArray.length(); i++) {
-                                listdata.add(jArray.getString(i));
-                            }
-                        }
-                        listdata.add(jsonNewProductToAdd);
+                addFavorite(jsonSaved, jsonArrayProduct, jsonNewProductToAdd, productFromShared);
+                editor.putString(PREFERENCE_NAME, String.valueOf(jsonArrayProduct));
+                editor.apply();
+            }
+
+            private void addFavorite(String jsonSaved, JSONArray jsonArrayProduct, String jsonNewProductToAdd, ArrayList<Quote> productFromShared) {
+
+                try {
+                    if (jsonSaved.length() != 0 && checkPresence(productFromShared)) {
+                        jsonArrayProduct = new JSONArray(jsonSaved);
                     }
                     jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                editor.putString(PREFERENCE_NAME, String.valueOf(jsonArrayProduct));
-                Log.e("vishnu", String.valueOf(jsonArrayProduct));
-                editor.apply();
-
-            /*  RETRIEVING
-
-              SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                 gson = new Gson();
-                String json2 = sharedPrefs.getString(PREFERENCE_NAME, "");
-                Type type = new TypeToken<List<Quote>>() {}.getType();
-                List<Quote> arrayList = gson.fromJson(json, type);
-                */
-
             }
+
+            private boolean checkPresence(ArrayList<Quote> productFromShared) {
+                boolean isPresent = false;
+                for (int i = 0; i < productFromShared.size(); i++) {
+                    if (productFromShared.get(i).getQuote().trim().toLowerCase().equals(quoteText.getText().toString().trim().toLowerCase())) {
+                        isPresent = true;
+                    }
+                }
+                return isPresent;
+            }
+
         });
-
     }
-
-
 }
+//TODO:Remove Color
