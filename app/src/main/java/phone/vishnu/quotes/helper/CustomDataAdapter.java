@@ -27,9 +27,8 @@ public class CustomDataAdapter extends ArrayAdapter<Quote> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        int viewType = this.getItemViewType(position);
+
         Quote item = objects.get(position);
-        //  convertView = null;
         View rootView = convertView;
         final ViewHolder viewHolder;
 
@@ -37,22 +36,22 @@ public class CustomDataAdapter extends ArrayAdapter<Quote> {
             viewHolder = new ViewHolder();
             rootView = inflater.inflate(R.layout.single_item, parent, false);
 
-            viewHolder.Roll_No = (TextView) rootView.findViewById(R.id.quoteTextSingleItem);
-            viewHolder.Stu_Name = (TextView) rootView.findViewById(R.id.authorTextSingleItem);
+            viewHolder.quoteTV = (TextView) rootView.findViewById(R.id.quoteTextSingleItem);
+            viewHolder.authorTV = (TextView) rootView.findViewById(R.id.authorTextSingleItem);
 
             rootView.setTag(viewHolder);
 
         } else {
             viewHolder = (ViewHolder) rootView.getTag();
         }
-        viewHolder.Roll_No.setText(item.getQuote());
-        viewHolder.Stu_Name.setText(item.getAuthor());
+        viewHolder.quoteTV.setText(item.getQuote());
+        viewHolder.authorTV.setText(item.getAuthor());
 
         return rootView;
     }
 
     static class ViewHolder {
-        TextView Roll_No;
-        TextView Stu_Name;
+        TextView quoteTV;
+        TextView authorTV;
     }
 }

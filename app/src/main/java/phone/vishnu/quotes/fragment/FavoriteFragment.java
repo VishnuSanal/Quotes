@@ -52,15 +52,19 @@ public class FavoriteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Gson gson = new Gson();
-        ArrayList<Quote> productFromShared;
+        ArrayList<Quote> productFromShared = new ArrayList<>();
         SharedPreferences sharedPrefs = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String jsonPreferences = sharedPrefs.getString(PREFERENCE_NAME, "");
         Type type = new TypeToken<ArrayList<Quote>>() {
         }.getType();
-        productFromShared = gson.fromJson(jsonPreferences, type);
-
+        if (0 != jsonPreferences.length()) productFromShared = gson.fromJson(jsonPreferences, type);
+        else productFromShared.add(new Quote("No Favorite Quotes", ""));
+//        try{
         CustomDataAdapter adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared);
-        lv.setAdapter(adapter);
+            lv.setAdapter(adapter);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
      /*   viewIV.setOnClickListener(new View.OnClickListener() {
             @Override
