@@ -102,7 +102,7 @@ public class QuoteFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TEXT, quoteText.getText().toString() + "\n" + authorText.getText().toString());
-                startActivity(Intent.createChooser(intent, "Share Using"));
+                startActivity(Intent.createChooser(intent, "Share Using  "));
             }
         });
 
@@ -119,27 +119,29 @@ public class QuoteFragment extends Fragment {
                 Gson gson = new Gson();
                 String jsonSaved = sharedPref.getString(PREFERENCE_NAME, "");
                 String jsonNewProductToAdd = gson.toJson(new Quote(quoteText.getText().toString(), authorText.getText().toString()));
-                JSONArray jsonArrayProduct = new JSONArray();
+
 
                 Type type = new TypeToken<ArrayList<Quote>>() {
                 }.getType();
                 ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
 
-                addFavorite(jsonSaved, jsonArrayProduct, jsonNewProductToAdd, productFromShared);
-                editor.putString(PREFERENCE_NAME, String.valueOf(jsonArrayProduct));
+                editor.putString(PREFERENCE_NAME, String.valueOf(addFavorite(jsonSaved,/* jsonArrayProduct, */jsonNewProductToAdd, productFromShared)));
                 editor.apply();
             }
 
-            private void addFavorite(String jsonSaved, JSONArray jsonArrayProduct, String jsonNewProductToAdd, ArrayList<Quote> productFromShared) {
-
+            private JSONArray addFavorite(String jsonSaved/*, JSONArray jsonArrayProduct*/, String jsonNewProductToAdd, ArrayList<Quote> productFromShared) {
+                JSONArray jsonArrayProduct = new JSONArray();
                 try {
-                    if (jsonSaved.length() != 0 && checkPresence(productFromShared)) {
+                    if (jsonSaved.length() != 0 && !checkPresence(productFromShared)) {
+                        jsonArrayProduct = new JSONArray(jsonSaved);
+                        jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
+                    }else if (checkPresence(productFromShared)){
                         jsonArrayProduct = new JSONArray(jsonSaved);
                     }
-                    jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                return jsonArrayProduct;
             }
 
             private boolean checkPresence(ArrayList<Quote> productFromShared) {
