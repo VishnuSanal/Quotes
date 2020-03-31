@@ -50,6 +50,10 @@ public class CustomDataAdapter extends ArrayAdapter<Quote> {
         return rootView;
     }
 
+
+
+
+
     static class ViewHolder {
         TextView quoteTV;
         TextView authorTV;

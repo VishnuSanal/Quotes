@@ -7,5 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+<!--TODO: Refurbish this Alert Dialog-->
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#B3B3B3</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:background">@color/colorBackground</item>
+    </style>
 </resources>

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,14 +26,16 @@ import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.data.QuoteListAsyncResponse;
 import phone.vishnu.quotes.data.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.fragment.BlankFragment;
+import phone.vishnu.quotes.fragment.BottomSheetFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.QuoteFragment;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.AlarmReceiver;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
+    ImageView menuIcon;
     private ViewPager viewPager;
-    private TextView aboutTV,favoriteTV;
+    private TextView aboutTV, favoriteTV;
     private QuoteViewPagerAdapter adapter;
     private String message = "Quote not found", author = "Author not found";
 
@@ -41,8 +44,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewPager = findViewById(R.id.viewPager);
-        aboutTV = findViewById(R.id.aboutTextView);
-        favoriteTV = findViewById(R.id.favoritesTextView);
+        menuIcon = findViewById(R.id.homeMenuIcon);
+//        aboutTV = findViewById(R.id.aboutTextView);
+//        favoriteTV = findViewById(R.id.favoritesTextView);
+
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetFragment bottomSheet = new BottomSheetFragment();
+                bottomSheet.show(getSupportFragmentManager(), "bottomSheetTag");
+            }
+        });
+
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -65,28 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        aboutTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BlankFragment fragment = BlankFragment.newInstance();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .add(R.id.constraintLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-        favoriteTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FavoriteFragment fragment = FavoriteFragment.newInstance();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .add(R.id.constraintLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+
     }
 
     private void setUpNotification() {
@@ -137,5 +129,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return fragments;
+    }
+
+    @Override
+    public void onButtonClicked(int id) {
+        if (id == R.id.bottomSheetFav) {
+            FavoriteFragment fragment = FavoriteFragment.newInstance();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .add(R.id.constraintLayout, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else if (id == R.id.bottomSheetAbout) {
+            BlankFragment fragment = BlankFragment.newInstance();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .add(R.id.constraintLayout, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }

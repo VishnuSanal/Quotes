@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +17,9 @@ import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -54,31 +59,17 @@ public class FavoriteFragment extends Fragment {
         Gson gson = new Gson();
         ArrayList<Quote> productFromShared = new ArrayList<>();
         SharedPreferences sharedPrefs = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        String jsonPreferences = sharedPrefs.getString(PREFERENCE_NAME, "");
+        final String jsonPreferences = sharedPrefs.getString(PREFERENCE_NAME, "");
         Type type = new TypeToken<ArrayList<Quote>>() {
         }.getType();
         if (0 != jsonPreferences.length()) productFromShared = gson.fromJson(jsonPreferences, type);
         else productFromShared.add(new Quote("No Favorite Quotes", ""));
-//        try{
-        CustomDataAdapter adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared);
-            lv.setAdapter(adapter);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
-     /*   viewIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        removeIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
-
+        final CustomDataAdapter adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared);
+        lv.setAdapter(adapter);
+ //TODO:Handle Clicks
     }
+
+
+
 }
