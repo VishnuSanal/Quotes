@@ -159,13 +159,19 @@ public class QuoteFragment extends Fragment {
         JSONArray jsonArrayProduct = new JSONArray();
         try {
 
-            if (jsonSaved.length() != 0 && !isPresent(productFromShared)) {
-                jsonArrayProduct = new JSONArray(jsonSaved);
-                jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
-                favIcon.setColorFilter(Color.RED);
-            } else if (isPresent(productFromShared)) {
-                favIcon.setColorFilter(Color.WHITE);
-                jsonArrayProduct = removeFavorite(jsonSaved, productFromShared, quoteText.getText().toString());
+            if (jsonSaved.length() != 0) {
+                if (!isPresent(productFromShared)) {
+                    jsonArrayProduct = new JSONArray(jsonSaved);
+                    jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
+                    favIcon.setColorFilter(Color.RED);
+                } else {
+
+                    favIcon.setColorFilter(Color.WHITE);
+                    jsonArrayProduct = removeFavorite(jsonSaved, productFromShared, quoteText.getText().toString());
+
+                }
+            } else {
+                productFromShared = new ArrayList<Quote>();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -232,7 +238,7 @@ public class QuoteFragment extends Fragment {
         rootView.setDrawingCacheEnabled(true);
         Bitmap bitmap = rootView.getDrawingCache();
 
-        File imagePath = new File(Environment.getExternalStorageDirectory() + "/Documents/screenshot.png");
+        File imagePath = new File(Environment.getExternalStorageDirectory() + "/Documents/.screenshot.png");
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(imagePath);
