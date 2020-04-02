@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -14,15 +17,18 @@ import phone.vishnu.quotes.model.Quote;
 
 public class CustomDataAdapter extends ArrayAdapter<Quote> {
 
-    Context _context;
-    LayoutInflater inflater;
+    private Context _context;
+    private LayoutInflater inflater;
+    private View.OnClickListener viewImageViewOnClickListener, removeImageViewOnClickListener;
     private ArrayList<Quote> objects;
 
-    public CustomDataAdapter(Context context, ArrayList<Quote> objects) {
+    public CustomDataAdapter(@NonNull Context context, ArrayList<Quote> objects, View.OnClickListener viewImageViewOnClickListener, View.OnClickListener removeImageViewOnClickListener) {
         super(context, 0, objects);
         this.objects = objects;
         _context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.viewImageViewOnClickListener = viewImageViewOnClickListener;
+        this.removeImageViewOnClickListener = removeImageViewOnClickListener;
     }
 
     @Override
@@ -36,9 +42,13 @@ public class CustomDataAdapter extends ArrayAdapter<Quote> {
             viewHolder = new ViewHolder();
             rootView = inflater.inflate(R.layout.single_item, parent, false);
 
-            viewHolder.quoteTV = (TextView) rootView.findViewById(R.id.quoteTextSingleItem);
-            viewHolder.authorTV = (TextView) rootView.findViewById(R.id.authorTextSingleItem);
+            viewHolder.quoteTV = rootView.findViewById(R.id.quoteTextSingleItem);
+            viewHolder.authorTV = rootView.findViewById(R.id.authorTextSingleItem);
+            viewHolder.viewIV = rootView.findViewById(R.id.singleItemViewImageView);
+            viewHolder.removeIV = rootView.findViewById(R.id.singleItemRemoveImageView);
 
+            viewHolder.viewIV.setOnClickListener(viewImageViewOnClickListener);
+            viewHolder.removeIV.setOnClickListener(removeImageViewOnClickListener);
             rootView.setTag(viewHolder);
 
         } else {
@@ -47,15 +57,16 @@ public class CustomDataAdapter extends ArrayAdapter<Quote> {
         viewHolder.quoteTV.setText(item.getQuote());
         viewHolder.authorTV.setText(item.getAuthor());
 
+        viewHolder.removeIV.setTag(position);
+        viewHolder.viewIV.setTag(position);
+
         return rootView;
     }
-
-
-
-
 
     static class ViewHolder {
         TextView quoteTV;
         TextView authorTV;
+        ImageView viewIV;
+        ImageView removeIV;
     }
 }

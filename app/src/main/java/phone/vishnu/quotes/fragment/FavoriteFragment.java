@@ -2,14 +2,13 @@ package phone.vishnu.quotes.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +32,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class FavoriteFragment extends Fragment {
     private static final String PREFERENCE_NAME = "favPreference";
     private ListView lv;
-    private ArrayAdapter<Quote> mAdapter;
     private ImageView viewIV, removeIV;
+    private CustomDataAdapter adapter;
+    private ArrayList<Quote> productFromShared = new ArrayList<>();
+    private SharedPreferences sharedPrefs;
 
     public FavoriteFragment() {
         // Required empty public constructor
@@ -56,20 +57,72 @@ public class FavoriteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         Gson gson = new Gson();
-        ArrayList<Quote> productFromShared = new ArrayList<>();
-        SharedPreferences sharedPrefs = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        final String jsonPreferences = sharedPrefs.getString(PREFERENCE_NAME, "");
+        sharedPrefs = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+        String jsonPreferences = sharedPrefs.getString(PREFERENCE_NAME, "");
+
         Type type = new TypeToken<ArrayList<Quote>>() {
         }.getType();
+
         if (0 != jsonPreferences.length()) productFromShared = gson.fromJson(jsonPreferences, type);
         else productFromShared.add(new Quote("No Favorite Quotes", ""));
 
-        final CustomDataAdapter adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared);
+        adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared, viewImageViewOnClickListener, removeImageViewOnClickListener);
         lv.setAdapter(adapter);
- //TODO:Handle Clicks
     }
 
+    private JSONArray removeFavorite(String jsonSaved, ArrayList<Quote> jsonList, String jsonProductToRemove) {
 
+        JSONArray jsonArrayProduct = new JSONArray();
+        try {
+            jsonArrayProduct = new JSONArray(jsonSaved);
+            jsonArrayProduct.remove(getIndex(jsonList, jsonProductToRemove));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonArrayProduct;
+    }
+
+    private int getIndex(ArrayList<Quote> quoteList, String productToRemove) {
+
+        int index = 0;
+        for (int i = 0; i < quoteList.size(); i++) {
+
+            if (productToRemove.toLowerCase().equals(quoteList.get(i).getQuote().toLowerCase())) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    private View.OnClickListener viewImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getActivity(), "Coming Soon....", Toast.LENGTH_SHORT).show();
+        }
+    };
+    private View.OnClickListener removeImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            Log.e("vishnu", String.valueOf(v.getTag()));
+            int position = Integer.parseInt(v.getTag().toString());
+            JSONArray jsonArray = removeFavorite(sharedPrefs.getString(PREFERENCE_NAME, ""), productFromShared, productFromShared.get(position).getQuote());
+            editor.putString(PREFERENCE_NAME, String.valueOf(jsonArray));
+            editor.apply();
+
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<Quote>>() {
+            }.getType();
+            productFromShared = gson.fromJson(String.valueOf(jsonArray), type);
+
+            adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared,viewImageViewOnClickListener,removeImageViewOnClickListener);
+            lv.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+    };
 
 }

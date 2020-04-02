@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:orientation="vertical"
     android:padding="5sp"
@@ -33,9 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
+        android:foregroundGravity="right"
         android:scaleType="fitXY"
         android:src="@drawable/ic_slideshow"
-        android:foregroundGravity="right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/singleItemRemoveImageView" />
 
@@ -45,7 +44,6 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
-        android:foregroundGravity="right"
         android:src="@drawable/ic_remove"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

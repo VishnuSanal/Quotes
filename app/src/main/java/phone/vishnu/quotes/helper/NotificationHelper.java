@@ -45,12 +45,15 @@ public class NotificationHelper {
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                         .setContentIntent(resultPendingIntent);
 
-
                 Collections.shuffle(quotes);
                 Quote quote = quotes.get(0);
 
-                mBuilder.setContentTitle(quote.getAuthor() + " says to you: ")
-                        .setContentText(quote.getQuote());
+
+                NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+                bigTextStyle.setBigContentTitle(quote.getAuthor() + " says you: ");
+                bigTextStyle.bigText(quote.getQuote());
+
+                mBuilder.setStyle(bigTextStyle);
 
                 NotificationManager mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 

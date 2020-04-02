@@ -12,7 +12,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,13 +50,13 @@ public class QuoteFragment extends Fragment {
 
     private static final String PREFERENCE_NAME = "favPreference";
     private static final int PERMISSION_REQ_CODE = 2222;
-    ImageView shareIcon, favIcon;
-    TextView quoteText, authorText;
+    private ImageView shareIcon, favIcon;
+    private TextView quoteText, authorText;
 
     public QuoteFragment() {
     }
 
-    public static final QuoteFragment newInstance(String quote, String author) {
+    public static QuoteFragment newInstance(String quote, String author) {
 
         QuoteFragment fragment = new QuoteFragment();
 
@@ -168,10 +167,10 @@ public class QuoteFragment extends Fragment {
 
                     favIcon.setColorFilter(Color.WHITE);
                     jsonArrayProduct = removeFavorite(jsonSaved, productFromShared, quoteText.getText().toString());
-
                 }
             } else {
                 productFromShared = new ArrayList<Quote>();
+//                addFavorite(jsonSaved,jsonNewProductToAdd,productFromShared);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -205,9 +204,6 @@ public class QuoteFragment extends Fragment {
 
         int index = 0;
         for (int i = 0; i < quoteList.size(); i++) {
-
-            Log.e("vishnu", productToRemove.toLowerCase());
-            Log.e("vishnu", quoteList.get(i).getQuote().toLowerCase());
 
             if (productToRemove.toLowerCase().equals(quoteList.get(i).getQuote().toLowerCase())) {
                 index = i;
@@ -246,7 +242,7 @@ public class QuoteFragment extends Fragment {
             fos.flush();
             fos.close();
         } catch (Exception e) {
-            Log.e("vishnu", e.getMessage(), e);
+            e.printStackTrace();
         }
 
         Uri uri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".provider", imagePath);
@@ -283,4 +279,6 @@ public class QuoteFragment extends Fragment {
         builder.show();
 
     }
+
+
 }
