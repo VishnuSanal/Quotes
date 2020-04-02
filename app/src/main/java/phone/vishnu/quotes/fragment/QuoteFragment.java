@@ -112,7 +112,9 @@ public class QuoteFragment extends Fragment {
         shareIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+                shareIcon.startAnimation(shake);
+                shareIcon.setColorFilter(Color.GREEN);
                 if (isPermissionGranted()) {
                     AsyncTask.execute(new Runnable() {
                         @Override
@@ -133,7 +135,6 @@ public class QuoteFragment extends Fragment {
             public void onClick(View v) {
                 final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
                 favIcon.startAnimation(shake);
-
 
                 SharedPreferences sharedPref = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();

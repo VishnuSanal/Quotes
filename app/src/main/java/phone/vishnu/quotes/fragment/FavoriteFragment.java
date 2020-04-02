@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -101,12 +103,17 @@ public class FavoriteFragment extends Fragment {
     private View.OnClickListener viewImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+            v.startAnimation(shake);
+//            v.setColorFilter(Color.GREEN);
             Toast.makeText(getActivity(), "Coming Soon....", Toast.LENGTH_SHORT).show();
         }
     };
     private View.OnClickListener removeImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+            v.startAnimation(shake);
             SharedPreferences.Editor editor = sharedPrefs.edit();
             Log.e("vishnu", String.valueOf(v.getTag()));
             int position = Integer.parseInt(v.getTag().toString());
