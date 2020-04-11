@@ -32,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
+        android:visibility="gone"
         android:foregroundGravity="right"
         android:scaleType="fitXY"
         android:src="@drawable/ic_slideshow"

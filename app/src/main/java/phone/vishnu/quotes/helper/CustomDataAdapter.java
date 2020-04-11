@@ -17,15 +17,14 @@ import phone.vishnu.quotes.model.Quote;
 
 public class CustomDataAdapter extends ArrayAdapter<Quote> {
 
-    private Context _context;
-    private LayoutInflater inflater;
-    private View.OnClickListener viewImageViewOnClickListener, removeImageViewOnClickListener;
-    private ArrayList<Quote> objects;
+    private final LayoutInflater inflater;
+    private final View.OnClickListener viewImageViewOnClickListener;
+    private final View.OnClickListener removeImageViewOnClickListener;
+    private final ArrayList<Quote> objects;
 
     public CustomDataAdapter(@NonNull Context context, ArrayList<Quote> objects, View.OnClickListener viewImageViewOnClickListener, View.OnClickListener removeImageViewOnClickListener) {
         super(context, 0, objects);
         this.objects = objects;
-        _context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.viewImageViewOnClickListener = viewImageViewOnClickListener;
         this.removeImageViewOnClickListener = removeImageViewOnClickListener;

@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.List;
 
 public class QuoteViewPagerAdapter extends FragmentPagerAdapter {
-    private List<Fragment> fragments;
+    private final List<Fragment> fragments;
 
     public QuoteViewPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
         super(fm);

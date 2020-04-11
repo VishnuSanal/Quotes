@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,7 +33,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class FavoriteFragment extends Fragment {
     private static final String PREFERENCE_NAME = "favPreference";
     private ListView lv;
-    private ImageView viewIV, removeIV;
     private CustomDataAdapter adapter;
     private ArrayList<Quote> productFromShared = new ArrayList<>();
     private SharedPreferences sharedPrefs;
@@ -47,14 +45,15 @@ public class FavoriteFragment extends Fragment {
         return new FavoriteFragment();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_favorite, container, false);
-        lv = inflate.findViewById(R.id.favoriteListView);
-        viewIV = inflate.findViewById(R.id.singleItemViewImageView);
-        removeIV = inflate.findViewById(R.id.singleItemRemoveImageView);
-        return inflate;
-    }
+    private final View.OnClickListener viewImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+            v.startAnimation(shake);
+//            v.setColorFilter(Color.GREEN);
+            Toast.makeText(getActivity(), "Coming Soon....", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -100,16 +99,7 @@ public class FavoriteFragment extends Fragment {
         return index;
     }
 
-    private View.OnClickListener viewImageViewOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
-            v.startAnimation(shake);
-//            v.setColorFilter(Color.GREEN);
-            Toast.makeText(getActivity(), "Coming Soon....", Toast.LENGTH_SHORT).show();
-        }
-    };
-    private View.OnClickListener removeImageViewOnClickListener = new View.OnClickListener() {
+    private final View.OnClickListener removeImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
@@ -131,5 +121,14 @@ public class FavoriteFragment extends Fragment {
             adapter.notifyDataSetChanged();
         }
     };
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View inflate = inflater.inflate(R.layout.fragment_favorite, container, false);
+        lv = inflate.findViewById(R.id.favoriteListView);
+//        ImageView viewIV = inflate.findViewById(R.id.singleItemViewImageView);
+//        ImageView removeIV = inflate.findViewById(R.id.singleItemRemoveImageView);
+        return inflate;
+    }
 
 }

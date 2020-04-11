@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.provider.Settings;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
@@ -24,7 +23,7 @@ public class NotificationHelper {
 
     private static final String NOTIFICATION_CHANNEL_ID = "phone.vishnu.quotes";
     private static final String NOTIFICATION_CHANNEL_NAME = "QuotesNotificationChannel";
-    private Context mContext;
+    private final Context mContext;
 
     public NotificationHelper(Context context) {
         mContext = context;

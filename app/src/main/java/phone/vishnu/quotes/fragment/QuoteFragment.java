@@ -82,7 +82,7 @@ public class QuoteFragment extends Fragment {
         String author = getArguments().getString("author");
 
         quoteText.setText(quote);
-        authorText.setText("-" + author);
+        authorText.setText(String.format("-%s", author));
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -170,7 +170,7 @@ public class QuoteFragment extends Fragment {
                     jsonArrayProduct = removeFavorite(jsonSaved, productFromShared, quoteText.getText().toString());
                 }
             } else {
-                productFromShared = new ArrayList<Quote>();
+                productFromShared = new ArrayList<>();
 //                addFavorite(jsonSaved,jsonNewProductToAdd,productFromShared);
             }
         } catch (JSONException e) {

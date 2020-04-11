@@ -31,17 +31,16 @@ import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
-    ImageView menuIcon;
     private ViewPager viewPager;
     private QuoteViewPagerAdapter adapter;
-    private String message = "Quote not found", author = "Author not found";
+//    private String message = "Quote not found", author = "Author not found";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewPager = findViewById(R.id.viewPager);
-        menuIcon = findViewById(R.id.homeMenuIcon);
+        ImageView menuIcon = findViewById(R.id.homeMenuIcon);
 
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     }
 
-    public void myAlarm() {
+    private void myAlarm() {
 
         Calendar calendar = Calendar.getInstance();
 //        calendar.setTimeInMillis(System.currentTimeMillis());
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     }
 
 
-    public List<Fragment> getFragments() {
+    private List<Fragment> getFragments() {
 
         final List<Fragment> fragments = new ArrayList<>();
         new QuoteData().getQuotes(new QuoteListAsyncResponse() {
