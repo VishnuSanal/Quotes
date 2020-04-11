@@ -17,7 +17,7 @@ import phone.vishnu.quotes.controller.AppController;
 import phone.vishnu.quotes.model.Quote;
 
 public class QuoteData {
-    ArrayList<Quote> quoteArrayList = new ArrayList<>();
+    private final ArrayList<Quote> quoteArrayList = new ArrayList<>();
 
     public void getQuotes(final QuoteListAsyncResponse callBack) {
 
