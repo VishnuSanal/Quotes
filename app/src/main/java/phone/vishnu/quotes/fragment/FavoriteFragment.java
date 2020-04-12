@@ -2,7 +2,6 @@ package phone.vishnu.quotes.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,7 +104,7 @@ public class FavoriteFragment extends Fragment {
             final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
             v.startAnimation(shake);
             SharedPreferences.Editor editor = sharedPrefs.edit();
-            Log.e("vishnu", String.valueOf(v.getTag()));
+//            Log.e("vishnu", String.valueOf(v.getTag()));
             int position = Integer.parseInt(v.getTag().toString());
             JSONArray jsonArray = removeFavorite(sharedPrefs.getString(PREFERENCE_NAME, ""), productFromShared, productFromShared.get(position).getQuote());
             editor.putString(PREFERENCE_NAME, String.valueOf(jsonArray));

@@ -235,7 +235,12 @@ public class QuoteFragment extends Fragment {
         rootView.setDrawingCacheEnabled(true);
         Bitmap bitmap = rootView.getDrawingCache();
 
-        File imagePath = new File(Environment.getExternalStorageDirectory() + "/Documents/.screenshot.png");
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+
+        if (!root.exists()) root.mkdirs();
+
+        String imagePath = root.toString() + File.separator + ".Screenshot" + ".jpg";
+
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(imagePath);
@@ -246,7 +251,7 @@ public class QuoteFragment extends Fragment {
             e.printStackTrace();
         }
 
-        Uri uri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".provider", imagePath);
+        Uri uri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".provider", new File(imagePath));
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("image/*");
         sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
