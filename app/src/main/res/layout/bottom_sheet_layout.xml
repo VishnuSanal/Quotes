@@ -36,5 +36,14 @@
         android:scaleType="fitXY"
         android:src="@drawable/ic_insert_photo" />
 
+    <ImageView
+        android:id="@+id/bottomSheetColorChooser"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/button_background"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_color_lens" />
 
 </LinearLayout>

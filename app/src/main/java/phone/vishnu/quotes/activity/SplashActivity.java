@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import phone.vishnu.quotes.R;
 
 public class SplashActivity extends AppCompatActivity {
-
+    //TODO:Implement On-boarding
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

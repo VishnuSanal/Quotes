@@ -16,7 +16,7 @@
         android:id="@+id/favoriteSampleIconImageView"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:background="@color/colorAccent"
+        android:background="@color/textColor"
         android:contentDescription="@string/app_name"
         android:foregroundGravity="center"
         android:src="@drawable/ic_favorite" />

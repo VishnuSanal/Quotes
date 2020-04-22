@@ -6,4 +6,5 @@
     <string name="view_source_code_at_github">View source code at GitHub</string>
     <string name="send_feedback_to_the_developer">Send feedback to developer</string>
     <string name="email_address_of_developer">t.v.s10123@gmail.com</string>
+    <string name="reset_settings">Reset Settings</string>
 </resources>

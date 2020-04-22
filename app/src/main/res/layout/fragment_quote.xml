@@ -11,7 +11,6 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:minHeight="220dp"
-        app:cardBackgroundColor="@color/colorBackground"
         app:cardCornerRadius="8dp"
         app:cardElevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +48,6 @@
             android:id="@+id/quoteTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_gravity="center|center_horizontal|center_vertical"
             android:layout_margin="4dp"
             android:fontFamily="sans-serif-light"
@@ -62,7 +60,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:background="@color/colorBackground"
             android:fontFamily="cursive"
             android:padding="4dp"
             android:textColor="@android:color/background_light"

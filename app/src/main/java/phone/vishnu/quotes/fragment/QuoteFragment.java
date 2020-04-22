@@ -23,6 +23,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -48,10 +49,12 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class QuoteFragment extends Fragment {
 
-    private static final String PREFERENCE_NAME = "favPreference";
+    private static final String FAV_PREFERENCE_NAME = "favPreference";
     private static final int PERMISSION_REQ_CODE = 2222;
+    private static final String COLOR_PREFERENCE_NAME = "colorPreference";
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
+    private CardView cardView;
 
     public QuoteFragment() {
     }
@@ -78,6 +81,12 @@ public class QuoteFragment extends Fragment {
         shareIcon = quoteView.findViewById(R.id.shareImageView);
         favIcon = quoteView.findViewById(R.id.favoriteImageView);
 
+        String hexColor = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(COLOR_PREFERENCE_NAME, "#5C5C5C");
+
+        cardView = quoteView.findViewById(R.id.cardView);
+        cardView.setCardBackgroundColor(Color.parseColor(hexColor));
+        authorText.setBackgroundColor(Color.parseColor(hexColor));
+
         final String quote = getArguments().getString("quote");
         String author = getArguments().getString("author");
 
@@ -89,7 +98,7 @@ public class QuoteFragment extends Fragment {
                 try {
                     SharedPreferences sharedPref = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
                     Gson gson = new Gson();
-                    String jsonSaved = sharedPref.getString(PREFERENCE_NAME, "");
+                    String jsonSaved = sharedPref.getString(FAV_PREFERENCE_NAME, "");
                     Type type = new TypeToken<ArrayList<Quote>>() {
                     }.getType();
                     ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
@@ -140,14 +149,14 @@ public class QuoteFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPref.edit();
 
                 Gson gson = new Gson();
-                String jsonSaved = sharedPref.getString(PREFERENCE_NAME, "");
+                String jsonSaved = sharedPref.getString(FAV_PREFERENCE_NAME, "");
                 String jsonNewProductToAdd = gson.toJson(new Quote(quoteText.getText().toString(), authorText.getText().toString()));
 
                 Type type = new TypeToken<ArrayList<Quote>>() {
                 }.getType();
                 ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
 
-                editor.putString(PREFERENCE_NAME, String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared)));
+                editor.putString(FAV_PREFERENCE_NAME, String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared)));
                 editor.apply();
             }
 
@@ -231,9 +240,13 @@ public class QuoteFragment extends Fragment {
 
     private void shareScreenshot() {
 
+//        setVisibility(View.INVISIBLE);
+
         View rootView = getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
         rootView.setDrawingCacheEnabled(true);
         Bitmap bitmap = rootView.getDrawingCache();
+
+//        setVisibility(View.VISIBLE);
 
         File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
 
@@ -258,8 +271,12 @@ public class QuoteFragment extends Fragment {
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
 
-
+    private void setVisibility(int visibility) {
+        favIcon.setVisibility(visibility);
+        shareIcon.setVisibility(visibility);
+        getActivity().findViewById(R.id.homeMenuIcon).setVisibility(visibility);
     }
 
     private void showPermissionDeniedDialog() {
@@ -285,6 +302,5 @@ public class QuoteFragment extends Fragment {
         builder.show();
 
     }
-
 
 }

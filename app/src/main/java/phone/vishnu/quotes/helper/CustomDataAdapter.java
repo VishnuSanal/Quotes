@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
@@ -32,6 +33,8 @@ public class CustomDataAdapter extends ArrayAdapter<Quote> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        Collections.reverse(objects);
 
         Quote item = objects.get(position);
         View rootView = convertView;

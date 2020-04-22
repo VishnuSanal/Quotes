@@ -1,11 +1,13 @@
 package phone.vishnu.quotes.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,8 +16,11 @@ import androidx.fragment.app.Fragment;
 
 import phone.vishnu.quotes.R;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class BlankFragment extends Fragment {
     private TextView sourceCodeTV, feedbackTV;
+    private Button resetButton;
 
     public BlankFragment() {
     }
@@ -29,6 +34,7 @@ public class BlankFragment extends Fragment {
         View inflate = inflater.inflate(R.layout.fragment_blank, container, false);
         sourceCodeTV = inflate.findViewById(R.id.aboutPageViewSourceCodeTextView);
         feedbackTV = inflate.findViewById(R.id.aboutPageFeedbackTextView);
+        resetButton = inflate.findViewById(R.id.aboutResetSettingsButton);
         return inflate;
     }
 
@@ -46,17 +52,22 @@ public class BlankFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
                 composeEmail(new String[]{getActivity().getString(R.string.email_address_of_developer)}, "Feedback of " + getActivity().getString(R.string.app_name));
 
+            }
+        });
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-//                Intent intent = new Intent(Intent.ACTION_SEND);
-//                intent.setType("message/rfc822");
-//                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getActivity().getString(R.string.email_address_of_developer)});
-//                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback of " + getActivity().getString(R.string.app_name));
-//                startActivity(Intent.createChooser(intent, "Send Feedback:"));
+                String COLOR_PREFERENCE_NAME = "colorPreference";
+                String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
 
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).edit();
 
+                editor.putString(COLOR_PREFERENCE_NAME, "#5C5C5C");
+                editor.putString(BACKGROUND_PREFERENCE_NAME, "-1");
+                editor.apply();
             }
         });
     }

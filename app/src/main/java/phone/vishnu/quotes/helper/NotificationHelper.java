@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.provider.Settings;
 
 import androidx.core.app.NotificationCompat;
@@ -23,6 +22,7 @@ public class NotificationHelper {
 
     private static final String NOTIFICATION_CHANNEL_ID = "phone.vishnu.quotes";
     private static final String NOTIFICATION_CHANNEL_NAME = "QuotesNotificationChannel";
+    private static final int NOTIFICATION_REQUEST_CODE = 2222;
     private final Context mContext;
 
     public NotificationHelper(Context context) {
@@ -38,15 +38,15 @@ public class NotificationHelper {
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                final PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext, 0 /* Request code */, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                final PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext, NOTIFICATION_REQUEST_CODE /* Request code */, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext);
-                mBuilder.setSmallIcon(R.drawable.ic_quotes).setAutoCancel(false)
+                mBuilder.setSmallIcon(R.drawable.ic_quotes)
+                        .setAutoCancel(true)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                         .setContentIntent(resultPendingIntent);
 
                 Collections.shuffle(quotes);
                 Quote quote = quotes.get(0);
-
 
                 NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
                 bigTextStyle.setBigContentTitle(quote.getAuthor() + " says you: ");
@@ -59,16 +59,11 @@ public class NotificationHelper {
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     int importance = NotificationManager.IMPORTANCE_HIGH;
                     NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, importance);
-                    notificationChannel.enableLights(true);
-                    notificationChannel.setLightColor(Color.RED);
-                    notificationChannel.enableVibration(true);
-                    notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-                    assert mNotificationManager != null;
                     mBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
                     mNotificationManager.createNotificationChannel(notificationChannel);
                 }
                 assert mNotificationManager != null;
-                mNotificationManager.notify(0 /* Request Code */, mBuilder.build());
+                mNotificationManager.notify(NOTIFICATION_REQUEST_CODE /* Request Code */, mBuilder.build());
 
             }
         });

@@ -23,6 +23,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog;
+import com.turkialkhateeb.materialcolorpicker.ColorListener;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,12 +48,12 @@ import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
     private static final int PICK_IMAGE_ID = 22;
-    private static final String PREFERENCE_NAME = "backgroundPreference";
+    private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
     private ConstraintLayout constraintLayout;
     private ViewPager viewPager;
     private QuoteViewPagerAdapter adapter;
-//    private String message = "Quote not found", author = "Author not found";
 
+    //    private String message = "Quote not found", author = "Author not found";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +62,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         viewPager = findViewById(R.id.viewPager);
         ImageView menuIcon = findViewById(R.id.homeMenuIcon);
 
-        String backgroundPath = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(PREFERENCE_NAME, "-1");
+        String backgroundPath = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1");
 
         if (!("-1".equals(backgroundPath)))
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
-
 
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         });
 
         myAlarm();
-
     }
 
     private void myAlarm() {
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
                     SharedPreferences sharedPrefs = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPrefs.edit();
-                    editor.putString(PREFERENCE_NAME, file);
+                    editor.putString(BACKGROUND_PREFERENCE_NAME, file);
                     editor.apply();
 
                 } catch (Exception e) {
@@ -176,25 +177,53 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     @Override
     public void onButtonClicked(int id) {
-        if (id == R.id.bottomSheetFav) {
-            FavoriteFragment fragment = FavoriteFragment.newInstance();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .add(R.id.constraintLayout, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        } else if (id == R.id.bottomSheetAbout) {
-            BlankFragment fragment = BlankFragment.newInstance();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .add(R.id.constraintLayout, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        } else if (id == R.id.bottomSheetImageChooser) {
+        switch (id) {
+            case R.id.bottomSheetFav: {
+                FavoriteFragment fragment = FavoriteFragment.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .add(R.id.constraintLayout, fragment)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            }
+            case R.id.bottomSheetAbout: {
+                BlankFragment fragment = BlankFragment.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .add(R.id.constraintLayout, fragment)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            }
+            case R.id.bottomSheetImageChooser: {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, PICK_IMAGE_ID);
+                break;
+            }
+            case R.id.bottomSheetColorChooser: {
+                final String COLOR_PREFERENCE_NAME = "colorPreference";
 
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/*");
-            startActivityForResult(intent, PICK_IMAGE_ID);
+                final SharedPreferences prefs = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+
+                ColorChooserDialog dialog = new ColorChooserDialog(MainActivity.this);
+                dialog.setTitle("Choose Color");
+                dialog.setColorListener(new ColorListener() {
+                    @Override
+                    public void OnColorClick(View v, int color) {
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString(COLOR_PREFERENCE_NAME, "#" + Integer.toHexString(color).substring(2));
+                        editor.apply();
+                        MainActivity.this.recreate();
+                    }
+                });
+                dialog.show();
+
+                break;
+
+            }
+
         }
     }
 }
