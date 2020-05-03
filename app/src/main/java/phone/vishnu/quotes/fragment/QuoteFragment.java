@@ -81,7 +81,8 @@ public class QuoteFragment extends Fragment {
         shareIcon = quoteView.findViewById(R.id.shareImageView);
         favIcon = quoteView.findViewById(R.id.favoriteImageView);
 
-        String hexColor = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(COLOR_PREFERENCE_NAME, "#5C5C5C");
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+        String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#5C5C5C");
 
         cardView = quoteView.findViewById(R.id.cardView);
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
@@ -303,4 +304,7 @@ public class QuoteFragment extends Fragment {
 
     }
 
+    private void showTour() {
+
+    }
 }

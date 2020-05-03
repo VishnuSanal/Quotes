@@ -1,15 +1,19 @@
 package phone.vishnu.quotes.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -17,8 +21,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -47,24 +54,52 @@ import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
-    private static final int PICK_IMAGE_ID = 22;
+    private static final int PICK_IMAGE_ID = 36;
     private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
     private ConstraintLayout constraintLayout;
     private ViewPager viewPager;
     private QuoteViewPagerAdapter adapter;
+    private int PERMISSION_REQ_CODE = 88;
 
-    //    private String message = "Quote not found", author = "Author not found";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         constraintLayout = findViewById(R.id.constraintLayout);
         viewPager = findViewById(R.id.viewPager);
+
         ImageView menuIcon = findViewById(R.id.homeMenuIcon);
+/*
+        final String[] backgroundPath = {this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1")};
+
+        if (("-1".equals(backgroundPath[0]))) {
+
+            final ProgressDialog dialog = ProgressDialog.show(this,"","Loading...");
+
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                public void run() {
+                    backgroundPath[0] = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1");
+
+                    Log.e("vishnu", "run: " );
+
+                    if (!"-1".equals(backgroundPath[0])){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                constraintLayout.setBackground(Drawable.createFromPath(backgroundPath[0]));
+                                dialog.dismiss();
+                                Log.e("vishnu", "run: if: " );
+                            }
+                        });
+                    }
+                }
+            }, 1000, 1000);
+        }
+        */
 
         String backgroundPath = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1");
-
-        if (!("-1".equals(backgroundPath)))
+        if (!"-1".equals(backgroundPath))
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
 
         menuIcon.setOnClickListener(new View.OnClickListener() {
@@ -197,9 +232,14 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 break;
             }
             case R.id.bottomSheetImageChooser: {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, PICK_IMAGE_ID);
+
+                if (!isPermissionGranted())
+                    isPermissionGranted();
+                else {
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, PICK_IMAGE_ID);
+                }
                 break;
             }
             case R.id.bottomSheetColorChooser: {
@@ -226,4 +266,44 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         }
     }
+
+    private void showPermissionDeniedDialog() {
+
+        final AlertDialog.Builder builder =
+                new AlertDialog.Builder(MainActivity.this, R.style.AppCompatAlertDialogStyle);
+        builder.setTitle("Permission Denied");
+        builder.setMessage("Please Accept Permission to Capture Screenshot of the Screen");
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQ_CODE);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
+
+    private boolean isPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 22) {
+            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    showPermissionDeniedDialog();
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQ_CODE);
+                }
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -11,27 +11,17 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="8dp"
-        android:background="@drawable/button_background"
+        android:background="@drawable/bottom_button_background"
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
         android:src="@drawable/ic_info" />
-
-    <ImageView
-        android:id="@+id/bottomSheetFav"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/button_background"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_favorite" />
 
     <ImageView
         android:id="@+id/bottomSheetImageChooser"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="8dp"
-        android:background="@drawable/button_background"
+        android:background="@drawable/bottom_button_background"
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
         android:src="@drawable/ic_insert_photo" />
@@ -41,9 +31,19 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="8dp"
-        android:background="@drawable/button_background"
+        android:background="@drawable/bottom_button_background"
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
         android:src="@drawable/ic_color_lens" />
+
+    <ImageView
+        android:id="@+id/bottomSheetFav"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/bottom_button_background"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_favorite" />
 
 </LinearLayout>

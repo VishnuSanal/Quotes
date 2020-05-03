@@ -7,5 +7,9 @@
     <color name="textColor">#D81B60</color>
     <color name="colorBackground">#5C5C5C</color>
     <color name="spacerColor">#BDBDBD</color>
+
+    <color name="tourBackgroundColor">#F8BBD0</color>
+    <color name="tourButtonColor">#03DAC5</color>
+
     <!--<color name="transparent">#0000</color>-->
 </resources>

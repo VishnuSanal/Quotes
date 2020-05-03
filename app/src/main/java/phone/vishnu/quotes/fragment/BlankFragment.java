@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,12 +63,16 @@ public class BlankFragment extends Fragment {
 
                 String COLOR_PREFERENCE_NAME = "colorPreference";
                 String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
+                String FIRST_RUN_BOOLEAN = "firstRunPreference";
 
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).edit();
 
                 editor.putString(COLOR_PREFERENCE_NAME, "#5C5C5C");
                 editor.putString(BACKGROUND_PREFERENCE_NAME, "-1");
+                editor.putBoolean(FIRST_RUN_BOOLEAN, true);
                 editor.apply();
+
+                Toast.makeText(getActivity(), "Settings Reset.....\nRestart App for changes to take effect.....", Toast.LENGTH_SHORT).show();
             }
         });
     }

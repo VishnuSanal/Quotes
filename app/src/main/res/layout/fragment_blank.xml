@@ -109,12 +109,12 @@
         style="@style/Theme.MaterialComponents.Light.Dialog.Alert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
+        android:background="@drawable/bottom_button_background"
         android:text="@string/reset_settings"
-        app:layout_constraintBottom_toBottomOf="@id/aboutSampleVersion"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@id/aboutSampleVersion"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutPageViewSourceCodeTextView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/aboutSampleVersion"
