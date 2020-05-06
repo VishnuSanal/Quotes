@@ -32,10 +32,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
-        android:visibility="gone"
+        android:src="@drawable/ic_share"
         android:foregroundGravity="right"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_slideshow"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/singleItemRemoveImageView" />
 

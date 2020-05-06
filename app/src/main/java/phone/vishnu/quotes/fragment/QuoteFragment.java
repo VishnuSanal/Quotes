@@ -304,7 +304,4 @@ public class QuoteFragment extends Fragment {
 
     }
 
-    private void showTour() {
-
-    }
 }

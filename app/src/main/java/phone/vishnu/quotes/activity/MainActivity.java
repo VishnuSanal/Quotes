@@ -10,22 +10,31 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -64,6 +73,26 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        if (savedInstanceState == null) {
+            final Bundle extras = getIntent().getExtras();
+            if (extras != null && extras.getBoolean("NotificationClick")) {
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            shareScreenshot(extras.getString("quote"), extras.getString("author"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+
+        }
+
+
         setContentView(R.layout.activity_main);
         constraintLayout = findViewById(R.id.constraintLayout);
         viewPager = findViewById(R.id.viewPager);
@@ -306,4 +335,63 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         return false;
     }
 
+    private void shareScreenshot(String quote, String author) {
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View shareView = inflater.inflate(R.layout.share_layout, null);
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+        String hexColor = sharedPreferences.getString("colorPreference", "#5C5C5C");
+
+        String backgroundPath = sharedPreferences.getString("backgroundPreference", "-1");
+        if (!"-1".equals(backgroundPath))
+            shareView.findViewById(R.id.shareRelativeLayout).setBackground(Drawable.createFromPath(backgroundPath));
+
+        CardView cardView = shareView.findViewById(R.id.shareCardView);
+        cardView.setCardBackgroundColor(Color.parseColor(hexColor));
+
+        ((ImageView) shareView.findViewById(R.id.shareFavoriteImageView)).setColorFilter(Color.RED);
+        ((ImageView) shareView.findViewById(R.id.shareShareImageView)).setColorFilter(Color.GREEN);
+
+        ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setText(quote);
+        ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setText(author);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
+
+        shareView.measure(View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.AT_MOST),
+                View.MeasureSpec.makeMeasureSpec(metrics.heightPixels, View.MeasureSpec.AT_MOST));
+
+        shareView.setDrawingCacheEnabled(true);
+
+        Bitmap bitmap = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
+
+        Canvas c = new Canvas(bitmap);
+        shareView.layout(0, 0, metrics.widthPixels, metrics.heightPixels);
+        shareView.draw(c);
+
+        shareView.buildDrawingCache(true);
+
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+        if (!root.exists()) root.mkdirs();
+        String imagePath = root.toString() + File.separator + ".Screenshot" + ".jpg";
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(imagePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Uri uri = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".provider", new File(imagePath));
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("image/*");
+        sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
+
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
 }

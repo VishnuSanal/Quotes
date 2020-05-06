@@ -35,24 +35,34 @@ public class NotificationHelper {
             public void processFinished(ArrayList<Quote> quotes) {
 
                 Intent intent = new Intent(mContext, MainActivity.class);
-
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 final PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext, NOTIFICATION_REQUEST_CODE /* Request code */, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext);
-                mBuilder.setSmallIcon(R.drawable.ic_quotes)
-                        .setAutoCancel(true)
-                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                        .setContentIntent(resultPendingIntent);
 
                 Collections.shuffle(quotes);
                 Quote quote = quotes.get(0);
 
+                Intent buttonIntent = new Intent(mContext, MainActivity.class);
+                buttonIntent.putExtra("NotificationClick", true);
+                buttonIntent.putExtra("quote", quote.getQuote());
+                buttonIntent.putExtra("author", quote.getAuthor());
+                PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 1, buttonIntent, PendingIntent.FLAG_ONE_SHOT);
+
+                NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.ic_share, "Share", pendingIntent).build();
+
+                final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext);
+                mBuilder.setSmallIcon(R.drawable.ic_quotes)
+                        .setAutoCancel(true)
+                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                        .setContentIntent(resultPendingIntent)
+                        .addAction(action);
+
                 NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
-                bigTextStyle.setBigContentTitle(quote.getAuthor() + " says you: ");
-                bigTextStyle.bigText(quote.getQuote());
+                bigTextStyle.setBigContentTitle("Today's Quote");
+                bigTextStyle.bigText(quote.getQuote() + "\n" + " -" + quote.getAuthor());
 
                 mBuilder.setStyle(bigTextStyle);
+                mBuilder.setContentTitle(mContext.getString(R.string.app_name));
 
                 NotificationManager mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 

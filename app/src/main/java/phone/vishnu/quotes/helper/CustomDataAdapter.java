@@ -1,6 +1,7 @@
 package phone.vishnu.quotes.helper;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
@@ -31,11 +31,11 @@ public class CustomDataAdapter extends ArrayAdapter<Quote> {
         this.removeImageViewOnClickListener = removeImageViewOnClickListener;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
-        Collections.reverse(objects);
-
+//        Collections.reverse(objects);
         Quote item = objects.get(position);
         View rootView = convertView;
         final ViewHolder viewHolder;
@@ -47,6 +47,7 @@ public class CustomDataAdapter extends ArrayAdapter<Quote> {
             viewHolder.quoteTV = rootView.findViewById(R.id.quoteTextSingleItem);
             viewHolder.authorTV = rootView.findViewById(R.id.authorTextSingleItem);
             viewHolder.viewIV = rootView.findViewById(R.id.singleItemViewImageView);
+            viewHolder.viewIV.setColorFilter(Color.parseColor("#9C9CFF"));
             viewHolder.removeIV = rootView.findViewById(R.id.singleItemRemoveImageView);
 
             viewHolder.viewIV.setOnClickListener(viewImageViewOnClickListener);
