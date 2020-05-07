@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,12 +16,12 @@ import android.view.View;
 import androidx.annotation.FloatRange;
 import androidx.annotation.Nullable;
 
+import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog;
+import com.turkialkhateeb.materialcolorpicker.ColorListener;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Objects;
 
 import io.github.dreierf.materialintroscreen.MaterialIntroActivity;
@@ -75,6 +74,7 @@ public class SplashActivity extends MaterialIntroActivity {
                     }
                 });
 
+        /*Screen 1*/
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)
                 .buttonsColor(R.color.tourButtonColor)
@@ -83,32 +83,17 @@ public class SplashActivity extends MaterialIntroActivity {
                 .description("Would you try?")
                 .build());
 
+        /*Permission Screen*/
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)
                 .buttonsColor(R.color.tourButtonColor)
+                .image(R.drawable.ic_check_box)
                 .neededPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET})
                 .title("Accept Permissions")
                 .description("Accept the permissions for the app to run")
                 .build());
 
-
-        addSlide(new SlideFragmentBuilder()
-                .backgroundColor(R.color.tourBackgroundColor)
-                .buttonsColor(R.color.tourButtonColor)
-                .image(R.drawable.ic_share)
-                .title("Share Quotes in Social Media")
-                .description("Click on this icon from a quote and select the required app from the chooser")
-                .build());
-
-        addSlide(new SlideFragmentBuilder()
-                .backgroundColor(R.color.tourBackgroundColor)
-                .buttonsColor(R.color.tourButtonColor)
-                .image(R.drawable.ic_favorite)
-                .title("Add a Quote to Favorites")
-                .description("Click on this icon from a quote. You can view the favorite quotes by clicking on the overflow menu on the bottom of the screen")
-                .build());
-
-
+        /*BG Image*/
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)
                 .buttonsColor(R.color.tourButtonColor)
@@ -124,11 +109,67 @@ public class SplashActivity extends MaterialIntroActivity {
             }
         }, "Choose Image"));
 
+        /*Accent Color*/
+        addSlide(new SlideFragmentBuilder()
+                .backgroundColor(R.color.tourBackgroundColor)
+                .buttonsColor(R.color.tourButtonColor)
+                .image(R.color.cardBackgroundColor)
+                .title("Choose accent color")
+                .description("Would you like to select a custom accent color for the app? Do nothing to use the above default accent color. You an change this later from the overflow menu on the bottom of the screen")
+                .build(), new MessageButtonBehaviour(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String COLOR_PREFERENCE_NAME = "colorPreference";
 
+                final SharedPreferences prefs = SplashActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+
+                ColorChooserDialog dialog = new ColorChooserDialog(SplashActivity.this);
+                dialog.setTitle("Choose Color");
+                dialog.setColorListener(new ColorListener() {
+                    @Override
+                    public void OnColorClick(View v, int color) {
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString(COLOR_PREFERENCE_NAME, "#" + Integer.toHexString(color).substring(2));
+                        editor.apply();
+                    }
+                });
+                dialog.show();
+            }
+        }, "Choose Color"));
+
+        /*Noti*/
+        addSlide(new SlideFragmentBuilder()
+                .backgroundColor(R.color.tourBackgroundColor)
+                .buttonsColor(R.color.tourButtonColor)
+                .image(R.drawable.ic_notifications)
+                .title("Daily Notification of Quotes")
+                .description("You can receive daily notifications with Quotes")
+                .build());
+
+        /*Share*/
+        addSlide(new SlideFragmentBuilder()
+                .backgroundColor(R.color.tourBackgroundColor)
+                .buttonsColor(R.color.tourButtonColor)
+                .image(R.drawable.ic_share)
+                .title("Share Quotes in Social Media")
+                .description("Click on this icon from a quote and select the required app from the chooser")
+                .build());
+
+        /*Fav*/
+        addSlide(new SlideFragmentBuilder()
+                .backgroundColor(R.color.tourBackgroundColor)
+                .buttonsColor(R.color.tourButtonColor)
+                .image(R.drawable.ic_favorite)
+                .title("Add a Quote to Favorites")
+                .description("Click on this icon from a quote. You can view the favorite quotes by clicking on the overflow menu on the bottom of the screen")
+                .build());
+
+        /*End Screen*/
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)
                 .buttonsColor(R.color.tourButtonColor)
                 .title("That's it")
+                .image(R.drawable.ic_whatshot)
                 .description("Get Started")
                 .build());
     }
@@ -200,7 +241,7 @@ public class SplashActivity extends MaterialIntroActivity {
         return file;
     }
 
-    private String DownloadImageFromPath(String path) {
+ /*   private String DownloadImageFromPath(String path) {
 
         InputStream inputStream = null;
         Bitmap bitmap = null;
@@ -226,6 +267,6 @@ public class SplashActivity extends MaterialIntroActivity {
             e.printStackTrace();
         }
         return noteOnSD;
-    }
+    }*/
 
 }

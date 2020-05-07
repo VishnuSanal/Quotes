@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if (savedInstanceState == null) {
             final Bundle extras = getIntent().getExtras();
             if (extras != null && extras.getBoolean("NotificationClick")) {
@@ -91,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             }
 
         }
-
 
         setContentView(R.layout.activity_main);
         constraintLayout = findViewById(R.id.constraintLayout);

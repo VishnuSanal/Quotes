@@ -28,7 +28,6 @@ public class QuoteData {
             @Override
             public void run(){
 
-
                 final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                         Request.Method.GET,
                         url,
@@ -65,7 +64,6 @@ public class QuoteData {
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-
                         AppController.getInstance().addToRequestQueue(jsonArrayRequest);
                     }
                 });
