@@ -1,20 +1,24 @@
 package phone.vishnu.quotes.fragment;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -243,9 +247,19 @@ public class QuoteFragment extends Fragment {
 
 //        setVisibility(View.INVISIBLE);
 
+        DisplayMetrics metrics = new DisplayMetrics();
+        ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
+
         View rootView = getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
+
         rootView.setDrawingCacheEnabled(true);
-        Bitmap bitmap = rootView.getDrawingCache();
+
+        Bitmap bitmap = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
+
+        Canvas c = new Canvas(bitmap);
+        rootView.layout(0, 0, metrics.widthPixels, metrics.heightPixels);
+        rootView.draw(c);
+        rootView.buildDrawingCache(true);
 
 //        setVisibility(View.VISIBLE);
 

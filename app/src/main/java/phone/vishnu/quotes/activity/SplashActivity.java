@@ -44,6 +44,7 @@ public class SplashActivity extends MaterialIntroActivity {
 
         sharedPreferences = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
 
+        //FIXME: FIXED
         if (sharedPreferences.getBoolean(FIRST_RUN_BOOLEAN, true)) {
 
          /*   if (("-1").equals(sharedPreferences.getString(BACKGROUND_PREFERENCE_NAME, "-1")))
@@ -94,12 +95,13 @@ public class SplashActivity extends MaterialIntroActivity {
                 .build());
 
         /*BG Image*/
+        //FIXME:There's an error here
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)
                 .buttonsColor(R.color.tourButtonColor)
                 .image(R.drawable.background)
                 .title("Choose background image")
-                .description("Would you like to select a background image from your phone? Do nothing to use the above default background image. You an change this later from the overflow menu on the bottom of the screen")
+                .description("Would you like to select a background image from your phone? Do nothing to use the above default background image. You can change this later from the overflow menu on the bottom of the screen")
                 .build(), new MessageButtonBehaviour(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +117,7 @@ public class SplashActivity extends MaterialIntroActivity {
                 .buttonsColor(R.color.tourButtonColor)
                 .image(R.color.cardBackgroundColor)
                 .title("Choose accent color")
-                .description("Would you like to select a custom accent color for the app? Do nothing to use the above default accent color. You an change this later from the overflow menu on the bottom of the screen")
+                .description("Would you like to select a custom accent color for the app? Do nothing to use the above default accent color. You can change this later from the overflow menu on the bottom of the screen")
                 .build(), new MessageButtonBehaviour(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
