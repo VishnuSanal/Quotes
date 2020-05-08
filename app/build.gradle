@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -30,9 +32,12 @@ dependencies {
     implementation 'com.turki-alkhateeb:materialcolorpicker:1.0.7'
     implementation 'io.github.dreierf:material-intro-screen:0.0.6'
 
+    implementation 'com.google.firebase:firebase-analytics:17.4.0'
+
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0-beta01'
 }

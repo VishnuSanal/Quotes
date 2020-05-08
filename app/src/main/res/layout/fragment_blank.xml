@@ -80,7 +80,7 @@
 
     <TextView
         android:id="@+id/aboutPageFeedbackTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:clickable="true"
@@ -93,7 +93,7 @@
 
     <TextView
         android:id="@+id/aboutPageViewSourceCodeTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:clickable="true"
@@ -103,6 +103,45 @@
         android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/aboutPageFeedbackTextView" />
+
+    <TextView
+        android:id="@+id/aboutPageCreditsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="16dp"
+        android:text="@string/thanks_to"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutPageViewSourceCodeTextView" />
+
+    <TextView
+        android:id="@+id/aboutPageCredit1TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:text="Aswin Kesav.U"
+        android:textColor="@android:color/background_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView" />
+
+    <TextView
+        android:id="@+id/aboutPageViewCredit2TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:text="Jaseel Ahamed.M"
+        android:textColor="@android:color/background_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView" />
+
 
     <Button
         android:id="@+id/aboutResetSettingsButton"
