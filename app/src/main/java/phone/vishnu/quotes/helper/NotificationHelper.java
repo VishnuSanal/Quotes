@@ -50,7 +50,7 @@ public class NotificationHelper {
 
                 NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.ic_share, "Share", pendingIntent).build();
 
-                final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext);
+                final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID);
                 mBuilder.setSmallIcon(R.drawable.ic_quotes)
                         .setAutoCancel(true)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)

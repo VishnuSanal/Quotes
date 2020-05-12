@@ -10,7 +10,7 @@ public class QuoteViewPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> fragments;
 
     public QuoteViewPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         fragments = fragmentList;
     }
 
