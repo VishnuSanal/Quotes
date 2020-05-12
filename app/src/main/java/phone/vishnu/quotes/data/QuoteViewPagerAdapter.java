@@ -14,6 +14,7 @@ public class QuoteViewPagerAdapter extends FragmentPagerAdapter {
         fragments = fragmentList;
     }
 
+    @androidx.annotation.NonNull
     @Override
     public Fragment getItem(int position) {
         return fragments.get(position);

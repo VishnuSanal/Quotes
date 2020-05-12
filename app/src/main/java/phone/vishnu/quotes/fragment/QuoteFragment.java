@@ -1,6 +1,7 @@
 package phone.vishnu.quotes.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -59,7 +60,6 @@ public class QuoteFragment extends Fragment {
     private static final String COLOR_PREFERENCE_NAME = "colorPreference";
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
-    private CardView cardView;
 
     public QuoteFragment() {
     }
@@ -89,7 +89,7 @@ public class QuoteFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#5C5C5C");
 
-        cardView = quoteView.findViewById(R.id.cardView);
+        CardView cardView = quoteView.findViewById(R.id.cardView);
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
 
@@ -247,7 +247,7 @@ public class QuoteFragment extends Fragment {
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View shareView = inflater.inflate(R.layout.share_layout, null);
+        @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String hexColor = sharedPreferences.getString("colorPreference", "#5C5C5C");

@@ -7,6 +7,6 @@
     <string name="send_feedback_to_the_developer">Send feedback to developer</string>
     <string name="email_address_of_developer">t.v.s10123@gmail.com</string>
     <string name="reset_settings">Reset Settings</string>
-    <string name="description">Here you can share screenshots of Quotes</string>
+    <!--<string name="description">Here you can share screenshots of Quotes</string>-->
     <string name="thanks_to">Thanks To:</string>
 </resources>

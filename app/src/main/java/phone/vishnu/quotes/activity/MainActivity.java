@@ -1,6 +1,7 @@
 package phone.vishnu.quotes.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     private ConstraintLayout constraintLayout;
     private ViewPager viewPager;
     private QuoteViewPagerAdapter adapter;
-    private int PERMISSION_REQ_CODE = 88;
+    private final int PERMISSION_REQ_CODE = 88;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -337,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View shareView = inflater.inflate(R.layout.share_layout, null);
+        @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String hexColor = sharedPreferences.getString("colorPreference", "#5C5C5C");

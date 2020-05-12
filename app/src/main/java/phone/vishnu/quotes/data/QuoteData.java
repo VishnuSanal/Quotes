@@ -1,7 +1,5 @@
 package phone.vishnu.quotes.data;
 
-import android.os.AsyncTask;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,12 +19,11 @@ public class QuoteData {
 
     public void getQuotes(final QuoteListAsyncResponse callBack) {
 
-
         final String url = "https://raw.githubusercontent.com/VishnuSanal/Quotes/master/Quotes.json";
 
-        Thread thread = new Thread(new Runnable(){
+        Thread thread = new Thread(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
 
                 final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                         Request.Method.GET,
@@ -52,7 +49,6 @@ public class QuoteData {
                                 }
                             }
                         },
-
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
@@ -60,19 +56,9 @@ public class QuoteData {
                             }
                         }
                 );
-
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        AppController.getInstance().addToRequestQueue(jsonArrayRequest);
-                    }
-                });
-
-
+                AppController.getInstance().addToRequestQueue(jsonArrayRequest);
             }
         });
         thread.start();
-
     }
-
 }

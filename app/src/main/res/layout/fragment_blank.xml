@@ -127,7 +127,8 @@
         android:text="Aswin Kesav.U"
         android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView" />
+        app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/aboutPageViewCredit2TextView"
@@ -140,7 +141,8 @@
         android:text="Jaseel Ahamed.M"
         android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView" />
+        app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView"
+        tools:ignore="HardcodedText" />
 
 
     <Button

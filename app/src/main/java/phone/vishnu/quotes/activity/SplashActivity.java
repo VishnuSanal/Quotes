@@ -33,18 +33,16 @@ import phone.vishnu.quotes.R;
 public class SplashActivity extends MaterialIntroActivity {
 
     private final int PICK_IMAGE_ID = 22;
-    private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
-    private final String FIRST_RUN_BOOLEAN = "firstRunPreference";
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        sharedPreferences = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
 
         //FIXME: FIXED
+        String FIRST_RUN_BOOLEAN = "firstRunPreference";
         if (sharedPreferences.getBoolean(FIRST_RUN_BOOLEAN, true)) {
 
          /*   if (("-1").equals(sharedPreferences.getString(BACKGROUND_PREFERENCE_NAME, "-1")))
@@ -197,6 +195,7 @@ public class SplashActivity extends MaterialIntroActivity {
 
                     SharedPreferences sharedPrefs = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPrefs.edit();
+                    String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
                     editor.putString(BACKGROUND_PREFERENCE_NAME, file);
                     editor.apply();
 
