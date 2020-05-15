@@ -145,12 +145,36 @@
         tools:ignore="HardcodedText" />
 
 
-    <Button
+    <Switch
+        android:id="@+id/aboutReminderSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:checked="true"
+        android:text="@string/daily_reminder"
+        app:layout_constraintBottom_toTopOf="@id/aboutResetSettingsButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/aboutReminderTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textColor="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="@id/aboutReminderSwitch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/aboutReminderSwitch"
+        app:layout_constraintTop_toTopOf="@id/aboutReminderSwitch"
+        tools:ignore="HardcodedText" />
+
+    <TextView
         android:id="@+id/aboutResetSettingsButton"
-        style="@style/Theme.MaterialComponents.Light.Dialog.Alert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bottom_button_background"
+        android:clickable="true"
+        android:focusable="true"
         android:text="@string/reset_settings"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@id/aboutSampleVersion"

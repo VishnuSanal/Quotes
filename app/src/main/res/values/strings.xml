@@ -9,4 +9,5 @@
     <string name="reset_settings">Reset Settings</string>
     <!--<string name="description">Here you can share screenshots of Quotes</string>-->
     <string name="thanks_to">Thanks To:</string>
+    <string name="daily_reminder">Daily Reminder</string>
 </resources>

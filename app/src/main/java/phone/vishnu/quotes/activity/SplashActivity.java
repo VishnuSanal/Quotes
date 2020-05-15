@@ -56,7 +56,6 @@ public class SplashActivity extends MaterialIntroActivity {
                     }
                 });*/
             showTour();
-            sharedPreferences.edit().putBoolean(FIRST_RUN_BOOLEAN, false).apply();
         } else {
             initTasks();
         }
@@ -137,13 +136,13 @@ public class SplashActivity extends MaterialIntroActivity {
             }
         }, "Choose Color"));
 
-        /*Noti*/
+        /*Notification*/
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)
                 .buttonsColor(R.color.tourButtonColor)
                 .image(R.drawable.ic_notifications)
                 .title("Daily Notification of Quotes")
-                .description("You can receive daily notifications with Quotes")
+                .description("You will receive daily notifications with Quotes at 08:30. You can change tis from the about screen")
                 .build());
 
         /*Share*/
@@ -177,6 +176,10 @@ public class SplashActivity extends MaterialIntroActivity {
     @Override
     public void onFinish() {
         super.onFinish();
+        String FIRST_RUN_BOOLEAN = "firstRunPreference";
+        SharedPreferences sharedPreferences = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean(FIRST_RUN_BOOLEAN, false).apply();
+
         startActivity(new Intent(SplashActivity.this, MainActivity.class));
         SplashActivity.this.finish();
     }

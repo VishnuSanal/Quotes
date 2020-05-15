@@ -66,10 +66,10 @@ import phone.vishnu.quotes.receiver.NotificationReceiver;
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
     private static final int PICK_IMAGE_ID = 36;
     private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
+    private final int PERMISSION_REQ_CODE = 88;
     private ConstraintLayout constraintLayout;
     private ViewPager viewPager;
     private QuoteViewPagerAdapter adapter;
-    private final int PERMISSION_REQ_CODE = 88;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +146,14 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             }
         });
 
-        myAlarm();
+        String ALARM_PREFERENCE_TIME = "customAlarmPreference";
+
+        String s = getApplicationContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE)
+                .getString(ALARM_PREFERENCE_TIME, "At 08:30 Daily");
+
+        if ("At 08:30 Daily".equals(s)) {
+            myAlarm();
+        }
     }
 
     private void myAlarm() {
