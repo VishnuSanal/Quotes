@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.FloatRange;
 import androidx.annotation.Nullable;
@@ -44,7 +46,6 @@ public class SplashActivity extends MaterialIntroActivity {
         //FIXME: FIXED
         String FIRST_RUN_BOOLEAN = "firstRunPreference";
         if (sharedPreferences.getBoolean(FIRST_RUN_BOOLEAN, true)) {
-
          /*   if (("-1").equals(sharedPreferences.getString(BACKGROUND_PREFERENCE_NAME, "-1")))
                 AsyncTask.execute(new Runnable() {
                     @Override
@@ -81,6 +82,24 @@ public class SplashActivity extends MaterialIntroActivity {
                 .description("Would you try?")
                 .build());
 
+        /*Screen 2*/
+        addSlide(new SlideFragmentBuilder()
+                .backgroundColor(R.color.tourBackgroundColor)
+                .buttonsColor(R.color.tourButtonColor)
+                .image(R.drawable.ic_quotes)
+                .title("It Works Like........")
+                .description("Share Quotations from World Leaders as an Image that too without any hassles of image editing......")
+                .build());
+
+        /*Hints*/
+        addSlide(new SlideFragmentBuilder()
+                .backgroundColor(R.color.tourBackgroundColor)
+                .buttonsColor(R.color.tourButtonColor)
+                .image(R.drawable.ic_unfold_more)
+                .title("Scroll For More")
+                .description("Scroll horizontally to get more awesome Quotes")
+                .build());
+
         /*Permission Screen*/
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)
@@ -88,7 +107,7 @@ public class SplashActivity extends MaterialIntroActivity {
                 .image(R.drawable.ic_check_box)
                 .neededPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET})
                 .title("Accept Permissions")
-                .description("Accept the permissions for the app to run")
+                .description("To make it clear......\n Permission for Internet is to load Quotes \n Permission for External Storage is to store Image Files temporarily")
                 .build());
 
         /*BG Image*/
@@ -142,7 +161,7 @@ public class SplashActivity extends MaterialIntroActivity {
                 .buttonsColor(R.color.tourButtonColor)
                 .image(R.drawable.ic_notifications)
                 .title("Daily Notification of Quotes")
-                .description("You will receive daily notifications with Quotes at 08:30. You can change tis from the about screen")
+                .description("You will receive daily notifications with Quotes at 08:30 AM. You can customise this from the about screen")
                 .build());
 
         /*Share*/
@@ -151,7 +170,7 @@ public class SplashActivity extends MaterialIntroActivity {
                 .buttonsColor(R.color.tourButtonColor)
                 .image(R.drawable.ic_share)
                 .title("Share Quotes in Social Media")
-                .description("Click on this icon from a quote and select the required app from the chooser")
+                .description("Click share icon from a Quote and select to share that Quote in the form of an Image")
                 .build());
 
         /*Fav*/
@@ -160,7 +179,7 @@ public class SplashActivity extends MaterialIntroActivity {
                 .buttonsColor(R.color.tourButtonColor)
                 .image(R.drawable.ic_favorite)
                 .title("Add a Quote to Favorites")
-                .description("Click on this icon from a quote. You can view the favorite quotes by clicking on the overflow menu on the bottom of the screen")
+                .description("Click favourite icon from a quote. You can view the favorite quotes by clicking on the overflow menu on the bottom of the screen")
                 .build());
 
         /*End Screen*/
@@ -211,6 +230,12 @@ public class SplashActivity extends MaterialIntroActivity {
 
     private void initTasks() {
         setContentView(R.layout.activity_splash);
+        final String COLOR_PREFERENCE_NAME = "colorPreference";
+
+        ((TextView) findViewById(R.id.splashScreenAppNameTextView))
+                .setTextColor(Color.parseColor(this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE)
+                        .getString(COLOR_PREFERENCE_NAME, "#5C5C5C")));
+
         int SPLASH_TIMEOUT = 1;
         new Handler().postDelayed(new Runnable() {
             @Override

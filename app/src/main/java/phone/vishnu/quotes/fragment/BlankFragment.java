@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class BlankFragment extends Fragment {
     private TextView sourceCodeTV, feedbackTV, resetTV, reminderTimeTV;
     private Switch reminderSwitch;
-
 
     public BlankFragment() {
     }
@@ -125,7 +125,7 @@ public class BlankFragment extends Fragment {
                             myAlarm(c);
 
                         }
-                    }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true);
+                    }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(getActivity()));
                     timePicker.show();
 
                 } else {
@@ -159,7 +159,6 @@ public class BlankFragment extends Fragment {
         }
 
     }
-
 
     private void composeEmail(String[] addresses, String subject) {
 
