@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,201 +7,237 @@
     android:background="@android:color/background_light"
     tools:context=".fragment.BlankFragment">
 
-    <!--TODO:Implement a Toolbar here
-      <com.google.android.material.appbar.CollapsingToolbarLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>-->
-
-    <ImageView
-        android:id="@+id/aboutSampleIconImageView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/textColor"
-        android:contentDescription="@string/app_name"
-        android:foregroundGravity="center"
-        android:src="@drawable/ic_info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/aboutPageAppLogo"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_quotes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutSampleIconImageView" />
+        <!--TODO:Implement a Toolbar here
+          <com.google.android.material.appbar.CollapsingToolbarLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"/>-->
 
-    <TextView
-        android:id="@+id/aboutSampleAppNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="casual"
-        android:text="@string/app_name"
-        android:textColor="@color/textColor"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutPageAppLogo" />
+        <ImageView
+            android:id="@+id/aboutSampleIconImageView"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/textColor"
+            android:contentDescription="@string/app_name"
+            android:foregroundGravity="center"
+            android:src="@drawable/ic_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/aboutSampleSpacerView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/spacerColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutSampleAppNameTextView" />
+        <ImageView
+            android:id="@+id/aboutPageAppLogo"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_quotes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutSampleIconImageView" />
 
+        <TextView
+            android:id="@+id/aboutSampleAppNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="casual"
+            android:text="@string/app_name"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageAppLogo" />
 
-    <TextView
-        android:id="@+id/aboutPageLinksTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_margin="16dp"
-        android:text="@string/links"
-        android:textColor="@color/textColor"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutSampleSpacerView" />
-
-    <TextView
-        android:id="@+id/aboutPageFeedbackTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="16dp"
-        android:text="@string/send_feedback_to_the_developer"
-        android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutPageLinksTextView" />
-
-    <TextView
-        android:id="@+id/aboutPageViewSourceCodeTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="16dp"
-        android:text="@string/view_source_code_at_github"
-        android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutPageFeedbackTextView" />
-
-    <TextView
-        android:id="@+id/aboutPageCreditsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_margin="16dp"
-        android:text="@string/thanks_to"
-        android:textColor="@color/textColor"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutPageViewSourceCodeTextView" />
-
-    <TextView
-        android:id="@+id/aboutPageCredit1TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:text="Jaseel Ahamed.M"
-        android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView"
-        tools:ignore="HardcodedText" />
+        <View
+            android:id="@+id/aboutSampleSpacerView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/spacerColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutSampleAppNameTextView" />
 
 
-    <TextView
-        android:id="@+id/aboutPageCredit2TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:text="Vidhu Vinodh"
-        android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView"
-        tools:ignore="HardcodedText" />
+        <TextView
+            android:id="@+id/aboutPageLinksTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_margin="16dp"
+            android:text="@string/links"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutSampleSpacerView" />
 
-    <TextView
-        android:id="@+id/aboutPageViewCredit3TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:text="Aswin Kesav.U"
-        android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutPageCredit2TextView"
-        tools:ignore="HardcodedText" />
+        <TextView
+            android:id="@+id/aboutPageFeedbackTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="16dp"
+            android:text="@string/send_feedback_to_the_developer"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageLinksTextView" />
 
-    <Switch
-        android:id="@+id/aboutReminderSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:checked="true"
-        android:text="@string/daily_reminder"
-        app:layout_constraintBottom_toTopOf="@id/aboutResetSettingsButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/aboutPageViewSourceCodeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="16dp"
+            android:text="@string/view_source_code_at_github"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageFeedbackTextView" />
 
-    <TextView
-        android:id="@+id/aboutReminderTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textColor="@android:color/background_dark"
-        app:layout_constraintBottom_toBottomOf="@id/aboutReminderSwitch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/aboutReminderSwitch"
-        app:layout_constraintTop_toTopOf="@id/aboutReminderSwitch"
-        tools:ignore="HardcodedText" />
+        <TextView
+            android:id="@+id/aboutPageCreditsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_margin="16dp"
+            android:text="@string/thanks_to"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageViewSourceCodeTextView" />
 
-    <TextView
-        android:id="@+id/aboutResetSettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottom_button_background"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/reset_settings"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@id/aboutSampleVersion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/aboutPageCredit1TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:text="Jaseel Ahamed.M"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView"
+            tools:ignore="HardcodedText" />
 
-    <TextView
-        android:id="@+id/aboutSampleVersion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/version"
-        android:textColor="@color/textColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/aboutPageCredit2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:text="Vidhu Vinodh"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/aboutPageCredit3TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:text="Aswin Kesav.U"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit2TextView"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/aboutPageCredit4TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:text="Pexels.com"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit3TextView"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/aboutPageCredit5TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:text="StackOverflow.com"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit4TextView"
+            tools:ignore="HardcodedText" />
+
+        <Switch
+            android:id="@+id/aboutReminderSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:checked="true"
+            android:text="@string/daily_reminder"
+            app:layout_constraintBottom_toTopOf="@id/aboutResetSettingsButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit5TextView" />
+
+        <TextView
+            android:id="@+id/aboutReminderTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/aboutReminderSwitch"
+            app:layout_constraintTop_toBottomOf="@id/aboutReminderSwitch"
+            app:layout_constraintTop_toTopOf="@id/aboutReminderSwitch"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/aboutResetSettingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_button_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/reset_settings"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintBottom_toTopOf="@id/aboutSampleVersion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutReminderSwitch" />
+
+        <TextView
+            android:id="@+id/aboutSampleVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/version"
+            android:textColor="@color/textColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutResetSettingsButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,7 +15,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -24,10 +24,14 @@ import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +44,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog;
 import com.turkialkhateeb.materialcolorpicker.ColorListener;
 
@@ -59,6 +68,7 @@ import phone.vishnu.quotes.data.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.fragment.BlankFragment;
 import phone.vishnu.quotes.fragment.BottomSheetFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
+import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.fragment.QuoteFragment;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
@@ -127,9 +137,40 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         */
 
         String backgroundPath = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1");
+//        Log.e("vishnu", "onCreate: " + backgroundPath);
         if (!"-1".equals(backgroundPath))
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
+        else {
+            final ProgressDialog dialog = ProgressDialog.show(this, "Please Wait", "");
+            String fileName = ("aerial-photography-of-buildings-near-sea-3560024-min.jpg");
 
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(fileName);
+
+            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+
+            final File f = new File(localFile + File.separator + ".Quotes_Background" + ".jpg");
+
+            storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    SharedPreferences.Editor editor = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", Context.MODE_PRIVATE).edit();
+                    String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
+                    editor.putString(BACKGROUND_PREFERENCE_NAME, f.toString());
+                    editor.apply();
+                    dialog.dismiss();
+
+                    Toast.makeText(MainActivity.this, "Background Set.....", Toast.LENGTH_SHORT).show();
+                    constraintLayout.setBackground(Drawable.createFromPath(f.toString()));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    exception.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Error.....", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+        }
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,7 +204,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         calendar.set(Calendar.HOUR_OF_DAY, 8);
         calendar.set(Calendar.MINUTE, 30);
 
-        if (calendar.getTime().compareTo(new Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1);
+        if (calendar.getTime().compareTo(new Date()) < 0)
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
 
         Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -205,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
 
-                    String file = generateNoteOnSD(this, bitmap);
+                    String file = generateNoteOnSD(bitmap);
 
                     constraintLayout.setBackground(Drawable.createFromPath(file));
 
@@ -221,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         }
     }
 
-    private String generateNoteOnSD(Context context, Bitmap image) {
+    private String generateNoteOnSD(Bitmap image) {
         File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
 
         if (!root.exists()) root.mkdirs();
@@ -241,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             e.printStackTrace();
         }
 
-        MediaScannerConnection.scanFile(context, new String[]{file}, null, null);
+//        MediaScannerConnection.scanFile(context, new String[]{file}, null, null);
         return file;
     }
 
@@ -271,9 +313,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 if (!isPermissionGranted())
                     isPermissionGranted();
                 else {
-                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.setType("image/*");
-                    startActivityForResult(intent, PICK_IMAGE_ID);
+                    getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
+//                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                    intent.setType("image/*");
+//                    startActivityForResult(intent, PICK_IMAGE_ID);
                 }
                 break;
             }
@@ -357,8 +400,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         CardView cardView = shareView.findViewById(R.id.shareCardView);
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
 
-        ((ImageView) shareView.findViewById(R.id.shareFavoriteImageView)).setColorFilter(Color.RED);
-        ((ImageView) shareView.findViewById(R.id.shareShareImageView)).setColorFilter(Color.GREEN);
+//        ((ImageView) shareView.findViewById(R.id.shareFavoriteImageView)).setColorFilter(Color.RED);
+//        ((ImageView) shareView.findViewById(R.id.shareShareImageView)).setColorFilter(Color.GREEN);
 
         ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setText(quote);
         ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setText(author);
@@ -366,8 +409,13 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         DisplayMetrics metrics = new DisplayMetrics();
         ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
 
-        shareView.measure(View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.AT_MOST),
-                View.MeasureSpec.makeMeasureSpec(metrics.heightPixels, View.MeasureSpec.AT_MOST));
+        shareView.measure(View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(metrics.heightPixels, View.MeasureSpec.EXACTLY));
+
+        shareView.findViewById(R.id.shareRelativeLayout).setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+        ConstraintLayout.LayoutParams cardParams = new ConstraintLayout.LayoutParams(300, ViewGroup.LayoutParams.WRAP_CONTENT);
+        cardParams.verticalBias = 0.5f;
+        cardParams.horizontalBias = 0.5f;
 
         shareView.setDrawingCacheEnabled(true);
 
@@ -400,4 +448,5 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
+
 }

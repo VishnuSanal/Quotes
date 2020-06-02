@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "690235089446",
+    "firebase_url": "https://quotes-q.firebaseio.com",
+    "project_id": "quotes-q",
+    "storage_bucket": "quotes-q.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690235089446:android:05fd558e4b1d3dbdf03ce7",
+        "android_client_info": {
+          "package_name": "phone.vishnu.quotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690235089446-6ptricp9q4571i8t621ns7p050q5be9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO5wWBN76doacXOAOs9N7nK4RNxjmu8Lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690235089446-6ptricp9q4571i8t621ns7p050q5be9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -86,7 +86,7 @@ public class SplashActivity extends MaterialIntroActivity {
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)
                 .buttonsColor(R.color.tourButtonColor)
-                .image(R.drawable.ic_quotes)
+                .image(R.drawable.ic_quotes_round)
                 .title("It Works Like........")
                 .description("Share Quotations from World Leaders as an Image that too without any hassles of image editing......")
                 .build());
@@ -115,17 +115,15 @@ public class SplashActivity extends MaterialIntroActivity {
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)
                 .buttonsColor(R.color.tourButtonColor)
-                .image(R.drawable.background)
-                .title("Choose background image")
-                .description("Would you like to select a background image from your phone? Do nothing to use the above default background image. You can change this later from the overflow menu on the bottom of the screen")
-                .build(), new MessageButtonBehaviour(new View.OnClickListener() {
+                .image(R.drawable.ic_insert_photo)
+                .title("Background image")
+                .description("You can select a custom background image for the app from the overflow menu on the bottom of the screen")
+                .build()/*, new MessageButtonBehaviour(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, PICK_IMAGE_ID);
+                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
             }
-        }, "Choose Image"));
+        }, "Choose Image")*/);
 
         /*Accent Color*/
         addSlide(new SlideFragmentBuilder()

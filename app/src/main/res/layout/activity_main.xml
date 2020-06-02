@@ -5,9 +5,6 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:backgroundTint="@android:color/black"
-    android:backgroundTintMode="add"
     tools:context=".activity.MainActivity">
 
     <ImageView

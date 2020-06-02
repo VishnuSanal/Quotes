@@ -1,13 +1,18 @@
 <resources>
     <string name="app_name">Quotes</string>
 
-    <string name="version">Version: Pre Release(0.9) [AD-FREE]</string>
+    <string name="version">Version: 1.0 [AD-FREE]</string>
     <string name="links">Links</string>
     <string name="view_source_code_at_github">View source code at GitHub</string>
     <string name="send_feedback_to_the_developer">Send feedback to developer</string>
     <string name="email_address_of_developer">t.v.s10123@gmail.com</string>
     <string name="reset_settings">Reset Settings</string>
-    <!--<string name="description">Here you can share screenshots of Quotes</string>-->
     <string name="thanks_to">Thanks To:</string>
     <string name="daily_reminder">Daily Reminder</string>
+
+    <string name="about">About</string>
+    <string name="choose_background_image">Choose background image</string>
+    <string name="choose_accent_colour">Choose accent colour</string>
+    <string name="favorites">Favorites</string>
+
 </resources>

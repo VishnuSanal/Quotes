@@ -12,7 +12,7 @@
         android:layout_height="48dp"
         android:layout_margin="8dp"
         android:background="@drawable/bottom_button_background"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="@string/about"
         android:scaleType="fitXY"
         android:src="@drawable/ic_info" />
 
@@ -22,7 +22,7 @@
         android:layout_height="48dp"
         android:layout_margin="8dp"
         android:background="@drawable/bottom_button_background"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="@string/choose_background_image"
         android:scaleType="fitXY"
         android:src="@drawable/ic_insert_photo" />
 
@@ -32,7 +32,7 @@
         android:layout_height="48dp"
         android:layout_margin="8dp"
         android:background="@drawable/bottom_button_background"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="@string/choose_accent_colour"
         android:scaleType="fitXY"
         android:src="@drawable/ic_color_lens" />
 
@@ -42,7 +42,7 @@
         android:layout_height="48dp"
         android:layout_margin="8dp"
         android:background="@drawable/bottom_button_background"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="@string/favorites"
         android:scaleType="fitXY"
         android:src="@drawable/ic_favorite" />
 
