@@ -18,6 +18,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.RecyclerViewAdapter;
 
 public class PickFragment extends Fragment {
@@ -75,7 +76,8 @@ public class PickFragment extends Fragment {
                         }
                     });
                 }
-
+                if (MainActivity.dialog != null && MainActivity.dialog.isShowing())
+                    MainActivity.dialog.dismiss();
             }
         });
     }

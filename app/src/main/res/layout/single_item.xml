@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
@@ -29,24 +30,26 @@
         app:layout_constraintTop_toBottomOf="@id/quoteTextSingleItem" />
 
     <ImageView
-        android:id="@+id/singleItemViewImageView"
+        android:id="@+id/singleItemShareImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="Favorite Screen Share Button"
         android:foregroundGravity="right"
         android:scaleType="fitXY"
         android:src="@drawable/ic_share"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/singleItemRemoveImageView" />
+        app:layout_constraintEnd_toStartOf="@id/singleItemRemoveImageView"
+        tools:ignore="HardcodedText" />
 
     <ImageView
         android:id="@+id/singleItemRemoveImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="Favorite Screen Remove Button"
         android:scaleType="fitXY"
         android:src="@drawable/ic_remove"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="HardcodedText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

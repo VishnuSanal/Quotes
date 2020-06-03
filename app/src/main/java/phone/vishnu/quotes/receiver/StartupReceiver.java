@@ -27,29 +27,32 @@ public class StartupReceiver extends BroadcastReceiver {
                 //TODO:  "At " + hourOfDay + " : " + minute + " Daily"
                 String time = preferences.getString(ALARM_PREFERENCE_TIME, "At 8 : 30 Daily");
 
-                String trim = time.replaceAll("At ", "").replaceAll(" Daily", "").trim();
+                if (!time.equals("-1")) {
 
-                String[] split = trim.split(":");
+                    String trim = time.replaceAll("At ", "").replaceAll(" Daily", "").trim();
+
+                    String[] split = trim.split(":");
 
 //                Log.e("vishnu", Integer.parseInt(split[0].trim()) + ":" + Integer.parseInt(split[1].trim()));
 
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(split[0].trim()));
-                calendar.set(Calendar.MINUTE, Integer.parseInt(split[1].trim()));
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(split[0].trim()));
+                    calendar.set(Calendar.MINUTE, Integer.parseInt(split[1].trim()));
 
-                if (calendar.getTime().compareTo(new Date()) < 0)
-                    calendar.add(Calendar.DAY_OF_MONTH, 1);
+                    if (calendar.getTime().compareTo(new Date()) < 0)
+                        calendar.add(Calendar.DAY_OF_MONTH, 1);
 
-                Intent i = new Intent(context, NotificationReceiver.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-                AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+                    Intent i = new Intent(context, NotificationReceiver.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                    AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
-                if (alarmManager != null) {
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                    if (alarmManager != null) {
+                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                    }
                 }
+
             }
-
         }
-    }
 
+    }
 }

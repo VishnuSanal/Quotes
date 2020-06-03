@@ -75,6 +75,7 @@ import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
     private static final int PICK_IMAGE_ID = 36;
+    public static ProgressDialog dialog;
     private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
     private final int PERMISSION_REQ_CODE = 88;
     private ConstraintLayout constraintLayout;
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         if (!"-1".equals(backgroundPath))
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
         else {
-            final ProgressDialog dialog = ProgressDialog.show(this, "Please Wait", "");
+            final ProgressDialog dialog = ProgressDialog.show(this, "", "Please Wait....");
             String fileName = ("aerial-photography-of-buildings-near-sea-3560024-min.jpg");
 
             StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(fileName);
@@ -313,6 +314,9 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 if (!isPermissionGranted())
                     isPermissionGranted();
                 else {
+
+                    dialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+
                     getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
 //                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 //                    intent.setType("image/*");
@@ -333,6 +337,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString(COLOR_PREFERENCE_NAME, "#" + Integer.toHexString(color).substring(2));
                         editor.apply();
+                        Toast.makeText(MainActivity.this, "Accent Colour Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
                         MainActivity.this.recreate();
                     }
                 });
@@ -412,7 +417,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         shareView.measure(View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(metrics.heightPixels, View.MeasureSpec.EXACTLY));
 
-        shareView.findViewById(R.id.shareRelativeLayout).setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+        shareView.findViewById(R.id.shareRelativeLayout).setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         ConstraintLayout.LayoutParams cardParams = new ConstraintLayout.LayoutParams(300, ViewGroup.LayoutParams.WRAP_CONTENT);
         cardParams.verticalBias = 0.5f;
         cardParams.horizontalBias = 0.5f;

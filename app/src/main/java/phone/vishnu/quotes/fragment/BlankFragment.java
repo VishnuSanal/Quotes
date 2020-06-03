@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -119,7 +120,7 @@ public class BlankFragment extends Fragment {
 
                             preferences.putString(ALARM_PREFERENCE_TIME, "At " + hourOfDay + " : " + minute + " Daily").apply();
 
-                            reminderTimeTV.setText("At " + hourOfDay + " : " + minute + " Daily");
+                            reminderTimeTV.setText(MessageFormat.format("At {0} : {1} Daily", hourOfDay, minute));
                             reminderTimeTV.setVisibility(View.VISIBLE);
 
                             myAlarm(c);

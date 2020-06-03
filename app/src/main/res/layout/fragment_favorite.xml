@@ -7,19 +7,20 @@
     android:orientation="vertical"
     tools:context=".fragment.FavoriteFragment">
 
-  <!--TODO:Implement a Toolbar here
-    <com.google.android.material.appbar.CollapsingToolbarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>-->
+    <!--TODO:Implement a Toolbar here
+      <com.google.android.material.appbar.CollapsingToolbarLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>-->
 
     <ImageView
         android:id="@+id/favoriteSampleIconImageView"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:background="@color/textColor"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="Favourite Screen Favourite Logo"
         android:foregroundGravity="center"
-        android:src="@drawable/ic_favorite" />
+        android:src="@drawable/ic_favorite"
+        tools:ignore="HardcodedText" />
 
     <ListView
         android:id="@+id/favoriteListView"

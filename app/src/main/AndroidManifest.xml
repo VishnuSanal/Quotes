@@ -19,15 +19,20 @@
         tools:targetApi="q">
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -42,7 +47,7 @@
         <receiver
             android:name=".receiver.NotificationReceiver"
             android:enabled="true" />
-        <!-- Start the Service if applicable on boot -->
+
         <receiver
             android:name=".receiver.StartupReceiver"
             android:enabled="true">

@@ -46,7 +46,7 @@ public class CustomDataAdapter extends ArrayAdapter<Quote> {
 
             viewHolder.quoteTV = rootView.findViewById(R.id.quoteTextSingleItem);
             viewHolder.authorTV = rootView.findViewById(R.id.authorTextSingleItem);
-            viewHolder.viewIV = rootView.findViewById(R.id.singleItemViewImageView);
+            viewHolder.viewIV = rootView.findViewById(R.id.singleItemShareImageView);
             viewHolder.viewIV.setColorFilter(Color.parseColor("#9C9CFF"));
             viewHolder.removeIV = rootView.findViewById(R.id.singleItemRemoveImageView);
 

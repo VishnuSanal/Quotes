@@ -22,24 +22,26 @@
             android:layout_height="36dp"
             android:layout_marginBottom="8dp"
             android:background="@color/textColor"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="About Screen Info Logo"
             android:foregroundGravity="center"
             android:src="@drawable/ic_info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:id="@+id/aboutPageAppLogo"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_margin="16dp"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="About Screen Logo"
             android:scaleType="fitXY"
             android:src="@drawable/ic_quotes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutSampleIconImageView" />
+            app:layout_constraintTop_toBottomOf="@id/aboutSampleIconImageView"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/aboutSampleAppNameTextView"
@@ -171,7 +173,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Pexels.com"
+            android:text="Paulo Dichone"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit3TextView"
@@ -185,7 +187,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="StackOverflow.com"
+            android:text="Pexels.com"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit4TextView"

@@ -31,19 +31,21 @@
                 android:id="@+id/favoriteImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
+                android:contentDescription="Quote Fragment Favourite Button"
                 android:src="@drawable/ic_favorite"
                 app:layout_constraintEnd_toStartOf="@id/shareImageView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
             <ImageView
                 android:id="@+id/shareImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
+                android:contentDescription="Quote Fragment Share Button"
                 android:src="@drawable/ic_share"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/quoteTextView"

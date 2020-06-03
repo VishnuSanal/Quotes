@@ -3,6 +3,7 @@ package phone.vishnu.quotes.helper;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
@@ -26,11 +27,12 @@ import java.io.File;
 import java.util.ArrayList;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.activity.MainActivity;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Uri> arr;
-    private Context context;
+    private final Context context;
     private ImageView imageView;
 
     public RecyclerViewAdapter(Context context) {
@@ -61,7 +63,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
 
-                final ProgressDialog dialog = ProgressDialog.show(context, "Please Wait", "");
+                final ProgressDialog dialog = ProgressDialog.show(context, "", "Please Wait....");
 
                 String[] split = String.valueOf(arr.get(position)).split("%2F")[1].split("\\?");
 
@@ -80,14 +82,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         editor.apply();
                         dialog.dismiss();
 
-                        Toast.makeText(context, "Background Set.....", Toast.LENGTH_SHORT).show();
-                        ((Activity) context).recreate();
+                        Toast.makeText(context, "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
+
+                        context.startActivity(new Intent(context, MainActivity.class));
+
+                        ((Activity) context).finish();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         exception.printStackTrace();
-                        Toast.makeText(context, "Error.....", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Error.....", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });

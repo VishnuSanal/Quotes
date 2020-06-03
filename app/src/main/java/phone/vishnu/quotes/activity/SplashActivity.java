@@ -34,8 +34,6 @@ import phone.vishnu.quotes.R;
 
 public class SplashActivity extends MaterialIntroActivity {
 
-    private final int PICK_IMAGE_ID = 22;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -205,6 +203,7 @@ public class SplashActivity extends MaterialIntroActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        int PICK_IMAGE_ID = 22;
         if ((requestCode == PICK_IMAGE_ID) && (resultCode == Activity.RESULT_OK)) {
             if (data != null) {
                 try {
