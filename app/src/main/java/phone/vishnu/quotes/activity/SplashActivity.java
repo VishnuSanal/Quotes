@@ -229,9 +229,12 @@ public class SplashActivity extends MaterialIntroActivity {
         setContentView(R.layout.activity_splash);
         final String COLOR_PREFERENCE_NAME = "colorPreference";
 
-        ((TextView) findViewById(R.id.splashScreenAppNameTextView))
-                .setTextColor(Color.parseColor(this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE)
-                        .getString(COLOR_PREFERENCE_NAME, "#5C5C5C")));
+        String colorString = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE)
+                .getString(COLOR_PREFERENCE_NAME, "#5C5C5C");
+
+        if (colorString.equals("#00000000")) colorString = "#5C5C5C";
+
+        ((TextView) findViewById(R.id.splashScreenAppNameTextView)).setTextColor(Color.parseColor(colorString));
 
         int SPLASH_TIMEOUT = 1;
         new Handler().postDelayed(new Runnable() {

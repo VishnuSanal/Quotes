@@ -334,19 +334,22 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 dialog.setColorListener(new ColorListener() {
                     @Override
                     public void OnColorClick(View v, int color) {
+
+                        String colorString = Integer.toHexString(color).substring(2);
+
+                        //TODO:Needs Fixing of string "WHITE"
+                        if (colorString.toLowerCase().equals("ffffff")) colorString = "00000000";
+
                         SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString(COLOR_PREFERENCE_NAME, "#" + Integer.toHexString(color).substring(2));
+                        editor.putString(COLOR_PREFERENCE_NAME, "#" + colorString);
                         editor.apply();
                         Toast.makeText(MainActivity.this, "Accent Colour Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
                         MainActivity.this.recreate();
                     }
                 });
                 dialog.show();
-
                 break;
-
             }
-
         }
     }
 
