@@ -133,6 +133,8 @@ public class SplashActivity extends MaterialIntroActivity {
                 .build(), new MessageButtonBehaviour(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 final String COLOR_PREFERENCE_NAME = "colorPreference";
 
                 final SharedPreferences prefs = SplashActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
@@ -142,8 +144,14 @@ public class SplashActivity extends MaterialIntroActivity {
                 dialog.setColorListener(new ColorListener() {
                     @Override
                     public void OnColorClick(View v, int color) {
+
+                        String colorString = Integer.toHexString(color).substring(2);
+
+                        //TODO:Needs Fixing of string "WHITE"
+                        if (colorString.toLowerCase().equals("ffffff")) colorString = "00000000";
+
                         SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString(COLOR_PREFERENCE_NAME, "#" + Integer.toHexString(color).substring(2));
+                        editor.putString(COLOR_PREFERENCE_NAME, "#" + colorString);
                         editor.apply();
                     }
                 });

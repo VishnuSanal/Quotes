@@ -24,7 +24,7 @@ public class StartupReceiver extends BroadcastReceiver {
 
                 final String ALARM_PREFERENCE_TIME = "customAlarmPreference";
 
-                //TODO:  "At " + hourOfDay + " : " + minute + " Daily"
+                // "At " + hourOfDay + " : " + minute + " Daily"
                 String time = preferences.getString(ALARM_PREFERENCE_TIME, "At 8 : 30 Daily");
 
                 if (!time.equals("-1")) {
