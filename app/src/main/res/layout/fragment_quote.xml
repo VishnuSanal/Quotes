@@ -22,8 +22,9 @@
         <!--android:background="@drawable/ic_quotes"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/singleCardContainer"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:minHeight="220dp"
             android:padding="4dp">
 

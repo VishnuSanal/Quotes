@@ -91,6 +91,8 @@ public class QuoteFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#5C5C5C");
 
+//        ConstraintLayout constraintLayout = quoteView.findViewById(R.id.singleCardContainer);
+//        constraintLayout.setBackgroundColor(Color.parseColor(hexColor));
         CardView cardView = quoteView.findViewById(R.id.cardView);
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
