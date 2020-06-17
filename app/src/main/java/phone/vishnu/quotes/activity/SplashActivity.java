@@ -2,12 +2,10 @@ package phone.vishnu.quotes.activity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -218,7 +216,7 @@ public class SplashActivity extends MaterialIntroActivity {
 
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
 
-                    String file = generateNoteOnSD(this, bitmap);
+                    String file = generateNoteOnSD(bitmap);
 
                     SharedPreferences sharedPrefs = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPrefs.edit();
@@ -254,7 +252,7 @@ public class SplashActivity extends MaterialIntroActivity {
         }, SPLASH_TIMEOUT * 1000);
     }
 
-    private String generateNoteOnSD(Context context, Bitmap image) {
+    private String generateNoteOnSD(Bitmap image) {
         File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
 
         if (!root.exists()) root.mkdirs();
@@ -273,8 +271,6 @@ public class SplashActivity extends MaterialIntroActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        MediaScannerConnection.scanFile(context, new String[]{file}, null, null);
         return file;
     }
 

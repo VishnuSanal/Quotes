@@ -214,9 +214,16 @@ public class FavoriteFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String hexColor = sharedPreferences.getString("colorPreference", "#5C5C5C");
 
+
         String backgroundPath = sharedPreferences.getString("backgroundPreference", "-1");
         if (!"-1".equals(backgroundPath))
             shareView.findViewById(R.id.shareRelativeLayout).setBackground(Drawable.createFromPath(backgroundPath));
+
+        /*shareView.findViewById(R.id.shareRelativeLayout)
+                .setBackgroundColor(
+                        Color.parseColor("#ff0000ff")
+                );*/
+
 
         CardView cardView = shareView.findViewById(R.id.shareCardView);
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
