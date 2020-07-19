@@ -31,28 +31,28 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         aboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onButtonClicked(aboutButton.getId());
+                listener.onBottomSheetButtonClicked(aboutButton.getId());
                 dismiss();
             }
         });
         favButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onButtonClicked(favButton.getId());
+                listener.onBottomSheetButtonClicked(favButton.getId());
                 dismiss();
             }
         });
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onButtonClicked(imgButton.getId());
+                listener.onBottomSheetButtonClicked(imgButton.getId());
                 dismiss();
             }
         });
         colorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onButtonClicked(colorButton.getId());
+                listener.onBottomSheetButtonClicked(colorButton.getId());
                 dismiss();
             }
         });
@@ -70,6 +70,6 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     }
 
     public interface BottomSheetListener {
-        void onButtonClicked(int id);
+        void onBottomSheetButtonClicked(int id);
     }
 }

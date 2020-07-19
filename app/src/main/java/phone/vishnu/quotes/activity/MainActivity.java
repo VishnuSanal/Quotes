@@ -15,6 +15,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -46,6 +48,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -56,6 +59,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -75,7 +79,7 @@ import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
     private static final int PICK_IMAGE_ID = 36;
-    public static ProgressDialog dialog;
+    public static ProgressDialog bgDialog;
     private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
     private final int PERMISSION_REQ_CODE = 88;
     private ConstraintLayout constraintLayout;
@@ -107,70 +111,79 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         constraintLayout = findViewById(R.id.constraintLayout);
         viewPager = findViewById(R.id.viewPager);
 
+        if (!isNetworkAvailable())
+            Toast.makeText(this, "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
+
         ImageView menuIcon = findViewById(R.id.homeMenuIcon);
-/*
-        final String[] backgroundPath = {this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1")};
-
-        if (("-1".equals(backgroundPath[0]))) {
-
-            final ProgressDialog dialog = ProgressDialog.show(this,"","Loading...");
-
-            Timer timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                public void run() {
-                    backgroundPath[0] = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1");
-
-                    Log.e("vishnu", "run: " );
-
-                    if (!"-1".equals(backgroundPath[0])){
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                constraintLayout.setBackground(Drawable.createFromPath(backgroundPath[0]));
-                                dialog.dismiss();
-                                Log.e("vishnu", "run: if: " );
-                            }
-                        });
-                    }
-                }
-            }, 1000, 1000);
-        }
-        */
 
         String backgroundPath = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1");
-//        Log.e("vishnu", "onCreate: " + backgroundPath);
         if (!"-1".equals(backgroundPath))
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
         else {
-            final ProgressDialog dialog = ProgressDialog.show(this, "", "Please Wait....");
-            String fileName = ("aerial-photography-of-buildings-near-sea-3560024-min.jpg");
 
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(fileName);
+            if (isNetworkAvailable()) {
 
-            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+                final ProgressDialog dialog = ProgressDialog.show(this, "", "Please Wait....");
+                String fileName = ("aerial-photography-of-buildings-near-sea-3560024-min.jpg");
 
-            final File f = new File(localFile + File.separator + ".Quotes_Background" + ".jpg");
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(fileName);
 
-            storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    SharedPreferences.Editor editor = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", Context.MODE_PRIVATE).edit();
-                    String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
-                    editor.putString(BACKGROUND_PREFERENCE_NAME, f.toString());
-                    editor.apply();
-                    dialog.dismiss();
+                final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
 
-                    Toast.makeText(MainActivity.this, "Background Set.....", Toast.LENGTH_SHORT).show();
-                    constraintLayout.setBackground(Drawable.createFromPath(f.toString()));
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    exception.printStackTrace();
-                    Toast.makeText(MainActivity.this, "Error.....", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                }
-            });
+                final File f = new File(localFile + File.separator + ".Quotes_Background" + ".jpg");
+
+                storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        SharedPreferences.Editor editor = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", Context.MODE_PRIVATE).edit();
+                        String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
+                        editor.putString(BACKGROUND_PREFERENCE_NAME, f.toString());
+                        editor.apply();
+                        dialog.dismiss();
+
+                        Toast.makeText(MainActivity.this, "Background Set.....", Toast.LENGTH_SHORT).show();
+                        constraintLayout.setBackground(Drawable.createFromPath(f.toString()));
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        exception.printStackTrace();
+                        Toast.makeText(MainActivity.this, "Error.....", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+            } else {
+
+                Toast.makeText(this, "No Internet Connection. You can set a colour as background", Toast.LENGTH_SHORT).show();
+
+                ColorChooserDialog colorChooserDialog = new ColorChooserDialog(MainActivity.this);
+                colorChooserDialog.setTitle("Choose Color");
+                colorChooserDialog.setColorListener(new ColorListener() {
+                    @Override
+                    public void OnColorClick(View v, int color) {
+
+                        DisplayMetrics metrics = new DisplayMetrics();
+                        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+                        Bitmap image = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(image);
+                        canvas.drawColor(color);
+
+                        String file = generateNoteOnSD(image);
+
+                        constraintLayout.setBackground(Drawable.createFromPath(file));
+
+                        SharedPreferences sharedPrefs = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPrefs.edit();
+                        editor.putString(BACKGROUND_PREFERENCE_NAME, file);
+                        editor.apply();
+
+                    }
+                });
+                colorChooserDialog.show();
+
+
+            }
         }
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -289,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     }
 
     @Override
-    public void onButtonClicked(int id) {
+    public void onBottomSheetButtonClicked(int id) {
         switch (id) {
             case R.id.bottomSheetFav: {
                 FavoriteFragment fragment = FavoriteFragment.newInstance();
@@ -314,13 +327,77 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 if (!isPermissionGranted())
                     isPermissionGranted();
                 else {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.AlertDialogTheme);
 
-                    dialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+                    final String[] items = {"Plain Colour", "Image From Gallery", "Default Images"};
+                    builder.setItems(items, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case 0: {
+                                    ColorChooserDialog colorChooserDialog = new ColorChooserDialog(MainActivity.this);
+                                    colorChooserDialog.setTitle("Choose Color");
+                                    colorChooserDialog.setColorListener(new ColorListener() {
+                                        @Override
+                                        public void OnColorClick(View v, int color) {
 
-                    getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
-//                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//                    intent.setType("image/*");
-//                    startActivityForResult(intent, PICK_IMAGE_ID);
+                                            DisplayMetrics metrics = new DisplayMetrics();
+                                            getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+                                            Bitmap image = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
+                                            Canvas canvas = new Canvas(image);
+                                            canvas.drawColor(color);
+
+                                            String file = generateNoteOnSD(image);
+
+                                            constraintLayout.setBackground(Drawable.createFromPath(file));
+
+                                            SharedPreferences sharedPrefs = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPrefs.edit();
+                                            editor.putString(BACKGROUND_PREFERENCE_NAME, file);
+                                            editor.apply();
+
+                                        }
+                                    });
+                                    colorChooserDialog.show();
+                                    break;
+                                }
+                                case 1: {
+                                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                                    intent.setType("image/*");
+                                    startActivityForResult(intent, PICK_IMAGE_ID);
+                                    break;
+                                }
+                                case 2: {
+                                    bgDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+                                    getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
+                                    break;
+                                }
+                                default: {
+                                    break;
+                                }
+                            }
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+
+                    alertDialog.getListView().setOnHierarchyChangeListener(
+                            new ViewGroup.OnHierarchyChangeListener() {
+                                @Override
+                                public void onChildViewAdded(View parent, View child) {
+                                    CharSequence text = ((TextView) child).getText();
+                                    int itemIndex = Arrays.asList(items).indexOf(text);
+                                    if ((itemIndex == 2) && !isNetworkAvailable()) {
+                                        child.setEnabled(false);
+                                        child.setOnClickListener(null);
+                                    }
+                                }
+
+                                @Override
+                                public void onChildViewRemoved(View view, View view1) {
+                                }
+                            });
+                    alertDialog.show();
                 }
                 break;
             }
@@ -356,7 +433,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     private void showPermissionDeniedDialog() {
 
         final AlertDialog.Builder builder =
-                new AlertDialog.Builder(MainActivity.this, R.style.AppCompatAlertDialogStyle);
+                new AlertDialog.Builder(MainActivity.this, R.style.AlertDialogTheme);
         builder.setTitle("Permission Denied");
         builder.setMessage("Please Accept Permission to Capture Screenshot of the Screen");
         builder.setCancelable(true);
@@ -455,6 +532,12 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

@@ -184,7 +184,7 @@ public class FavoriteFragment extends Fragment {
 
     private void showPermissionDeniedDialog() {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
         builder.setTitle("Permission Denied");
         builder.setMessage("Please Accept Permission to Capture Screenshot of the Screen");
         builder.setCancelable(true);

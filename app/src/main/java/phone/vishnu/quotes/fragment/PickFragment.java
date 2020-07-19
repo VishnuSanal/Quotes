@@ -68,7 +68,15 @@ public class PickFragment extends Fragment {
                                 adapter = new RecyclerViewAdapter(getActivity(), list);
                                 recyclerView.setAdapter(adapter);
 
-                                RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                                RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) {
+                                    @Override
+                                    public void onLayoutCompleted(RecyclerView.State state) {
+                                        super.onLayoutCompleted(state);
+                                        if (state.getItemCount() >= 1 && MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing())
+                                            MainActivity.bgDialog.dismiss();
+
+                                    }
+                                };
                                 recyclerView.setLayoutManager(layoutManager);
 
                                 adapter.notifyDataSetChanged();
@@ -76,8 +84,7 @@ public class PickFragment extends Fragment {
                         }
                     });
                 }
-                if (MainActivity.dialog != null && MainActivity.dialog.isShowing())
-                    MainActivity.dialog.dismiss();
+
             }
         });
     }
