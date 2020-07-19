@@ -39,19 +39,8 @@ public class SplashActivity extends MaterialIntroActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
 
-        //FIXME: FIXED
         String FIRST_RUN_BOOLEAN = "firstRunPreference";
         if (sharedPreferences.getBoolean(FIRST_RUN_BOOLEAN, true)) {
-         /*   if (("-1").equals(sharedPreferences.getString(BACKGROUND_PREFERENCE_NAME, "-1")))
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        sharedPreferences.edit().putString(
-                                BACKGROUND_PREFERENCE_NAME,
-                                DownloadImageFromPath("https://raw.githubusercontent.com/VishnuSanal/Quotes/master/background.png")
-                        ).apply();
-                    }
-                });*/
             showTour();
         } else {
             initTasks();
@@ -273,33 +262,4 @@ public class SplashActivity extends MaterialIntroActivity {
         }
         return file;
     }
-
- /*   private String DownloadImageFromPath(String path) {
-
-        InputStream inputStream = null;
-        Bitmap bitmap = null;
-        int responseCode = -1;
-        String noteOnSD = "";
-
-        try {
-            URL url = new URL(path);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setDoInput(true);
-            urlConnection.connect();
-
-            responseCode = urlConnection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-
-                inputStream = urlConnection.getInputStream();
-                bitmap = BitmapFactory.decodeStream(inputStream);
-                inputStream.close();
-                noteOnSD = generateNoteOnSD(this, bitmap);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return noteOnSD;
-    }*/
-
 }
