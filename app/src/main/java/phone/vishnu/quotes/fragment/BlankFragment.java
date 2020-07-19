@@ -168,7 +168,7 @@ public class BlankFragment extends Fragment {
         }*/
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.setData(Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_EMAIL, addresses);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
 //        intent.putExtra(Intent.EXTRA_STREAM, outputFile.getAbsolutePath());
