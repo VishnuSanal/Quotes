@@ -1,5 +1,7 @@
 package phone.vishnu.quotes.data;
 
+import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -39,7 +41,7 @@ public class QuoteData {
                                         quote.setQuote(quoteObject.getString("quote"));
                                         quote.setAuthor(quoteObject.getString("name"));
                                         quoteArrayList.add(quote);
-
+                                        Log.e("vishnu", quote.getQuote() + "  -  " + quote.getAuthor());
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }

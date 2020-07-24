@@ -92,15 +92,13 @@ public class QuoteFragment extends Fragment {
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#5C5C5C");
-        String fontItem = sharedPreferences.getString(FONT_PREFERENCE_NAME, "-1");
+        String fontPath = sharedPreferences.getString(FONT_PREFERENCE_NAME, "-1");
 
-        if (!fontItem.equals("-1")) {
-            Typeface face = Typeface.createFromAsset(getActivity().getAssets(), fontItem);
+        if (!fontPath.equals("-1")) {
+            Typeface face = Typeface.createFromFile(fontPath);
             quoteText.setTypeface(face);
         }
 
-//        ConstraintLayout constraintLayout = quoteView.findViewById(R.id.singleCardContainer);
-//        constraintLayout.setBackgroundColor(Color.parseColor(hexColor));
         CardView cardView = quoteView.findViewById(R.id.cardView);
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));

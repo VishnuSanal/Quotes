@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     android:orientation="vertical"
-    tools:context=".fragment.FavoriteFragment">
+    tools:context=".fragment.FontFragment">
 
     <!--TODO:Implement a Toolbar here
       <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -17,13 +17,19 @@
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:background="@color/textColor"
-        android:contentDescription="Favourite Screen Favourite Logo"
+        android:contentDescription="Font Screen Font Logo"
         android:foregroundGravity="center"
-        android:src="@drawable/ic_favorite"
+        android:src="@drawable/ic_font"
         tools:ignore="HardcodedText" />
 
+    <ProgressBar
+        android:id="@+id/fontProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
     <ListView
-        android:id="@+id/favoriteListView"
+        android:id="@+id/fontListView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical" />

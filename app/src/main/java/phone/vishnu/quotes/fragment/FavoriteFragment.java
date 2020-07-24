@@ -84,26 +84,28 @@ public class FavoriteFragment extends Fragment {
     private final View.OnClickListener removeImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
-            v.startAnimation(shake);
-            SharedPreferences.Editor editor = sharedPrefs.edit();
+            {
+                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+                v.startAnimation(shake);
+                SharedPreferences.Editor editor = sharedPrefs.edit();
 
-            int position = Integer.parseInt(v.getTag().toString());
+                int position = Integer.parseInt(v.getTag().toString());
 //            Log.e("vishnu", "onClick: " + position);
 
-            JSONArray jsonArray = removeFavorite(sharedPrefs.getString(PREFERENCE_NAME, ""), productFromShared, productFromShared.get(position).getQuote());
-            editor.putString(PREFERENCE_NAME, String.valueOf(jsonArray));
-            editor.apply();
+                JSONArray jsonArray = removeFavorite(sharedPrefs.getString(PREFERENCE_NAME, ""), productFromShared, productFromShared.get(position).getQuote());
+                editor.putString(PREFERENCE_NAME, String.valueOf(jsonArray));
+                editor.apply();
 
-            Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<Quote>>() {
-            }.getType();
+                Gson gson = new Gson();
+                Type type = new TypeToken<ArrayList<Quote>>() {
+                }.getType();
 
-            productFromShared = gson.fromJson(sharedPrefs.getString(PREFERENCE_NAME, ""), type);
+                productFromShared = gson.fromJson(sharedPrefs.getString(PREFERENCE_NAME, ""), type);
 
-            adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared, viewImageViewOnClickListener, removeImageViewOnClickListener);
-            lv.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+                adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared, viewImageViewOnClickListener, removeImageViewOnClickListener);
+                lv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
         }
     };
 
@@ -163,7 +165,6 @@ public class FavoriteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_favorite, container, false);
         lv = inflate.findViewById(R.id.favoriteListView);
-
         return inflate;
     }
 
