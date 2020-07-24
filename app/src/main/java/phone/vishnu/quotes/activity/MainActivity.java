@@ -33,7 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,12 +45,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog;
 import com.turkialkhateeb.materialcolorpicker.ColorListener;
 
@@ -121,69 +115,85 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
         else {
 
-            if (isNetworkAvailable()) {
+            Toast.makeText(this, "Choose a background", Toast.LENGTH_LONG).show();
 
-                final ProgressDialog dialog = ProgressDialog.show(this, "", "Please Wait....");
-                String fileName = ("aerial-photography-of-buildings-near-sea-3560024-min.jpg");
+            if (!isPermissionGranted())
+                isPermissionGranted();
+            else {
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.AlertDialogTheme);
 
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(fileName);
-
-                final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-
-                final File f = new File(localFile + File.separator + ".Quotes_Background" + ".jpg");
-
-                storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                final String[] items = {"Plain Colour", "Image From Gallery", "Default Images"};
+                builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        SharedPreferences.Editor editor = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", Context.MODE_PRIVATE).edit();
-                        String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
-                        editor.putString(BACKGROUND_PREFERENCE_NAME, f.toString());
-                        editor.apply();
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0: {
+                                ColorChooserDialog colorChooserDialog = new ColorChooserDialog(MainActivity.this);
+                                colorChooserDialog.setTitle("Choose Color");
+                                colorChooserDialog.setColorListener(new ColorListener() {
+                                    @Override
+                                    public void OnColorClick(View v, int color) {
 
-                        Toast.makeText(MainActivity.this, "Background Set.....", Toast.LENGTH_SHORT).show();
-                        constraintLayout.setBackground(Drawable.createFromPath(f.toString()));
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        exception.printStackTrace();
-                        Toast.makeText(MainActivity.this, "Error.....", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
-            } else {
+                                        DisplayMetrics metrics = new DisplayMetrics();
+                                        getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-                Toast.makeText(this, "No Internet Connection. You can set a colour as background", Toast.LENGTH_SHORT).show();
+                                        Bitmap image = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
+                                        Canvas canvas = new Canvas(image);
+                                        canvas.drawColor(color);
 
-                ColorChooserDialog colorChooserDialog = new ColorChooserDialog(MainActivity.this);
-                colorChooserDialog.setTitle("Choose Color");
-                colorChooserDialog.setColorListener(new ColorListener() {
-                    @Override
-                    public void OnColorClick(View v, int color) {
+                                        String file = generateNoteOnSD(image);
 
-                        DisplayMetrics metrics = new DisplayMetrics();
-                        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                                        constraintLayout.setBackground(Drawable.createFromPath(file));
 
-                        Bitmap image = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
-                        Canvas canvas = new Canvas(image);
-                        canvas.drawColor(color);
+                                        SharedPreferences sharedPrefs = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPrefs.edit();
+                                        editor.putString(BACKGROUND_PREFERENCE_NAME, file);
+                                        editor.apply();
 
-                        String file = generateNoteOnSD(image);
-
-                        constraintLayout.setBackground(Drawable.createFromPath(file));
-
-                        SharedPreferences sharedPrefs = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPrefs.edit();
-                        editor.putString(BACKGROUND_PREFERENCE_NAME, file);
-                        editor.apply();
-
+                                    }
+                                });
+                                colorChooserDialog.show();
+                                break;
+                            }
+                            case 1: {
+                                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                                intent.setType("image/*");
+                                startActivityForResult(intent, PICK_IMAGE_ID);
+                                break;
+                            }
+                            case 2: {
+                                bgDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+                                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
+                                break;
+                            }
+                            default: {
+                                break;
+                            }
+                        }
                     }
                 });
-                colorChooserDialog.show();
+                AlertDialog alertDialog = builder.create();
 
+                alertDialog.getListView().setOnHierarchyChangeListener(
+                        new ViewGroup.OnHierarchyChangeListener() {
+                            @Override
+                            public void onChildViewAdded(View parent, View child) {
+                                CharSequence text = ((TextView) child).getText();
+                                int itemIndex = Arrays.asList(items).indexOf(text);
+                                if ((itemIndex == 2) && !isNetworkAvailable()) {
+                                    child.setEnabled(false);
+                                    child.setOnClickListener(null);
+                                }
+                            }
 
+                            @Override
+                            public void onChildViewRemoved(View view, View view1) {
+                            }
+                        });
+                alertDialog.show();
             }
+
+
         }
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
