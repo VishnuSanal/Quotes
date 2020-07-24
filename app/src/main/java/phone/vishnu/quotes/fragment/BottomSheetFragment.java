@@ -17,7 +17,7 @@ import phone.vishnu.quotes.R;
 public class BottomSheetFragment extends BottomSheetDialogFragment {
 
     private BottomSheetListener listener;
-    private ImageView aboutButton, favButton, imgButton, colorButton;
+    private ImageView aboutButton, favButton, imgButton, colorButton, fontButton;
 
     @Nullable
     @Override
@@ -28,6 +28,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         favButton = v.findViewById(R.id.bottomSheetFav);
         imgButton = v.findViewById(R.id.bottomSheetImageChooser);
         colorButton = v.findViewById(R.id.bottomSheetColorChooser);
+        fontButton = v.findViewById(R.id.bottomSheetFont);
         aboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +54,13 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 listener.onBottomSheetButtonClicked(colorButton.getId());
+                dismiss();
+            }
+        });
+        fontButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onBottomSheetButtonClicked(fontButton.getId());
                 dismiss();
             }
         });

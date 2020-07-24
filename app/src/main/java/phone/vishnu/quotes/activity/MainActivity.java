@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -435,6 +436,54 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                     }
                 });
                 dialog.show();
+                break;
+            }
+            case R.id.bottomSheetFont: {
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.AlertDialogTheme);
+
+                final String[] items = {"Chilanka", "BlackChancery", "MetalMacabre", "Precious"};
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        String fontItem = "fonts/" + items[which].toLowerCase() + ".ttf";
+
+                        String FONT_PREFERENCE_NAME = "fontPreference";
+                        final SharedPreferences prefs = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString(FONT_PREFERENCE_NAME, fontItem);
+                        editor.apply();
+                        Toast.makeText(MainActivity.this, "Font Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
+                        MainActivity.this.recreate();
+
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+
+                alertDialog.getListView().setOnHierarchyChangeListener(
+                        new ViewGroup.OnHierarchyChangeListener() {
+                            @Override
+                            public void onChildViewAdded(View parent, View child) {
+
+                                TextView textView = (TextView) child;
+
+                                textView.setTextSize(24);
+
+                                int i = Arrays.asList(items).indexOf(textView.getText().toString().trim());
+                                String item = "fonts/" + items[i].toLowerCase() + ".ttf";
+                                Typeface face = Typeface.createFromAsset(getAssets(), item);
+                                textView.setTypeface(face);
+
+                            }
+
+                            @Override
+                            public void onChildViewRemoved(View view, View view1) {
+                            }
+                        });
+
+                alertDialog.show();
+
                 break;
             }
         }

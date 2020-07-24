@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -60,6 +61,7 @@ public class QuoteFragment extends Fragment {
     private static final String FAV_PREFERENCE_NAME = "favPreference";
     private static final int PERMISSION_REQ_CODE = 2222;
     private static final String COLOR_PREFERENCE_NAME = "colorPreference";
+    private static final String FONT_PREFERENCE_NAME = "fontPreference";
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
 
@@ -90,6 +92,12 @@ public class QuoteFragment extends Fragment {
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#5C5C5C");
+        String fontItem = sharedPreferences.getString(FONT_PREFERENCE_NAME, "-1");
+
+        if (!fontItem.equals("-1")) {
+            Typeface face = Typeface.createFromAsset(getActivity().getAssets(), fontItem);
+            quoteText.setTypeface(face);
+        }
 
 //        ConstraintLayout constraintLayout = quoteView.findViewById(R.id.singleCardContainer);
 //        constraintLayout.setBackgroundColor(Color.parseColor(hexColor));
@@ -311,57 +319,6 @@ public class QuoteFragment extends Fragment {
 
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
-
-    /*private void shareScreenshot() {
-
-//        setVisibility(View.INVISIBLE);
-
-        DisplayMetrics metrics = new DisplayMetrics();
-        ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
-
-        View rootView = getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
-
-        rootView.setDrawingCacheEnabled(true);
-
-        Bitmap bitmap = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
-
-        Canvas c = new Canvas(bitmap);
-        rootView.layout(0, 0, metrics.widthPixels, metrics.heightPixels);
-        rootView.draw(c);
-        rootView.buildDrawingCache(true);
-
-//        setVisibility(View.VISIBLE);
-
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-
-        if (!root.exists()) root.mkdirs();
-
-        String imagePath = root.toString() + File.separator + ".Screenshot" + ".jpg";
-
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(imagePath);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Uri uri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".provider", new File(imagePath));
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("image/*");
-        sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
-
-        startActivity(Intent.createChooser(sharingIntent, "Share via"));
-    }*/
-
- /*   private void setVisibility(int visibility) {
-        favIcon.setVisibility(visibility);
-        shareIcon.setVisibility(visibility);
-        getActivity().findViewById(R.id.homeMenuIcon).setVisibility(visibility);
-    }*/
 
     private void showPermissionDeniedDialog() {
 

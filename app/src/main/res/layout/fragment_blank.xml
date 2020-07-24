@@ -136,7 +136,6 @@
             app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView"
             tools:ignore="HardcodedText" />
 
-
         <TextView
             android:id="@+id/aboutPageCredit2TextView"
             android:layout_width="wrap_content"
@@ -145,7 +144,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Vidhu Vinodh"
+            android:text="Aswin Kesav.U"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView"
@@ -159,11 +158,12 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Aswin Kesav.U"
+            android:text="Vidhu Vinodh"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit2TextView"
             tools:ignore="HardcodedText" />
+
 
         <TextView
             android:id="@+id/aboutPageCredit4TextView"
@@ -179,8 +179,23 @@
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit3TextView"
             tools:ignore="HardcodedText" />
 
+
         <TextView
             android:id="@+id/aboutPageCredit5TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:text="Nikhil.S"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit4TextView"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/aboutPageCredit6TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -190,7 +205,7 @@
             android:text="Pexels.com"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit4TextView"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit5TextView"
             tools:ignore="HardcodedText" />
 
         <Switch
@@ -203,7 +218,7 @@
             app:layout_constraintBottom_toTopOf="@id/aboutResetSettingsButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit5TextView" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit6TextView" />
 
         <TextView
             android:id="@+id/aboutReminderTV"

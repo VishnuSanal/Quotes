@@ -17,6 +17,16 @@
         android:src="@drawable/ic_info" />
 
     <ImageView
+        android:id="@+id/bottomSheetFont"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/bottom_button_background"
+        android:contentDescription="@string/font"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_font" />
+
+    <ImageView
         android:id="@+id/bottomSheetImageChooser"
         android:layout_width="48dp"
         android:layout_height="48dp"

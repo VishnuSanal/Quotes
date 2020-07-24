@@ -14,5 +14,6 @@
     <string name="choose_background_image">Choose background image</string>
     <string name="choose_accent_colour">Choose accent colour</string>
     <string name="favorites">Favorites</string>
+    <string name="font">Font</string>
 
 </resources>
