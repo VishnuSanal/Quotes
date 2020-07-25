@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -492,6 +493,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String hexColor = sharedPreferences.getString("colorPreference", "#5C5C5C");
+        String fontPath = sharedPreferences.getString("fontPreference", "-1");
 
         String backgroundPath = sharedPreferences.getString("backgroundPreference", "-1");
         if (!"-1".equals(backgroundPath))
@@ -502,6 +504,11 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
 //        ((ImageView) shareView.findViewById(R.id.shareFavoriteImageView)).setColorFilter(Color.RED);
 //        ((ImageView) shareView.findViewById(R.id.shareShareImageView)).setColorFilter(Color.GREEN);
+
+        if (!fontPath.equals("-1")) {
+            Typeface face = Typeface.createFromFile(fontPath);
+            ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTypeface(face);
+        }
 
         ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setText(quote);
         ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setText(author);

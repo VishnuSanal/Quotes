@@ -261,6 +261,7 @@ public class QuoteFragment extends Fragment {
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String hexColor = sharedPreferences.getString("colorPreference", "#5C5C5C");
+        String fontPath = sharedPreferences.getString("fontPreference", "-1");
 
         String backgroundPath = sharedPreferences.getString("backgroundPreference", "-1");
         if (!"-1".equals(backgroundPath))
@@ -271,6 +272,11 @@ public class QuoteFragment extends Fragment {
 
 //        ((ImageView) shareView.findViewById(R.id.shareFavoriteImageView)).setColorFilter(Color.RED);
 //        ((ImageView) shareView.findViewById(R.id.shareShareImageView)).setColorFilter(Color.GREEN);
+
+        if (!fontPath.equals("-1")) {
+            Typeface face = Typeface.createFromFile(fontPath);
+            ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTypeface(face);
+        }
 
         ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setText(quote);
         ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setText(author);
