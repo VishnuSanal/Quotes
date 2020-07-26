@@ -1,10 +1,9 @@
 package phone.vishnu.quotes.helper;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -84,9 +83,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                         Toast.makeText(context, "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
 
-                        context.startActivity(new Intent(context, MainActivity.class));
-
-                        ((Activity) context).finish();
+//                        context.startActivity(new Intent(context, MainActivity.class));
+                        ((MainActivity) context).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.toString()));
+                        ((MainActivity) context).onBackPressed();
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {

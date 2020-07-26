@@ -24,7 +24,7 @@ import phone.vishnu.quotes.helper.RecyclerViewAdapter;
 public class PickFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private RecyclerViewAdapter adapter;
 
     public PickFragment() {
     }
@@ -36,18 +36,15 @@ public class PickFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_pick, container, false);
-
-        recyclerView = inflate.findViewById(R.id.my_recycler_view);
-
-        adapter = new RecyclerViewAdapter(getActivity());
-        recyclerView.setAdapter(adapter);
-
-        setUpRecyclerView();
-
+        setUpRecyclerView(inflate);
         return inflate;
     }
 
-    private void setUpRecyclerView() {
+    private void setUpRecyclerView(View inflate) {
+        recyclerView = inflate.findViewById(R.id.my_recycler_view);
+        adapter = new RecyclerViewAdapter(getActivity());
+        recyclerView.setAdapter(adapter);
+
         recyclerView.setHasFixedSize(true);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -72,7 +69,7 @@ public class PickFragment extends Fragment {
                                     @Override
                                     public void onLayoutCompleted(RecyclerView.State state) {
                                         super.onLayoutCompleted(state);
-                                        if (state.getItemCount() >= 1 && MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing())
+                                        if (state.getItemCount() >= 2 && MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing())
                                             MainActivity.bgDialog.dismiss();
 
                                     }

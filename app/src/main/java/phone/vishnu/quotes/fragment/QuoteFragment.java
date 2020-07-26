@@ -64,6 +64,7 @@ public class QuoteFragment extends Fragment {
     private static final String FONT_PREFERENCE_NAME = "fontPreference";
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
+    private CardView cardView;
 
     public QuoteFragment() {
     }
@@ -78,6 +79,20 @@ public class QuoteFragment extends Fragment {
         fragment.setArguments(bundle);
 
         return fragment;
+    }
+
+    public void setFontFamily(String fontPath) {
+        if ((quoteText != null)) {
+            Typeface face = Typeface.createFromFile(fontPath);
+            quoteText.setTypeface(face);
+        }
+    }
+
+    public void setBackgroundColor(String hexColor) {
+        if ((cardView != null) && (authorText != null)) {
+            cardView.setCardBackgroundColor(Color.parseColor(hexColor));
+            authorText.setBackgroundColor(Color.parseColor(hexColor));
+        }
     }
 
     @Override
@@ -99,7 +114,7 @@ public class QuoteFragment extends Fragment {
             quoteText.setTypeface(face);
         }
 
-        CardView cardView = quoteView.findViewById(R.id.cardView);
+        cardView = quoteView.findViewById(R.id.cardView);
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
 
@@ -316,7 +331,7 @@ public class QuoteFragment extends Fragment {
         }
 
         Uri uri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".provider", new File(imagePath));
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("image/*");
         sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
@@ -347,5 +362,4 @@ public class QuoteFragment extends Fragment {
         builder.show();
 
     }
-
 }

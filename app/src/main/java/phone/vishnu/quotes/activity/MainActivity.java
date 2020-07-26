@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         ImageView menuIcon = findViewById(R.id.homeMenuIcon);
 
         String backgroundPath = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1");
+
         if (!"-1".equals(backgroundPath))
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
         else {
@@ -175,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                     }
                 });
                 AlertDialog alertDialog = builder.create();
+                alertDialog.setCancelable(false);
 
                 alertDialog.getListView().setOnHierarchyChangeListener(
                         new ViewGroup.OnHierarchyChangeListener() {
@@ -194,8 +196,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         });
                 alertDialog.show();
             }
-
-
         }
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -418,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
                 final SharedPreferences prefs = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
 
-                ColorChooserDialog dialog = new ColorChooserDialog(MainActivity.this);
+                final ColorChooserDialog dialog = new ColorChooserDialog(MainActivity.this);
                 dialog.setTitle("Choose Color");
                 dialog.setColorListener(new ColorListener() {
                     @Override
@@ -433,6 +433,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         editor.putString(COLOR_PREFERENCE_NAME, "#" + colorString);
                         editor.apply();
                         Toast.makeText(MainActivity.this, "Accent Colour Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
+
+//                        QuoteFragment.setBackgroundColor("#" + colorString);
+                        dialog.dismiss();
+
                         MainActivity.this.recreate();
                     }
                 });

@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
@@ -68,14 +69,15 @@ public class FontFragment extends Fragment {
                     fontList.add(fontString);
                 }
                 progressBar.setVisibility(View.GONE);
-                if (arrayAdapter == null) {
-                    arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, fontList);
-                    listView.setAdapter(arrayAdapter);
-                } else {
-                    arrayAdapter.clear();
-                    arrayAdapter.addAll(fontList);
-                    arrayAdapter.notifyDataSetChanged();
-                }
+                if (getActivity() != null)
+                    if (arrayAdapter == null) {
+                        arrayAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), android.R.layout.simple_list_item_1, fontList);
+                        listView.setAdapter(arrayAdapter);
+                    } else {
+                        arrayAdapter.clear();
+                        arrayAdapter.addAll(fontList);
+                        arrayAdapter.notifyDataSetChanged();
+                    }
             }
         });
 
@@ -96,15 +98,20 @@ public class FontFragment extends Fragment {
                 storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        SharedPreferences.Editor editor = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", Context.MODE_PRIVATE).edit();
-                        String FONT_PREFERENCE_NAME = "fontPreference";
-                        editor.putString(FONT_PREFERENCE_NAME, f.toString());
-                        editor.apply();
+                        if (getActivity() != null) {
+                            SharedPreferences.Editor editor = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", Context.MODE_PRIVATE).edit();
+                            String FONT_PREFERENCE_NAME = "fontPreference";
+                            editor.putString(FONT_PREFERENCE_NAME, f.toString());
+                            editor.apply();
 
-                        Toast.makeText(getActivity(), "Font Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
+                            Toast.makeText(getActivity(), "Font Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
 
-                        getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+                            getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+                            ((MainActivity) getActivity()).finish();
+//                            QuoteFragment.setFontFamily(f.toString()));
+
+                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

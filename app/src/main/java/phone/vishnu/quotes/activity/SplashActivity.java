@@ -1,31 +1,19 @@
 package phone.vishnu.quotes.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.FloatRange;
-import androidx.annotation.Nullable;
 
-import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog;
-import com.turkialkhateeb.materialcolorpicker.ColorListener;
-
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Objects;
 
 import io.github.dreierf.materialintroscreen.MaterialIntroActivity;
-import io.github.dreierf.materialintroscreen.MessageButtonBehaviour;
 import io.github.dreierf.materialintroscreen.SlideFragmentBuilder;
 import io.github.dreierf.materialintroscreen.animations.IViewTranslation;
 import phone.vishnu.quotes.R;
@@ -103,48 +91,25 @@ public class SplashActivity extends MaterialIntroActivity {
                 .image(R.drawable.ic_insert_photo)
                 .title("Background image")
                 .description("You can select a custom background image for the app from the overflow menu on the bottom of the screen")
-                .build()/*, new MessageButtonBehaviour(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
-            }
-        }, "Choose Image")*/);
+                .build());
 
         /*Accent Color*/
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)
                 .buttonsColor(R.color.tourButtonColor)
-                .image(R.color.cardBackgroundColor)
-                .title("Choose accent color")
-                .description("Would you like to select a custom accent color for the app? Do nothing to use the above default accent color. You can change this later from the overflow menu on the bottom of the screen")
-                .build(), new MessageButtonBehaviour(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                .image(R.drawable.ic_color_lens)
+                .title("Custom accent color")
+                .description("You can select a custom accent colour for the app from the overflow menu on the bottom of the screen")
+                .build());
 
-
-                final String COLOR_PREFERENCE_NAME = "colorPreference";
-
-                final SharedPreferences prefs = SplashActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-
-                ColorChooserDialog dialog = new ColorChooserDialog(SplashActivity.this);
-                dialog.setTitle("Choose Color");
-                dialog.setColorListener(new ColorListener() {
-                    @Override
-                    public void OnColorClick(View v, int color) {
-
-                        String colorString = Integer.toHexString(color).substring(2);
-
-                        //TODO:Needs Fixing of string "WHITE"
-                        if (colorString.toLowerCase().equals("ffffff")) colorString = "00000000";
-
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString(COLOR_PREFERENCE_NAME, "#" + colorString);
-                        editor.apply();
-                    }
-                });
-                dialog.show();
-            }
-        }, "Choose Color"));
+        /*Font FamilyColor*/
+        addSlide(new SlideFragmentBuilder()
+                .backgroundColor(R.color.tourBackgroundColor)
+                .buttonsColor(R.color.tourButtonColor)
+                .image(R.drawable.ic_font)
+                .title("Custom font")
+                .description("You can select a custom font for the app from the overflow menu on the bottom of the screen")
+                .build());
 
         /*Notification*/
         addSlide(new SlideFragmentBuilder()
@@ -194,32 +159,6 @@ public class SplashActivity extends MaterialIntroActivity {
         SplashActivity.this.finish();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        int PICK_IMAGE_ID = 22;
-        if ((requestCode == PICK_IMAGE_ID) && (resultCode == Activity.RESULT_OK)) {
-            if (data != null) {
-                try {
-
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-
-                    String file = generateNoteOnSD(bitmap);
-
-                    SharedPreferences sharedPrefs = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPrefs.edit();
-                    String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
-                    editor.putString(BACKGROUND_PREFERENCE_NAME, file);
-                    editor.apply();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     private void initTasks() {
         setContentView(R.layout.activity_splash);
         final String COLOR_PREFERENCE_NAME = "colorPreference";
@@ -239,27 +178,5 @@ public class SplashActivity extends MaterialIntroActivity {
                 SplashActivity.this.finish();
             }
         }, SPLASH_TIMEOUT * 1000);
-    }
-
-    private String generateNoteOnSD(Bitmap image) {
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-
-        if (!root.exists()) root.mkdirs();
-
-        String file = root.toString() + File.separator + ".Quotes_Background" + ".jpg";
-
-        try {
-            FileOutputStream fOutputStream = new FileOutputStream(file);
-            BufferedOutputStream bos = new BufferedOutputStream(fOutputStream);
-
-            image.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-
-            fOutputStream.flush();
-            fOutputStream.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return file;
     }
 }
