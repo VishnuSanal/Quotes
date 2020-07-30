@@ -56,6 +56,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -250,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             @Override
             public void processFinished(ArrayList<Quote> quotes) {
 
-//                if (savedInstanceState == null)  Collections.shuffle(quotes);
+                Collections.shuffle(quotes);
 
                 for (int i = 0; i < quotes.size(); i++) {
                     QuoteFragment quoteFragment = QuoteFragment.newInstance(quotes.get(i).getQuote(), quotes.get(i).getAuthor());
