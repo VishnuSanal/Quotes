@@ -56,7 +56,6 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     private QuoteViewPagerAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState == null) {
@@ -109,8 +108,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         if (!isNetworkAvailable())
             Toast.makeText(this, "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
-
-        ImageView menuIcon = findViewById(R.id.homeMenuIcon);
 
         String backgroundPath = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1");
 
@@ -198,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             }
         }
 
+        ImageView menuIcon = findViewById(R.id.homeMenuIcon);
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
+//                List<Fragment> fragmentList = getFragments(savedInstanceState);
                 adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getFragments());
                 viewPager.setAdapter(adapter);
             }
@@ -244,14 +243,14 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     }
 
-    private List<Fragment> getFragments() {
+    private List<Fragment> getFragments(/*final Bundle savedInstanceState*/) {
 
         final List<Fragment> fragments = new ArrayList<>();
         new QuoteData().getQuotes(new QuoteListAsyncResponse() {
             @Override
             public void processFinished(ArrayList<Quote> quotes) {
 
-                Collections.shuffle(quotes);
+//                if (savedInstanceState == null)  Collections.shuffle(quotes);
 
                 for (int i = 0; i < quotes.size(); i++) {
                     QuoteFragment quoteFragment = QuoteFragment.newInstance(quotes.get(i).getQuote(), quotes.get(i).getAuthor());
@@ -316,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     @Override
     public void onBottomSheetButtonClicked(int id) {
+
         switch (id) {
             case R.id.bottomSheetFav: {
                 FavoriteFragment fragment = FavoriteFragment.newInstance();
@@ -435,13 +435,11 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         editor.apply();
                         Toast.makeText(MainActivity.this, "Accent Colour Set..... \n Scroll for changes to take effect...", Toast.LENGTH_LONG).show();
 
-//                        QuoteFragment.setBackgroundColor("#" + colorString);
-                        dialog.dismiss();
+                        adapter.notifyDataSetChanged();
 
-//                        MainActivity.this.recreate();
-//                        QuoteFragment quoteFragment = (QuoteFragment) adapter.getItem(viewPager.getCurrentItem());
-//                        quoteFragment.setBackgroundColor("#" + colorString);
-//                        adapter.saveState();
+//                        adapter.instantiateItem(viewPager, viewPager.getCurrentItem());
+
+                        dialog.dismiss();
 
                     }
                 });
@@ -572,4 +570,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    public QuoteViewPagerAdapter getQuoteViewPagerAdapter() {
+        return adapter;
+    }
 }

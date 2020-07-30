@@ -24,4 +24,9 @@ public class QuoteViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fragments.size();
     }
+
+    @Override
+    public int getItemPosition(@androidx.annotation.NonNull Object object) {
+        return POSITION_NONE;
+    }
 }

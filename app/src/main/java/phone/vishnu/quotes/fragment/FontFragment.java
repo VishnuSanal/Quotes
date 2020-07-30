@@ -110,11 +110,10 @@ public class FontFragment extends Fragment {
                             progressDialog.dismiss();
                             Toast.makeText(getActivity(), "Font Set..... \n Scroll for changes to take effect...", Toast.LENGTH_LONG).show();
 
+                            ((MainActivity) getActivity()).getQuoteViewPagerAdapter().notifyDataSetChanged();
+
                             getActivity().onBackPressed();
 
-
-//                            getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
-//                            ((MainActivity) getActivity()).finish();
 
                         }
                     }
@@ -129,7 +128,6 @@ public class FontFragment extends Fragment {
             }
         });
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
