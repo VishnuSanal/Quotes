@@ -2,7 +2,6 @@ package phone.vishnu.quotes.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -54,6 +53,9 @@ public class FontFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if (MainActivity.fontDialog != null && MainActivity.fontDialog.isShowing())
+            MainActivity.fontDialog.dismiss();
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference().child("fonts");
         storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
@@ -104,12 +106,15 @@ public class FontFragment extends Fragment {
                             editor.putString(FONT_PREFERENCE_NAME, f.toString());
                             editor.apply();
 
-                            Toast.makeText(getActivity(), "Font Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Font Set..... \n Applying Changes", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
+                            Toast.makeText(getActivity(), "Font Set..... \n Scroll for changes to take effect...", Toast.LENGTH_LONG).show();
 
-                            getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
-                            ((MainActivity) getActivity()).finish();
-//                            QuoteFragment.setFontFamily(f.toString()));
+                            getActivity().onBackPressed();
+
+
+//                            getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+//                            ((MainActivity) getActivity()).finish();
 
                         }
                     }
@@ -124,6 +129,7 @@ public class FontFragment extends Fragment {
             }
         });
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

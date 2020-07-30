@@ -63,19 +63,19 @@ import java.util.List;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.data.QuoteListAsyncResponse;
-import phone.vishnu.quotes.data.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.fragment.BlankFragment;
 import phone.vishnu.quotes.fragment.BottomSheetFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.fragment.QuoteFragment;
+import phone.vishnu.quotes.helper.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
     private static final int PICK_IMAGE_ID = 36;
-    public static ProgressDialog bgDialog;
+    public static ProgressDialog bgDialog, fontDialog;
     private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
     private final int PERMISSION_REQ_CODE = 88;
     private ConstraintLayout constraintLayout;
@@ -197,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 alertDialog.show();
             }
         }
+
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -432,18 +433,23 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString(COLOR_PREFERENCE_NAME, "#" + colorString);
                         editor.apply();
-                        Toast.makeText(MainActivity.this, "Accent Colour Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Accent Colour Set..... \n Scroll for changes to take effect...", Toast.LENGTH_LONG).show();
 
 //                        QuoteFragment.setBackgroundColor("#" + colorString);
                         dialog.dismiss();
 
-                        MainActivity.this.recreate();
+//                        MainActivity.this.recreate();
+//                        QuoteFragment quoteFragment = (QuoteFragment) adapter.getItem(viewPager.getCurrentItem());
+//                        quoteFragment.setBackgroundColor("#" + colorString);
+//                        adapter.saveState();
+
                     }
                 });
                 dialog.show();
                 break;
             }
             case R.id.bottomSheetFont: {
+                fontDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
                 getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontFragment.newInstance()).addToBackStack(null).commit();
                 break;
             }
