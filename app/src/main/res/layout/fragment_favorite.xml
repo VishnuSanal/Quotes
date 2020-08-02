@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/favoriteConstraintLayout"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     android:orientation="vertical"
@@ -13,18 +15,39 @@
           android:layout_height="wrap_content"/>-->
 
     <ImageView
-        android:id="@+id/fontSampleIconImageView"
-        android:layout_width="match_parent"
+        android:id="@+id/favoriteSampleIconImageView"
+        android:layout_width="0dp"
         android:layout_height="36dp"
         android:background="@color/textColor"
         android:contentDescription="Favourite Screen Favourite Logo"
         android:foregroundGravity="center"
         android:src="@drawable/ic_favorite"
+        app:layout_constraintEnd_toStartOf="@id/favoriteAddImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/favoriteAddImageView"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@color/textColor"
+        android:contentDescription="Favourite Screen Favourite Logo"
+        android:foregroundGravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_post_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/favoriteSampleIconImageView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
 
     <ListView
         android:id="@+id/favoriteListView"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical" />
-</LinearLayout>
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favoriteSampleIconImageView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

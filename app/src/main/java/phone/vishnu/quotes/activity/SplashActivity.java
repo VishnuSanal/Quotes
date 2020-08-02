@@ -138,6 +138,15 @@ public class SplashActivity extends MaterialIntroActivity {
                 .description("Click favourite icon from a quote. You can view the favorite quotes by clicking on the overflow menu on the bottom of the screen")
                 .build());
 
+        /*Custom Quotes*/
+        addSlide(new SlideFragmentBuilder()
+                .backgroundColor(R.color.tourBackgroundColor)
+                .buttonsColor(R.color.tourButtonColor)
+                .image(R.drawable.ic_post_add)
+                .title("Use your Quotes")
+                .description("Add Your Quotes to Favorites from Favorites Screen")
+                .build());
+
         /*End Screen*/
         addSlide(new SlideFragmentBuilder()
                 .backgroundColor(R.color.tourBackgroundColor)

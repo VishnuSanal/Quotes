@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class FavoriteFragment extends Fragment {
     private final int PERMISSION_REQ_CODE = 2222;
     private ListView lv;
     private CustomDataAdapter adapter;
+    private ImageView addImageView;
     private ArrayList<Quote> productFromShared = new ArrayList<>();
     private final View.OnClickListener viewImageViewOnClickListener = new View.OnClickListener() {
         @Override
@@ -134,6 +136,14 @@ public class FavoriteFragment extends Fragment {
 
         adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared, viewImageViewOnClickListener, removeImageViewOnClickListener);
         lv.setAdapter(adapter);
+
+        addImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.favoriteConstraintLayout, AddNewFragment.newInstance()).commit();
+            }
+        });
+
     }
 
     private JSONArray removeFavorite(String jsonSaved, ArrayList<Quote> jsonList, String jsonProductToRemove) {
@@ -166,6 +176,7 @@ public class FavoriteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_favorite, container, false);
         lv = inflate.findViewById(R.id.favoriteListView);
+        addImageView = inflate.findViewById(R.id.favoriteAddImageView);
         return inflate;
     }
 

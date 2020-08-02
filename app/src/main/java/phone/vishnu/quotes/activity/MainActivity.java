@@ -123,6 +123,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             else {
                 MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.AlertDialogTheme);
 
+                builder.setTitle("Choose a Background");
+
                 final String[] items = {"Plain Colour", "Image From Gallery", "Default Images"};
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
