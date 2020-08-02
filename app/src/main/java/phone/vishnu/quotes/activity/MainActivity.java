@@ -74,8 +74,8 @@ import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
-    private static final int PICK_IMAGE_ID = 36;
     public static ProgressDialog bgDialog, fontDialog;
+    private final int PICK_IMAGE_ID = 36;
     private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
     private final int PERMISSION_REQ_CODE = 88;
     private ConstraintLayout constraintLayout;
@@ -208,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-//                List<Fragment> fragmentList = getFragments(savedInstanceState);
                 adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getFragments());
                 viewPager.setAdapter(adapter);
             }
@@ -244,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     }
 
-    private List<Fragment> getFragments(/*final Bundle savedInstanceState*/) {
+    private List<Fragment> getFragments() {
 
         final List<Fragment> fragments = new ArrayList<>();
         new QuoteData().getQuotes(new QuoteListAsyncResponse() {
