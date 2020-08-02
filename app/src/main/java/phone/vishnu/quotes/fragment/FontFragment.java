@@ -108,7 +108,6 @@ public class FontFragment extends Fragment {
 
                             Toast.makeText(getActivity(), "Font Set..... \n Applying Changes", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
-                            Toast.makeText(getActivity(), "Font Set..... \n Scroll for changes to take effect...", Toast.LENGTH_LONG).show();
 
                             ((MainActivity) getActivity()).getQuoteViewPagerAdapter().notifyDataSetChanged();
 

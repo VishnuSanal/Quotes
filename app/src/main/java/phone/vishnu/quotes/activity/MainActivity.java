@@ -317,7 +317,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     @Override
     public void onBottomSheetButtonClicked(int id) {
-
         switch (id) {
             case R.id.bottomSheetFav: {
                 FavoriteFragment fragment = FavoriteFragment.newInstance();
@@ -338,7 +337,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 break;
             }
             case R.id.bottomSheetImageChooser: {
-
                 if (!isPermissionGranted())
                     isPermissionGranted();
                 else {
@@ -435,11 +433,9 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString(COLOR_PREFERENCE_NAME, "#" + colorString);
                         editor.apply();
-                        Toast.makeText(MainActivity.this, "Accent Colour Set..... \n Scroll for changes to take effect...", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Accent Colour Set...", Toast.LENGTH_LONG).show();
 
                         adapter.notifyDataSetChanged();
-
-//                        adapter.instantiateItem(viewPager, viewPager.getCurrentItem());
 
                         dialog.dismiss();
 
