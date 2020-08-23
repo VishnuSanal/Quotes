@@ -270,7 +270,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         if (alarmManager != null) {
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
         }
-
     }
 
     private List<Fragment> getFragments() {

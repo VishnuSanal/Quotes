@@ -1,22 +1,31 @@
 package phone.vishnu.quotes.activity;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.FloatRange;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 import io.github.dreierf.materialintroscreen.MaterialIntroActivity;
+import io.github.dreierf.materialintroscreen.MessageButtonBehaviour;
 import io.github.dreierf.materialintroscreen.SlideFragmentBuilder;
 import io.github.dreierf.materialintroscreen.animations.IViewTranslation;
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class SplashActivity extends MaterialIntroActivity {
 
@@ -117,8 +126,34 @@ public class SplashActivity extends MaterialIntroActivity {
                 .buttonsColor(R.color.tourButtonColor)
                 .image(R.drawable.ic_notifications)
                 .title("Daily Notification of Quotes")
-                .description("You will receive daily notifications with Quotes at 08:30 AM. You can customise this from the about screen")
-                .build());
+                .description("You will receive daily notifications with Quotes at 08:30 AM. You can change the time here. You can customise this later from the about screen")
+                .build(), new MessageButtonBehaviour(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final String ALARM_PREFERENCE_TIME = "customAlarmPreference";
+                final SharedPreferences.Editor preferences = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).edit();
+
+                final Calendar c = Calendar.getInstance();
+
+                TimePickerDialog timePicker = new TimePickerDialog(SplashActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        c.set(Calendar.MINUTE, minute);
+
+                        preferences.putString(ALARM_PREFERENCE_TIME, "At " + hourOfDay + " : " + minute + " Daily").apply();
+
+                        myAlarm(c);
+
+                    }
+                }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(SplashActivity.this));
+                timePicker.show();
+
+
+            }
+        }, "Set"));
 
         /*Share*/
         addSlide(new SlideFragmentBuilder()
@@ -187,5 +222,19 @@ public class SplashActivity extends MaterialIntroActivity {
                 SplashActivity.this.finish();
             }
         }, SPLASH_TIMEOUT * 1000);
+    }
+
+    private void myAlarm(Calendar calendar) {
+
+        if (calendar.getTime().compareTo(new Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) this.getApplicationContext().getSystemService(ALARM_SERVICE);
+
+        if (alarmManager != null) {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
+
     }
 }
