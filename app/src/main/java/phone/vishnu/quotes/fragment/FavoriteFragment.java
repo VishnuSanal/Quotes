@@ -66,19 +66,21 @@ public class FavoriteFragment extends Fragment {
     private final View.OnClickListener viewImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
-            final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
-            v.startAnimation(shake);
+            {
+                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+                v.startAnimation(shake);
 
-            if (isPermissionGranted()) {
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        int position = Integer.parseInt(v.getTag().toString());
-                        shareScreenshot(productFromShared.get(position).getQuote(), productFromShared.get(position).getAuthor());
-                    }
-                });
-            } else {
-                isPermissionGranted();
+                if (isPermissionGranted()) {
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            int position = Integer.parseInt(v.getTag().toString());
+                            shareScreenshot(productFromShared.get(position).getQuote(), productFromShared.get(position).getAuthor());
+                        }
+                    });
+                } else {
+                    isPermissionGranted();
+                }
             }
 
         }

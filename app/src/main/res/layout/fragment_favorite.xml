@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/favoriteConstraintLayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     android:orientation="vertical"
@@ -14,6 +14,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>-->
 
+
     <ImageView
         android:id="@+id/favoriteSampleIconImageView"
         android:layout_width="0dp"
@@ -21,7 +22,9 @@
         android:background="@color/textColor"
         android:contentDescription="Favourite Screen Favourite Logo"
         android:foregroundGravity="center"
+        android:paddingStart="36dp"
         android:src="@drawable/ic_favorite"
+        app:layout_constraintBottom_toTopOf="@id/favoriteGuideLine"
         app:layout_constraintEnd_toStartOf="@id/favoriteAddImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,10 +39,20 @@
         android:foregroundGravity="center"
         android:scaleType="fitXY"
         android:src="@drawable/ic_post_add"
+        app:layout_constraintBottom_toTopOf="@id/favoriteGuideLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/favoriteSampleIconImageView"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/favoriteGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="36dp"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ListView
         android:id="@+id/favoriteListView"
@@ -49,5 +62,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/favoriteSampleIconImageView" />
+        app:layout_constraintTop_toBottomOf="@id/favoriteGuideLine" />
 </androidx.constraintlayout.widget.ConstraintLayout>

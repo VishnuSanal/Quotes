@@ -130,7 +130,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Jaseel Ahamed.M"
+            android:text="Aswin Kesav.U"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView"
@@ -144,7 +144,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Aswin Kesav.U"
+            android:text="Vasudevan.T"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView"
@@ -164,7 +164,6 @@
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit2TextView"
             tools:ignore="HardcodedText" />
 
-
         <TextView
             android:id="@+id/aboutPageCredit4TextView"
             android:layout_width="wrap_content"
@@ -173,12 +172,11 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Paulo Dichone"
+            android:text="Jaseel Ahamed.M"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit3TextView"
             tools:ignore="HardcodedText" />
-
 
         <TextView
             android:id="@+id/aboutPageCredit5TextView"
@@ -188,7 +186,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Nikhil.S"
+            android:text="Paulo Dichone"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit4TextView"
@@ -208,6 +206,20 @@
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit5TextView"
             tools:ignore="HardcodedText" />
 
+        <TextView
+            android:id="@+id/aboutPageCredit7TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:text="Nikhil.S"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit6TextView"
+            tools:ignore="HardcodedText" />
+
         <Switch
             android:id="@+id/aboutReminderSwitch"
             android:layout_width="wrap_content"
@@ -218,7 +230,7 @@
             app:layout_constraintBottom_toTopOf="@id/aboutResetSettingsButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit6TextView" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit7TextView" />
 
         <TextView
             android:id="@+id/aboutReminderTV"

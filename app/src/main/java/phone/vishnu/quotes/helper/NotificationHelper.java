@@ -33,29 +33,42 @@ public class NotificationHelper {
         new QuoteData().getQuotes(new QuoteListAsyncResponse() {
             @Override
             public void processFinished(ArrayList<Quote> quotes) {
+/*
 
                 Intent intent = new Intent(mContext, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                final PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext, NOTIFICATION_REQUEST_CODE /* Request code */, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                final PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext, NOTIFICATION_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+*/
 
                 Collections.shuffle(quotes);
                 Quote quote = quotes.get(0);
 
-                Intent buttonIntent = new Intent(mContext, MainActivity.class);
-                buttonIntent.putExtra("NotificationClick", true);
-                buttonIntent.putExtra("quote", quote.getQuote());
-                buttonIntent.putExtra("author", quote.getAuthor());
-                PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 1, buttonIntent, PendingIntent.FLAG_ONE_SHOT);
+                Intent shareButtonIntent = new Intent(mContext, MainActivity.class);
+                shareButtonIntent.putExtra("NotificationClick", true);
+                shareButtonIntent.putExtra("ShareButton", true);
+                shareButtonIntent.putExtra("quote", quote.getQuote());
+                shareButtonIntent.putExtra("author", quote.getAuthor());
 
-                NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.ic_share, "Share", pendingIntent).build();
+                PendingIntent sharePendingIntent = PendingIntent.getActivity(mContext, 1, shareButtonIntent, PendingIntent.FLAG_ONE_SHOT);
+                NotificationCompat.Action shareAction = new NotificationCompat.Action.Builder(R.drawable.ic_share, "Share", sharePendingIntent).build();
+
+                Intent favButtonIntent = new Intent(mContext, MainActivity.class);
+                favButtonIntent.putExtra("NotificationClick", true);
+                favButtonIntent.putExtra("FavButton", true);
+                favButtonIntent.putExtra("quote", quote.getQuote());
+                favButtonIntent.putExtra("author", quote.getAuthor());
+
+                PendingIntent favPendingIntent = PendingIntent.getActivity(mContext, 2, favButtonIntent, PendingIntent.FLAG_ONE_SHOT);
+                NotificationCompat.Action favAction = new NotificationCompat.Action.Builder(R.drawable.ic_favorite, "Add to Favorites", favPendingIntent).build();
 
                 final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID);
                 mBuilder.setSmallIcon(R.drawable.ic_quotes)
                         .setAutoCancel(true)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                        .setContentIntent(resultPendingIntent)
-                        .addAction(action);
+                        .setContentIntent(sharePendingIntent)
+                        .addAction(shareAction)
+                        .addAction(favAction);
 
                 NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
                 bigTextStyle.setBigContentTitle("Today's Quote");
@@ -77,7 +90,5 @@ public class NotificationHelper {
 
             }
         });
-
-
     }
 }

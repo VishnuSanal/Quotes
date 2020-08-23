@@ -47,12 +47,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog;
 import com.turkialkhateeb.materialcolorpicker.ColorListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -74,6 +81,8 @@ import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
+    private static final String FAV_PREFERENCE_NAME = "favPreference";
+    private static final String TAG = "vishnu";
     public static ProgressDialog bgDialog, fontDialog;
     private final int PICK_IMAGE_ID = 36;
     private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
@@ -89,18 +98,36 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         if (savedInstanceState == null) {
             final Bundle extras = getIntent().getExtras();
             if (extras != null && extras.getBoolean("NotificationClick")) {
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            shareScreenshot(extras.getString("quote"), extras.getString("author"));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
 
+                if (extras.getBoolean("ShareButton")) {
+
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                shareScreenshot(extras.getString("quote"), extras.getString("author"));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                } else if (extras.getBoolean("FavButton")) {
+
+                    SharedPreferences sharedPref = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+
+                    Gson gson = new Gson();
+                    String jsonSaved = sharedPref.getString(FAV_PREFERENCE_NAME, "");
+                    String jsonNewProductToAdd = gson.toJson(new Quote(extras.getString("quote"), extras.getString("author")));
+
+                    Type type = new TypeToken<ArrayList<Quote>>() {
+                    }.getType();
+                    ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
+
+                    editor.putString(FAV_PREFERENCE_NAME, String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared, extras.getString("quote"))));
+                    editor.apply();
+                }
+            }
         }
 
         setContentView(R.layout.activity_main);
@@ -220,6 +247,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         String s = getApplicationContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE)
                 .getString(ALARM_PREFERENCE_TIME, "At 08:30 Daily");
 
+//        if (true) {
         if ("At 08:30 Daily".equals(s)) {
             myAlarm();
         }
@@ -570,5 +598,32 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     public QuoteViewPagerAdapter getQuoteViewPagerAdapter() {
         return adapter;
+    }
+
+    private JSONArray addFavorite(String jsonSaved, String jsonNewProductToAdd, ArrayList<Quote> productFromShared, String quote) {
+        JSONArray jsonArrayProduct = new JSONArray();
+        try {
+            if (jsonSaved.length() != 0) {
+                if (!isPresent(productFromShared, quote)) {
+                    jsonArrayProduct = new JSONArray(jsonSaved);
+                    jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
+                }
+            } else {
+                productFromShared = new ArrayList<>();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonArrayProduct;
+    }
+
+    private boolean isPresent(ArrayList<Quote> productFromShared, String quote) {
+        boolean isPresent = false;
+        for (int i = 0; i < productFromShared.size(); i++) {
+            if (productFromShared.get(i).getQuote().trim().toLowerCase().equals(quote.trim().toLowerCase())) {
+                isPresent = true;
+            }
+        }
+        return isPresent;
     }
 }
