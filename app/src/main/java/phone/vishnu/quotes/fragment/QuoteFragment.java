@@ -81,20 +81,6 @@ public class QuoteFragment extends Fragment {
         return fragment;
     }
 
-    public void setFontFamily(String fontPath) {
-        if ((quoteText != null)) {
-            Typeface face = Typeface.createFromFile(fontPath);
-            quoteText.setTypeface(face);
-        }
-    }
-
-    public void setBackgroundColor(String hexColor) {
-        if ((cardView != null) && (authorText != null)) {
-            cardView.setCardBackgroundColor(Color.parseColor(hexColor));
-            authorText.setBackgroundColor(Color.parseColor(hexColor));
-        }
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -106,7 +92,7 @@ public class QuoteFragment extends Fragment {
         favIcon = quoteView.findViewById(R.id.favoriteImageView);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#5C5C5C");
+        String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#607D8B");
         String fontPath = sharedPreferences.getString(FONT_PREFERENCE_NAME, "-1");
 
         if (!fontPath.equals("-1")) {
@@ -197,14 +183,12 @@ public class QuoteFragment extends Fragment {
     private JSONArray addFavorite(String jsonSaved, String jsonNewProductToAdd, ArrayList<Quote> productFromShared) {
         JSONArray jsonArrayProduct = new JSONArray();
         try {
-
             if (jsonSaved.length() != 0) {
                 if (!isPresent(productFromShared)) {
                     jsonArrayProduct = new JSONArray(jsonSaved);
                     jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
                     favIcon.setColorFilter(Color.RED);
                 } else {
-
                     favIcon.setColorFilter(Color.WHITE);
                     jsonArrayProduct = removeFavorite(jsonSaved, productFromShared, quoteText.getText().toString());
                 }
@@ -275,8 +259,8 @@ public class QuoteFragment extends Fragment {
         @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        String hexColor = sharedPreferences.getString("colorPreference", "#5C5C5C");
-        String fontPath = sharedPreferences.getString("fontPreference", "-1");
+        String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#607D8B");
+        String fontPath = sharedPreferences.getString(FONT_PREFERENCE_NAME, "-1");
 
         String backgroundPath = sharedPreferences.getString("backgroundPreference", "-1");
         if (!"-1".equals(backgroundPath))

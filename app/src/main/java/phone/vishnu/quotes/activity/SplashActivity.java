@@ -208,9 +208,9 @@ public class SplashActivity extends MaterialIntroActivity {
         final String COLOR_PREFERENCE_NAME = "colorPreference";
 
         String colorString = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE)
-                .getString(COLOR_PREFERENCE_NAME, "#5C5C5C");
+                .getString(COLOR_PREFERENCE_NAME, "#607D8B");
 
-        if (colorString.equals("#00000000")) colorString = "#5C5C5C";
+        if (colorString.equals("#00000000")) colorString = "#607D8B";
 
         ((TextView) findViewById(R.id.splashScreenAppNameTextView)).setTextColor(Color.parseColor(colorString));
 

@@ -86,7 +86,7 @@ public class BlankFragment extends Fragment {
 
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).edit();
 
-                editor.putString(COLOR_PREFERENCE_NAME, "#5C5C5C");
+                editor.putString(COLOR_PREFERENCE_NAME, "#607D8B");
                 editor.putString(BACKGROUND_PREFERENCE_NAME, "-1");
                 editor.putString(ALARM_PREFERENCE_TIME, "At 08:30 Daily");
                 editor.putString(FONT_PREFERENCE_NAME, "-1");

@@ -5,12 +5,12 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="textColor">#D81B60</color>
-    <!--<color name="colorBackground">#5C5C5C</color>-->
+    <!--<color name="colorBackground">#607D8B</color>-->
     <color name="spacerColor">#BDBDBD</color>
 
     <color name="tourBackgroundColor">#F8BBD0</color>
     <color name="tourButtonColor">#03DAC5</color>
 
-    <color name="cardBackgroundColor">#5C5C5C</color>
+    <color name="cardBackgroundColor">#607D8B</color>
     <color name="transparent">#00000000</color>
 </resources>

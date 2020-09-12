@@ -227,7 +227,7 @@ public class FavoriteFragment extends Fragment {
         @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        String hexColor = sharedPreferences.getString("colorPreference", "#5C5C5C");
+        String hexColor = sharedPreferences.getString("colorPreference", "#607D8B");
         String fontPath = sharedPreferences.getString("fontPreference", "-1");
 
         String backgroundPath = sharedPreferences.getString("backgroundPreference", "-1");

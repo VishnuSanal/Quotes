@@ -82,7 +82,6 @@ import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
     private static final String FAV_PREFERENCE_NAME = "favPreference";
-    private static final String TAG = "vishnu";
     public static ProgressDialog bgDialog, fontDialog;
     private final int PICK_IMAGE_ID = 36;
     private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
@@ -151,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.AlertDialogTheme);
 
                 builder.setTitle("Choose a Background");
+                builder.setCancelable(false);
 
                 final String[] items = {"Plain Colour", "Image From Gallery", "Default Images"};
                 builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -525,10 +525,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        String hexColor = sharedPreferences.getString("colorPreference", "#5C5C5C");
+        String hexColor = sharedPreferences.getString("colorPreference", "#607D8B");
         String fontPath = sharedPreferences.getString("fontPreference", "-1");
 
-        String backgroundPath = sharedPreferences.getString("backgroundPreference", "-1");
+        String backgroundPath = sharedPreferences.getString(BACKGROUND_PREFERENCE_NAME, "-1");
         if (!"-1".equals(backgroundPath))
             shareView.findViewById(R.id.shareRelativeLayout).setBackground(Drawable.createFromPath(backgroundPath));
 
