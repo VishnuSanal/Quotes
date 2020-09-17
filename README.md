@@ -9,6 +9,8 @@ Share Famous Quotes as Status without any hassles of Image Editing.😉
 
 	Quotes App presents you with Famous Quotations. Swipe horizontally to load more Quotes. 
 
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Quotes%20Banner.png?raw=true)
+
 ## Features
 
     • Favourite Quotes – Store Your Personal Favourite Quotes
@@ -19,6 +21,16 @@ Share Famous Quotes as Status without any hassles of Image Editing.😉
     • Custom Quotes – Add your own Quotes
     • Customizable Daily Notification – Choose the Time for Daily Notifications to suit your needs
     • Completely Open Source – Quotes Status Creator App is Completely Open Source
+
+## Screenshots
+
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home.png?raw=true) 
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Favorites.png?raw=true)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/ImagePick.png?raw=true)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/ColorPick.png?raw=true)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Font.png?raw=true)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Reminder.png?raw=true)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/AddNew.png?raw=true)
 
 ## Quotes – Quotes Status Creator includes
 
