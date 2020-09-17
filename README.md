@@ -24,13 +24,13 @@ Share Famous Quotes as Status without any hassles of Image Editing.😉
 
 ## Screenshots
 
-![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home.png?raw=true) 
-![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Favorites.png?raw=true)
-![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/ImagePick.png?raw=true)
-![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/ColorPick.png?raw=true)
-![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Font.png?raw=true)
-![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Reminder.png?raw=true)
-![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/AddNew.png?raw=true)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home.png) 
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Favorites.png)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/ImagePick.png)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/ColorPick.png)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Font.png)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Reminder.png)
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/AddNew.png)
 
 ## Quotes – Quotes Status Creator includes
 
