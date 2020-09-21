@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
@@ -112,7 +113,7 @@ public class FontFragment extends Fragment {
                             ((MainActivity) getActivity()).getQuoteViewPagerAdapter().notifyDataSetChanged();
 
                             getActivity().onBackPressed();
-
+                        } else {
 
                         }
                     }
@@ -120,6 +121,8 @@ public class FontFragment extends Fragment {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         exception.printStackTrace();
+                        //TODO: Check this
+                        FirebaseCrashlytics.getInstance().recordException(exception);
                         progressDialog.dismiss();
                         Toast.makeText(getActivity(), "Error.....", Toast.LENGTH_LONG).show();
                     }

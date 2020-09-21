@@ -23,7 +23,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +50,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog;
 import com.turkialkhateeb.materialcolorpicker.ColorListener;
+import com.yalantis.ucrop.UCrop;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,8 +81,8 @@ import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
-    private static final String FAV_PREFERENCE_NAME = "favPreference";
     public static ProgressDialog bgDialog, fontDialog;
+    private final String FAV_PREFERENCE_NAME = "favPreference";
     private final int PICK_IMAGE_ID = 36;
     private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
     private final int PERMISSION_REQ_CODE = 88;
@@ -296,26 +296,38 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if ((requestCode == PICK_IMAGE_ID) && (resultCode == Activity.RESULT_OK)) {
-            if (data != null) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
+
+            File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+            if (!root.exists()) root.mkdirs();
+            String file = root.toString() + File.separator + ".Quotes_Background" + ".jpg";
+
+            if (requestCode == PICK_IMAGE_ID) {
+
+                UCrop.of(data.getData(), Uri.fromFile(new File(file)))
+                        .withAspectRatio(9, 16)
+                        .withMaxResultSize(640, 960)
+                        .start(this);
+
+            } else if (requestCode == UCrop.REQUEST_CROP) {
+
                 try {
-
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-
-                    String file = generateNoteOnSD(bitmap);
-
                     constraintLayout.setBackground(Drawable.createFromPath(file));
 
                     SharedPreferences sharedPrefs = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPrefs.edit();
                     editor.putString(BACKGROUND_PREFERENCE_NAME, file);
                     editor.apply();
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+        } else {
+
+            Toast.makeText(this, "Error...", Toast.LENGTH_SHORT).show();
+
         }
+
     }
 
     private String generateNoteOnSD(Bitmap image) {
