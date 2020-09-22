@@ -191,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                             }
                             case 2: {
                                 bgDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+                                bgDialog.setCancelable(false);
                                 getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
                                 break;
                             }

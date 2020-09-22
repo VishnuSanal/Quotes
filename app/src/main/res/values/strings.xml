@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Quotes</string>
 
-    <string name="version">Version: 1.0.1</string>
+    <string name="version">Version: 1.1.0</string>
     <string name="links">Links</string>
     <string name="view_source_code_at_github">View source code at GitHub</string>
     <string name="send_feedback_to_the_developer">Send feedback to developer</string>
