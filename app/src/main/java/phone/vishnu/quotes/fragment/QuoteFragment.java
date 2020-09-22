@@ -21,7 +21,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -32,7 +31,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -58,13 +56,12 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class QuoteFragment extends Fragment {
 
-    private static final String FAV_PREFERENCE_NAME = "favPreference";
-    private static final int PERMISSION_REQ_CODE = 2222;
-    private static final String COLOR_PREFERENCE_NAME = "colorPreference";
-    private static final String FONT_PREFERENCE_NAME = "fontPreference";
+    private String FAV_PREFERENCE_NAME = "favPreference";
+    private int PERMISSION_REQ_CODE = 2222;
+    private String COLOR_PREFERENCE_NAME = "colorPreference";
+    private String FONT_PREFERENCE_NAME = "fontPreference";
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
-    private CardView cardView;
 
     public QuoteFragment() {
     }
@@ -100,8 +97,7 @@ public class QuoteFragment extends Fragment {
             quoteText.setTypeface(face);
         }
 
-        cardView = quoteView.findViewById(R.id.cardView);
-        cardView.setCardBackgroundColor(Color.parseColor(hexColor));
+        ((CardView) quoteView.findViewById(R.id.cardView)).setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
 
         final String quote = getArguments().getString("quote");
@@ -145,7 +141,7 @@ public class QuoteFragment extends Fragment {
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
-                            shareScreenshot(quoteText.getText().toString(), authorText.getText().toString());
+                            shareScreenshot(getActivity(), quoteText.getText().toString(), authorText.getText().toString());
                         }
                     });
                 } else {
@@ -252,13 +248,13 @@ public class QuoteFragment extends Fragment {
         return false;
     }
 
-    private void shareScreenshot(String quote, String author) {
+    private void shareScreenshot(Context context, String quote, String author) {
 
-        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
         String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#607D8B");
         String fontPath = sharedPreferences.getString(FONT_PREFERENCE_NAME, "-1");
 
@@ -269,9 +265,6 @@ public class QuoteFragment extends Fragment {
         CardView cardView = shareView.findViewById(R.id.shareCardView);
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
 
-//        ((ImageView) shareView.findViewById(R.id.shareFavoriteImageView)).setColorFilter(Color.RED);
-//        ((ImageView) shareView.findViewById(R.id.shareShareImageView)).setColorFilter(Color.GREEN);
-
         if (!fontPath.equals("-1")) {
             Typeface face = Typeface.createFromFile(fontPath);
             ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTypeface(face);
@@ -281,15 +274,17 @@ public class QuoteFragment extends Fragment {
         ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setText(author);
 
         DisplayMetrics metrics = new DisplayMetrics();
-        ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
+        metrics.widthPixels = 1080;
+        metrics.heightPixels = 1920;
+//        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
 
         shareView.measure(View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(metrics.heightPixels, View.MeasureSpec.EXACTLY));
 
+       /* cardView.measure(View.MeasureSpec.makeMeasureSpec(920, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY));*/
+
         shareView.findViewById(R.id.shareRelativeLayout).setLayoutParams(new LinearLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels));
-        ConstraintLayout.LayoutParams cardParams = new ConstraintLayout.LayoutParams(300, ViewGroup.LayoutParams.WRAP_CONTENT);
-        cardParams.verticalBias = 0.5f;
-        cardParams.horizontalBias = 0.5f;
 
         shareView.setDrawingCacheEnabled(true);
 
@@ -314,7 +309,7 @@ public class QuoteFragment extends Fragment {
             e.printStackTrace();
         }
 
-        Uri uri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".provider", new File(imagePath));
+        Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(imagePath));
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("image/*");
         sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

@@ -12,13 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import java.text.MessageFormat;
@@ -33,7 +33,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class BlankFragment extends Fragment {
     private TextView sourceCodeTV, feedbackTV, resetTV, reminderTimeTV;
-    private Switch reminderSwitch;
+    private SwitchCompat reminderSwitch;
 
     public BlankFragment() {
     }

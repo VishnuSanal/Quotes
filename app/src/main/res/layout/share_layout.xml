@@ -2,14 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/shareRelativeLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="1080px"
+    android:layout_height="1920px"
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/shareCardView"
-        android:layout_width="300dp"
+        android:layout_width="920px"
         android:layout_height="wrap_content"
+        android:layout_margin="36dp"
         app:cardBackgroundColor="@color/cardBackgroundColor"
         app:cardCornerRadius="8dp"
         app:cardElevation="12dp">
@@ -25,8 +26,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
+                android:lineSpacingExtra="2sp"
+                android:maxWidth="900px"
+                android:padding="4dp"
                 android:textColor="@android:color/background_light"
-                android:textSize="24sp"
+                android:textSize="32sp"
                 app:layout_constraintBottom_toTopOf="@id/shareAuthorTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +41,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="cursive"
+                android:padding="4dp"
                 android:textColor="@android:color/background_light"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

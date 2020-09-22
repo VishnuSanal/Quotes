@@ -82,12 +82,10 @@ import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
     public static ProgressDialog bgDialog, fontDialog;
-    private final String FAV_PREFERENCE_NAME = "favPreference";
-    private final int PICK_IMAGE_ID = 36;
-    private final String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
-    private final int PERMISSION_REQ_CODE = 88;
+    private int PICK_IMAGE_ID = 36;
+    private String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
+    private int PERMISSION_REQ_CODE = 88;
     private ConstraintLayout constraintLayout;
-    private ViewPager viewPager;
     private QuoteViewPagerAdapter adapter;
 
     @Override
@@ -116,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                     SharedPreferences.Editor editor = sharedPref.edit();
 
                     Gson gson = new Gson();
+                    String FAV_PREFERENCE_NAME = "favPreference";
                     String jsonSaved = sharedPref.getString(FAV_PREFERENCE_NAME, "");
                     String jsonNewProductToAdd = gson.toJson(new Quote(extras.getString("quote"), extras.getString("author")));
 
@@ -131,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         setContentView(R.layout.activity_main);
         constraintLayout = findViewById(R.id.constraintLayout);
-        viewPager = findViewById(R.id.viewPager);
 
         if (!isNetworkAvailable())
             Toast.makeText(this, "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
@@ -238,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             @Override
             public void run() {
                 adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getFragments());
-                viewPager.setAdapter(adapter);
+                ((ViewPager) findViewById(R.id.viewPager)).setAdapter(adapter);
             }
         });
 

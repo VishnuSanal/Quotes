@@ -186,7 +186,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Paulo Dichone"
+            android:text="Yadhu Krishnan E.T"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit4TextView"
@@ -200,7 +200,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Pexels.com"
+            android:text="Paulo Dichone"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit5TextView"
@@ -214,13 +214,28 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Nikhil.S"
+            android:text="Pexels.com"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit6TextView"
             tools:ignore="HardcodedText" />
 
-        <Switch
+        <TextView
+            android:id="@+id/aboutPageCredit8TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:text="Nikhil.S"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit7TextView"
+            tools:ignore="HardcodedText" />
+
+
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/aboutReminderSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -230,7 +245,7 @@
             app:layout_constraintBottom_toTopOf="@id/aboutResetSettingsButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit7TextView" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit8TextView" />
 
         <TextView
             android:id="@+id/aboutReminderTV"

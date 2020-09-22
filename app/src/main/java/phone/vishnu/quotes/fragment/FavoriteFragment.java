@@ -21,7 +21,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -33,7 +32,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -57,12 +55,40 @@ import phone.vishnu.quotes.model.Quote;
 import static android.content.Context.MODE_PRIVATE;
 
 public class FavoriteFragment extends Fragment {
-    private final String PREFERENCE_NAME = "favPreference";
-    private final int PERMISSION_REQ_CODE = 2222;
+    private String FAV_PREFERENCE_NAME = "favPreference";
+    private final View.OnClickListener removeImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            {
+                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+                v.startAnimation(shake);
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+
+                int position = Integer.parseInt(v.getTag().toString());
+//            Log.e("vishnu", "onClick: " + position);
+
+                JSONArray jsonArray = removeFavorite(sharedPrefs.getString(FAV_PREFERENCE_NAME, ""), productFromShared, productFromShared.get(position).getQuote());
+                editor.putString(FAV_PREFERENCE_NAME, String.valueOf(jsonArray));
+                editor.apply();
+
+                Gson gson = new Gson();
+                Type type = new TypeToken<ArrayList<Quote>>() {
+                }.getType();
+
+                productFromShared = gson.fromJson(sharedPrefs.getString(FAV_PREFERENCE_NAME, ""), type);
+
+                adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared, viewImageViewOnClickListener, removeImageViewOnClickListener);
+                lv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+        }
+    };
     private ListView lv;
     private CustomDataAdapter adapter;
     private ImageView addImageView;
     private ArrayList<Quote> productFromShared = new ArrayList<>();
+    private int PERMISSION_REQ_CODE = 2222;
+    private SharedPreferences sharedPrefs;
     private final View.OnClickListener viewImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
@@ -75,7 +101,7 @@ public class FavoriteFragment extends Fragment {
                         @Override
                         public void run() {
                             int position = Integer.parseInt(v.getTag().toString());
-                            shareScreenshot(productFromShared.get(position).getQuote(), productFromShared.get(position).getAuthor());
+                            shareScreenshot(getActivity(), productFromShared.get(position).getQuote(), productFromShared.get(position).getAuthor());
                         }
                     });
                 } else {
@@ -83,34 +109,6 @@ public class FavoriteFragment extends Fragment {
                 }
             }
 
-        }
-    };
-    private SharedPreferences sharedPrefs;
-    private final View.OnClickListener removeImageViewOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            {
-                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
-                v.startAnimation(shake);
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-
-                int position = Integer.parseInt(v.getTag().toString());
-//            Log.e("vishnu", "onClick: " + position);
-
-                JSONArray jsonArray = removeFavorite(sharedPrefs.getString(PREFERENCE_NAME, ""), productFromShared, productFromShared.get(position).getQuote());
-                editor.putString(PREFERENCE_NAME, String.valueOf(jsonArray));
-                editor.apply();
-
-                Gson gson = new Gson();
-                Type type = new TypeToken<ArrayList<Quote>>() {
-                }.getType();
-
-                productFromShared = gson.fromJson(sharedPrefs.getString(PREFERENCE_NAME, ""), type);
-
-                adapter = new CustomDataAdapter(getActivity().getApplicationContext(), productFromShared, viewImageViewOnClickListener, removeImageViewOnClickListener);
-                lv.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
         }
     };
 
@@ -128,7 +126,7 @@ public class FavoriteFragment extends Fragment {
 
         Gson gson = new Gson();
         sharedPrefs = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        String jsonPreferences = sharedPrefs.getString(PREFERENCE_NAME, "");
+        String jsonPreferences = sharedPrefs.getString(FAV_PREFERENCE_NAME, "");
 
         Type type = new TypeToken<ArrayList<Quote>>() {
         }.getType();
@@ -220,31 +218,24 @@ public class FavoriteFragment extends Fragment {
 
     }
 
-    private void shareScreenshot(String quote, String author) {
+    private void shareScreenshot(Context context, String quote, String author) {
 
-        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        String hexColor = sharedPreferences.getString("colorPreference", "#607D8B");
-        String fontPath = sharedPreferences.getString("fontPreference", "-1");
+        SharedPreferences sharedPreferences = context.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+        String COLOR_PREFERENCE_NAME = "colorPreference";
+        String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#607D8B");
+        String FONT_PREFERENCE_NAME = "fontPreference";
+        String fontPath = sharedPreferences.getString(FONT_PREFERENCE_NAME, "-1");
 
         String backgroundPath = sharedPreferences.getString("backgroundPreference", "-1");
         if (!"-1".equals(backgroundPath))
             shareView.findViewById(R.id.shareRelativeLayout).setBackground(Drawable.createFromPath(backgroundPath));
 
-        /*shareView.findViewById(R.id.shareRelativeLayout)
-                .setBackgroundColor(
-                        Color.parseColor("#ff0000ff")
-                );*/
-
-
         CardView cardView = shareView.findViewById(R.id.shareCardView);
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
-
-//        ((ImageView) shareView.findViewById(R.id.shareFavoriteImageView)).setColorFilter(Color.RED);
-//        ((ImageView) shareView.findViewById(R.id.shareShareImageView)).setColorFilter(Color.GREEN);
 
         if (!fontPath.equals("-1")) {
             Typeface face = Typeface.createFromFile(fontPath);
@@ -255,17 +246,19 @@ public class FavoriteFragment extends Fragment {
         ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setText(author);
 
         DisplayMetrics metrics = new DisplayMetrics();
-        ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
+        metrics.widthPixels = 1080;
+        metrics.heightPixels = 1920;
+//        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
 
         shareView.measure(View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(metrics.heightPixels, View.MeasureSpec.EXACTLY));
 
-        shareView.setDrawingCacheEnabled(true);
+       /* cardView.measure(View.MeasureSpec.makeMeasureSpec(920, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY));*/
 
         shareView.findViewById(R.id.shareRelativeLayout).setLayoutParams(new LinearLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels));
-        ConstraintLayout.LayoutParams cardParams = new ConstraintLayout.LayoutParams(300, ViewGroup.LayoutParams.WRAP_CONTENT);
-        cardParams.verticalBias = 0.5f;
-        cardParams.horizontalBias = 0.5f;
+
+        shareView.setDrawingCacheEnabled(true);
 
         Bitmap bitmap = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
 
@@ -288,8 +281,8 @@ public class FavoriteFragment extends Fragment {
             e.printStackTrace();
         }
 
-        Uri uri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".provider", new File(imagePath));
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(imagePath));
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("image/*");
         sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
