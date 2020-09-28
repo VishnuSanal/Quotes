@@ -125,6 +125,7 @@ public class FontFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "Please Wait....");
+
                 String fontString = fontList.get(position).toLowerCase() + ".ttf";
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
 

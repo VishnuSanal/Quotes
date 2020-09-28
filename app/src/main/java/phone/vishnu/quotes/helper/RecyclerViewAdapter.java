@@ -30,6 +30,7 @@ import phone.vishnu.quotes.activity.MainActivity;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private final Context context;
+    private SharedPreferenceHelper sharedPreferenceHelper;
     private ArrayList<Uri> arr;
     private ImageView imageView;
 
@@ -46,6 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.single_card, parent, false);
+        sharedPreferenceHelper = new SharedPreferenceHelper(context);
         return new ViewHolder(v);
     }
 
@@ -69,31 +71,42 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
 
-                final File f = new File(localFile + File.separator + ".Quotes_Background" + ".jpg");
+                final File f = new File(localFile + File.separator + "." + split[0]);
 
-                storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(context);
-                        sharedPreferenceHelper.setBackgroundPath(f.toString());
+                if (f.exists()) {
+                    sharedPreferenceHelper.setBackgroundPath(f.getAbsolutePath());
 
-                        dialog.dismiss();
+                    dialog.dismiss();
 
-                        Toast.makeText(context, "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
 
-//                        context.startActivity(new Intent(context, MainActivity.class));
-                        ((MainActivity) context).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.toString()));
-                        ((MainActivity) context).onBackPressed();
+                    ((MainActivity) context).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.toString()));
+                    ((MainActivity) context).onBackPressed();
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        exception.printStackTrace();
-                        Toast.makeText(context, "Error.....", Toast.LENGTH_LONG).show();
-                        dialog.dismiss();
-                    }
-                });
+                } else {
+                    storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                            sharedPreferenceHelper.setBackgroundPath(f.getAbsolutePath());
+
+                            dialog.dismiss();
+
+                            Toast.makeText(context, "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
+
+                            ((MainActivity) context).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.toString()));
+                            ((MainActivity) context).onBackPressed();
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            exception.printStackTrace();
+                            Toast.makeText(context, "Error.....", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
+                        }
+                    });
+                }
             }
         });
 
