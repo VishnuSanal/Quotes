@@ -1,6 +1,5 @@
 package phone.vishnu.quotes.fragment;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +23,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class AddNewFragment extends Fragment {
 
-    private static final String FAV_PREFERENCE_NAME = "favPreference";
+    private SharedPreferenceHelper sharedPreferenceHelper;
     private TextInputEditText quoteTIE, authorTIE;
     private Button saveButton, cancelButton;
 
@@ -50,6 +48,8 @@ public class AddNewFragment extends Fragment {
 
         saveButton = inflate.findViewById(R.id.buttonAdd);
         cancelButton = inflate.findViewById(R.id.buttonCancel);
+
+        sharedPreferenceHelper = new SharedPreferenceHelper(getActivity());
 
         return inflate;
     }
@@ -81,19 +81,17 @@ public class AddNewFragment extends Fragment {
                         authorTIE.requestFocus();
                     }
                 } else {
-                    SharedPreferences sharedPref = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
+
 
                     Gson gson = new Gson();
-                    String jsonSaved = sharedPref.getString(FAV_PREFERENCE_NAME, "");
+                    String jsonSaved = sharedPreferenceHelper.getFavoriteArrayString();
                     String jsonNewProductToAdd = gson.toJson(new Quote(quote, author));
 
                     Type type = new TypeToken<ArrayList<Quote>>() {
                     }.getType();
                     ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
 
-                    editor.putString(FAV_PREFERENCE_NAME, String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared)));
-                    editor.apply();
+                    sharedPreferenceHelper.setFavoriteArrayString(String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared)));
 
                     Toast.makeText(getActivity(), "Added...", Toast.LENGTH_SHORT).show();
 

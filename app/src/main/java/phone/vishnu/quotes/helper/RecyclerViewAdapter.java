@@ -2,7 +2,6 @@ package phone.vishnu.quotes.helper;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
@@ -30,8 +29,8 @@ import phone.vishnu.quotes.activity.MainActivity;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<Uri> arr;
     private final Context context;
+    private ArrayList<Uri> arr;
     private ImageView imageView;
 
     public RecyclerViewAdapter(Context context) {
@@ -75,10 +74,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        SharedPreferences.Editor editor = context.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", Context.MODE_PRIVATE).edit();
-                        String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
-                        editor.putString(BACKGROUND_PREFERENCE_NAME, f.toString());
-                        editor.apply();
+                        SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(context);
+                        sharedPreferenceHelper.setBackgroundPath(f.toString());
+
                         dialog.dismiss();
 
                         Toast.makeText(context, "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();

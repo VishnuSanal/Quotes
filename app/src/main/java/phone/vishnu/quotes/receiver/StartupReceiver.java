@@ -5,13 +5,13 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import phone.vishnu.quotes.helper.SharedPreferenceHelper;
+
 import static android.content.Context.ALARM_SERVICE;
-import static android.content.Context.MODE_PRIVATE;
 
 public class StartupReceiver extends BroadcastReceiver {
     @Override
@@ -21,12 +21,12 @@ public class StartupReceiver extends BroadcastReceiver {
             if (intent.getAction() != null) {
                 if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
 
-                    SharedPreferences preferences = context.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+                    SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(context);
 
                     final String ALARM_PREFERENCE_TIME = "customAlarmPreference";
 
                     // "At " + hourOfDay + " : " + minute + " Daily"
-                    String time = preferences.getString(ALARM_PREFERENCE_TIME, "At 8 : 30 Daily");
+                    String time = sharedPreferenceHelper.getAlarmString();
 
                     if (!time.equals("-1")) {
 

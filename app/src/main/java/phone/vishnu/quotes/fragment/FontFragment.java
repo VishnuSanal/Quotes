@@ -2,7 +2,6 @@ package phone.vishnu.quotes.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -27,18 +25,24 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
+import phone.vishnu.quotes.helper.FontDataAdapter;
+import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class FontFragment extends Fragment {
 
+    private SharedPreferenceHelper sharedPreferenceHelper;
     private ListView listView;
-    private ArrayAdapter<String> arrayAdapter;
+    private FontDataAdapter fontDataAdapter;
     private ArrayList<String> fontList = new ArrayList<>();
     private ProgressBar progressBar;
 
@@ -57,6 +61,29 @@ public class FontFragment extends Fragment {
         if (MainActivity.fontDialog != null && MainActivity.fontDialog.isShowing())
             MainActivity.fontDialog.dismiss();
 
+
+        final String fontArrayListString = sharedPreferenceHelper.getFontArrayString();
+
+        if (null != fontArrayListString) {
+            fontList = new ArrayList<>();
+
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<String>>() {
+            }.getType();
+            fontList = gson.fromJson(fontArrayListString, type);
+
+//            progressBar.setVisibility(View.GONE);
+            if (getActivity() != null)
+                if (fontDataAdapter == null) {
+                    fontDataAdapter = new FontDataAdapter(Objects.requireNonNull(getActivity()), fontList);
+                    listView.setAdapter(fontDataAdapter);
+                } else {
+                    fontDataAdapter.clear();
+                    fontDataAdapter.addAll(fontList);
+                    fontDataAdapter.notifyDataSetChanged();
+                }
+        }
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference().child("fonts");
         storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
@@ -69,17 +96,26 @@ public class FontFragment extends Fragment {
 
                     fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
 
+//                    if (!fontList.contains(fontString))
                     fontList.add(fontString);
                 }
+
+//                progressBar.animate().translationY(-250).alpha(0);
+
                 progressBar.setVisibility(View.GONE);
+
+                Gson gson = new Gson();
+
+                sharedPreferenceHelper.setFontArrayString(gson.toJson(fontList));
+
                 if (getActivity() != null)
-                    if (arrayAdapter == null) {
-                        arrayAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), android.R.layout.simple_list_item_1, fontList);
-                        listView.setAdapter(arrayAdapter);
+                    if (fontDataAdapter == null) {
+                        fontDataAdapter = new FontDataAdapter(Objects.requireNonNull(getActivity()), fontList);
+                        listView.setAdapter(fontDataAdapter);
                     } else {
-                        arrayAdapter.clear();
-                        arrayAdapter.addAll(fontList);
-                        arrayAdapter.notifyDataSetChanged();
+                        fontDataAdapter.clear();
+                        fontDataAdapter.addAll(fontList);
+                        fontDataAdapter.notifyDataSetChanged();
                     }
             }
         });
@@ -89,44 +125,51 @@ public class FontFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "Please Wait....");
-
                 String fontString = fontList.get(position).toLowerCase() + ".ttf";
-
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
 
                 final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
 
-                final File f = new File(localFile + File.separator + ".font" + ".ttf");
+                final File f = new File(localFile + File.separator + "." + fontString);
 
-                storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        if (getActivity() != null) {
-                            SharedPreferences.Editor editor = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", Context.MODE_PRIVATE).edit();
-                            String FONT_PREFERENCE_NAME = "fontPreference";
-                            editor.putString(FONT_PREFERENCE_NAME, f.toString());
-                            editor.apply();
+                if (f.exists()) {
+                    sharedPreferenceHelper.setFontPath(f.toString());
 
-                            Toast.makeText(getActivity(), "Font Set..... \n Applying Changes", Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
+                    Toast.makeText(getActivity(), "Font Set..... \n Applying Changes", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
 
-                            ((MainActivity) getActivity()).getQuoteViewPagerAdapter().notifyDataSetChanged();
+                    ((MainActivity) getActivity()).getQuoteViewPagerAdapter().notifyDataSetChanged();
 
-                            getActivity().onBackPressed();
-                        } else {
+                    getActivity().onBackPressed();
+                } else {
+                    storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            if (getActivity() != null) {
 
+                                sharedPreferenceHelper.setFontPath(f.toString());
+
+                                Toast.makeText(getActivity(), "Font Set..... \n Applying Changes", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+
+                                ((MainActivity) getActivity()).getQuoteViewPagerAdapter().notifyDataSetChanged();
+
+                                getActivity().onBackPressed();
+                            } else {
+                                progressDialog.dismiss();
+                            }
                         }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        exception.printStackTrace();
-                        //TODO: Check this
-                        FirebaseCrashlytics.getInstance().recordException(exception);
-                        progressDialog.dismiss();
-                        Toast.makeText(getActivity(), "Error.....", Toast.LENGTH_LONG).show();
-                    }
-                });
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            exception.printStackTrace();
+                            //TODO: Check this
+                            FirebaseCrashlytics.getInstance().recordException(exception);
+                            progressDialog.dismiss();
+                            Toast.makeText(getActivity(), "Error.....", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         });
     }
@@ -139,6 +182,7 @@ public class FontFragment extends Fragment {
 
         progressBar = inflate.findViewById(R.id.fontProgressBar);
         listView = inflate.findViewById(R.id.fontListView);
+        sharedPreferenceHelper = new SharedPreferenceHelper(getActivity());
         return inflate;
     }
 

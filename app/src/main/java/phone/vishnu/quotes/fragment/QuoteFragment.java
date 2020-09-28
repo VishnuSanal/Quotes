@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -50,16 +49,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class QuoteFragment extends Fragment {
 
-    private String FAV_PREFERENCE_NAME = "favPreference";
+    private SharedPreferenceHelper sharedPreferenceHelper;
     private int PERMISSION_REQ_CODE = 2222;
-    private String COLOR_PREFERENCE_NAME = "colorPreference";
-    private String FONT_PREFERENCE_NAME = "fontPreference";
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
 
@@ -88,9 +84,10 @@ public class QuoteFragment extends Fragment {
         shareIcon = quoteView.findViewById(R.id.shareImageView);
         favIcon = quoteView.findViewById(R.id.favoriteImageView);
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#607D8B");
-        String fontPath = sharedPreferences.getString(FONT_PREFERENCE_NAME, "-1");
+        sharedPreferenceHelper = new SharedPreferenceHelper(getActivity());
+
+        String hexColor = sharedPreferenceHelper.getColorPreference();
+        String fontPath = sharedPreferenceHelper.getFontPath();
 
         if (!fontPath.equals("-1")) {
             Typeface face = Typeface.createFromFile(fontPath);
@@ -109,9 +106,8 @@ public class QuoteFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    SharedPreferences sharedPref = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
                     Gson gson = new Gson();
-                    String jsonSaved = sharedPref.getString(FAV_PREFERENCE_NAME, "");
+                    String jsonSaved = sharedPreferenceHelper.getFavoriteArrayString();
                     Type type = new TypeToken<ArrayList<Quote>>() {
                     }.getType();
                     ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
@@ -157,19 +153,16 @@ public class QuoteFragment extends Fragment {
                 final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
                 favIcon.startAnimation(shake);
 
-                SharedPreferences sharedPref = getContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-
                 Gson gson = new Gson();
-                String jsonSaved = sharedPref.getString(FAV_PREFERENCE_NAME, "");
+                String jsonSaved = sharedPreferenceHelper.getFavoriteArrayString();
                 String jsonNewProductToAdd = gson.toJson(new Quote(quoteText.getText().toString(), authorText.getText().toString()));
 
                 Type type = new TypeToken<ArrayList<Quote>>() {
                 }.getType();
                 ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
 
-                editor.putString(FAV_PREFERENCE_NAME, String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared)));
-                editor.apply();
+                sharedPreferenceHelper.setFavoriteArrayString(String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared)));
+
             }
 
 
@@ -254,11 +247,10 @@ public class QuoteFragment extends Fragment {
 
         @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        String hexColor = sharedPreferences.getString(COLOR_PREFERENCE_NAME, "#607D8B");
-        String fontPath = sharedPreferences.getString(FONT_PREFERENCE_NAME, "-1");
+        String hexColor = sharedPreferenceHelper.getColorPreference();
+        String fontPath = sharedPreferenceHelper.getFontPath();
 
-        String backgroundPath = sharedPreferences.getString("backgroundPreference", "-1");
+        String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
         if (!"-1".equals(backgroundPath))
             shareView.findViewById(R.id.shareRelativeLayout).setBackground(Drawable.createFromPath(backgroundPath));
 

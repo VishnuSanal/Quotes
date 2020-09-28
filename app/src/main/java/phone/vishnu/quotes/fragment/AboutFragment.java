@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -24,35 +23,39 @@ import androidx.fragment.app.Fragment;
 import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 import static android.content.Context.ALARM_SERVICE;
-import static android.content.Context.MODE_PRIVATE;
 
-public class BlankFragment extends Fragment {
+public class AboutFragment extends Fragment {
+
+    private SharedPreferenceHelper sharedPreferenceHelper;
     private TextView sourceCodeTV, feedbackTV, resetTV, reminderTimeTV;
     private SwitchCompat reminderSwitch;
 
-    public BlankFragment() {
+    public AboutFragment() {
     }
 
-    public static BlankFragment newInstance() {
-        return new BlankFragment();
+    public static AboutFragment newInstance() {
+        return new AboutFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_blank, container, false);
+        View inflate = inflater.inflate(R.layout.fragment_about, container, false);
         sourceCodeTV = inflate.findViewById(R.id.aboutPageViewSourceCodeTextView);
         feedbackTV = inflate.findViewById(R.id.aboutPageFeedbackTextView);
         resetTV = inflate.findViewById(R.id.aboutResetSettingsButton);
         reminderSwitch = inflate.findViewById(R.id.aboutReminderSwitch);
         reminderTimeTV = inflate.findViewById(R.id.aboutReminderTV);
-        String ALARM_PREFERENCE_TIME = "customAlarmPreference";
-        reminderTimeTV.setText(getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE)
-                .getString(ALARM_PREFERENCE_TIME, "At 08:30 Daily"));
+
+        sharedPreferenceHelper = new SharedPreferenceHelper(Objects.requireNonNull(getActivity()));
+
+        reminderTimeTV.setText(sharedPreferenceHelper.getAlarmString());
         return inflate;
     }
 
@@ -78,21 +81,7 @@ public class BlankFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String COLOR_PREFERENCE_NAME = "colorPreference";
-                String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
-                String FIRST_RUN_BOOLEAN = "firstRunPreference";
-                String ALARM_PREFERENCE_TIME = "customAlarmPreference";
-                String FONT_PREFERENCE_NAME = "fontPreference";
-
-                SharedPreferences.Editor editor = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).edit();
-
-                editor.putString(COLOR_PREFERENCE_NAME, "#607D8B");
-                editor.putString(BACKGROUND_PREFERENCE_NAME, "-1");
-                editor.putString(ALARM_PREFERENCE_TIME, "At 08:30 Daily");
-                editor.putString(FONT_PREFERENCE_NAME, "-1");
-                editor.putBoolean(FIRST_RUN_BOOLEAN, true);
-
-                editor.apply();
+                sharedPreferenceHelper.resetSharedPreferences();
 
                 Toast.makeText(getActivity(), "Settings Reset.....\nRestart App for changes to take effect.....", Toast.LENGTH_SHORT).show();
             }
@@ -101,9 +90,6 @@ public class BlankFragment extends Fragment {
         reminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                final String ALARM_PREFERENCE_TIME = "customAlarmPreference";
-                final SharedPreferences.Editor preferences = getActivity().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).edit();
 
                 if (isChecked) {
 
@@ -116,7 +102,7 @@ public class BlankFragment extends Fragment {
                             c.set(Calendar.HOUR_OF_DAY, hourOfDay);
                             c.set(Calendar.MINUTE, minute);
 
-                            preferences.putString(ALARM_PREFERENCE_TIME, "At " + hourOfDay + " : " + minute + " Daily").apply();
+                            sharedPreferenceHelper.setAlarmString("At " + hourOfDay + " : " + minute + " Daily");
 
                             reminderTimeTV.setText(MessageFormat.format("At {0} : {1} Daily", hourOfDay, minute));
                             reminderTimeTV.setVisibility(View.VISIBLE);
@@ -130,7 +116,7 @@ public class BlankFragment extends Fragment {
                 } else {
                     reminderTimeTV.setVisibility(View.GONE);
 
-                    preferences.putString(ALARM_PREFERENCE_TIME, "Alarm Not Set").apply();
+                    sharedPreferenceHelper.setAlarmString("Alarm Not Set");
 
                     Intent intent = new Intent(getActivity(), NotificationReceiver.class);
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);

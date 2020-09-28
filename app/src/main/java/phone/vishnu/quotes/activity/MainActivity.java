@@ -9,7 +9,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -56,7 +55,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Type;
@@ -70,20 +68,24 @@ import java.util.List;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.data.QuoteListAsyncResponse;
-import phone.vishnu.quotes.fragment.BlankFragment;
+import phone.vishnu.quotes.fragment.AboutFragment;
 import phone.vishnu.quotes.fragment.BottomSheetFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.fragment.QuoteFragment;
+import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.QuoteViewPagerAdapter;
+import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
+
     public static ProgressDialog bgDialog, fontDialog;
+    private SharedPreferenceHelper sharedPreferenceHelper;
+    private ExportHelper exportHelper;
     private int PICK_IMAGE_ID = 36;
-    private String BACKGROUND_PREFERENCE_NAME = "backgroundPreference";
     private int PERMISSION_REQ_CODE = 88;
     private ConstraintLayout constraintLayout;
     private QuoteViewPagerAdapter adapter;
@@ -91,6 +93,9 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sharedPreferenceHelper = new SharedPreferenceHelper(this);
+        exportHelper = new ExportHelper(this);
 
         if (savedInstanceState == null) {
             final Bundle extras = getIntent().getExtras();
@@ -110,20 +115,16 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                     });
                 } else if (extras.getBoolean("FavButton")) {
 
-                    SharedPreferences sharedPref = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
 
                     Gson gson = new Gson();
-                    String FAV_PREFERENCE_NAME = "favPreference";
-                    String jsonSaved = sharedPref.getString(FAV_PREFERENCE_NAME, "");
+                    String jsonSaved = sharedPreferenceHelper.getFavoriteArrayString();
                     String jsonNewProductToAdd = gson.toJson(new Quote(extras.getString("quote"), extras.getString("author")));
 
                     Type type = new TypeToken<ArrayList<Quote>>() {
                     }.getType();
                     ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
 
-                    editor.putString(FAV_PREFERENCE_NAME, String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared, extras.getString("quote"))));
-                    editor.apply();
+                    sharedPreferenceHelper.setFavoriteArrayString(String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared, extras.getString("quote"))));
                 }
             }
         }
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         if (!isNetworkAvailable())
             Toast.makeText(this, "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
 
-        String backgroundPath = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).getString(BACKGROUND_PREFERENCE_NAME, "-1");
+        final String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
 
         if (!"-1".equals(backgroundPath))
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
@@ -169,14 +170,9 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                                         Canvas canvas = new Canvas(image);
                                         canvas.drawColor(color);
 
-                                        String file = generateNoteOnSD(image);
+                                        exportHelper.exportBackgroundImage(image);
 
-                                        constraintLayout.setBackground(Drawable.createFromPath(file));
-
-                                        SharedPreferences sharedPrefs = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = sharedPrefs.edit();
-                                        editor.putString(BACKGROUND_PREFERENCE_NAME, file);
-                                        editor.apply();
+                                        constraintLayout.setBackground(Drawable.createFromPath(sharedPreferenceHelper.getBackgroundPath()));
 
                                     }
                                 });
@@ -241,10 +237,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             }
         });
 
-        String ALARM_PREFERENCE_TIME = "customAlarmPreference";
-
-        String s = getApplicationContext().getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE)
-                .getString(ALARM_PREFERENCE_TIME, "At 08:30 Daily");
+        String s = sharedPreferenceHelper.getAlarmString();
 
 //        if (true) {
         if ("At 08:30 Daily".equals(s)) {
@@ -297,60 +290,22 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         if (resultCode == Activity.RESULT_OK && data != null) {
 
-            File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-            if (!root.exists()) root.mkdirs();
-            String file = root.toString() + File.separator + ".Quotes_Background" + ".jpg";
+            String file = exportHelper.getBGPath();
 
-            if (requestCode == PICK_IMAGE_ID) {
+            if (requestCode == PICK_IMAGE_ID)
 
                 UCrop.of(data.getData(), Uri.fromFile(new File(file)))
-                        .withAspectRatio(9, 16)
+                        .withAspectRatio(1080, 1920)
                         .withMaxResultSize(640, 960)
                         .start(this);
 
-            } else if (requestCode == UCrop.REQUEST_CROP) {
-
-                try {
-                    constraintLayout.setBackground(Drawable.createFromPath(file));
-
-                    SharedPreferences sharedPrefs = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPrefs.edit();
-                    editor.putString(BACKGROUND_PREFERENCE_NAME, file);
-                    editor.apply();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            else if (requestCode == UCrop.REQUEST_CROP) {
+                constraintLayout.setBackground(Drawable.createFromPath(file));
+                sharedPreferenceHelper.setBackgroundPath(file);
             }
-        } else {
+        } else Toast.makeText(this, "Error...", Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(this, "Error...", Toast.LENGTH_SHORT).show();
 
-        }
-
-    }
-
-    private String generateNoteOnSD(Bitmap image) {
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-
-        if (!root.exists()) root.mkdirs();
-
-        String file = root.toString() + File.separator + ".Quotes_Background" + ".jpg";
-
-        try {
-            FileOutputStream fOutputStream = new FileOutputStream(file);
-            BufferedOutputStream bos = new BufferedOutputStream(fOutputStream);
-
-            image.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-
-            fOutputStream.flush();
-            fOutputStream.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-//        MediaScannerConnection.scanFile(context, new String[]{file}, null, null);
-        return file;
     }
 
     @Override
@@ -366,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 break;
             }
             case R.id.bottomSheetAbout: {
-                BlankFragment fragment = BlankFragment.newInstance();
+                AboutFragment fragment = AboutFragment.newInstance();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .add(R.id.constraintLayout, fragment)
@@ -399,14 +354,9 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                                             Canvas canvas = new Canvas(image);
                                             canvas.drawColor(color);
 
-                                            String file = generateNoteOnSD(image);
+                                            exportHelper.exportBackgroundImage(image);
 
-                                            constraintLayout.setBackground(Drawable.createFromPath(file));
-
-                                            SharedPreferences sharedPrefs = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = sharedPrefs.edit();
-                                            editor.putString(BACKGROUND_PREFERENCE_NAME, file);
-                                            editor.apply();
+                                            constraintLayout.setBackground(Drawable.createFromPath(sharedPreferenceHelper.getBackgroundPath()));
 
                                         }
                                     });
@@ -455,8 +405,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             case R.id.bottomSheetColorChooser: {
                 final String COLOR_PREFERENCE_NAME = "colorPreference";
 
-                final SharedPreferences prefs = MainActivity.this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-
                 final ColorChooserDialog dialog = new ColorChooserDialog(MainActivity.this);
                 dialog.setTitle("Choose Color");
                 dialog.setColorListener(new ColorListener() {
@@ -468,9 +416,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         //TODO:Needs Fixing of string "WHITE"
                         if (colorString.toLowerCase().equals("ffffff")) colorString = "00000000";
 
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString(COLOR_PREFERENCE_NAME, "#" + colorString);
-                        editor.apply();
+
+                        sharedPreferenceHelper.setColorPreference("#" + colorString);
                         Toast.makeText(MainActivity.this, "Accent Colour Set...", Toast.LENGTH_LONG).show();
 
                         adapter.notifyDataSetChanged();
@@ -535,11 +482,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        String hexColor = sharedPreferences.getString("colorPreference", "#607D8B");
-        String fontPath = sharedPreferences.getString("fontPreference", "-1");
+        String hexColor = sharedPreferenceHelper.getColorPreference();
+        String fontPath = sharedPreferenceHelper.getFontPath();
 
-        String backgroundPath = sharedPreferences.getString(BACKGROUND_PREFERENCE_NAME, "-1");
+        String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
         if (!"-1".equals(backgroundPath))
             shareView.findViewById(R.id.shareRelativeLayout).setBackground(Drawable.createFromPath(backgroundPath));
 

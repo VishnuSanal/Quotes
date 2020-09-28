@@ -16,14 +16,14 @@ import java.util.ArrayList;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
 
-public class CustomDataAdapter extends ArrayAdapter<Quote> {
+public class FavoritesDataAdapter extends ArrayAdapter<Quote> {
 
     private final LayoutInflater inflater;
     private final View.OnClickListener viewImageViewOnClickListener;
     private final View.OnClickListener removeImageViewOnClickListener;
     private final ArrayList<Quote> objects;
 
-    public CustomDataAdapter(@NonNull Context context, ArrayList<Quote> objects, View.OnClickListener viewImageViewOnClickListener, View.OnClickListener removeImageViewOnClickListener) {
+    public FavoritesDataAdapter(@NonNull Context context, ArrayList<Quote> objects, View.OnClickListener viewImageViewOnClickListener, View.OnClickListener removeImageViewOnClickListener) {
         super(context, 0, objects);
         this.objects = objects;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -42,7 +42,7 @@ public class CustomDataAdapter extends ArrayAdapter<Quote> {
 
         if (rootView == null) {
             viewHolder = new ViewHolder();
-            rootView = inflater.inflate(R.layout.single_item, parent, false);
+            rootView = inflater.inflate(R.layout.favourite_single_item, parent, false);
 
             viewHolder.quoteTV = rootView.findViewById(R.id.quoteTextSingleItem);
             viewHolder.authorTV = rootView.findViewById(R.id.authorTextSingleItem);

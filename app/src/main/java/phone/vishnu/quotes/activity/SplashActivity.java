@@ -5,7 +5,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,19 +24,21 @@ import io.github.dreierf.materialintroscreen.MessageButtonBehaviour;
 import io.github.dreierf.materialintroscreen.SlideFragmentBuilder;
 import io.github.dreierf.materialintroscreen.animations.IViewTranslation;
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class SplashActivity extends MaterialIntroActivity {
+
+    private SharedPreferenceHelper sharedPreferenceHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
+        sharedPreferenceHelper = new SharedPreferenceHelper(this);
 
-        String FIRST_RUN_BOOLEAN = "firstRunPreference";
-        if (sharedPreferences.getBoolean(FIRST_RUN_BOOLEAN, true)) {
+        if (sharedPreferenceHelper.isFirstRun()) {
             showTour();
         } else {
             initTasks();
@@ -131,8 +132,6 @@ public class SplashActivity extends MaterialIntroActivity {
             @Override
             public void onClick(View v) {
 
-                final String ALARM_PREFERENCE_TIME = "customAlarmPreference";
-                final SharedPreferences.Editor preferences = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE).edit();
 
                 final Calendar c = Calendar.getInstance();
 
@@ -143,7 +142,7 @@ public class SplashActivity extends MaterialIntroActivity {
                         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         c.set(Calendar.MINUTE, minute);
 
-                        preferences.putString(ALARM_PREFERENCE_TIME, "At " + hourOfDay + " : " + minute + " Daily").apply();
+                        sharedPreferenceHelper.setAlarmString("At " + hourOfDay + " : " + minute + " Daily");
 
                         myAlarm(c);
 
@@ -195,9 +194,8 @@ public class SplashActivity extends MaterialIntroActivity {
     @Override
     public void onFinish() {
         super.onFinish();
-        String FIRST_RUN_BOOLEAN = "firstRunPreference";
-        SharedPreferences sharedPreferences = getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean(FIRST_RUN_BOOLEAN, false).apply();
+
+        sharedPreferenceHelper.setFirstRunBoolean(false);
 
         startActivity(new Intent(SplashActivity.this, MainActivity.class));
         SplashActivity.this.finish();
@@ -207,8 +205,7 @@ public class SplashActivity extends MaterialIntroActivity {
         setContentView(R.layout.activity_splash);
         final String COLOR_PREFERENCE_NAME = "colorPreference";
 
-        String colorString = this.getSharedPreferences("phone.vishnu.quotes.sharedPreferences", MODE_PRIVATE)
-                .getString(COLOR_PREFERENCE_NAME, "#607D8B");
+        String colorString = sharedPreferenceHelper.getColorPreference();
 
         if (colorString.equals("#00000000")) colorString = "#607D8B";
 
