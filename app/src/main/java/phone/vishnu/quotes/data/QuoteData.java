@@ -4,6 +4,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +42,7 @@ public class QuoteData {
                                         quoteArrayList.add(quote);
 //                                        Log.e("vishnu", quote.getQuote() + "  -  " + quote.getAuthor());
                                     } catch (JSONException e) {
+                                        FirebaseCrashlytics.getInstance().recordException(e);
                                         e.printStackTrace();
                                     }
                                 }
@@ -52,6 +54,7 @@ public class QuoteData {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                FirebaseCrashlytics.getInstance().recordException(error);
                                 error.printStackTrace();
                             }
                         }

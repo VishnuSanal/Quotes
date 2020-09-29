@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,6 +32,7 @@ public class ExportHelper {
             sharedPreferenceHelper.setBackgroundPath(getBGPath());
 
         } catch (Exception e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
     }

@@ -36,6 +36,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -148,6 +149,7 @@ public class FavoriteFragment extends Fragment {
             jsonArrayProduct = new JSONArray(jsonSaved);
             jsonArrayProduct.remove(getIndex(jsonList, jsonProductToRemove));
         } catch (JSONException e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
 
@@ -270,6 +272,7 @@ public class FavoriteFragment extends Fragment {
             fos.flush();
             fos.close();
         } catch (Exception e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
 

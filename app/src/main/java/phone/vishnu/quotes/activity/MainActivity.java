@@ -45,6 +45,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                             try {
                                 shareScreenshot(extras.getString("quote"), extras.getString("author"));
                             } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
                                 e.printStackTrace();
                             }
                         }
@@ -534,6 +536,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             fos.flush();
             fos.close();
         } catch (Exception e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
 
@@ -568,6 +571,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 productFromShared = new ArrayList<>();
             }
         } catch (JSONException e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
         return jsonArrayProduct;

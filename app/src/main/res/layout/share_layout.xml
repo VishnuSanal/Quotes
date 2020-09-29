@@ -25,7 +25,7 @@
                 android:id="@+id/shareQuoteTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="serif"
                 android:lineSpacingExtra="2sp"
                 android:maxWidth="900px"
                 android:padding="4dp"

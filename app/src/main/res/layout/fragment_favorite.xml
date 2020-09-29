@@ -9,12 +9,6 @@
     android:orientation="vertical"
     tools:context=".fragment.FavoriteFragment">
 
-    <!--TODO:Implement a Toolbar here
-      <com.google.android.material.appbar.CollapsingToolbarLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>-->
-
-
     <ImageView
         android:id="@+id/favoriteSampleIconImageView"
         android:layout_width="0dp"

@@ -25,6 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
@@ -52,6 +53,7 @@ public class AboutFragment extends Fragment {
         resetTV = inflate.findViewById(R.id.aboutResetSettingsButton);
         reminderSwitch = inflate.findViewById(R.id.aboutReminderSwitch);
         reminderTimeTV = inflate.findViewById(R.id.aboutReminderTV);
+        ((TextView) inflate.findViewById(R.id.aboutSampleVersion)).setText(String.format("Version: %s", BuildConfig.VERSION_NAME));
 
         sharedPreferenceHelper = new SharedPreferenceHelper(Objects.requireNonNull(getActivity()));
 
@@ -151,6 +153,7 @@ public class AboutFragment extends Fragment {
         try {
             Runtime.getRuntime().exec("logcat -f " + outputFile.getAbsolutePath());
         } catch (IOException e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }*/
 

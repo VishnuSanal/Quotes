@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -55,6 +57,7 @@ public class StartupReceiver extends BroadcastReceiver {
                 }
             }
         } catch (Exception e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
     }
