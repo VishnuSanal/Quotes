@@ -25,6 +25,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -90,9 +91,12 @@ public class QuoteFragment extends Fragment {
         String hexColor = sharedPreferenceHelper.getColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
 
-        if (!fontPath.equals("-1")) {
+        if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
             Typeface face = Typeface.createFromFile(fontPath);
             quoteText.setTypeface(face);
+        } else {
+            if (!new File(fontPath).exists())
+                Toast.makeText(getActivity(), "Font file not found", Toast.LENGTH_SHORT).show();
         }
 
         ((CardView) quoteView.findViewById(R.id.cardView)).setCardBackgroundColor(Color.parseColor(hexColor));
@@ -261,7 +265,7 @@ public class QuoteFragment extends Fragment {
         CardView cardView = shareView.findViewById(R.id.shareCardView);
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
 
-        if (!fontPath.equals("-1")) {
+        if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
             Typeface face = Typeface.createFromFile(fontPath);
             ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTypeface(face);
         }

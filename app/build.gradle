@@ -11,15 +11,21 @@ android {
         applicationId "phone.vishnu.quotes"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.2.0"
+        versionCode 5
+        versionName "1.2.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+
+        debug {
+            manifestPlaceholders = [analytics_deactivated: "true"]
+        }
+
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [analytics_deactivated: "false"]
         }
     }
 }

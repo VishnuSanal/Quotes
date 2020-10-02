@@ -139,7 +139,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         final String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
 
-        if (!"-1".equals(backgroundPath))
+        File f = new File(backgroundPath);
+        if (!("-1".equals(backgroundPath)) && (f.exists()))
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
         else {
 
@@ -497,7 +498,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 //        ((ImageView) shareView.findViewById(R.id.shareFavoriteImageView)).setColorFilter(Color.RED);
 //        ((ImageView) shareView.findViewById(R.id.shareShareImageView)).setColorFilter(Color.GREEN);
 
-        if (!fontPath.equals("-1")) {
+        if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
             Typeface face = Typeface.createFromFile(fontPath);
             ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTypeface(face);
         }

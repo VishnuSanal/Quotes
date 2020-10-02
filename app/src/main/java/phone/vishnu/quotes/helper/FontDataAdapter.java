@@ -63,7 +63,6 @@ public class FontDataAdapter extends ArrayAdapter<String> {
         String fontString = objects.get(position).toLowerCase() + ".ttf";
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
-
         final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
 
         final File f = new File(localFile + File.separator + "." + fontString);
@@ -74,6 +73,8 @@ public class FontDataAdapter extends ArrayAdapter<String> {
             Typeface face = Typeface.createFromFile(f);
             viewHolder.fontTV.setTypeface(face);
         } else {
+            if (!localFile.exists()) localFile.mkdirs();
+
             storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
@@ -94,6 +95,7 @@ public class FontDataAdapter extends ArrayAdapter<String> {
                     );
                 }
             });
+
         }
         return rootView;
     }

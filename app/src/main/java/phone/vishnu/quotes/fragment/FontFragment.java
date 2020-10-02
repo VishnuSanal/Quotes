@@ -61,7 +61,6 @@ public class FontFragment extends Fragment {
         if (MainActivity.fontDialog != null && MainActivity.fontDialog.isShowing())
             MainActivity.fontDialog.dismiss();
 
-
         final String fontArrayListString = sharedPreferenceHelper.getFontArrayString();
 
         if (null != fontArrayListString) {
@@ -90,12 +89,14 @@ public class FontFragment extends Fragment {
             @Override
             public void onSuccess(ListResult listResult) {
                 fontList = new ArrayList<>();
+
                 for (StorageReference item : listResult.getItems()) {
 
                     String fontString = item.getName().replace(".ttf", "");
 
                     fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
 
+                    //                        Log.e("vishnu", String.valueOf(!fontList.contains(fontString)));
 //                    if (!fontList.contains(fontString))
                     fontList.add(fontString);
                 }
@@ -127,10 +128,9 @@ public class FontFragment extends Fragment {
                 final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "Please Wait....");
 
                 String fontString = fontList.get(position).toLowerCase() + ".ttf";
+
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
-
                 final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-
                 final File f = new File(localFile + File.separator + "." + fontString);
 
                 if (f.exists()) {
@@ -143,6 +143,9 @@ public class FontFragment extends Fragment {
 
                     getActivity().onBackPressed();
                 } else {
+
+                    if (!localFile.exists()) localFile.mkdirs();
+
                     storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
@@ -171,6 +174,7 @@ public class FontFragment extends Fragment {
                         }
                     });
                 }
+
             }
         });
     }

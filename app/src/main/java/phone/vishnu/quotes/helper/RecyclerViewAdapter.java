@@ -69,7 +69,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 String[] split = String.valueOf(arr.get(position)).split("%2F")[1].split("\\?");
 
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(split[0]);
-
                 final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
 
                 final File f = new File(localFile + File.separator + "." + split[0]);
@@ -85,6 +84,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     ((MainActivity) context).onBackPressed();
 
                 } else {
+                    if (!localFile.exists()) localFile.mkdirs();
+
                     storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
