@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/BGColor"
     tools:context=".fragment.AboutFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginBottom="8dp"
-            android:background="@color/textColor"
+            android:background="@color/colorAccent"
             android:contentDescription="About Screen Info Logo"
             android:foregroundGravity="center"
             android:src="@drawable/ic_info"
@@ -46,7 +46,7 @@
             android:layout_marginTop="24dp"
             android:fontFamily="casual"
             android:text="@string/app_name"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorAccent"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +74,7 @@
             android:layout_gravity="start"
             android:layout_margin="16dp"
             android:text="@string/links"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorAccent"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutSampleSpacerView" />
@@ -89,7 +89,7 @@
             android:focusable="true"
             android:padding="16dp"
             android:text="@string/send_feedback_to_the_developer"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageLinksTextView" />
 
@@ -103,7 +103,7 @@
             android:focusable="true"
             android:padding="16dp"
             android:text="@string/view_source_code_at_github"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageFeedbackTextView" />
 
@@ -114,7 +114,7 @@
             android:layout_gravity="start"
             android:layout_margin="16dp"
             android:text="@string/thanks_to"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorAccent"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageViewSourceCodeTextView" />
@@ -128,7 +128,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:text="Aswin Kesav.U"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView"
             tools:ignore="HardcodedText" />
@@ -142,7 +142,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:text="Vasudevan.T"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView"
             tools:ignore="HardcodedText" />
@@ -156,7 +156,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:text="Vidhu Vinodh"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit2TextView"
             tools:ignore="HardcodedText" />
@@ -170,7 +170,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:text="Jaseel Ahamed.M"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit3TextView"
             tools:ignore="HardcodedText" />
@@ -184,7 +184,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:text="Yadhu Krishnan E.T"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit4TextView"
             tools:ignore="HardcodedText" />
@@ -198,7 +198,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:text="Paulo Dichone"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit5TextView"
             tools:ignore="HardcodedText" />
@@ -212,7 +212,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:text="Pexels.com"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit6TextView"
             tools:ignore="HardcodedText" />
@@ -226,7 +226,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:text="Nikhil.S"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageCredit7TextView"
             tools:ignore="HardcodedText" />
@@ -239,6 +239,7 @@
             android:layout_margin="8dp"
             android:checked="true"
             android:text="@string/daily_reminder"
+            android:textColor="@color/textColor"
             app:layout_constraintBottom_toTopOf="@id/aboutResetSettingsButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -249,7 +250,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/aboutReminderSwitch"
             app:layout_constraintTop_toBottomOf="@id/aboutReminderSwitch"
@@ -260,9 +261,9 @@
             android:id="@+id/aboutResetSettingsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bottom_button_background"
             android:clickable="true"
             android:focusable="true"
+            android:layout_margin="8dp"
             android:text="@string/reset_settings"
             android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@id/aboutSampleVersion"
@@ -274,7 +275,7 @@
             android:id="@+id/aboutSampleVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

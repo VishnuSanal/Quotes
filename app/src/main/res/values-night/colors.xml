@@ -13,7 +13,7 @@
     <color name="cardBackgroundColor">#607D8B</color>
     <color name="transparent">#00000000</color>
 
-    <color name="BGColor">#FFFFFF</color>
-    <color name="textColor">#000000</color>
+    <color name="BGColor">#000000</color>
+    <color name="textColor">#FFFFFF</color>
     <color name="editTextColor">#BDBDBD</color>
 </resources>

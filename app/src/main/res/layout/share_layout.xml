@@ -29,7 +29,7 @@
                 android:lineSpacingExtra="2sp"
                 android:maxWidth="900px"
                 android:padding="4dp"
-                android:textColor="@android:color/background_light"
+                android:textColor="#FFFFFF"
                 android:textSize="32sp"
                 app:layout_constraintBottom_toTopOf="@id/shareAuthorTextView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="cursive"
                 android:padding="4dp"
-                android:textColor="@android:color/background_light"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

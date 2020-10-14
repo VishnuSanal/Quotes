@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/BGColor"
     tools:context=".fragment.AddNewFragment">
 
     <ImageView
         android:id="@+id/addNewSampleIconImageView"
         android:layout_width="0dp"
         android:layout_height="36dp"
-        android:background="@color/textColor"
+        android:background="@color/colorAccent"
         android:contentDescription="Favourite Screen Favourite Logo"
         android:foregroundGravity="center"
         android:src="@drawable/ic_post_add"
@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:foregroundGravity="center"
+        android:textColorHint="@color/editTextColor"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +40,9 @@
             android:layout_height="wrap_content"
             android:hint="Quote"
             android:inputType="textCapSentences|textMultiLine"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:textColor="@color/editTextColor"
+            android:textColorHint="@color/editTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:foregroundGravity="center"
+        android:textColorHint="@color/editTextColor"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +65,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Author"
-            android:inputType="textCapWords|textMultiLine" />
+            android:inputType="textCapWords|textMultiLine"
+            android:textColor="@color/editTextColor"
+            android:textColorHint="@color/editTextColor" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

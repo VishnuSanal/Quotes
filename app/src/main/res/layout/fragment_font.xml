@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/BGColor"
     android:orientation="vertical"
     tools:context=".fragment.FontFragment">
 
@@ -11,7 +11,7 @@
         android:id="@+id/favoriteSampleIconImageView"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:background="@color/textColor"
+        android:background="@color/colorAccent"
         android:contentDescription="Font Screen Font Logo"
         android:foregroundGravity="center"
         android:src="@drawable/ic_font"

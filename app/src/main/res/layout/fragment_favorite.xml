@@ -5,7 +5,7 @@
     android:id="@+id/favoriteConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/BGColor"
     android:orientation="vertical"
     tools:context=".fragment.FavoriteFragment">
 
@@ -13,7 +13,7 @@
         android:id="@+id/favoriteSampleIconImageView"
         android:layout_width="0dp"
         android:layout_height="36dp"
-        android:background="@color/textColor"
+        android:background="@color/colorAccent"
         android:contentDescription="Favourite Screen Favourite Logo"
         android:foregroundGravity="center"
         android:paddingStart="36dp"
@@ -28,7 +28,7 @@
         android:id="@+id/favoriteAddImageView"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:background="@color/textColor"
+        android:background="@color/colorAccent"
         android:contentDescription="Favourite Screen Favourite Logo"
         android:foregroundGravity="center"
         android:scaleType="fitXY"
