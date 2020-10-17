@@ -203,7 +203,6 @@ public class SplashActivity extends MaterialIntroActivity {
 
     private void initTasks() {
         setContentView(R.layout.activity_splash);
-        final String COLOR_PREFERENCE_NAME = "colorPreference";
 
         String colorString = sharedPreferenceHelper.getColorPreference();
 

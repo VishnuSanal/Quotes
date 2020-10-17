@@ -48,8 +48,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog;
-import com.turkialkhateeb.materialcolorpicker.ColorListener;
 import com.yalantis.ucrop.UCrop;
 
 import org.json.JSONArray;
@@ -71,6 +69,7 @@ import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.data.QuoteListAsyncResponse;
 import phone.vishnu.quotes.fragment.AboutFragment;
 import phone.vishnu.quotes.fragment.BottomSheetFragment;
+import phone.vishnu.quotes.fragment.ColorFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
@@ -160,26 +159,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0: {
-                                ColorChooserDialog colorChooserDialog = new ColorChooserDialog(MainActivity.this);
-                                colorChooserDialog.setTitle("Choose Color");
-                                colorChooserDialog.setColorListener(new ColorListener() {
-                                    @Override
-                                    public void OnColorClick(View v, int color) {
-
-                                        DisplayMetrics metrics = new DisplayMetrics();
-                                        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-                                        Bitmap image = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
-                                        Canvas canvas = new Canvas(image);
-                                        canvas.drawColor(color);
-
-                                        exportHelper.exportBackgroundImage(image);
-
-                                        constraintLayout.setBackground(Drawable.createFromPath(sharedPreferenceHelper.getBackgroundPath()));
-
-                                    }
-                                });
-                                colorChooserDialog.show();
+                                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(0)).addToBackStack(null).commit();
                                 break;
                             }
                             case 1: {
@@ -227,8 +207,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomSheetFragment bottomSheet = new BottomSheetFragment();
-                bottomSheet.show(getSupportFragmentManager(), "bottomSheetTag");
+                if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                    BottomSheetFragment bottomSheet = new BottomSheetFragment();
+                    bottomSheet.show(getSupportFragmentManager(), "bottomSheetTag");
+                }
             }
         });
 
@@ -298,8 +280,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             if (requestCode == PICK_IMAGE_ID)
 
                 UCrop.of(data.getData(), Uri.fromFile(new File(file)))
-                        .withAspectRatio(1080, 1920)
-                        .withMaxResultSize(640, 960)
+                        .withAspectRatio(9, 16)
+                        .withMaxResultSize(1080, 1920)
                         .start(this);
 
             else if (requestCode == UCrop.REQUEST_CROP) {
@@ -344,26 +326,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
                                 case 0: {
-                                    ColorChooserDialog colorChooserDialog = new ColorChooserDialog(MainActivity.this);
-                                    colorChooserDialog.setTitle("Choose Color");
-                                    colorChooserDialog.setColorListener(new ColorListener() {
-                                        @Override
-                                        public void OnColorClick(View v, int color) {
-
-                                            DisplayMetrics metrics = new DisplayMetrics();
-                                            getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-                                            Bitmap image = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
-                                            Canvas canvas = new Canvas(image);
-                                            canvas.drawColor(color);
-
-                                            exportHelper.exportBackgroundImage(image);
-
-                                            constraintLayout.setBackground(Drawable.createFromPath(sharedPreferenceHelper.getBackgroundPath()));
-
-                                        }
-                                    });
-                                    colorChooserDialog.show();
+                                    getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(0)).addToBackStack(null).commit();
                                     break;
                                 }
                                 case 1: {
@@ -406,30 +369,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 break;
             }
             case R.id.bottomSheetColorChooser: {
-                final String COLOR_PREFERENCE_NAME = "colorPreference";
-
-                final ColorChooserDialog dialog = new ColorChooserDialog(MainActivity.this);
-                dialog.setTitle("Choose Color");
-                dialog.setColorListener(new ColorListener() {
-                    @Override
-                    public void OnColorClick(View v, int color) {
-
-                        String colorString = Integer.toHexString(color).substring(2);
-
-                        //TODO:Needs Fixing of string "WHITE"
-                        if (colorString.toLowerCase().equals("ffffff")) colorString = "00000000";
-
-
-                        sharedPreferenceHelper.setColorPreference("#" + colorString);
-                        Toast.makeText(MainActivity.this, "Accent Colour Set...", Toast.LENGTH_LONG).show();
-
-                        adapter.notifyDataSetChanged();
-
-                        dialog.dismiss();
-
-                    }
-                });
-                dialog.show();
+                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(1)).addToBackStack(null).commit();
                 break;
             }
             case R.id.bottomSheetFont: {
@@ -586,5 +526,13 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             }
         }
         return isPresent;
+    }
+
+    public void notifyViewPagerDataSetChanged() {
+        adapter.notifyDataSetChanged();
+    }
+
+    public void setConstraintLayoutBackground(Drawable drawable) {
+        constraintLayout.setBackground(drawable);
     }
 }
