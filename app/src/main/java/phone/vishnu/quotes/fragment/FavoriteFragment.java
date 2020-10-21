@@ -1,39 +1,24 @@
 package phone.vishnu.quotes.fragment;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
@@ -43,12 +28,11 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.FavoritesDataAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
@@ -56,10 +40,34 @@ import phone.vishnu.quotes.model.Quote;
 public class FavoriteFragment extends Fragment {
 
     private SharedPreferenceHelper sharedPreferenceHelper;
+    private ExportHelper exportHelper;
     private ListView lv;
     private FavoritesDataAdapter adapter;
     private ImageView addImageView;
     private ArrayList<Quote> productFromShared = new ArrayList<>();
+    private int PERMISSION_REQ_CODE = 2222;
+    private final View.OnClickListener viewImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(final View v) {
+            {
+                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+                v.startAnimation(shake);
+
+                if (isPermissionGranted()) {
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            int position = Integer.parseInt(v.getTag().toString());
+                            exportHelper.shareScreenshot(requireContext(), productFromShared.get(position).getQuote(), productFromShared.get(position).getAuthor());
+                        }
+                    });
+                } else {
+                    isPermissionGranted();
+                }
+            }
+
+        }
+    };
     private final View.OnClickListener removeImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -82,29 +90,6 @@ public class FavoriteFragment extends Fragment {
                 lv.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
-        }
-    };
-    private int PERMISSION_REQ_CODE = 2222;
-    private final View.OnClickListener viewImageViewOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(final View v) {
-            {
-                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
-                v.startAnimation(shake);
-
-                if (isPermissionGranted()) {
-                    AsyncTask.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            int position = Integer.parseInt(v.getTag().toString());
-                            shareScreenshot(getActivity(), productFromShared.get(position).getQuote(), productFromShared.get(position).getAuthor());
-                        }
-                    });
-                } else {
-                    isPermissionGranted();
-                }
-            }
-
         }
     };
 
@@ -175,6 +160,7 @@ public class FavoriteFragment extends Fragment {
         lv = inflate.findViewById(R.id.favoriteListView);
         addImageView = inflate.findViewById(R.id.favoriteAddImageView);
         sharedPreferenceHelper = new SharedPreferenceHelper(getActivity());
+        exportHelper = new ExportHelper(requireContext());
         return inflate;
     }
 
@@ -214,74 +200,5 @@ public class FavoriteFragment extends Fragment {
         });
         builder.show();
 
-    }
-
-    private void shareScreenshot(Context context, String quote, String author) {
-
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
-        String hexColor = sharedPreferenceHelper.getColorPreference();
-        String fontPath = sharedPreferenceHelper.getFontPath();
-
-        String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
-        if (!"-1".equals(backgroundPath))
-            shareView.findViewById(R.id.shareRelativeLayout).setBackground(Drawable.createFromPath(backgroundPath));
-
-        CardView cardView = shareView.findViewById(R.id.shareCardView);
-        cardView.setCardBackgroundColor(Color.parseColor(hexColor));
-
-        if (!fontPath.equals("-1")) {
-            Typeface face = Typeface.createFromFile(fontPath);
-            ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTypeface(face);
-        }
-
-        ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setText(quote);
-        ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setText(author);
-
-        DisplayMetrics metrics = new DisplayMetrics();
-        metrics.widthPixels = 1080;
-        metrics.heightPixels = 1920;
-//        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
-
-        shareView.measure(View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(metrics.heightPixels, View.MeasureSpec.EXACTLY));
-
-       /* cardView.measure(View.MeasureSpec.makeMeasureSpec(920, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY));*/
-
-        shareView.findViewById(R.id.shareRelativeLayout).setLayoutParams(new LinearLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels));
-
-        shareView.setDrawingCacheEnabled(true);
-
-        Bitmap bitmap = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
-
-        Canvas c = new Canvas(bitmap);
-        shareView.layout(0, 0, metrics.widthPixels, metrics.heightPixels);
-        shareView.draw(c);
-
-        shareView.buildDrawingCache(true);
-
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-        if (!root.exists()) root.mkdirs();
-        String imagePath = root.toString() + File.separator + ".Screenshot" + ".jpg";
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(imagePath);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-            e.printStackTrace();
-        }
-
-        Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(imagePath));
-        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-        sharingIntent.setType("image/*");
-        sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
-
-        startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 }

@@ -1,7 +1,6 @@
 package phone.vishnu.quotes.activity;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -10,10 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -21,25 +16,18 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -55,7 +43,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -107,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         @Override
                         public void run() {
                             try {
-                                shareScreenshot(extras.getString("quote"), extras.getString("author"));
+                                exportHelper.shareScreenshot(MainActivity.this, extras.getString("quote"), extras.getString("author"));
                             } catch (Exception e) {
                                 FirebaseCrashlytics.getInstance().recordException(e);
                                 e.printStackTrace();
@@ -132,6 +119,27 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         setContentView(R.layout.activity_main);
         constraintLayout = findViewById(R.id.constraintLayout);
+
+        /*MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                AdView adView = new AdView(MainActivity.this);
+                adView.setAdUnitId(getString(R.string.banner_ad_unit_id));
+
+                constraintLayout.addView(adView);
+                adView.setAdSize(getAdSize());
+
+                Bundle extras = new Bundle();
+                extras.putString("max_ad_content_rating", "G");
+
+                AdRequest adRequest = new AdRequest.Builder()
+                        .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                        .tagForChildDirectedTreatment(true)
+                        .build();
+
+                adView.loadAd(adRequest);
+            }
+        });*/
 
         if (!isNetworkAvailable())
             Toast.makeText(this, "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
@@ -419,77 +427,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         return false;
     }
 
-    private void shareScreenshot(String quote, String author) {
-
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
-
-        String hexColor = sharedPreferenceHelper.getColorPreference();
-        String fontPath = sharedPreferenceHelper.getFontPath();
-
-        String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
-        if (!"-1".equals(backgroundPath))
-            shareView.findViewById(R.id.shareRelativeLayout).setBackground(Drawable.createFromPath(backgroundPath));
-
-        CardView cardView = shareView.findViewById(R.id.shareCardView);
-        cardView.setCardBackgroundColor(Color.parseColor(hexColor));
-
-//        ((ImageView) shareView.findViewById(R.id.shareFavoriteImageView)).setColorFilter(Color.RED);
-//        ((ImageView) shareView.findViewById(R.id.shareShareImageView)).setColorFilter(Color.GREEN);
-
-        if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
-            Typeface face = Typeface.createFromFile(fontPath);
-            ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTypeface(face);
-        }
-
-        ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setText(quote);
-        ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setText(author);
-
-        DisplayMetrics metrics = new DisplayMetrics();
-        ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
-
-        shareView.measure(View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(metrics.heightPixels, View.MeasureSpec.EXACTLY));
-
-        shareView.findViewById(R.id.shareRelativeLayout).setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        ConstraintLayout.LayoutParams cardParams = new ConstraintLayout.LayoutParams(300, ViewGroup.LayoutParams.WRAP_CONTENT);
-        cardParams.verticalBias = 0.5f;
-        cardParams.horizontalBias = 0.5f;
-
-        shareView.setDrawingCacheEnabled(true);
-
-        Bitmap bitmap = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
-
-        Canvas c = new Canvas(bitmap);
-        shareView.layout(0, 0, metrics.widthPixels, metrics.heightPixels);
-        shareView.draw(c);
-
-        shareView.buildDrawingCache(true);
-
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-        if (!root.exists()) root.mkdirs();
-        String imagePath = root.toString() + File.separator + ".Screenshot" + ".jpg";
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(imagePath);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-            e.printStackTrace();
-        }
-
-        Uri uri = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".provider", new File(imagePath));
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("image/*");
-        sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
-
-        startActivity(Intent.createChooser(sharingIntent, "Share via"));
-    }
-
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -535,4 +472,19 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     public void setConstraintLayoutBackground(Drawable drawable) {
         constraintLayout.setBackground(drawable);
     }
+
+    /*private AdSize getAdSize() {
+        // Step 2 - Determine the screen width (less decorations) to use for the ad width.
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+
+        float widthPixels = outMetrics.widthPixels;
+        float density = outMetrics.density;
+
+        int adWidth = (int) (widthPixels / density);
+
+        // Step 3 - Get adaptive ad size and return for setting on the ad view.
+        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
+    }*/
 }
