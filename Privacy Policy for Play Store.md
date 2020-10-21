@@ -1,6 +1,6 @@
 **Privacy Policy**
 
-Vishnu Sanal. T built the Quotes – Quotes Status Creator app as an Open Source app. This SERVICE is provided by Vishnu Sanal. T at no cost and is intended for use as is.
+Vishnu Sanal. T built the Quotes – Quotes Status Creator app as an Ad Supported app. This SERVICE is provided by Vishnu Sanal. T at no cost and is intended for use as is.
 
 This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
 
@@ -17,6 +17,7 @@ The app does use third party services that may collect information used to ident
 Link to privacy policy of third party service providers used by the app
 
 *   [Google Play Services](https://www.google.com/policies/privacy/)
+*   [AdMob](https://support.google.com/admob/answer/6128543?hl=en)
 *   [Google Analytics for Firebase](https://firebase.google.com/policies/analytics)
 *   [Firebase Crashlytics](https://firebase.google.com/support/privacy/)
 
@@ -57,7 +58,7 @@ These Services do not address anyone under the age of 13. I do not knowingly col
 
 I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page.
 
-This policy is effective as of 2020-08-23
+This policy is effective as of 2020-10-21
 
 **Contact Us**
 
