@@ -38,12 +38,12 @@ public class SplashActivity extends MaterialIntroActivity {
 
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
 
-        if (sharedPreferenceHelper.isFirstRun()) {
-            showTour();
-        } else {
+        if (sharedPreferenceHelper.isFirstRun())
             initTasks();
-        }
+        else
+            initTasks();
     }
+
 
     private void showTour() {
         enableLastSlideAlphaExitTransition(true);
