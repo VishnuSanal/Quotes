@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/tourBackgroundColor"
+    android:foregroundGravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".fragment.TourSingleFragment">
+
+    <ImageView
+        android:id="@+id/tourImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_margin="8dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="Tour Fragment ImageView"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tourTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/BGColor"
+        android:textSize="28sp"
+        app:layout_constraintTop_toBottomOf="@id/tourImage" />
+
+    <TextView
+        android:id="@+id/tourDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/cardBackgroundColor"
+        android:textSize="20sp" />
+
+</LinearLayout>
