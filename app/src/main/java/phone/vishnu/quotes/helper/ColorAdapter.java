@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 
 public class ColorAdapter extends BaseAdapter {
 
-    private String[] colors = new String[]{
+    private final String[] colors = new String[]{
             "#FFF44336",
             "#FFE91E63",
             "#FF9C27B0",
@@ -38,7 +38,7 @@ public class ColorAdapter extends BaseAdapter {
             "#FF000000",
             "#00000000"
     };
-    private Context context;
+    private final Context context;
 
     public ColorAdapter(Context c) {
         context = c;
@@ -72,9 +72,15 @@ public class ColorAdapter extends BaseAdapter {
         d.getPaint().setStyle(Paint.Style.FILL);
         d.getPaint().setColor(Color.parseColor(colors[position]));
 
+//        GradientDrawable d = new GradientDrawable();
+//        d.setShape(GradientDrawable.OVAL);
+//        d.setColor(Color.parseColor(colors[position]));
+//        d.setStroke(1, context.getResources().getColor(R.color.spacerColor));
+
         imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
 
         imageView.setBackground(d);
+//        imageView.setElevation(12);
 
         return imageView;
     }

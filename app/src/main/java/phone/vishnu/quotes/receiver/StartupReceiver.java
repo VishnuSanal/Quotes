@@ -25,8 +25,6 @@ public class StartupReceiver extends BroadcastReceiver {
 
                     SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(context);
 
-                    final String ALARM_PREFERENCE_TIME = "customAlarmPreference";
-
                     // "At " + hourOfDay + " : " + minute + " Daily"
                     String time = sharedPreferenceHelper.getAlarmString();
 

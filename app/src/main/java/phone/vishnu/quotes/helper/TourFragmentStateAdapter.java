@@ -38,15 +38,15 @@ public class TourFragmentStateAdapter extends androidx.viewpager2.adapter.Fragme
         ArrayList<TourItem> tourItems = new ArrayList<>();
 
         tourItems.add(new TourItem(R.drawable.ic_quotes, "Spread positivity with us", "Would you try?"));
-        tourItems.add(new TourItem(R.drawable.ic_quotes_round, "It Works Like........", "Share Quotations from World Leaders as an Image that too without any hassles of image editing......"));
-        tourItems.add(new TourItem(R.drawable.ic_unfold_more, "Scroll For More", "Scroll horizontally to get more awesome Quotes"));
-        tourItems.add(new TourItem(R.drawable.ic_insert_photo, "Background Image", "You can select a custom background image for the app from the overflow menu on the bottom of the screen"));
-        tourItems.add(new TourItem(R.drawable.ic_color_lens, "Custom Accent Color", "You can select a custom accent colour for the app from the overflow menu on the bottom of the screen"));
-        tourItems.add(new TourItem(R.drawable.ic_font, "Custom Font", "You can select a custom font for the app from the overflow menu on the bottom of the screen"));
-        tourItems.add(new TourItem(R.drawable.ic_notifications, "Daily Notification of Quotes", "You will receive daily notifications with Quotes at 08:30 AM. You can change the time here. You can customise this later from the about screen"));
-        tourItems.add(new TourItem(R.drawable.ic_share, "Share Quotes in Social Media", "Click share icon from a Quote and select to share that Quote in the form of an Image"));
-        tourItems.add(new TourItem(R.drawable.ic_favorite, "Add a Quote to Favorites", "Click favourite icon from a quote. You can view the favorite quotes by clicking on the overflow menu on the bottom of the screen"));
-        tourItems.add(new TourItem(R.drawable.ic_post_add, "Use your Quotes", "Add Your Quotes to Favorites from Favorites Screen"));
+        tourItems.add(new TourItem(R.drawable.ic_quotes_round, "It Works Like...", "Share Quotations as an Image without any hassles of image editing..."));
+        tourItems.add(new TourItem(R.drawable.ic_unfold_more, "Scroll For More", "Scroll horizontally to get more Quotes"));
+        tourItems.add(new TourItem(R.drawable.ic_insert_photo, "Background Image", "Customize Background Image from the Overflow Menu"));
+        tourItems.add(new TourItem(R.drawable.ic_color_lens, "Accent Color", "Customize Accent Colour from the Overflow Menu"));
+        tourItems.add(new TourItem(R.drawable.ic_font, "Custom Font", "Customize Font from the Overflow Menu"));
+        tourItems.add(new TourItem(R.drawable.ic_notifications, "Daily Notification of Quotes", "Daily Notifications with Quotes. You can customize the time later"));
+        tourItems.add(new TourItem(R.drawable.ic_share, "Share Quotes in Social Media", "Share Quote as an HD Image"));
+        tourItems.add(new TourItem(R.drawable.ic_favorite, "Favorite Quotes", "Add to Favourites for easy-access of Quotes"));
+        tourItems.add(new TourItem(R.drawable.ic_post_add, "Use your Quotes", "Add Custom Quotes Favorites Screen"));
         tourItems.add(new TourItem(R.drawable.ic_whatshot, "That's it", "Get Started"));
 
         return tourItems;

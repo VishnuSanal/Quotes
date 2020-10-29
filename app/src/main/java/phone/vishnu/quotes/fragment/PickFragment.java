@@ -42,7 +42,7 @@ public class PickFragment extends Fragment {
 
     private void setUpRecyclerView(View inflate) {
         recyclerView = inflate.findViewById(R.id.my_recycler_view);
-        adapter = new RecyclerViewAdapter(getActivity());
+        adapter = new RecyclerViewAdapter(requireContext());
         recyclerView.setAdapter(adapter);
 
         recyclerView.setHasFixedSize(true);
@@ -62,7 +62,7 @@ public class PickFragment extends Fragment {
                         public void onSuccess(Uri uri) {
                             list.add(uri);
                             if (adapter != null) {
-                                adapter = new RecyclerViewAdapter(getActivity(), list);
+                                adapter = new RecyclerViewAdapter(requireContext(), list);
                                 recyclerView.setAdapter(adapter);
 
                                 RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) {

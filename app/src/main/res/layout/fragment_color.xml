@@ -11,7 +11,6 @@
     tools:context=".fragment.ColorFragment">
 
     <ImageView
-        android:id="@+id/colorSampleColorTextView"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:background="@color/colorAccent"

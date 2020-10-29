@@ -2,12 +2,13 @@ package phone.vishnu.quotes.fragment;
 
 import android.Manifest;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +20,18 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +51,6 @@ public class QuoteFragment extends Fragment {
 
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ExportHelper exportHelper;
-    private int PERMISSION_REQ_CODE = 2222;
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
 
@@ -76,18 +79,19 @@ public class QuoteFragment extends Fragment {
         shareIcon = quoteView.findViewById(R.id.shareImageView);
         favIcon = quoteView.findViewById(R.id.favoriteImageView);
 
-        sharedPreferenceHelper = new SharedPreferenceHelper(getActivity());
+        sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
         exportHelper = new ExportHelper(requireContext());
 
         String hexColor = sharedPreferenceHelper.getColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
 
-        if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
+        if ((!fontPath.equals("-1")) && (new File(fontPath).exists())) {
             Typeface face = Typeface.createFromFile(fontPath);
             quoteText.setTypeface(face);
         } else {
-            if (!new File(fontPath).exists())
-                Toast.makeText(getActivity(), "Font file not found", Toast.LENGTH_SHORT).show();
+            if ((!fontPath.equals("-1")))
+                if (!new File(fontPath).exists())
+                    Toast.makeText(requireContext(), "Font file not found", Toast.LENGTH_SHORT).show();
         }
 
         ((CardView) quoteView.findViewById(R.id.cardView)).setCardBackgroundColor(Color.parseColor(hexColor));
@@ -127,19 +131,35 @@ public class QuoteFragment extends Fragment {
         shareIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+                final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
                 shareIcon.startAnimation(shake);
                 shareIcon.setColorFilter(Color.GREEN);
-                if (isPermissionGranted()) {
-                    AsyncTask.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            exportHelper.shareScreenshot(getActivity(), quoteText.getText().toString(), authorText.getText().toString());
-                        }
-                    });
-                } else {
-                    isPermissionGranted();
-                }
+
+                Dexter.withContext(requireContext())
+                        .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                                AsyncTask.execute(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        exportHelper.shareScreenshot(requireContext(), quoteText.getText().toString(), authorText.getText().toString());
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                                showPermissionDeniedDialog();
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                                Toast.makeText(requireContext(), "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
+                                permissionToken.continuePermissionRequest();
+                            }
+                        })
+                        .check();
 
             }
         });
@@ -147,7 +167,7 @@ public class QuoteFragment extends Fragment {
         favIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+                final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
                 favIcon.startAnimation(shake);
 
                 Gson gson = new Gson();
@@ -164,6 +184,33 @@ public class QuoteFragment extends Fragment {
 
 
         });
+    }
+
+    private void showPermissionDeniedDialog() {
+        final androidx.appcompat.app.AlertDialog.Builder builder =
+                new androidx.appcompat.app.AlertDialog.Builder(requireContext());
+        builder.setTitle("Permission Denied");
+        builder.setMessage("Please Accept Necessary Permissions");
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface imageDialog, int which) {
+                imageDialog.cancel();
+                startActivity(
+                        new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                .setData(Uri.fromParts("package", requireContext().getPackageName(), null))
+                );
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface imageDialog, int which) {
+                imageDialog.cancel();
+                Toast.makeText(requireContext(), "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
+
     }
 
     private JSONArray addFavorite(String jsonSaved, String jsonNewProductToAdd, ArrayList<Quote> productFromShared) {
@@ -223,44 +270,5 @@ public class QuoteFragment extends Fragment {
             }
         }
         return index;
-    }
-
-    private boolean isPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 22) {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    showPermissionDeniedDialog();
-                } else {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQ_CODE);
-                }
-            } else {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void showPermissionDeniedDialog() {
-
-        final AlertDialog.Builder builder =
-                new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
-        builder.setTitle("Permission Denied");
-        builder.setMessage("Please Accept Permission to Capture Screenshot of the Screen");
-        builder.setCancelable(true);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQ_CODE);
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        builder.show();
-
     }
 }

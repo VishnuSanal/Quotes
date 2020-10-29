@@ -29,7 +29,7 @@ import phone.vishnu.quotes.R;
 
 public class ExportHelper {
 
-    private SharedPreferenceHelper sharedPreferenceHelper;
+    private final SharedPreferenceHelper sharedPreferenceHelper;
 
     public ExportHelper(Context context) {
         sharedPreferenceHelper = new SharedPreferenceHelper(context);

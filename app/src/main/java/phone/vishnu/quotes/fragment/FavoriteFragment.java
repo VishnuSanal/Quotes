@@ -2,10 +2,11 @@ package phone.vishnu.quotes.fragment;
 
 import android.Manifest;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +14,21 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,34 +50,51 @@ public class FavoriteFragment extends Fragment {
     private FavoritesDataAdapter adapter;
     private ImageView addImageView;
     private ArrayList<Quote> productFromShared = new ArrayList<>();
-    private int PERMISSION_REQ_CODE = 2222;
+
     private final View.OnClickListener viewImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
             {
-                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+                final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
                 v.startAnimation(shake);
 
-                if (isPermissionGranted()) {
-                    AsyncTask.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            int position = Integer.parseInt(v.getTag().toString());
-                            exportHelper.shareScreenshot(requireContext(), productFromShared.get(position).getQuote(), productFromShared.get(position).getAuthor());
-                        }
-                    });
-                } else {
-                    isPermissionGranted();
-                }
+                Dexter.withContext(requireContext())
+                        .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                                AsyncTask.execute(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        int position = Integer.parseInt(v.getTag().toString());
+                                        exportHelper.shareScreenshot(requireContext(), productFromShared.get(position).getQuote(), productFromShared.get(position).getAuthor());
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                                showPermissionDeniedDialog();
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                                Toast.makeText(requireContext(), "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
+                                permissionToken.continuePermissionRequest();
+                            }
+                        })
+                        .check();
+
             }
 
         }
     };
+
     private final View.OnClickListener removeImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             {
-                final Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.animate);
+                final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
                 v.startAnimation(shake);
 
                 int position = Integer.parseInt(v.getTag().toString());
@@ -86,7 +108,7 @@ public class FavoriteFragment extends Fragment {
 
                 productFromShared = gson.fromJson(sharedPreferenceHelper.getFavoriteArrayString(), type);
 
-                adapter = new FavoritesDataAdapter(getActivity().getApplicationContext(), productFromShared, viewImageViewOnClickListener, removeImageViewOnClickListener);
+                adapter = new FavoritesDataAdapter(requireContext().getApplicationContext(), productFromShared, viewImageViewOnClickListener, removeImageViewOnClickListener);
                 lv.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
@@ -115,13 +137,13 @@ public class FavoriteFragment extends Fragment {
         if (0 != jsonPreferences.length()) productFromShared = gson.fromJson(jsonPreferences, type);
         else productFromShared.add(new Quote("No Favorite Quotes", ""));
 
-        adapter = new FavoritesDataAdapter(getActivity().getApplicationContext(), productFromShared, viewImageViewOnClickListener, removeImageViewOnClickListener);
+        adapter = new FavoritesDataAdapter(requireContext().getApplicationContext(), productFromShared, viewImageViewOnClickListener, removeImageViewOnClickListener);
         lv.setAdapter(adapter);
 
         addImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.favoriteConstraintLayout, AddNewFragment.newInstance()).commit();
+                requireActivity().getSupportFragmentManager().beginTransaction().add(R.id.favoriteConstraintLayout, AddNewFragment.newInstance()).commit();
             }
         });
 
@@ -159,43 +181,32 @@ public class FavoriteFragment extends Fragment {
         View inflate = inflater.inflate(R.layout.fragment_favorite, container, false);
         lv = inflate.findViewById(R.id.favoriteListView);
         addImageView = inflate.findViewById(R.id.favoriteAddImageView);
-        sharedPreferenceHelper = new SharedPreferenceHelper(getActivity());
+        sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
         exportHelper = new ExportHelper(requireContext());
         return inflate;
     }
 
-    private boolean isPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 22) {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    showPermissionDeniedDialog();
-                } else {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQ_CODE);
-                }
-            } else {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void showPermissionDeniedDialog() {
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
+        final androidx.appcompat.app.AlertDialog.Builder builder =
+                new androidx.appcompat.app.AlertDialog.Builder(requireContext());
         builder.setTitle("Permission Denied");
-        builder.setMessage("Please Accept Permission to Capture Screenshot of the Screen");
+        builder.setMessage("Please Accept Necessary Permissions");
         builder.setCancelable(true);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQ_CODE);
+            public void onClick(DialogInterface imageDialog, int which) {
+                imageDialog.cancel();
+                startActivity(
+                        new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                .setData(Uri.fromParts("package", requireContext().getPackageName(), null))
+                );
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+            public void onClick(DialogInterface imageDialog, int which) {
+                imageDialog.cancel();
+                Toast.makeText(requireContext(), "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
             }
         });
         builder.show();

@@ -1,15 +1,27 @@
 package phone.vishnu.quotes.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.Objects;
 
@@ -29,6 +41,7 @@ public class SplashActivity extends AppCompatActivity {
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
 
         if (sharedPreferenceHelper.isFirstRun())
+//        if (true)
             showNewTour();
         else
             initTasks();
@@ -43,11 +56,12 @@ public class SplashActivity extends AppCompatActivity {
         final TourFragmentStateAdapter adapter = new TourFragmentStateAdapter(this);
         viewPager.setAdapter(adapter);
 
+        final int pageCount = adapter.getItemCount() - 1;
+
         findViewById(R.id.splashScreenNextButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (viewPager.getCurrentItem() < adapter.getItemCount() - 1)
+                if (viewPager.getCurrentItem() < pageCount)
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 else {
                     tourCompleted();
@@ -70,7 +84,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                if (position == adapter.getItemCount() - 1)
+                if ((position == pageCount))
                     tourCompleted();
             }
         });
@@ -78,6 +92,60 @@ public class SplashActivity extends AppCompatActivity {
 
     private void tourCompleted() {
         sharedPreferenceHelper.setFirstRunBoolean(false);
+
+        Dexter.withContext(this)
+                .withPermissions(Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE);
+
+        Dexter.withContext(this)
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        moveToNext();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                        showPermissionDeniedDialog();
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        Toast.makeText(SplashActivity.this, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
+                        permissionToken.continuePermissionRequest();
+                    }
+                })
+                .check();
+    }
+
+    private void showPermissionDeniedDialog() {
+        final androidx.appcompat.app.AlertDialog.Builder builder =
+                new androidx.appcompat.app.AlertDialog.Builder(this);
+        builder.setTitle("Permission Denied");
+        builder.setMessage("Please Accept Necessary Permissions");
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface imageDialog, int which) {
+                imageDialog.cancel();
+                startActivity(
+                        new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                .setData(Uri.fromParts("package", getPackageName(), null))
+                );
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface imageDialog, int which) {
+                imageDialog.cancel();
+                Toast.makeText(SplashActivity.this, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
+
+    }
+
+    private void moveToNext() {
         startActivity(new Intent(SplashActivity.this, MainActivity.class));
         SplashActivity.this.finish();
     }
@@ -95,10 +163,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                SplashActivity.this.finish();
+                moveToNext();
             }
         }, SPLASH_TIMEOUT * 1000);
     }
-
 }

@@ -36,7 +36,6 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <View
-        android:id="@+id/splashScreenSampleSpacerView"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="1dp"

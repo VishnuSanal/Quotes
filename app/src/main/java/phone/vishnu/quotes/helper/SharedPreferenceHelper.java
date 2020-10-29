@@ -7,18 +7,18 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SharedPreferenceHelper {
 
-    private String FIRST_RUN_BOOLEAN = "firstRunBoolean";
+    private final String FIRST_RUN_BOOLEAN = "firstRunBoolean";
 
-    private String FAV_ARRAY_STRING = "favoriteArrayString";
-    private String FONT_ARRAY_STRING = "fontArrayString";
+    private final String FAV_ARRAY_STRING = "favoriteArrayString";
+    private final String FONT_ARRAY_STRING = "fontArrayString";
 
-    private String CARD_COLOR = "colorString";
-    private String ALARM_TIME = "alarmString";
+    private final String CARD_COLOR = "colorString";
+    private final String ALARM_TIME = "alarmString";
 
-    private String BG_PATH = "backgroundPath";
-    private String FONT_PATH = "fontPath";
+    private final String BG_PATH = "backgroundPath";
+    private final String FONT_PATH = "fontPath";
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     public SharedPreferenceHelper(Context context) {
         this.sharedPreferences = context.getSharedPreferences(context.getPackageName(), MODE_PRIVATE);

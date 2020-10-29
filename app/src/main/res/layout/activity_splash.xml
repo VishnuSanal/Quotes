@@ -9,7 +9,6 @@
     tools:ignore="HardcodedText">
 
     <ImageView
-        android:id="@+id/splashScreenIconImageView"
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:layout_margin="8dp"

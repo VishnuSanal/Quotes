@@ -50,7 +50,7 @@ public class AddNewFragment extends Fragment {
         saveButton = inflate.findViewById(R.id.buttonAdd);
         cancelButton = inflate.findViewById(R.id.buttonCancel);
 
-        sharedPreferenceHelper = new SharedPreferenceHelper(getActivity());
+        sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
 
         return inflate;
     }
@@ -62,7 +62,7 @@ public class AddNewFragment extends Fragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
             }
         });
 
@@ -94,9 +94,9 @@ public class AddNewFragment extends Fragment {
 
                     sharedPreferenceHelper.setFavoriteArrayString(String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared)));
 
-                    Toast.makeText(getActivity(), "Added...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Added...", Toast.LENGTH_SHORT).show();
 
-                    getActivity().onBackPressed();
+                    requireActivity().onBackPressed();
                 }
             }
         });

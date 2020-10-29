@@ -8,14 +8,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,8 +25,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -36,6 +33,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.yalantis.ucrop.UCrop;
 
 import org.json.JSONArray;
@@ -72,8 +75,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     public static ProgressDialog bgDialog, fontDialog;
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ExportHelper exportHelper;
-    private int PICK_IMAGE_ID = 36;
-    private int PERMISSION_REQ_CODE = 88;
+    private final int PICK_IMAGE_ID = 36;
     private ConstraintLayout constraintLayout;
     private QuoteViewPagerAdapter adapter;
 
@@ -146,69 +148,32 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         final String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
 
-        File f = new File(backgroundPath);
+        final File f = new File(backgroundPath);
         if (!("-1".equals(backgroundPath)) && (f.exists()))
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
         else {
-
             Toast.makeText(this, "Choose a background", Toast.LENGTH_LONG).show();
 
-            if (!isPermissionGranted())
-                isPermissionGranted();
-            else {
-                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.AlertDialogTheme);
-
-                builder.setTitle("Choose a Background");
-                builder.setCancelable(false);
-
-                final String[] items = {"Plain Colour", "Image From Gallery", "Default Images"};
-                builder.setItems(items, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0: {
-                                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(0)).addToBackStack(null).commit();
-                                break;
-                            }
-                            case 1: {
-                                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                                intent.setType("image/*");
-                                startActivityForResult(intent, PICK_IMAGE_ID);
-                                break;
-                            }
-                            case 2: {
-                                bgDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
-                                bgDialog.setCancelable(false);
-                                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
-                                break;
-                            }
-                            default: {
-                                break;
-                            }
+            Dexter.withContext(this)
+                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                            showBackgroundOptionChooser(false);
                         }
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.setCancelable(false);
 
-                alertDialog.getListView().setOnHierarchyChangeListener(
-                        new ViewGroup.OnHierarchyChangeListener() {
-                            @Override
-                            public void onChildViewAdded(View parent, View child) {
-                                CharSequence text = ((TextView) child).getText();
-                                int itemIndex = Arrays.asList(items).indexOf(text);
-                                if ((itemIndex == 2) && !isNetworkAvailable()) {
-                                    child.setEnabled(false);
-                                    child.setOnClickListener(null);
-                                }
-                            }
+                        @Override
+                        public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                            showPermissionDeniedDialog();
+                        }
 
-                            @Override
-                            public void onChildViewRemoved(View view, View view1) {
-                            }
-                        });
-                alertDialog.show();
-            }
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                            Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
+                            permissionToken.continuePermissionRequest();
+                        }
+                    })
+                    .check();
         }
 
         ImageView menuIcon = findViewById(R.id.homeMenuIcon);
@@ -303,128 +268,133 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     @Override
     public void onBottomSheetButtonClicked(int id) {
-        switch (id) {
-            case R.id.bottomSheetFav: {
-                FavoriteFragment fragment = FavoriteFragment.newInstance();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .add(R.id.constraintLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
-                break;
-            }
-            case R.id.bottomSheetAbout: {
-                AboutFragment fragment = AboutFragment.newInstance();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .add(R.id.constraintLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
-                break;
-            }
-            case R.id.bottomSheetImageChooser: {
-                if (!isPermissionGranted())
-                    isPermissionGranted();
-                else {
-                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.AlertDialogTheme);
+        if (id == R.id.bottomSheetFav) {
+            FavoriteFragment fragment = FavoriteFragment.newInstance();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .add(R.id.constraintLayout, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else if (id == R.id.bottomSheetAbout) {
+            AboutFragment fragment = AboutFragment.newInstance();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .add(R.id.constraintLayout, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else if (id == R.id.bottomSheetImageChooser) {
 
-                    final String[] items = {"Plain Colour", "Image From Gallery", "Default Images"};
-                    builder.setItems(items, new DialogInterface.OnClickListener() {
+            Dexter.withContext(this)
+                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new PermissionListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which) {
-                                case 0: {
-                                    getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(0)).addToBackStack(null).commit();
-                                    break;
-                                }
-                                case 1: {
-                                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                                    intent.setType("image/*");
-                                    startActivityForResult(intent, PICK_IMAGE_ID);
-                                    break;
-                                }
-                                case 2: {
-                                    bgDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
-                                    getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
-                                    break;
-                                }
-                                default: {
-                                    break;
-                                }
-                            }
+                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                            showBackgroundOptionChooser(true);
                         }
-                    });
-                    AlertDialog alertDialog = builder.create();
 
-                    alertDialog.getListView().setOnHierarchyChangeListener(
-                            new ViewGroup.OnHierarchyChangeListener() {
-                                @Override
-                                public void onChildViewAdded(View parent, View child) {
-                                    CharSequence text = ((TextView) child).getText();
-                                    int itemIndex = Arrays.asList(items).indexOf(text);
-                                    if ((itemIndex == 2) && !isNetworkAvailable()) {
-                                        child.setEnabled(false);
-                                        child.setOnClickListener(null);
-                                    }
-                                }
+                        @Override
+                        public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                            showPermissionDeniedDialog();
+                        }
 
-                                @Override
-                                public void onChildViewRemoved(View view, View view1) {
-                                }
-                            });
-                    alertDialog.show();
-                }
-                break;
-            }
-            case R.id.bottomSheetColorChooser: {
-                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(1)).addToBackStack(null).commit();
-                break;
-            }
-            case R.id.bottomSheetFont: {
-                fontDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
-                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontFragment.newInstance()).addToBackStack(null).commit();
-                break;
-            }
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                            Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
+                            permissionToken.continuePermissionRequest();
+                        }
+                    })
+                    .check();
+
+        } else if (id == R.id.bottomSheetColorChooser) {
+            getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(1)).addToBackStack(null).commit();
+        } else if (id == R.id.bottomSheetFont) {
+            fontDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+            fontDialog.setCancelable(false);
+            getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontFragment.newInstance()).addToBackStack(null).commit();
         }
     }
 
     private void showPermissionDeniedDialog() {
-
-        final AlertDialog.Builder builder =
-                new AlertDialog.Builder(MainActivity.this, R.style.AlertDialogTheme);
+        final androidx.appcompat.app.AlertDialog.Builder builder =
+                new androidx.appcompat.app.AlertDialog.Builder(this);
         builder.setTitle("Permission Denied");
-        builder.setMessage("Please Accept Permission to Capture Screenshot of the Screen");
+        builder.setMessage("Please Accept Necessary Permissions");
         builder.setCancelable(true);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQ_CODE);
+            public void onClick(DialogInterface imageDialog, int which) {
+                imageDialog.cancel();
+                startActivity(
+                        new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                .setData(Uri.fromParts("package", getPackageName(), null))
+                );
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+            public void onClick(DialogInterface imageDialog, int which) {
+                imageDialog.cancel();
+                Toast.makeText(MainActivity.this, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
             }
         });
         builder.show();
 
     }
 
-    private boolean isPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 22) {
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    showPermissionDeniedDialog();
-                } else {
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQ_CODE);
+    private void showBackgroundOptionChooser(boolean isCancellable) {
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.AlertDialogTheme);
+
+        builder.setTitle("Choose a Background");
+        builder.setCancelable(isCancellable);
+
+        final String[] items = {"Plain Colour", "Image From Gallery", "Default Images"};
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0: {
+                        getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(0)).addToBackStack(null).commit();
+                        break;
+                    }
+                    case 1: {
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        intent.setType("image/*");
+                        startActivityForResult(intent, PICK_IMAGE_ID);
+                        break;
+                    }
+                    case 2: {
+                        bgDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+                        bgDialog.setCancelable(false);
+                        getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
+                        break;
+                    }
+                    default: {
+                        break;
+                    }
                 }
-            } else {
-                return true;
             }
-        }
-        return false;
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setCancelable(isCancellable);
+
+        alertDialog.getListView().setOnHierarchyChangeListener(
+                new ViewGroup.OnHierarchyChangeListener() {
+                    @Override
+                    public void onChildViewAdded(View parent, View child) {
+                        CharSequence text = ((TextView) child).getText();
+                        int itemIndex = Arrays.asList(items).indexOf(text);
+                        if ((itemIndex == 2) && !isNetworkAvailable()) {
+                            child.setEnabled(false);
+                            child.setOnClickListener(null);
+                        }
+                    }
+
+                    @Override
+                    public void onChildViewRemoved(View view, View view1) {
+                    }
+                });
+        alertDialog.show();
     }
 
     private boolean isNetworkAvailable() {

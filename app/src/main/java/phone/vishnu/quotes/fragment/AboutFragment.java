@@ -55,7 +55,7 @@ public class AboutFragment extends Fragment {
         reminderTimeTV = inflate.findViewById(R.id.aboutReminderTV);
         ((TextView) inflate.findViewById(R.id.aboutSampleVersion)).setText(String.format("Version: %s", BuildConfig.VERSION_NAME));
 
-        sharedPreferenceHelper = new SharedPreferenceHelper(Objects.requireNonNull(getActivity()));
+        sharedPreferenceHelper = new SharedPreferenceHelper(Objects.requireNonNull(requireContext()));
 
         reminderTimeTV.setText(sharedPreferenceHelper.getAlarmString());
         return inflate;
@@ -75,7 +75,7 @@ public class AboutFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                composeEmail(new String[]{getActivity().getString(R.string.email_address_of_developer)}, "Feedback of " + getActivity().getString(R.string.app_name));
+                composeEmail(new String[]{requireContext().getString(R.string.email_address_of_developer)}, "Feedback of " + requireContext().getString(R.string.app_name));
 
             }
         });
@@ -85,7 +85,7 @@ public class AboutFragment extends Fragment {
 
                 sharedPreferenceHelper.resetSharedPreferences();
 
-                Toast.makeText(getActivity(), "Settings Reset.....\nRestart App for changes to take effect.....", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Settings Reset.....\nRestart App for changes to take effect.....", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -97,7 +97,7 @@ public class AboutFragment extends Fragment {
 
                     final Calendar c = Calendar.getInstance();
 
-                    TimePickerDialog timePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    TimePickerDialog timePicker = new TimePickerDialog(requireContext(), new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
@@ -112,7 +112,7 @@ public class AboutFragment extends Fragment {
                             myAlarm(c);
 
                         }
-                    }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(getActivity()));
+                    }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(requireContext()));
                     timePicker.show();
 
                 } else {
@@ -120,9 +120,9 @@ public class AboutFragment extends Fragment {
 
                     sharedPreferenceHelper.setAlarmString("Alarm Not Set");
 
-                    Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                    Intent intent = new Intent(requireContext(), NotificationReceiver.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(ALARM_SERVICE);
 
                     if (alarmManager != null) {
                         alarmManager.cancel(pendingIntent);
@@ -137,9 +137,9 @@ public class AboutFragment extends Fragment {
 
         if (calendar.getTime().compareTo(new Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1);
 
-        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getActivity().getApplicationContext().getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(requireContext(), NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) requireContext().getApplicationContext().getSystemService(ALARM_SERVICE);
 
         if (alarmManager != null) {
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
@@ -162,7 +162,7 @@ public class AboutFragment extends Fragment {
         intent.putExtra(Intent.EXTRA_EMAIL, addresses);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
 //        intent.putExtra(Intent.EXTRA_STREAM, outputFile.getAbsolutePath());
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+        if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
             startActivity(intent);
         }
     }
