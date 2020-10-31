@@ -143,7 +143,7 @@ public class QuoteFragment extends Fragment {
                                 AsyncTask.execute(new Runnable() {
                                     @Override
                                     public void run() {
-                                        exportHelper.shareScreenshot(requireContext(), quoteText.getText().toString(), authorText.getText().toString());
+                                        exportHelper.shareScreenshot(requireContext(), new Quote(quoteText.getText().toString(), authorText.getText().toString()));
                                     }
                                 });
                             }

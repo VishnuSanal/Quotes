@@ -33,6 +33,7 @@
                 android:src="@drawable/ic_favorite"
                 app:layout_constraintEnd_toStartOf="@id/shareImageView"
                 app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorWhite"
                 tools:ignore="HardcodedText" />
 
             <ImageView
@@ -41,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="Quote Fragment Share Button"
                 android:src="@drawable/ic_share"
+                app:tint="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />

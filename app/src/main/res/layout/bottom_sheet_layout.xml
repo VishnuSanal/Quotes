@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
@@ -54,6 +55,7 @@
         android:background="@drawable/bottom_button_background"
         android:contentDescription="@string/favorites"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_favorite" />
+        android:src="@drawable/ic_favorite"
+        app:tint="@color/colorWhite" />
 
 </LinearLayout>

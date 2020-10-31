@@ -94,7 +94,7 @@ public class AddNewFragment extends Fragment {
 
                     sharedPreferenceHelper.setFavoriteArrayString(String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared)));
 
-                    Toast.makeText(requireContext(), "Added...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Quote Added to Favourites...", Toast.LENGTH_SHORT).show();
 
                     requireActivity().onBackPressed();
                 }

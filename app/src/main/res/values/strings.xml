@@ -15,5 +15,15 @@
     <string name="favorites">Favorites</string>
     <string name="font">Font</string>
 
-    <!--    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
+    <string name="home">Home</string>
+    <string name="share">Share Random Quote</string>
+
+    <!--
+    <string name="quotes_home">Quotes Home</string>
+    <string name="quotes_favorites">Quotes Favorites</string>
+    -->
+
+    <!--
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    -->
 </resources>

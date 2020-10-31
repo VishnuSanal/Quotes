@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:shortcutId="shortcut_home"
+        android:shortcutLongLabel="@string/home"
+        android:shortcutShortLabel="@string/home">
+
+        <intent
+            android:action="phone.vishnu.quotes.openMainActivity"
+            android:targetClass="phone.vishnu.quotes.activity.MainActivity"
+            android:targetPackage="phone.vishnu.quotes" />
+
+        <!--        <categories android:name="android.shortcut.conversation" />-->
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_favorite"
+        android:shortcutId="shortcut_fav"
+        android:shortcutLongLabel="@string/favorites"
+        android:shortcutShortLabel="@string/favorites">
+
+        <intent
+            android:action="phone.vishnu.quotes.openFavouriteFragment"
+            android:targetClass="phone.vishnu.quotes.activity.MainActivity"
+            android:targetPackage="phone.vishnu.quotes" />
+
+        <!--        <categories android:name="android.shortcut.conversation" />-->
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_share"
+        android:shortcutId="shortcut_share_random"
+        android:shortcutLongLabel="@string/share"
+        android:shortcutShortLabel="@string/share">
+
+        <intent
+            android:action="phone.vishnu.quotes.shareRandomQuote"
+            android:targetClass="phone.vishnu.quotes.activity.MainActivity"
+            android:targetPackage="phone.vishnu.quotes" />
+
+        <!--        <categories android:name="android.shortcut.conversation" />-->
+    </shortcut>
+</shortcuts>

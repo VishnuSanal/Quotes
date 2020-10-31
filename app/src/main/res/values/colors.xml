@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <!--<color name="colorBackground">#607D8B</color>-->
+    <color name="colorWhite">#FFFFFF</color>
+
     <color name="spacerColor">#BDBDBD</color>
 
     <color name="tourBackgroundColor">#F8BBD0</color>

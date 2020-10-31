@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.model.Quote;
 
 public class ExportHelper {
 
@@ -60,7 +61,10 @@ public class ExportHelper {
         return root.toString() + File.separator + ".Quotes_Background" + ".jpg";
     }
 
-    public void shareScreenshot(Context context, String quote, String author) {
+    public void shareScreenshot(Context context, Quote q) {
+
+        String quote = q.getQuote();
+        String author = q.getAuthor();
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 

@@ -67,7 +67,7 @@ public class FavoriteFragment extends Fragment {
                                     @Override
                                     public void run() {
                                         int position = Integer.parseInt(v.getTag().toString());
-                                        exportHelper.shareScreenshot(requireContext(), productFromShared.get(position).getQuote(), productFromShared.get(position).getAuthor());
+                                        exportHelper.shareScreenshot(requireContext(), productFromShared.get(position));
                                     }
                                 });
                             }

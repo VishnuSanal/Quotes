@@ -73,9 +73,9 @@ import phone.vishnu.quotes.receiver.NotificationReceiver;
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
 
     public static ProgressDialog bgDialog, fontDialog;
+    private final int PICK_IMAGE_ID = 36;
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ExportHelper exportHelper;
-    private final int PICK_IMAGE_ID = 36;
     private ConstraintLayout constraintLayout;
     private QuoteViewPagerAdapter adapter;
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         @Override
                         public void run() {
                             try {
-                                exportHelper.shareScreenshot(MainActivity.this, extras.getString("quote"), extras.getString("author"));
+                                exportHelper.shareScreenshot(MainActivity.this, new Quote(extras.getString("quote"), extras.getString("author")));
                             } catch (Exception e) {
                                 FirebaseCrashlytics.getInstance().recordException(e);
                                 e.printStackTrace();
@@ -116,6 +116,25 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
                     sharedPreferenceHelper.setFavoriteArrayString(String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared, extras.getString("quote"))));
                 }
+            }
+        }
+
+        if (null != getIntent() && null != getIntent().getAction()) {
+            if ("phone.vishnu.quotes.openMainActivity".equals(getIntent().getAction())) {
+
+                //Do Nothing
+
+            } else if ("phone.vishnu.quotes.openFavouriteFragment".equals(getIntent().getAction())) {
+
+                FavoriteFragment fragment = FavoriteFragment.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .add(R.id.constraintLayout, fragment)
+                        .addToBackStack(null)
+                        .commit();
+
+            } else if ("phone.vishnu.quotes.shareRandomQuote".equals(getIntent().getAction())) {
+                if (isNetworkAvailable()) shareRandomQuote();
             }
         }
 
@@ -441,6 +460,24 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     public void setConstraintLayoutBackground(Drawable drawable) {
         constraintLayout.setBackground(drawable);
+    }
+
+    private void shareRandomQuote() {
+
+        final ProgressDialog progressDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+        progressDialog.setCancelable(false);
+
+        new QuoteData().getQuotes(new QuoteListAsyncResponse() {
+            @Override
+            public void processFinished(ArrayList<Quote> quotes) {
+                Collections.shuffle(quotes);
+                Quote quote = quotes.get(0);
+
+                new ExportHelper(MainActivity.this).shareScreenshot(MainActivity.this, quote);
+                progressDialog.dismiss();
+            }
+        });
+
     }
 
     /*private AdSize getAdSize() {

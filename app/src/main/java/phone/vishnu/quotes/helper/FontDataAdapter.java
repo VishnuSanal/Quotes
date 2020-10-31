@@ -58,6 +58,7 @@ public class FontDataAdapter extends ArrayAdapter<String> {
         } else {
             viewHolder = (FontDataAdapter.ViewHolder) rootView.getTag();
         }
+
         viewHolder.fontTV.setText(objects.get(position));
 
         String fontString = objects.get(position).toLowerCase() + ".ttf";
@@ -72,14 +73,17 @@ public class FontDataAdapter extends ArrayAdapter<String> {
 
             Typeface face = Typeface.createFromFile(f);
             viewHolder.fontTV.setTypeface(face);
+
         } else {
-            if (!localFile.exists()) localFile.mkdirs();
+            if (!localFile.exists())
+                localFile.mkdirs();
 
             storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     Typeface face = Typeface.createFromFile(f);
                     viewHolder.fontTV.setTypeface(face);
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
