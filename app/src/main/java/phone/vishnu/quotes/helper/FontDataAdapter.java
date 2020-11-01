@@ -104,7 +104,6 @@ public class FontDataAdapter extends ArrayAdapter<String> {
         return rootView;
     }
 
-
     static class ViewHolder {
         TextView fontTV;
         ProgressBar progressBar;

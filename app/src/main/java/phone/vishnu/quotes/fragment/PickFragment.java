@@ -61,7 +61,7 @@ public class PickFragment extends Fragment {
                         @Override
                         public void onSuccess(Uri uri) {
                             list.add(uri);
-                            if (adapter != null) {
+                            if (adapter != null && getContext() != null) {
                                 adapter = new RecyclerViewAdapter(requireContext(), list);
                                 recyclerView.setAdapter(adapter);
 
@@ -81,7 +81,6 @@ public class PickFragment extends Fragment {
                         }
                     });
                 }
-
             }
         });
     }

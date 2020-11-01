@@ -71,7 +71,7 @@ public class FontFragment extends Fragment {
             fontList = gson.fromJson(fontArrayListString, type);
 
 //            progressBar.setVisibility(View.GONE);
-            if (getActivity() != null)
+            if (getContext() != null)
                 if (fontDataAdapter == null) {
                     fontDataAdapter = new FontDataAdapter(Objects.requireNonNull(requireContext()), fontList);
                     listView.setAdapter(fontDataAdapter);
@@ -104,7 +104,7 @@ public class FontFragment extends Fragment {
 
                 sharedPreferenceHelper.setFontArrayString(gson.toJson(fontList));
 
-                if (getActivity() != null)
+                if (getContext() != null)
                     if (fontDataAdapter == null) {
                         fontDataAdapter = new FontDataAdapter(Objects.requireNonNull(requireContext()), fontList);
                         listView.setAdapter(fontDataAdapter);
