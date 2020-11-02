@@ -57,13 +57,13 @@ public class QuoteFragment extends Fragment {
     public QuoteFragment() {
     }
 
-    public static QuoteFragment newInstance(String quote, String author) {
+    public static QuoteFragment newInstance(Quote quote) {
 
         QuoteFragment fragment = new QuoteFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putString("quote", quote);
-        bundle.putString("author", author);
+        bundle.putString("quote", quote.getQuote());
+        bundle.putString("author", quote.getAuthor());
         fragment.setArguments(bundle);
 
         return fragment;
@@ -86,8 +86,14 @@ public class QuoteFragment extends Fragment {
         String fontPath = sharedPreferenceHelper.getFontPath();
 
         if ((!fontPath.equals("-1")) && (new File(fontPath).exists())) {
-            Typeface face = Typeface.createFromFile(fontPath);
-            quoteText.setTypeface(face);
+            try {
+                Typeface face = Typeface.createFromFile(fontPath);
+                quoteText.setTypeface(face);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Font file not found", Toast.LENGTH_SHORT).show();
+                FirebaseCrashlytics.getInstance().recordException(e);
+                e.printStackTrace();
+            }
         } else {
             if ((!fontPath.equals("-1")))
                 if (!new File(fontPath).exists())

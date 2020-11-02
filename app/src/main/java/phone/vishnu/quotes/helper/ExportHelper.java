@@ -81,8 +81,13 @@ public class ExportHelper {
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
 
         if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
-            Typeface face = Typeface.createFromFile(fontPath);
-            ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTypeface(face);
+            try {
+                Typeface face = Typeface.createFromFile(fontPath);
+                ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTypeface(face);
+            } catch (Exception e) {
+                FirebaseCrashlytics.getInstance().recordException(e);
+                e.printStackTrace();
+            }
         }
 
         ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setText(quote);

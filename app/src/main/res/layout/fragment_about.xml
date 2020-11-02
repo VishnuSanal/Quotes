@@ -15,6 +15,7 @@
             android:id="@+id/aboutSampleIconImageView"
             android:layout_width="match_parent"
             android:layout_height="36dp"
+            android:elevation="12dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorAccent"
             android:contentDescription="About Screen Info Logo"

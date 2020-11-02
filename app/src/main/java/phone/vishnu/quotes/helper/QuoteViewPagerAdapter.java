@@ -6,23 +6,26 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-public class QuoteViewPagerAdapter extends FragmentPagerAdapter {
-    private final List<Fragment> fragments;
+import phone.vishnu.quotes.fragment.QuoteFragment;
+import phone.vishnu.quotes.model.Quote;
 
-    public QuoteViewPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+public class QuoteViewPagerAdapter extends FragmentPagerAdapter {
+    private final List<Quote> quoteList;
+
+    public QuoteViewPagerAdapter(FragmentManager fm, List<Quote> fragmentList) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        fragments = fragmentList;
+        quoteList = fragmentList;
     }
 
     @androidx.annotation.NonNull
     @Override
     public Fragment getItem(int position) {
-        return fragments.get(position);
+        return QuoteFragment.newInstance(quoteList.get(position));
     }
 
     @Override
     public int getCount() {
-        return fragments.size();
+        return quoteList.size();
     }
 
     @Override

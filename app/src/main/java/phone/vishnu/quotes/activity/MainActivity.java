@@ -25,7 +25,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
@@ -52,7 +51,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.data.QuoteData;
@@ -63,7 +61,6 @@ import phone.vishnu.quotes.fragment.ColorFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
-import phone.vishnu.quotes.fragment.QuoteFragment;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
@@ -206,13 +203,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             }
         });
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getFragments());
-                ((ViewPager) findViewById(R.id.viewPager)).setAdapter(adapter);
-            }
-        });
+        adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getQuotes());
+        ((ViewPager) findViewById(R.id.viewPager)).setAdapter(adapter);
 
         String s = sharedPreferenceHelper.getAlarmString();
 
@@ -220,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         if ("At 08:30 Daily".equals(s)) {
             myAlarm();
         }
+
     }
 
     private void myAlarm() {
@@ -241,24 +234,17 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         }
     }
 
-    private List<Fragment> getFragments() {
-
-        final List<Fragment> fragments = new ArrayList<>();
+    private ArrayList<Quote> getQuotes() {
+        final ArrayList<Quote> quoteArrayList = new ArrayList<>();
         new QuoteData().getQuotes(new QuoteListAsyncResponse() {
             @Override
             public void processFinished(ArrayList<Quote> quotes) {
-
                 Collections.shuffle(quotes);
-
-                for (int i = 0; i < quotes.size(); i++) {
-                    QuoteFragment quoteFragment = QuoteFragment.newInstance(quotes.get(i).getQuote(), quotes.get(i).getAuthor());
-                    fragments.add(quoteFragment);
-                }
-
-                adapter.notifyDataSetChanged();
+                quoteArrayList.addAll(quotes);
+                notifyViewPagerDataSetChanged();
             }
         });
-        return fragments;
+        return quoteArrayList;
     }
 
     @Override

@@ -41,7 +41,7 @@ public class PickFragment extends Fragment {
     }
 
     private void setUpRecyclerView(View inflate) {
-        recyclerView = inflate.findViewById(R.id.my_recycler_view);
+        recyclerView = inflate.findViewById(R.id.imagePickRecyclerView);
         adapter = new RecyclerViewAdapter(requireContext());
         recyclerView.setAdapter(adapter);
 

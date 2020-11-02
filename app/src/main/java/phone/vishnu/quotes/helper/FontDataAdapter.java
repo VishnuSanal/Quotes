@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -39,7 +40,7 @@ public class FontDataAdapter extends ArrayAdapter<String> {
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, final View convertView, @NonNull ViewGroup parent) {
 
         View rootView = convertView;
         final FontDataAdapter.ViewHolder viewHolder;
@@ -68,38 +69,61 @@ public class FontDataAdapter extends ArrayAdapter<String> {
 
         final File f = new File(localFile + File.separator + "." + fontString);
 
+//        Log.e("vishnu", "getView() -> f: [" + f + "]  ");
+
         if (f.exists()) {
+
+//            Log.e("vishnu", "getView() -> f: [" + f + "] exists ");
+
             viewHolder.progressBar.setProgress(100);
 
-            Typeface face = Typeface.createFromFile(f);
-            viewHolder.fontTV.setTypeface(face);
-
+            try {
+                Typeface face = Typeface.createFromFile(f);
+                viewHolder.fontTV.setTypeface(face);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Something Went Wrong...", Toast.LENGTH_SHORT).show();
+                FirebaseCrashlytics.getInstance().recordException(e);
+                e.printStackTrace();
+            }
         } else {
             if (!localFile.exists())
                 localFile.mkdirs();
 
+//            Log.e("vishnu", "getView() -> f: [" + f + "] do not exist ");
+
+            //FIXME:
+            //if (!storageReference.getActiveDownloadTasks().contains(storageReference.getFile(f)))
             storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Typeface face = Typeface.createFromFile(f);
-                    viewHolder.fontTV.setTypeface(face);
+//                    Log.e("vishnu", "getView() -> f: [" + f + "] download completed");
+
+                    try {
+                        Typeface face = Typeface.createFromFile(f);
+                        viewHolder.fontTV.setTypeface(face);
+                    } catch (Exception e) {
+                        Toast.makeText(getContext(), "Something Went Wrong...", Toast.LENGTH_SHORT).show();
+                        FirebaseCrashlytics.getInstance().recordException(e);
+                        e.printStackTrace();
+                    }
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
+//                    Log.e("vishnu", "getView() -> f: [" + f + "] download failed");
                     FirebaseCrashlytics.getInstance().recordException(exception);
                     exception.printStackTrace();
                 }
             }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(@NonNull FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                    Log.e("vishnu", "getView() -> f: [" + f + "]" + "  Progress" + (int) ((100.0 * taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount())));
                     viewHolder.progressBar.setProgress(
                             (int) ((100.0 * taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount()))
                     );
                 }
             });
-
         }
         return rootView;
     }
