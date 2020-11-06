@@ -38,7 +38,7 @@
  - 🆕Custom Quotes – Add your own Quotes
  - 🔔Customizable Daily Notification – Choose the Time for Daily Notifications to suit your needs
  - 🕶Dark Mode - Includes Dark Mode experience
- - 🤗Completely Open Source – Quotes Status Creator App is Completely Open Source
+ - 👨‍💻Completely Open Source – Quotes Status Creator App is Completely Open Source
 
 ## Screenshots
 
@@ -60,4 +60,4 @@
 
 ## 🤩Feedback and Suggestion
 
-We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear you. Email your suggestions/feedback to us.
+We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Email your suggestions/feedback to us.
