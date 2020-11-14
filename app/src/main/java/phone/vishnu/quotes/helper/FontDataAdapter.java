@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,82 +48,69 @@ public class FontDataAdapter extends ArrayAdapter<String> {
             viewHolder = new FontDataAdapter.ViewHolder();
             rootView = inflater.inflate(R.layout.font_single_item, parent, false);
 
-            rootView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
             viewHolder.fontTV = rootView.findViewById(R.id.quoteTextFontSingleItem);
             viewHolder.progressBar = rootView.findViewById(R.id.singleItemFontProgressBar);
 
             rootView.setTag(viewHolder);
 
+            String fontString = objects.get(position).toLowerCase() + ".ttf";
+
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
+            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+
+            final File f = new File(localFile + File.separator + "." + fontString);
+
+            if (f.exists()) {
+
+                viewHolder.progressBar.setProgress(100);
+
+                try {
+                    Typeface face = Typeface.createFromFile(f);
+                    viewHolder.fontTV.setTypeface(face);
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Something Went Wrong...", Toast.LENGTH_SHORT).show();
+                    FirebaseCrashlytics.getInstance().recordException(e);
+                    e.printStackTrace();
+                }
+            } else {
+                if (!localFile.exists())
+                    localFile.mkdirs();
+
+                storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        try {
+                            Typeface face = Typeface.createFromFile(f);
+                            viewHolder.fontTV.setTypeface(face);
+                        } catch (Exception e) {
+                            Toast.makeText(getContext(), "Something Went Wrong...", Toast.LENGTH_SHORT).show();
+                            FirebaseCrashlytics.getInstance().recordException(e);
+                            e.printStackTrace();
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        FirebaseCrashlytics.getInstance().recordException(exception);
+                        exception.printStackTrace();
+                    }
+                }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        viewHolder.progressBar.setProgress(
+                                (int) ((100.0 * taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount()))
+                        );
+                    }
+                });
+            }
         } else {
             viewHolder = (FontDataAdapter.ViewHolder) rootView.getTag();
         }
 
         viewHolder.fontTV.setText(objects.get(position));
 
-        String fontString = objects.get(position).toLowerCase() + ".ttf";
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
-        final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-
-        final File f = new File(localFile + File.separator + "." + fontString);
-
-//        Log.e("vishnu", "getView() -> f: [" + f + "]  ");
-
-        if (f.exists()) {
-
-//            Log.e("vishnu", "getView() -> f: [" + f + "] exists ");
-
-            viewHolder.progressBar.setProgress(100);
-
-            try {
-                Typeface face = Typeface.createFromFile(f);
-                viewHolder.fontTV.setTypeface(face);
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Something Went Wrong...", Toast.LENGTH_SHORT).show();
-                FirebaseCrashlytics.getInstance().recordException(e);
-                e.printStackTrace();
-            }
-        } else {
-            if (!localFile.exists())
-                localFile.mkdirs();
-
-//            Log.e("vishnu", "getView() -> f: [" + f + "] do not exist ");
-
-            //FIXME:
-            //if (!storageReference.getActiveDownloadTasks().contains(storageReference.getFile(f)))
-            storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                    Log.e("vishnu", "getView() -> f: [" + f + "] download completed");
-
-                    try {
-                        Typeface face = Typeface.createFromFile(f);
-                        viewHolder.fontTV.setTypeface(face);
-                    } catch (Exception e) {
-                        Toast.makeText(getContext(), "Something Went Wrong...", Toast.LENGTH_SHORT).show();
-                        FirebaseCrashlytics.getInstance().recordException(e);
-                        e.printStackTrace();
-                    }
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-//                    Log.e("vishnu", "getView() -> f: [" + f + "] download failed");
-                    FirebaseCrashlytics.getInstance().recordException(exception);
-                    exception.printStackTrace();
-                }
-            }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(@NonNull FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                    Log.e("vishnu", "getView() -> f: [" + f + "]" + "  Progress" + (int) ((100.0 * taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount())));
-                    viewHolder.progressBar.setProgress(
-                            (int) ((100.0 * taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount()))
-                    );
-                }
-            });
-        }
         return rootView;
     }
 

@@ -10,7 +10,7 @@ import phone.vishnu.quotes.fragment.QuoteFragment;
 import phone.vishnu.quotes.model.Quote;
 
 public class QuoteViewPagerAdapter extends FragmentPagerAdapter {
-    private final List<Quote> quoteList;
+    private List<Quote> quoteList;
 
     public QuoteViewPagerAdapter(FragmentManager fm, List<Quote> fragmentList) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -31,5 +31,9 @@ public class QuoteViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getItemPosition(@androidx.annotation.NonNull Object object) {
         return POSITION_NONE;
+    }
+
+    public void setQuoteList(List<Quote> quoteList) {
+        this.quoteList = quoteList;
     }
 }

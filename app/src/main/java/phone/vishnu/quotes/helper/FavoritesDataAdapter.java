@@ -42,7 +42,7 @@ public class FavoritesDataAdapter extends ArrayAdapter<Quote> {
 
         if (rootView == null) {
             viewHolder = new ViewHolder();
-            rootView = inflater.inflate(R.layout.favourite_single_item, parent, false);
+            rootView = inflater.inflate(R.layout.favorite_single_item, parent, false);
 
             viewHolder.quoteTV = rootView.findViewById(R.id.quoteTextSingleItem);
             viewHolder.authorTV = rootView.findViewById(R.id.authorTextSingleItem);
