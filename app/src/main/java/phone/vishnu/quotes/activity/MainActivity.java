@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -51,6 +53,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.data.QuoteData;
@@ -73,8 +76,13 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     private final int PICK_IMAGE_ID = 36;
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ExportHelper exportHelper;
-    private ConstraintLayout constraintLayout;
+
     private QuoteViewPagerAdapter adapter;
+    private List<Quote> allQuotesList;
+
+    private ConstraintLayout constraintLayout;
+    private ViewPager viewPager;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -137,6 +145,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         setContentView(R.layout.activity_main);
         constraintLayout = findViewById(R.id.constraintLayout);
+        viewPager = findViewById(R.id.viewPager);
+        allQuotesList = getQuotes();
 
         /*MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -203,8 +213,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             }
         });
 
-        adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getQuotes());
-        ((ViewPager) findViewById(R.id.viewPager)).setAdapter(adapter);
+//        viewPager.setSaveFromParentEnabled(false);
+//        viewPager.setSaveEnabled(false);
+        adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), allQuotesList);
+        viewPager.setAdapter(adapter);
 
         String s = sharedPreferenceHelper.getAlarmString();
 
@@ -213,6 +225,51 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             myAlarm();
         }
 
+        searchView = findViewById(R.id.homeSearchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
+
+    private Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                ArrayList<Quote> filteredResults = new ArrayList<>();
+
+                if (constraint.toString().isEmpty())
+                    filteredResults.addAll(allQuotesList);
+                else
+                    for (Quote quote : allQuotesList) {
+                        if (quote.getQuote().toLowerCase().contains(constraint.toString().toLowerCase())
+                                || quote.getAuthor().toLowerCase().contains(constraint.toString().toLowerCase()))
+                            filteredResults.add(quote);
+                    }
+
+                FilterResults filterResult = new FilterResults();
+                filterResult.values = filteredResults;
+
+                return filterResult;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                //noinspection unchecked
+                adapter.setQuoteList((List<Quote>) results.values);
+                adapter.notifyDataSetChanged();
+                viewPager.setCurrentItem(0);
+            }
+        };
     }
 
     private void myAlarm() {
@@ -267,8 +324,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 sharedPreferenceHelper.setBackgroundPath(file);
             }
         } else Toast.makeText(this, "Error...", Toast.LENGTH_SHORT).show();
-
-
     }
 
     @Override
@@ -317,6 +372,15 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             fontDialog.setCancelable(false);
             getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontFragment.newInstance()).addToBackStack(null).commit();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!searchView.isIconified()) {
+            searchView.setIconified(true);
+            viewPager.requestFocus();
+        } else
+            super.onBackPressed();
     }
 
     private void showPermissionDeniedDialog() {
