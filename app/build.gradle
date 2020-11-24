@@ -11,8 +11,8 @@ android {
         applicationId "phone.vishnu.quotes"
         minSdkVersion 22
         targetSdkVersion 30
-        versionCode 16
-        versionName "1.8.0"
+        versionCode 17
+        versionName "1.9.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -38,9 +38,11 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.google.firebase:firebase-analytics:18.0.0'
-    implementation 'com.google.firebase:firebase-crashlytics:17.2.2'
+    implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
     implementation 'com.google.firebase:firebase-storage:19.2.0'
 //    implementation 'com.google.firebase:firebase-ads:19.1.0'
+
+    implementation 'com.google.android.play:core:1.8.3'
 
     implementation 'com.dubsmash.volley:library:2.0.1'
     implementation 'com.google.code.gson:gson:2.8.6'

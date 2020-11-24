@@ -24,8 +24,6 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -33,23 +31,19 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.helper.ExportHelper;
+import phone.vishnu.quotes.helper.FavUtils;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 
 public class QuoteFragment extends Fragment {
 
-    private SharedPreferenceHelper sharedPreferenceHelper;
+    private Quote quote;
+    private FavUtils favUtils;
     private ExportHelper exportHelper;
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
@@ -79,7 +73,8 @@ public class QuoteFragment extends Fragment {
         shareIcon = quoteView.findViewById(R.id.shareImageView);
         favIcon = quoteView.findViewById(R.id.favoriteImageView);
 
-        sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+        SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+        favUtils = new FavUtils(requireContext());
         exportHelper = new ExportHelper(requireContext());
 
         String hexColor = sharedPreferenceHelper.getColorPreference();
@@ -103,30 +98,23 @@ public class QuoteFragment extends Fragment {
         ((CardView) quoteView.findViewById(R.id.cardView)).setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
 
-        final String quote = getArguments().getString("quote");
-        String author = getArguments().getString("author");
+        quote = new Quote(
+                Objects.requireNonNull(getArguments()).getString("quote"),
+                Objects.requireNonNull(getArguments()).getString("author")
+        );
 
-        quoteText.setText(quote);
-        authorText.setText(String.format("-%s", author));
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Gson gson = new Gson();
-                    String jsonSaved = sharedPreferenceHelper.getFavoriteArrayString();
-                    Type type = new TypeToken<ArrayList<Quote>>() {
-                    }.getType();
-                    ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
-                    for (Quote tempQuote : productFromShared) {
-                        if (Objects.equals(quote, tempQuote.getQuote()))
-                            favIcon.setColorFilter(Color.RED);
-                    }
-                } catch (Exception e) {
-                    FirebaseCrashlytics.getInstance().recordException(e);
-                    e.printStackTrace();
-                }
-            }
-        });
+        quoteText.setText(quote.getQuote());
+        authorText.setText(String.format("-%s", quote.getAuthor()));
+
+        try {
+            if (favUtils.isPresent(quote))
+                favIcon.setColorFilter(Color.RED);
+        } catch (Exception e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+            e.printStackTrace();
+        }
+
+
         return quoteView;
     }
 
@@ -176,19 +164,11 @@ public class QuoteFragment extends Fragment {
                 final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
                 favIcon.startAnimation(shake);
 
-                Gson gson = new Gson();
-                String jsonSaved = sharedPreferenceHelper.getFavoriteArrayString();
-                String jsonNewProductToAdd = gson.toJson(new Quote(quoteText.getText().toString(), authorText.getText().toString()));
-
-                Type type = new TypeToken<ArrayList<Quote>>() {
-                }.getType();
-                ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
-
-                sharedPreferenceHelper.setFavoriteArrayString(String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared)));
-
+                if (!favUtils.newFavorite(quote))
+                    favIcon.setColorFilter(Color.RED);
+                else
+                    favIcon.setColorFilter(Color.WHITE);
             }
-
-
         });
     }
 
@@ -217,64 +197,5 @@ public class QuoteFragment extends Fragment {
         });
         builder.show();
 
-    }
-
-    private JSONArray addFavorite(String jsonSaved, String jsonNewProductToAdd, ArrayList<Quote> productFromShared) {
-        JSONArray jsonArrayProduct = new JSONArray();
-        try {
-            if (jsonSaved.length() != 0) {
-                if (!isPresent(productFromShared)) {
-                    jsonArrayProduct = new JSONArray(jsonSaved);
-                    jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
-                    favIcon.setColorFilter(Color.RED);
-                } else {
-                    favIcon.setColorFilter(Color.WHITE);
-                    jsonArrayProduct = removeFavorite(jsonSaved, productFromShared, quoteText.getText().toString());
-                }
-            } else {
-                productFromShared = new ArrayList<>();
-//                addFavorite(jsonSaved,jsonNewProductToAdd,productFromShared);
-            }
-        } catch (JSONException e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-            e.printStackTrace();
-        }
-        return jsonArrayProduct;
-    }
-
-    private boolean isPresent(ArrayList<Quote> productFromShared) {
-        boolean isPresent = false;
-        for (int i = 0; i < productFromShared.size(); i++) {
-            if (productFromShared.get(i).getQuote().trim().toLowerCase().equals(quoteText.getText().toString().trim().toLowerCase())) {
-                isPresent = true;
-            }
-        }
-        return isPresent;
-    }
-
-    private JSONArray removeFavorite(String jsonSaved, ArrayList<Quote> jsonList, String jsonProductToRemove) {
-
-        JSONArray jsonArrayProduct = new JSONArray();
-        try {
-            jsonArrayProduct = new JSONArray(jsonSaved);
-            jsonArrayProduct.remove(getIndex(jsonList, jsonProductToRemove));
-        } catch (JSONException e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-            e.printStackTrace();
-        }
-        return jsonArrayProduct;
-    }
-
-    private int getIndex(ArrayList<Quote> quoteList, String productToRemove) {
-
-        int index = 0;
-        for (int i = 0; i < quoteList.size(); i++) {
-
-            if (productToRemove.toLowerCase().equals(quoteList.get(i).getQuote().toLowerCase())) {
-                index = i;
-                break;
-            }
-        }
-        return index;
     }
 }

@@ -12,24 +12,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.util.Objects;
 
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.helper.SharedPreferenceHelper;
+import phone.vishnu.quotes.helper.FavUtils;
 import phone.vishnu.quotes.model.Quote;
 
 public class AddNewFragment extends Fragment {
 
-    private SharedPreferenceHelper sharedPreferenceHelper;
     private TextInputEditText quoteTIE, authorTIE;
     private Button saveButton, cancelButton;
 
@@ -50,8 +41,6 @@ public class AddNewFragment extends Fragment {
         saveButton = inflate.findViewById(R.id.buttonAdd);
         cancelButton = inflate.findViewById(R.id.buttonCancel);
 
-        sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
-
         return inflate;
     }
 
@@ -70,8 +59,8 @@ public class AddNewFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String quote = quoteTIE.getText().toString().trim();
-                String author = authorTIE.getText().toString().trim();
+                String quote = Objects.requireNonNull(quoteTIE.getText()).toString().trim();
+                String author = Objects.requireNonNull(authorTIE.getText()).toString().trim();
 
                 if (quote.isEmpty() || author.isEmpty()) {
                     if (quote.isEmpty()) {
@@ -82,17 +71,7 @@ public class AddNewFragment extends Fragment {
                         authorTIE.requestFocus();
                     }
                 } else {
-
-
-                    Gson gson = new Gson();
-                    String jsonSaved = sharedPreferenceHelper.getFavoriteArrayString();
-                    String jsonNewProductToAdd = gson.toJson(new Quote(quote, author));
-
-                    Type type = new TypeToken<ArrayList<Quote>>() {
-                    }.getType();
-                    ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
-
-                    sharedPreferenceHelper.setFavoriteArrayString(String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared)));
+                    new FavUtils(requireContext()).addFavorite(new Quote(quote, author));
 
                     Toast.makeText(requireContext(), "Quote Added to Favourites...", Toast.LENGTH_SHORT).show();
 
@@ -100,21 +79,5 @@ public class AddNewFragment extends Fragment {
                 }
             }
         });
-    }
-
-    private JSONArray addFavorite(String jsonSaved, String jsonNewProductToAdd, ArrayList<Quote> productFromShared) {
-        JSONArray jsonArrayProduct = new JSONArray();
-        try {
-            if (jsonSaved.length() != 0) {
-                jsonArrayProduct = new JSONArray(jsonSaved);
-                jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
-            } else {
-                productFromShared = new ArrayList<>();
-            }
-        } catch (JSONException e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-            e.printStackTrace();
-        }
-        return jsonArrayProduct;
     }
 }

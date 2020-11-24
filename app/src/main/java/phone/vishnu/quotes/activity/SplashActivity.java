@@ -39,9 +39,11 @@ public class SplashActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
+        sharedPreferenceHelper.incrementRunCount();
+        sharedPreferenceHelper.installedNow();
 
+        //if (true)
         if (sharedPreferenceHelper.isFirstRun())
-//        if (true)
             showNewTour();
         else
             initTasks();

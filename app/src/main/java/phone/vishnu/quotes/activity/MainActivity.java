@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -31,9 +32,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.tasks.OnCompleteListener;
+import com.google.android.play.core.tasks.Task;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -42,12 +46,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.yalantis.ucrop.UCrop;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -65,6 +64,7 @@ import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.helper.ExportHelper;
+import phone.vishnu.quotes.helper.FavUtils;
 import phone.vishnu.quotes.helper.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     private ConstraintLayout constraintLayout;
     private ViewPager viewPager;
     private SearchView searchView;
+
+    private ReviewInfo reviewInfo;
+    private ReviewManager manager;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -109,23 +112,16 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         }
                     });
                 } else if (extras.getBoolean("FavButton")) {
-
-
-                    Gson gson = new Gson();
-                    String jsonSaved = sharedPreferenceHelper.getFavoriteArrayString();
-                    String jsonNewProductToAdd = gson.toJson(new Quote(extras.getString("quote"), extras.getString("author")));
-
-                    Type type = new TypeToken<ArrayList<Quote>>() {
-                    }.getType();
-                    ArrayList<Quote> productFromShared = gson.fromJson(jsonSaved, type);
-
-                    sharedPreferenceHelper.setFavoriteArrayString(String.valueOf(addFavorite(jsonSaved, jsonNewProductToAdd, productFromShared, extras.getString("quote"))));
+                    addFavourite(
+                            this,
+                            new Quote(extras.getString("quote"), extras.getString("author")));
                 }
             }
         }
 
         if (null != getIntent() && null != getIntent().getAction()) {
             //Shortcut
+            //noinspection StatementWithEmptyBody
             if ("phone.vishnu.quotes.openMainActivity".equals(getIntent().getAction())) {
 
                 //Do Nothing
@@ -151,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             } else if ("phone.vishnu.quotes.widgetFavClicked".equals(getIntent().getAction())) {
                 Quote q = (sharedPreferenceHelper.getWidgetQuote());
                 if (q != null) {
-                    //TODO: Add Favorite
+                    addFavourite(this, q);
                 }
             }
         }
@@ -181,6 +177,9 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 adView.loadAd(adRequest);
             }
         });*/
+
+        initReviewInfo(this);
+        launchReview(this);
 
         if (!isNetworkAvailable())
             Toast.makeText(this, "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
@@ -489,32 +488,15 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         return adapter;
     }
 
-    private JSONArray addFavorite(String jsonSaved, String jsonNewProductToAdd, ArrayList<Quote> productFromShared, String quote) {
-        JSONArray jsonArrayProduct = new JSONArray();
-        try {
-            if (jsonSaved.length() != 0) {
-                if (!isPresent(productFromShared, quote)) {
-                    jsonArrayProduct = new JSONArray(jsonSaved);
-                    jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
-                }
-            } else {
-                productFromShared = new ArrayList<>();
-            }
-        } catch (JSONException e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-            e.printStackTrace();
-        }
-        return jsonArrayProduct;
-    }
+    private void addFavourite(Context context, Quote quote) {
+        FavUtils favUtils = new FavUtils(context);
 
-    private boolean isPresent(ArrayList<Quote> productFromShared, String quote) {
-        boolean isPresent = false;
-        for (int i = 0; i < productFromShared.size(); i++) {
-            if (productFromShared.get(i).getQuote().trim().toLowerCase().equals(quote.trim().toLowerCase())) {
-                isPresent = true;
-            }
+        if (favUtils.isPresent(quote)) {
+            Toast.makeText(this, "Already Present in Favourites", Toast.LENGTH_SHORT).show();
+        } else {
+            favUtils.addFavorite(quote);
+            Toast.makeText(this, "Added to Favourites", Toast.LENGTH_SHORT).show();
         }
-        return isPresent;
     }
 
     public void notifyViewPagerDataSetChanged() {
@@ -546,6 +528,41 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             }
         });
 
+    }
+
+    private void initReviewInfo(Context context) {
+//        manager = new FakeReviewManager(context);
+
+        manager = ReviewManagerFactory.create(context);
+
+        Task<ReviewInfo> request = manager.requestReviewFlow();
+        request.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
+            @Override
+            public void onComplete(Task<ReviewInfo> task) {
+                if (task.isSuccessful()) {
+                    // We can get the ReviewInfo object
+                    reviewInfo = task.getResult();
+                } else {
+                    Log.e("vishnu", "onComplete: ", task.getException());
+                    FirebaseCrashlytics.getInstance().recordException(task.getException());
+                }
+            }
+        });
+    }
+
+    private void launchReview(MainActivity activity) {
+        if (sharedPreferenceHelper.getRunCount() > 10 &&
+                sharedPreferenceHelper.getInstalledDaysCount() > 5 &&
+                sharedPreferenceHelper.getReviewShownDaysCount() > 10) {
+
+            Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
+            flow.addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(Task<Void> task) {
+                    sharedPreferenceHelper.reviewShownNow();
+                }
+            });
+        }
     }
 
     /*private AdSize getAdSize() {

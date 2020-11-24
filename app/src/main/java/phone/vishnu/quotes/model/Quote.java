@@ -1,5 +1,7 @@
 package phone.vishnu.quotes.model;
 
+import java.util.Objects;
+
 public class Quote {
 
     private String quote;
@@ -27,5 +29,15 @@ public class Quote {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if ((o instanceof Quote)) {
+            Quote quote1 = (Quote) o;
+            return Objects.equals(quote, quote1.quote) &&
+                    Objects.equals(author, quote1.author);
+        }
+        return false;
     }
 }

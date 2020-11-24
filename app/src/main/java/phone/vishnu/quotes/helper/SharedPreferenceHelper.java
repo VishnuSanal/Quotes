@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.Nullable;
 
+import java.util.concurrent.TimeUnit;
+
 import phone.vishnu.quotes.model.Quote;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -12,6 +14,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class SharedPreferenceHelper {
 
     private final String FIRST_RUN_BOOLEAN = "firstRunBoolean";
+    private final String RUN_COUNT_INT = "runCountInt";
+    private final String INSTALLED_ON_STRING = "installedOnString";
+    private final String REVIEW_SHOWN_STRING = "reviewShownString";
 
     private final String FAV_ARRAY_STRING = "favoriteArrayString";
     private final String FONT_ARRAY_STRING = "fontArrayString";
@@ -40,7 +45,7 @@ public class SharedPreferenceHelper {
     }
 
     public String getFavoriteArrayString() {
-        return sharedPreferences.getString(FAV_ARRAY_STRING, "");
+        return sharedPreferences.getString(FAV_ARRAY_STRING, null);
     }
 
     public void setFavoriteArrayString(String favoriteArrayString) {
@@ -110,6 +115,53 @@ public class SharedPreferenceHelper {
         }
     }
 
+    public int getRunCount() {
+        return sharedPreferences.getInt(RUN_COUNT_INT, 0);
+    }
+
+    public void incrementRunCount() {
+        int runCount = getRunCount();
+        sharedPreferences.edit().putInt(RUN_COUNT_INT, ++runCount).apply();
+    }
+
+    public void installedNow() {
+        if (getInstalledOn() == null)
+            sharedPreferences.edit().putString(INSTALLED_ON_STRING, String.valueOf(System.currentTimeMillis())).apply();
+    }
+
+    @Nullable
+    private String getInstalledOn() {
+        return sharedPreferences.getString(INSTALLED_ON_STRING, null);
+    }
+
+    public long getInstalledDaysCount() {
+        if (getInstalledOn() != null) {
+
+            long diff = System.currentTimeMillis() - Long.parseLong(getInstalledOn().trim());
+
+            return TimeUnit.MILLISECONDS.toDays(diff);
+        } else return 0;
+    }
+
+    public void reviewShownNow() {
+        sharedPreferences.edit().putString(REVIEW_SHOWN_STRING, String.valueOf(System.currentTimeMillis())).apply();
+    }
+
+    @Nullable
+    private String getReviewShownOn() {
+        return sharedPreferences.getString(REVIEW_SHOWN_STRING, null);
+    }
+
+    public long getReviewShownDaysCount() {
+        if (getReviewShownOn() != null) {
+
+            long diff = System.currentTimeMillis() - Long.parseLong(getReviewShownOn().trim());
+
+            return TimeUnit.MILLISECONDS.toDays(diff);
+        } else
+            return 0;
+    }
+
     private String getWidgetQuoteString() {
         return sharedPreferences.getString(WIDGET_QUOTE_STRING, null);
     }
@@ -132,7 +184,7 @@ public class SharedPreferenceHelper {
         setAlarmString("At 08:30 Daily");
         setFontPath("-1");
         setFontArrayString(null);
-        setFavoriteArrayString("");
+        setFavoriteArrayString(null);
         setFirstRunBoolean(true);
     }
 }
