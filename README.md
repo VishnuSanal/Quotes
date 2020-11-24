@@ -40,6 +40,13 @@
  - 🕶Dark Mode - Includes Dark Mode experience
  - 👨‍💻Completely Open Source – Quotes Status Creator App is Completely Open Source
 
+## 📑Libraries Used - Thanks TO
+ - [Volley](https://github.com/google/volley)
+ - [Gson](https://github.com/google/gson)
+ - [Picasso](https://square.github.io/picasso/)
+ - [uCrop](https://github.com/Yalantis/uCrop)
+ - [Dexter](https://github.com/Karumi/Dexter)
+
 ## Screenshots
 
 ![Home](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home.png) 
