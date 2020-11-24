@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         }
 
         if (null != getIntent() && null != getIntent().getAction()) {
+            //Shortcut
             if ("phone.vishnu.quotes.openMainActivity".equals(getIntent().getAction())) {
 
                 //Do Nothing
@@ -139,7 +140,19 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         .commit();
 
             } else if ("phone.vishnu.quotes.shareRandomQuote".equals(getIntent().getAction())) {
-                if (isNetworkAvailable()) shareRandomQuote();
+                shareRandomQuote();
+            }
+            //Widget
+            else if ("phone.vishnu.quotes.widgetShareClicked".equals(getIntent().getAction())) {
+                Quote q = (sharedPreferenceHelper.getWidgetQuote());
+                if (q != null)
+                    exportHelper.shareScreenshot(this, q);
+
+            } else if ("phone.vishnu.quotes.widgetFavClicked".equals(getIntent().getAction())) {
+                Quote q = (sharedPreferenceHelper.getWidgetQuote());
+                if (q != null) {
+                    //TODO: Add Favorite
+                }
             }
         }
 
@@ -521,6 +534,11 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             @Override
             public void processFinished(ArrayList<Quote> quotes) {
                 Collections.shuffle(quotes);
+                if (quotes.size() == 0) {
+                    progressDialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Loading Failed", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Quote quote = quotes.get(0);
 
                 new ExportHelper(MainActivity.this).shareScreenshot(MainActivity.this, quote);

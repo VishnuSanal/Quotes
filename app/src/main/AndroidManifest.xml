@@ -77,6 +77,18 @@
             android:value="ca-app-pub-3940256099942544~3347511713"/>-->
 
 
+        <receiver android:name=".receiver.QuoteWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="phone.vishnu.quotes.WIDGET_CLICK_LISTENER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/quote_widget_info" />
+        </receiver>
+
     </application>
 
 </manifest>

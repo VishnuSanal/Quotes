@@ -3,6 +3,10 @@ package phone.vishnu.quotes.helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.annotation.Nullable;
+
+import phone.vishnu.quotes.model.Quote;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class SharedPreferenceHelper {
@@ -17,6 +21,9 @@ public class SharedPreferenceHelper {
 
     private final String BG_PATH = "backgroundPath";
     private final String FONT_PATH = "fontPath";
+
+    private final String WIDGET_QUOTE_STRING = "widgetQuoteString";
+    private final String WIDGET_AUTHOR_STRING = "widgetAuthorString";
 
     private final SharedPreferences sharedPreferences;
 
@@ -78,6 +85,45 @@ public class SharedPreferenceHelper {
 
     public void setColorPreference(String colorPreference) {
         sharedPreferences.edit().putString(CARD_COLOR, colorPreference).apply();
+    }
+
+    public void saveWidgetQuote(Quote quote) {
+        setWidgetQuoteString(quote.getQuote());
+        setWidgetAuthorString(quote.getAuthor());
+    }
+
+    public void deleteWidgetQuote() {
+        setWidgetQuoteString(null);
+        setWidgetAuthorString(null);
+    }
+
+    @Nullable
+    public Quote getWidgetQuote() {
+        Quote quote = new Quote();
+        quote.setQuote(getWidgetQuoteString());
+        quote.setAuthor(getWidgetAuthorString());
+
+        if (quote.getQuote() != null && quote.getAuthor() != null) {
+            return quote;
+        } else {
+            return null;
+        }
+    }
+
+    private String getWidgetQuoteString() {
+        return sharedPreferences.getString(WIDGET_QUOTE_STRING, null);
+    }
+
+    private void setWidgetQuoteString(String quote) {
+        sharedPreferences.edit().putString(WIDGET_QUOTE_STRING, quote).apply();
+    }
+
+    private String getWidgetAuthorString() {
+        return sharedPreferences.getString(WIDGET_AUTHOR_STRING, null);
+    }
+
+    private void setWidgetAuthorString(String author) {
+        sharedPreferences.edit().putString(WIDGET_AUTHOR_STRING, author).apply();
     }
 
     public void resetSharedPreferences() {

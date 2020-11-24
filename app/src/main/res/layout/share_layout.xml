@@ -5,7 +5,6 @@
     android:layout_width="1080px"
     android:layout_height="1920px"
     android:gravity="center">
-
     <androidx.cardview.widget.CardView
         android:id="@+id/shareCardView"
         android:layout_width="920px"
@@ -58,5 +57,6 @@
         android:layout_margin="8dp"
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
+
         android:src="@drawable/ic_quotes" />-->
 </RelativeLayout>
