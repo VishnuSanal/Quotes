@@ -12,11 +12,10 @@ import phone.vishnu.quotes.model.Quote;
 public class FavUtils {
 
     private final SharedPreferenceHelper sharedPreferenceHelper;
-    private final ArrayList<Quote> favArrayList;
 
     public FavUtils(Context context) {
         this.sharedPreferenceHelper = new SharedPreferenceHelper(context);
-        this.favArrayList = getFavArrayList();
+//        this.favArrayList = getFavArrayList();
     }
 
     public boolean newFavorite(Quote newQuote) {
@@ -30,26 +29,35 @@ public class FavUtils {
     }
 
     private void removeFavorite(Quote newQuote) {
-        favArrayList.remove(newQuote);
-        favArrayChanged();
-    }
+        ArrayList<Quote> list = getFavArrayList();
 
-    public void addFavorite(Quote newQuote) {
-        favArrayList.add(newQuote);
-        favArrayChanged();
+        list.remove(newQuote);
+
+        favArrayChanged(list);
     }
 
     public void removeFavorite(int index) {
-        removeFavorite(favArrayList.get(index));
+        ArrayList<Quote> list = getFavArrayList();
+
+        list.remove(index);
+
+        favArrayChanged(list);
     }
 
-    private void favArrayChanged() {
+    public void addFavorite(Quote newQuote) {
+        ArrayList<Quote> list = getFavArrayList();
+
+        list.add(newQuote);
+
+        favArrayChanged(list);
+    }
+
+    private void favArrayChanged(ArrayList<Quote> favArrayList) {
         sharedPreferenceHelper.setFavoriteArrayString(new Gson().toJson(favArrayList));
     }
 
     public boolean isPresent(Quote quote) {
-        boolean isPresent = favArrayList.contains(quote);
-        return isPresent;
+        return getFavArrayList().contains(quote);
     }
 
     public ArrayList<Quote> getFavArrayList() {
@@ -64,6 +72,6 @@ public class FavUtils {
     }
 
     public Quote getFavourite(int position) {
-        return favArrayList.get(position);
+        return getFavArrayList().get(position);
     }
 }

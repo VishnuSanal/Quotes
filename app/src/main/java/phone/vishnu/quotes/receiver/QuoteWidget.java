@@ -83,12 +83,12 @@ public class QuoteWidget extends AppWidgetProvider {
     private void updateQuoteWidget(Context context, Quote quote) {
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.quote_widget);
 
-        remoteViews.setTextViewText(R.id.quoteTextView, quote.getQuote());
-        remoteViews.setTextViewText(R.id.authorTextView, String.format("-%s", quote.getAuthor()));
+        remoteViews.setTextViewText(R.id.widgetQuoteTextView, quote.getQuote());
+        remoteViews.setTextViewText(R.id.widgetAuthorTextView, String.format("-%s", quote.getAuthor()));
 
-        remoteViews.setOnClickPendingIntent(R.id.shareImageView, getPendingIntent(context, SHARE_REQ_CODE));
+        remoteViews.setOnClickPendingIntent(R.id.widgetShareImageView, getPendingIntent(context, SHARE_REQ_CODE));
 
-        remoteViews.setOnClickPendingIntent(R.id.favoriteImageView, getPendingIntent(context, FAVOURITE_REQ_CODE));
+        remoteViews.setOnClickPendingIntent(R.id.widgetFavoriteImageView, getPendingIntent(context, FAVOURITE_REQ_CODE));
 
         AppWidgetManager.getInstance(context).updateAppWidget(
                 new ComponentName(context, QuoteWidget.class),

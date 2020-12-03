@@ -18,6 +18,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -238,6 +239,16 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         }
 
         searchView = findViewById(R.id.homeSearchView);
+
+        try {
+            EditText searchEditText = ((EditText) searchView.findViewById(androidx.appcompat.R.id.search_src_text));
+            searchEditText.setTextColor(getResources().getColor(R.color.colorWhite));
+            searchEditText.setHintTextColor(getResources().getColor(R.color.colorWhite));
+        } catch (Exception e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+            e.printStackTrace();
+        }
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

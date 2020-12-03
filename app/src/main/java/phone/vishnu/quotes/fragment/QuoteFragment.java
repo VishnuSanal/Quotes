@@ -114,7 +114,6 @@ public class QuoteFragment extends Fragment {
             e.printStackTrace();
         }
 
-
         return quoteView;
     }
 

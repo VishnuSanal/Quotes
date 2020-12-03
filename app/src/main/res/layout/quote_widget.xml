@@ -14,7 +14,7 @@
         android:padding="4dp">
 
         <ImageView
-            android:id="@+id/favoriteImageView"
+            android:id="@+id/widgetFavoriteImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Quote Widget Favourite Button"
@@ -22,7 +22,7 @@
             android:src="@drawable/ic_favorite" />
 
         <ImageView
-            android:id="@+id/shareImageView"
+            android:id="@+id/widgetShareImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Quote Widget Share Button"
@@ -31,20 +31,22 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/quoteTextView"
+        android:id="@+id/widgetQuoteTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:gravity="center"
+        android:text="Quote Loading..."
         android:textColor="@android:color/darker_gray"
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/authorTextView"
+        android:id="@+id/widgetAuthorTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
         android:gravity="end"
+        android:text=""
         android:textColor="@android:color/darker_gray"
         android:textSize="20sp" />
 
