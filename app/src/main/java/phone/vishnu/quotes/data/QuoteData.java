@@ -45,7 +45,6 @@ public class QuoteData {
                                         quote.setQuote(quoteObject.getString("quote"));
                                         quote.setAuthor(quoteObject.getString("name"));
                                         quoteArrayList.add(quote);
-//                                        Log.e("vishnu", quote.getQuote() + "  -  " + quote.getAuthor());
                                     } catch (JSONException e) {
                                         FirebaseCrashlytics.getInstance().recordException(e);
                                         e.printStackTrace();

@@ -23,7 +23,6 @@ import phone.vishnu.quotes.helper.RecyclerViewAdapter;
 
 public class PickFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
 
     public PickFragment() {
@@ -41,11 +40,22 @@ public class PickFragment extends Fragment {
     }
 
     private void setUpRecyclerView(View inflate) {
-        recyclerView = inflate.findViewById(R.id.imagePickRecyclerView);
+        RecyclerView recyclerView = inflate.findViewById(R.id.imagePickRecyclerView);
         adapter = new RecyclerViewAdapter(requireContext());
         recyclerView.setAdapter(adapter);
 
         recyclerView.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) {
+            @Override
+            public void onLayoutCompleted(RecyclerView.State state) {
+                super.onLayoutCompleted(state);
+                if (state.getItemCount() >= 2 && MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing())
+                    MainActivity.bgDialog.dismiss();
+
+            }
+        };
+        recyclerView.setLayoutManager(layoutManager);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference().child("images");
@@ -62,20 +72,7 @@ public class PickFragment extends Fragment {
                         public void onSuccess(Uri uri) {
                             list.add(uri);
                             if (adapter != null && getContext() != null) {
-                                adapter = new RecyclerViewAdapter(requireContext(), list);
-                                recyclerView.setAdapter(adapter);
-
-                                RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) {
-                                    @Override
-                                    public void onLayoutCompleted(RecyclerView.State state) {
-                                        super.onLayoutCompleted(state);
-                                        if (state.getItemCount() >= 2 && MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing())
-                                            MainActivity.bgDialog.dismiss();
-
-                                    }
-                                };
-                                recyclerView.setLayoutManager(layoutManager);
-
+                                adapter.setArrayList(list);
                                 adapter.notifyDataSetChanged();
                             }
                         }

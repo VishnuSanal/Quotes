@@ -32,16 +32,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private final Context context;
     private SharedPreferenceHelper sharedPreferenceHelper;
-    private ArrayList<Uri> arr;
-    private ImageView imageView;
+    private ArrayList<Uri> arrayList = new ArrayList<>();
 
     public RecyclerViewAdapter(Context context) {
         this.context = context;
     }
 
-    public RecyclerViewAdapter(Context context, ArrayList<Uri> arr) {
-        this.context = context;
-        this.arr = arr;
+    public void setArrayList(ArrayList<Uri> arrayList) {
+        this.arrayList = arrayList;
     }
 
     @NonNull
@@ -54,19 +52,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.setIsRecyclable(false);
+//        holder.setIsRecyclable(false);
 
         Picasso.get()
-                .load(arr.get(position))
-                .into(imageView);
+                .load(arrayList.get(position))
+                .into(holder.imageView);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 final ProgressDialog dialog = ProgressDialog.show(context, "", "Please Wait....");
 
-                String[] split = String.valueOf(arr.get(position)).split("%2F")[1].split("\\?");
+                String[] split = String.valueOf(arrayList.get(position)).split("%2F")[1].split("\\?");
 
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(split[0]);
                 final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
@@ -117,10 +115,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return arr.size();
+        return arrayList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView imageView;
+
         ViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);

@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     private ConstraintLayout constraintLayout;
     private ViewPager viewPager;
-    private SearchView searchView;
 
     private ReviewInfo reviewInfo;
     private ReviewManager manager;
@@ -226,8 +225,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             }
         });
 
-//        viewPager.setSaveFromParentEnabled(false);
-//        viewPager.setSaveEnabled(false);
         adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), allQuotesList);
         viewPager.setAdapter(adapter);
 
@@ -238,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             myAlarm();
         }
 
-        searchView = findViewById(R.id.homeSearchView);
+        SearchView searchView = findViewById(R.id.homeSearchView);
 
         try {
             EditText searchEditText = ((EditText) searchView.findViewById(androidx.appcompat.R.id.search_src_text));
@@ -291,6 +288,9 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 adapter.setQuoteList((List<Quote>) results.values);
                 adapter.notifyDataSetChanged();
                 viewPager.setCurrentItem(0);
+
+                String s = (adapter.getCount() == sharedPreferenceHelper.getTotalQuotesCount()) ? "" : String.valueOf(adapter.getCount());
+                ((TextView) findViewById(R.id.searchCountTV)).setText(s);
             }
         };
     }
@@ -319,6 +319,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         new QuoteData().getQuotes(new QuoteListAsyncResponse() {
             @Override
             public void processFinished(ArrayList<Quote> quotes) {
+                sharedPreferenceHelper.setTotalQuotesCount(quotes.size());
                 Collections.shuffle(quotes);
                 quoteArrayList.addAll(quotes);
                 notifyViewPagerDataSetChanged();
@@ -399,11 +400,11 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     @Override
     public void onBackPressed() {
-        if (!searchView.isIconified()) {
+        /*if (!searchView.isIconified()) {
             searchView.setIconified(true);
             viewPager.requestFocus();
-        } else
-            super.onBackPressed();
+        }*/
+        super.onBackPressed();
     }
 
     private void showPermissionDeniedDialog() {

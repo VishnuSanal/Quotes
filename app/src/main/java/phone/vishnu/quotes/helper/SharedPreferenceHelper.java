@@ -13,6 +13,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SharedPreferenceHelper {
 
+
     private final String FIRST_RUN_BOOLEAN = "firstRunBoolean";
     private final String RUN_COUNT_INT = "runCountInt";
     private final String INSTALLED_ON_STRING = "installedOnString";
@@ -29,6 +30,8 @@ public class SharedPreferenceHelper {
 
     private final String WIDGET_QUOTE_STRING = "widgetQuoteString";
     private final String WIDGET_AUTHOR_STRING = "widgetAuthorString";
+
+    private final String TOTAL_QUOTE_COUNT = "totalQuoteInt";
 
     private final SharedPreferences sharedPreferences;
 
@@ -90,6 +93,14 @@ public class SharedPreferenceHelper {
 
     public void setColorPreference(String colorPreference) {
         sharedPreferences.edit().putString(CARD_COLOR, colorPreference).apply();
+    }
+
+    public int getTotalQuotesCount() {
+        return sharedPreferences.getInt(TOTAL_QUOTE_COUNT, 0);
+    }
+
+    public void setTotalQuotesCount(int size) {
+        sharedPreferences.edit().putInt(TOTAL_QUOTE_COUNT, size).apply();
     }
 
     public void saveWidgetQuote(Quote quote) {

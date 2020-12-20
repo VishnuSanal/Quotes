@@ -17,6 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />-->
 
+    <TextView
+        android:id="@+id/searchCountTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="@id/homeSearchView"
+        app:layout_constraintEnd_toStartOf="@id/homeSearchView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/homeSearchView"
         android:layout_width="wrap_content"
