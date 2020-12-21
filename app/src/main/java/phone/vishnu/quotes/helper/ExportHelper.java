@@ -71,6 +71,7 @@ public class ExportHelper {
         @SuppressLint("InflateParams") View shareView = inflater.inflate(R.layout.share_layout, null);
 
         String hexColor = sharedPreferenceHelper.getColorPreference();
+        String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
 
         String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
@@ -89,6 +90,9 @@ public class ExportHelper {
                 e.printStackTrace();
             }
         }
+
+        ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTextColor(Color.parseColor(fontColor));
+        ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setTextColor(Color.parseColor(fontColor));
 
         ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setText(quote);
         ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setText(author);

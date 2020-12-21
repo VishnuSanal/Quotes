@@ -13,7 +13,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SharedPreferenceHelper {
 
-
     private final String FIRST_RUN_BOOLEAN = "firstRunBoolean";
     private final String RUN_COUNT_INT = "runCountInt";
     private final String INSTALLED_ON_STRING = "installedOnString";
@@ -23,6 +22,7 @@ public class SharedPreferenceHelper {
     private final String FONT_ARRAY_STRING = "fontArrayString";
 
     private final String CARD_COLOR = "colorString";
+    private final String FONT_COLOR = "fontColorString";
     private final String ALARM_TIME = "alarmString";
 
     private final String BG_PATH = "backgroundPath";
@@ -93,6 +93,14 @@ public class SharedPreferenceHelper {
 
     public void setColorPreference(String colorPreference) {
         sharedPreferences.edit().putString(CARD_COLOR, colorPreference).apply();
+    }
+
+    public String getFontColorPreference() {
+        return sharedPreferences.getString(FONT_COLOR, "#FFFFFF");
+    }
+
+    public void setFontColorPreference(String colorPreference) {
+        sharedPreferences.edit().putString(FONT_COLOR, colorPreference).apply();
     }
 
     public int getTotalQuotesCount() {

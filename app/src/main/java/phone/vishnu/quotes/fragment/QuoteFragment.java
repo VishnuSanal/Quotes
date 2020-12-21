@@ -78,6 +78,7 @@ public class QuoteFragment extends Fragment {
         exportHelper = new ExportHelper(requireContext());
 
         String hexColor = sharedPreferenceHelper.getColorPreference();
+        String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
 
         if ((!fontPath.equals("-1")) && (new File(fontPath).exists())) {
@@ -94,6 +95,9 @@ public class QuoteFragment extends Fragment {
                 if (!new File(fontPath).exists())
                     Toast.makeText(requireContext(), "Font file not found", Toast.LENGTH_SHORT).show();
         }
+
+        quoteText.setTextColor(Color.parseColor(fontColor));
+        authorText.setTextColor(Color.parseColor(fontColor));
 
         ((CardView) quoteView.findViewById(R.id.cardView)).setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));

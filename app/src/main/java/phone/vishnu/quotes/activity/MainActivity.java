@@ -62,7 +62,7 @@ import phone.vishnu.quotes.fragment.AboutFragment;
 import phone.vishnu.quotes.fragment.BottomSheetFragment;
 import phone.vishnu.quotes.fragment.ColorFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
-import phone.vishnu.quotes.fragment.FontFragment;
+import phone.vishnu.quotes.fragment.FontMasterFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.FavUtils;
@@ -394,7 +394,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         } else if (id == R.id.bottomSheetFont) {
             fontDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
             fontDialog.setCancelable(false);
-            getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontFragment.newInstance()).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontMasterFragment.newInstance()).addToBackStack(null).commit();
         }
     }
 

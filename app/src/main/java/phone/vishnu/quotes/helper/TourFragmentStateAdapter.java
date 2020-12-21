@@ -41,7 +41,7 @@ public class TourFragmentStateAdapter extends androidx.viewpager2.adapter.Fragme
         tourItems.add(new TourItem(R.drawable.ic_quotes_round, "It Works Like...", "Share Quotations as an Image without any hassles of image editing..."));
         tourItems.add(new TourItem(R.drawable.ic_unfold_more, "Scroll For More", "Scroll horizontally to get more Quotes"));
         tourItems.add(new TourItem(R.drawable.ic_insert_photo, "Background Image", "Customize Background Image from the Overflow Menu"));
-        tourItems.add(new TourItem(R.drawable.ic_color_lens, "Accent Color", "Customize Accent Colour from the Overflow Menu"));
+        tourItems.add(new TourItem(R.drawable.ic_color_lens, "Color", "Customize Card Colour & Font Colour from the Overflow Menu"));
         tourItems.add(new TourItem(R.drawable.ic_font, "Custom Font", "Customize Font from the Overflow Menu"));
         tourItems.add(new TourItem(R.drawable.ic_search, "Search", "Search for Quotes"));
         tourItems.add(new TourItem(R.drawable.ic_notifications, "Daily Notification of Quotes", "Daily Notifications with Quotes. You can customize the time later"));

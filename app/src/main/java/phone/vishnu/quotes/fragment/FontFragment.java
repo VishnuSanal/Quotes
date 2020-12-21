@@ -181,6 +181,7 @@ public class FontFragment extends Fragment {
 
         progressBar = inflate.findViewById(R.id.fontProgressBar);
         listView = inflate.findViewById(R.id.fontListView);
+
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
         return inflate;
     }
@@ -190,4 +191,6 @@ public class FontFragment extends Fragment {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
+
 }

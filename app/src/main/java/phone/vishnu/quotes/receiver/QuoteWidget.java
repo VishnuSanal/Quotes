@@ -53,6 +53,7 @@ public class QuoteWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+//        scheduleWidgetUpdate(context);
         Quote widgetQuote = new SharedPreferenceHelper(context).getWidgetQuote();
         if (widgetQuote != null)
             updateQuoteWidget(context, widgetQuote);
@@ -64,7 +65,6 @@ public class QuoteWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         if (intent != null && intent.getAction() != null) {
-
             if ((intent.getAction().equals("phone.vishnu.quotes.WIDGET_CLICK_LISTENER")))
                 if (intent.getExtras() != null && intent.getExtras().containsKey("WIDGET_REQ_CODE"))
                     onWidgetClickListener(context, intent.getExtras().getInt("WIDGET_REQ_CODE"));
@@ -125,7 +125,7 @@ public class QuoteWidget extends AppWidgetProvider {
 
         Intent intent = new Intent(context, QuoteWidget.class);
         intent.setAction(QUOTE_WIDGET_UPDATE);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -144,15 +144,7 @@ public class QuoteWidget extends AppWidgetProvider {
 
         Intent intent = new Intent(context, QuoteWidget.class);
         intent.setAction(QUOTE_WIDGET_UPDATE);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-
-        calendar.set(Calendar.SECOND, 1);
-        calendar.set(Calendar.MILLISECOND, 0);
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (alarmManager != null)
             alarmManager.cancel(pendingIntent);

@@ -44,6 +44,7 @@ public class ColorFragment extends Fragment {
         View i = inflater.inflate(R.layout.fragment_color, container, false);
 
         gridView = i.findViewById(R.id.gridView);
+//        ImageView sampleIcon = i.findViewById(R.id.colorSampleIconImageView);
 //        gridView.setNumColumns(getNumberOfColumns());
         colorAdapter = new ColorAdapter(requireContext());
         gridView.setAdapter(colorAdapter);
@@ -56,6 +57,7 @@ public class ColorFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final int colorRequestCode = getArguments().getInt("ColorRequestCode");
+//        if (colorRequestCode == 2) sampleIcon.setVisibility(View.GONE);
 
         final SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,15 +67,7 @@ public class ColorFragment extends Fragment {
 
                 String colorString = colorAdapter.getColor(position);
 
-                if (colorRequestCode == 1) {
-
-                    sharedPreferenceHelper.setColorPreference(colorString);
-                    Toast.makeText(requireContext(), "Accent Colour Set...", Toast.LENGTH_LONG).show();
-
-                    ((MainActivity) requireActivity()).notifyViewPagerDataSetChanged();
-
-                    requireActivity().onBackPressed();
-                } else if (colorRequestCode == 0) {
+                if (colorRequestCode == 0) {
 
                     DisplayMetrics metrics = new DisplayMetrics();
                     metrics.widthPixels = 1080;
@@ -86,6 +80,24 @@ public class ColorFragment extends Fragment {
                     new ExportHelper(requireContext()).exportBackgroundImage(image);
 
                     ((MainActivity) requireActivity()).setConstraintLayoutBackground(Drawable.createFromPath(sharedPreferenceHelper.getBackgroundPath()));
+
+                    requireActivity().onBackPressed();
+                } else if (colorRequestCode == 1) {
+
+                    sharedPreferenceHelper.setColorPreference(colorString);
+                    Toast.makeText(requireContext(), "Accent Colour Set...", Toast.LENGTH_LONG).show();
+
+                    ((MainActivity) requireActivity()).notifyViewPagerDataSetChanged();
+
+                    requireActivity().onBackPressed();
+                } else if (colorRequestCode == 2) {
+
+                    if (colorString.equals("#00000000")) colorString = "#FFFFFF";
+
+                    sharedPreferenceHelper.setFontColorPreference(colorString);
+                    Toast.makeText(requireContext(), "Font Colour Set...", Toast.LENGTH_LONG).show();
+
+                    ((MainActivity) requireActivity()).notifyViewPagerDataSetChanged();
 
                     requireActivity().onBackPressed();
                 }
