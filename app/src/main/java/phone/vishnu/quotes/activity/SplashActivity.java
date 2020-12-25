@@ -26,8 +26,8 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.adapter.TourFragmentStateAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
-import phone.vishnu.quotes.helper.TourFragmentStateAdapter;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -39,10 +39,7 @@ public class SplashActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
-        sharedPreferenceHelper.incrementRunCount();
-        sharedPreferenceHelper.installedNow();
 
-        //if (true)
         if (sharedPreferenceHelper.isFirstRun())
             showNewTour();
         else

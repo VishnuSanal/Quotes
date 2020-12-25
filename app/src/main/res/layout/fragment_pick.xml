@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.PickFragment">
+    tools:context=".fragment.PickFragment"
+    tools:ignore="HardcodedText">
 
     <ImageView
         android:id="@+id/imagePickSampleIconImageView"
@@ -17,8 +18,7 @@
         android:src="@drawable/ic_insert_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imagePickRecyclerView"

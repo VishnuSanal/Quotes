@@ -35,7 +35,7 @@ import java.util.Objects;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.helper.FontDataAdapter;
+import phone.vishnu.quotes.adapter.FontDataAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class FontFragment extends Fragment {

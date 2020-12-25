@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.helper.ColorAdapter;
+import phone.vishnu.quotes.adapter.ColorAdapter;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 

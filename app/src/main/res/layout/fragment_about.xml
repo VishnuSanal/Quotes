@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/BGColor"
-    tools:context=".fragment.AboutFragment">
+    tools:context=".fragment.AboutFragment"
+    tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,29 +16,27 @@
             android:id="@+id/aboutSampleIconImageView"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:elevation="12dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorAccent"
-            android:contentDescription="About Screen Info Logo"
+            android:contentDescription="About Screen Info Icon"
+            android:elevation="12dp"
             android:foregroundGravity="center"
             android:src="@drawable/ic_info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/aboutPageAppLogo"
+            android:id="@+id/aboutPageAppIcon"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_margin="16dp"
-            android:contentDescription="About Screen Logo"
+            android:contentDescription="About Screen App Icon"
             android:scaleType="fitXY"
             android:src="@drawable/ic_quotes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutSampleIconImageView"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toBottomOf="@id/aboutSampleIconImageView" />
 
         <TextView
             android:id="@+id/aboutSampleAppNameTextView"
@@ -52,7 +51,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageAppLogo" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageAppIcon" />
 
         <View
             android:id="@+id/aboutSampleSpacerView"
@@ -131,8 +130,7 @@
             android:text="Aswin Kesav.U"
             android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView" />
 
         <TextView
             android:id="@+id/aboutPageCredit2TextView"
@@ -145,8 +143,7 @@
             android:text="Vasudevan.T"
             android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView" />
 
         <TextView
             android:id="@+id/aboutPageCredit3TextView"
@@ -159,8 +156,7 @@
             android:text="Vidhu Vinodh"
             android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit2TextView"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit2TextView" />
 
         <TextView
             android:id="@+id/aboutPageCredit4TextView"
@@ -173,8 +169,7 @@
             android:text="Jaseel Ahamed.M"
             android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit3TextView"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit3TextView" />
 
         <TextView
             android:id="@+id/aboutPageCredit5TextView"
@@ -187,8 +182,7 @@
             android:text="Yadhu Krishnan E.T"
             android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit4TextView"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit4TextView" />
 
         <TextView
             android:id="@+id/aboutPageCredit6TextView"
@@ -201,8 +195,7 @@
             android:text="Paulo Dichone"
             android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit5TextView"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit5TextView" />
 
         <TextView
             android:id="@+id/aboutPageCredit7TextView"
@@ -215,8 +208,7 @@
             android:text="Pexels.com"
             android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit6TextView"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit6TextView" />
 
         <TextView
             android:id="@+id/aboutPageCredit8TextView"
@@ -229,8 +221,7 @@
             android:text="Nikhil.S"
             android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit7TextView"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit7TextView" />
 
 
         <androidx.appcompat.widget.SwitchCompat
@@ -255,16 +246,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/aboutReminderSwitch"
             app:layout_constraintTop_toBottomOf="@id/aboutReminderSwitch"
-            app:layout_constraintTop_toTopOf="@id/aboutReminderSwitch"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toTopOf="@id/aboutReminderSwitch" />
 
         <TextView
             android:id="@+id/aboutResetSettingsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:clickable="true"
             android:focusable="true"
-            android:layout_margin="8dp"
             android:text="@string/reset_settings"
             android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@id/aboutSampleVersion"

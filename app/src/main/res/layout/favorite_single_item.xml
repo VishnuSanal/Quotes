@@ -8,7 +8,8 @@
     android:orientation="vertical"
     android:padding="4dp"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    tools:ignore="HardcodedText">
 
     <TextView
         android:id="@+id/quoteTextSingleItem"
@@ -33,23 +34,21 @@
         android:id="@+id/singleItemShareImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Favorite Screen Share Button"
+        android:contentDescription="Share Single Favorite"
         android:foregroundGravity="right"
         android:scaleType="fitXY"
         android:src="@drawable/ic_share"
-        app:tint="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/singleItemRemoveImageView"
-        tools:ignore="HardcodedText" />
+        app:tint="@color/colorWhite" />
 
     <ImageView
         android:id="@+id/singleItemRemoveImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Favorite Screen Remove Button"
+        android:contentDescription="Remove Single Favorite"
         android:scaleType="fitXY"
         android:src="@drawable/ic_remove"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

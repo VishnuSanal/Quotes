@@ -5,21 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/BGColor"
-    tools:context=".fragment.AddNewFragment">
+    tools:context=".fragment.AddNewFragment"
+    tools:ignore="HardcodedText">
 
     <ImageView
         android:id="@+id/addNewSampleIconImageView"
         android:layout_width="0dp"
         android:layout_height="36dp"
-        android:contentDescription="Add New Screen Add Icon"
         android:background="@color/colorAccent"
+        android:contentDescription="Add New Screen Add Icon"
         android:elevation="12dp"
         android:foregroundGravity="center"
         android:src="@drawable/ic_post_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/addQuoteTIL"
@@ -32,14 +32,13 @@
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addNewSampleIconImageView"
-        tools:ignore="HardcodedText">
+        app:layout_constraintTop_toBottomOf="@id/addNewSampleIconImageView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/addQuoteTIE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Quote"
+            android:hint="@string/quote"
             android:inputType="textCapSentences|textMultiLine"
             android:scrollbars="vertical"
             android:textColor="@color/editTextColor"
@@ -58,14 +57,13 @@
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addQuoteTIL"
-        tools:ignore="HardcodedText">
+        app:layout_constraintTop_toBottomOf="@id/addQuoteTIL">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/addAuthorTIE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Author"
+            android:hint="@string/author"
             android:inputType="textCapWords|textMultiLine"
             android:textColor="@color/editTextColor"
             android:textColorHint="@color/editTextColor" />
@@ -77,11 +75,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Add"
+        android:text="@string/add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonCancel"
-        app:layout_constraintTop_toBottomOf="@id/addAuthorTIL"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@id/addAuthorTIL" />
 
     <Button
         android:id="@+id/buttonCancel"
@@ -89,10 +86,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Cancel"
+        android:text="@string/cancel"
         app:layout_constraintEnd_toStartOf="@id/buttonAdd"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addAuthorTIL"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@id/addAuthorTIL" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

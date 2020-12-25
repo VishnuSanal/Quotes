@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.helper.RecyclerViewAdapter;
+import phone.vishnu.quotes.adapter.RecyclerViewAdapter;
 
 public class PickFragment extends Fragment {
 

@@ -8,18 +8,18 @@
     android:foregroundGravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".fragment.ColorFragment">
+    tools:context=".fragment.ColorFragment"
+    tools:ignore="HardcodedText">
 
     <ImageView
         android:id="@+id/colorSampleIconImageView"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:background="@color/colorAccent"
-        android:contentDescription="Color Screen Palette Logo"
+        android:contentDescription="Color Screen Palette Icon"
         android:elevation="12dp"
         android:foregroundGravity="center"
-        android:src="@drawable/ic_color_lens"
-        tools:ignore="HardcodedText" />
+        android:src="@drawable/ic_color_lens" />
 
     <GridView
         android:id="@+id/gridView"

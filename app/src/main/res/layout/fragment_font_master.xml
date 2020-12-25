@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.FontMasterFragment">
+    tools:context=".fragment.FontMasterFragment"
+    tools:ignore="HardcodedText">
 
     <ImageView
         android:id="@+id/fontFontSampleIconImageView"
@@ -12,15 +13,14 @@
         android:layout_height="36dp"
         android:background="@color/colorAccent"
         android:clickable="true"
-        android:contentDescription="Font Screen Font Logo"
+        android:contentDescription="Font Screen Font Icon"
         android:elevation="12dp"
         android:focusable="true"
         android:foregroundGravity="center"
         android:src="@drawable/ic_font"
         app:layout_constraintEnd_toStartOf="@id/fontColorSampleIconImageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/fontColorSampleIconImageView"
@@ -28,15 +28,14 @@
         android:layout_height="36dp"
         android:background="@color/colorAccent"
         android:clickable="true"
-        android:contentDescription="Color Screen Palette Logo"
+        android:contentDescription="Font Screen Color Palette Icon"
         android:elevation="8dp"
         android:focusable="true"
         android:foregroundGravity="center"
         android:src="@drawable/ic_color_lens"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/fontFontSampleIconImageView"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/masterFragmentHost"

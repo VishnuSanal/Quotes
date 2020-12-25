@@ -28,9 +28,9 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.adapter.FavoritesDataAdapter;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.FavUtils;
-import phone.vishnu.quotes.helper.FavoritesDataAdapter;
 
 public class FavoriteFragment extends Fragment {
 

@@ -9,7 +9,8 @@
     android:foregroundGravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".fragment.TourSingleFragment">
+    tools:context=".fragment.TourSingleFragment"
+    tools:ignore="HardcodedText">
 
     <ImageView
         android:id="@+id/tourImage"
@@ -19,8 +20,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="Tour Fragment ImageView"
         android:gravity="center"
-        android:scaleType="fitXY"
-        tools:ignore="HardcodedText" />
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/tourTitle"

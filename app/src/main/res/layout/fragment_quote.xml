@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".fragment.QuoteFragment">
+    tools:context=".fragment.QuoteFragment"
+    tools:ignore="HardcodedText">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -33,8 +34,7 @@
                 android:src="@drawable/ic_favorite"
                 app:layout_constraintEnd_toStartOf="@id/shareImageView"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/colorWhite"
-                tools:ignore="HardcodedText" />
+                app:tint="@color/colorWhite" />
 
             <ImageView
                 android:id="@+id/shareImageView"
@@ -42,10 +42,9 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="Quote Fragment Share Button"
                 android:src="@drawable/ic_share"
-                app:tint="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
+                app:tint="@color/colorWhite" />
 
             <TextView
                 android:id="@+id/quoteTextView"

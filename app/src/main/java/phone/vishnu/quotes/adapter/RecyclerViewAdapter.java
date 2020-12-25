@@ -1,4 +1,4 @@
-package phone.vishnu.quotes.helper;
+package phone.vishnu.quotes.adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
+import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
@@ -123,7 +124,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         ViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView);
+            imageView = itemView.findViewById(R.id.defaultSingleImage);
         }
     }
 }

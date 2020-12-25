@@ -12,14 +12,13 @@
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:layout_margin="8dp"
-        android:contentDescription="Splash Screen Logo"
+        android:contentDescription="Splash Screen App Icon"
         android:scaleType="fitXY"
         android:src="@drawable/ic_quotes"
         app:layout_constraintBottom_toTopOf="@+id/splashScreenAppNameTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/splashScreenAppNameTextView"

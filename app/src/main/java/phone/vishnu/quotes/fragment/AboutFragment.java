@@ -148,20 +148,10 @@ public class AboutFragment extends Fragment {
     }
 
     private void composeEmail(String[] addresses, String subject) {
-/*
-        File outputFile = new File(Environment.getExternalStorageDirectory(), "logcat.txt");
-        try {
-            Runtime.getRuntime().exec("logcat -f " + outputFile.getAbsolutePath());
-        } catch (IOException e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-            e.printStackTrace();
-        }*/
-
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_EMAIL, addresses);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-//        intent.putExtra(Intent.EXTRA_STREAM, outputFile.getAbsolutePath());
         if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
             startActivity(intent);
         }

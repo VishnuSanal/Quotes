@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -33,11 +32,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.play.core.review.ReviewInfo;
-import com.google.android.play.core.review.ReviewManager;
-import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.tasks.OnCompleteListener;
-import com.google.android.play.core.tasks.Task;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -56,6 +50,7 @@ import java.util.Date;
 import java.util.List;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.data.QuoteListAsyncResponse;
 import phone.vishnu.quotes.fragment.AboutFragment;
@@ -66,7 +61,6 @@ import phone.vishnu.quotes.fragment.FontMasterFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.FavUtils;
-import phone.vishnu.quotes.helper.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
@@ -83,9 +77,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     private ConstraintLayout constraintLayout;
     private ViewPager viewPager;
-
-    private ReviewInfo reviewInfo;
-    private ReviewManager manager;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -157,30 +148,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         viewPager = findViewById(R.id.viewPager);
         allQuotesList = getQuotes();
 
-        /*MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-                AdView adView = new AdView(MainActivity.this);
-                adView.setAdUnitId(getString(R.string.banner_ad_unit_id));
-
-                constraintLayout.addView(adView);
-                adView.setAdSize(getAdSize());
-
-                Bundle extras = new Bundle();
-                extras.putString("max_ad_content_rating", "G");
-
-                AdRequest adRequest = new AdRequest.Builder()
-                        .addNetworkExtrasBundle(AdMobAdapter.class, extras)
-                        .tagForChildDirectedTreatment(true)
-                        .build();
-
-                adView.loadAd(adRequest);
-            }
-        });*/
-
-        initReviewInfo(this);
-        launchReview(this);
-
         if (!isNetworkAvailable())
             Toast.makeText(this, "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
 
@@ -230,7 +197,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
         String s = sharedPreferenceHelper.getAlarmString();
 
-//        if (true) {
         if ("At 08:30 Daily".equals(s)) {
             myAlarm();
         }
@@ -398,15 +364,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        /*if (!searchView.isIconified()) {
-            searchView.setIconified(true);
-            viewPager.requestFocus();
-        }*/
-        super.onBackPressed();
-    }
-
     private void showPermissionDeniedDialog() {
         final androidx.appcompat.app.AlertDialog.Builder builder =
                 new androidx.appcompat.app.AlertDialog.Builder(this);
@@ -541,54 +498,4 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         });
 
     }
-
-    private void initReviewInfo(Context context) {
-//        manager = new FakeReviewManager(context);
-
-        manager = ReviewManagerFactory.create(context);
-
-        Task<ReviewInfo> request = manager.requestReviewFlow();
-        request.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
-            @Override
-            public void onComplete(Task<ReviewInfo> task) {
-                if (task.isSuccessful()) {
-                    // We can get the ReviewInfo object
-                    reviewInfo = task.getResult();
-                } else {
-                    Log.e("vishnu", "onComplete: ", task.getException());
-                    FirebaseCrashlytics.getInstance().recordException(task.getException());
-                }
-            }
-        });
-    }
-
-    private void launchReview(MainActivity activity) {
-        if (sharedPreferenceHelper.getRunCount() > 10 &&
-                sharedPreferenceHelper.getInstalledDaysCount() > 5 &&
-                sharedPreferenceHelper.getReviewShownDaysCount() > 10) {
-
-            Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
-            flow.addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(Task<Void> task) {
-                    sharedPreferenceHelper.reviewShownNow();
-                }
-            });
-        }
-    }
-
-    /*private AdSize getAdSize() {
-        // Step 2 - Determine the screen width (less decorations) to use for the ad width.
-        Display display = getWindowManager().getDefaultDisplay();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        display.getMetrics(outMetrics);
-
-        float widthPixels = outMetrics.widthPixels;
-        float density = outMetrics.density;
-
-        int adWidth = (int) (widthPixels / density);
-
-        // Step 3 - Get adaptive ad size and return for setting on the ad view.
-        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
-    }*/
 }

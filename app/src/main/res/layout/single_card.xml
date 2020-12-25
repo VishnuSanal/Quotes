@@ -7,15 +7,15 @@
     app:cardBackgroundColor="@color/cardBackgroundColor"
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    tools:ignore="HardcodedText">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/defaultSingleImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:contentDescription="Background Image Single Image"
-        android:scaleType="centerCrop"
-        tools:ignore="HardcodedText" />
+        android:contentDescription="Default Single Image"
+        android:scaleType="centerCrop" />
 
 </androidx.cardview.widget.CardView>

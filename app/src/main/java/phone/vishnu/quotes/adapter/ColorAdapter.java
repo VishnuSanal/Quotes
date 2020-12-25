@@ -1,4 +1,4 @@
-package phone.vishnu.quotes.helper;
+package phone.vishnu.quotes.adapter;
 
 import android.content.Context;
 import android.graphics.Color;

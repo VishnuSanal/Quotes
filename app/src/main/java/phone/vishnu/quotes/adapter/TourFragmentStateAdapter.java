@@ -1,4 +1,4 @@
-package phone.vishnu.quotes.helper;
+package phone.vishnu.quotes.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
