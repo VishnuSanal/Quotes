@@ -59,8 +59,8 @@ public class AddNewFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String quote = Objects.requireNonNull(quoteTIE.getText()).toString().trim();
-                String author = Objects.requireNonNull(authorTIE.getText()).toString().trim();
+                String quote = Objects.requireNonNull(quoteTIE.getText()).toString();
+                String author = Objects.requireNonNull(authorTIE.getText()).toString();
 
                 if (quote.isEmpty() || author.isEmpty()) {
                     if (quote.isEmpty()) {
