@@ -77,7 +77,7 @@ public class QuoteFragment extends Fragment {
         favUtils = new FavUtils(requireContext());
         exportHelper = new ExportHelper(requireContext());
 
-        String hexColor = sharedPreferenceHelper.getColorPreference();
+        String hexColor = sharedPreferenceHelper.getCardColorPreference();
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
 
@@ -140,7 +140,7 @@ public class QuoteFragment extends Fragment {
                                 AsyncTask.execute(new Runnable() {
                                     @Override
                                     public void run() {
-                                        exportHelper.shareScreenshot(requireContext(), new Quote(quoteText.getText().toString(), authorText.getText().toString()));
+                                        exportHelper.shareImage(requireContext(), new Quote(quoteText.getText().toString(), authorText.getText().toString()));
                                     }
                                 });
                             }

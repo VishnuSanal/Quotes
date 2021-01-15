@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.Objects;
+
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.ColorAdapter;
@@ -44,8 +46,6 @@ public class ColorFragment extends Fragment {
         View i = inflater.inflate(R.layout.fragment_color, container, false);
 
         gridView = i.findViewById(R.id.gridView);
-//        ImageView sampleIcon = i.findViewById(R.id.colorSampleIconImageView);
-//        gridView.setNumColumns(getNumberOfColumns());
         colorAdapter = new ColorAdapter(requireContext());
         gridView.setAdapter(colorAdapter);
 
@@ -56,14 +56,12 @@ public class ColorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final int colorRequestCode = getArguments().getInt("ColorRequestCode");
-//        if (colorRequestCode == 2) sampleIcon.setVisibility(View.GONE);
+        final int colorRequestCode = Objects.requireNonNull(getArguments()).getInt("ColorRequestCode");
 
         final SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Log.e("vishnu", colorAdapter.getColor(position));
 
                 String colorString = colorAdapter.getColor(position);
 
@@ -104,13 +102,4 @@ public class ColorFragment extends Fragment {
             }
         });
     }
-
-  /*  int getNumberOfColumns(){
-        DisplayMetrics metrics = new DisplayMetrics();
-        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-
-
-        return 3;
-    }*/
 }

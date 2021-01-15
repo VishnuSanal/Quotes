@@ -82,7 +82,7 @@ public class SharedPreferenceHelper {
         sharedPreferences.edit().putString(FONT_PATH, fontPath).apply();
     }
 
-    public String getColorPreference() {
+    public String getCardColorPreference() {
         return sharedPreferences.getString(CARD_COLOR, "#607D8B");
     }
 

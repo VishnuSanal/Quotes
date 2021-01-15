@@ -16,4 +16,6 @@
     <color name="BGColor">#000000</color>
     <color name="textColor">#FFFFFF</color>
     <color name="editTextColor">#BDBDBD</color>
+
+    <color name="noColorIconColor">#BDBDBD</color>
 </resources>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +54,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-//        holder.setIsRecyclable(false);
-
         Picasso.get()
                 .load(arrayList.get(position))
                 .into(holder.imageView);
@@ -65,12 +64,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 final ProgressDialog dialog = ProgressDialog.show(context, "", "Please Wait....");
 
-                String[] split = String.valueOf(arrayList.get(position)).split("%2F")[1].split("\\?");
-
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(split[0]);
                 final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
 
-                final File f = new File(localFile + File.separator + "." + split[0]);
+                final File f;
+
+                Log.e("vishnu", "getPath():" + arrayList.get(position).getPath());
+
+                if (arrayList.get(position).toString().contains("https://firebasestorage.googleapis.com/v0/b/quotes-q.appspot.com")) {
+                    String fileName = String.valueOf(arrayList.get(position)).split("%2F")[1].split("\\?")[0];
+
+                    Log.e("vishnu", "fileName Variable:" + fileName);
+
+                    f = new File(localFile + File.separator + "." + fileName);
+
+                } else {
+                    f = new File(arrayList.get(position).getPath());
+                }
+
+                Log.e("vishnu", "onClick:" + f.getAbsolutePath());
+                Log.e("vishnu", "onClick:" + f.getName());
 
                 if (f.exists()) {
                     sharedPreferenceHelper.setBackgroundPath(f.getAbsolutePath());
@@ -79,10 +91,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                     Toast.makeText(context, "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
 
-                    ((MainActivity) context).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.toString()));
+                    ((MainActivity) context).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.getAbsolutePath()));
                     ((MainActivity) context).onBackPressed();
 
                 } else {
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(f.getName().substring(1));
+
                     if (!localFile.exists()) localFile.mkdirs();
 
                     storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {

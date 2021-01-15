@@ -152,7 +152,7 @@ public class SplashActivity extends AppCompatActivity {
     private void initTasks() {
         setContentView(R.layout.activity_splash);
 
-        String colorString = sharedPreferenceHelper.getColorPreference();
+        String colorString = sharedPreferenceHelper.getCardColorPreference();
 
         if (colorString.equals("#00000000")) colorString = "#607D8B";
 

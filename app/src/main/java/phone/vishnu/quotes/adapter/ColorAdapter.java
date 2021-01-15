@@ -13,6 +13,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
+import phone.vishnu.quotes.R;
+
 public class ColorAdapter extends BaseAdapter {
 
     private final String[] colors = new String[]{
@@ -68,20 +70,19 @@ public class ColorAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView = (convertView == null) ? new ImageView(context) : (ImageView) convertView;
 
-        ShapeDrawable d = new ShapeDrawable(new OvalShape());
-        d.getPaint().setStyle(Paint.Style.FILL);
-        d.getPaint().setColor(Color.parseColor(colors[position]));
+        if (colors[position].equals("#00000000")) {
+            imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
+            imageView.setScaleType(ImageView.ScaleType.CENTER);
+            imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_no_color));
+        } else {
+            ShapeDrawable d = new ShapeDrawable(new OvalShape());
+            d.getPaint().setStyle(Paint.Style.FILL);
+            d.getPaint().setColor(Color.parseColor(colors[position]));
 
-//        GradientDrawable d = new GradientDrawable();
-//        d.setShape(GradientDrawable.OVAL);
-//        d.setColor(Color.parseColor(colors[position]));
-//        d.setStroke(1, context.getResources().getColor(R.color.spacerColor));
+            imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
 
-        imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
-
-        imageView.setBackground(d);
-//        imageView.setElevation(12);
-
+            imageView.setBackground(d);
+        }
         return imageView;
     }
 

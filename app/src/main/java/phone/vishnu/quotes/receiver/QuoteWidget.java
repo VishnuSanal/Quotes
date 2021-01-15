@@ -53,7 +53,6 @@ public class QuoteWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-//        scheduleWidgetUpdate(context);
         Quote widgetQuote = new SharedPreferenceHelper(context).getWidgetQuote();
         if (widgetQuote != null)
             updateQuoteWidget(context, widgetQuote);

@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         @Override
                         public void run() {
                             try {
-                                exportHelper.shareScreenshot(MainActivity.this, new Quote(extras.getString("quote"), extras.getString("author")));
+                                exportHelper.shareImage(MainActivity.this, new Quote(extras.getString("quote"), extras.getString("author")));
                             } catch (Exception e) {
                                 FirebaseCrashlytics.getInstance().recordException(e);
                                 e.printStackTrace();
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
             else if ("phone.vishnu.quotes.widgetShareClicked".equals(getIntent().getAction())) {
                 Quote q = (sharedPreferenceHelper.getWidgetQuote());
                 if (q != null)
-                    exportHelper.shareScreenshot(this, q);
+                    exportHelper.shareImage(this, q);
 
             } else if ("phone.vishnu.quotes.widgetFavClicked".equals(getIntent().getAction())) {
                 Quote q = (sharedPreferenceHelper.getWidgetQuote());
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         SearchView searchView = findViewById(R.id.homeSearchView);
 
         try {
-            EditText searchEditText = ((EditText) searchView.findViewById(androidx.appcompat.R.id.search_src_text));
+            EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
             searchEditText.setTextColor(getResources().getColor(R.color.colorWhite));
             searchEditText.setHintTextColor(getResources().getColor(R.color.colorWhite));
         } catch (Exception e) {
@@ -434,10 +434,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                     public void onChildViewAdded(View parent, View child) {
                         CharSequence text = ((TextView) child).getText();
                         int itemIndex = Arrays.asList(items).indexOf(text);
-                        if ((itemIndex == 2) && !isNetworkAvailable()) {
+                        /*if ((itemIndex == 2) && !isNetworkAvailable()) {
                             child.setEnabled(false);
                             child.setOnClickListener(null);
-                        }
+                        }*/
                     }
 
                     @Override
@@ -492,7 +492,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 }
                 Quote quote = quotes.get(0);
 
-                new ExportHelper(MainActivity.this).shareScreenshot(MainActivity.this, quote);
+                new ExportHelper(MainActivity.this).shareImage(MainActivity.this, quote);
                 progressDialog.dismiss();
             }
         });
