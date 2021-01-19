@@ -67,8 +67,6 @@ public class StartupReceiver extends BroadcastReceiver {
 
             String[] split = trim.split(":");
 
-//                Log.e("vishnu", Integer.parseInt(split[0].trim()) + ":" + Integer.parseInt(split[1].trim()));
-
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(split[0].trim()));
             calendar.set(Calendar.MINUTE, Integer.parseInt(split[1].trim()));

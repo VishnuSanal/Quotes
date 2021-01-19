@@ -1,136 +1,61 @@
 package phone.vishnu.quotes.adapter;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends ListAdapter<Uri, RecyclerViewAdapter.ViewHolder> {
 
-    private final Context context;
+    private OnItemClickListener listener;
     private SharedPreferenceHelper sharedPreferenceHelper;
-    private ArrayList<Uri> arrayList = new ArrayList<>();
 
-    public RecyclerViewAdapter(Context context) {
-        this.context = context;
-    }
+    public RecyclerViewAdapter() {
+        super(new DiffUtil.ItemCallback<Uri>() {
+            @Override
+            public boolean areItemsTheSame(@NonNull Uri oldItem, @NonNull Uri newItem) {
+                return oldItem.getEncodedPath().equals(newItem.getEncodedPath());
+            }
 
-    public void setArrayList(ArrayList<Uri> arrayList) {
-        this.arrayList = arrayList;
+            @Override
+            public boolean areContentsTheSame(@NonNull Uri oldItem, @NonNull Uri newItem) {
+                return false;
+            }
+        });
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.single_card, parent, false);
-        sharedPreferenceHelper = new SharedPreferenceHelper(context);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_card, parent, false);
+        sharedPreferenceHelper = new SharedPreferenceHelper(parent.getContext());
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Picasso.get()
-                .load(arrayList.get(position))
+                .load(getItem(position))
                 .into(holder.imageView);
-
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final ProgressDialog dialog = ProgressDialog.show(context, "", "Please Wait....");
-
-                final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-
-                final File f;
-
-                Log.e("vishnu", "getPath():" + arrayList.get(position).getPath());
-
-                if (arrayList.get(position).toString().contains("https://firebasestorage.googleapis.com/v0/b/quotes-q.appspot.com")) {
-                    String fileName = String.valueOf(arrayList.get(position)).split("%2F")[1].split("\\?")[0];
-
-                    Log.e("vishnu", "fileName Variable:" + fileName);
-
-                    f = new File(localFile + File.separator + "." + fileName);
-
-                } else {
-                    f = new File(arrayList.get(position).getPath());
-                }
-
-                Log.e("vishnu", "onClick:" + f.getAbsolutePath());
-                Log.e("vishnu", "onClick:" + f.getName());
-
-                if (f.exists()) {
-                    sharedPreferenceHelper.setBackgroundPath(f.getAbsolutePath());
-
-                    dialog.dismiss();
-
-                    Toast.makeText(context, "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
-
-                    ((MainActivity) context).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.getAbsolutePath()));
-                    ((MainActivity) context).onBackPressed();
-
-                } else {
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(f.getName().substring(1));
-
-                    if (!localFile.exists()) localFile.mkdirs();
-
-                    storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-
-                            sharedPreferenceHelper.setBackgroundPath(f.getAbsolutePath());
-
-                            dialog.dismiss();
-
-                            Toast.makeText(context, "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
-
-                            ((MainActivity) context).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.toString()));
-                            ((MainActivity) context).onBackPressed();
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            FirebaseCrashlytics.getInstance().recordException(exception);
-                            exception.printStackTrace();
-                            Toast.makeText(context, "Error.....", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
-                        }
-                    });
-                }
-            }
-        });
-
     }
 
-    @Override
-    public int getItemCount() {
-        return arrayList.size();
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Uri uri, int id);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -139,6 +64,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.defaultSingleImage);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION)
+                        listener.onItemClick(getItem(getAdapterPosition()), v.getId());
+                }
+            });
         }
     }
 }
