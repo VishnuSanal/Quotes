@@ -14,12 +14,18 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.EditText;
 import android.widget.Filter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,10 +34,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -65,7 +73,7 @@ import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
-public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener {
+public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener, View.OnClickListener {
 
     public static ProgressDialog bgDialog, fontDialog;
     private final int PICK_IMAGE_ID = 36;
@@ -77,6 +85,14 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     private ConstraintLayout constraintLayout;
     private ViewPager viewPager;
+
+    private FloatingActionButton fontFAB;
+    private FloatingActionButton aboutFAB;
+    private FloatingActionButton bgFAB;
+    private FloatingActionButton colorFAB;
+    private FloatingActionButton favFAB;
+    private FloatingActionButton settingsFAB;
+    private FloatingActionButton homeFAB;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -181,7 +197,25 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                     .check();
         }
 
-        ImageView menuIcon = findViewById(R.id.homeMenuIcon);
+        fontFAB = findViewById(R.id.fontFAB);
+        aboutFAB = findViewById(R.id.aboutFAB);
+        bgFAB = findViewById(R.id.bgFAB);
+        colorFAB = findViewById(R.id.colorFAB);
+        favFAB = findViewById(R.id.favFAB);
+        settingsFAB = findViewById(R.id.settingsFAB);
+        homeFAB = findViewById(R.id.homeFAB);
+
+        homeFAB.setOnClickListener(this);
+        settingsFAB.setOnClickListener(this);
+        favFAB.setOnClickListener(this);
+        fontFAB.setOnClickListener(this);
+        colorFAB.setOnClickListener(this);
+        bgFAB.setOnClickListener(this);
+        aboutFAB.setOnClickListener(this);
+
+        initAnimations();
+
+        /*ImageView menuIcon = findViewById(R.id.homeMenuIcon);
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                     bottomSheet.show(getSupportFragmentManager(), "bottomSheetTag");
                 }
             }
-        });
+        });*/
 
         adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), allQuotesList);
         viewPager.setAdapter(adapter);
@@ -225,6 +259,170 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animate));
+        if (id == R.id.homeFAB) {
+            if (null == homeFAB.getTag()) {
+                if (isFABMenuHidden()) {
+                    openFABMenu();
+                } else {
+                    closeFABMenu();
+                }
+            } else {
+                onBackPressed();
+                resetHomeFAB();
+            }
+        } else {
+            closeFABMenu();
+
+            if (id == R.id.favFAB) {
+                FavoriteFragment fragment = FavoriteFragment.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .add(R.id.constraintLayout, fragment)
+                        .addToBackStack(null)
+                        .commit();
+                setHomeFABHome();
+            } else if (id == R.id.aboutFAB) {
+                AboutFragment fragment = AboutFragment.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .add(R.id.constraintLayout, fragment)
+                        .addToBackStack(null)
+                        .commit();
+                setHomeFABHome();
+            } else if (id == R.id.bgFAB) {
+                Dexter.withContext(this)
+                        .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                                showBackgroundOptionChooser(true);
+                            }
+
+                            @Override
+                            public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                                showPermissionDeniedDialog();
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                                Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
+                                permissionToken.continuePermissionRequest();
+                            }
+                        })
+                        .check();
+            } else if (id == R.id.colorFAB) {
+                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(1)).addToBackStack(null).commit();
+                setHomeFABHome();
+            } else if (id == R.id.fontFAB) {
+                fontDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+                fontDialog.setCancelable(false);
+                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontMasterFragment.newInstance()).addToBackStack(null).commit();
+                setHomeFABHome();
+            } else if (id == R.id.settingsFAB) {
+                Toast.makeText(this, "Ouch!!!", Toast.LENGTH_SHORT).show();
+//                changeHomeFABState();
+            }
+        }
+    }
+
+    private void setHomeFABHome() {
+        homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_home));
+        homeFAB.setTag("Menu Opened");
+    }
+
+    private void resetHomeFAB() {
+        homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_menu));
+        homeFAB.setTag(null);
+    }
+
+    private boolean isFABMenuHidden() {
+        return fontFAB.getVisibility() == View.GONE &&
+                aboutFAB.getVisibility() == View.GONE &&
+                settingsFAB.getVisibility() == View.GONE &&
+                favFAB.getVisibility() == View.GONE &&
+                colorFAB.getVisibility() == View.GONE &&
+                bgFAB.getVisibility() == View.GONE;
+    }
+
+    private void closeFABMenu() {
+
+        float fabPosition = homeFAB.getX();
+
+        favFAB.animate().x(fabPosition).alpha(0f);
+        aboutFAB.animate().x(fabPosition).alpha(0f);
+        colorFAB.animate().x(fabPosition).alpha(0f);
+        settingsFAB.animate().x(fabPosition).alpha(0f);
+        bgFAB.animate().x(fabPosition).alpha(0f);
+        fontFAB.animate().x(fabPosition).alpha(0f);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setVisibility(View.GONE);
+            }
+        }, 500);
+    }
+
+    private void openFABMenu() {
+        setVisibility(View.VISIBLE);
+
+        float homeFABX = homeFAB.getX();
+        float homeFABY = homeFAB.getY();
+
+        favFAB.animate().translationX(DPtoPX(60 * 3)).alpha(1f);
+        aboutFAB.animate().translationX(-DPtoPX(60 * 3)).alpha(1f);
+
+        colorFAB.animate().translationX(DPtoPX(60 * 2)).alpha(1f);
+        settingsFAB.animate().translationX(-DPtoPX(60 * 2)).alpha(1f);
+
+        bgFAB.animate().translationX(DPtoPX(60)).alpha(1f);
+        fontFAB.animate().translationX(-DPtoPX(60)).alpha(1f);
+    }
+
+    private void setVisibility(int i) {
+        favFAB.setVisibility(i);
+        colorFAB.setVisibility(i);
+        bgFAB.setVisibility(i);
+        fontFAB.setVisibility(i);
+        settingsFAB.setVisibility(i);
+        aboutFAB.setVisibility(i);
+    }
+
+    public int DPtoPX(int DP) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        return Math.round(DP * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    public int getScreenWidth() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        return (displayMetrics.widthPixels / 2);
+    }
+
+    private void initAnimations() {
+        ScaleAnimation scaleAnimation =
+                new ScaleAnimation(0, 1f, 0, 1f, Animation.RELATIVE_TO_SELF, 0.5f,
+                        Animation.RELATIVE_TO_SELF, 0.5f);
+        scaleAnimation.setDuration(500);
+        scaleAnimation.setFillAfter(true);
+
+        AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+        alphaAnimation.setDuration(500);
+        alphaAnimation.setInterpolator(new LinearInterpolator());
+        alphaAnimation.setRepeatCount(Animation.INFINITE);
+        alphaAnimation.setRepeatMode(Animation.REVERSE);
+
+        findViewById(R.id.openIndicatorLeft).setAnimation(scaleAnimation);
+        findViewById(R.id.openIndicatorLeft).setAnimation(alphaAnimation);
+
+        findViewById(R.id.openIndicatorRight).setAnimation(scaleAnimation);
+        findViewById(R.id.openIndicatorRight).setAnimation(alphaAnimation);
     }
 
     private Filter getFilter() {
@@ -364,6 +562,12 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        resetHomeFAB();
+        super.onBackPressed();
+    }
+
     private void showPermissionDeniedDialog() {
         final androidx.appcompat.app.AlertDialog.Builder builder =
                 new androidx.appcompat.app.AlertDialog.Builder(this);
@@ -405,6 +609,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 switch (which) {
                     case 0: {
                         getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(0)).addToBackStack(null).commit();
+                        setHomeFABHome();
                         break;
                     }
                     case 1: {
@@ -417,6 +622,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                         bgDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
                         bgDialog.setCancelable(false);
                         getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
+                        setHomeFABHome();
                         break;
                     }
                     default: {

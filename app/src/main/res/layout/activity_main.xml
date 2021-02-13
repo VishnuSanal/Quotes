@@ -35,20 +35,159 @@
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/homeMenuIcon"
+        app:layout_constraintBottom_toTopOf="@id/homeFAB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/homeSearchView" />
 
+
     <ImageView
-        android:id="@+id/homeMenuIcon"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:id="@+id/openIndicatorLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:contentDescription="Overflow Menu Icon"
+        android:contentDescription="Home Open Indicator Left"
+        android:rotation="180"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="@id/homeFAB"
+        app:layout_constraintEnd_toStartOf="@id/homeFAB"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/homeFAB" />
+
+    <ImageView
+        android:id="@+id/openIndicatorRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:contentDescription="Home Open Indicator Right"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="@id/homeFAB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/homeFAB"
+        app:layout_constraintTop_toTopOf="@id/homeFAB" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/aboutFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:contentDescription="About FAB"
+        android:focusable="true"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_menu"
+        android:visibility="gone"
+        app:elevation="8dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@id/homeFAB"
+        app:layout_constraintEnd_toEndOf="@id/homeFAB"
+        app:layout_constraintStart_toStartOf="@id/homeFAB"
+        app:layout_constraintTop_toTopOf="@id/homeFAB"
+        app:srcCompat="@drawable/ic_info" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/settingsFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Settings FAB"
+        android:visibility="gone"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@id/homeFAB"
+        app:layout_constraintEnd_toEndOf="@id/homeFAB"
+        app:layout_constraintStart_toStartOf="@id/homeFAB"
+        app:layout_constraintTop_toTopOf="@id/homeFAB"
+        app:srcCompat="@drawable/ic_settings" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fontFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:contentDescription="Font FAB"
+        android:focusable="true"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        app:elevation="8dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@id/homeFAB"
+        app:layout_constraintEnd_toEndOf="@id/homeFAB"
+        app:layout_constraintStart_toStartOf="@id/homeFAB"
+        app:layout_constraintTop_toTopOf="@id/homeFAB"
+        app:srcCompat="@drawable/ic_font" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/homeFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:clickable="true"
+        android:contentDescription="Home FAB"
+        android:focusable="true"
+        android:scaleType="fitXY"
+        app:elevation="12dp"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewPager" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_menu"
+        app:tint="@color/colorWhite" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bgFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:contentDescription="BG FAB"
+        android:focusable="true"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        app:elevation="8dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@id/homeFAB"
+        app:layout_constraintEnd_toEndOf="@id/homeFAB"
+        app:layout_constraintStart_toStartOf="@id/homeFAB"
+        app:layout_constraintTop_toTopOf="@id/homeFAB"
+        app:srcCompat="@drawable/ic_insert_photo" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/colorFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:contentDescription="Color FAB"
+        android:focusable="true"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        app:elevation="8dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@id/homeFAB"
+        app:layout_constraintEnd_toEndOf="@id/homeFAB"
+        app:layout_constraintStart_toStartOf="@id/homeFAB"
+        app:layout_constraintTop_toTopOf="@id/homeFAB"
+        app:srcCompat="@drawable/ic_color_lens" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/favFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:contentDescription="Fav FAB"
+        android:focusable="true"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        app:elevation="8dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@id/homeFAB"
+        app:layout_constraintEnd_toEndOf="@id/homeFAB"
+        app:layout_constraintStart_toStartOf="@id/homeFAB"
+        app:layout_constraintTop_toTopOf="@id/homeFAB"
+        app:srcCompat="@drawable/ic_favorite"
+        app:tint="@color/colorWhite" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
