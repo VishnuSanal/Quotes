@@ -83,7 +83,7 @@ public class ColorFragment extends Fragment {
                 } else if (colorRequestCode == 1) {
 
                     sharedPreferenceHelper.setColorPreference(colorString);
-                    Toast.makeText(requireContext(), "Accent Colour Set...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireContext(), "Card Colour Set...", Toast.LENGTH_LONG).show();
 
                     ((MainActivity) requireActivity()).notifyViewPagerDataSetChanged();
 

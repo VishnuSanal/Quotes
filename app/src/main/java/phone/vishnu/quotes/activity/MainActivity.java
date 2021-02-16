@@ -19,6 +19,7 @@ import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -264,8 +265,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animate));
         if (id == R.id.homeFAB) {
+            homeFAB.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animate));
             if (null == homeFAB.getTag()) {
                 if (isFABMenuHidden()) {
                     openFABMenu();
@@ -325,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontMasterFragment.newInstance()).addToBackStack(null).commit();
                 setHomeFABHome();
             } else if (id == R.id.settingsFAB) {
-                Toast.makeText(this, "Ouch!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Feature under development...", Toast.LENGTH_SHORT).show();
 //                changeHomeFABState();
             }
         }
@@ -352,14 +353,17 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
 
     private void closeFABMenu() {
 
-        float fabPosition = homeFAB.getX();
+        float homeFABX = homeFAB.getX();
+        float homeFABY = homeFAB.getY();
 
-        favFAB.animate().x(fabPosition).alpha(0f);
-        aboutFAB.animate().x(fabPosition).alpha(0f);
-        colorFAB.animate().x(fabPosition).alpha(0f);
-        settingsFAB.animate().x(fabPosition).alpha(0f);
-        bgFAB.animate().x(fabPosition).alpha(0f);
-        fontFAB.animate().x(fabPosition).alpha(0f);
+        favFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
+        aboutFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
+        colorFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
+        settingsFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
+        bgFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
+        fontFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
+
+        homeFAB.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_menu));
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -372,17 +376,23 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     private void openFABMenu() {
         setVisibility(View.VISIBLE);
 
-        float homeFABX = homeFAB.getX();
-        float homeFABY = homeFAB.getY();
+        int i = 120;
+        double cos36 = Math.cos(Math.toRadians(36));
+        double sin36 = Math.sin(Math.toRadians(36));
 
-        favFAB.animate().translationX(DPtoPX(60 * 3)).alpha(1f);
-        aboutFAB.animate().translationX(-DPtoPX(60 * 3)).alpha(1f);
+        double cos72 = Math.cos(Math.toRadians(72));
+        double sin72 = Math.sin(Math.toRadians(72));
 
-        colorFAB.animate().translationX(DPtoPX(60 * 2)).alpha(1f);
-        settingsFAB.animate().translationX(-DPtoPX(60 * 2)).alpha(1f);
+        favFAB.animate().translationX(DPtoPX(i)).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
+        aboutFAB.animate().translationX(-DPtoPX(i)).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
 
-        bgFAB.animate().translationX(DPtoPX(60)).alpha(1f);
-        fontFAB.animate().translationX(-DPtoPX(60)).alpha(1f);
+        colorFAB.animate().translationX(DPtoPX((int) (i * cos36))).translationY(-DPtoPX((int) (i * sin36))).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
+        settingsFAB.animate().translationX(-DPtoPX((int) (i * cos36))).translationY(-DPtoPX((int) (i * sin36))).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
+
+        bgFAB.animate().translationX(DPtoPX((int) (i * cos72))).translationY(-DPtoPX((int) (i * sin72))).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
+        fontFAB.animate().translationX(-DPtoPX((int) (i * cos72))).translationY(-DPtoPX((int) (i * sin72))).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
+
+        homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_close));
     }
 
     private void setVisibility(int i) {
@@ -397,12 +407,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     public int DPtoPX(int DP) {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         return Math.round(DP * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-    }
-
-    public int getScreenWidth() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return (displayMetrics.widthPixels / 2);
     }
 
     private void initAnimations() {

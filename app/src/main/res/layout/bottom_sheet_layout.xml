@@ -43,7 +43,7 @@
         android:layout_height="48dp"
         android:layout_margin="8dp"
         android:background="@drawable/bottom_button_background"
-        android:contentDescription="@string/choose_accent_colour"
+        android:contentDescription="@string/choose_card_colour"
         android:scaleType="fitXY"
         android:src="@drawable/ic_color_lens" />
 

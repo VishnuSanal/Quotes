@@ -33,7 +33,7 @@
  - ❤Favourite Quotes – Store Your Personal Favourite Quotes
  - 😎Share – Share Quotes as an Image to Social Media
  - 📷Custom Background Images – Personalize the app with Custom Background Images
- - 🎨Custom Accent Colors – Personalize the app with Custom Colors
+ - 🎨Custom Card Colors – Personalize the app with Custom Colors
  - 🔠Custom Fonts – Personalize the app with Custom Fonts
  - 🆕Custom Quotes – Add your own Quotes
  - 🔔Customizable Daily Notification – Choose the Time for Daily Notifications to suit your needs
