@@ -63,7 +63,6 @@ import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.data.QuoteListAsyncResponse;
 import phone.vishnu.quotes.fragment.AboutFragment;
-import phone.vishnu.quotes.fragment.BottomSheetFragment;
 import phone.vishnu.quotes.fragment.ColorFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontMasterFragment;
@@ -74,7 +73,7 @@ import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
-public class MainActivity extends AppCompatActivity implements BottomSheetFragment.BottomSheetListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static ProgressDialog bgDialog, fontDialog;
     private final int PICK_IMAGE_ID = 36;
@@ -87,13 +86,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     private ConstraintLayout constraintLayout;
     private ViewPager viewPager;
 
-    private FloatingActionButton fontFAB;
-    private FloatingActionButton aboutFAB;
-    private FloatingActionButton bgFAB;
-    private FloatingActionButton colorFAB;
-    private FloatingActionButton favFAB;
-    private FloatingActionButton settingsFAB;
-    private FloatingActionButton homeFAB;
+    private FloatingActionButton fontFAB, aboutFAB, bgFAB, colorFAB, favFAB, settingsFAB, homeFAB;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -215,17 +208,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
         aboutFAB.setOnClickListener(this);
 
         initAnimations();
-
-        /*ImageView menuIcon = findViewById(R.id.homeMenuIcon);
-        menuIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                    BottomSheetFragment bottomSheet = new BottomSheetFragment();
-                    bottomSheet.show(getSupportFragmentManager(), "bottomSheetTag");
-                }
-            }
-        });*/
 
         adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), allQuotesList);
         viewPager.setAdapter(adapter);
@@ -516,54 +498,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 sharedPreferenceHelper.setBackgroundPath(file);
             }
         } else Toast.makeText(this, "Error...", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onBottomSheetButtonClicked(int id) {
-        if (id == R.id.bottomSheetFav) {
-            FavoriteFragment fragment = FavoriteFragment.newInstance();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .add(R.id.constraintLayout, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        } else if (id == R.id.bottomSheetAbout) {
-            AboutFragment fragment = AboutFragment.newInstance();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .add(R.id.constraintLayout, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        } else if (id == R.id.bottomSheetImageChooser) {
-
-            Dexter.withContext(this)
-                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .withListener(new PermissionListener() {
-                        @Override
-                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                            showBackgroundOptionChooser(true);
-                        }
-
-                        @Override
-                        public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                            showPermissionDeniedDialog();
-                        }
-
-                        @Override
-                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                            Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
-                            permissionToken.continuePermissionRequest();
-                        }
-                    })
-                    .check();
-
-        } else if (id == R.id.bottomSheetColorChooser) {
-            getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(1)).addToBackStack(null).commit();
-        } else if (id == R.id.bottomSheetFont) {
-            fontDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
-            fontDialog.setCancelable(false);
-            getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontMasterFragment.newInstance()).addToBackStack(null).commit();
-        }
     }
 
     @Override

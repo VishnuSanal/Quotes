@@ -12,7 +12,6 @@
     tools:ignore="HardcodedText">
 
     <ImageView
-        android:id="@+id/colorSampleIconImageView"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:background="@color/colorAccent"
