@@ -13,24 +13,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class RecyclerViewAdapter extends ListAdapter<Uri, RecyclerViewAdapter.ViewHolder> {
 
     private OnItemClickListener listener;
-    private SharedPreferenceHelper sharedPreferenceHelper;
 
     public RecyclerViewAdapter() {
         super(new DiffUtil.ItemCallback<Uri>() {
             @Override
             public boolean areItemsTheSame(@NonNull Uri oldItem, @NonNull Uri newItem) {
-                return oldItem.getEncodedPath().equals(newItem.getEncodedPath());
+                return Objects.equals(oldItem.getEncodedPath(), newItem.getEncodedPath());
             }
 
             @Override
             public boolean areContentsTheSame(@NonNull Uri oldItem, @NonNull Uri newItem) {
-                return false;
+                return Objects.equals(oldItem.getEncodedPath(), newItem.getEncodedPath());
             }
         });
     }
@@ -39,7 +39,6 @@ public class RecyclerViewAdapter extends ListAdapter<Uri, RecyclerViewAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_card, parent, false);
-        sharedPreferenceHelper = new SharedPreferenceHelper(parent.getContext());
         return new ViewHolder(v);
     }
 

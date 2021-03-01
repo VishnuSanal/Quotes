@@ -25,11 +25,8 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -40,10 +37,10 @@ import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class FontFragment extends Fragment {
 
+    private final ArrayList<String> fontList = new ArrayList<>();
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ListView listView;
     private FontDataAdapter fontDataAdapter;
-    private ArrayList<String> fontList = new ArrayList<>();
     private ProgressBar progressBar;
 
     public FontFragment() {
@@ -54,23 +51,40 @@ public class FontFragment extends Fragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View inflate = inflater.inflate(R.layout.fragment_font, container, false);
+        if (!isNetworkAvailable(requireContext()))
+            Toast.makeText(requireContext(), "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
+
+        progressBar = inflate.findViewById(R.id.fontProgressBar);
+        listView = inflate.findViewById(R.id.fontListView);
+
+        sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+        return inflate;
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         if (MainActivity.fontDialog != null && MainActivity.fontDialog.isShowing())
             MainActivity.fontDialog.dismiss();
 
-        final String fontArrayListString = sharedPreferenceHelper.getFontArrayString();
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+        final File[] files = root.listFiles();
 
-        if (null != fontArrayListString) {
-            fontList = new ArrayList<>();
+        if (files != null) {
+            for (File file : files) {
 
-            Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<String>>() {
-            }.getType();
-            fontList = gson.fromJson(fontArrayListString, type);
+                if (file.getAbsolutePath().endsWith(".ttf")) {
 
-//            progressBar.setVisibility(View.GONE);
+                    String fontString = file.getName().replace(".ttf", "");
+
+                    fontString = fontString.toUpperCase().charAt(1) + fontString.substring(2);
+
+                    fontList.add(fontString);
+                }
+            }
             if (getContext() != null)
                 if (fontDataAdapter == null) {
                     fontDataAdapter = new FontDataAdapter(Objects.requireNonNull(requireContext()), fontList);
@@ -82,39 +96,32 @@ public class FontFragment extends Fragment {
                 }
         }
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference().child("fonts");
-        storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
-            @Override
-            public void onSuccess(ListResult listResult) {
-                fontList = new ArrayList<>();
+        if (isNetworkAvailable(requireContext())) {
 
-                for (StorageReference item : listResult.getItems()) {
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReference().child("fonts");
+            storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+                @Override
+                public void onSuccess(ListResult listResult) {
 
-                    String fontString = item.getName().replace(".ttf", "");
+                    for (StorageReference item : listResult.getItems()) {
 
-                    fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
+                        String fontString = item.getName().replace(".ttf", "");
 
-                    fontList.add(fontString);
-                }
+                        fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
 
-                progressBar.setVisibility(View.GONE);
+                        ArrayList<String> toBeRemoved = sharedPreferenceHelper.getFontListToBeRemoved();
 
-                Gson gson = new Gson();
-
-                sharedPreferenceHelper.setFontArrayString(gson.toJson(fontList));
-
-                if (getContext() != null)
-                    if (fontDataAdapter == null) {
-                        fontDataAdapter = new FontDataAdapter(Objects.requireNonNull(requireContext()), fontList);
-                        listView.setAdapter(fontDataAdapter);
-                    } else {
-                        fontDataAdapter.clear();
-                        fontDataAdapter.addAll(fontList);
-                        fontDataAdapter.notifyDataSetChanged();
+                        if (!fontList.contains(fontString) && !toBeRemoved.contains("." + item.getName().toLowerCase())) {
+                            fontDataAdapter.add(fontString);
+                            fontDataAdapter.notifyDataSetChanged();
+                        }
                     }
-            }
-        });
+
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -173,21 +180,8 @@ public class FontFragment extends Fragment {
         });
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_font, container, false);
-        if (!isNetworkAvailable())
-            Toast.makeText(requireContext(), "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
-
-        progressBar = inflate.findViewById(R.id.fontProgressBar);
-        listView = inflate.findViewById(R.id.fontListView);
-
-        sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
-        return inflate;
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) requireContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    private boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }

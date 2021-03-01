@@ -63,7 +63,6 @@ public class FontDataAdapter extends ArrayAdapter<String> {
             if (f.exists()) {
 
                 viewHolder.progressBar.setProgress(100);
-
                 try {
                     Typeface face = Typeface.createFromFile(f);
                     viewHolder.fontTV.setTypeface(face);
@@ -108,8 +107,11 @@ public class FontDataAdapter extends ArrayAdapter<String> {
             viewHolder = (FontDataAdapter.ViewHolder) rootView.getTag();
         }
 
-        viewHolder.fontTV.setText(objects.get(position));
+        String fontString = objects.get(position).replace(".ttf", "");
 
+        fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
+
+        viewHolder.fontTV.setText(fontString);
 
         return rootView;
     }

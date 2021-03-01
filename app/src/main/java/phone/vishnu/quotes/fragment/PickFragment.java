@@ -174,6 +174,7 @@ public class PickFragment extends Fragment {
             storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
                 @Override
                 public void onSuccess(ListResult listResult) {
+
                     for (StorageReference item : listResult.getItems())
                         if (!bgArrayList.contains(item.getName()))
                             item.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

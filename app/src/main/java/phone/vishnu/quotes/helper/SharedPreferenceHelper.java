@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 import phone.vishnu.quotes.model.Quote;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -14,7 +16,6 @@ public class SharedPreferenceHelper {
     private final String FIRST_RUN_BOOLEAN = "firstRunBoolean";
 
     private final String FAV_ARRAY_STRING = "favoriteArrayString";
-    private final String FONT_ARRAY_STRING = "fontArrayString";
 
     private final String CARD_COLOR = "colorString";
     private final String FONT_COLOR = "fontColorString";
@@ -48,14 +49,6 @@ public class SharedPreferenceHelper {
 
     public void setFavoriteArrayString(String favoriteArrayString) {
         sharedPreferences.edit().putString(FAV_ARRAY_STRING, favoriteArrayString).apply();
-    }
-
-    public String getFontArrayString() {
-        return sharedPreferences.getString(FONT_ARRAY_STRING, null);
-    }
-
-    public void setFontArrayString(String fontArrayString) {
-        sharedPreferences.edit().putString(FONT_ARRAY_STRING, fontArrayString).apply();
     }
 
     public String getAlarmString() {
@@ -145,13 +138,31 @@ public class SharedPreferenceHelper {
         sharedPreferences.edit().putString(WIDGET_AUTHOR_STRING, author).apply();
     }
 
+    public void deleteFontPreference() {
+        String FONT_ARRAY_STRING = "fontArrayString";
+
+        if (sharedPreferences.contains(FONT_ARRAY_STRING))
+            sharedPreferences.edit().remove(FONT_ARRAY_STRING).apply();
+    }
+
     public void resetSharedPreferences() {
         setColorPreference("#607D8B");
         setBackgroundPath("-1");
         setAlarmString("At 08:30 Daily");
         setFontPath("-1");
-        setFontArrayString(null);
         setFavoriteArrayString(null);
         setFirstRunBoolean(true);
+    }
+
+    public ArrayList<String> getFontListToBeRemoved() {
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        arrayList.add(".alloyink.ttf");
+        arrayList.add(".azonix.ttf");
+        arrayList.add(".chlorinr.ttf");
+        arrayList.add(".cimeropro.ttf");
+        arrayList.add(".healtheweb.ttf");
+
+        return arrayList;
     }
 }

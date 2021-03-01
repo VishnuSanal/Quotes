@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
@@ -23,6 +24,8 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
@@ -40,10 +43,30 @@ public class SplashActivity extends AppCompatActivity {
 
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
 
+        removeFonts();
+
         if (sharedPreferenceHelper.isFirstRun())
             showNewTour();
         else
             initTasks();
+    }
+
+    private void removeFonts() {
+        sharedPreferenceHelper.deleteFontPreference();
+
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+        File[] files = root.listFiles();
+
+        ArrayList<String> arrayList = sharedPreferenceHelper.getFontListToBeRemoved();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.getAbsolutePath().endsWith(".ttf")) {
+                    if (arrayList.contains(file.getName()))
+                        file.delete();
+                }
+            }
+        }
     }
 
     private void showNewTour() {
