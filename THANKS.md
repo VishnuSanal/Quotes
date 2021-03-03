@@ -76,7 +76,7 @@
 ## ♥ Other awesome people who helped
 
  - [Aswin Kesav U](https://www.twitter.com/KesavAswin/)
- - [Vasudevan T](https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md/#)
+ - Vasudevan T
  - [Vidhu Vinodh](https://www.instagram.com/vidhu_vinodh/)
- - [Jaseel Ahamed M](https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md/#)
+ - Jaseel Ahamed M
  - [Yadhu Krishnan E T](https://www.instagram.com/yadhu1020/)
