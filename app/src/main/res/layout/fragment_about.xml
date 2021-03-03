@@ -42,16 +42,27 @@
             android:id="@+id/aboutSampleAppNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="casual"
+            android:layout_margin="8dp"
+            android:fontFamily="serif"
             android:text="@string/app_name"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageAppIcon" />
+
+        <TextView
+            android:id="@+id/aboutSampleVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:fontFamily="serif"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@id/aboutSampleAppNameTextView"
+            app:layout_constraintStart_toStartOf="@id/aboutSampleAppNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/aboutSampleAppNameTextView"
+            tools:text="Version 1.12.1" />
 
         <View
             android:id="@+id/aboutSampleSpacerView"
@@ -62,10 +73,10 @@
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="8dp"
             android:background="@color/spacerColor"
+            app:layout_constraintBottom_toTopOf="@id/aboutPageLinksTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutSampleAppNameTextView" />
-
+            app:layout_constraintTop_toBottomOf="@id/aboutSampleVersion" />
 
         <TextView
             android:id="@+id/aboutPageLinksTextView"
@@ -76,11 +87,14 @@
             android:text="@string/links"
             android:textColor="@color/colorAccent"
             android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/aboutPageRateTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutSampleSpacerView" />
 
         <TextView
-            android:id="@+id/aboutPageFeedbackTextView"
+            android:id="@+id/aboutPageRateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -88,8 +102,10 @@
             android:clickable="true"
             android:focusable="true"
             android:padding="16dp"
-            android:text="@string/send_feedback_to_the_developer"
+            android:text="@string/rate_this_app_on_google_play"
             android:textColor="@color/textColor"
+            app:layout_constraintBottom_toTopOf="@id/aboutPageViewSourceCodeTextView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageLinksTextView" />
 
@@ -102,127 +118,44 @@
             android:clickable="true"
             android:focusable="true"
             android:padding="16dp"
-            android:text="@string/view_source_code_at_github"
+            android:text="@string/view_source_code_on_github"
             android:textColor="@color/textColor"
+            app:layout_constraintBottom_toTopOf="@id/aboutPageThanksTextView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageFeedbackTextView" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageRateTextView" />
 
         <TextView
-            android:id="@+id/aboutPageCreditsTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/aboutPageThanksTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_margin="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="16dp"
             android:text="@string/thanks_to"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp"
+            android:textColor="@color/textColor"
+            app:layout_constraintBottom_toTopOf="@id/aboutPageFeedbackTextView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutPageViewSourceCodeTextView" />
 
         <TextView
-            android:id="@+id/aboutPageCredit1TextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/aboutPageFeedbackTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:text="Aswin Kesav.U"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="16dp"
+            android:text="@string/send_feedback_to_the_developer"
             android:textColor="@color/textColor"
+            app:layout_constraintBottom_toTopOf="@id/aboutReminderSwitch"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCreditsTextView" />
-
-        <TextView
-            android:id="@+id/aboutPageCredit2TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:text="Vasudevan.T"
-            android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit1TextView" />
-
-        <TextView
-            android:id="@+id/aboutPageCredit3TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:text="Vidhu Vinodh"
-            android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit2TextView" />
-
-        <TextView
-            android:id="@+id/aboutPageCredit4TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:text="Jaseel Ahamed.M"
-            android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit3TextView" />
-
-        <TextView
-            android:id="@+id/aboutPageCredit5TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:text="Yadhu Krishnan E.T"
-            android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit4TextView" />
-
-        <TextView
-            android:id="@+id/aboutPageCredit6TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:text="Paulo Dichone"
-            android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit5TextView" />
-
-        <TextView
-            android:id="@+id/aboutPageCredit7TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:text="Pexels.com"
-            android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit6TextView" />
-
-        <TextView
-            android:id="@+id/aboutPageCredit8TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:text="Nikhil.S"
-            android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit7TextView" />
-
+            app:layout_constraintTop_toBottomOf="@id/aboutPageThanksTextView" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/aboutReminderSwitch"
@@ -235,7 +168,7 @@
             app:layout_constraintBottom_toTopOf="@id/aboutResetSettingsButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageCredit8TextView" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageFeedbackTextView" />
 
         <TextView
             android:id="@+id/aboutReminderTV"
@@ -243,33 +176,23 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:textColor="@color/textColor"
+            app:layout_constraintBottom_toBottomOf="@id/aboutReminderSwitch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/aboutReminderSwitch"
-            app:layout_constraintTop_toBottomOf="@id/aboutReminderSwitch"
-            app:layout_constraintTop_toTopOf="@id/aboutReminderSwitch" />
+            app:layout_constraintTop_toTopOf="@id/aboutReminderSwitch"
+            tools:text="At 11:45 Daily" />
 
         <TextView
             android:id="@+id/aboutResetSettingsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
             android:clickable="true"
             android:focusable="true"
             android:text="@string/reset_settings"
             android:textColor="@color/colorAccent"
-            app:layout_constraintBottom_toTopOf="@id/aboutSampleVersion"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutReminderSwitch" />
-
-        <TextView
-            android:id="@+id/aboutSampleVersion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutResetSettingsButton" />
+            app:layout_constraintTop_toBottomOf="@id/aboutReminderSwitch" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

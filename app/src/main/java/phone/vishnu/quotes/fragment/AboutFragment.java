@@ -3,6 +3,7 @@ package phone.vishnu.quotes.fragment;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,7 +36,7 @@ import static android.content.Context.ALARM_SERVICE;
 public class AboutFragment extends Fragment {
 
     private SharedPreferenceHelper sharedPreferenceHelper;
-    private TextView sourceCodeTV, feedbackTV, resetTV, reminderTimeTV;
+    private TextView sourceCodeTV, feedbackTV, resetTV, reminderTimeTV, thanksTV, rateTV;
     private SwitchCompat reminderSwitch;
 
     public AboutFragment() {
@@ -53,7 +54,9 @@ public class AboutFragment extends Fragment {
         resetTV = inflate.findViewById(R.id.aboutResetSettingsButton);
         reminderSwitch = inflate.findViewById(R.id.aboutReminderSwitch);
         reminderTimeTV = inflate.findViewById(R.id.aboutReminderTV);
-        ((TextView) inflate.findViewById(R.id.aboutSampleVersion)).setText(String.format("Version: %s", BuildConfig.VERSION_NAME));
+        thanksTV = inflate.findViewById(R.id.aboutPageThanksTextView);
+        rateTV = inflate.findViewById(R.id.aboutPageRateTextView);
+        ((TextView) inflate.findViewById(R.id.aboutSampleVersion)).setText(String.format("Version %s", BuildConfig.VERSION_NAME));
 
         sharedPreferenceHelper = new SharedPreferenceHelper(Objects.requireNonNull(requireContext()));
 
@@ -77,6 +80,34 @@ public class AboutFragment extends Fragment {
 
                 composeEmail(new String[]{requireContext().getString(R.string.email_address_of_developer)}, "Feedback of " + requireContext().getString(R.string.app_name));
 
+            }
+        });
+        thanksTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse("https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md");
+                startActivity(new Intent(Intent.ACTION_VIEW, uriUrl));
+            }
+        });
+        rateTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Uri uriUrl = Uri.parse("market://details?id=" + requireContext().getPackageName());
+                Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    e.printStackTrace();
+                    startActivity(
+                            new Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("http://play.google.com/store/apps/details?id=" + requireContext().getPackageName())));
+                }
             }
         });
         resetTV.setOnClickListener(new View.OnClickListener() {

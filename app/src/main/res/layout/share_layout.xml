@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/shareRelativeLayout"
     android:layout_width="1080px"
     android:layout_height="1920px"
-    android:gravity="center">
+    android:gravity="center"
+    tools:ignore="PxUsage,SpUsage">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/shareCardView"
         android:layout_width="920px"
@@ -29,7 +32,7 @@
                 android:maxWidth="900px"
                 android:padding="4dp"
                 android:textColor="#FFFFFF"
-                android:textSize="32sp"
+                android:textSize="32dp"
                 app:layout_constraintBottom_toTopOf="@id/shareAuthorTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +45,7 @@
                 android:fontFamily="cursive"
                 android:padding="4dp"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp"
+                android:textSize="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

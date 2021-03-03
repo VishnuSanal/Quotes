@@ -113,8 +113,11 @@ public class FontFragment extends Fragment {
                         ArrayList<String> toBeRemoved = sharedPreferenceHelper.getFontListToBeRemoved();
 
                         if (!fontList.contains(fontString) && !toBeRemoved.contains("." + item.getName().toLowerCase())) {
-                            fontDataAdapter.add(fontString);
-                            fontDataAdapter.notifyDataSetChanged();
+
+                            if (getContext() != null && fontDataAdapter != null) {
+                                fontDataAdapter.add(fontString);
+                                fontDataAdapter.notifyDataSetChanged();
+                            }
                         }
                     }
 

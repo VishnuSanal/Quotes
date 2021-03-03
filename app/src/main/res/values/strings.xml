@@ -2,15 +2,15 @@
     <string name="app_name">Quotes</string>
 
     <string name="links">Links</string>
-    <string name="view_source_code_at_github">View source code on GitHub</string>
-    <string name="send_feedback_to_the_developer">Send feedback to developer</string>
+    <string name="view_source_code_on_github">👨🏿‍💻 View source code on GitHub</string>
+    <string name="send_feedback_to_the_developer">📑 Send feedback to developer</string>
     <string name="email_address_of_developer">t.v.s10123@gmail.com</string>
     <string name="reset_settings">Reset Settings</string>
-    <string name="thanks_to">Thanks To:</string>
+    <string name="thanks_to">♥ Thanks to these awesome people</string>
+    <string name="rate_this_app_on_google_play">⭐ Rate this app on Google Play</string>
     <string name="daily_reminder">Daily Reminder</string>
 
     <string name="favorites">Favorites</string>
-
     <string name="home">Home</string>
     <string name="share">Share Random Quote</string>
     <string name="author">Author</string>

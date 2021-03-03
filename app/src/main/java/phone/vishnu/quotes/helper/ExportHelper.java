@@ -76,21 +76,24 @@ public class ExportHelper {
         CardView cardView = shareView.findViewById(R.id.shareCardView);
         cardView.setCardBackgroundColor(Color.parseColor(cardColor));
 
+        TextView shareQuoteTextView = (TextView) shareView.findViewById(R.id.shareQuoteTextView);
+        TextView shareAuthorTextView = (TextView) shareView.findViewById(R.id.shareAuthorTextView);
+
         if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
             try {
                 Typeface face = Typeface.createFromFile(fontPath);
-                ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTypeface(face);
+                shareQuoteTextView.setTypeface(face);
             } catch (Exception e) {
                 FirebaseCrashlytics.getInstance().recordException(e);
                 e.printStackTrace();
             }
         }
 
-        ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setTextColor(Color.parseColor(fontColor));
-        ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setTextColor(Color.parseColor(fontColor));
+        shareQuoteTextView.setTextColor(Color.parseColor(fontColor));
+        shareAuthorTextView.setTextColor(Color.parseColor(fontColor));
 
-        ((TextView) shareView.findViewById(R.id.shareQuoteTextView)).setText(quote);
-        ((TextView) shareView.findViewById(R.id.shareAuthorTextView)).setText(author);
+        shareQuoteTextView.setText(quote);
+        shareAuthorTextView.setText(author);
 
         int widthPixels = 1080;
         int heightPixels = 1920;

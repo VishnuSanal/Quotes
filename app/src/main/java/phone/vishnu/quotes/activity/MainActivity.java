@@ -395,11 +395,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ScaleAnimation scaleAnimation =
                 new ScaleAnimation(0, 1f, 0, 1f, Animation.RELATIVE_TO_SELF, 0.5f,
                         Animation.RELATIVE_TO_SELF, 0.5f);
-        scaleAnimation.setDuration(500);
+        scaleAnimation.setDuration(750);
         scaleAnimation.setFillAfter(true);
 
         AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
-        alphaAnimation.setDuration(500);
+        alphaAnimation.setDuration(750);
         alphaAnimation.setInterpolator(new LinearInterpolator());
         alphaAnimation.setRepeatCount(Animation.INFINITE);
         alphaAnimation.setRepeatMode(Animation.REVERSE);
