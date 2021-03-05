@@ -7,7 +7,7 @@
 </h1>
 
 <p align="center">
-	Awesome open source people who helped build this app
+	Awesome people that helps build & run this app
 </p>
 
 ## 📷 Background Images -> From [Pexels](https://www.pexels.com)
