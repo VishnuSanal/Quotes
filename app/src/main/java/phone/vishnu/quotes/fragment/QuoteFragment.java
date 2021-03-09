@@ -83,7 +83,6 @@ public class QuoteFragment extends Fragment {
 
         if ((!fontPath.equals("-1")) && (new File(fontPath).exists())) {
             try {
-//                Typeface face = Typeface.createFromFile("/storage/emulated/0/Documents/Quotes/akayatelivigala.ttf");
                 Typeface face = Typeface.createFromFile(fontPath);
                 quoteText.setTypeface(face);
             } catch (Exception e) {

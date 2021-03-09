@@ -65,6 +65,9 @@
  - [Vaishnavi Murthy](https://fonts.google.com/specimen/Akaya+Telivigala?preview.text_type=custom#about)
  - [Impallari Type](https://fonts.google.com/specimen/Dancing+Script?preview.text_type=custom#about)
  - [Tart Workshop](https://fonts.google.com/specimen/Fredericka+the+Great?preview.text_type=custom#about) 
+ - [Astigmatic](https://fonts.google.com/specimen/Berkshire+Swash?preview.text_type=custom#about)
+ - [Sideshow](https://fonts.google.com/specimen/Flavors?preview.text_type=custom#about)
+ - [Brenda Gallo & Gustavo Dipre](https://fonts.google.com/specimen/Spirax?preview.text_type=custom#about)
 
 ## 📑Libraries Used
  - [Volley](https://github.com/google/volley)
