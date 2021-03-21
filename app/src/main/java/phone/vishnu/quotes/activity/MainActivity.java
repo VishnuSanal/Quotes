@@ -67,6 +67,7 @@ import phone.vishnu.quotes.fragment.ColorFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontMasterFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
+import phone.vishnu.quotes.fragment.SettingsFragment;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.FavUtils;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
@@ -261,7 +262,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         } else {
             closeFABMenu();
-
             if (id == R.id.favFAB) {
                 FavoriteFragment fragment = FavoriteFragment.newInstance();
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -308,8 +308,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontMasterFragment.newInstance()).addToBackStack(null).commit();
                 setHomeFABHome();
             } else if (id == R.id.settingsFAB) {
-                Toast.makeText(this, "Feature under development...", Toast.LENGTH_SHORT).show();
-//                changeHomeFABState();
+                SettingsFragment fragment = SettingsFragment.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .add(R.id.constraintLayout, fragment)
+                        .addToBackStack(null)
+                        .commit();
+
+                setHomeFABHome();
             }
         }
     }

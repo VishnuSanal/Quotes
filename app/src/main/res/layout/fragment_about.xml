@@ -152,47 +152,9 @@
             android:padding="16dp"
             android:text="@string/send_feedback_to_the_developer"
             android:textColor="@color/textColor"
-            app:layout_constraintBottom_toTopOf="@id/aboutReminderSwitch"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageThanksTextView" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/aboutReminderSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:checked="true"
-            android:text="@string/daily_reminder"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toTopOf="@id/aboutResetSettingsButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageFeedbackTextView" />
-
-        <TextView
-            android:id="@+id/aboutReminderTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toBottomOf="@id/aboutReminderSwitch"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/aboutReminderSwitch"
-            app:layout_constraintTop_toTopOf="@id/aboutReminderSwitch"
-            tools:text="At 11:45 Daily" />
-
-        <TextView
-            android:id="@+id/aboutResetSettingsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="@string/reset_settings"
-            android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutReminderSwitch" />
+            app:layout_constraintTop_toBottomOf="@id/aboutPageThanksTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
