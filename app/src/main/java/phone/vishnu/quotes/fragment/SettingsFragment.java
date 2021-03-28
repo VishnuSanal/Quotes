@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -22,6 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
+
+import com.ncorti.slidetoact.SlideToActView;
 
 import java.text.MessageFormat;
 import java.util.Calendar;
@@ -37,7 +38,7 @@ import static android.content.Context.ALARM_SERVICE;
 public class SettingsFragment extends Fragment {
 
     private SwitchCompat reminderSwitch;
-    private TextView resetTV;
+    private SlideToActView resetToggle;
     private SharedPreferenceHelper sharedPreferenceHelper;
 
     public SettingsFragment() {
@@ -50,7 +51,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_settings, container, false);
-        resetTV = inflate.findViewById(R.id.settingsResetButton);
+        resetToggle = inflate.findViewById(R.id.settingsResetToggle);
         reminderSwitch = inflate.findViewById(R.id.settingsReminderSwitch);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(Objects.requireNonNull(requireContext()));
@@ -64,13 +65,14 @@ public class SettingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        resetTV.setOnClickListener(new View.OnClickListener() {
+        resetToggle.setOnSlideCompleteListener(new SlideToActView.OnSlideCompleteListener() {
             @Override
-            public void onClick(View v) {
+            public void onSlideComplete(@NonNull SlideToActView slideToActView) {
 
                 sharedPreferenceHelper.resetSharedPreferences();
 
-                Toast.makeText(requireContext(), "Settings Reset.....\nRestart App for changes to take effect.....", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Settings Reset\nRestart App for changes to take effect...", Toast.LENGTH_SHORT).show();
+
             }
         });
 

@@ -50,16 +50,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settingsReminderSwitch" />
 
-    <TextView
-        android:id="@+id/settingsResetButton"
-        android:layout_width="wrap_content"
+    <com.ncorti.slidetoact.SlideToActView
+        android:id="@+id/settingsResetToggle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="80dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/reset_settings"
-        android:textColor="@color/colorAccent"
+        android:elevation="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:outer_color="@color/colorAccent"
+        app:text="@string/reset_settings" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

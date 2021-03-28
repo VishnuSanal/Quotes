@@ -75,6 +75,7 @@
  - [Picasso](https://square.github.io/picasso/)
  - [uCrop](https://github.com/Yalantis/uCrop)
  - [Dexter](https://github.com/Karumi/Dexter)
+ - [Slide To Act](https://github.com/cortinico/slidetoact)
 
 ## ♥ Other awesome people who helped
 
