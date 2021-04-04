@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background"
+    android:elevation="8dp"
+    tools:ignore="HardcodedText">
+
+    <TextView
+        android:id="@+id/bottomSheetTitleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:text="Pick an Option"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/bottomSheetRadioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/bottomSheetRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetTitleTV">
+
+        <RadioButton
+            android:id="@+id/bottomSheetCopyRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:drawableStart="@drawable/ic_copy"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:text="Copy Quote to Clipboard"
+            android:textColor="@color/textColor" />
+
+        <RadioButton
+            android:id="@+id/bottomSheetShareRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:drawableStart="@drawable/ic_share"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:text="Share Quote as Image"
+            android:textColor="@color/textColor" />
+
+        <RadioButton
+            android:id="@+id/bottomSheetSaveRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:drawableStart="@drawable/ic_save"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:text="Save to Gallery"
+            android:textColor="@color/textColor" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/bottomSheetCancelButton"
+        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bottomSheetPickButton"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetRadioGroup" />
+
+    <Button
+        android:id="@+id/bottomSheetPickButton"
+        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Pick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetRadioGroup" />
+</androidx.constraintlayout.widget.ConstraintLayout>

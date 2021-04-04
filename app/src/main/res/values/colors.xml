@@ -18,4 +18,6 @@
     <color name="editTextColor">#BDBDBD</color>
 
     <color name="noColorIconColor">#8B000000</color>
+
+    <color name="bottomSheetBGColor">#FFFFFF</color>
 </resources>

@@ -479,7 +479,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sharedPreferenceHelper.setTotalQuotesCount(quotes.size());
                 Collections.shuffle(quotes);
                 quoteArrayList.addAll(quotes);
-                notifyViewPagerDataSetChanged();
+                updateViewPager();
             }
         });
         return quoteArrayList;
@@ -619,7 +619,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void notifyViewPagerDataSetChanged() {
+    public void updateViewPager() {
         adapter.notifyDataSetChanged();
     }
 

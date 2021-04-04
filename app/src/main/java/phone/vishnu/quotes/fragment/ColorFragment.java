@@ -85,7 +85,7 @@ public class ColorFragment extends Fragment {
                     sharedPreferenceHelper.setColorPreference(colorString);
                     Toast.makeText(requireContext(), "Card Colour Set...", Toast.LENGTH_LONG).show();
 
-                    ((MainActivity) requireActivity()).notifyViewPagerDataSetChanged();
+                    ((MainActivity) requireActivity()).updateViewPager();
 
                     requireActivity().onBackPressed();
                 } else if (colorRequestCode == 2) {
@@ -95,7 +95,7 @@ public class ColorFragment extends Fragment {
                     sharedPreferenceHelper.setFontColorPreference(colorString);
                     Toast.makeText(requireContext(), "Font Colour Set...", Toast.LENGTH_LONG).show();
 
-                    ((MainActivity) requireActivity()).notifyViewPagerDataSetChanged();
+                    ((MainActivity) requireActivity()).updateViewPager();
 
                     requireActivity().onBackPressed();
                 }

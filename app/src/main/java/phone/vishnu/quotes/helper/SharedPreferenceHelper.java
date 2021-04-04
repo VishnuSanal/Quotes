@@ -29,6 +29,8 @@ public class SharedPreferenceHelper {
 
     private final String TOTAL_QUOTE_COUNT = "totalQuoteInt";
 
+    private final String SHARE_BUTTON_ACTION = "shareButtonActionInt";
+
     private final SharedPreferences sharedPreferences;
 
     public SharedPreferenceHelper(Context context) {
@@ -99,6 +101,14 @@ public class SharedPreferenceHelper {
         sharedPreferences.edit().putInt(TOTAL_QUOTE_COUNT, size).apply();
     }
 
+    public int getShareButtonAction() {
+        return sharedPreferences.getInt(SHARE_BUTTON_ACTION, 1);
+    }
+
+    public void setShareButtonAction(int action) {
+        sharedPreferences.edit().putInt(SHARE_BUTTON_ACTION, action).apply();
+    }
+
     public void saveWidgetQuote(Quote quote) {
         setWidgetQuoteString(quote.getQuote());
         setWidgetAuthorString(quote.getAuthor());
@@ -152,6 +162,7 @@ public class SharedPreferenceHelper {
         setFontPath("-1");
         setFavoriteArrayString(null);
         setFirstRunBoolean(true);
+        setShareButtonAction(1);
     }
 
     public ArrayList<String> getFontListToBeRemoved() {

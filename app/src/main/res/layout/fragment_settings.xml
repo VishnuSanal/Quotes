@@ -24,31 +24,81 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/settingsReminderSwitchHintIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:contentDescription="Settings Screen Notification Switch Hint"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_notifications"
+        app:layout_constraintBottom_toBottomOf="@id/settingsReminderSwitch"
+        app:layout_constraintEnd_toStartOf="@id/settingsReminderSwitch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/settingsReminderSwitch"
+        app:tint="@color/colorAccent" />
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/settingsReminderSwitch"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:checked="true"
-        android:fontFamily="serif"
         android:textColor="@color/textColor"
-        app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerView"
+        app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewOne"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/settingsReminderSwitchHintIV"
         app:layout_constraintTop_toBottomOf="@id/settingsSampleIconImageView" />
 
     <View
-        android:id="@+id/settingsSampleSpacerView"
+        android:id="@+id/settingsSampleSpacerViewOne"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="8dp"
         android:background="@color/spacerColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settingsReminderSwitch" />
+
+    <ImageView
+        android:id="@+id/settingsShareActionHintIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:contentDescription="Settings Screen Share TV Hint"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_share"
+        app:layout_constraintBottom_toBottomOf="@id/settingsShareActionPickTV"
+        app:layout_constraintEnd_toStartOf="@id/settingsShareActionPickTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/settingsShareActionPickTV"
+        app:tint="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/settingsShareActionPickTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/settingsShareActionHintIV"
+        app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewOne" />
+
+    <View
+        android:id="@+id/settingsSampleSpacerViewTwo"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/spacerColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settingsShareActionPickTV" />
 
     <com.ncorti.slidetoact.SlideToActView
         android:id="@+id/settingsResetToggle"

@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.format.DateFormat;
@@ -14,12 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.ncorti.slidetoact.SlideToActView;
@@ -40,6 +43,7 @@ public class SettingsFragment extends Fragment {
     private SwitchCompat reminderSwitch;
     private SlideToActView resetToggle;
     private SharedPreferenceHelper sharedPreferenceHelper;
+    private TextView shareActionPickTV;
 
     public SettingsFragment() {
     }
@@ -51,12 +55,17 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_settings, container, false);
-        resetToggle = inflate.findViewById(R.id.settingsResetToggle);
-        reminderSwitch = inflate.findViewById(R.id.settingsReminderSwitch);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(Objects.requireNonNull(requireContext()));
 
+        resetToggle = inflate.findViewById(R.id.settingsResetToggle);
+
+        reminderSwitch = inflate.findViewById(R.id.settingsReminderSwitch);
+
+        shareActionPickTV = inflate.findViewById(R.id.settingsShareActionPickTV);
+
         reminderSwitch.setText(getSwitchText(sharedPreferenceHelper.getAlarmString()));
+        shareActionPickTV.setText(getSpannableText("Share", "What share button does"));
 
         return inflate;
     }
@@ -117,6 +126,13 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        shareActionPickTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance();
+                bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
+            }
+        });
     }
 
     private void myAlarm(Calendar calendar) {
@@ -134,12 +150,34 @@ public class SettingsFragment extends Fragment {
     }
 
     private SpannableString getSwitchText(String v) {
-        String s = "Daily Reminder" + "\n" + v;
+        return getSpannableText("Daily Reminder", v);
+    }
+
+    private SpannableString getSpannableText(String s1, String s2) {
+
+        String s = s1 + "\n" + s2;
 
         SpannableString spannableString = new SpannableString(s);
-        spannableString.setSpan(new RelativeSizeSpan(1.5f), 0, 14, 0);
-        spannableString.setSpan(new ForegroundColorSpan(Color.GRAY), 0, 14, 0);
+        spannableString.setSpan(new RelativeSizeSpan(1.5f), 0, s1.length(), 0);
+        spannableString.setSpan(new ForegroundColorSpan(Color.GRAY), 0, s1.length(), 0);
 
         return spannableString;
+
+    }
+
+    private Drawable getShareIconDrawable(int i) {
+
+        //Copy -> 0
+        //Share -> 1
+        //Save -> 2
+
+        if (i == 0)
+            return ContextCompat.getDrawable(requireContext(), R.drawable.ic_copy);
+        else if (i == 1)
+            return ContextCompat.getDrawable(requireContext(), R.drawable.ic_share);
+        else if (i == 2)
+            return ContextCompat.getDrawable(requireContext(), R.drawable.ic_save);
+
+        return ContextCompat.getDrawable(requireContext(), R.drawable.ic_share);
     }
 }

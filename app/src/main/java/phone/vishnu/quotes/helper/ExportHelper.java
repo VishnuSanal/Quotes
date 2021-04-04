@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.view.View;
@@ -76,8 +77,8 @@ public class ExportHelper {
         CardView cardView = shareView.findViewById(R.id.shareCardView);
         cardView.setCardBackgroundColor(Color.parseColor(cardColor));
 
-        TextView shareQuoteTextView = (TextView) shareView.findViewById(R.id.shareQuoteTextView);
-        TextView shareAuthorTextView = (TextView) shareView.findViewById(R.id.shareAuthorTextView);
+        TextView shareQuoteTextView = shareView.findViewById(R.id.shareQuoteTextView);
+        TextView shareAuthorTextView = shareView.findViewById(R.id.shareAuthorTextView);
 
         if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
             try {
@@ -128,5 +129,71 @@ public class ExportHelper {
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
         context.startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    public void saveImage(Context context, Quote q) {
+
+        String quote = q.getQuote();
+        String author = q.getAuthor();
+
+        View shareView = View.inflate(context, R.layout.share_layout, null);
+
+        String cardColor = sharedPreferenceHelper.getCardColorPreference();
+        String fontColor = sharedPreferenceHelper.getFontColorPreference();
+        String fontPath = sharedPreferenceHelper.getFontPath();
+
+        String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
+        if (!"-1".equals(backgroundPath))
+            shareView.findViewById(R.id.shareRelativeLayout).setBackground(Drawable.createFromPath(backgroundPath));
+
+        CardView cardView = shareView.findViewById(R.id.shareCardView);
+        cardView.setCardBackgroundColor(Color.parseColor(cardColor));
+
+        TextView shareQuoteTextView = shareView.findViewById(R.id.shareQuoteTextView);
+        TextView shareAuthorTextView = shareView.findViewById(R.id.shareAuthorTextView);
+
+        if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
+            try {
+                Typeface face = Typeface.createFromFile(fontPath);
+                shareQuoteTextView.setTypeface(face);
+            } catch (Exception e) {
+                FirebaseCrashlytics.getInstance().recordException(e);
+                e.printStackTrace();
+            }
+        }
+
+        shareQuoteTextView.setTextColor(Color.parseColor(fontColor));
+        shareAuthorTextView.setTextColor(Color.parseColor(fontColor));
+
+        shareQuoteTextView.setText(quote);
+        shareAuthorTextView.setText(author);
+
+        int widthPixels = 1080;
+        int heightPixels = 1920;
+
+        shareView.measure(View.MeasureSpec.makeMeasureSpec(widthPixels, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(heightPixels, View.MeasureSpec.EXACTLY));
+
+        Bitmap bitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
+
+        Canvas c = new Canvas(bitmap);
+        shareView.layout(0, 0, widthPixels, heightPixels);
+        shareView.draw(c);
+
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Quotes");
+        if (!root.exists()) root.mkdirs();
+        String imagePath = root.toString() + File.separator + "Quotes - " + System.currentTimeMillis() + ".jpg";
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(imagePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (IOException | SecurityException e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+            e.printStackTrace();
+        }
+
+        MediaScannerConnection.scanFile(context, new String[]{imagePath}, null, null);
     }
 }

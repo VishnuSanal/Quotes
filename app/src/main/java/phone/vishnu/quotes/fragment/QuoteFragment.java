@@ -1,10 +1,14 @@
 package phone.vishnu.quotes.fragment;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +25,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
@@ -47,6 +52,7 @@ public class QuoteFragment extends Fragment {
     private ExportHelper exportHelper;
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
+    private SharedPreferenceHelper sharedPreferenceHelper;
 
     public QuoteFragment() {
     }
@@ -68,12 +74,15 @@ public class QuoteFragment extends Fragment {
 
         final View quoteView = inflater.inflate(R.layout.fragment_quote, container, false);
 
+        sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+
         quoteText = quoteView.findViewById(R.id.quoteTextView);
         authorText = quoteView.findViewById(R.id.authorTextView);
         shareIcon = quoteView.findViewById(R.id.shareImageView);
         favIcon = quoteView.findViewById(R.id.favoriteImageView);
 
-        SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+        shareIcon.setImageDrawable(getShareIconDrawable(sharedPreferenceHelper.getShareButtonAction()));
+
         favUtils = new FavUtils(requireContext());
         exportHelper = new ExportHelper(requireContext());
 
@@ -128,36 +137,14 @@ public class QuoteFragment extends Fragment {
         shareIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
                 shareIcon.startAnimation(shake);
                 shareIcon.setColorFilter(Color.GREEN);
 
-                Dexter.withContext(requireContext())
-                        .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .withListener(new PermissionListener() {
-                            @Override
-                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                                AsyncTask.execute(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        exportHelper.shareImage(requireContext(), new Quote(quoteText.getText().toString(), authorText.getText().toString()));
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                                showPermissionDeniedDialog();
-                            }
-
-                            @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                                Toast.makeText(requireContext(), "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
-                                permissionToken.continuePermissionRequest();
-                            }
-                        })
-                        .check();
-
+                shareButtonClicked(sharedPreferenceHelper.getShareButtonAction(),
+                        new Quote(quoteText.getText().toString(), authorText.getText().toString())
+                );
             }
         });
 
@@ -173,6 +160,107 @@ public class QuoteFragment extends Fragment {
                     favIcon.setColorFilter(Color.WHITE);
             }
         });
+    }
+
+    private Drawable getShareIconDrawable(int i) {
+
+        //Copy -> 0
+        //Share -> 1
+        //Save -> 2
+
+        if (i == 0)
+            return ContextCompat.getDrawable(requireContext(), R.drawable.ic_copy);
+        else if (i == 1)
+            return ContextCompat.getDrawable(requireContext(), R.drawable.ic_share);
+        else if (i == 2)
+            return ContextCompat.getDrawable(requireContext(), R.drawable.ic_save);
+
+        return ContextCompat.getDrawable(requireContext(), R.drawable.ic_share);
+    }
+
+    private void shareButtonClicked(int i, Quote q) {
+
+        //Copy -> 0
+        //Share -> 1
+        //Save -> 2
+
+        if (i == 0) {
+            copyQuote(q);
+        } else if (i == 1) {
+            shareQuote(q);
+        } else if (i == 2) {
+            saveQuote(q);
+        }
+    }
+
+    private void copyQuote(Quote quote) {
+
+        String q = "\"" + quote.getQuote() + "\"" + " - " + quote.getAuthor().replace("-", "");
+
+        ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(getResources().getString(R.string.app_name), q);
+        clipboard.setPrimaryClip(clip);
+
+        Toast.makeText(requireContext(), "Copied to Clipboard", Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveQuote(final Quote q) {
+
+        Dexter.withContext(requireContext())
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        Toast.makeText(requireContext(), "Saving to Gallery...", Toast.LENGTH_SHORT).show();
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                exportHelper.saveImage(requireContext(), q);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                        showPermissionDeniedDialog();
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        Toast.makeText(requireContext(), "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
+                        permissionToken.continuePermissionRequest();
+                    }
+                })
+                .check();
+
+    }
+
+    private void shareQuote(final Quote q) {
+        Dexter.withContext(requireContext())
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                exportHelper.shareImage(requireContext(), q);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                        showPermissionDeniedDialog();
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        Toast.makeText(requireContext(), "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
+                        permissionToken.continuePermissionRequest();
+                    }
+                })
+                .check();
     }
 
     private void showPermissionDeniedDialog() {
