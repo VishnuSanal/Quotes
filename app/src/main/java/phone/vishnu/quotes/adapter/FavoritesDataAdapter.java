@@ -2,6 +2,7 @@ package phone.vishnu.quotes.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 
 public class FavoritesDataAdapter extends ArrayAdapter<Quote> {
@@ -34,8 +37,6 @@ public class FavoritesDataAdapter extends ArrayAdapter<Quote> {
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-
-//        Collections.reverse(objects);
         Quote item = objects.get(position);
         View rootView = convertView;
         final ViewHolder viewHolder;
@@ -60,10 +61,30 @@ public class FavoritesDataAdapter extends ArrayAdapter<Quote> {
         viewHolder.quoteTV.setText(item.getQuote());
         viewHolder.authorTV.setText(item.getAuthor());
 
+        viewHolder.viewIV.setImageDrawable(getShareIconDrawable(rootView.getContext()));
+
         viewHolder.removeIV.setTag(position);
         viewHolder.viewIV.setTag(position);
 
         return rootView;
+    }
+
+    private Drawable getShareIconDrawable(Context context) {
+
+        int i = new SharedPreferenceHelper(context).getShareButtonAction();
+
+        //Copy -> 0
+        //Share -> 1
+        //Save -> 2
+
+        if (i == 0)
+            return ContextCompat.getDrawable(context, R.drawable.ic_copy);
+        else if (i == 1)
+            return ContextCompat.getDrawable(context, R.drawable.ic_share);
+        else if (i == 2)
+            return ContextCompat.getDrawable(context, R.drawable.ic_save);
+
+        return ContextCompat.getDrawable(context, R.drawable.ic_share);
     }
 
     static class ViewHolder {

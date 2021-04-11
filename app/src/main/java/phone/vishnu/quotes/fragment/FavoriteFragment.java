@@ -1,6 +1,9 @@
 package phone.vishnu.quotes.fragment;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -31,6 +34,8 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.FavoritesDataAdapter;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.FavUtils;
+import phone.vishnu.quotes.helper.SharedPreferenceHelper;
+import phone.vishnu.quotes.model.Quote;
 
 public class FavoriteFragment extends Fragment {
 
@@ -43,7 +48,6 @@ public class FavoriteFragment extends Fragment {
     private ImageView addImageView;
 
     public FavoriteFragment() {
-        // Required empty public constructor
         viewImageViewOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -51,35 +55,12 @@ public class FavoriteFragment extends Fragment {
                     final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
                     v.startAnimation(shake);
 
-                    Dexter.withContext(requireContext())
-                            .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            .withListener(new PermissionListener() {
-                                @Override
-                                public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                                    AsyncTask.execute(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            int position = Integer.parseInt(v.getTag().toString());
-                                            exportHelper.shareImage(requireContext(), favUtils.getFavourite(position));
-                                        }
-                                    });
-                                }
+                    int position = Integer.parseInt(v.getTag().toString());
 
-                                @Override
-                                public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                                    showPermissionDeniedDialog();
-                                }
-
-                                @Override
-                                public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                                    Toast.makeText(requireContext(), "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
-                                    permissionToken.continuePermissionRequest();
-                                }
-                            })
-                            .check();
-
+                    shareButtonClicked(new SharedPreferenceHelper(requireContext()).getShareButtonAction(),
+                            favUtils.getFavourite(position)
+                    );
                 }
-
             }
         };
         removeImageViewOnClickListener = new View.OnClickListener() {
@@ -160,4 +141,90 @@ public class FavoriteFragment extends Fragment {
         builder.show();
 
     }
+
+    private void shareButtonClicked(int i, Quote q) {
+
+        //Copy -> 0
+        //Share -> 1
+        //Save -> 2
+
+        if (i == 0) {
+            copyQuote(q);
+        } else if (i == 1) {
+            shareQuote(q);
+        } else if (i == 2) {
+            saveQuote(q);
+        }
+    }
+
+    private void copyQuote(Quote quote) {
+
+        String q = "\"" + quote.getQuote() + "\"" + " - " + quote.getAuthor().replace("-", "");
+
+        ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(getResources().getString(R.string.app_name), q);
+        clipboard.setPrimaryClip(clip);
+
+        Toast.makeText(requireContext(), "Copied to Clipboard", Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveQuote(final Quote q) {
+
+        Dexter.withContext(requireContext())
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        Toast.makeText(requireContext(), "Saving to Gallery...", Toast.LENGTH_SHORT).show();
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                exportHelper.saveImage(requireContext(), q);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                        showPermissionDeniedDialog();
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        Toast.makeText(requireContext(), "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
+                        permissionToken.continuePermissionRequest();
+                    }
+                })
+                .check();
+
+    }
+
+    private void shareQuote(final Quote q) {
+        Dexter.withContext(requireContext())
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                exportHelper.shareImage(requireContext(), q);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                        showPermissionDeniedDialog();
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        Toast.makeText(requireContext(), "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
+                        permissionToken.continuePermissionRequest();
+                    }
+                })
+                .check();
+    }
+
 }
