@@ -19,7 +19,6 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -53,7 +52,6 @@ import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -579,22 +577,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog alertDialog = builder.create();
         alertDialog.setCancelable(isCancellable);
 
-        alertDialog.getListView().setOnHierarchyChangeListener(
-                new ViewGroup.OnHierarchyChangeListener() {
-                    @Override
-                    public void onChildViewAdded(View parent, View child) {
-                        CharSequence text = ((TextView) child).getText();
-                        int itemIndex = Arrays.asList(items).indexOf(text);
-                        /*if ((itemIndex == 2) && !isNetworkAvailable()) {
-                            child.setEnabled(false);
-                            child.setOnClickListener(null);
-                        }*/
-                    }
-
-                    @Override
-                    public void onChildViewRemoved(View view, View view1) {
-                    }
-                });
         alertDialog.show();
     }
 

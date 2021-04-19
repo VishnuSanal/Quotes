@@ -46,6 +46,8 @@ public class TourFragmentStateAdapter extends androidx.viewpager2.adapter.Fragme
         tourItems.add(new TourItem(R.drawable.ic_search, "Search", "Search for Quotes"));
         tourItems.add(new TourItem(R.drawable.ic_notifications, "Daily Notification of Quotes", "Daily Notifications with inspiring Quotes"));
         tourItems.add(new TourItem(R.drawable.ic_share, "Share Quotes in Social Media", "Share Quote as an HD Image"));
+        tourItems.add(new TourItem(R.drawable.ic_copy, "Share Quotes as Text", "Copy Quotes to Clipboard"));
+        tourItems.add(new TourItem(R.drawable.ic_save, "Save Quotes to Gallery", "Save Quotes to Gallery as an HD Image"));
         tourItems.add(new TourItem(R.drawable.ic_favorite, "Favorite Quotes", "Add to Favourites for easy-access of Quotes"));
         tourItems.add(new TourItem(R.drawable.ic_post_add, "Use your Quotes", "Add your Quotes to Favorites"));
         tourItems.add(new TourItem(R.drawable.ic_whatshot, "That's it", "Get Started"));
