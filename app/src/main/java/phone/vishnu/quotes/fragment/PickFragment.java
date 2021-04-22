@@ -83,7 +83,7 @@ public class PickFragment extends Fragment {
 
                     dialog.dismiss();
 
-                    Toast.makeText(requireContext(), "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireContext(), "Background Set \n Applying Changes", Toast.LENGTH_LONG).show();
 
                     ((MainActivity) requireContext()).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.getAbsolutePath()));
                     ((MainActivity) requireContext()).onBackPressed();
@@ -101,7 +101,7 @@ public class PickFragment extends Fragment {
 
                             dialog.dismiss();
 
-                            Toast.makeText(requireContext(), "Background Set..... \n Applying Changes", Toast.LENGTH_LONG).show();
+                            Toast.makeText(requireContext(), "Background Set \n Applying Changes", Toast.LENGTH_LONG).show();
 
                             ((MainActivity) requireContext()).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.toString()));
                             ((MainActivity) requireContext()).onBackPressed();
@@ -111,7 +111,7 @@ public class PickFragment extends Fragment {
                         public void onFailure(@NonNull Exception exception) {
                             FirebaseCrashlytics.getInstance().recordException(exception);
                             exception.printStackTrace();
-                            Toast.makeText(requireContext(), "Error.....", Toast.LENGTH_LONG).show();
+                            Toast.makeText(requireContext(), "Oops! Something went wrong!", Toast.LENGTH_LONG).show();
                             dialog.dismiss();
                         }
                     });

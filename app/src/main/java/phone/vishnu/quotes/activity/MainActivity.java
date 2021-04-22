@@ -502,7 +502,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 constraintLayout.setBackground(Drawable.createFromPath(file));
                 sharedPreferenceHelper.setBackgroundPath(file);
             }
-        } else Toast.makeText(this, "Error...", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

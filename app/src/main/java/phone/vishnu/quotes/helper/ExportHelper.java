@@ -59,6 +59,12 @@ public class ExportHelper {
         return root.toString() + File.separator + ".Quotes_Background" + ".jpg";
     }
 
+    public String getSSPath() {
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+        if (!root.exists()) root.mkdirs();
+        return root.toString() + File.separator + ".Screenshot" + ".jpg";
+    }
+
     public void shareImage(Context context, Quote q) {
 
         String quote = q.getQuote();
@@ -108,9 +114,7 @@ public class ExportHelper {
         shareView.layout(0, 0, widthPixels, heightPixels);
         shareView.draw(c);
 
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-        if (!root.exists()) root.mkdirs();
-        String imagePath = root.toString() + File.separator + ".Screenshot" + ".jpg";
+        String imagePath = getSSPath();
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(imagePath);

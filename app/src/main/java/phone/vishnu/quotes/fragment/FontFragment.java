@@ -141,7 +141,7 @@ public class FontFragment extends Fragment {
                 if (f.exists()) {
                     sharedPreferenceHelper.setFontPath(f.toString());
 
-                    Toast.makeText(requireContext(), "Font Set..... \n Applying Changes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Font Set \n Applying Changes", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
 
                     ((MainActivity) requireContext()).getQuoteViewPagerAdapter().notifyDataSetChanged();
@@ -158,7 +158,7 @@ public class FontFragment extends Fragment {
 
                                 sharedPreferenceHelper.setFontPath(f.toString());
 
-                                Toast.makeText(requireContext(), "Font Set..... \n Applying Changes", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireContext(), "Font Set \n Applying Changes", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
 
                                 ((MainActivity) requireContext()).getQuoteViewPagerAdapter().notifyDataSetChanged();
@@ -174,7 +174,7 @@ public class FontFragment extends Fragment {
                             exception.printStackTrace();
                             FirebaseCrashlytics.getInstance().recordException(exception);
                             progressDialog.dismiss();
-                            Toast.makeText(requireContext(), "Error.....", Toast.LENGTH_LONG).show();
+                            Toast.makeText(requireContext(), "Oops! Something went wrong!", Toast.LENGTH_LONG).show();
                         }
                     });
                 }

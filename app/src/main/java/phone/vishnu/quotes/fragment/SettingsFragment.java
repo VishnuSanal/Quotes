@@ -3,9 +3,9 @@ package phone.vishnu.quotes.fragment;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.format.DateFormat;
@@ -22,17 +22,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.ncorti.slidetoact.SlideToActView;
 
+import java.io.File;
 import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.activity.SplashActivity;
+import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 
@@ -78,9 +80,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onSlideComplete(@NonNull SlideToActView slideToActView) {
 
-                sharedPreferenceHelper.resetSharedPreferences();
-
-                Toast.makeText(requireContext(), "Settings Reset\nRestart App for changes to take effect...", Toast.LENGTH_SHORT).show();
+                resetSettings(requireContext());
 
             }
         });
@@ -135,6 +135,34 @@ public class SettingsFragment extends Fragment {
         });
     }
 
+    private void resetSettings(Context c) {
+
+        sharedPreferenceHelper.resetSharedPreferences();
+
+        deleteFiles(c);
+    }
+
+    private void deleteFiles(Context c) {
+        ExportHelper exportHelper = new ExportHelper(c);
+
+        File BGFile = new File(exportHelper.getBGPath());
+        File SSFile = new File(exportHelper.getSSPath());
+
+        if (BGFile.exists())
+            BGFile.delete();
+        if (SSFile.exists())
+            SSFile.delete();
+
+        requireActivity().finish();
+
+        if (getContext() != null)
+            requireActivity().startActivity(
+                    new Intent(requireContext(), SplashActivity.class
+                    ));
+
+        Toast.makeText(requireContext(), "Settings Reset\nRestarting App for changes to take effect...", Toast.LENGTH_SHORT).show();
+    }
+
     private void myAlarm(Calendar calendar) {
 
         if (calendar.getTime().compareTo(new Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -163,21 +191,5 @@ public class SettingsFragment extends Fragment {
 
         return spannableString;
 
-    }
-
-    private Drawable getShareIconDrawable(int i) {
-
-        //Copy -> 0
-        //Share -> 1
-        //Save -> 2
-
-        if (i == 0)
-            return ContextCompat.getDrawable(requireContext(), R.drawable.ic_copy);
-        else if (i == 1)
-            return ContextCompat.getDrawable(requireContext(), R.drawable.ic_share);
-        else if (i == 2)
-            return ContextCompat.getDrawable(requireContext(), R.drawable.ic_save);
-
-        return ContextCompat.getDrawable(requireContext(), R.drawable.ic_share);
     }
 }
