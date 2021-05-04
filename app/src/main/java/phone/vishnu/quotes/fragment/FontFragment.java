@@ -54,7 +54,7 @@ public class FontFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_font, container, false);
         if (!isNetworkAvailable(requireContext()))
-            Toast.makeText(requireContext(), "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Please connect to the Internet", Toast.LENGTH_SHORT).show();
 
         progressBar = inflate.findViewById(R.id.fontProgressBar);
         listView = inflate.findViewById(R.id.fontListView);

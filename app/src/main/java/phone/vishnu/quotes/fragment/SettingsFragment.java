@@ -160,7 +160,7 @@ public class SettingsFragment extends Fragment {
                     new Intent(requireContext(), SplashActivity.class
                     ));
 
-        Toast.makeText(requireContext(), "Settings Reset\nRestarting App for changes to take effect...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "Settings Reset\nRestarting App for changes to take effect", Toast.LENGTH_SHORT).show();
     }
 
     private void myAlarm(Calendar calendar) {

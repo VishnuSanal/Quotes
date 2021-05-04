@@ -73,7 +73,7 @@ public class AddNewFragment extends Fragment {
                 } else {
                     new FavUtils(requireContext()).addFavorite(new Quote(quote, author));
 
-                    Toast.makeText(requireContext(), "Quote Added to Favourites...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Quote added to Favourites", Toast.LENGTH_SHORT).show();
 
                     requireActivity().onBackPressed();
                 }

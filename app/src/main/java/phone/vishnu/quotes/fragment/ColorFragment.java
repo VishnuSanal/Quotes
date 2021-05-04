@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -83,7 +82,6 @@ public class ColorFragment extends Fragment {
                 } else if (colorRequestCode == 1) {
 
                     sharedPreferenceHelper.setColorPreference(colorString);
-                    Toast.makeText(requireContext(), "Card Colour Set...", Toast.LENGTH_LONG).show();
 
                     ((MainActivity) requireActivity()).updateViewPager();
 
@@ -93,7 +91,6 @@ public class ColorFragment extends Fragment {
                     if (colorString.equals("#00000000")) colorString = "#FFFFFF";
 
                     sharedPreferenceHelper.setFontColorPreference(colorString);
-                    Toast.makeText(requireContext(), "Font Colour Set...", Toast.LENGTH_LONG).show();
 
                     ((MainActivity) requireActivity()).updateViewPager();
 

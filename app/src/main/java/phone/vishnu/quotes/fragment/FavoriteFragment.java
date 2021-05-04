@@ -175,7 +175,7 @@ public class FavoriteFragment extends Fragment {
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        Toast.makeText(requireContext(), "Saving to Gallery...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Saving to Gallery", Toast.LENGTH_SHORT).show();
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {

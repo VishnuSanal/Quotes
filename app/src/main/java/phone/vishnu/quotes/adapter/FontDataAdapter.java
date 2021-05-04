@@ -67,7 +67,7 @@ public class FontDataAdapter extends ArrayAdapter<String> {
                     Typeface face = Typeface.createFromFile(f);
                     viewHolder.fontTV.setTypeface(face);
                 } catch (Exception e) {
-                    Toast.makeText(getContext(), "Something Went Wrong...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
                     FirebaseCrashlytics.getInstance().recordException(e);
                     e.printStackTrace();
                 }
@@ -82,7 +82,7 @@ public class FontDataAdapter extends ArrayAdapter<String> {
                             Typeface face = Typeface.createFromFile(f);
                             viewHolder.fontTV.setTypeface(face);
                         } catch (Exception e) {
-                            Toast.makeText(getContext(), "Something Went Wrong...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
                             FirebaseCrashlytics.getInstance().recordException(e);
                             e.printStackTrace();
                         }

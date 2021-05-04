@@ -53,7 +53,7 @@ public class PickFragment extends Fragment {
         setUpRecyclerView(inflate);
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
         if (!isNetworkAvailable(requireContext()))
-            Toast.makeText(requireContext(), "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Please connect to the Internet", Toast.LENGTH_SHORT).show();
         return inflate;
     }
 
@@ -164,7 +164,7 @@ public class PickFragment extends Fragment {
 
         if (bgArrayList.size() == 0 && MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing()) {
             MainActivity.bgDialog.dismiss();
-            Toast.makeText(requireContext(), "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Please connect to the Internet", Toast.LENGTH_SHORT).show();
         }
 
         if (isNetworkAvailable(requireContext())) {
