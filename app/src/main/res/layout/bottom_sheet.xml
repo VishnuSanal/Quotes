@@ -24,12 +24,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/bottomSheetDoneIndicatorIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:alpha="0"
+        android:contentDescription="Bottom Sheet Done Indicator"
+        android:padding="8dp"
+        android:src="@drawable/ic_done"
+        app:layout_constraintBottom_toTopOf="@id/bottomSheetRadioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@id/bottomSheetTitleTV"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorAccent" />
+
     <RadioGroup
         android:id="@+id/bottomSheetRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bottomSheetTitleTV">
@@ -68,26 +85,4 @@
             android:textColor="@color/textColor" />
 
     </RadioGroup>
-
-    <Button
-        android:id="@+id/bottomSheetCancelButton"
-        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/bottomSheetPickButton"
-        app:layout_constraintTop_toBottomOf="@id/bottomSheetRadioGroup" />
-
-    <Button
-        android:id="@+id/bottomSheetPickButton"
-        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Pick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomSheetRadioGroup" />
 </androidx.constraintlayout.widget.ConstraintLayout>

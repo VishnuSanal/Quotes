@@ -345,12 +345,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         homeFAB.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_menu));
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                setVisibility(View.GONE);
-            }
-        }, 500);
+        new Handler().postDelayed(() -> setVisibility(View.GONE), 500);
     }
 
     private void openFABMenu() {

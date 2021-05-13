@@ -1,10 +1,11 @@
 package phone.vishnu.quotes.fragment;
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -19,7 +20,6 @@ import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class BottomSheetFragment extends BottomSheetDialogFragment {
 
-    private Button pickButton, cancelButton;
     private RadioGroup radioGroup;
     private SharedPreferenceHelper sharedPreferenceHelper;
 
@@ -40,8 +40,6 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
 
-        pickButton = inflate.findViewById(R.id.bottomSheetPickButton);
-        cancelButton = inflate.findViewById(R.id.bottomSheetCancelButton);
         radioGroup = inflate.findViewById(R.id.bottomSheetRadioGroup);
 
         setChecked(sharedPreferenceHelper.getShareButtonAction());
@@ -53,25 +51,40 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        radioGroup.setOnCheckedChangeListener((group, id) -> {
 
-        pickButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            sharedPreferenceHelper.setShareButtonAction(getInt(id));
 
-                int id = radioGroup.getCheckedRadioButtonId();
+            ((MainActivity) requireActivity()).updateViewPager();
 
-                sharedPreferenceHelper.setShareButtonAction(getInt(id));
+            ((ImageView) view.findViewById(R.id.bottomSheetDoneIndicatorIV))
+                    .animate()
+                    .alpha(1)
+                    .rotation(360)
+                    .translationY(70 * (getInt(id) + 1))
+                    .setListener(new Animator.AnimatorListener() {
 
-                ((MainActivity) requireActivity()).updateViewPager();
+                        @Override
+                        public void onAnimationStart(Animator animation) {
 
-                dismiss();
-            }
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            dismiss();
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+
+                        }
+                    });
+
         });
     }
 
