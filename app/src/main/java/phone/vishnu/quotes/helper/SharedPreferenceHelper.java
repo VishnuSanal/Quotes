@@ -160,8 +160,10 @@ public class SharedPreferenceHelper {
         setBackgroundPath("-1");
         setAlarmString("At 08:30 Daily");
         setFontPath("-1");
+        setFontColorPreference("#FFFFFF");
         setFavoriteArrayString(null);
         setFirstRunBoolean(true);
+        setTotalQuotesCount(0);
         setShareButtonAction(1);
     }
 

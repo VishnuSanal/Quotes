@@ -58,7 +58,7 @@ public class FontDataAdapter extends ArrayAdapter<String> {
 
             if (f.exists()) {
 
-                viewHolder.progressBar.setProgress(100);
+                viewHolder.progressBar.setVisibility(View.GONE);
                 try {
                     Typeface face = Typeface.createFromFile(f);
                     viewHolder.fontTV.setTypeface(face);
@@ -84,9 +84,13 @@ public class FontDataAdapter extends ArrayAdapter<String> {
                 }).addOnFailureListener(exception -> {
                     FirebaseCrashlytics.getInstance().recordException(exception);
                     exception.printStackTrace();
-                }).addOnProgressListener(taskSnapshot -> viewHolder.progressBar.setProgress(
-                        (int) ((100.0 * taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount()))
-                ));
+                }).addOnProgressListener(taskSnapshot -> {
+                    viewHolder.progressBar.setProgress(
+                            (int) ((100.0 * taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount()))
+                    );
+                    if ((taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount()) == 1)
+                        viewHolder.progressBar.setVisibility(View.GONE);
+                });
             }
         } else {
             viewHolder = (FontDataAdapter.ViewHolder) rootView.getTag();
