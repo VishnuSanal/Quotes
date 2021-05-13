@@ -3,8 +3,6 @@ package phone.vishnu.quotes.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -52,9 +50,7 @@ import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import phone.vishnu.quotes.R;
@@ -67,11 +63,11 @@ import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontMasterFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.fragment.SettingsFragment;
+import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.FavUtils;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
-import phone.vishnu.quotes.receiver.NotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -212,11 +208,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), allQuotesList);
         viewPager.setAdapter(adapter);
 
-        String s = sharedPreferenceHelper.getAlarmString();
-
-        if ("At 08:30 Daily".equals(s)) {
-            myAlarm();
-        }
+        if ("At 08:30 Daily".equals(sharedPreferenceHelper.getAlarmString()))
+            AlarmHelper.setDefaultAlarm(this);
 
         SearchView searchView = findViewById(R.id.homeSearchView);
 
@@ -448,25 +441,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ((TextView) findViewById(R.id.searchCountTV)).setText(s);
             }
         };
-    }
-
-    private void myAlarm() {
-
-        Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        calendar.set(Calendar.MINUTE, 30);
-
-        if (calendar.getTime().compareTo(new Date()) < 0)
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-
-        Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-        if (alarmManager != null) {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-        }
     }
 
     private ArrayList<Quote> getQuotes() {

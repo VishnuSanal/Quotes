@@ -1,7 +1,5 @@
 package phone.vishnu.quotes.fragment;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +12,7 @@ import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,16 +25,13 @@ import com.ncorti.slidetoact.SlideToActView;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.SplashActivity;
+import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
-import phone.vishnu.quotes.receiver.NotificationReceiver;
-
-import static android.content.Context.ALARM_SERVICE;
 
 public class SettingsFragment extends Fragment {
 
@@ -66,6 +59,8 @@ public class SettingsFragment extends Fragment {
 
         shareActionPickTV = inflate.findViewById(R.id.settingsShareActionPickTV);
 
+        reminderSwitch.setChecked(!sharedPreferenceHelper.getAlarmString().equals("Alarm Not Set"));
+
         reminderSwitch.setText(getSwitchText(sharedPreferenceHelper.getAlarmString()));
         shareActionPickTV.setText(getSpannableText("Share", "What share button does"));
 
@@ -76,26 +71,16 @@ public class SettingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        resetToggle.setOnSlideCompleteListener(new SlideToActView.OnSlideCompleteListener() {
-            @Override
-            public void onSlideComplete(@NonNull SlideToActView slideToActView) {
+        resetToggle.setOnSlideCompleteListener(slideToActView -> resetSettings(requireContext()));
 
-                resetSettings(requireContext());
+        reminderSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
 
-            }
-        });
+                Calendar c = Calendar.getInstance();
 
-        reminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked) {
-
-                    final Calendar c = Calendar.getInstance();
-
-                    TimePickerDialog timePicker = new TimePickerDialog(requireContext(), new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        requireContext(),
+                        (view1, hourOfDay, minute) -> {
 
                             c.set(Calendar.HOUR_OF_DAY, hourOfDay);
                             c.set(Calendar.MINUTE, minute);
@@ -104,35 +89,35 @@ public class SettingsFragment extends Fragment {
 
                             reminderSwitch.setText(getSwitchText(MessageFormat.format("At {0} : {1} Daily", hourOfDay, minute)));
 
-                            myAlarm(c);
+                            AlarmHelper.setAlarm(requireContext(), c);
 
-                        }
-                    }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(requireContext()));
-                    timePicker.show();
+                        },
+                        c.get(Calendar.HOUR_OF_DAY),
+                        c.get(Calendar.MINUTE),
+                        DateFormat.is24HourFormat(requireContext())
+                );
 
-                } else {
-                    reminderSwitch.setText(getSwitchText(""));
+                timePickerDialog.setOnCancelListener(d -> reminderSwitch.setChecked(false));
 
-                    sharedPreferenceHelper.setAlarmString("Alarm Not Set");
+                timePickerDialog.show();
 
-                    Intent intent = new Intent(requireContext(), NotificationReceiver.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(ALARM_SERVICE);
-
-                    if (alarmManager != null) {
-                        alarmManager.cancel(pendingIntent);
-                    }
-                }
+            } else {
+                alarmTurnedOff(requireContext());
             }
         });
 
-        shareActionPickTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance();
-                bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
-            }
+        shareActionPickTV.setOnClickListener(v -> {
+            BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance();
+            bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
         });
+    }
+
+    private void alarmTurnedOff(Context context) {
+        reminderSwitch.setText(getSwitchText(""));
+
+        sharedPreferenceHelper.setAlarmString("Alarm Not Set");
+
+        AlarmHelper.cancelAlarm(context);
     }
 
     private void resetSettings(Context c) {
@@ -161,20 +146,6 @@ public class SettingsFragment extends Fragment {
                     ));
 
         Toast.makeText(requireContext(), "Settings Reset\nRestarting App for changes to take effect", Toast.LENGTH_SHORT).show();
-    }
-
-    private void myAlarm(Calendar calendar) {
-
-        if (calendar.getTime().compareTo(new Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1);
-
-        Intent intent = new Intent(requireContext(), NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) requireContext().getApplicationContext().getSystemService(ALARM_SERVICE);
-
-        if (alarmManager != null) {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-        }
-
     }
 
     private SpannableString getSwitchText(String v) {
