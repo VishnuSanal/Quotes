@@ -39,22 +39,16 @@ public class FontMasterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        fontSelector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fontSelector.setElevation(DP2PX(12));
-                colorSelector.setElevation(DP2PX(8));
+        fontSelector.setOnClickListener(v -> {
+            fontSelector.setElevation(DP2PX(12));
+            colorSelector.setElevation(DP2PX(8));
 
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.masterFragmentHost, FontFragment.newInstance()).commit();
-            }
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.masterFragmentHost, FontFragment.newInstance()).commit();
         });
-        colorSelector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                colorSelector.setElevation(DP2PX(12));
-                fontSelector.setElevation(DP2PX(8));
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.masterFragmentHost, ColorFragment.newInstance(2)).commit();
-            }
+        colorSelector.setOnClickListener(v -> {
+            colorSelector.setElevation(DP2PX(12));
+            fontSelector.setElevation(DP2PX(8));
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.masterFragmentHost, ColorFragment.newInstance(2)).commit();
         });
     }
 

@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -18,12 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
@@ -100,86 +95,74 @@ public class FontFragment extends Fragment {
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference().child("fonts");
-            storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
-                @Override
-                public void onSuccess(ListResult listResult) {
+            storageRef.listAll().addOnSuccessListener(listResult -> {
 
-                    for (StorageReference item : listResult.getItems()) {
+                for (StorageReference item : listResult.getItems()) {
 
-                        String fontString = item.getName().replace(".ttf", "");
+                    String fontString = item.getName().replace(".ttf", "");
 
-                        fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
+                    fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
 
-                        ArrayList<String> toBeRemoved = sharedPreferenceHelper.getFontListToBeRemoved();
+                    ArrayList<String> toBeRemoved = sharedPreferenceHelper.getFontListToBeRemoved();
 
-                        if (!fontList.contains(fontString) && !toBeRemoved.contains("." + item.getName().toLowerCase())) {
+                    if (!fontList.contains(fontString) && !toBeRemoved.contains("." + item.getName().toLowerCase())) {
 
-                            if (getContext() != null && fontDataAdapter != null) {
-                                fontDataAdapter.add(fontString);
-                                fontDataAdapter.notifyDataSetChanged();
-                            }
+                        if (getContext() != null && fontDataAdapter != null) {
+                            fontDataAdapter.add(fontString);
+                            fontDataAdapter.notifyDataSetChanged();
                         }
                     }
-
-                    progressBar.setVisibility(View.GONE);
                 }
+
+                progressBar.setVisibility(View.GONE);
             });
         }
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
 
-                final ProgressDialog progressDialog = ProgressDialog.show(requireContext(), "", "Please Wait....");
+            final ProgressDialog progressDialog = ProgressDialog.show(requireContext(), "", "Please Wait....");
 
-                String fontString = fontList.get(position).toLowerCase() + ".ttf";
+            String fontString = fontList.get(position).toLowerCase() + ".ttf";
 
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
-                final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
-                final File f = new File(localFile + File.separator + "." + fontString);
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
+            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+            final File f = new File(localFile + File.separator + "." + fontString);
 
-                if (f.exists()) {
-                    sharedPreferenceHelper.setFontPath(f.toString());
+            if (f.exists()) {
+                sharedPreferenceHelper.setFontPath(f.toString());
 
-                    Toast.makeText(requireContext(), "Font Set \n Applying Changes", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Font Set \n Applying Changes", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+                ((MainActivity) requireContext()).getQuoteViewPagerAdapter().notifyDataSetChanged();
+
+                requireActivity().onBackPressed();
+            } else {
+
+                if (!localFile.exists()) localFile.mkdirs();
+
+                storageReference.getFile(f).addOnSuccessListener(taskSnapshot -> {
+                    if (getActivity() != null) {
+
+                        sharedPreferenceHelper.setFontPath(f.toString());
+
+                        Toast.makeText(requireContext(), "Font Set \n Applying Changes", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+
+                        ((MainActivity) requireContext()).getQuoteViewPagerAdapter().notifyDataSetChanged();
+
+                        requireActivity().onBackPressed();
+                    } else {
+                        progressDialog.dismiss();
+                    }
+                }).addOnFailureListener(exception -> {
+                    exception.printStackTrace();
+                    FirebaseCrashlytics.getInstance().recordException(exception);
                     progressDialog.dismiss();
-
-                    ((MainActivity) requireContext()).getQuoteViewPagerAdapter().notifyDataSetChanged();
-
-                    requireActivity().onBackPressed();
-                } else {
-
-                    if (!localFile.exists()) localFile.mkdirs();
-
-                    storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            if (getActivity() != null) {
-
-                                sharedPreferenceHelper.setFontPath(f.toString());
-
-                                Toast.makeText(requireContext(), "Font Set \n Applying Changes", Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
-
-                                ((MainActivity) requireContext()).getQuoteViewPagerAdapter().notifyDataSetChanged();
-
-                                requireActivity().onBackPressed();
-                            } else {
-                                progressDialog.dismiss();
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            exception.printStackTrace();
-                            FirebaseCrashlytics.getInstance().recordException(exception);
-                            progressDialog.dismiss();
-                            Toast.makeText(requireContext(), "Oops! Something went wrong!", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-
+                    Toast.makeText(requireContext(), "Oops! Something went wrong!", Toast.LENGTH_LONG).show();
+                });
             }
+
         });
     }
 

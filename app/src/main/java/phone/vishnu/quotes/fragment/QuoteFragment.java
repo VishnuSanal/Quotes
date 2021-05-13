@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -134,31 +133,25 @@ public class QuoteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        shareIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        shareIcon.setOnClickListener(v -> {
 
-                final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
-                shareIcon.startAnimation(shake);
-                shareIcon.setColorFilter(Color.GREEN);
+            final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
+            shareIcon.startAnimation(shake);
+            shareIcon.setColorFilter(Color.GREEN);
 
-                shareButtonClicked(sharedPreferenceHelper.getShareButtonAction(),
-                        new Quote(quoteText.getText().toString(), authorText.getText().toString())
-                );
-            }
+            shareButtonClicked(sharedPreferenceHelper.getShareButtonAction(),
+                    new Quote(quoteText.getText().toString(), authorText.getText().toString())
+            );
         });
 
-        favIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
-                favIcon.startAnimation(shake);
+        favIcon.setOnClickListener(v -> {
+            final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
+            favIcon.startAnimation(shake);
 
-                if (!favUtils.newFavorite(quote))
-                    favIcon.setColorFilter(Color.RED);
-                else
-                    favIcon.setColorFilter(Color.WHITE);
-            }
+            if (!favUtils.newFavorite(quote))
+                favIcon.setColorFilter(Color.RED);
+            else
+                favIcon.setColorFilter(Color.WHITE);
         });
     }
 
@@ -212,12 +205,7 @@ public class QuoteFragment extends Fragment {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
                         Toast.makeText(requireContext(), "Saving to Gallery", Toast.LENGTH_SHORT).show();
-                        AsyncTask.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                exportHelper.saveImage(requireContext(), q);
-                            }
-                        });
+                        AsyncTask.execute(() -> exportHelper.saveImage(requireContext(), q));
                     }
 
                     @Override
@@ -241,12 +229,7 @@ public class QuoteFragment extends Fragment {
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        AsyncTask.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                exportHelper.shareImage(requireContext(), q);
-                            }
-                        });
+                        AsyncTask.execute(() -> exportHelper.shareImage(requireContext(), q));
                     }
 
                     @Override
@@ -269,22 +252,16 @@ public class QuoteFragment extends Fragment {
         builder.setTitle("Permission Denied");
         builder.setMessage("Please Accept Necessary Permissions");
         builder.setCancelable(true);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface imageDialog, int which) {
-                imageDialog.cancel();
-                startActivity(
-                        new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                .setData(Uri.fromParts("package", requireContext().getPackageName(), null))
-                );
-            }
+        builder.setPositiveButton("OK", (imageDialog, which) -> {
+            imageDialog.cancel();
+            startActivity(
+                    new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            .setData(Uri.fromParts("package", requireContext().getPackageName(), null))
+            );
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface imageDialog, int which) {
-                imageDialog.cancel();
-                Toast.makeText(requireContext(), "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
-            }
+        builder.setNegativeButton("Cancel", (imageDialog, which) -> {
+            imageDialog.cancel();
+            Toast.makeText(requireContext(), "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
         });
         builder.show();
 

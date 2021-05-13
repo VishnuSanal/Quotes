@@ -54,7 +54,7 @@ public class RecyclerViewAdapter extends ListAdapter<Uri, RecyclerViewAdapter.Vi
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Uri uri, int id);
+        void onItemClick(Uri uri);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,12 +63,9 @@ public class RecyclerViewAdapter extends ListAdapter<Uri, RecyclerViewAdapter.Vi
         ViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.defaultSingleImage);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION)
-                        listener.onItemClick(getItem(getAdapterPosition()), v.getId());
-                }
+            imageView.setOnClickListener(v -> {
+                if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION)
+                    listener.onItemClick(getItem(getAdapterPosition()));
             });
         }
     }

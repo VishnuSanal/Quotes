@@ -42,47 +42,31 @@ public class AboutFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        sourceCodeTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://github.com/VishnuSanal/Quotes");
-                startActivity(new Intent(Intent.ACTION_VIEW, uriUrl));
-            }
+        sourceCodeTV.setOnClickListener(v -> {
+            Uri uriUrl = Uri.parse("https://github.com/VishnuSanal/Quotes");
+            startActivity(new Intent(Intent.ACTION_VIEW, uriUrl));
         });
-        feedbackTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                composeEmail(new String[]{requireContext().getString(R.string.email_address_of_developer)}, "Feedback of " + requireContext().getString(R.string.app_name));
-
-            }
+        feedbackTV.setOnClickListener(v -> composeEmail(new String[]{requireContext().getString(R.string.email_address_of_developer)}, "Feedback of " + requireContext().getString(R.string.app_name)));
+        thanksTV.setOnClickListener(v -> {
+            Uri uriUrl = Uri.parse("https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md");
+            startActivity(new Intent(Intent.ACTION_VIEW, uriUrl));
         });
-        thanksTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md");
-                startActivity(new Intent(Intent.ACTION_VIEW, uriUrl));
-            }
-        });
-        rateTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        rateTV.setOnClickListener(v -> {
 
-                Uri uriUrl = Uri.parse("market://details?id=" + requireContext().getPackageName());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
+            Uri uriUrl = Uri.parse("market://details?id=" + requireContext().getPackageName());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
 
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-                try {
-                    startActivity(intent);
-                } catch (ActivityNotFoundException e) {
-                    e.printStackTrace();
-                    startActivity(
-                            new Intent(
-                                    Intent.ACTION_VIEW,
-                                    Uri.parse("http://play.google.com/store/apps/details?id=" + requireContext().getPackageName())));
-                }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+                startActivity(
+                        new Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("http://play.google.com/store/apps/details?id=" + requireContext().getPackageName())));
             }
         });
     }

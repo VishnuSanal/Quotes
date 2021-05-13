@@ -9,7 +9,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
@@ -58,44 +57,41 @@ public class ColorFragment extends Fragment {
         final int colorRequestCode = Objects.requireNonNull(getArguments()).getInt("ColorRequestCode");
 
         final SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        gridView.setOnItemClickListener((parent, view1, position, id) -> {
 
-                String colorString = colorAdapter.getColor(position);
+            String colorString = colorAdapter.getColor(position);
 
-                if (colorRequestCode == 0) {
+            if (colorRequestCode == 0) {
 
-                    DisplayMetrics metrics = new DisplayMetrics();
-                    metrics.widthPixels = 1080;
-                    metrics.heightPixels = 1920;
+                DisplayMetrics metrics = new DisplayMetrics();
+                metrics.widthPixels = 1080;
+                metrics.heightPixels = 1920;
 
-                    Bitmap image = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
-                    Canvas canvas = new Canvas(image);
-                    canvas.drawColor(Color.parseColor(colorString));
+                Bitmap image = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(image);
+                canvas.drawColor(Color.parseColor(colorString));
 
-                    new ExportHelper(requireContext()).exportBackgroundImage(image);
+                new ExportHelper(requireContext()).exportBackgroundImage(image);
 
-                    ((MainActivity) requireActivity()).setConstraintLayoutBackground(Drawable.createFromPath(sharedPreferenceHelper.getBackgroundPath()));
+                ((MainActivity) requireActivity()).setConstraintLayoutBackground(Drawable.createFromPath(sharedPreferenceHelper.getBackgroundPath()));
 
-                    requireActivity().onBackPressed();
-                } else if (colorRequestCode == 1) {
+                requireActivity().onBackPressed();
+            } else if (colorRequestCode == 1) {
 
-                    sharedPreferenceHelper.setColorPreference(colorString);
+                sharedPreferenceHelper.setColorPreference(colorString);
 
-                    ((MainActivity) requireActivity()).updateViewPager();
+                ((MainActivity) requireActivity()).updateViewPager();
 
-                    requireActivity().onBackPressed();
-                } else if (colorRequestCode == 2) {
+                requireActivity().onBackPressed();
+            } else if (colorRequestCode == 2) {
 
-                    if (colorString.equals("#00000000")) colorString = "#FFFFFF";
+                if (colorString.equals("#00000000")) colorString = "#FFFFFF";
 
-                    sharedPreferenceHelper.setFontColorPreference(colorString);
+                sharedPreferenceHelper.setFontColorPreference(colorString);
 
-                    ((MainActivity) requireActivity()).updateViewPager();
+                ((MainActivity) requireActivity()).updateViewPager();
 
-                    requireActivity().onBackPressed();
-                }
+                requireActivity().onBackPressed();
             }
         });
     }

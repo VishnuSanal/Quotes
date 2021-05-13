@@ -11,7 +11,7 @@ import phone.vishnu.quotes.fragment.TourSingleFragment;
 import phone.vishnu.quotes.model.TourItem;
 
 public class TourFragmentStateAdapter extends androidx.viewpager2.adapter.FragmentStateAdapter {
-    private ArrayList<TourItem> tourItems = new ArrayList<>();
+    private final ArrayList<TourItem> tourItems;
 
     public TourFragmentStateAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);

@@ -8,13 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.data.QuoteData;
-import phone.vishnu.quotes.data.QuoteListAsyncResponse;
 import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
@@ -102,14 +100,11 @@ public class QuoteWidget extends AppWidgetProvider {
     }
 
     private void initAppWidget(final Context context) {
-        new QuoteData().getQuotes(new QuoteListAsyncResponse() {
-            @Override
-            public void processFinished(ArrayList<Quote> quotes) {
-                Collections.shuffle(quotes);
-                Quote quote = quotes.get(0);
+        new QuoteData().getQuotes(quotes -> {
+            Collections.shuffle(quotes);
+            Quote quote = quotes.get(0);
 
-                updateQuoteWidget(context, quote);
-            }
+            updateQuoteWidget(context, quote);
         });
     }
 

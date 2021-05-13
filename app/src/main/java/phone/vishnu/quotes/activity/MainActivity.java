@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -56,7 +55,6 @@ import java.util.List;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.data.QuoteData;
-import phone.vishnu.quotes.data.QuoteListAsyncResponse;
 import phone.vishnu.quotes.fragment.AboutFragment;
 import phone.vishnu.quotes.fragment.ColorFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
@@ -97,15 +95,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (extras.getBoolean("ShareButton")) {
 
-                    AsyncTask.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                exportHelper.shareImage(MainActivity.this, new Quote(extras.getString("quote"), extras.getString("author")));
-                            } catch (Exception e) {
-                                FirebaseCrashlytics.getInstance().recordException(e);
-                                e.printStackTrace();
-                            }
+                    AsyncTask.execute(() -> {
+                        try {
+                            exportHelper.shareImage(MainActivity.this, new Quote(extras.getString("quote"), extras.getString("author")));
+                        } catch (Exception e) {
+                            FirebaseCrashlytics.getInstance().recordException(e);
+                            e.printStackTrace();
                         }
                     });
                 } else if (extras.getBoolean("FavButton")) {
@@ -440,14 +435,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ArrayList<Quote> getQuotes() {
         final ArrayList<Quote> quoteArrayList = new ArrayList<>();
-        new QuoteData().getQuotes(new QuoteListAsyncResponse() {
-            @Override
-            public void processFinished(ArrayList<Quote> quotes) {
-                sharedPreferenceHelper.setTotalQuotesCount(quotes.size());
-                Collections.shuffle(quotes);
-                quoteArrayList.addAll(quotes);
-                updateViewPager();
-            }
+        new QuoteData().getQuotes(quotes -> {
+            sharedPreferenceHelper.setTotalQuotesCount(quotes.size());
+            Collections.shuffle(quotes);
+            quoteArrayList.addAll(quotes);
+            updateViewPager();
         });
         return quoteArrayList;
     }
@@ -486,22 +478,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setTitle("Permission Denied");
         builder.setMessage("Please Accept Necessary Permissions");
         builder.setCancelable(true);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface imageDialog, int which) {
-                imageDialog.cancel();
-                startActivity(
-                        new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                .setData(Uri.fromParts("package", getPackageName(), null))
-                );
-            }
+        builder.setPositiveButton("OK", (imageDialog, which) -> {
+            imageDialog.cancel();
+            startActivity(
+                    new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            .setData(Uri.fromParts("package", getPackageName(), null))
+            );
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface imageDialog, int which) {
-                imageDialog.cancel();
-                Toast.makeText(MainActivity.this, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
-            }
+        builder.setNegativeButton("Cancel", (imageDialog, which) -> {
+            imageDialog.cancel();
+            Toast.makeText(MainActivity.this, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
         });
         builder.show();
 
@@ -515,31 +501,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setCancelable(isCancellable);
 
         final String[] items = {"Plain Colour", "Image From Gallery", "Default Images"};
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0: {
-                        getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(0)).addToBackStack(null).commit();
-                        setHomeFABHome();
-                        break;
-                    }
-                    case 1: {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("image/*");
-                        startActivityForResult(intent, PICK_IMAGE_ID);
-                        break;
-                    }
-                    case 2: {
-                        bgDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
-                        bgDialog.setCancelable(false);
-                        getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
-                        setHomeFABHome();
-                        break;
-                    }
-                    default: {
-                        break;
-                    }
+        builder.setItems(items, (dialog, which) -> {
+            switch (which) {
+                case 0: {
+                    getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(0)).addToBackStack(null).commit();
+                    setHomeFABHome();
+                    break;
+                }
+                case 1: {
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, PICK_IMAGE_ID);
+                    break;
+                }
+                case 2: {
+                    bgDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+                    bgDialog.setCancelable(false);
+                    getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
+                    setHomeFABHome();
+                    break;
+                }
+                default: {
+                    break;
                 }
             }
         });
@@ -583,20 +566,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final ProgressDialog progressDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
         progressDialog.setCancelable(false);
 
-        new QuoteData().getQuotes(new QuoteListAsyncResponse() {
-            @Override
-            public void processFinished(ArrayList<Quote> quotes) {
-                Collections.shuffle(quotes);
-                if (quotes.size() == 0) {
-                    progressDialog.dismiss();
-                    Toast.makeText(MainActivity.this, "Loading Failed", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Quote quote = quotes.get(0);
-
-                new ExportHelper(MainActivity.this).shareImage(MainActivity.this, quote);
+        new QuoteData().getQuotes(quotes -> {
+            Collections.shuffle(quotes);
+            if (quotes.size() == 0) {
                 progressDialog.dismiss();
+                Toast.makeText(MainActivity.this, "Loading Failed", Toast.LENGTH_SHORT).show();
+                return;
             }
+            Quote quote = quotes.get(0);
+
+            new ExportHelper(MainActivity.this).shareImage(MainActivity.this, quote);
+            progressDialog.dismiss();
         });
 
     }

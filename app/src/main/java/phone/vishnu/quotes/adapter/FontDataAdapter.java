@@ -13,12 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
@@ -75,33 +71,22 @@ public class FontDataAdapter extends ArrayAdapter<String> {
                 if (!localFile.exists())
                     localFile.mkdirs();
 
-                storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        try {
-                            Typeface face = Typeface.createFromFile(f);
-                            viewHolder.fontTV.setTypeface(face);
-                        } catch (Exception e) {
-                            Toast.makeText(getContext(), "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
-                            FirebaseCrashlytics.getInstance().recordException(e);
-                            e.printStackTrace();
-                        }
+                storageReference.getFile(f).addOnSuccessListener(taskSnapshot -> {
+                    try {
+                        Typeface face = Typeface.createFromFile(f);
+                        viewHolder.fontTV.setTypeface(face);
+                    } catch (Exception e) {
+                        Toast.makeText(getContext(), "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
+                        FirebaseCrashlytics.getInstance().recordException(e);
+                        e.printStackTrace();
+                    }
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        FirebaseCrashlytics.getInstance().recordException(exception);
-                        exception.printStackTrace();
-                    }
-                }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        viewHolder.progressBar.setProgress(
-                                (int) ((100.0 * taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount()))
-                        );
-                    }
-                });
+                }).addOnFailureListener(exception -> {
+                    FirebaseCrashlytics.getInstance().recordException(exception);
+                    exception.printStackTrace();
+                }).addOnProgressListener(taskSnapshot -> viewHolder.progressBar.setProgress(
+                        (int) ((100.0 * taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount()))
+                ));
             }
         } else {
             viewHolder = (FontDataAdapter.ViewHolder) rootView.getTag();

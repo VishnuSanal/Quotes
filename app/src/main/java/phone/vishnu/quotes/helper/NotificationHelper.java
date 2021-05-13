@@ -9,13 +9,11 @@ import android.provider.Settings;
 
 import androidx.core.app.NotificationCompat;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.data.QuoteData;
-import phone.vishnu.quotes.data.QuoteListAsyncResponse;
 import phone.vishnu.quotes.model.Quote;
 
 public class NotificationHelper {
@@ -30,65 +28,62 @@ public class NotificationHelper {
     }
 
     public void createNotification() {
-        new QuoteData().getQuotes(new QuoteListAsyncResponse() {
-            @Override
-            public void processFinished(ArrayList<Quote> quotes) {
+        new QuoteData().getQuotes(quotes -> {
 /*
 
-                Intent intent = new Intent(mContext, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent intent = new Intent(mContext, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                final PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext, NOTIFICATION_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            final PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext, NOTIFICATION_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 */
 
-                Collections.shuffle(quotes);
-                Quote quote = quotes.get(0);
+            Collections.shuffle(quotes);
+            Quote quote = quotes.get(0);
 
-                Intent shareButtonIntent = new Intent(mContext, MainActivity.class);
-                shareButtonIntent.putExtra("NotificationClick", true);
-                shareButtonIntent.putExtra("ShareButton", true);
-                shareButtonIntent.putExtra("quote", quote.getQuote());
-                shareButtonIntent.putExtra("author", quote.getAuthor());
+            Intent shareButtonIntent = new Intent(mContext, MainActivity.class);
+            shareButtonIntent.putExtra("NotificationClick", true);
+            shareButtonIntent.putExtra("ShareButton", true);
+            shareButtonIntent.putExtra("quote", quote.getQuote());
+            shareButtonIntent.putExtra("author", quote.getAuthor());
 
-                PendingIntent sharePendingIntent = PendingIntent.getActivity(mContext, 1, shareButtonIntent, PendingIntent.FLAG_ONE_SHOT);
-                NotificationCompat.Action shareAction = new NotificationCompat.Action.Builder(R.drawable.ic_share, "Share", sharePendingIntent).build();
+            PendingIntent sharePendingIntent = PendingIntent.getActivity(mContext, 1, shareButtonIntent, PendingIntent.FLAG_ONE_SHOT);
+            NotificationCompat.Action shareAction = new NotificationCompat.Action.Builder(R.drawable.ic_share, "Share", sharePendingIntent).build();
 
-                Intent favButtonIntent = new Intent(mContext, MainActivity.class);
-                favButtonIntent.putExtra("NotificationClick", true);
-                favButtonIntent.putExtra("FavButton", true);
-                favButtonIntent.putExtra("quote", quote.getQuote());
-                favButtonIntent.putExtra("author", quote.getAuthor());
+            Intent favButtonIntent = new Intent(mContext, MainActivity.class);
+            favButtonIntent.putExtra("NotificationClick", true);
+            favButtonIntent.putExtra("FavButton", true);
+            favButtonIntent.putExtra("quote", quote.getQuote());
+            favButtonIntent.putExtra("author", quote.getAuthor());
 
-                PendingIntent favPendingIntent = PendingIntent.getActivity(mContext, 2, favButtonIntent, PendingIntent.FLAG_ONE_SHOT);
-                NotificationCompat.Action favAction = new NotificationCompat.Action.Builder(R.drawable.ic_favorite, "Add to Favorites", favPendingIntent).build();
+            PendingIntent favPendingIntent = PendingIntent.getActivity(mContext, 2, favButtonIntent, PendingIntent.FLAG_ONE_SHOT);
+            NotificationCompat.Action favAction = new NotificationCompat.Action.Builder(R.drawable.ic_favorite, "Add to Favorites", favPendingIntent).build();
 
-                final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID);
-                mBuilder.setSmallIcon(R.drawable.ic_quotes)
-                        .setAutoCancel(true)
-                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                        .setContentIntent(sharePendingIntent)
-                        .addAction(shareAction)
-                        .addAction(favAction);
+            final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID);
+            mBuilder.setSmallIcon(R.drawable.ic_quotes)
+                    .setAutoCancel(true)
+                    .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                    .setContentIntent(sharePendingIntent)
+                    .addAction(shareAction)
+                    .addAction(favAction);
 
-                NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
-                bigTextStyle.setBigContentTitle("Today's Quote");
-                bigTextStyle.bigText(quote.getQuote() + "\n" + " -" + quote.getAuthor());
+            NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+            bigTextStyle.setBigContentTitle("Today's Quote");
+            bigTextStyle.bigText(quote.getQuote() + "\n" + " -" + quote.getAuthor());
 
-                mBuilder.setStyle(bigTextStyle);
-                mBuilder.setContentTitle(mContext.getString(R.string.app_name));
+            mBuilder.setStyle(bigTextStyle);
+            mBuilder.setContentTitle(mContext.getString(R.string.app_name));
 
-                NotificationManager mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    int importance = NotificationManager.IMPORTANCE_HIGH;
-                    NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, importance);
-                    mBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
-                    mNotificationManager.createNotificationChannel(notificationChannel);
-                }
-                assert mNotificationManager != null;
-                mNotificationManager.notify(NOTIFICATION_REQUEST_CODE /* Request Code */, mBuilder.build());
-
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                int importance = NotificationManager.IMPORTANCE_HIGH;
+                NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, importance);
+                mBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
+                mNotificationManager.createNotificationChannel(notificationChannel);
             }
+            assert mNotificationManager != null;
+            mNotificationManager.notify(NOTIFICATION_REQUEST_CODE /* Request Code */, mBuilder.build());
+
         });
     }
 }

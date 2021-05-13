@@ -48,35 +48,27 @@ public class AddNewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requireActivity().onBackPressed();
-            }
-        });
+        cancelButton.setOnClickListener(v -> requireActivity().onBackPressed());
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        saveButton.setOnClickListener(v -> {
 
-                String quote = Objects.requireNonNull(quoteTIE.getText()).toString();
-                String author = Objects.requireNonNull(authorTIE.getText()).toString();
+            String quote = Objects.requireNonNull(quoteTIE.getText()).toString();
+            String author = Objects.requireNonNull(authorTIE.getText()).toString();
 
-                if (quote.isEmpty() || author.isEmpty()) {
-                    if (quote.isEmpty()) {
-                        quoteTIE.setError("Field Empty");
-                        quoteTIE.requestFocus();
-                    } else if (author.isEmpty()) {
-                        authorTIE.setError("Field Empty");
-                        authorTIE.requestFocus();
-                    }
-                } else {
-                    new FavUtils(requireContext()).addFavorite(new Quote(quote, author));
-
-                    Toast.makeText(requireContext(), "Quote added to Favourites", Toast.LENGTH_SHORT).show();
-
-                    requireActivity().onBackPressed();
+            if (quote.isEmpty() || author.isEmpty()) {
+                if (quote.isEmpty()) {
+                    quoteTIE.setError("Field Empty");
+                    quoteTIE.requestFocus();
+                } else if (author.isEmpty()) {
+                    authorTIE.setError("Field Empty");
+                    authorTIE.requestFocus();
                 }
+            } else {
+                new FavUtils(requireContext()).addFavorite(new Quote(quote, author));
+
+                Toast.makeText(requireContext(), "Quote added to Favourites", Toast.LENGTH_SHORT).show();
+
+                requireActivity().onBackPressed();
             }
         });
     }

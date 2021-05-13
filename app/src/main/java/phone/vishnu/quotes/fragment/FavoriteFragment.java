@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -48,34 +47,28 @@ public class FavoriteFragment extends Fragment {
     private ImageView addImageView;
 
     public FavoriteFragment() {
-        viewImageViewOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                {
-                    final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
-                    v.startAnimation(shake);
+        viewImageViewOnClickListener = v -> {
+            {
+                final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
+                v.startAnimation(shake);
 
-                    int position = Integer.parseInt(v.getTag().toString());
+                int position = Integer.parseInt(v.getTag().toString());
 
-                    shareButtonClicked(new SharedPreferenceHelper(requireContext()).getShareButtonAction(),
-                            favUtils.getFavourite(position)
-                    );
-                }
+                shareButtonClicked(new SharedPreferenceHelper(requireContext()).getShareButtonAction(),
+                        favUtils.getFavourite(position)
+                );
             }
         };
-        removeImageViewOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                {
-                    final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
-                    v.startAnimation(shake);
+        removeImageViewOnClickListener = v -> {
+            {
+                final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
+                v.startAnimation(shake);
 
-                    int position = Integer.parseInt(v.getTag().toString());
+                int position = Integer.parseInt(v.getTag().toString());
 
-                    favUtils.removeFavorite(position);
+                favUtils.removeFavorite(position);
 
-                    initFavourites();
-                }
+                initFavourites();
             }
         };
     }
@@ -96,12 +89,7 @@ public class FavoriteFragment extends Fragment {
 
         initFavourites();
 
-        addImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requireActivity().getSupportFragmentManager().beginTransaction().add(R.id.favoriteConstraintLayout, AddNewFragment.newInstance()).commit();
-            }
-        });
+        addImageView.setOnClickListener(v -> requireActivity().getSupportFragmentManager().beginTransaction().add(R.id.favoriteConstraintLayout, AddNewFragment.newInstance()).commit());
 
     }
 
@@ -121,22 +109,16 @@ public class FavoriteFragment extends Fragment {
         builder.setTitle("Permission Denied");
         builder.setMessage("Please Accept Necessary Permissions");
         builder.setCancelable(true);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface imageDialog, int which) {
-                imageDialog.cancel();
-                startActivity(
-                        new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                .setData(Uri.fromParts("package", requireContext().getPackageName(), null))
-                );
-            }
+        builder.setPositiveButton("OK", (imageDialog, which) -> {
+            imageDialog.cancel();
+            startActivity(
+                    new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            .setData(Uri.fromParts("package", requireContext().getPackageName(), null))
+            );
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface imageDialog, int which) {
-                imageDialog.cancel();
-                Toast.makeText(requireContext(), "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
-            }
+        builder.setNegativeButton("Cancel", (imageDialog, which) -> {
+            imageDialog.cancel();
+            Toast.makeText(requireContext(), "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
         });
         builder.show();
 
@@ -176,12 +158,7 @@ public class FavoriteFragment extends Fragment {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
                         Toast.makeText(requireContext(), "Saving to Gallery", Toast.LENGTH_SHORT).show();
-                        AsyncTask.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                exportHelper.saveImage(requireContext(), q);
-                            }
-                        });
+                        AsyncTask.execute(() -> exportHelper.saveImage(requireContext(), q));
                     }
 
                     @Override
@@ -205,12 +182,7 @@ public class FavoriteFragment extends Fragment {
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        AsyncTask.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                exportHelper.shareImage(requireContext(), q);
-                            }
-                        });
+                        AsyncTask.execute(() -> exportHelper.shareImage(requireContext(), q));
                     }
 
                     @Override

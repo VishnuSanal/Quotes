@@ -1,7 +1,6 @@
 package phone.vishnu.quotes.activity;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,28 +78,15 @@ public class SplashActivity extends AppCompatActivity {
 
         final int pageCount = adapter.getItemCount() - 1;
 
-        findViewById(R.id.splashScreenNextButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (viewPager.getCurrentItem() < pageCount)
-                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                else {
-                    tourCompleted();
-                }
-            }
-        });
-        findViewById(R.id.splashScreenBackButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-            }
-        });
-        findViewById(R.id.splashScreenSkipButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        findViewById(R.id.splashScreenNextButton).setOnClickListener(v -> {
+            if (viewPager.getCurrentItem() < pageCount)
+                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+            else {
                 tourCompleted();
             }
         });
+        findViewById(R.id.splashScreenBackButton).setOnClickListener(v -> viewPager.setCurrentItem(viewPager.getCurrentItem() - 1));
+        findViewById(R.id.splashScreenSkipButton).setOnClickListener(v -> tourCompleted());
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -146,22 +131,16 @@ public class SplashActivity extends AppCompatActivity {
         builder.setTitle("Permission Denied");
         builder.setMessage("Please Accept Necessary Permissions");
         builder.setCancelable(true);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface imageDialog, int which) {
-                imageDialog.cancel();
-                startActivity(
-                        new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                .setData(Uri.fromParts("package", getPackageName(), null))
-                );
-            }
+        builder.setPositiveButton("OK", (imageDialog, which) -> {
+            imageDialog.cancel();
+            startActivity(
+                    new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            .setData(Uri.fromParts("package", getPackageName(), null))
+            );
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface imageDialog, int which) {
-                imageDialog.cancel();
-                Toast.makeText(SplashActivity.this, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
-            }
+        builder.setNegativeButton("Cancel", (imageDialog, which) -> {
+            imageDialog.cancel();
+            Toast.makeText(SplashActivity.this, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
         });
         builder.show();
 
@@ -182,11 +161,6 @@ public class SplashActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.splashScreenAppNameTextView)).setTextColor(Color.parseColor(colorString));
 
         int SPLASH_TIMEOUT = 1;
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                moveToNext();
-            }
-        }, SPLASH_TIMEOUT * 1000);
+        new Handler().postDelayed(this::moveToNext, SPLASH_TIMEOUT * 1000);
     }
 }

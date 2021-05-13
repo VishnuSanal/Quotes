@@ -12,6 +12,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import phone.vishnu.quotes.R;
 
@@ -73,7 +74,7 @@ public class ColorAdapter extends BaseAdapter {
         if (colors[position].equals("#00000000")) {
             imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
             imageView.setScaleType(ImageView.ScaleType.CENTER);
-            imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_no_color));
+            imageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_no_color));
         } else {
             ShapeDrawable d = new ShapeDrawable(new OvalShape());
             d.getPaint().setStyle(Paint.Style.FILL);

@@ -19,12 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
@@ -60,62 +56,53 @@ public class PickFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Uri uri, int id) {
-                final ProgressDialog dialog = ProgressDialog.show(requireContext(), "", "Please Wait....");
+        adapter.setOnItemClickListener(uri -> {
+            final ProgressDialog dialog = ProgressDialog.show(requireContext(), "", "Please Wait....");
 
-                final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
 
-                final File f;
+            final File f;
 
-                if (uri.toString().contains("https://firebasestorage.googleapis.com/v0/b/quotes-q.appspot.com")) {
-                    String fileName = String.valueOf(uri).split("%2F")[1].split("\\?")[0];
+            if (uri.toString().contains("https://firebasestorage.googleapis.com/v0/b/quotes-q.appspot.com")) {
+                String fileName = String.valueOf(uri).split("%2F")[1].split("\\?")[0];
 
-                    f = new File(localFile + File.separator + "." + fileName);
+                f = new File(localFile + File.separator + "." + fileName);
 
-                } else {
-                    f = new File(uri.getPath());
-                }
+            } else {
+                f = new File(uri.getPath());
+            }
 
-                if (f.exists()) {
+            if (f.exists()) {
+                sharedPreferenceHelper.setBackgroundPath(f.getAbsolutePath());
+
+                dialog.dismiss();
+
+                Toast.makeText(requireContext(), "Background Set \n Applying Changes", Toast.LENGTH_LONG).show();
+
+                ((MainActivity) requireContext()).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.getAbsolutePath()));
+                ((MainActivity) requireContext()).onBackPressed();
+
+            } else {
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(f.getName().substring(1));
+
+                if (!localFile.exists()) localFile.mkdirs();
+
+                storageReference.getFile(f).addOnSuccessListener(taskSnapshot -> {
+
                     sharedPreferenceHelper.setBackgroundPath(f.getAbsolutePath());
 
                     dialog.dismiss();
 
                     Toast.makeText(requireContext(), "Background Set \n Applying Changes", Toast.LENGTH_LONG).show();
 
-                    ((MainActivity) requireContext()).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.getAbsolutePath()));
+                    ((MainActivity) requireContext()).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.toString()));
                     ((MainActivity) requireContext()).onBackPressed();
-
-                } else {
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(f.getName().substring(1));
-
-                    if (!localFile.exists()) localFile.mkdirs();
-
-                    storageReference.getFile(f).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-
-                            sharedPreferenceHelper.setBackgroundPath(f.getAbsolutePath());
-
-                            dialog.dismiss();
-
-                            Toast.makeText(requireContext(), "Background Set \n Applying Changes", Toast.LENGTH_LONG).show();
-
-                            ((MainActivity) requireContext()).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.toString()));
-                            ((MainActivity) requireContext()).onBackPressed();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            FirebaseCrashlytics.getInstance().recordException(exception);
-                            exception.printStackTrace();
-                            Toast.makeText(requireContext(), "Oops! Something went wrong!", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
-                        }
-                    });
-                }
+                }).addOnFailureListener(exception -> {
+                    FirebaseCrashlytics.getInstance().recordException(exception);
+                    exception.printStackTrace();
+                    Toast.makeText(requireContext(), "Oops! Something went wrong!", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
+                });
             }
         });
     }
@@ -171,23 +158,17 @@ public class PickFragment extends Fragment {
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference().child("images");
 
-            storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
-                @Override
-                public void onSuccess(ListResult listResult) {
+            storageRef.listAll().addOnSuccessListener(listResult -> {
 
-                    for (StorageReference item : listResult.getItems())
-                        if (!bgArrayList.contains(item.getName()))
-                            item.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    list.add(uri);
-                                    if (adapter != null && getContext() != null) {
-                                        adapter.submitList(list);
-                                        adapter.notifyDataSetChanged();
-                                    }
-                                }
-                            });
-                }
+                for (StorageReference item : listResult.getItems())
+                    if (!bgArrayList.contains(item.getName()))
+                        item.getDownloadUrl().addOnSuccessListener(uri -> {
+                            list.add(uri);
+                            if (adapter != null && getContext() != null) {
+                                adapter.submitList(list);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
             });
         }
     }

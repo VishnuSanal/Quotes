@@ -34,33 +34,27 @@ public class QuoteData {
                 final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                         Request.Method.GET,
                         url,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                for (int i = 0; i < response.length(); i++) {
-                                    try {
-                                        JSONObject quoteObject = response.getJSONObject(i);
+                        response -> {
+                            for (int i = 0; i < response.length(); i++) {
+                                try {
+                                    JSONObject quoteObject = response.getJSONObject(i);
 
-                                        Quote quote = new Quote();
-                                        quote.setQuote(quoteObject.getString("quote"));
-                                        quote.setAuthor(quoteObject.getString("name"));
-                                        quoteArrayList.add(quote);
-                                    } catch (JSONException e) {
-                                        FirebaseCrashlytics.getInstance().recordException(e);
-                                        e.printStackTrace();
-                                    }
+                                    Quote quote = new Quote();
+                                    quote.setQuote(quoteObject.getString("quote"));
+                                    quote.setAuthor(quoteObject.getString("name"));
+                                    quoteArrayList.add(quote);
+                                } catch (JSONException e) {
+                                    FirebaseCrashlytics.getInstance().recordException(e);
+                                    e.printStackTrace();
                                 }
-                                if (null != callBack) {
-                                    callBack.processFinished(quoteArrayList);
-                                }
+                            }
+                            if (null != callBack) {
+                                callBack.processFinished(quoteArrayList);
                             }
                         },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                FirebaseCrashlytics.getInstance().recordException(error);
-                                error.printStackTrace();
-                            }
+                        error -> {
+                            FirebaseCrashlytics.getInstance().recordException(error);
+                            error.printStackTrace();
                         }
                 ) {
                     @Override
