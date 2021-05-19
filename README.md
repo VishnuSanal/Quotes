@@ -22,7 +22,7 @@
 
 ## ☺ Enjoying Quotes? Consider Supporting!
 
-Please consider donating a small amount to support the development. It requires a lot of time and effort to develop an application keeping it free, open source & ad-free. Plus as a student, this helps me in my bread butter needs :D
+Please consider donating a small amount to support the development. It requires a lot of time and effort to develop an application keeping it free, open source & ad-free. :D 
 
 <p align="center">
   <a href="https://www.buymeacoffee.com/VishnuSanal">
