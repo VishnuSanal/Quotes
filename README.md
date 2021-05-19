@@ -41,6 +41,8 @@ If you enjoy the app, wish to contribute or simply wish to be with like-minded p
   </a>
 </p>
 
+<hr>
+
 ![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Quotes%20Banner.png?raw=true)
 
 ## 🚀Features
