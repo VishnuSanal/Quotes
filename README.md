@@ -24,7 +24,6 @@
 
 Please consider donating a small amount to support the development. It requires a lot of time and effort to develop an application keeping it free, open source & ad-free. Plus as a student, this helps me in my bread butter needs :D
 
-</p>
 <p align="center">
   <a href="https://www.buymeacoffee.com/VishnuSanal">
     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="100px">
@@ -34,12 +33,14 @@ Please consider donating a small amount to support the development. It requires 
 ## 🏠 Join Discord Server
 If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us!!! It'll be fun :)
 
-</p>
 <p align="center">
   <a href="https://discord.gg/M8ukyzTP5G">
     <img src="https://discord.com/assets/ff41b628a47ef3141164bfedb04fb220.png" alt="Join us on Discord" height="100px">
   </a>
 </p>
+
+## 🏠 Follow [Instagram Page](https://instagram.com/quotes_status_creator)
+Follow the Instagram Page to get your daily dose of inspiration delivered to your feed! If you enjoy the app, you'll enjoy the Instagram Page too! Come follow us & be inspired!
 
 <hr>
 
