@@ -11,20 +11,38 @@
 </p>
 
 <p align="center">
-	<a href='https://play.google.com/store/apps/details?id=phone.vishnu.quotes&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="100px"/></a>
-	<br>
-	<h3 align="center">Made in India with ❤</h3>
+	<a href='https://play.google.com/store/apps/details?id=phone.vishnu.quotes&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="100px" /></a>
 </p>
-	
+
 <hr>
 
     • Huge Collection of Inspirational Quotes that can be shared on Social Media Platforms.
-    • Quotes Making without any image editing whatsoever that too in User-Friendly UI.
+    • Create Quotes Status without any image editing whatsoever - that too in User-Friendly UI.
     • Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
 
-## ⚙ How it Works
+## ☺ Enjoying Quotes? Consider Supporting!
 
-	Quotes App presents you with Famous Quotations. Swipe horizontally to load more Quotes. 
+Please consider donating a small amount to support the development. It requires a lot of time and effort to develop an application keeping it free, open source & ad-free. :D 
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/VishnuSanal">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="100px">
+  </a>
+</p>
+
+## 🏠 Join Discord Server
+If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us!!! It'll be fun :)
+
+<p align="center">
+  <a href="https://discord.gg/M8ukyzTP5G">
+    <img src="https://discord.com/assets/ff41b628a47ef3141164bfedb04fb220.png" alt="Join us on Discord" height="100px">
+  </a>
+</p>
+
+## 🏠 Follow [Instagram Page](https://instagram.com/quotes_status_creator)
+Follow the Instagram Page to get your daily dose of inspiration delivered to your feed! If you enjoy the app, you'll enjoy the Instagram Page too! Come follow us & be inspired!
+
+<hr>
 
 ![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Quotes%20Banner.png?raw=true)
 
