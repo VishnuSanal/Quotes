@@ -4,22 +4,23 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="colorWhite">#FFFFFF</color>
-
-    <color name="spacerColor">#BDBDBD</color>
-
-    <color name="tourBackgroundColor">#F8BBD0</color>
-
-    <color name="cardBackgroundColor">#607D8B</color>
-    <color name="transparent">#00000000</color>
-
     <color name="BGColor">#000000</color>
-    <color name="BGColorLight">#D05C5C5C</color>
+    <color name="BGColorLight">#5C5C5C</color>
 
     <color name="textColor">#FFFFFF</color>
-    <color name="editTextColor">#BDBDBD</color>
+    <color name="textColorLight">#ECE4E4</color>
 
     <color name="noColorIconColor">#BDBDBD</color>
 
     <color name="bottomSheetBGColor">#191823</color>
+    <color name="editTextColor">#BDBDBD</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="cardBackgroundColor">#607D8B</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="spacerColor">#BDBDBD</color>
+    <color name="tourBackgroundColor">#F8BBD0</color>
+
+    <color name="PickBGColor">#D05C5C5C</color>
 </resources>

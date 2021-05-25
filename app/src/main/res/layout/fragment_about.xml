@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BGColor"
+    android:background="@color/BGColorLight"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".fragment.AboutFragment"
     tools:ignore="HardcodedText">
 
@@ -26,135 +28,107 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/aboutPageAppIcon"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_margin="16dp"
-            android:contentDescription="About Screen App Icon"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_quotes"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutSampleIconImageView" />
-
-        <TextView
-            android:id="@+id/aboutSampleAppNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:fontFamily="serif"
-            android:text="@string/app_name"
-            android:textColor="@color/colorAccent"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageAppIcon" />
-
-        <TextView
-            android:id="@+id/aboutSampleVersion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:fontFamily="serif"
-            android:textColor="@color/textColor"
-            app:layout_constraintEnd_toEndOf="@id/aboutSampleAppNameTextView"
-            app:layout_constraintStart_toStartOf="@id/aboutSampleAppNameTextView"
-            app:layout_constraintTop_toBottomOf="@id/aboutSampleAppNameTextView"
-            tools:text="Version 1.12.1" />
-
-        <View
-            android:id="@+id/aboutSampleSpacerView"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/spacerColor"
-            app:layout_constraintBottom_toTopOf="@id/aboutPageLinksTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutSampleVersion" />
-
-        <TextView
-            android:id="@+id/aboutPageLinksTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_margin="16dp"
-            android:text="@string/links"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/aboutPageRateTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutSampleSpacerView" />
-
-        <TextView
-            android:id="@+id/aboutPageRateTextView"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/aboutCardViewOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
-            android:text="@string/rate_this_app_on_google_play"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toTopOf="@id/aboutPageViewSourceCodeTextView"
+            android:padding="8dp"
+            app:cardBackgroundColor="@color/BGColor"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toTopOf="@id/aboutCardViewTwo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageLinksTextView" />
+            app:layout_constraintTop_toBottomOf="@id/aboutSampleIconImageView"
+            app:layout_constraintVertical_bias="0">
 
-        <TextView
-            android:id="@+id/aboutPageViewSourceCodeTextView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="220dp">
+
+                <ImageView
+                    android:id="@+id/aboutPageAppIcon"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="16dp"
+                    android:contentDescription="About Screen App Icon"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_quotes"
+                    app:layout_constraintBottom_toTopOf="@id/aboutSampleAppNameTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/aboutSampleAppNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:fontFamily="serif"
+                    android:text="Quotes Status Creator"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/aboutSampleVersion"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/aboutPageAppIcon" />
+
+                <TextView
+                    android:id="@+id/aboutSampleVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:fontFamily="serif"
+                    android:textColor="@color/textColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/aboutSampleAppNameTextView"
+                    app:layout_constraintStart_toStartOf="@id/aboutSampleAppNameTextView"
+                    app:layout_constraintTop_toBottomOf="@id/aboutSampleAppNameTextView"
+                    tools:text="v1.12.1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/aboutCardViewTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
-            android:text="@string/view_source_code_on_github"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toTopOf="@id/aboutPageThanksTextView"
+            android:padding="8dp"
+            app:cardBackgroundColor="@color/BGColor"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageRateTextView" />
+            app:layout_constraintTop_toBottomOf="@id/aboutCardViewOne"
+            app:layout_constraintVertical_bias="0">
 
-        <TextView
-            android:id="@+id/aboutPageThanksTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
-            android:text="@string/thanks_to"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toTopOf="@id/aboutPageFeedbackTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageViewSourceCodeTextView" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="48dp">
 
-        <TextView
-            android:id="@+id/aboutPageFeedbackTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
-            android:text="@string/send_feedback_to_the_developer"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutPageThanksTextView" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/aboutRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/about_single_item" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
+</androidx.core.widget.NestedScrollView>

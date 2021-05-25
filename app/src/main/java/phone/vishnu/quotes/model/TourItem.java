@@ -1,5 +1,7 @@
 package phone.vishnu.quotes.model;
 
+import java.util.Objects;
+
 public class TourItem {
 
     private int imgId;
@@ -34,5 +36,14 @@ public class TourItem {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TourItem tourItem = (TourItem) o;
+        return imgId == tourItem.imgId &&
+                Objects.equals(title, tourItem.title) &&
+                Objects.equals(desc, tourItem.desc);
     }
 }
