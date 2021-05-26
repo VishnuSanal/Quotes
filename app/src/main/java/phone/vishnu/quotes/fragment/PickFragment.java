@@ -26,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.util.ArrayList;
 
+import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.RecyclerViewAdapter;
@@ -59,11 +60,11 @@ public class PickFragment extends Fragment {
         adapter.setOnItemClickListener(uri -> {
             final ProgressDialog dialog = ProgressDialog.show(requireContext(), "", "Please Wait....");
 
-            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
 
             final File f;
 
-            if (uri.toString().contains("https://firebasestorage.googleapis.com/v0/b/quotes-q.appspot.com")) {
+            if (uri.toString().contains((BuildConfig.DEBUG) ? "https://firebasestorage.googleapis.com/v0/b/quotes-debug-q.appspot.com" : "https://firebasestorage.googleapis.com/v0/b/quotes-q.appspot.com")) {
                 String fileName = String.valueOf(uri).split("%2F")[1].split("\\?")[0];
 
                 f = new File(localFile + File.separator + "." + fileName);
@@ -127,7 +128,7 @@ public class PickFragment extends Fragment {
         final ArrayList<Uri> list = new ArrayList<>();
         final ArrayList<String> bgArrayList = new ArrayList<>();
 
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
         File[] files = root.listFiles();
 
         if (files != null) {

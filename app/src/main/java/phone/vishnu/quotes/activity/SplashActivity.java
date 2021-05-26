@@ -26,6 +26,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.TourFragmentStateAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
@@ -52,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
     private void removeFonts() {
         sharedPreferenceHelper.deleteFontPreference();
 
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Quotes");
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
         File[] files = root.listFiles();
 
         ArrayList<String> arrayList = sharedPreferenceHelper.getFontListToBeRemoved();
@@ -157,6 +158,9 @@ public class SplashActivity extends AppCompatActivity {
         String colorString = sharedPreferenceHelper.getCardColorPreference();
 
         if (colorString.equals("#00000000")) colorString = "#607D8B";
+
+        if (BuildConfig.DEBUG)
+            ((TextView) findViewById(R.id.splashScreenAppNameTextView)).setText("Quotes Debug");
 
         ((TextView) findViewById(R.id.splashScreenAppNameTextView)).setTextColor(Color.parseColor(colorString));
 

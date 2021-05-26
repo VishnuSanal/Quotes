@@ -18,6 +18,8 @@ android {
     buildTypes {
 
         debug {
+            applicationIdSuffix ".debug"
+
             manifestPlaceholders = [analytics_deactivated: "true"]
         }
 
