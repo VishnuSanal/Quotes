@@ -39,8 +39,11 @@ If you enjoy the app, wish to contribute or simply wish to be with like-minded p
   </a>
 </p>
 
-## 🏠 Follow [Instagram Page](https://instagram.com/quotes_status_creator)
+## 🎨 Follow [Instagram Page](https://instagram.com/quotes_status_creator)
 Follow the Instagram Page to get your daily dose of inspiration delivered to your feed! If you enjoy the app, you'll enjoy the Instagram Page too! Come follow us & be inspired!
+
+## ✨ Contribute to the project
+[ONTRIBUTING.md](https://github.com/VishnuSanal/Quotes/blob/master/CONTRIBUTING.md) will be a good place to start :)
 
 <hr>
 
