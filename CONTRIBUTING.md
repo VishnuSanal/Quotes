@@ -15,7 +15,7 @@
 - ## Recommended WorkFlow
 
     ```
-    Check the [issue section](https://github.com/VishnuSanal/Quotes/issues/) -> Choose an issue that you can fix ->
+    Check the issue section -> Choose an issue that you can fix ->
     Comment there asking to work on the issue -> Start working on the issue when it gets assigned to you
     ```
  
