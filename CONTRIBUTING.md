@@ -4,7 +4,7 @@
 
 - ## Please Note
 
-- Never start working on an issue until it's not assigned to you!
+- Never start working on an issue until it's assigned to you!
 - Please rearrange the code with Andorid Studio (`Ctrl + Alt + L` or `Cmd + Alt + L`) before making a PR
 - Creation of a new branch for every contribution is recommended
 - Feel free to create issues too. That too counts as a contribution!
