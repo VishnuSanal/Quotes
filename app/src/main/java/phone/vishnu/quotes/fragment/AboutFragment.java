@@ -52,14 +52,11 @@ public class AboutFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(position -> {
-
             if (position == 0) {
                 openLink("https://discord.gg/M8ukyzTP5G");
             } else if (position == 1) {
-                openLink("https://www.buymeacoffee.com/VishnuSanal");
-            } else if (position == 2) {
                 openLink("https://instagram.com/quotes_status_creator");
-            } else if (position == 3) {
+            } else if (position == 2) {
 
                 Uri uriUrl = Uri.parse("market://details?id=" + requireContext().getPackageName());
                 Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
@@ -77,11 +74,11 @@ public class AboutFragment extends Fragment {
                                     Uri.parse("http://play.google.com/store/apps/details?id=" + requireContext().getPackageName())));
                 }
 
-            } else if (position == 4) {
+            } else if (position == 3) {
                 openLink("https://github.com/VishnuSanal/Quotes");
-            } else if (position == 5) {
+            } else if (position == 4) {
                 openLink("https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md");
-            } else if (position == 6) {
+            } else if (position == 5) {
 
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setData(Uri.parse("mailto:"));
@@ -103,12 +100,10 @@ public class AboutFragment extends Fragment {
     private List<TourItem> getItems() {
         return Arrays.asList(
                 new TourItem(R.drawable.ic_home, "Join Discord Server", "Join our community on Discord"),
-                new TourItem(R.drawable.ic_whatshot, "Support Development", "Donate a small amount to support development"),
                 new TourItem(R.drawable.ic_color_lens, "Follow on Instagram", "Follow Quotes Status Creator on Instagram"),
                 new TourItem(R.drawable.ic_done, "Rate the App", "Rate this app on Google Play"),
                 new TourItem(R.drawable.ic_info, "Source Code", "View source code on GitHub"),
                 new TourItem(R.drawable.ic_favorite, "Thanks To", "Thanks to these awesome people"),
-
                 new TourItem(R.drawable.ic_settings, " Send Feedback", " Send feedback to developer")
         );
     }
