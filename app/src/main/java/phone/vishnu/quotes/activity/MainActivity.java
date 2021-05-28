@@ -290,7 +290,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(1)).addToBackStack(null).commit();
                 setHomeFABHome();
             } else if (id == R.id.fontFAB) {
-                fontDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+                fontDialog =  new ProgressDialog(MainActivity.this, R.style.DialogTheme);
+                fontDialog.setMessage("Please Wait....");
+                fontDialog.show();
                 fontDialog.setCancelable(false);
                 getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontMasterFragment.newInstance()).addToBackStack(null).commit();
                 setHomeFABHome();
@@ -515,7 +517,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 }
                 case 2: {
-                    bgDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+                    bgDialog = new ProgressDialog(MainActivity.this, R.style.DialogTheme);
+                    bgDialog.setMessage("Please Wait....");
+                    bgDialog.show();
                     bgDialog.setCancelable(false);
                     getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
                     setHomeFABHome();
