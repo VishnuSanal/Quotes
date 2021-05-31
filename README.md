@@ -42,8 +42,11 @@ If you enjoy the app, wish to contribute or simply wish to be with like-minded p
 ## 🎨 Follow [Instagram Page](https://instagram.com/quotes_status_creator)
 Follow the Instagram Page to get your daily dose of inspiration delivered to your feed! If you enjoy the app, you'll enjoy the Instagram Page too! Come follow us & be inspired!
 
+## ♥ Thanks to [these](https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md) awesome people
+Awesome people that help & support the development & maintenance of Quotes Status Creator
+
 ## ✨ Contribute to the project
-[ONTRIBUTING.md](https://github.com/VishnuSanal/Quotes/blob/master/CONTRIBUTING.md) will be a good place to start :)
+[CONTRIBUTING.md](https://github.com/VishnuSanal/Quotes/blob/master/CONTRIBUTING.md) will be a good place to start :)
 
 <hr>
 
@@ -89,7 +92,3 @@ Follow the Instagram Page to get your daily dose of inspiration delivered to you
 ## 🤩Feedback and Suggestion
 
 We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Email your suggestions/feedback to us.
-
-## ♥ Thanks to [these](https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md) awesome people
-
-Awesome people that helps build & run this app
