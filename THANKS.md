@@ -77,6 +77,9 @@
  - [Dexter](https://github.com/Karumi/Dexter)
  - [Slide To Act](https://github.com/cortinico/slidetoact)
 
+## 👩🏿‍💻👨🏿‍💻 Contributors - Thank you for all your works :)
+ - [Shourya Shikhar](https://github.com/danger-ahead)
+
 ## ♥ Other awesome people who helped
 
  - [Aswin Kesav U](https://www.twitter.com/KesavAswin/)
