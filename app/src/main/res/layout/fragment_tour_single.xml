@@ -18,6 +18,7 @@
         android:layout_height="120dp"
         android:layout_margin="8dp"
         android:adjustViewBounds="true"
+        app:tint="@color/colorWhite"
         android:contentDescription="Tour Fragment ImageView"
         android:gravity="center"
         android:scaleType="fitXY" />

@@ -34,9 +34,12 @@ public class TourSingleFragment extends Fragment {
         View i = inflater.inflate(R.layout.fragment_tour_single, container, false);
 
         Bundle args = getArguments();
-        ((ImageView) i.findViewById(R.id.tourImage)).setImageResource(args.getInt("tourImg"));
-        ((TextView) i.findViewById(R.id.tourTitle)).setText(args.getString("tourTitle"));
-        ((TextView) i.findViewById(R.id.tourDescription)).setText(args.getString("tourDescription"));
+
+        if (args != null) {
+            ((ImageView) i.findViewById(R.id.tourImage)).setImageResource(args.getInt("tourImg"));
+            ((TextView) i.findViewById(R.id.tourTitle)).setText(args.getString("tourTitle"));
+            ((TextView) i.findViewById(R.id.tourDescription)).setText(args.getString("tourDescription"));
+        }
 
         return i;
     }

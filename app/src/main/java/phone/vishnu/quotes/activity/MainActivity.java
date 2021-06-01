@@ -113,12 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (null != getIntent() && null != getIntent().getAction()) {
             //Shortcut
-            //noinspection StatementWithEmptyBody
-            if ("phone.vishnu.quotes.openMainActivity".equals(getIntent().getAction())) {
-
-                //Do Nothing
-
-            } else if ("phone.vishnu.quotes.openFavouriteFragment".equals(getIntent().getAction())) {
+            if ("phone.vishnu.quotes.openFavouriteFragment".equals(getIntent().getAction())) {
 
                 FavoriteFragment fragment = FavoriteFragment.newInstance();
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -450,7 +445,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK && data != null) {
+        if (resultCode == Activity.RESULT_OK && data != null && null != data.getData()) {
 
             String file = exportHelper.getBGPath();
 
