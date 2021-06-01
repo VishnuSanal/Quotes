@@ -1,0 +1,130 @@
+package phone.vishnu.quotes.helper;
+
+import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.provider.Settings;
+import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+
+import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.model.Quote;
+
+/*
+Copy -> 0
+Share -> 1
+Save -> 2
+Ask -> 3
+*/
+
+public class ShareHelper {
+
+    public static void copyQuote(Context context, Quote quote) {
+
+        String q = "\"" + quote.getQuote() + "\"" + " - " + quote.getAuthor().replace("-", "");
+
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(context.getResources().getString(R.string.app_name), q);
+        clipboard.setPrimaryClip(clip);
+
+        Toast.makeText(context, "Copied to Clipboard", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void saveQuote(Context context, final Quote q) {
+
+        Dexter.withContext(context)
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        Toast.makeText(context, "Saving to Gallery", Toast.LENGTH_SHORT).show();
+                        AsyncTask.execute(() -> new ExportHelper(context).saveImage(context, q));
+                    }
+
+                    @Override
+                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                        showPermissionDeniedDialog(context);
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        Toast.makeText(context, "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
+                        permissionToken.continuePermissionRequest();
+                    }
+                })
+                .check();
+
+    }
+
+    public static void shareQuote(Context context, final Quote q) {
+        Dexter.withContext(context)
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        AsyncTask.execute(() -> new ExportHelper(context).shareImage(context, q));
+                    }
+
+                    @Override
+                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                        showPermissionDeniedDialog(context);
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        Toast.makeText(context, "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
+                        permissionToken.continuePermissionRequest();
+                    }
+                })
+                .check();
+    }
+
+    private static void showPermissionDeniedDialog(Context context) {
+        final androidx.appcompat.app.AlertDialog.Builder builder =
+                new androidx.appcompat.app.AlertDialog.Builder(context);
+        builder.setTitle("Permission Denied");
+        builder.setMessage("Please Accept Necessary Permissions");
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK", (imageDialog, which) -> {
+            imageDialog.cancel();
+            context.startActivity(
+                    new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            .setData(Uri.fromParts("package", context.getPackageName(), null))
+            );
+        });
+        builder.setNegativeButton("Cancel", (imageDialog, which) -> {
+            imageDialog.cancel();
+            Toast.makeText(context, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
+        });
+        builder.show();
+
+    }
+
+    public static Drawable getShareIconDrawable(Context context) {
+        return getShareIconDrawable(context, new SharedPreferenceHelper(context).getShareButtonAction());
+    }
+
+    public static Drawable getShareIconDrawable(Context context, int i) {
+        if (i == 0)
+            return ContextCompat.getDrawable(context, R.drawable.ic_copy);
+        else if (i == 1 || i == 3)
+            return ContextCompat.getDrawable(context, R.drawable.ic_share);
+        else if (i == 2)
+            return ContextCompat.getDrawable(context, R.drawable.ic_save);
+
+        return ContextCompat.getDrawable(context, R.drawable.ic_share);
+    }
+}

@@ -1,15 +1,7 @@
 package phone.vishnu.quotes.fragment;
 
-import android.Manifest;
 import android.animation.Animator;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,22 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.helper.ExportHelper;
+import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 
@@ -43,7 +28,6 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
 
     private RadioGroup radioGroup;
     private SharedPreferenceHelper sharedPreferenceHelper;
-    private ExportHelper exportHelper;
 
     private Quote quote = null;
 
@@ -87,7 +71,6 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         View inflate = inflater.inflate(R.layout.bottom_sheet, container, false);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
-        exportHelper = new ExportHelper(requireContext());
 
         radioGroup = inflate.findViewById(R.id.bottomSheetRadioGroup);
 
@@ -144,79 +127,13 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     }
 
     private void shareButtonClicked(int i, Quote q) {
-
-        //Copy -> 0
-        //Share -> 1
-        //Save -> 2
-        //Ask -> 3
-
         if (i == 0) {
-            copyQuote(q);
+            ShareHelper.copyQuote(requireContext(), q);
         } else if (i == 1) {
-            shareQuote(q);
+            ShareHelper.shareQuote(requireContext(), q);
         } else if (i == 2) {
-            saveQuote(q);
+            ShareHelper.saveQuote(requireContext(), q);
         }
-    }
-
-    private void copyQuote(Quote quote) {
-
-        String q = "\"" + quote.getQuote() + "\"" + " - " + quote.getAuthor().replace("-", "");
-
-        ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText(getResources().getString(R.string.app_name), q);
-        clipboard.setPrimaryClip(clip);
-
-        Toast.makeText(requireContext(), "Copied to Clipboard", Toast.LENGTH_SHORT).show();
-    }
-
-    private void saveQuote(final Quote q) {
-
-        Dexter.withContext(requireContext())
-                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        Toast.makeText(requireContext(), "Saving to Gallery", Toast.LENGTH_SHORT).show();
-                        AsyncTask.execute(() -> exportHelper.saveImage(requireContext(), q));
-                    }
-
-                    @Override
-                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                        showPermissionDeniedDialog();
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                        Toast.makeText(requireContext(), "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
-                        permissionToken.continuePermissionRequest();
-                    }
-                })
-                .check();
-
-    }
-
-    private void shareQuote(final Quote q) {
-        Dexter.withContext(requireContext())
-                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        AsyncTask.execute(() -> exportHelper.shareImage(requireContext(), q));
-                    }
-
-                    @Override
-                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                        showPermissionDeniedDialog();
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                        Toast.makeText(requireContext(), "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
-                        permissionToken.continuePermissionRequest();
-                    }
-                })
-                .check();
     }
 
     private void setChecked(int i) {
@@ -246,26 +163,5 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         else if (id == R.id.bottomSheetAskRadioButton)
             return 3;
         return 1;
-    }
-
-    private void showPermissionDeniedDialog() {
-        final androidx.appcompat.app.AlertDialog.Builder builder =
-                new androidx.appcompat.app.AlertDialog.Builder(requireContext());
-        builder.setTitle("Permission Denied");
-        builder.setMessage("Please Accept Necessary Permissions");
-        builder.setCancelable(true);
-        builder.setPositiveButton("OK", (imageDialog, which) -> {
-            imageDialog.cancel();
-            startActivity(
-                    new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                            .setData(Uri.fromParts("package", requireContext().getPackageName(), null))
-            );
-        });
-        builder.setNegativeButton("Cancel", (imageDialog, which) -> {
-            imageDialog.cancel();
-            Toast.makeText(requireContext(), "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
-        });
-        builder.show();
-
     }
 }
