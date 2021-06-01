@@ -136,7 +136,14 @@ public class FavoriteFragment extends Fragment {
             shareQuote(q);
         } else if (i == 2) {
             saveQuote(q);
+        } else if (i == 3) {
+            showBottomSheetDialog(q);
         }
+    }
+
+    private void showBottomSheetDialog(Quote q) {
+        BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance(q);
+        bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
     }
 
     private void copyQuote(Quote quote) {
@@ -198,5 +205,4 @@ public class FavoriteFragment extends Fragment {
                 })
                 .check();
     }
-
 }

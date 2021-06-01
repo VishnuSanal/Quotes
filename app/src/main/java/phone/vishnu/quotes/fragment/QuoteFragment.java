@@ -160,10 +160,11 @@ public class QuoteFragment extends Fragment {
         //Copy -> 0
         //Share -> 1
         //Save -> 2
+        //Ask -> 3
 
         if (i == 0)
             return ContextCompat.getDrawable(requireContext(), R.drawable.ic_copy);
-        else if (i == 1)
+        else if (i == 1 || i == 3)
             return ContextCompat.getDrawable(requireContext(), R.drawable.ic_share);
         else if (i == 2)
             return ContextCompat.getDrawable(requireContext(), R.drawable.ic_save);
@@ -176,6 +177,7 @@ public class QuoteFragment extends Fragment {
         //Copy -> 0
         //Share -> 1
         //Save -> 2
+        //Ask -> 3
 
         if (i == 0) {
             copyQuote(q);
@@ -183,7 +185,14 @@ public class QuoteFragment extends Fragment {
             shareQuote(q);
         } else if (i == 2) {
             saveQuote(q);
+        } else if (i == 3) {
+            showBottomSheetDialog(q);
         }
+    }
+
+    private void showBottomSheetDialog(Quote q) {
+        BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance(q);
+        bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
     }
 
     private void copyQuote(Quote quote) {

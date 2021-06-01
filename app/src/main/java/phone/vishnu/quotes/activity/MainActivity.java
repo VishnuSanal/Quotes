@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(1)).addToBackStack(null).commit();
                 setHomeFABHome();
             } else if (id == R.id.fontFAB) {
-                fontDialog =  new ProgressDialog(MainActivity.this, R.style.DialogTheme);
+                fontDialog = new ProgressDialog(MainActivity.this, R.style.DialogTheme);
                 fontDialog.setMessage("Please Wait....");
                 fontDialog.show();
                 fontDialog.setCancelable(false);

@@ -84,5 +84,16 @@
             android:text="Save to Gallery"
             android:textColor="@color/textColor" />
 
+        <RadioButton
+            android:id="@+id/bottomSheetAskRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:drawableStart="@drawable/ic_menu"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:text="Ask everytime"
+            android:textColor="@color/textColor" />
+
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

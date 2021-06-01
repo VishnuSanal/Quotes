@@ -76,10 +76,11 @@ public class FavoritesDataAdapter extends ArrayAdapter<Quote> {
         //Copy -> 0
         //Share -> 1
         //Save -> 2
+        //Ask -> 3
 
         if (i == 0)
             return ContextCompat.getDrawable(context, R.drawable.ic_copy);
-        else if (i == 1)
+        else if (i == 1 || i == 3)
             return ContextCompat.getDrawable(context, R.drawable.ic_share);
         else if (i == 2)
             return ContextCompat.getDrawable(context, R.drawable.ic_save);

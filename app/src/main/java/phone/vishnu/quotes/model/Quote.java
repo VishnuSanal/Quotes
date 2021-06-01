@@ -1,5 +1,7 @@
 package phone.vishnu.quotes.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.Objects;
 
 public class Quote {
@@ -39,5 +41,14 @@ public class Quote {
                     Objects.equals(author, quote1.author);
         }
         return false;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Quote{" +
+                "quote='" + quote + '\'' +
+                ", author='" + author + '\'' +
+                '}';
     }
 }
