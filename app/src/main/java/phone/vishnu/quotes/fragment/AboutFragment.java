@@ -53,7 +53,7 @@ public class AboutFragment extends Fragment {
 
         adapter.setOnItemClickListener(position -> {
             if (position == 0) {
-                openLink("https://discord.gg/M8ukyzTP5G");
+                openLink("https://t.me/QuotesStatusCreator");
             } else if (position == 1) {
                 openLink("https://instagram.com/quotes_status_creator");
             } else if (position == 2) {
@@ -99,7 +99,7 @@ public class AboutFragment extends Fragment {
 
     private List<TourItem> getItems() {
         return Arrays.asList(
-                new TourItem(R.drawable.ic_home, "Join Discord Server", "Join our community on Discord"),
+                new TourItem(R.drawable.ic_home, "Join Telegram Group", "Join our community on Telegram"),
                 new TourItem(R.drawable.ic_color_lens, "Follow on Instagram", "Follow Quotes Status Creator on Instagram"),
                 new TourItem(R.drawable.ic_done, "Rate the App", "Rate this app on Google Play"),
                 new TourItem(R.drawable.ic_info, "Source Code", "View source code on GitHub"),
