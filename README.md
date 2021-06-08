@@ -30,12 +30,12 @@ Please consider donating a small amount to support the development. It requires 
   </a>
 </p>
 
-## 🏠 Join Discord Server
+## 🏠 Join Telegram Group
 If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us!!! It'll be fun :)
 
 <p align="center">
-  <a href="https://discord.gg/M8ukyzTP5G">
-    <img src="https://discord.com/assets/ff41b628a47ef3141164bfedb04fb220.png" alt="Join us on Discord" height="100px">
+  <a href="https://t.me/QuotesStatusCreator">
+	<img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Join us on Telegram" height="60px">
   </a>
 </p>
 
