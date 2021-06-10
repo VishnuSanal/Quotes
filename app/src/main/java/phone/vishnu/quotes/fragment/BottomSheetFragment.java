@@ -77,7 +77,8 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         if (quote != null)
             ((RadioButton) radioGroup.findViewById(R.id.bottomSheetAskRadioButton)).setVisibility(View.GONE);
 
-        setChecked(sharedPreferenceHelper.getShareButtonAction());
+        if (quote == null)
+            setChecked(sharedPreferenceHelper.getShareButtonAction());
 
         return inflate;
     }

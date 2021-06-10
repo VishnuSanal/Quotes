@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -56,6 +55,7 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.fragment.AboutFragment;
+import phone.vishnu.quotes.fragment.BottomSheetFragment;
 import phone.vishnu.quotes.fragment.ColorFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontMasterFragment;
@@ -70,7 +70,9 @@ import phone.vishnu.quotes.model.Quote;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static ProgressDialog bgDialog, fontDialog;
+
     private final int PICK_IMAGE_ID = 36;
+
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ExportHelper exportHelper;
 
@@ -95,18 +97,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (extras.getBoolean("ShareButton")) {
 
-                    AsyncTask.execute(() -> {
-                        try {
-                            exportHelper.shareImage(MainActivity.this, new Quote(extras.getString("quote"), extras.getString("author")));
-                        } catch (Exception e) {
-                            FirebaseCrashlytics.getInstance().recordException(e);
-                            e.printStackTrace();
-                        }
-                    });
+                    showBottomSheetDialog(
+                            new Quote(
+                                    extras.getString("quote"),
+                                    extras.getString("author")
+                            )
+                    );
+
                 } else if (extras.getBoolean("FavButton")) {
+
                     addFavourite(
                             this,
                             new Quote(extras.getString("quote"), extras.getString("author")));
+
                 }
             }
         }
@@ -467,6 +470,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         resetHomeFAB();
         super.onBackPressed();
+    }
+
+    private void showBottomSheetDialog(Quote q) {
+        BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance(q);
+        bottomSheet.show(getSupportFragmentManager(), "ModalBottomSheet");
     }
 
     private void showPermissionDeniedDialog() {
