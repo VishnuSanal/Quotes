@@ -1,88 +1,169 @@
 package phone.vishnu.quotes.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.app.Application;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.progressindicator.LinearProgressIndicator;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.adapter.FavoritesDataAdapter;
-import phone.vishnu.quotes.helper.FavUtils;
+import phone.vishnu.quotes.adapter.FavoritesAdapter;
 import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
+import phone.vishnu.quotes.viewmodel.FavViewModel;
 
 public class FavoriteFragment extends Fragment {
 
-    private final View.OnClickListener viewImageViewOnClickListener;
-    private final View.OnClickListener removeImageViewOnClickListener;
+    private FavViewModel viewModel;
+    private FavoritesAdapter adapter;
+    private RecyclerView recyclerView;
 
-    private FavUtils favUtils;
-    private ListView listView;
-    private ImageView addImageView;
+    private ImageView addImageView, emptyHintIV;
+    private TextView emptyHintTV;
+    private LinearProgressIndicator progressBar;
 
     public FavoriteFragment() {
-        viewImageViewOnClickListener = v -> {
-            {
-                final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
-                v.startAnimation(shake);
-
-                int position = Integer.parseInt(v.getTag().toString());
-
-                shareButtonClicked(new SharedPreferenceHelper(requireContext()).getShareButtonAction(),
-                        favUtils.getFavourite(position)
-                );
-            }
-        };
-        removeImageViewOnClickListener = v -> {
-            {
-                final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
-                v.startAnimation(shake);
-
-                int position = Integer.parseInt(v.getTag().toString());
-
-                favUtils.removeFavorite(position);
-
-                initFavourites();
-            }
-        };
     }
 
     public static FavoriteFragment newInstance() {
         return new FavoriteFragment();
     }
 
-    private void initFavourites() {
-        FavoritesDataAdapter adapter = new FavoritesDataAdapter(requireContext().getApplicationContext(), favUtils.getFavArrayList(), viewImageViewOnClickListener, removeImageViewOnClickListener);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View inflate = inflater.inflate(R.layout.fragment_favorite, container, false);
+
+        addImageView = inflate.findViewById(R.id.favoriteAddImageView);
+        progressBar = inflate.findViewById(R.id.favProgressBar);
+        emptyHintIV = inflate.findViewById(R.id.recyclerViewEmptyHintIV);
+        emptyHintTV = inflate.findViewById(R.id.recyclerViewEmptyHintTV);
+        recyclerView = inflate.findViewById(R.id.favoriteRecyclerView);
+
+        return inflate;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initFavourites();
+        setUpRecyclerView(requireContext());
 
-        addImageView.setOnClickListener(v -> requireActivity().getSupportFragmentManager().beginTransaction().add(R.id.favoriteConstraintLayout, AddNewFragment.newInstance()).commit());
+        addImageView.setOnClickListener(
+                v -> requireActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.favoriteConstraintLayout, AddNewFragment.newInstance())
+                        .commit()
+        );
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_favorite, container, false);
-        listView = inflate.findViewById(R.id.favoriteListView);
-        addImageView = inflate.findViewById(R.id.favoriteAddImageView);
-        favUtils = new FavUtils(requireContext());
-        return inflate;
+    private void setUpRecyclerView(final Context context) {
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+
+        adapter = new FavoritesAdapter();
+        recyclerView.setAdapter(adapter);
+
+        viewModel = new ViewModelProvider(
+                this,
+                new ViewModelProvider
+                        .AndroidViewModelFactory(
+                        (Application) context.getApplicationContext()
+                )
+        ).get(FavViewModel.class);
+
+        viewModel.getAllFav().observe(this, favList -> {
+
+            if (favList.size() == 0) {
+                emptyHintIV.setVisibility(View.VISIBLE);
+                emptyHintTV.setVisibility(View.VISIBLE);
+            } else {
+                emptyHintIV.setVisibility(View.GONE);
+                emptyHintTV.setVisibility(View.GONE);
+            }
+
+            if (progressBar.getVisibility() == View.VISIBLE)
+                progressBar.animate().translationY(DPtoPX(-8)).alpha(0).setDuration(200).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
+
+            adapter.submitList(favList);//TODO: Find a way to reverse the list :)
+        });
+
+        new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+                    @Override
+                    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
+                                            @NonNull RecyclerView.ViewHolder viewHolder,
+                                            float dX, float dY,
+                                            int actionState, boolean isCurrentlyActive) {
+
+                        new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                                .addSwipeLeftBackgroundColor(Color.GREEN)
+                                .addSwipeRightBackgroundColor(Color.RED)
+                                .addSwipeLeftActionIcon(R.drawable.ic_share)
+                                .addSwipeRightActionIcon(R.drawable.ic_delete)
+                                .create()
+                                .decorate();
+
+                        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                    }
+
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView,
+                                          @NonNull RecyclerView.ViewHolder viewHolder,
+                                          @NonNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
+
+                        if (direction == ItemTouchHelper.LEFT) {
+                            shareButtonClicked(new SharedPreferenceHelper(requireContext()).getShareButtonAction(),
+                                    adapter.getFav(viewHolder.getAdapterPosition()));
+
+                            new Handler().postDelayed(() -> adapter.notifyItemChanged(viewHolder.getAdapterPosition()), 100);
+
+                        } else {
+                            viewModel.delete(adapter.getFav(viewHolder.getAdapterPosition()));
+                            adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                            adapter.notifyItemRangeChanged(viewHolder.getAdapterPosition(), adapter.getItemCount());
+                        }
+                    }
+                }
+        ).attachToRecyclerView(recyclerView);
     }
 
     private void shareButtonClicked(int i, Quote q) {
@@ -100,5 +181,11 @@ public class FavoriteFragment extends Fragment {
     private void showBottomSheetDialog(Quote q) {
         BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance(q);
         bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private int DPtoPX(int DP) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        return Math.round(DP * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 }

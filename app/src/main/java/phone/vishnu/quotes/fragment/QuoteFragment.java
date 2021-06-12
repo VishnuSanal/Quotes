@@ -1,5 +1,6 @@
 package phone.vishnu.quotes.fragment;
 
+import android.app.Application;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -20,18 +21,16 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.io.File;
-import java.util.Objects;
 
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.helper.FavUtils;
 import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
+import phone.vishnu.quotes.repository.FavRepository;
 
 public class QuoteFragment extends Fragment {
 
     private Quote quote;
-    private FavUtils favUtils;
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
     private SharedPreferenceHelper sharedPreferenceHelper;
@@ -70,8 +69,6 @@ public class QuoteFragment extends Fragment {
                 )
         );
 
-        favUtils = new FavUtils(requireContext());
-
         String hexColor = sharedPreferenceHelper.getCardColorPreference();
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
@@ -97,17 +94,22 @@ public class QuoteFragment extends Fragment {
         ((CardView) quoteView.findViewById(R.id.cardView)).setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
 
+        //noinspection ConstantConditions
         quote = new Quote(
-                Objects.requireNonNull(getArguments()).getString("quote"),
-                Objects.requireNonNull(getArguments()).getString("author")
+                getArguments().getString("quote"),
+                getArguments().getString("author")
         );
 
         quoteText.setText(quote.getQuote());
         authorText.setText(String.format("-%s", quote.getAuthor()));
 
         try {
-            if (favUtils.isPresent(quote))
+
+            FavRepository repository = new FavRepository((Application) requireContext().getApplicationContext());
+
+            if (repository.isPresent(quote))
                 favIcon.setColorFilter(Color.RED);
+
         } catch (Exception e) {
             FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
@@ -135,10 +137,16 @@ public class QuoteFragment extends Fragment {
             final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
             favIcon.startAnimation(shake);
 
-            if (!favUtils.newFavorite(quote))
-                favIcon.setColorFilter(Color.RED);
-            else
+            FavRepository repository = new FavRepository((Application) requireContext().getApplicationContext());
+
+            long l = repository.insertFav(quote);
+
+            if (l == -1) {
+                repository.deleteFav(quote);
                 favIcon.setColorFilter(Color.WHITE);
+            } else
+                favIcon.setColorFilter(Color.RED);
+
         });
     }
 

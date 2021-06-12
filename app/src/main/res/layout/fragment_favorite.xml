@@ -5,7 +5,7 @@
     android:id="@+id/favoriteConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BGColor"
+    android:background="@color/favBGColor"
     android:orientation="vertical"
     tools:context=".fragment.FavoriteFragment"
     tools:ignore="HardcodedText">
@@ -20,7 +20,7 @@
         android:foregroundGravity="center"
         android:paddingStart="36dp"
         android:src="@drawable/ic_favorite"
-        app:layout_constraintBottom_toTopOf="@id/favoriteGuideLine"
+        app:layout_constraintBottom_toTopOf="@id/favProgressBar"
         app:layout_constraintEnd_toStartOf="@id/favoriteAddImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,27 +37,57 @@
         android:foregroundGravity="center"
         android:scaleType="fitXY"
         android:src="@drawable/ic_post_add"
-        app:layout_constraintBottom_toTopOf="@id/favoriteGuideLine"
+        app:layout_constraintBottom_toTopOf="@id/favProgressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/favoriteSampleIconImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/favoriteGuideLine"
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/favProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favoriteSampleIconImageView"
+        app:trackColor="@color/tourBackgroundColor" />
+
+    <ImageView
+        android:id="@+id/recyclerViewEmptyHintIV"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:contentDescription="Fav RecyclerView Empty Hint ImageView"
+        android:src="@drawable/ic_favorite"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/favoriteRecyclerView"
+        app:layout_constraintEnd_toEndOf="@id/favoriteRecyclerView"
+        app:layout_constraintStart_toStartOf="@id/favoriteRecyclerView"
+        app:layout_constraintTop_toTopOf="@id/favoriteRecyclerView" />
+
+    <TextView
+        android:id="@+id/recyclerViewEmptyHintTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_begin="36dp"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:contentDescription="Fav RecyclerView Empty Hint TextVIew"
+        android:fontFamily="casual"
+        android:text="Nothing Here!"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/recyclerViewEmptyHintIV"
+        app:layout_constraintStart_toStartOf="@id/recyclerViewEmptyHintIV"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewEmptyHintIV" />
 
-    <ListView
-        android:id="@+id/favoriteListView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoriteRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/favoriteGuideLine" />
+        app:layout_constraintTop_toBottomOf="@id/favProgressBar"
+        tools:listitem="@layout/favorite_single_item" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

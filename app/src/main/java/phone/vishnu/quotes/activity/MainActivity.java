@@ -63,9 +63,9 @@ import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.fragment.SettingsFragment;
 import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.ExportHelper;
-import phone.vishnu.quotes.helper.FavUtils;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
+import phone.vishnu.quotes.repository.FavRepository;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else if (extras.getBoolean("FavButton")) {
 
                     addFavourite(
-                            this,
                             new Quote(extras.getString("quote"), extras.getString("author")));
 
                 }
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else if ("phone.vishnu.quotes.widgetFavClicked".equals(getIntent().getAction())) {
                 Quote q = (sharedPreferenceHelper.getWidgetQuote());
                 if (q != null) {
-                    addFavourite(this, q);
+                    addFavourite(q);
                 }
             }
         }
@@ -374,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         aboutFAB.setVisibility(i);
     }
 
-    public int DPtoPX(int DP) {
+    private int DPtoPX(int DP) {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         return Math.round(DP * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
@@ -549,15 +548,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return adapter;
     }
 
-    private void addFavourite(Context context, Quote quote) {
-        FavUtils favUtils = new FavUtils(context);
+    private void addFavourite(Quote quote) {//FIXME: Test :)
 
-        if (favUtils.isPresent(quote)) {
+        long l = new FavRepository(getApplication()).insertFav(quote);
+
+        if (l == -1)
             Toast.makeText(this, "Already Present in Favourites", Toast.LENGTH_SHORT).show();
-        } else {
-            favUtils.addFavorite(quote);
+        else
             Toast.makeText(this, "Added to Favourites", Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     public void updateViewPager() {

@@ -88,20 +88,20 @@ public class NotificationHelper {
     }
 
     private PendingIntent getFavPendingIntent(Quote quote) {
-        return getPendingIntent(1, quote);
+        return getPendingIntent(1, "FavButton", quote);
     }
 
     private PendingIntent getSharePendingIntent(Quote quote) {
-        return getPendingIntent(2, quote);
+        return getPendingIntent(2, "ShareButton", quote);
     }
 
-    private PendingIntent getPendingIntent(int i, Quote quote) {
+    private PendingIntent getPendingIntent(int i, String actionName, Quote quote) {
         return PendingIntent.getActivity(
                 context,
                 i,
                 new Intent(context, MainActivity.class)
                         .putExtra("NotificationClick", true)
-                        .putExtra("ShareButton", true)
+                        .putExtra(actionName, true)
                         .putExtra("quote", quote.getQuote())
                         .putExtra("author", quote.getAuthor()),
                 PendingIntent.FLAG_ONE_SHOT

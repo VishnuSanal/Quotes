@@ -155,13 +155,18 @@ public class SharedPreferenceHelper {
             sharedPreferences.edit().remove(FONT_ARRAY_STRING).apply();
     }
 
+    public void deleteFavPreference() {
+        if (sharedPreferences.contains(FAV_ARRAY_STRING))
+            sharedPreferences.edit().remove(FAV_ARRAY_STRING).apply();
+    }
+
     public void resetSharedPreferences() {
         setColorPreference("#607D8B");
         setBackgroundPath("-1");
         setAlarmString("At 08:30 Daily");
         setFontPath("-1");
         setFontColorPreference("#FFFFFF");
-        setFavoriteArrayString(null);
+        deleteFavPreference();
         setFirstRunBoolean(true);
         setTotalQuotesCount(0);
         setShareButtonAction(1);

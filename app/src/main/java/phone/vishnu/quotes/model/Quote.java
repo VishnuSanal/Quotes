@@ -1,35 +1,39 @@
 package phone.vishnu.quotes.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
 
 import java.util.Objects;
 
+@Entity(primaryKeys = {"quote", "author"})
 public class Quote {
 
-    private String quote;
-    private String author;
+    @NonNull
+    private String quote, author;
 
     public Quote() {
     }
 
-    public Quote(String quote, String author) {
+    public Quote(@NonNull String quote, @NonNull String author) {
         this.quote = quote;
         this.author = author;
     }
 
+    @NonNull
     public String getQuote() {
         return quote;
     }
 
-    public void setQuote(String quote) {
+    public void setQuote(@NonNull String quote) {
         this.quote = quote;
     }
 
+    @NonNull
     public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(@NonNull String author) {
         this.author = author;
     }
 

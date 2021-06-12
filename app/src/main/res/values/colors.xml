@@ -22,5 +22,9 @@
     <color name="spacerColor">#BDBDBD</color>
     <color name="tourBackgroundColor">#F8BBD0</color>
 
-    <color name="PickBGColor">#D05C5C5C</color>
+    <color name="pickBGColor">#D05C5C5C</color>
+
+    <color name="favBGColor">#BDBDBD</color>
+    <color name="favCardColor">#FFFFFF</color>
+
 </resources>

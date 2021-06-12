@@ -43,6 +43,7 @@ public class SplashActivity extends AppCompatActivity {
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
 
         removeFonts();
+        sharedPreferenceHelper.deleteFavPreference();
 
         if (sharedPreferenceHelper.isFirstRun())
             showNewTour();
@@ -53,7 +54,9 @@ public class SplashActivity extends AppCompatActivity {
     private void removeFonts() {
         sharedPreferenceHelper.deleteFontPreference();
 
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+                (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+
         File[] files = root.listFiles();
 
         ArrayList<String> arrayList = sharedPreferenceHelper.getFontListToBeRemoved();

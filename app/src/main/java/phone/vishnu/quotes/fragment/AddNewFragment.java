@@ -1,5 +1,6 @@
 package phone.vishnu.quotes.fragment;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.helper.FavUtils;
 import phone.vishnu.quotes.model.Quote;
+import phone.vishnu.quotes.repository.FavRepository;
 
 public class AddNewFragment extends Fragment {
 
@@ -59,12 +60,13 @@ public class AddNewFragment extends Fragment {
                 if (quote.isEmpty()) {
                     quoteTIE.setError("Field Empty");
                     quoteTIE.requestFocus();
-                } else if (author.isEmpty()) {
+                } else {
                     authorTIE.setError("Field Empty");
                     authorTIE.requestFocus();
                 }
             } else {
-                new FavUtils(requireContext()).addFavorite(new Quote(quote, author));
+                new FavRepository((Application) requireContext().getApplicationContext())
+                        .insertFav(new Quote(quote, author));
 
                 Toast.makeText(requireContext(), "Quote added to Favourites", Toast.LENGTH_SHORT).show();
 

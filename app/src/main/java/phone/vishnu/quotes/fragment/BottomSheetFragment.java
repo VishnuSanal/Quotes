@@ -1,6 +1,7 @@
 package phone.vishnu.quotes.fragment;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -101,29 +102,13 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
                     .alpha(1)
                     .rotation(360)
                     .translationY(70 * (getInt(id) + 1))
-                    .setListener(new Animator.AnimatorListener() {
-
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-
-                        }
-
+                    .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
                             dismiss();
                         }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-
-                        }
                     });
-
         });
     }
 
