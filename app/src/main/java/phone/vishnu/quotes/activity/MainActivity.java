@@ -548,7 +548,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return adapter;
     }
 
-    private void addFavourite(Quote quote) {//FIXME: Test :)
+    private void addFavourite(Quote quote) {
 
         long l = new FavRepository(getApplication()).insertFav(quote);
 

@@ -7,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -73,6 +73,9 @@ public class FontDataAdapter extends ArrayAdapter<String> {
                     localFile.mkdirs();
 
                 storageReference.getFile(f).addOnSuccessListener(taskSnapshot -> {
+
+                    viewHolder.progressBar.setVisibility(View.GONE);
+
                     try {
                         Typeface face = Typeface.createFromFile(f);
                         viewHolder.fontTV.setTypeface(face);
@@ -85,12 +88,6 @@ public class FontDataAdapter extends ArrayAdapter<String> {
                 }).addOnFailureListener(exception -> {
                     FirebaseCrashlytics.getInstance().recordException(exception);
                     exception.printStackTrace();
-                }).addOnProgressListener(taskSnapshot -> {
-                    viewHolder.progressBar.setProgress(
-                            (int) ((100.0 * taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount()))
-                    );
-                    if ((taskSnapshot.getBytesTransferred()) / (taskSnapshot.getTotalByteCount()) == 1)
-                        viewHolder.progressBar.setVisibility(View.GONE);
                 });
             }
         } else {
@@ -108,6 +105,6 @@ public class FontDataAdapter extends ArrayAdapter<String> {
 
     static class ViewHolder {
         TextView fontTV;
-        ProgressBar progressBar;
+        LinearProgressIndicator progressBar;
     }
 }
