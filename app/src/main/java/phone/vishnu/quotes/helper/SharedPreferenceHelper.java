@@ -15,8 +15,6 @@ public class SharedPreferenceHelper {
 
     private final String FIRST_RUN_BOOLEAN = "firstRunBoolean";
 
-    private final String FAV_ARRAY_STRING = "favoriteArrayString";
-
     private final String CARD_COLOR = "colorString";
     private final String FONT_COLOR = "fontColorString";
     private final String ALARM_TIME = "alarmString";
@@ -28,6 +26,7 @@ public class SharedPreferenceHelper {
     private final String WIDGET_AUTHOR_STRING = "widgetAuthorString";
 
     private final String TOTAL_QUOTE_COUNT = "totalQuoteInt";
+    private final String FAV_HINT_SHOWN_COUNT = "favHintShownCount";
 
     private final String SHARE_BUTTON_ACTION = "shareButtonActionInt";
 
@@ -43,14 +42,6 @@ public class SharedPreferenceHelper {
 
     public void setFirstRunBoolean(boolean firstRunBoolean) {
         sharedPreferences.edit().putBoolean(FIRST_RUN_BOOLEAN, firstRunBoolean).apply();
-    }
-
-    public String getFavoriteArrayString() {
-        return sharedPreferences.getString(FAV_ARRAY_STRING, null);
-    }
-
-    public void setFavoriteArrayString(String favoriteArrayString) {
-        sharedPreferences.edit().putString(FAV_ARRAY_STRING, favoriteArrayString).apply();
     }
 
     public String getAlarmString() {
@@ -99,6 +90,18 @@ public class SharedPreferenceHelper {
 
     public void setTotalQuotesCount(int size) {
         sharedPreferences.edit().putInt(TOTAL_QUOTE_COUNT, size).apply();
+    }
+
+    public int getFavHintShownCount() {
+        return sharedPreferences.getInt(FAV_HINT_SHOWN_COUNT, 0);
+    }
+
+    private void setFavHintShownCount(int count) {
+        sharedPreferences.edit().putInt(FAV_HINT_SHOWN_COUNT, count).apply();
+    }
+
+    public void incrementFavHintShownCount() {
+        setFavHintShownCount(getFavHintShownCount() + 1);
     }
 
     public int getShareButtonAction() {
@@ -156,6 +159,8 @@ public class SharedPreferenceHelper {
     }
 
     public void deleteFavPreference() {
+        String FAV_ARRAY_STRING = "favoriteArrayString";
+
         if (sharedPreferences.contains(FAV_ARRAY_STRING))
             sharedPreferences.edit().remove(FAV_ARRAY_STRING).apply();
     }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -107,6 +108,14 @@ public class FavoriteFragment extends Fragment {
             } else {
                 emptyHintIV.setVisibility(View.GONE);
                 emptyHintTV.setVisibility(View.GONE);
+
+                SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+
+                if (sharedPreferenceHelper.getFavHintShownCount() < 2) {
+                    Toast.makeText(requireContext(), "Swipe Right to Delete\nSwipe Left to Share", Toast.LENGTH_LONG).show();
+                    sharedPreferenceHelper.incrementFavHintShownCount();
+                }
+
             }
 
             if (progressBar.getVisibility() == View.VISIBLE)
