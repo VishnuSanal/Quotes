@@ -43,7 +43,6 @@ public class SplashActivity extends AppCompatActivity {
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
 
         removeFonts();
-        sharedPreferenceHelper.deleteFavPreference();
 
         if (sharedPreferenceHelper.isFirstRun())
             showNewTour();

@@ -15,6 +15,8 @@ public class SharedPreferenceHelper {
 
     private final String FIRST_RUN_BOOLEAN = "firstRunBoolean";
 
+    private final String FAV_ARRAY_STRING = "favoriteArrayString";
+
     private final String CARD_COLOR = "colorString";
     private final String FONT_COLOR = "fontColorString";
     private final String ALARM_TIME = "alarmString";
@@ -42,6 +44,14 @@ public class SharedPreferenceHelper {
 
     public void setFirstRunBoolean(boolean firstRunBoolean) {
         sharedPreferences.edit().putBoolean(FIRST_RUN_BOOLEAN, firstRunBoolean).apply();
+    }
+
+    public String getFavoriteArrayString() {
+
+        if (!sharedPreferences.contains(FAV_ARRAY_STRING))
+            return null;
+
+        return sharedPreferences.getString(FAV_ARRAY_STRING, null);
     }
 
     public String getAlarmString() {
@@ -159,8 +169,6 @@ public class SharedPreferenceHelper {
     }
 
     public void deleteFavPreference() {
-        String FAV_ARRAY_STRING = "favoriteArrayString";
-
         if (sharedPreferences.contains(FAV_ARRAY_STRING))
             sharedPreferences.edit().remove(FAV_ARRAY_STRING).apply();
     }

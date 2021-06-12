@@ -3,6 +3,7 @@ package phone.vishnu.quotes.fragment;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Application;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -27,6 +28,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import phone.vishnu.quotes.R;
@@ -37,6 +42,8 @@ import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.viewmodel.FavViewModel;
 
 public class FavoriteFragment extends Fragment {
+
+    private SharedPreferenceHelper sharedPreferenceHelper;
 
     private FavViewModel viewModel;
     private FavoritesAdapter adapter;
@@ -63,6 +70,8 @@ public class FavoriteFragment extends Fragment {
         emptyHintTV = inflate.findViewById(R.id.recyclerViewEmptyHintTV);
         recyclerView = inflate.findViewById(R.id.favoriteRecyclerView);
 
+        sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+
         return inflate;
     }
 
@@ -72,12 +81,39 @@ public class FavoriteFragment extends Fragment {
 
         setUpRecyclerView(requireContext());
 
+        importFavourites();
+
         addImageView.setOnClickListener(
                 v -> requireActivity().getSupportFragmentManager().beginTransaction()
                         .add(R.id.favoriteConstraintLayout, AddNewFragment.newInstance())
                         .commit()
         );
 
+    }
+
+    private void importFavourites() {
+
+        String favArrayListString = sharedPreferenceHelper.getFavoriteArrayString();
+
+        if (favArrayListString != null) {
+
+            ProgressDialog progressDialog = new ProgressDialog(requireContext(), R.style.DialogTheme);
+
+            progressDialog.setMessage("Please Wait....");
+            progressDialog.show();
+            progressDialog.setCancelable(false);
+
+            ArrayList<Quote> arrayList = new Gson().fromJson(favArrayListString, new TypeToken<ArrayList<Quote>>() {
+            }.getType());
+
+            for (Quote quote : arrayList) {
+                viewModel.insert(quote);
+                adapter.notifyDataSetChanged();
+            }
+            progressDialog.dismiss();
+
+            sharedPreferenceHelper.deleteFavPreference();
+        }
     }
 
     private void setUpRecyclerView(final Context context) {
@@ -108,8 +144,6 @@ public class FavoriteFragment extends Fragment {
             } else {
                 emptyHintIV.setVisibility(View.GONE);
                 emptyHintTV.setVisibility(View.GONE);
-
-                SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
 
                 if (sharedPreferenceHelper.getFavHintShownCount() < 2) {
                     Toast.makeText(requireContext(), "Swipe Right to Delete\nSwipe Left to Share", Toast.LENGTH_LONG).show();
