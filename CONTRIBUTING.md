@@ -8,7 +8,7 @@
 - Please rearrange the code with Andorid Studio (`Ctrl + Alt + L` or `Cmd + Alt + L`) before making a PR
 - Creation of a new branch for every contribution is recommended
 - Feel free to create issues too. That too counts as a contribution!
-- Feel free to join our [community](https://discord.gg/M8ukyzTP5G) if you face any issue or need help on the project
+- Feel free to join our [community](https://t.me/QuotesStatusCreator) if you face any issue or need help on the project
 
 **Note**: If you're a user of Quotes Status Creator, copying all the contents from `Documents/Quotes` to `Documents/Quotes - Debug` will save some data by not needing to download those assets again!
 
