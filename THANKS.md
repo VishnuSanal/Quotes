@@ -79,6 +79,7 @@
 
 ## 👩🏿‍💻👨🏿‍💻 Contributors - Thank you for all your works :)
  - [Shourya Shikhar](https://github.com/danger-ahead)
+ - [Shuvashish Sahoo](https://github.com/shuvashish76)
 
 ## ♥ Other awesome people who helped
 
@@ -87,4 +88,3 @@
  - [Vidhu Vinodh](https://www.instagram.com/vidhu_vinodh/)
  - Jaseel Ahamed M
  - [Yadhu Krishnan E T](https://www.instagram.com/yadhu1020/)
- - Shuvashish Sahoo
