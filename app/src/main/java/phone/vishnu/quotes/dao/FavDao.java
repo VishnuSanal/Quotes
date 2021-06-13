@@ -24,7 +24,7 @@ public interface FavDao {
     @Delete
     void delete(Quote quote);
 
-    @Query("SELECT * FROM Quote")
+    @Query("SELECT * FROM Quote ORDER BY dateAdded DESC")
     LiveData<List<Quote>> getAllFav();
 
     @Query("SELECT COUNT(*) FROM Quote WHERE quote = :quote AND author = :author")

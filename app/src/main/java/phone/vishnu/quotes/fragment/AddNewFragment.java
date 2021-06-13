@@ -66,7 +66,7 @@ public class AddNewFragment extends Fragment {
                 }
             } else {
                 new FavRepository((Application) requireContext().getApplicationContext())
-                        .insertFav(new Quote(quote, author));
+                        .insertFav(new Quote(quote, author, true));
 
                 Toast.makeText(requireContext(), "Quote added to Favourites", Toast.LENGTH_SHORT).show();
 

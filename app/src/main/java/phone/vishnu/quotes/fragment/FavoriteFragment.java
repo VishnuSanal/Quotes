@@ -161,7 +161,7 @@ public class FavoriteFragment extends Fragment {
                     }
                 });
 
-            adapter.submitList(favList);//TODO: Find a way to reverse the list :)
+            adapter.submitList(favList);
         });
 
         new ItemTouchHelper(

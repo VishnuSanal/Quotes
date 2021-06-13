@@ -62,7 +62,12 @@ public class FavRepository {
 
         @Override
         protected Long doInBackground(Quote... fav) {
-            return favDao.insert(fav[0]);
+
+            Quote q = fav[0];
+
+            q.setDateAdded(System.currentTimeMillis());
+
+            return favDao.insert(q);
         }
     }
 
