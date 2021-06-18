@@ -132,6 +132,7 @@ public class ExportHelper {
         sharingIntent.setType("image/*");
         sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, "For more, visit: https://kutt.it/Quotes");
 
         context.startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
