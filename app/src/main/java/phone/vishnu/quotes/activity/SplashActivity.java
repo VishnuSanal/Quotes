@@ -161,9 +161,6 @@ public class SplashActivity extends AppCompatActivity {
 
         if (colorString.equals("#00000000")) colorString = "#607D8B";
 
-        if (BuildConfig.DEBUG)
-            ((TextView) findViewById(R.id.splashScreenAppNameTextView)).setText("Quotes Debug");
-
         ((TextView) findViewById(R.id.splashScreenAppNameTextView)).setTextColor(Color.parseColor(colorString));
 
         int SPLASH_TIMEOUT = 1;
