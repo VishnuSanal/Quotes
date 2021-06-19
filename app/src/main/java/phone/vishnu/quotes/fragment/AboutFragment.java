@@ -57,6 +57,8 @@ public class AboutFragment extends Fragment {
             } else if (position == 1) {
                 openLink("https://instagram.com/quotes_status_creator");
             } else if (position == 2) {
+                openLink("https://t.me/DailyQuotesStatus");
+            } else if (position == 3) {
 
                 Uri uriUrl = Uri.parse("market://details?id=" + requireContext().getPackageName());
                 Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
@@ -74,11 +76,11 @@ public class AboutFragment extends Fragment {
                                     Uri.parse("http://play.google.com/store/apps/details?id=" + requireContext().getPackageName())));
                 }
 
-            } else if (position == 3) {
-                openLink("https://github.com/VishnuSanal/Quotes");
             } else if (position == 4) {
-                openLink("https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md");
+                openLink("https://github.com/VishnuSanal/Quotes");
             } else if (position == 5) {
+                openLink("https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md");
+            } else if (position == 6) {
 
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setData(Uri.parse("mailto:"));
@@ -100,7 +102,8 @@ public class AboutFragment extends Fragment {
     private List<TourItem> getItems() {
         return Arrays.asList(
                 new TourItem(R.drawable.ic_home, "Join Telegram Group", "Join our community on Telegram"),
-                new TourItem(R.drawable.ic_color_lens, "Follow on Instagram", "Follow Quotes Status Creator on Instagram"),
+                new TourItem(R.drawable.ic_whatshot, "Follow on Instagram", "Follow Quotes Status Creator on Instagram"),
+                new TourItem(R.drawable.ic_color_lens, "Join Telegram Channel", "Get a daily dose of inspiration on your inbox!"),
                 new TourItem(R.drawable.ic_done, "Rate the App", "Rate this app on Google Play"),
                 new TourItem(R.drawable.ic_info, "Source Code", "View source code on GitHub"),
                 new TourItem(R.drawable.ic_favorite, "Thanks To", "Thanks to these awesome people"),
