@@ -42,6 +42,9 @@ If you enjoy the app, wish to contribute or simply wish to be with like-minded p
 ## 🎨 Follow [Instagram Page](https://instagram.com/quotes_status_creator)
 Follow the Instagram Page to get your daily dose of inspiration delivered to your feed! If you enjoy the app, you'll enjoy the Instagram Page too! Come follow us & be inspired!
 
+## 📜 Join [Telegram Channel](https://t.me/DailyQuotesStatus)
+Join the Telegram Channel to get a Quote as an image & as a text in your inbox - daily! Come join it & be inspired!
+
 ## ♥ Thanks to [these](https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md) awesome people
 Awesome people that help & support the development & maintenance of Quotes Status Creator
 
