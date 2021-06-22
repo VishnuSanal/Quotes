@@ -63,6 +63,7 @@ import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.fragment.SettingsFragment;
 import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.ExportHelper;
+import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.repository.FavRepository;
@@ -131,7 +132,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else if ("phone.vishnu.quotes.widgetShareClicked".equals(getIntent().getAction())) {
                 Quote q = (sharedPreferenceHelper.getWidgetQuote());
                 if (q != null)
-                    exportHelper.shareImage(this, q);
+                    shareButtonClicked(
+                            this,
+                            new SharedPreferenceHelper(this).getShareButtonAction(),
+                            q
+                    );
 
             } else if ("phone.vishnu.quotes.widgetFavClicked".equals(getIntent().getAction())) {
                 Quote q = (sharedPreferenceHelper.getWidgetQuote());
@@ -585,5 +590,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             progressDialog.dismiss();
         });
 
+    }
+
+    private void shareButtonClicked(Context context, int i, Quote q) {
+        if (i == 0) {
+            ShareHelper.copyQuote(context, q);
+        } else if (i == 1) {
+            ShareHelper.shareQuote(context, q);
+        } else if (i == 2) {
+            ShareHelper.saveQuote(context, q);
+        } else if (i == 3) {
+            showBottomSheetDialog(q);
+        }
     }
 }
