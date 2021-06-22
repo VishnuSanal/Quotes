@@ -52,6 +52,12 @@
  - [Todd Trapani](https://www.pexels.com/@todd-trapani-488382)
  - [Tom Verdoot](https://www.pexels.com/@bowovisuals)
  - [Tomas Anunziata](https://www.pexels.com/@tomas-anunziata-129267)
+ - [Karolina Grabowska](https://www.pexels.com/@karolina-grabowska)
+ - [Velroy Fernandes](https://www.pexels.com/@velroy)
+ - [Alex Azabache](https://www.pexels.com/@alexazabache)
+ - [Lisa](https://www.pexels.com/@fotios-photos)
+ - [Bruno Scramgnon](https://www.pexels.com/@brunoscramgnon)
+ - [Александр Прокофьев](https://www.pexels.com/@13nuance)
 
 ## 🔠Fonts
 
