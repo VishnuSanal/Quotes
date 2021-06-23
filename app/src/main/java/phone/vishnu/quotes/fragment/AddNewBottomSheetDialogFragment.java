@@ -10,8 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
@@ -20,38 +20,39 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.repository.FavRepository;
 
-public class AddNewFragment extends Fragment {
+public class AddNewBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     private TextInputEditText quoteTIE, authorTIE;
-    private Button saveButton, cancelButton;
+    private Button submitButton, cancelButton;
 
-    public AddNewFragment() {
-    }
-
-    public static AddNewFragment newInstance() {
-        return new AddNewFragment();
+    public static AddNewBottomSheetDialogFragment newInstance() {
+        return new AddNewBottomSheetDialogFragment();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_add_new, container, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+    }
 
-        quoteTIE = inflate.findViewById(R.id.addQuoteTIE);
-        authorTIE = inflate.findViewById(R.id.addAuthorTIE);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.add_new_bottom_sheet_dialog, container, false);
 
-        saveButton = inflate.findViewById(R.id.buttonAdd);
-        cancelButton = inflate.findViewById(R.id.buttonCancel);
+        quoteTIE = view.findViewById(R.id.addNewQuoteTIE);
+        authorTIE = view.findViewById(R.id.addNewAuthorTIE);
+        submitButton = view.findViewById(R.id.addNewSubmitButton);
+        cancelButton = view.findViewById(R.id.addNewCancelButton);
 
-        return inflate;
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        cancelButton.setOnClickListener(v -> requireActivity().onBackPressed());
-
-        saveButton.setOnClickListener(v -> {
+        submitButton.setOnClickListener(v -> {
 
             String quote = Objects.requireNonNull(quoteTIE.getText()).toString();
             String author = Objects.requireNonNull(authorTIE.getText()).toString();
@@ -70,8 +71,12 @@ public class AddNewFragment extends Fragment {
 
                 Toast.makeText(requireContext(), "Quote added to Favourites", Toast.LENGTH_SHORT).show();
 
-                requireActivity().onBackPressed();
+                dismiss();
             }
+
         });
+
+        cancelButton.setOnClickListener(v -> dismiss());
+
     }
 }

@@ -84,9 +84,11 @@ public class FavoriteFragment extends Fragment {
         importFavourites();
 
         addImageView.setOnClickListener(
-                v -> requireActivity().getSupportFragmentManager().beginTransaction()
-                        .add(R.id.favoriteConstraintLayout, AddNewFragment.newInstance())
-                        .commit()
+                v -> AddNewBottomSheetDialogFragment.newInstance()
+                        .show(
+                                requireActivity().getSupportFragmentManager(),
+                                "AddNewBottomSheetDialogFragment"
+                        )
         );
 
     }

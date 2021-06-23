@@ -3,26 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/BGColor"
-    tools:context=".fragment.AddNewFragment"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
     tools:ignore="HardcodedText">
 
-    <ImageView
-        android:id="@+id/addNewSampleIconImageView"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:background="@color/colorAccent"
-        android:contentDescription="Add New Screen Add Icon"
-        android:elevation="12dp"
-        android:foregroundGravity="center"
-        android:src="@drawable/ic_post_add"
+    <TextView
+        android:id="@+id/addNewTitleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:letterSpacing="0.15"
+        android:padding="8dp"
+        android:text="Add Custom Quote"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@id/addNewQuoteTIL"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addQuoteTIL"
+        android:id="@+id/addNewQuoteTIL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -32,14 +34,14 @@
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addNewSampleIconImageView">
+        app:layout_constraintTop_toBottomOf="@id/addNewTitleTV">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addQuoteTIE"
+            android:id="@+id/addNewQuoteTIE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/quote"
-            android:inputType="textCapSentences|textMultiLine"
+            android:inputType="textCapSentences"
             android:scrollbars="vertical"
             android:textColor="@color/editTextColor"
             android:textColorHint="@color/editTextColor" />
@@ -47,7 +49,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addAuthorTIL"
+        android:id="@+id/addNewAuthorTIL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -57,38 +59,41 @@
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addQuoteTIL">
+        app:layout_constraintTop_toBottomOf="@id/addNewQuoteTIL">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addAuthorTIE"
+            android:id="@+id/addNewAuthorTIE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/author"
-            android:inputType="textCapWords|textMultiLine"
+            android:inputType="textCapWords"
             android:textColor="@color/editTextColor"
             android:textColorHint="@color/editTextColor" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/buttonAdd"
+        android:id="@+id/addNewSubmitButton"
         style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/add"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/buttonCancel"
-        app:layout_constraintTop_toBottomOf="@id/addAuthorTIL" />
+        app:layout_constraintTop_toBottomOf="@id/addNewAuthorTIL" />
 
     <Button
-        android:id="@+id/buttonCancel"
+        android:id="@+id/addNewCancelButton"
         style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/cancel"
-        app:layout_constraintEnd_toStartOf="@id/buttonAdd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addAuthorTIL" />
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/addNewSubmitButton"
+        app:layout_constraintTop_toBottomOf="@id/addNewAuthorTIL" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
