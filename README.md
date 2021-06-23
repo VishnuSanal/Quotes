@@ -20,6 +20,7 @@
     • Create Quotes Status without any image editing whatsoever - that too in User-Friendly UI.
     • Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
 
+<!--  
 ## ☺ Enjoying Quotes? Consider Supporting!
 
 Please consider donating a small amount to support the development. It requires a lot of time and effort to develop an application keeping it free, open source & ad-free. :D 
@@ -29,6 +30,7 @@ Please consider donating a small amount to support the development. It requires 
     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="100px">
   </a>
 </p>
+-->
 
 ## 🏠 Join Telegram Group
 If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us!!! It'll be fun :)
