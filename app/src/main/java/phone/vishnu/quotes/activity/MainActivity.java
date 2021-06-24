@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -451,23 +453,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+//TODO: TEST :)
+        Log.e("vishnu", "RequestCode:" + requestCode);
 
-        if (resultCode == Activity.RESULT_OK && data != null && null != data.getData()) {
+        if (resultCode == Activity.RESULT_OK) {
 
             String file = exportHelper.getBGPath();
 
-            if (requestCode == PICK_IMAGE_ID)
+            if (requestCode == PICK_IMAGE_ID &&
+                    data != null &&
+                    (null != data.getData() ||
+                            (null != data.getExtras() && data.getExtras().containsKey("data")))) {
 
-                UCrop.of(data.getData(), Uri.fromFile(new File(file)))
+                Uri uri = data.getData();
+
+                if (data.getData() == null &&
+                        (null != data.getExtras() && data.getExtras().containsKey("data"))) {
+
+                    uri = Uri.fromFile(new File(file));
+
+                    Log.e("vishnu", "Uri:" + uri);
+
+                    exportHelper.exportBackgroundImage((Bitmap) data.getExtras().get("data"));
+
+                }
+
+                UCrop.of(uri, Uri.fromFile(new File(file)))
                         .withAspectRatio(9, 16)
                         .withMaxResultSize(1080, 1920)
                         .start(this);
 
-            else if (requestCode == UCrop.REQUEST_CROP) {
+            } else if (requestCode == UCrop.REQUEST_CROP) {
+
                 constraintLayout.setBackground(Drawable.createFromPath(file));
                 sharedPreferenceHelper.setBackgroundPath(file);
+
             }
-        } else Toast.makeText(this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
+
+        } else {
+            if (resultCode == Activity.RESULT_CANCELED)
+                Toast.makeText(this, "Action Cancelled!", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
