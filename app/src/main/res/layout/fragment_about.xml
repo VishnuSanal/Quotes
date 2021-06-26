@@ -4,29 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BGColorLight"
+    android:background="@drawable/bottom_sheet_background"
     android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".fragment.AboutFragment"
     tools:ignore="HardcodedText">
-
+    <!--TODO: Check Color-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/aboutSampleIconImageView"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorAccent"
-            android:contentDescription="About Screen Info Icon"
-            android:elevation="12dp"
-            android:foregroundGravity="center"
-            android:src="@drawable/ic_info"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/aboutCardViewOne"
@@ -40,7 +27,7 @@
             app:layout_constraintBottom_toTopOf="@id/aboutCardViewTwo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutSampleIconImageView"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0">
 
             <androidx.constraintlayout.widget.ConstraintLayout

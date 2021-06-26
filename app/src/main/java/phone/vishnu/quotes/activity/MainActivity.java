@@ -259,13 +259,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .commit();
                 setHomeFABHome();
             } else if (id == R.id.aboutFAB) {
-                AboutFragment fragment = AboutFragment.newInstance();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .add(R.id.constraintLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
-                setHomeFABHome();
+                AboutFragment.newInstance()
+                        .show(getSupportFragmentManager(), "AboutFragment");
             } else if (id == R.id.bgFAB) {
                 Dexter.withContext(this)
                         .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
