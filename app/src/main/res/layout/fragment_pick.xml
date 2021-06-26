@@ -19,7 +19,8 @@
         android:src="@drawable/ic_insert_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorWhite" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imagePickRecyclerView"

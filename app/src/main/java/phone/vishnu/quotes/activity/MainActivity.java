@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -29,7 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -37,7 +35,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.karumi.dexter.Dexter;
@@ -57,10 +54,10 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.fragment.AboutFragment;
+import phone.vishnu.quotes.fragment.BackgroundOptionPickFragment;
 import phone.vishnu.quotes.fragment.ColorPickFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontMasterFragment;
-import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.fragment.SettingsFragment;
 import phone.vishnu.quotes.fragment.ShareActionPickBottomSheetDialogFragment;
 import phone.vishnu.quotes.helper.AlarmHelper;
@@ -72,9 +69,9 @@ import phone.vishnu.quotes.repository.FavRepository;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static ProgressDialog bgDialog, fontDialog;
+    public static final int PICK_IMAGE_ID = 36;
 
-    private final int PICK_IMAGE_ID = 36;
+    public static ProgressDialog bgDialog, fontDialog;
 
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ExportHelper exportHelper;
@@ -100,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (extras.getBoolean("ShareButton")) {
 
-                    showBottomSheetDialog(
+                    showShareActionPicker(
                             new Quote(
                                     extras.getString("quote"),
                                     extras.getString("author")
@@ -319,7 +316,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void setHomeFABHome() {
+    public void setHomeFABHome() {
         homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_home));
         homeFAB.setTag("Menu Opened");
     }
@@ -459,8 +456,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//TODO: TEST :)
-        Log.e("vishnu", "RequestCode:" + requestCode);
+
+        //FIXME: Debug This
 
         if (resultCode == Activity.RESULT_OK) {
 
@@ -477,8 +474,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         (null != data.getExtras() && data.getExtras().containsKey("data"))) {
 
                     uri = Uri.fromFile(new File(file));
-
-                    Log.e("vishnu", "Uri:" + uri);
 
                     exportHelper.exportBackgroundImage((Bitmap) data.getExtras().get("data"));
 
@@ -510,9 +505,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onBackPressed();
     }
 
-    private void showBottomSheetDialog(Quote q) {
-        ShareActionPickBottomSheetDialogFragment bottomSheet = ShareActionPickBottomSheetDialogFragment.newInstance(q);
-        bottomSheet.show(getSupportFragmentManager(), "ModalBottomSheet");
+    private void showShareActionPicker(Quote q) {
+        ShareActionPickBottomSheetDialogFragment.newInstance(q)
+                .show(getSupportFragmentManager(), "ShareActionPicker");
     }
 
     private void showPermissionDeniedDialog() {
@@ -538,48 +533,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showBackgroundOptionChooser(boolean isCancellable) {
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.AlertDialogTheme);
+        BackgroundOptionPickFragment.newInstance(isCancellable)
+                .show(getSupportFragmentManager(), "BackgroundOptionPick");
 
-        builder.setTitle("Choose a Background");
-        builder.setCancelable(isCancellable);
-
-        final String[] items = {"Plain Colour", "Image From Gallery", "Default Images"};
-        builder.setItems(items, (dialog, which) -> {
-            switch (which) {
-                case 0: {
-                    ColorPickFragment.newInstance(0)
-                            .show(
-                                    getSupportFragmentManager(),
-                                    "ColorPickBottomSheetDialogFragment"
-                            );
-
-//                    setHomeFABHome();
-                    break;
-                }
-                case 1: {
-                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.setType("image/*");
-                    startActivityForResult(intent, PICK_IMAGE_ID);
-                    break;
-                }
-                case 2: {
-                    bgDialog = new ProgressDialog(MainActivity.this, R.style.DialogTheme);
-                    bgDialog.setMessage("Please Wait....");
-                    bgDialog.show();
-                    bgDialog.setCancelable(false);
-                    getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance()).addToBackStack(null).commit();
-                    setHomeFABHome();
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setCancelable(isCancellable);
-
-        alertDialog.show();
     }
 
     private boolean isNetworkAvailable() {
@@ -639,7 +595,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (i == 2) {
             ShareHelper.saveQuote(context, q);
         } else if (i == 3) {
-            showBottomSheetDialog(q);
+            showShareActionPicker(q);
         }
     }
 }
