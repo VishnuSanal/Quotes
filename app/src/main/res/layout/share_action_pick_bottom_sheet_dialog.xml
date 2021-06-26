@@ -13,11 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:letterSpacing="0.15"
         android:padding="8dp"
         android:text="Pick an Option"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/bottomSheetRadioGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -44,12 +44,13 @@
         android:id="@+id/bottomSheetRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomSheetTitleTV">
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetTitleTV"
+        tools:ignore="RtlSymmetry">
 
         <RadioButton
             android:id="@+id/bottomSheetCopyRadioButton"
@@ -59,6 +60,7 @@
             android:drawableStart="@drawable/ic_copy"
             android:drawablePadding="8dp"
             android:padding="8dp"
+            android:paddingStart="32dp"
             android:text="Copy Quote to Clipboard"
             android:textColor="@color/textColor" />
 
@@ -70,6 +72,7 @@
             android:drawableStart="@drawable/ic_share"
             android:drawablePadding="8dp"
             android:padding="8dp"
+            android:paddingStart="32dp"
             android:text="Share Quote as Image"
             android:textColor="@color/textColor" />
 
@@ -81,6 +84,7 @@
             android:drawableStart="@drawable/ic_save"
             android:drawablePadding="8dp"
             android:padding="8dp"
+            android:paddingStart="32dp"
             android:text="Save to Gallery"
             android:textColor="@color/textColor" />
 
@@ -92,6 +96,7 @@
             android:drawableStart="@drawable/ic_menu"
             android:drawablePadding="8dp"
             android:padding="8dp"
+            android:paddingStart="32dp"
             android:text="Ask everytime"
             android:textColor="@color/textColor" />
 
