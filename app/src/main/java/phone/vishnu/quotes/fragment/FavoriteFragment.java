@@ -224,7 +224,7 @@ public class FavoriteFragment extends Fragment {
     }
 
     private void showBottomSheetDialog(Quote q) {
-        BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance(q);
+        ShareActionPickBottomSheetDialogFragment bottomSheet = ShareActionPickBottomSheetDialogFragment.newInstance(q);
         bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
     }
 

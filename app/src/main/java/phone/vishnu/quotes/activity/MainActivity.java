@@ -57,12 +57,12 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.fragment.AboutFragment;
-import phone.vishnu.quotes.fragment.BottomSheetFragment;
 import phone.vishnu.quotes.fragment.ColorFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontMasterFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
 import phone.vishnu.quotes.fragment.SettingsFragment;
+import phone.vishnu.quotes.fragment.ShareActionPickBottomSheetDialogFragment;
 import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.ShareHelper;
@@ -505,7 +505,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showBottomSheetDialog(Quote q) {
-        BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance(q);
+        ShareActionPickBottomSheetDialogFragment bottomSheet = ShareActionPickBottomSheetDialogFragment.newInstance(q);
         bottomSheet.show(getSupportFragmentManager(), "ModalBottomSheet");
     }
 

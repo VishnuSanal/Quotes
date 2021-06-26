@@ -22,7 +22,7 @@ import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 
-public class BottomSheetFragment extends BottomSheetDialogFragment {
+public class ShareActionPickBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     private static final String QUOTE_EXTRA = "quote";
     private static final String AUTHOR_EXTRA = "author";
@@ -32,16 +32,16 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
 
     private Quote quote = null;
 
-    public static BottomSheetFragment newInstance() {
-        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+    public static ShareActionPickBottomSheetDialogFragment newInstance() {
+        ShareActionPickBottomSheetDialogFragment bottomSheetFragment = new ShareActionPickBottomSheetDialogFragment();
 
         bottomSheetFragment.setArguments(null);
 
         return bottomSheetFragment;
     }
 
-    public static BottomSheetFragment newInstance(Quote q) {
-        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+    public static ShareActionPickBottomSheetDialogFragment newInstance(Quote q) {
+        ShareActionPickBottomSheetDialogFragment bottomSheetFragment = new ShareActionPickBottomSheetDialogFragment();
 
         Bundle bundle = new Bundle();
 
@@ -69,7 +69,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.bottom_sheet, container, false);
+        View inflate = inflater.inflate(R.layout.share_action_pick_bottom_sheet_dialog, container, false);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
 

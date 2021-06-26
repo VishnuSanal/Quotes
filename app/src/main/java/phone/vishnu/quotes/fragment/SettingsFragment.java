@@ -107,7 +107,7 @@ public class SettingsFragment extends Fragment {
         });
 
         shareActionPickTV.setOnClickListener(v -> {
-            BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance();
+            ShareActionPickBottomSheetDialogFragment bottomSheet = ShareActionPickBottomSheetDialogFragment.newInstance();
             bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
         });
     }
