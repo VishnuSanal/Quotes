@@ -7,7 +7,7 @@
 </h1>
 
 <p align="center">
-	Share Famous Quotes as Status without any hassles of Image Editing.😉
+	Quotes Status Creator lets you share quotations as status images on social media
 </p>
 
 <p align="center">
@@ -16,9 +16,9 @@
 
 <hr>
 
-    • Huge Collection of Inspirational Quotes that can be shared on Social Media Platforms.
-    • Create Quotes Status without any image editing whatsoever - that too in User-Friendly UI.
-    • Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
+    ☆ Huge Collection of Inspirational Quotes that can be shared on Social Media Platforms as a high definition image
+    ☆ Quotes Status Creation without any Image Editing whatsoever - that too in User-Friendly UI
+    ☆ Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
 
 ## ☺ Enjoying Quotes? Consider Supporting!
 
@@ -57,15 +57,15 @@ Awesome people that help & support the development & maintenance of Quotes Statu
 
 ## 🚀Features
 
- - ❤Favourite Quotes – Store Your Personal Favourite Quotes
- - 😎Share – Share Quotes as an Image to Social Media
- - 📷Custom Background Images – Personalize the app with Custom Background Images
- - 🎨Custom Card Colors – Personalize the app with Custom Colors
- - 🔠Custom Fonts – Personalize the app with Custom Fonts
+ - ❤Favourite Quotes – Add Quotes to Favourites
+ - 😎Share Quotes – Share Quotes as a High Definition Image to Social Media
+ - 📷Custom Backgrounds – Personalize Quotes Statuses with Custom Background Images, Solid Background Colors or Images from Gallery
+ - 🎨Custom Card Colors – Personalize Quotes Statuses with Custom Card Colors
+ - 🔠Custom Fonts – Personalize Quotes Statuses with Custom Fonts
+ - 🔠Custom Font Colors – Personalize Quotes Statuses with Custom Font Colors
  - 🆕Custom Quotes – Add your own Quotes
- - 🔔Customizable Daily Notification – Choose the Time for Daily Notifications to suit your needs
- - 🕶Dark Mode - Includes Dark Mode experience
- - 👨‍💻Completely Open Source – Quotes Status Creator App is Completely Open Source
+ - 🔔Daily Notification – Get notified with your daily dose of motivation
+ - 🔢Multiple Sharing Option – Multiple Sharing Options - Share as Image, Share as Text (copy as text to the clipboard) and Save to Gallery
 
 ## 📑Libraries Used
  - [Volley](https://github.com/google/volley)
@@ -91,7 +91,14 @@ Awesome people that help & support the development & maintenance of Quotes Statu
     • Life Quotes
     • Wisdom Quotes
     • Attitude Quotes
+    • Philosophy Quotes
+    • Positive Quotes
+    • Greatness Quotes
+    • Business Quotes
+    • Thinking Quotes
+    • Optimistic Quotes
+    • Creativity Quotes
 
 ## 🤩Feedback and Suggestion
 
-We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Email your suggestions/feedback to us.
+We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Email your suggestions/feedback to us. Or feel free to create an issue! :)
