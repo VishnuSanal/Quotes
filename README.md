@@ -81,7 +81,7 @@ Awesome people that help & support the development & maintenance of Quotes Statu
 ![Image Picker](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/ImagePick.png)
 ![Color Picker](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/ColorPick.png)
 ![Font Picker](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Font.png)
-![Reminder](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Reminder.png)
+![Multiple Sharing](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Share.png)
 ![Add New Quote](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/AddNew.png)
 
 ## 🚀Quotes – Quotes Status Creator includes
