@@ -48,7 +48,14 @@ public class FontMasterFragment extends Fragment {
         colorSelector.setOnClickListener(v -> {
             colorSelector.setElevation(DP2PX(12));
             fontSelector.setElevation(DP2PX(8));
-            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.masterFragmentHost, ColorFragment.newInstance(2)).commit();
+
+            //TODO:
+            ColorPickFragment.newInstance(2)
+                    .show(
+                            requireActivity().getSupportFragmentManager(),
+                            "ColorPickBottomSheetDialogFragment"
+                    );
+
         });
     }
 

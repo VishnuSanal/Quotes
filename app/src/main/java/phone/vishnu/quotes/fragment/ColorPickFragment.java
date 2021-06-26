@@ -9,12 +9,16 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
@@ -23,29 +27,42 @@ import phone.vishnu.quotes.adapter.ColorAdapter;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class ColorFragment extends Fragment {
+public class ColorPickFragment extends BottomSheetDialogFragment {
 
     private ColorAdapter colorAdapter;
-    private GridView gridView;
+    private RecyclerView recyclerView;
 
-    public ColorFragment() {
+    public ColorPickFragment() {
     }
 
-    public static ColorFragment newInstance(int COLOR_REQ_CODE) {
+    public static ColorPickFragment newInstance(int COLOR_REQ_CODE) {
         Bundle args = new Bundle();
         args.putInt("ColorRequestCode", COLOR_REQ_CODE);
-        ColorFragment fragment = new ColorFragment();
+        ColorPickFragment fragment = new ColorPickFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View i = inflater.inflate(R.layout.fragment_color, container, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+    }
 
-        gridView = i.findViewById(R.id.gridView);
-        colorAdapter = new ColorAdapter(requireContext());
-        gridView.setAdapter(colorAdapter);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View i = inflater.inflate(R.layout.fragment_color_pick, container, false);
+
+        recyclerView = i.findViewById(R.id.colorPickRecyclerView);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false));
+
+        colorAdapter = new ColorAdapter();
+
+        colorAdapter.submitList(getColorList());
+
+        recyclerView.setAdapter(colorAdapter);
 
         return i;
     }
@@ -57,9 +74,8 @@ public class ColorFragment extends Fragment {
         final int colorRequestCode = Objects.requireNonNull(getArguments()).getInt("ColorRequestCode");
 
         final SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
-        gridView.setOnItemClickListener((parent, view1, position, id) -> {
 
-            String colorString = colorAdapter.getColor(position);
+        colorAdapter.setOnItemClickListener(colorString -> {
 
             if (colorRequestCode == 0) {
 
@@ -75,14 +91,15 @@ public class ColorFragment extends Fragment {
 
                 ((MainActivity) requireActivity()).setConstraintLayoutBackground(Drawable.createFromPath(sharedPreferenceHelper.getBackgroundPath()));
 
-                requireActivity().onBackPressed();
+                dismiss();
+
             } else if (colorRequestCode == 1) {
 
                 sharedPreferenceHelper.setColorPreference(colorString);
 
                 ((MainActivity) requireActivity()).updateViewPager();
 
-                requireActivity().onBackPressed();
+                dismiss();
             } else if (colorRequestCode == 2) {
 
                 if (colorString.equals("#00000000")) colorString = "#FFFFFF";
@@ -91,8 +108,36 @@ public class ColorFragment extends Fragment {
 
                 ((MainActivity) requireActivity()).updateViewPager();
 
-                requireActivity().onBackPressed();
+                dismiss();
             }
+
         });
+
+    }
+
+    private List<String> getColorList() {
+        return Arrays.asList(
+                "#FFF44336",
+                "#FFE91E63",
+                "#FF9C27B0",
+                "#FF673AB7",
+                "#FF3F51B5",
+                "#FF2196F3",
+                "#FF03A9F4",
+                "#FF00BCD4",
+                "#FF009688",
+                "#FF4CAF50",
+                "#FF8BC34A",
+                "#FFCDDC39",
+                "#FFFFEB3B",
+                "#FFFFC107",
+                "#FFFF9800",
+                "#FFFF5722",
+                "#FF795548",
+                "#FF9E9E9E",
+                "#FF607D8B",
+                "#FF000000",
+                "#00000000"
+        );
     }
 }

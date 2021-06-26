@@ -57,7 +57,7 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.fragment.AboutFragment;
-import phone.vishnu.quotes.fragment.ColorFragment;
+import phone.vishnu.quotes.fragment.ColorPickFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontMasterFragment;
 import phone.vishnu.quotes.fragment.PickFragment;
@@ -291,8 +291,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         })
                         .check();
             } else if (id == R.id.colorFAB) {
-                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(1)).addToBackStack(null).commit();
-                setHomeFABHome();
+
+                ColorPickFragment.newInstance(1)
+                        .show(
+                                getSupportFragmentManager(),
+                                "ColorPickBottomSheetDialogFragment"
+                        );
+
+//                setHomeFABHome();
             } else if (id == R.id.fontFAB) {
                 fontDialog = new ProgressDialog(MainActivity.this, R.style.DialogTheme);
                 fontDialog.setMessage("Please Wait....");
@@ -541,8 +547,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setItems(items, (dialog, which) -> {
             switch (which) {
                 case 0: {
-                    getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, ColorFragment.newInstance(0)).addToBackStack(null).commit();
-                    setHomeFABHome();
+                    ColorPickFragment.newInstance(0)
+                            .show(
+                                    getSupportFragmentManager(),
+                                    "ColorPickBottomSheetDialogFragment"
+                            );
+
+//                    setHomeFABHome();
                     break;
                 }
                 case 1: {

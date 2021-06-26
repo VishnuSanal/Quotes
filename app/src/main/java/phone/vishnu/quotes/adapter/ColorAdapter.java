@@ -1,90 +1,113 @@
 package phone.vishnu.quotes.adapter;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 import phone.vishnu.quotes.R;
 
-public class ColorAdapter extends BaseAdapter {
+public class ColorAdapter extends ListAdapter<String, ColorAdapter.ViewHolder> {
 
-    private final String[] colors = new String[]{
-            "#FFF44336",
-            "#FFE91E63",
-            "#FF9C27B0",
-            "#FF673AB7",
-            "#FF3F51B5",
-            "#FF2196F3",
-            "#FF03A9F4",
-            "#FF00BCD4",
-            "#FF009688",
-            "#FF4CAF50",
-            "#FF8BC34A",
-            "#FFCDDC39",
-            "#FFFFEB3B",
-            "#FFFFC107",
-            "#FFFF9800",
-            "#FFFF5722",
-            "#FF795548",
-            "#FF9E9E9E",
-            "#FF607D8B",
-            "#FF000000",
-            "#00000000"
-    };
-    private final Context context;
+    private OnItemClickListener listener;
 
-    public ColorAdapter(Context c) {
-        context = c;
+    public ColorAdapter() {
+        super(new DiffUtil.ItemCallback<String>() {
+            @Override
+            public boolean areItemsTheSame(@NonNull String oldItem, @NonNull String newItem) {
+                return oldItem.equals(newItem);
+            }
+
+            @Override
+            public boolean areContentsTheSame(@NonNull String oldItem, @NonNull String newItem) {
+                return oldItem.equals(newItem);
+            }
+        });
     }
 
-    public String getColor(int position) {
-        return colors[position];
-    }
-
+    @NonNull
     @Override
-    public int getCount() {
-        return colors.length;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.color_pick_single_item, parent, false);
+        return new ColorAdapter.ViewHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    @Nullable
-    public Object getItem(int position) {
-        return null;
-    }
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.setIsRecyclable(false);
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+        if (getItem(position).equals("#00000000")) {
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView = (convertView == null) ? new ImageView(context) : (ImageView) convertView;
+            Log.e("vishnu", "onBindViewHolder:" + getItem(position) + " : One");
 
-        if (colors[position].equals("#00000000")) {
-            imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
-            imageView.setScaleType(ImageView.ScaleType.CENTER);
-            imageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_no_color));
+            holder.imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                            holder.itemView.getContext(),
+                            R.drawable.ic_no_color
+                    )
+            );
+
+            holder.textView.setText("TRANSPARENT");
+
         } else {
+
+            Log.e("vishnu", "onBindViewHolder:" + getItem(position) + " : Two");
+
             ShapeDrawable d = new ShapeDrawable(new OvalShape());
             d.getPaint().setStyle(Paint.Style.FILL);
-            d.getPaint().setColor(Color.parseColor(colors[position]));
+            d.getPaint().setColor(Color.parseColor(getItem(position)));
 
-            imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
+            holder.imageView.setBackgroundDrawable(
+                    d
+            );
 
-            imageView.setBackground(d);
+            holder.textView.setText(getItem(position).replace("#FF", "#"));
+
         }
-        return imageView;
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String colorString);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private final ImageView imageView;
+        private final TextView textView;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            imageView = itemView.findViewById(R.id.colorPickSingleView);
+            textView = itemView.findViewById(R.id.colorPickSingleTV);
+
+            imageView.setOnClickListener(this);
+            textView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION)
+                listener.onItemClick(getItem(getAdapterPosition()));
+        }
+    }
 }
