@@ -18,8 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.ncorti.slidetoact.SlideToActView;
 
 import java.io.File;
@@ -33,7 +33,7 @@ import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends BottomSheetDialogFragment {
 
     private SwitchCompat reminderSwitch;
     private SlideToActView resetToggle;
@@ -45,6 +45,13 @@ public class SettingsFragment extends Fragment {
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
     @Override
@@ -78,6 +85,8 @@ public class SettingsFragment extends Fragment {
 
                 Calendar c = Calendar.getInstance();
 
+                //TODO: Find a way to implement this in Bottom Sheet!
+
                 TimePickerDialog timePickerDialog = new TimePickerDialog(
                         requireContext(),
                         (view1, hourOfDay, minute) -> {
@@ -108,7 +117,9 @@ public class SettingsFragment extends Fragment {
 
         shareActionPickTV.setOnClickListener(v -> {
             ShareActionPickBottomSheetDialogFragment bottomSheet = ShareActionPickBottomSheetDialogFragment.newInstance();
-            bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
+            bottomSheet.show(requireActivity().getSupportFragmentManager(), "ShareActionPicker");
+
+            dismiss();
         });
     }
 

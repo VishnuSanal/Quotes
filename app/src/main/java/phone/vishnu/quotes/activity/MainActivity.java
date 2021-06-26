@@ -290,7 +290,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 "ColorPickBottomSheetDialogFragment"
                         );
 
-//                setHomeFABHome();
             } else if (id == R.id.fontFAB) {
                 fontDialog = new ProgressDialog(MainActivity.this, R.style.DialogTheme);
                 fontDialog.setMessage("Please Wait....");
@@ -299,14 +298,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontMasterFragment.newInstance()).addToBackStack(null).commit();
                 setHomeFABHome();
             } else if (id == R.id.settingsFAB) {
-                SettingsFragment fragment = SettingsFragment.newInstance();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .add(R.id.constraintLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
-
-                setHomeFABHome();
+                SettingsFragment.newInstance()
+                        .show(getSupportFragmentManager(), "SettingsFragment");
             }
         }
     }
