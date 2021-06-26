@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,8 +51,6 @@ public class ColorAdapter extends ListAdapter<String, ColorAdapter.ViewHolder> {
 
         if (getItem(position).equals("#00000000")) {
 
-            Log.e("vishnu", "onBindViewHolder:" + getItem(position) + " : One");
-
             holder.imageView.setImageDrawable(
                     ContextCompat.getDrawable(
                             holder.itemView.getContext(),
@@ -64,8 +61,6 @@ public class ColorAdapter extends ListAdapter<String, ColorAdapter.ViewHolder> {
             holder.textView.setText("TRANSPARENT");
 
         } else {
-
-            Log.e("vishnu", "onBindViewHolder:" + getItem(position) + " : Two");
 
             ShapeDrawable d = new ShapeDrawable(new OvalShape());
             d.getPaint().setStyle(Paint.Style.FILL);

@@ -3,11 +3,9 @@ package phone.vishnu.quotes.fragment;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -61,7 +59,6 @@ public class ShareActionPickBottomSheetDialogFragment extends BottomSheetDialogF
         if (getArguments() != null)
             if (getArguments().containsKey(QUOTE_EXTRA) && getArguments().containsKey(QUOTE_EXTRA)) {
                 quote = new Quote(getArguments().getString(QUOTE_EXTRA), getArguments().getString(AUTHOR_EXTRA));
-                Log.e("vishnu", "newInstance:" + quote.toString());
             }
 
     }
@@ -76,7 +73,7 @@ public class ShareActionPickBottomSheetDialogFragment extends BottomSheetDialogF
         radioGroup = inflate.findViewById(R.id.bottomSheetRadioGroup);
 
         if (quote != null)
-            ((RadioButton) radioGroup.findViewById(R.id.bottomSheetAskRadioButton)).setVisibility(View.GONE);
+            radioGroup.findViewById(R.id.bottomSheetAskRadioButton).setVisibility(View.GONE);
 
         if (quote == null)
             setChecked(sharedPreferenceHelper.getShareButtonAction());
@@ -97,7 +94,7 @@ public class ShareActionPickBottomSheetDialogFragment extends BottomSheetDialogF
 
             ((MainActivity) requireActivity()).updateViewPager();
 
-            ((ImageView) view.findViewById(R.id.bottomSheetDoneIndicatorIV))
+            view.findViewById(R.id.bottomSheetDoneIndicatorIV)
                     .animate()
                     .alpha(1)
                     .rotation(360)

@@ -78,10 +78,9 @@ public class BackgroundOptionPickFragment extends BottomSheetDialogFragment {
 
                 dismiss();
 
-//                    setHomeFABHome();
             } else if (id == R.id.backgroundPickGalleryRadioButton) {
 
-                startActivityForResult(
+                requireActivity().startActivityForResult(
                         new Intent(Intent.ACTION_GET_CONTENT).setType("image/*"),
                         MainActivity.PICK_IMAGE_ID
                 );
