@@ -23,16 +23,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
 
 public class ExportHelper {
 
     private final SharedPreferenceHelper sharedPreferenceHelper;
+    private final Context context;
 
     public ExportHelper(Context context) {
         sharedPreferenceHelper = new SharedPreferenceHelper(context);
+        this.context = context;
     }
 
     public void exportBackgroundImage(Bitmap image) {
@@ -55,13 +56,13 @@ public class ExportHelper {
     }
 
     public String getBGPath() {
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), context.getString(R.string.app_name));
         if (!root.exists()) root.mkdirs();
         return root.toString() + File.separator + ".Quotes_Background" + ".jpg";
     }
 
     public String getSSPath() {
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), context.getString(R.string.app_name));
         if (!root.exists()) root.mkdirs();
         return root.toString() + File.separator + ".Screenshot" + ".jpg";
     }
@@ -186,7 +187,7 @@ public class ExportHelper {
         shareView.layout(0, 0, widthPixels, heightPixels);
         shareView.draw(c);
 
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), context.getString(R.string.app_name));
         if (!root.exists()) root.mkdirs();
         String imagePath = root.toString() + File.separator + "Quotes - " + System.currentTimeMillis() + ".jpg";
 

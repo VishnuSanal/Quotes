@@ -25,7 +25,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.FontDataAdapter;
@@ -66,7 +65,7 @@ public class FontFragment extends Fragment {
         if (MainActivity.fontDialog != null && MainActivity.fontDialog.isShowing())
             MainActivity.fontDialog.dismiss();
 
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), getString(R.string.app_name));
         final File[] files = root.listFiles();
 
         if (files != null) {
@@ -126,7 +125,7 @@ public class FontFragment extends Fragment {
             String fontString = fontList.get(position).toLowerCase() + ".ttf";
 
             StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
-            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), getString(R.string.app_name));
             final File f = new File(localFile + File.separator + "." + fontString);
 
             if (f.exists()) {

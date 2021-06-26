@@ -60,7 +60,7 @@ public class PickFragment extends Fragment {
         adapter.setOnItemClickListener(uri -> {
             final ProgressDialog dialog = ProgressDialog.show(requireContext(), "", "Please Wait....");
 
-            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), getString(R.string.app_name));
 
             final File f;
 
@@ -128,7 +128,7 @@ public class PickFragment extends Fragment {
         final ArrayList<Uri> list = new ArrayList<>();
         final ArrayList<String> bgArrayList = new ArrayList<>();
 
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), getString(R.string.app_name));
         File[] files = root.listFiles();
 
         if (files != null) {

@@ -20,7 +20,6 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.util.ArrayList;
 
-import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 
 public class FontDataAdapter extends ArrayAdapter<String> {
@@ -53,7 +52,8 @@ public class FontDataAdapter extends ArrayAdapter<String> {
             String fontString = objects.get(position).toLowerCase() + ".ttf";
 
             StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
-            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+                    getContext().getString(R.string.app_name));
 
             final File f = new File(localFile + File.separator + "." + fontString);
 

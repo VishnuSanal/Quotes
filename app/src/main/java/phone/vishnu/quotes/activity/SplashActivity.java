@@ -26,7 +26,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.TourFragmentStateAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
@@ -54,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
         sharedPreferenceHelper.deleteFontPreference();
 
         File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
-                (BuildConfig.DEBUG) ? "Quotes - Debug" : "Quotes");
+                getString(R.string.app_name));
 
         File[] files = root.listFiles();
 
