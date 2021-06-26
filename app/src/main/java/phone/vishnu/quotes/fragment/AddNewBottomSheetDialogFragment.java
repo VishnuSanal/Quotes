@@ -52,6 +52,8 @@ public class AddNewBottomSheetDialogFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        quoteTIE.requestFocus();
+
         submitButton.setOnClickListener(v -> {
 
             String quote = Objects.requireNonNull(quoteTIE.getText()).toString();
