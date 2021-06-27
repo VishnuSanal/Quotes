@@ -13,11 +13,26 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        app:layout_constraintBottom_toTopOf="@id/fontListView"
+        app:layout_constraintBottom_toTopOf="@id/fontTitleTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:trackColor="@color/tourBackgroundColor" />
+
+    <TextView
+        android:id="@+id/fontTitleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:letterSpacing="0.15"
+        android:padding="8dp"
+        android:text="Pick Font Style"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fontProgressBar"
+        tools:ignore="HardcodedText" />
 
     <ListView
         android:id="@+id/fontListView"
@@ -27,6 +42,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fontProgressBar" />
+        app:layout_constraintTop_toBottomOf="@id/fontTitleTV" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -69,7 +69,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         reminderSwitch.setChecked(!sharedPreferenceHelper.getAlarmString().equals("Alarm Not Set"));
 
         reminderSwitch.setText(getSwitchText(sharedPreferenceHelper.getAlarmString()));
-        shareActionPickTV.setText(getSpannableText("Share", "What share button does"));
+        shareActionPickTV.setText(getSpannableText("Share", "Share Button Action"));
 
         return inflate;
     }
