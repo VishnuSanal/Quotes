@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imagePickRecyclerView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/pickBGColor"
-    tools:context=".fragment.PickFragment"
-    tools:ignore="HardcodedText">
-
-    <ImageView
-        android:id="@+id/imagePickSampleIconImageView"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:background="@color/colorAccent"
-        android:contentDescription="Image Pick Screen Image Icon"
-        android:elevation="12dp"
-        android:foregroundGravity="center"
-        android:src="@drawable/ic_insert_photo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/colorWhite" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/imagePickRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imagePickSampleIconImageView"
-        tools:listitem="@layout/single_card" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background"
+    android:fillViewport="true"
+    android:paddingTop="16dp"
+    android:scrollbars="vertical"
+    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:spanCount="2"
+    tools:listitem="@layout/single_card" />

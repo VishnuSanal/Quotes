@@ -15,15 +15,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 import static phone.vishnu.quotes.activity.MainActivity.bgDialog;
 
 public class BackgroundOptionPickFragment extends BottomSheetDialogFragment {
 
     private static final String CANCELLABLE_EXTRA = "isCancellable";
-
-    private SharedPreferenceHelper sharedPreferenceHelper;
 
     private RadioGroup radioGroup;
 
@@ -55,8 +52,6 @@ public class BackgroundOptionPickFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.background_option_pick_dialog, container, false);
-
-        sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
 
         radioGroup = inflate.findViewById(R.id.backgroundPickRadioGroup);
 
@@ -93,16 +88,15 @@ public class BackgroundOptionPickFragment extends BottomSheetDialogFragment {
                 bgDialog.setMessage("Please Wait....");
                 bgDialog.show();
                 bgDialog.setCancelable(false);
-                requireActivity().getSupportFragmentManager()
-                        .beginTransaction().add(R.id.constraintLayout, PickFragment.newInstance())
-                        .addToBackStack(null).commit();
+
+                PickFragment.newInstance()
+                        .show(
+                                requireActivity().getSupportFragmentManager(),
+                                "PickFragment"
+                        );
 
                 dismiss();
-                //FIXME: Fix This
-//                    MainActivity.setHomeFABHome();
             }
-
-
         });
     }
 }

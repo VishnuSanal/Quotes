@@ -15,10 +15,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,7 +32,7 @@ import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.RecyclerViewAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class PickFragment extends Fragment {
+public class PickFragment extends BottomSheetDialogFragment {
 
     private RecyclerViewAdapter adapter;
     private SharedPreferenceHelper sharedPreferenceHelper;
@@ -42,6 +42,14 @@ public class PickFragment extends Fragment {
 
     public static PickFragment newInstance() {
         return new PickFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+
     }
 
     @Override
@@ -81,7 +89,8 @@ public class PickFragment extends Fragment {
                 Toast.makeText(requireContext(), "Background Set \n Applying Changes", Toast.LENGTH_LONG).show();
 
                 ((MainActivity) requireContext()).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.getAbsolutePath()));
-                ((MainActivity) requireContext()).onBackPressed();
+
+                dismiss();
 
             } else {
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(f.getName().substring(1));
@@ -97,7 +106,9 @@ public class PickFragment extends Fragment {
                     Toast.makeText(requireContext(), "Background Set \n Applying Changes", Toast.LENGTH_LONG).show();
 
                     ((MainActivity) requireContext()).findViewById(R.id.constraintLayout).setBackground(Drawable.createFromPath(f.toString()));
-                    ((MainActivity) requireContext()).onBackPressed();
+
+                    dismiss();
+
                 }).addOnFailureListener(exception -> {
                     FirebaseCrashlytics.getInstance().recordException(exception);
                     exception.printStackTrace();
