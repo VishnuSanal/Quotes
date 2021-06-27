@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .check();
             } else if (id == R.id.colorFAB) {
 
-                ColorPickFragment.newInstance(1)
+                ColorPickFragment.newInstance(ColorPickFragment.PICK_CARD_COLOR_REQ_CODE)
                         .show(
                                 getSupportFragmentManager(),
                                 "ColorPickBottomSheetDialogFragment"

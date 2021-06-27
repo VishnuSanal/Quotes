@@ -29,8 +29,11 @@ import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class ColorPickFragment extends BottomSheetDialogFragment {
 
+    public static final int PICK_BG_COLOR_REQ_CODE = 0;
+    public static final int PICK_CARD_COLOR_REQ_CODE = 1;
+    public static final int PICK_FONT_COLOR_REQ_CODE = 2;
+
     private ColorAdapter colorAdapter;
-    private RecyclerView recyclerView;
 
     public ColorPickFragment() {
     }
@@ -53,14 +56,16 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View i = inflater.inflate(R.layout.fragment_color_pick, container, false);
 
-        recyclerView = i.findViewById(R.id.colorPickRecyclerView);
+        RecyclerView recyclerView = i.findViewById(R.id.colorPickRecyclerView);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false));
 
         colorAdapter = new ColorAdapter();
 
-        colorAdapter.submitList(getColorList());
+        colorAdapter.submitList(
+                Objects.requireNonNull(getArguments()).getInt("ColorRequestCode") == PICK_FONT_COLOR_REQ_CODE ? getFontColorList() : getColorList()
+        );
 
         recyclerView.setAdapter(colorAdapter);
 
@@ -77,7 +82,7 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
 
         colorAdapter.setOnItemClickListener(colorString -> {
 
-            if (colorRequestCode == 0) {
+            if (colorRequestCode == PICK_BG_COLOR_REQ_CODE) {
 
                 DisplayMetrics metrics = new DisplayMetrics();
                 metrics.widthPixels = 1080;
@@ -93,14 +98,15 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
 
                 dismiss();
 
-            } else if (colorRequestCode == 1) {
+            } else if (colorRequestCode == PICK_CARD_COLOR_REQ_CODE) {
 
                 sharedPreferenceHelper.setColorPreference(colorString);
 
                 ((MainActivity) requireActivity()).updateViewPager();
 
                 dismiss();
-            } else if (colorRequestCode == 2) {
+
+            } else if (colorRequestCode == PICK_FONT_COLOR_REQ_CODE) {
 
                 if (colorString.equals("#00000000")) colorString = "#FFFFFF";
 
@@ -109,10 +115,9 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
                 ((MainActivity) requireActivity()).updateViewPager();
 
                 dismiss();
+
             }
-
         });
-
     }
 
     private List<String> getColorList() {
@@ -138,6 +143,32 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
                 "#FF607D8B",
                 "#FF000000",
                 "#00000000"
+        );
+    }
+
+    private List<String> getFontColorList() {
+        return Arrays.asList(
+                "#FFF44336",
+                "#FFE91E63",
+                "#FF9C27B0",
+                "#FF673AB7",
+                "#FF3F51B5",
+                "#FF2196F3",
+                "#FF03A9F4",
+                "#FF00BCD4",
+                "#FF009688",
+                "#FF4CAF50",
+                "#FF8BC34A",
+                "#FFCDDC39",
+                "#FFFFEB3B",
+                "#FFFFC107",
+                "#FFFF9800",
+                "#FFFF5722",
+                "#FF795548",
+                "#FF9E9E9E",
+                "#FF607D8B",
+                "#FF000000",
+                "#FFFFFFFF"
         );
     }
 }

@@ -57,7 +57,7 @@ public class ColorAdapter extends ListAdapter<String, ColorAdapter.ViewHolder> {
                             R.drawable.ic_no_color
                     )
             );
-//FIXME: Should be white in font color pick
+
             holder.textView.setText("TRANSPARENT");
 
         } else {
