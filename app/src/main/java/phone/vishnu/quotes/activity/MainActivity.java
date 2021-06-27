@@ -57,7 +57,7 @@ import phone.vishnu.quotes.fragment.AboutFragment;
 import phone.vishnu.quotes.fragment.BackgroundOptionPickFragment;
 import phone.vishnu.quotes.fragment.ColorPickFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
-import phone.vishnu.quotes.fragment.FontMasterFragment;
+import phone.vishnu.quotes.fragment.FontOptionPickFragment;
 import phone.vishnu.quotes.fragment.SettingsFragment;
 import phone.vishnu.quotes.fragment.ShareActionPickBottomSheetDialogFragment;
 import phone.vishnu.quotes.helper.AlarmHelper;
@@ -291,12 +291,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         );
 
             } else if (id == R.id.fontFAB) {
-                fontDialog = new ProgressDialog(MainActivity.this, R.style.DialogTheme);
-                fontDialog.setMessage("Please Wait....");
-                fontDialog.show();
-                fontDialog.setCancelable(false);
-                getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout, FontMasterFragment.newInstance()).addToBackStack(null).commit();
-                setHomeFABHome();
+
+                FontOptionPickFragment.newInstance()
+                        .show(
+                                getSupportFragmentManager(),
+                                "FontOptionPickFragment"
+                        );
+
             } else if (id == R.id.settingsFAB) {
                 SettingsFragment.newInstance()
                         .show(getSupportFragmentManager(), "SettingsFragment");

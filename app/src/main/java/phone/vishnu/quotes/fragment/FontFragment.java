@@ -10,13 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -30,19 +30,27 @@ import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.FontDataAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class FontFragment extends Fragment {
+public class FontFragment extends BottomSheetDialogFragment {
 
     private final ArrayList<String> fontList = new ArrayList<>();
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ListView listView;
     private FontDataAdapter fontDataAdapter;
-    private ProgressBar progressBar;
+    private LinearProgressIndicator progressBar;
 
     public FontFragment() {
     }
 
     public static FontFragment newInstance() {
         return new FontFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+
     }
 
     @Override
@@ -136,7 +144,8 @@ public class FontFragment extends Fragment {
 
                 ((MainActivity) requireContext()).getQuoteViewPagerAdapter().notifyDataSetChanged();
 
-                requireActivity().onBackPressed();
+                dismiss();
+
             } else {
 
                 if (!localFile.exists()) localFile.mkdirs();
@@ -151,7 +160,8 @@ public class FontFragment extends Fragment {
 
                         ((MainActivity) requireContext()).getQuoteViewPagerAdapter().notifyDataSetChanged();
 
-                        requireActivity().onBackPressed();
+                        dismiss();
+
                     } else {
                         progressDialog.dismiss();
                     }
