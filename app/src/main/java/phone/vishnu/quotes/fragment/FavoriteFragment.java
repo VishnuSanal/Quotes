@@ -1,7 +1,5 @@
 package phone.vishnu.quotes.fragment;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -27,7 +24,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -41,7 +39,7 @@ import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.viewmodel.FavViewModel;
 
-public class FavoriteFragment extends Fragment {
+public class FavoriteFragment extends BottomSheetDialogFragment {
 
     private SharedPreferenceHelper sharedPreferenceHelper;
 
@@ -49,9 +47,9 @@ public class FavoriteFragment extends Fragment {
     private FavoritesAdapter adapter;
     private RecyclerView recyclerView;
 
-    private ImageView addImageView, emptyHintIV;
-    private TextView emptyHintTV;
-    private LinearProgressIndicator progressBar;
+    private ImageView emptyHintIV;
+    private TextView emptyHintTV, addTV;
+    private CircularProgressIndicator progressBar;
 
     public FavoriteFragment() {
     }
@@ -61,13 +59,20 @@ public class FavoriteFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_favorite, container, false);
 
-        addImageView = inflate.findViewById(R.id.favoriteAddImageView);
         progressBar = inflate.findViewById(R.id.favProgressBar);
         emptyHintIV = inflate.findViewById(R.id.recyclerViewEmptyHintIV);
         emptyHintTV = inflate.findViewById(R.id.recyclerViewEmptyHintTV);
+        addTV = inflate.findViewById(R.id.favAddTV);
         recyclerView = inflate.findViewById(R.id.favoriteRecyclerView);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
@@ -83,14 +88,13 @@ public class FavoriteFragment extends Fragment {
 
         importFavourites();
 
-        addImageView.setOnClickListener(
-                v -> AddNewBottomSheetDialogFragment.newInstance()
+        addTV.setOnClickListener(v ->
+                AddNewBottomSheetDialogFragment.newInstance()
                         .show(
                                 requireActivity().getSupportFragmentManager(),
                                 "AddNewBottomSheetDialogFragment"
                         )
         );
-
     }
 
     private void importFavourites() {
@@ -155,15 +159,10 @@ public class FavoriteFragment extends Fragment {
             }
 
             if (progressBar.getVisibility() == View.VISIBLE)
-                progressBar.animate().translationY(DPtoPX(-8)).alpha(0).setDuration(200).setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-                        progressBar.setVisibility(View.GONE);
-                    }
-                });
+                progressBar.setVisibility(View.GONE);
 
             adapter.submitList(favList);
+            recyclerView.requestLayout();
         });
 
         new ItemTouchHelper(

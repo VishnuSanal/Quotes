@@ -32,7 +32,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -117,12 +116,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Shortcut
             if ("phone.vishnu.quotes.openFavouriteFragment".equals(getIntent().getAction())) {
 
-                FavoriteFragment fragment = FavoriteFragment.newInstance();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .add(R.id.constraintLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
+                FavoriteFragment.newInstance()
+                        .show(getSupportFragmentManager(), "FavoriteFragment");
 
             } else if ("phone.vishnu.quotes.shareRandomQuote".equals(getIntent().getAction())) {
                 shareRandomQuote();
@@ -251,13 +246,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             closeFABMenu();
             if (id == R.id.favFAB) {
-                FavoriteFragment fragment = FavoriteFragment.newInstance();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .add(R.id.constraintLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
-                setHomeFABHome();
+                FavoriteFragment.newInstance()
+                        .show(getSupportFragmentManager(), "FavoriteFragment");
             } else if (id == R.id.aboutFAB) {
                 AboutFragment.newInstance()
                         .show(getSupportFragmentManager(), "AboutFragment");

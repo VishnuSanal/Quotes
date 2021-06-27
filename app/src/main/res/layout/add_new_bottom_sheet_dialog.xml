@@ -46,8 +46,8 @@
                 android:hint="@string/quote"
                 android:inputType="textCapSentences"
                 android:scrollbars="vertical"
-                android:textColor="@color/editTextColor"
-                android:textColorHint="@color/editTextColor" />
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,8 +70,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/author"
                 android:inputType="textCapWords"
-                android:textColor="@color/editTextColor"
-                android:textColorHint="@color/editTextColor" />
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

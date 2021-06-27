@@ -68,7 +68,7 @@ public class BackgroundOptionPickFragment extends BottomSheetDialogFragment {
                 ColorPickFragment.newInstance(0)
                         .show(
                                 requireActivity().getSupportFragmentManager(),
-                                "ColorPickBottomSheetDialogFragment"
+                                "ColorPickFragment"
                         );
 
                 dismiss();
