@@ -53,6 +53,10 @@ public class FavRepository {
         return false;
     }
 
+    public void deleteAll() {
+        new DeleteAllFavAsyncTask(favDao).execute();
+    }
+
     private static class InsertFavAsyncTask extends AsyncTask<Quote, Void, Long> {
         private final FavDao favDao;
 
@@ -95,6 +99,20 @@ public class FavRepository {
         @Override
         protected Void doInBackground(Quote... fav) {
             favDao.delete(fav[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllFavAsyncTask extends AsyncTask<Void, Void, Void> {
+        private final FavDao favDao;
+
+        public DeleteAllFavAsyncTask(FavDao favDao) {
+            this.favDao = favDao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            favDao.deleteAll();
             return null;
         }
     }

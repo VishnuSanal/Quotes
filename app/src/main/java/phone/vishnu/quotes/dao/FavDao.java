@@ -29,4 +29,8 @@ public interface FavDao {
 
     @Query("SELECT COUNT(*) FROM Quote WHERE quote = :quote AND author = :author")
     int isPresent(String quote, String author);
+
+    @Query("DELETE FROM Quote")
+    void deleteAll();
+
 }
