@@ -13,27 +13,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AlertDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
-        <item name="buttonBarPositiveButtonStyle">@style/Alert.Button.Positive</item>
-        <item name="buttonBarNegativeButtonStyle">@style/Alert.Button.Positive</item>
-        <item name="buttonBarNeutralButtonStyle">@style/Alert.Button.Neutral</item>
-    </style>
-
-    <style name="Alert.Button.Positive" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="backgroundTint">@color/transparent</item>
-        <item name="rippleColor">@color/colorAccent</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textAllCaps">false</item>
-    </style>
-
-    <style name="Alert.Button.Neutral" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="backgroundTint">@color/transparent</item>
-        <item name="rippleColor">@color/colorAccent</item>
-        <item name="android:textColor">#B3B3B3</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-
     <style name="CustomBottomSheetDialogTheme" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
         <item name="android:windowIsFloating">false</item>
