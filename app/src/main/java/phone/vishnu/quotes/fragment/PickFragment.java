@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -36,6 +37,7 @@ public class PickFragment extends BottomSheetDialogFragment {
 
     private RecyclerViewAdapter adapter;
     private SharedPreferenceHelper sharedPreferenceHelper;
+    private LinearProgressIndicator progressBar;
 
     public PickFragment() {
     }
@@ -55,16 +57,23 @@ public class PickFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_pick, container, false);
+
         setUpRecyclerView(inflate);
+
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+
+        progressBar = inflate.findViewById(R.id.imagePickProgressBar);
+
         if (!isNetworkAvailable(requireContext()))
             Toast.makeText(requireContext(), "Please connect to the Internet", Toast.LENGTH_SHORT).show();
+
         return inflate;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         adapter.setOnItemClickListener(uri -> {
             final ProgressDialog dialog = ProgressDialog.show(requireContext(), "", "Please Wait....");
 
@@ -132,6 +141,9 @@ public class PickFragment extends BottomSheetDialogFragment {
                 super.onLayoutCompleted(state);
                 if (state.getItemCount() >= 2 && MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing())
                     MainActivity.bgDialog.dismiss();
+
+                if (state.getItemCount() > 4)
+                    progressBar.setVisibility(View.GONE);
             }
         };
         recyclerView.setLayoutManager(layoutManager);
