@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -227,9 +226,4 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private int DPtoPX(int DP) {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        return Math.round(DP * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-    }
 }

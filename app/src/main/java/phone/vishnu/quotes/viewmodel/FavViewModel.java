@@ -13,8 +13,8 @@ import phone.vishnu.quotes.repository.FavRepository;
 
 public class FavViewModel extends AndroidViewModel {
 
-    FavRepository repository;
-    LiveData<List<Quote>> allFavList;
+    final FavRepository repository;
+    final LiveData<List<Quote>> allFavList;
 
     public FavViewModel(@NonNull Application application) {
         super(application);

@@ -80,7 +80,7 @@ public class FavoritesAdapter extends ListAdapter<Quote, FavoritesAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView quoteTV, authorTV;
-        public View colorView;
+        public final View colorView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -48,6 +48,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
@@ -98,15 +99,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     showShareActionPicker(
                             new Quote(
-                                    extras.getString("quote"),
-                                    extras.getString("author")
+                                    Objects.requireNonNull(extras.getString("quote")),
+                                    Objects.requireNonNull(extras.getString("author"))
                             )
                     );
 
                 } else if (extras.getBoolean("FavButton")) {
 
                     addFavourite(
-                            new Quote(extras.getString("quote"), extras.getString("author")));
+                            new Quote(Objects.requireNonNull(extras.getString("quote")), Objects.requireNonNull(extras.getString("author"))));
 
                 }
             }
@@ -293,11 +294,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .show(getSupportFragmentManager(), "SettingsFragment");
             }
         }
-    }
-
-    public void setHomeFABHome() {
-        homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_home));
-        homeFAB.setTag("Menu Opened");
     }
 
     private void resetHomeFAB() {

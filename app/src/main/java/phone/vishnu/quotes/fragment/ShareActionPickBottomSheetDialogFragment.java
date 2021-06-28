@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.Objects;
+
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.ShareHelper;
@@ -58,7 +60,7 @@ public class ShareActionPickBottomSheetDialogFragment extends BottomSheetDialogF
 
         if (getArguments() != null)
             if (getArguments().containsKey(QUOTE_EXTRA) && getArguments().containsKey(QUOTE_EXTRA)) {
-                quote = new Quote(getArguments().getString(QUOTE_EXTRA), getArguments().getString(AUTHOR_EXTRA));
+                quote = new Quote(Objects.requireNonNull(getArguments().getString(QUOTE_EXTRA)), Objects.requireNonNull(getArguments().getString(AUTHOR_EXTRA)));
             }
 
     }

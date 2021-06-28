@@ -113,10 +113,6 @@ public class ShareHelper {
 
     }
 
-    public static Drawable getShareIconDrawable(Context context) {
-        return getShareIconDrawable(context, new SharedPreferenceHelper(context).getShareButtonAction());
-    }
-
     public static Drawable getShareIconDrawable(Context context, int i) {
         if (i == 0)
             return ContextCompat.getDrawable(context, R.drawable.ic_copy);

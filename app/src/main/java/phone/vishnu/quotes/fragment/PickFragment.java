@@ -26,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
@@ -87,7 +88,7 @@ public class PickFragment extends BottomSheetDialogFragment {
                 f = new File(localFile + File.separator + "." + fileName);
 
             } else {
-                f = new File(uri.getPath());
+                f = new File(Objects.requireNonNull(uri.getPath()));
             }
 
             if (f.exists()) {
