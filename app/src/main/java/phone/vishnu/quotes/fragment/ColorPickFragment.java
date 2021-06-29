@@ -1,5 +1,6 @@
 package phone.vishnu.quotes.fragment;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,6 +54,7 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View i = inflater.inflate(R.layout.fragment_color_pick, container, false);
@@ -66,6 +69,13 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
         colorAdapter.submitList(
                 Objects.requireNonNull(getArguments()).getInt("ColorRequestCode") == PICK_FONT_COLOR_REQ_CODE ? getFontColorList() : getColorList()
         );
+
+        if (Objects.requireNonNull(getArguments()).getInt("ColorRequestCode") == PICK_FONT_COLOR_REQ_CODE)
+            ((TextView) i.findViewById(R.id.colorPickTitleTV)).setText("Pick Font Color");
+        else if (Objects.requireNonNull(getArguments()).getInt("ColorRequestCode") == PICK_BG_COLOR_REQ_CODE)
+            ((TextView) i.findViewById(R.id.colorPickTitleTV)).setText("Pick Background Color");
+        else
+            ((TextView) i.findViewById(R.id.colorPickTitleTV)).setText("Pick Card Color");
 
         recyclerView.setAdapter(colorAdapter);
 
