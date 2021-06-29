@@ -118,7 +118,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         });
 
         shareActionPickTV.setOnClickListener(v -> {
-            ShareActionPickBottomSheetDialogFragment bottomSheet = ShareActionPickBottomSheetDialogFragment.newInstance();
+            ShareOptionPickFragment bottomSheet = ShareOptionPickFragment.newInstance();
             bottomSheet.show(requireActivity().getSupportFragmentManager(), "ShareActionPicker");
 
             dismiss();

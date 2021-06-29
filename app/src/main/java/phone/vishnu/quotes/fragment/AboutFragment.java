@@ -20,7 +20,7 @@ import java.util.List;
 
 import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.helper.AboutAdapter;
+import phone.vishnu.quotes.adapter.AboutRVAdapter;
 import phone.vishnu.quotes.model.TourItem;
 
 public class AboutFragment extends BottomSheetDialogFragment {
@@ -55,7 +55,7 @@ public class AboutFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        AboutAdapter adapter = new AboutAdapter();
+        AboutRVAdapter adapter = new AboutRVAdapter();
         adapter.submitList(getItems());
         recyclerView.setAdapter(adapter);
 

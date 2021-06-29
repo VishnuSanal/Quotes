@@ -54,12 +54,12 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.fragment.AboutFragment;
-import phone.vishnu.quotes.fragment.BackgroundOptionPickFragment;
+import phone.vishnu.quotes.fragment.BGOptionPickFragment;
 import phone.vishnu.quotes.fragment.ColorPickFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontOptionPickFragment;
 import phone.vishnu.quotes.fragment.SettingsFragment;
-import phone.vishnu.quotes.fragment.ShareActionPickBottomSheetDialogFragment;
+import phone.vishnu.quotes.fragment.ShareOptionPickFragment;
 import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.ShareHelper;
@@ -479,7 +479,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showShareActionPicker(Quote q) {
-        ShareActionPickBottomSheetDialogFragment.newInstance(q)
+        ShareOptionPickFragment.newInstance(q)
                 .show(getSupportFragmentManager(), "ShareActionPicker");
     }
 
@@ -506,7 +506,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showBackgroundOptionChooser(boolean isCancellable) {
 
-        BackgroundOptionPickFragment.newInstance(isCancellable)
+        BGOptionPickFragment.newInstance(isCancellable)
                 .show(getSupportFragmentManager(), "BackgroundOptionPick");
 
     }

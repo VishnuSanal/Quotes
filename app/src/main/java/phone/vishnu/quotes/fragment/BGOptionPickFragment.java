@@ -18,14 +18,14 @@ import phone.vishnu.quotes.activity.MainActivity;
 
 import static phone.vishnu.quotes.activity.MainActivity.bgDialog;
 
-public class BackgroundOptionPickFragment extends BottomSheetDialogFragment {
+public class BGOptionPickFragment extends BottomSheetDialogFragment {
 
     private static final String CANCELLABLE_EXTRA = "isCancellable";
 
     private RadioGroup radioGroup;
 
-    public static BackgroundOptionPickFragment newInstance(boolean isCancellable) {
-        BackgroundOptionPickFragment bottomSheetFragment = new BackgroundOptionPickFragment();
+    public static BGOptionPickFragment newInstance(boolean isCancellable) {
+        BGOptionPickFragment bottomSheetFragment = new BGOptionPickFragment();
 
         Bundle bundle = new Bundle();
 
@@ -89,10 +89,10 @@ public class BackgroundOptionPickFragment extends BottomSheetDialogFragment {
                 bgDialog.show();
                 bgDialog.setCancelable(false);
 
-                PickFragment.newInstance()
+                BGImagePickFragment.newInstance()
                         .show(
                                 requireActivity().getSupportFragmentManager(),
-                                "PickFragment"
+                                "BGImagePickFragment"
                         );
 
                 dismiss();

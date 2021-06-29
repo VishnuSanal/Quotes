@@ -31,7 +31,7 @@ public class TourSingleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View i = inflater.inflate(R.layout.fragment_tour_single, container, false);
+        View i = inflater.inflate(R.layout.tour_single_item, container, false);
 
         Bundle args = getArguments();
 

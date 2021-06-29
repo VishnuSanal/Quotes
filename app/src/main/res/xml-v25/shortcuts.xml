@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
-    <shortcut
+
+<shortcut
         android:enabled="true"
         android:icon="@drawable/ic_home"
         android:shortcutId="shortcut_home"
@@ -12,7 +13,6 @@
             android:targetClass="phone.vishnu.quotes.activity.MainActivity"
             android:targetPackage="phone.vishnu.quotes" />
 
-        <!--        <categories android:name="android.shortcut.conversation" />-->
     </shortcut>
 
     <shortcut
@@ -27,7 +27,6 @@
             android:targetClass="phone.vishnu.quotes.activity.MainActivity"
             android:targetPackage="phone.vishnu.quotes" />
 
-        <!--        <categories android:name="android.shortcut.conversation" />-->
     </shortcut>
 
     <shortcut
@@ -42,6 +41,6 @@
             android:targetClass="phone.vishnu.quotes.activity.MainActivity"
             android:targetPackage="phone.vishnu.quotes" />
 
-        <!--        <categories android:name="android.shortcut.conversation" />-->
     </shortcut>
+
 </shortcuts>

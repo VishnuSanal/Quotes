@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.adapter.TourFragmentStateAdapter;
+import phone.vishnu.quotes.adapter.TourViewPagerAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class SplashActivity extends AppCompatActivity {
@@ -75,7 +75,7 @@ public class SplashActivity extends AppCompatActivity {
 
         final ViewPager2 viewPager = findViewById(R.id.splashScreenTourViewPager);
 
-        final TourFragmentStateAdapter adapter = new TourFragmentStateAdapter(this);
+        final TourViewPagerAdapter adapter = new TourViewPagerAdapter(this);
         viewPager.setAdapter(adapter);
 
         final int pageCount = adapter.getItemCount() - 1;

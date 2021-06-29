@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.adapter.FavoritesAdapter;
+import phone.vishnu.quotes.adapter.FavoritesRVAdapter;
 import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
@@ -43,7 +43,7 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
     private SharedPreferenceHelper sharedPreferenceHelper;
 
     private FavViewModel viewModel;
-    private FavoritesAdapter adapter;
+    private FavoritesRVAdapter adapter;
     private RecyclerView recyclerView;
 
     private ImageView emptyHintIV;
@@ -88,10 +88,10 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         importFavourites();
 
         addTV.setOnClickListener(v ->
-                AddNewBottomSheetDialogFragment.newInstance()
+                AddNewFragment.newInstance()
                         .show(
                                 requireActivity().getSupportFragmentManager(),
-                                "AddNewBottomSheetDialogFragment"
+                                "AddNewFragment"
                         )
         );
     }
@@ -130,7 +130,7 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
 
-        adapter = new FavoritesAdapter();
+        adapter = new FavoritesRVAdapter();
         recyclerView.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(
@@ -222,7 +222,7 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
     }
 
     private void showBottomSheetDialog(Quote q) {
-        ShareActionPickBottomSheetDialogFragment bottomSheet = ShareActionPickBottomSheetDialogFragment.newInstance(q);
+        ShareOptionPickFragment bottomSheet = ShareOptionPickFragment.newInstance(q);
         bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
     }
 

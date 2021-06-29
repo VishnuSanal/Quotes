@@ -17,8 +17,8 @@ import java.util.Random;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
 
-public class FavoritesAdapter extends ListAdapter<Quote, FavoritesAdapter.ViewHolder> {
-    public FavoritesAdapter() {
+public class FavoritesRVAdapter extends ListAdapter<Quote, FavoritesRVAdapter.ViewHolder> {
+    public FavoritesRVAdapter() {
         super(new DiffUtil.ItemCallback<Quote>() {
             @Override
             public boolean areItemsTheSame(@NonNull Quote oldItem, @NonNull Quote newItem) {

@@ -25,7 +25,7 @@ import java.util.Objects;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.adapter.ColorAdapter;
+import phone.vishnu.quotes.adapter.ColorRVAdapter;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
@@ -35,7 +35,7 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
     public static final int PICK_CARD_COLOR_REQ_CODE = 1;
     public static final int PICK_FONT_COLOR_REQ_CODE = 2;
 
-    private ColorAdapter colorAdapter;
+    private ColorRVAdapter colorAdapter;
 
     public ColorPickFragment() {
     }
@@ -64,7 +64,7 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false));
 
-        colorAdapter = new ColorAdapter();
+        colorAdapter = new ColorRVAdapter();
 
         colorAdapter.submitList(
                 Objects.requireNonNull(getArguments()).getInt("ColorRequestCode") == PICK_FONT_COLOR_REQ_CODE ? getFontColorList() : getColorList()

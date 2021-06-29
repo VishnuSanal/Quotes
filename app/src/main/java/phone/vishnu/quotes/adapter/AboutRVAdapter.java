@@ -1,4 +1,4 @@
-package phone.vishnu.quotes.helper;
+package phone.vishnu.quotes.adapter;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -16,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.TourItem;
 
-public class AboutAdapter extends ListAdapter<TourItem, AboutAdapter.ViewHolder> {
+public class AboutRVAdapter extends ListAdapter<TourItem, AboutRVAdapter.ViewHolder> {
 
     private OnItemClickListener listener;
 
-    public AboutAdapter() {
+    public AboutRVAdapter() {
         super(new DiffUtil.ItemCallback<TourItem>() {
             @Override
             public boolean areItemsTheSame(@NonNull TourItem oldItem, @NonNull TourItem newItem) {

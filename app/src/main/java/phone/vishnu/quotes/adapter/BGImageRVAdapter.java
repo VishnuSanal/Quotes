@@ -17,11 +17,11 @@ import java.util.Objects;
 
 import phone.vishnu.quotes.R;
 
-public class RecyclerViewAdapter extends ListAdapter<Uri, RecyclerViewAdapter.ViewHolder> {
+public class BGImageRVAdapter extends ListAdapter<Uri, BGImageRVAdapter.ViewHolder> {
 
     private OnItemClickListener listener;
 
-    public RecyclerViewAdapter() {
+    public BGImageRVAdapter() {
         super(new DiffUtil.ItemCallback<Uri>() {
             @Override
             public boolean areItemsTheSame(@NonNull Uri oldItem, @NonNull Uri newItem) {
@@ -38,7 +38,7 @@ public class RecyclerViewAdapter extends ListAdapter<Uri, RecyclerViewAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_card, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.background_image_pick_single_item, parent, false);
         return new ViewHolder(v);
     }
 

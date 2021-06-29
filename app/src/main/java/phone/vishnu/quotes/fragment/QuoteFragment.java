@@ -163,7 +163,7 @@ public class QuoteFragment extends Fragment {
     }
 
     private void showBottomSheetDialog(Quote q) {
-        ShareActionPickBottomSheetDialogFragment bottomSheet = ShareActionPickBottomSheetDialogFragment.newInstance(q);
+        ShareOptionPickFragment bottomSheet = ShareOptionPickFragment.newInstance(q);
         bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
     }
 }

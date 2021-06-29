@@ -7,7 +7,7 @@
     android:background="@drawable/bottom_sheet_background"
     android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".fragment.PickFragment"
+    tools:context=".fragment.BGImagePickFragment"
     tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,7 +53,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imagePickTitleTV"
             app:spanCount="2"
-            tools:listitem="@layout/single_card" />
+            tools:listitem="@layout/background_image_pick_single_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

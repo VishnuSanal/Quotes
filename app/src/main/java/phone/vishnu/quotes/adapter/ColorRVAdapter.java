@@ -19,11 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import phone.vishnu.quotes.R;
 
-public class ColorAdapter extends ListAdapter<String, ColorAdapter.ViewHolder> {
+public class ColorRVAdapter extends ListAdapter<String, ColorRVAdapter.ViewHolder> {
 
     private OnItemClickListener listener;
 
-    public ColorAdapter() {
+    public ColorRVAdapter() {
         super(new DiffUtil.ItemCallback<String>() {
             @Override
             public boolean areItemsTheSame(@NonNull String oldItem, @NonNull String newItem) {
@@ -41,7 +41,7 @@ public class ColorAdapter extends ListAdapter<String, ColorAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.color_pick_single_item, parent, false);
-        return new ColorAdapter.ViewHolder(v);
+        return new ColorRVAdapter.ViewHolder(v);
     }
 
     @SuppressLint("SetTextI18n")

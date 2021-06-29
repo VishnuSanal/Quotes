@@ -22,12 +22,12 @@ import java.util.ArrayList;
 
 import phone.vishnu.quotes.R;
 
-public class FontDataAdapter extends ArrayAdapter<String> {
+public class FontLVAdapter extends ArrayAdapter<String> {
 
     private final LayoutInflater inflater;
     private final ArrayList<String> objects;
 
-    public FontDataAdapter(@NonNull Context context, ArrayList<String> objects) {
+    public FontLVAdapter(@NonNull Context context, ArrayList<String> objects) {
         super(context, 0, objects);
         this.objects = objects;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -38,10 +38,10 @@ public class FontDataAdapter extends ArrayAdapter<String> {
     public View getView(int position, final View convertView, @NonNull ViewGroup parent) {
 
         View rootView = convertView;
-        final FontDataAdapter.ViewHolder viewHolder;
+        final FontLVAdapter.ViewHolder viewHolder;
 
         if (rootView == null) {
-            viewHolder = new FontDataAdapter.ViewHolder();
+            viewHolder = new FontLVAdapter.ViewHolder();
             rootView = inflater.inflate(R.layout.font_single_item, parent, false);
 
             viewHolder.fontTV = rootView.findViewById(R.id.quoteTextFontSingleItem);
@@ -91,7 +91,7 @@ public class FontDataAdapter extends ArrayAdapter<String> {
                 });
             }
         } else {
-            viewHolder = (FontDataAdapter.ViewHolder) rootView.getTag();
+            viewHolder = (FontLVAdapter.ViewHolder) rootView.getTag();
         }
 
         String fontString = objects.get(position).replace(".ttf", "");

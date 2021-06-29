@@ -20,13 +20,13 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.repository.FavRepository;
 
-public class AddNewBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class AddNewFragment extends BottomSheetDialogFragment {
 
     private TextInputEditText quoteTIE, authorTIE;
     private Button submitButton, cancelButton;
 
-    public static AddNewBottomSheetDialogFragment newInstance() {
-        return new AddNewBottomSheetDialogFragment();
+    public static AddNewFragment newInstance() {
+        return new AddNewFragment();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class AddNewBottomSheetDialogFragment extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.add_new_bottom_sheet_dialog, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_new, container, false);
 
         quoteTIE = view.findViewById(R.id.addNewQuoteTIE);
         authorTIE = view.findViewById(R.id.addNewAuthorTIE);

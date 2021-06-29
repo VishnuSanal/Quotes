@@ -27,7 +27,7 @@ import java.util.Objects;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.adapter.FontDataAdapter;
+import phone.vishnu.quotes.adapter.FontLVAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class FontFragment extends BottomSheetDialogFragment {
@@ -35,7 +35,7 @@ public class FontFragment extends BottomSheetDialogFragment {
     private final ArrayList<String> fontList = new ArrayList<>();
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ListView listView;
-    private FontDataAdapter fontDataAdapter;
+    private FontLVAdapter fontDataAdapter;
     private LinearProgressIndicator progressBar;
 
     public FontFragment() {
@@ -90,7 +90,7 @@ public class FontFragment extends BottomSheetDialogFragment {
             }
             if (getContext() != null)
                 if (fontDataAdapter == null) {
-                    fontDataAdapter = new FontDataAdapter(Objects.requireNonNull(requireContext()), fontList);
+                    fontDataAdapter = new FontLVAdapter(Objects.requireNonNull(requireContext()), fontList);
                     listView.setAdapter(fontDataAdapter);
                 } else {
                     fontDataAdapter.clear();

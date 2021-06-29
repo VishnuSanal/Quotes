@@ -31,20 +31,20 @@ import java.util.Objects;
 import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.adapter.RecyclerViewAdapter;
+import phone.vishnu.quotes.adapter.BGImageRVAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class PickFragment extends BottomSheetDialogFragment {
+public class BGImagePickFragment extends BottomSheetDialogFragment {
 
-    private RecyclerViewAdapter adapter;
+    private BGImageRVAdapter adapter;
     private SharedPreferenceHelper sharedPreferenceHelper;
     private LinearProgressIndicator progressBar;
 
-    public PickFragment() {
+    public BGImagePickFragment() {
     }
 
-    public static PickFragment newInstance() {
-        return new PickFragment();
+    public static BGImagePickFragment newInstance() {
+        return new BGImagePickFragment();
     }
 
     @Override
@@ -57,7 +57,7 @@ public class PickFragment extends BottomSheetDialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_pick, container, false);
+        View inflate = inflater.inflate(R.layout.fragment_backgrond_image_pick, container, false);
 
         setUpRecyclerView(inflate);
 
@@ -131,7 +131,7 @@ public class PickFragment extends BottomSheetDialogFragment {
 
     private void setUpRecyclerView(View inflate) {
         RecyclerView recyclerView = inflate.findViewById(R.id.imagePickRecyclerView);
-        adapter = new RecyclerViewAdapter();
+        adapter = new BGImageRVAdapter();
         recyclerView.setAdapter(adapter);
 
         recyclerView.setHasFixedSize(true);

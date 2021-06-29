@@ -10,10 +10,10 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.fragment.TourSingleFragment;
 import phone.vishnu.quotes.model.TourItem;
 
-public class TourFragmentStateAdapter extends androidx.viewpager2.adapter.FragmentStateAdapter {
+public class TourViewPagerAdapter extends androidx.viewpager2.adapter.FragmentStateAdapter {
     private final ArrayList<TourItem> tourItems;
 
-    public TourFragmentStateAdapter(@NonNull FragmentActivity fragmentActivity) {
+    public TourViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
         this.tourItems = getTourItems();
     }
