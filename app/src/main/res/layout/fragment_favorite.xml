@@ -62,8 +62,7 @@
             android:indeterminate="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/favGuideLineOne"
-            app:trackColor="@color/tourBackgroundColor" />
+            app:layout_constraintTop_toBottomOf="@id/favGuideLineOne" />
 
         <ImageView
             android:id="@+id/recyclerViewEmptyHintIV"
