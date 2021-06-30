@@ -64,7 +64,7 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false));
 
-        colorAdapter = new ColorRVAdapter();
+        colorAdapter = new ColorRVAdapter(Objects.requireNonNull(getArguments()).getInt("ColorRequestCode"));
 
         colorAdapter.submitList(
                 Objects.requireNonNull(getArguments()).getInt("ColorRequestCode") == PICK_FONT_COLOR_REQ_CODE ? getFontColorList() : getColorList()
