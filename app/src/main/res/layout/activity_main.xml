@@ -40,6 +40,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/homeSearchView" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/mainProgressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="@id/viewPager"
+        app:layout_constraintEnd_toEndOf="@id/viewPager"
+        app:layout_constraintStart_toStartOf="@id/viewPager"
+        app:layout_constraintTop_toTopOf="@id/viewPager" />
 
     <ImageView
         android:id="@+id/openIndicatorLeft"

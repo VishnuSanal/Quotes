@@ -1,5 +1,6 @@
 package phone.vishnu.quotes.adapter;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -12,12 +13,12 @@ import phone.vishnu.quotes.model.Quote;
 public class QuoteViewPagerAdapter extends FragmentStatePagerAdapter {
     private List<Quote> quoteList;
 
-    public QuoteViewPagerAdapter(FragmentManager fm, List<Quote> fragmentList) {
-        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        quoteList = fragmentList;
+    public QuoteViewPagerAdapter(FragmentManager fragmentManager, List<Quote> quoteList) {
+        super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        this.quoteList = quoteList;
     }
 
-    @androidx.annotation.NonNull
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         return QuoteFragment.newInstance(quoteList.get(position));
@@ -29,7 +30,7 @@ public class QuoteViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public int getItemPosition(@androidx.annotation.NonNull Object object) {
+    public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
     }
 

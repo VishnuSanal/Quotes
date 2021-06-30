@@ -9,8 +9,6 @@ import android.provider.Settings;
 
 import androidx.core.app.NotificationCompat;
 
-import java.util.Collections;
-
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.data.QuoteData;
@@ -30,10 +28,8 @@ public class NotificationHelper {
     }
 
     public void createNotification() {
-        new QuoteData().getQuotes(quotes -> {
 
-            Collections.shuffle(quotes);
-            Quote quote = quotes.get(0);
+        new QuoteData().getRandomQuote(quote -> {
 
             NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(
@@ -84,7 +80,9 @@ public class NotificationHelper {
 
             if (notificationManager != null)
                 notificationManager.notify(NOTIFICATION_REQUEST_CODE, builder.build());
+
         });
+
     }
 
     private PendingIntent getFavPendingIntent(Quote quote) {

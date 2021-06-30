@@ -10,8 +10,6 @@
     tools:context=".fragment.AboutFragment"
     tools:ignore="HardcodedText">
 
-    <!--TODO: Check Color-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

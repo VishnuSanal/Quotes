@@ -8,8 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-import java.util.Collections;
-
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.data.QuoteData;
@@ -100,12 +98,13 @@ public class QuoteWidget extends AppWidgetProvider {
     }
 
     private void initAppWidget(final Context context) {
-        new QuoteData().getQuotes(quotes -> {
-            Collections.shuffle(quotes);
-            Quote quote = quotes.get(0);
+
+        new QuoteData().getRandomQuote(quote -> {
 
             updateQuoteWidget(context, quote);
+
         });
+
     }
 
     private void saveWidgetQuote(Context context, Quote quote) {

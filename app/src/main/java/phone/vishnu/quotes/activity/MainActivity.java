@@ -3,10 +3,12 @@ package phone.vishnu.quotes.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -32,9 +34,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -66,6 +70,7 @@ import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.repository.FavRepository;
+import phone.vishnu.quotes.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -77,12 +82,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ExportHelper exportHelper;
 
     private QuoteViewPagerAdapter adapter;
-    private List<Quote> allQuotesList;
 
     private ConstraintLayout constraintLayout;
+
     private ViewPager viewPager;
+    private MainViewModel viewModel;
+    private ArrayList<Quote> allQuotesList;
 
     private FloatingActionButton fontFAB, aboutFAB, bgFAB, colorFAB, favFAB, settingsFAB, homeFAB;
+
+    private CircularProgressIndicator progressIndicator;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -90,6 +99,113 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
         exportHelper = new ExportHelper(this);
+
+        viewModel = new ViewModelProvider(
+                this,
+                new ViewModelProvider
+                        .AndroidViewModelFactory(
+                        (Application) getApplicationContext()
+                )
+        ).get(MainViewModel.class);
+
+        setIntentListeners(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
+
+        constraintLayout = findViewById(R.id.constraintLayout);
+
+        progressIndicator = findViewById(R.id.mainProgressIndicator);
+
+        progressIndicator.setIndicatorColor(
+                Color.parseColor(
+                        sharedPreferenceHelper.getCardColorPreference()
+                )
+        );
+
+        initViewPager();
+
+        if (!isNetworkAvailable())
+            Toast.makeText(this, "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
+
+        final String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
+
+        final File f = new File(backgroundPath);
+
+        if (!("-1".equals(backgroundPath)) && (f.exists()))
+            constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
+        else {
+            Toast.makeText(this, "Choose a background", Toast.LENGTH_LONG).show();
+
+            Dexter.withContext(this)
+                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                            showBackgroundOptionChooser(false);
+                        }
+
+                        @Override
+                        public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                            showPermissionDeniedDialog();
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                            Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
+                            permissionToken.continuePermissionRequest();
+                        }
+                    })
+                    .check();
+        }
+
+        fontFAB = findViewById(R.id.fontFAB);
+        aboutFAB = findViewById(R.id.aboutFAB);
+        bgFAB = findViewById(R.id.bgFAB);
+        colorFAB = findViewById(R.id.colorFAB);
+        favFAB = findViewById(R.id.favFAB);
+        settingsFAB = findViewById(R.id.settingsFAB);
+        homeFAB = findViewById(R.id.homeFAB);
+
+        homeFAB.setOnClickListener(this);
+        settingsFAB.setOnClickListener(this);
+        favFAB.setOnClickListener(this);
+        fontFAB.setOnClickListener(this);
+        colorFAB.setOnClickListener(this);
+        bgFAB.setOnClickListener(this);
+        aboutFAB.setOnClickListener(this);
+
+        initAnimations();
+
+        if ("At 08:30 Daily".equals(sharedPreferenceHelper.getAlarmString()))
+            AlarmHelper.setDefaultAlarm(this);
+
+        SearchView searchView = findViewById(R.id.homeSearchView);
+
+        try {
+            EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+            searchEditText.setTextColor(getResources().getColor(R.color.colorWhite));
+            searchEditText.setHintTextColor(getResources().getColor(R.color.colorWhite));
+        } catch (Exception e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+            e.printStackTrace();
+        }
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
+
+    private void setIntentListeners(Bundle savedInstanceState) {
 
         if (savedInstanceState == null) {
             final Bundle extras = getIntent().getExtras();
@@ -141,92 +257,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        setContentView(R.layout.activity_main);
-        constraintLayout = findViewById(R.id.constraintLayout);
-        viewPager = findViewById(R.id.viewPager);
-        allQuotesList = getQuotes();
-
-        if (!isNetworkAvailable())
-            Toast.makeText(this, "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
-
-        final String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
-
-        final File f = new File(backgroundPath);
-        if (!("-1".equals(backgroundPath)) && (f.exists()))
-            constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
-        else {
-            Toast.makeText(this, "Choose a background", Toast.LENGTH_LONG).show();
-
-            Dexter.withContext(this)
-                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .withListener(new PermissionListener() {
-                        @Override
-                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                            showBackgroundOptionChooser(false);
-                        }
-
-                        @Override
-                        public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                            showPermissionDeniedDialog();
-                        }
-
-                        @Override
-                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                            Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
-                            permissionToken.continuePermissionRequest();
-                        }
-                    })
-                    .check();
-        }
-
-        fontFAB = findViewById(R.id.fontFAB);
-        aboutFAB = findViewById(R.id.aboutFAB);
-        bgFAB = findViewById(R.id.bgFAB);
-        colorFAB = findViewById(R.id.colorFAB);
-        favFAB = findViewById(R.id.favFAB);
-        settingsFAB = findViewById(R.id.settingsFAB);
-        homeFAB = findViewById(R.id.homeFAB);
-
-        homeFAB.setOnClickListener(this);
-        settingsFAB.setOnClickListener(this);
-        favFAB.setOnClickListener(this);
-        fontFAB.setOnClickListener(this);
-        colorFAB.setOnClickListener(this);
-        bgFAB.setOnClickListener(this);
-        aboutFAB.setOnClickListener(this);
-
-        initAnimations();
-
-        adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), allQuotesList);
-        viewPager.setAdapter(adapter);
-
-        if ("At 08:30 Daily".equals(sharedPreferenceHelper.getAlarmString()))
-            AlarmHelper.setDefaultAlarm(this);
-
-        SearchView searchView = findViewById(R.id.homeSearchView);
-
-        try {
-            EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
-            searchEditText.setTextColor(getResources().getColor(R.color.colorWhite));
-            searchEditText.setHintTextColor(getResources().getColor(R.color.colorWhite));
-        } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-            e.printStackTrace();
-        }
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                getFilter().filter(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                getFilter().filter(newText);
-                return false;
-            }
-        });
     }
 
     @Override
@@ -384,9 +414,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private Filter getFilter() {
+
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
+
                 ArrayList<Quote> filteredResults = new ArrayList<>();
 
                 if (constraint.toString().isEmpty())
@@ -415,17 +447,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ((TextView) findViewById(R.id.searchCountTV)).setText(s);
             }
         };
+
     }
 
-    private ArrayList<Quote> getQuotes() {
-        final ArrayList<Quote> quoteArrayList = new ArrayList<>();
-        new QuoteData().getQuotes(quotes -> {
-            sharedPreferenceHelper.setTotalQuotesCount(quotes.size());
-            Collections.shuffle(quotes);
-            quoteArrayList.addAll(quotes);
-            updateViewPager();
-        });
-        return quoteArrayList;
+    private void initViewPager() {
+        viewPager = findViewById(R.id.viewPager);
+
+        adapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), new ArrayList<>());
+
+        viewPager.setAdapter(adapter);
+
+        viewModel.getQuotes().observe(
+                this,
+                quotes -> {
+
+                    sharedPreferenceHelper.setTotalQuotesCount(quotes.size());
+
+                    Collections.shuffle(quotes);
+
+                    allQuotesList = new ArrayList<>(quotes);
+
+                    adapter.setQuoteList(quotes);
+
+                    adapter.notifyDataSetChanged();
+
+                    progressIndicator.setVisibility(View.GONE);
+
+                }
+        );
     }
 
     @Override
@@ -545,17 +594,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final ProgressDialog progressDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
         progressDialog.setCancelable(false);
 
-        new QuoteData().getQuotes(quotes -> {
-            Collections.shuffle(quotes);
-            if (quotes.size() == 0) {
-                progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Loading Failed", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Quote quote = quotes.get(0);
+        new QuoteData().getRandomQuote(quote -> {
 
-            new ExportHelper(MainActivity.this).shareImage(MainActivity.this, quote);
+            exportHelper.shareImage(MainActivity.this, quote);
             progressDialog.dismiss();
+
         });
 
     }
