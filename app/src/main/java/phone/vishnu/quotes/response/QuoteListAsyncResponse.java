@@ -1,4 +1,4 @@
-package phone.vishnu.quotes.data;
+package phone.vishnu.quotes.response;
 
 import java.util.ArrayList;
 

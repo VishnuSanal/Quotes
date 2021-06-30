@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.model.Quote;
+import phone.vishnu.quotes.repository.QuotesRepository;
 
 public class MainViewModel extends ViewModel {
 
@@ -32,7 +32,7 @@ public class MainViewModel extends ViewModel {
 
         mutableLiveData = new MutableLiveData<>();
 
-        new QuoteData().getQuotes(quotes -> {
+        new QuotesRepository().getQuotes(quotes -> {
             quoteArrayList = new ArrayList<>(quotes);
             mutableLiveData.setValue(quoteArrayList);
         });

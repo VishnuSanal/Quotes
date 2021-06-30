@@ -11,8 +11,8 @@ import androidx.core.app.NotificationCompat;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.model.Quote;
+import phone.vishnu.quotes.repository.QuotesRepository;
 
 public class NotificationHelper {
 
@@ -29,7 +29,7 @@ public class NotificationHelper {
 
     public void createNotification() {
 
-        new QuoteData().getRandomQuote(quote -> {
+        new QuotesRepository().getRandomQuote(quote -> {
 
             NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(

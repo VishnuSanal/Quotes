@@ -10,10 +10,10 @@ import android.widget.RemoteViews;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.data.QuoteData;
 import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
+import phone.vishnu.quotes.repository.QuotesRepository;
 
 public class QuoteWidget extends AppWidgetProvider {
 
@@ -99,7 +99,7 @@ public class QuoteWidget extends AppWidgetProvider {
 
     private void initAppWidget(final Context context) {
 
-        new QuoteData().getRandomQuote(quote -> {
+        new QuotesRepository().getRandomQuote(quote -> {
 
             updateQuoteWidget(context, quote);
 

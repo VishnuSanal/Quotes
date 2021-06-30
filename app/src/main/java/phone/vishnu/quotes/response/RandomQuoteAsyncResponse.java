@@ -1,4 +1,4 @@
-package phone.vishnu.quotes.data;
+package phone.vishnu.quotes.response;
 
 import phone.vishnu.quotes.model.Quote;
 

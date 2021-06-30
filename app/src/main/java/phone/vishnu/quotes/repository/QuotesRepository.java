@@ -1,4 +1,4 @@
-package phone.vishnu.quotes.data;
+package phone.vishnu.quotes.repository;
 
 import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
@@ -19,8 +19,10 @@ import java.util.Collections;
 
 import phone.vishnu.quotes.controller.AppController;
 import phone.vishnu.quotes.model.Quote;
+import phone.vishnu.quotes.response.QuoteListAsyncResponse;
+import phone.vishnu.quotes.response.RandomQuoteAsyncResponse;
 
-public class QuoteData {
+public class QuotesRepository {
 
     private final ArrayList<Quote> quoteArrayList = new ArrayList<>();
 
