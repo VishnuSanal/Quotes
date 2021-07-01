@@ -113,96 +113,114 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         constraintLayout = findViewById(R.id.constraintLayout);
-
         progressIndicator = findViewById(R.id.mainProgressIndicator);
 
-        progressIndicator.setIndicatorColor(
-                Color.parseColor(
-                        sharedPreferenceHelper.getCardColorPreference()
-                )
-        );
-
         initViewPager();
-
-        if (!isNetworkAvailable())
-            Toast.makeText(this, "Please Connect to the Internet...", Toast.LENGTH_SHORT).show();
-
-        final String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
-
-        final File f = new File(backgroundPath);
-
-        if (!("-1".equals(backgroundPath)) && (f.exists()))
-            constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
-        else {
-            Toast.makeText(this, "Choose a background", Toast.LENGTH_LONG).show();
-
-            Dexter.withContext(this)
-                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .withListener(new PermissionListener() {
-                        @Override
-                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                            showBackgroundOptionChooser(false);
-                        }
-
-                        @Override
-                        public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                            showPermissionDeniedDialog();
-                        }
-
-                        @Override
-                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                            Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
-                            permissionToken.continuePermissionRequest();
-                        }
-                    })
-                    .check();
-        }
-
-        fontFAB = findViewById(R.id.fontFAB);
-        aboutFAB = findViewById(R.id.aboutFAB);
-        bgFAB = findViewById(R.id.bgFAB);
-        colorFAB = findViewById(R.id.colorFAB);
-        favFAB = findViewById(R.id.favFAB);
-        settingsFAB = findViewById(R.id.settingsFAB);
-        homeFAB = findViewById(R.id.homeFAB);
-
-        homeFAB.setOnClickListener(this);
-        settingsFAB.setOnClickListener(this);
-        favFAB.setOnClickListener(this);
-        fontFAB.setOnClickListener(this);
-        colorFAB.setOnClickListener(this);
-        bgFAB.setOnClickListener(this);
-        aboutFAB.setOnClickListener(this);
-
+        runInitChecks();
+        initFABs();
         initAnimations();
+        setUpSearchView();
+    }
 
-        if ("At 08:30 Daily".equals(sharedPreferenceHelper.getAlarmString()))
-            AlarmHelper.setDefaultAlarm(this);
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
 
-        SearchView searchView = findViewById(R.id.homeSearchView);
+        if (id == R.id.homeFAB) {
+            homeFAB.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animate));
+            if (null == homeFAB.getTag()) {
+                if (isFABMenuHidden()) {
+                    openFABMenu();
+                } else {
+                    closeFABMenu();
+                }
+            } else {
+                onBackPressed();
+                resetHomeFAB();
+            }
+        } else {
+            closeFABMenu();
+            if (id == R.id.favFAB) {
+                FavoriteFragment.newInstance()
+                        .show(getSupportFragmentManager(), "FavoriteFragment");
+            } else if (id == R.id.aboutFAB) {
+                AboutFragment.newInstance()
+                        .show(getSupportFragmentManager(), "AboutFragment");
+            } else if (id == R.id.bgFAB) {
 
-        try {
-            EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
-            searchEditText.setTextColor(getResources().getColor(R.color.colorWhite));
-            searchEditText.setHintTextColor(getResources().getColor(R.color.colorWhite));
-        } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-            e.printStackTrace();
+                showBackgroundOptionChooser(true);
+
+            } else if (id == R.id.colorFAB) {
+
+                ColorPickFragment.newInstance(ColorPickFragment.PICK_CARD_COLOR_REQ_CODE)
+                        .show(
+                                getSupportFragmentManager(),
+                                "ColorPickBottomSheetDialogFragment"
+                        );
+
+            } else if (id == R.id.fontFAB) {
+
+                FontOptionPickFragment.newInstance()
+                        .show(
+                                getSupportFragmentManager(),
+                                "FontOptionPickFragment"
+                        );
+
+            } else if (id == R.id.settingsFAB) {
+                SettingsFragment.newInstance()
+                        .show(getSupportFragmentManager(), "SettingsFragment");
+            }
         }
+    }
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                getFilter().filter(query);
-                return false;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+
+            String file = exportHelper.getBGPath();
+
+            if (requestCode == PICK_IMAGE_ID &&
+                    data != null &&
+                    (null != data.getData() ||
+                            (null != data.getExtras() && data.getExtras().containsKey("data")))) {
+
+                Uri uri = data.getData();
+
+                if (data.getData() == null &&
+                        (null != data.getExtras() && data.getExtras().containsKey("data"))) {
+
+                    uri = Uri.fromFile(new File(file));
+
+                    exportHelper.exportBackgroundImage((Bitmap) data.getExtras().get("data"));
+
+                }
+
+                UCrop.of(uri, Uri.fromFile(new File(file)))
+                        .withAspectRatio(9, 16)
+                        .withMaxResultSize(1080, 1920)
+                        .start(this);
+
+            } else if (requestCode == UCrop.REQUEST_CROP) {
+
+                constraintLayout.setBackground(Drawable.createFromPath(file));
+                sharedPreferenceHelper.setBackgroundPath(file);
+
             }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                getFilter().filter(newText);
-                return false;
-            }
-        });
+        } else {
+            if (resultCode == Activity.RESULT_CANCELED)
+                Toast.makeText(this, "Action Cancelled!", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        resetHomeFAB();
+        super.onBackPressed();
     }
 
     private void setIntentListeners(Bundle savedInstanceState) {
@@ -259,71 +277,80 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.homeFAB) {
-            homeFAB.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animate));
-            if (null == homeFAB.getTag()) {
-                if (isFABMenuHidden()) {
-                    openFABMenu();
-                } else {
-                    closeFABMenu();
-                }
-            } else {
-                onBackPressed();
-                resetHomeFAB();
-            }
-        } else {
-            closeFABMenu();
-            if (id == R.id.favFAB) {
-                FavoriteFragment.newInstance()
-                        .show(getSupportFragmentManager(), "FavoriteFragment");
-            } else if (id == R.id.aboutFAB) {
-                AboutFragment.newInstance()
-                        .show(getSupportFragmentManager(), "AboutFragment");
-            } else if (id == R.id.bgFAB) {
-                Dexter.withContext(this)
-                        .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .withListener(new PermissionListener() {
-                            @Override
-                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                                showBackgroundOptionChooser(true);
-                            }
+    private void setUpSearchView() {
+        SearchView searchView = findViewById(R.id.homeSearchView);
 
-                            @Override
-                            public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                                showPermissionDeniedDialog();
-                            }
-
-                            @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                                Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
-                                permissionToken.continuePermissionRequest();
-                            }
-                        })
-                        .check();
-            } else if (id == R.id.colorFAB) {
-
-                ColorPickFragment.newInstance(ColorPickFragment.PICK_CARD_COLOR_REQ_CODE)
-                        .show(
-                                getSupportFragmentManager(),
-                                "ColorPickBottomSheetDialogFragment"
-                        );
-
-            } else if (id == R.id.fontFAB) {
-
-                FontOptionPickFragment.newInstance()
-                        .show(
-                                getSupportFragmentManager(),
-                                "FontOptionPickFragment"
-                        );
-
-            } else if (id == R.id.settingsFAB) {
-                SettingsFragment.newInstance()
-                        .show(getSupportFragmentManager(), "SettingsFragment");
-            }
+        try {
+            EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+            searchEditText.setTextColor(getResources().getColor(R.color.colorWhite));
+            searchEditText.setHintTextColor(getResources().getColor(R.color.colorWhite));
+        } catch (Exception e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+            e.printStackTrace();
         }
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
+
+    private void runInitChecks() {
+
+        progressIndicator.setIndicatorColor(
+                Color.parseColor(
+                        sharedPreferenceHelper.getCardColorPreference()
+                )
+        );
+
+        checkBackground();
+
+        if (!isNetworkAvailable())
+            Toast.makeText(this, "Please Connect to the Internet", Toast.LENGTH_SHORT).show();
+
+        if ("At 08:30 Daily".equals(sharedPreferenceHelper.getAlarmString()))
+            AlarmHelper.setDefaultAlarm(this);
+    }
+
+    private void checkBackground() {
+        final String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
+
+        final File f = new File(backgroundPath);
+
+        if (!("-1".equals(backgroundPath)) && (f.exists()))
+            constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
+        else {
+            Toast.makeText(this, "Choose a background", Toast.LENGTH_LONG).show();
+
+            showBackgroundOptionChooser(false);
+        }
+    }
+
+    private void initFABs() {
+        fontFAB = findViewById(R.id.fontFAB);
+        aboutFAB = findViewById(R.id.aboutFAB);
+        bgFAB = findViewById(R.id.bgFAB);
+        colorFAB = findViewById(R.id.colorFAB);
+        favFAB = findViewById(R.id.favFAB);
+        settingsFAB = findViewById(R.id.settingsFAB);
+        homeFAB = findViewById(R.id.homeFAB);
+
+        homeFAB.setOnClickListener(this);
+        settingsFAB.setOnClickListener(this);
+        favFAB.setOnClickListener(this);
+        fontFAB.setOnClickListener(this);
+        colorFAB.setOnClickListener(this);
+        bgFAB.setOnClickListener(this);
+        aboutFAB.setOnClickListener(this);
     }
 
     private void resetHomeFAB() {
@@ -477,56 +504,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         );
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == Activity.RESULT_OK) {
-
-            String file = exportHelper.getBGPath();
-
-            if (requestCode == PICK_IMAGE_ID &&
-                    data != null &&
-                    (null != data.getData() ||
-                            (null != data.getExtras() && data.getExtras().containsKey("data")))) {
-
-                Uri uri = data.getData();
-
-                if (data.getData() == null &&
-                        (null != data.getExtras() && data.getExtras().containsKey("data"))) {
-
-                    uri = Uri.fromFile(new File(file));
-
-                    exportHelper.exportBackgroundImage((Bitmap) data.getExtras().get("data"));
-
-                }
-
-                UCrop.of(uri, Uri.fromFile(new File(file)))
-                        .withAspectRatio(9, 16)
-                        .withMaxResultSize(1080, 1920)
-                        .start(this);
-
-            } else if (requestCode == UCrop.REQUEST_CROP) {
-
-                constraintLayout.setBackground(Drawable.createFromPath(file));
-                sharedPreferenceHelper.setBackgroundPath(file);
-
-            }
-
-        } else {
-            if (resultCode == Activity.RESULT_CANCELED)
-                Toast.makeText(this, "Action Cancelled!", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        resetHomeFAB();
-        super.onBackPressed();
-    }
-
     private void showShareActionPicker(Quote q) {
         ShareOptionPickFragment.newInstance(q)
                 .show(getSupportFragmentManager(), "ShareActionPicker");
@@ -555,8 +532,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showBackgroundOptionChooser(boolean isCancellable) {
 
-        BGOptionPickFragment.newInstance(isCancellable)
-                .show(getSupportFragmentManager(), "BackgroundOptionPick");
+        Dexter.withContext(this)
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        BGOptionPickFragment.newInstance(isCancellable)
+                                .show(getSupportFragmentManager(), "BackgroundOptionPick");
+                    }
+
+                    @Override
+                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                        showPermissionDeniedDialog();
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
+                        permissionToken.continuePermissionRequest();
+                    }
+                })
+                .check();
 
     }
 
