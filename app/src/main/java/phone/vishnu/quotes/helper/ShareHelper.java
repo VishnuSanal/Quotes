@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.Settings;
 import android.widget.Toast;
 
@@ -45,51 +46,65 @@ public class ShareHelper {
 
     public static void saveQuote(Context context, final Quote q) {
 
-        Dexter.withContext(context)
-                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        Toast.makeText(context, "Saving to Gallery", Toast.LENGTH_SHORT).show();
-                        AsyncTask.execute(() -> new ExportHelper(context).saveImage(context, q));
-                    }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
 
-                    @Override
-                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                        showPermissionDeniedDialog(context);
-                    }
+            Toast.makeText(context, "Saving to Gallery", Toast.LENGTH_SHORT).show();
+            AsyncTask.execute(() -> new ExportHelper(context).saveImage(context, q));
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                        Toast.makeText(context, "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
-                        permissionToken.continuePermissionRequest();
-                    }
-                })
-                .check();
+        } else
+
+            Dexter.withContext(context)
+                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                            Toast.makeText(context, "Saving to Gallery", Toast.LENGTH_SHORT).show();
+                            AsyncTask.execute(() -> new ExportHelper(context).saveImage(context, q));
+                        }
+
+                        @Override
+                        public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                            showPermissionDeniedDialog(context);
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                            Toast.makeText(context, "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
+                            permissionToken.continuePermissionRequest();
+                        }
+                    })
+                    .check();
 
     }
 
     public static void shareQuote(Context context, final Quote q) {
-        Dexter.withContext(context)
-                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        AsyncTask.execute(() -> new ExportHelper(context).shareImage(context, q));
-                    }
 
-                    @Override
-                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                        showPermissionDeniedDialog(context);
-                    }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                        Toast.makeText(context, "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
-                        permissionToken.continuePermissionRequest();
-                    }
-                })
-                .check();
+            AsyncTask.execute(() -> new ExportHelper(context).shareImage(context, q));
+
+        else
+
+            Dexter.withContext(context)
+                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                            AsyncTask.execute(() -> new ExportHelper(context).shareImage(context, q));
+                        }
+
+                        @Override
+                        public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                            showPermissionDeniedDialog(context);
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                            Toast.makeText(context, "App requires these permissions to share the quote", Toast.LENGTH_SHORT).show();
+                            permissionToken.continuePermissionRequest();
+                        }
+                    })
+                    .check();
     }
 
     private static void showPermissionDeniedDialog(Context context) {

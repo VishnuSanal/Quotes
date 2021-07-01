@@ -56,15 +56,11 @@ public class ExportHelper {
     }
 
     public String getBGPath() {
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), context.getString(R.string.app_name));
-        if (!root.exists()) root.mkdirs();
-        return root.toString() + File.separator + ".Quotes_Background" + ".jpg";
+        return new File(context.getFilesDir(), "background.jpg").toString();
     }
 
     public String getSSPath() {
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), context.getString(R.string.app_name));
-        if (!root.exists()) root.mkdirs();
-        return root.toString() + File.separator + ".Screenshot" + ".jpg";
+        return new File(context.getFilesDir(), "screenshot.jpg").toString();
     }
 
     public void shareImage(Context context, Quote q) {
@@ -116,26 +112,36 @@ public class ExportHelper {
         shareView.layout(0, 0, widthPixels, heightPixels);
         shareView.draw(c);
 
-        String imagePath = getSSPath();
+        File file = null;
 
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(imagePath);
+
+            file = File.createTempFile("screenshot.jpg", null, context.getCacheDir());
+
+            FileOutputStream fileOutputStream = new FileOutputStream(file.getAbsolutePath());
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
             fileOutputStream.flush();
             fileOutputStream.close();
+
         } catch (IOException | SecurityException e) {
+
             FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
+
+        } finally {
+
+            if (file != null) {
+
+                Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(file.getAbsolutePath()));
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("image/*");
+                sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, "For more, visit: https://kutt.it/Quotes");
+
+                context.startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            }
         }
-
-        Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(imagePath));
-        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-        sharingIntent.setType("image/*");
-        sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, "For more, visit: https://kutt.it/Quotes");
-
-        context.startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 
     public void saveImage(Context context, Quote q) {

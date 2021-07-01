@@ -5,7 +5,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,17 +72,19 @@ public class FontFragment extends BottomSheetDialogFragment {
         if (MainActivity.fontDialog != null && MainActivity.fontDialog.isShowing())
             MainActivity.fontDialog.dismiss();
 
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), getString(R.string.app_name));
-        final File[] files = root.listFiles();
+        final String[] files = requireContext().fileList();
 
         if (files != null) {
-            for (File file : files) {
+
+            for (String s : files) {
+
+                File file = new File(s);
 
                 if (file.getAbsolutePath().endsWith(".ttf")) {
 
                     String fontString = file.getName().replace(".ttf", "");
 
-                    fontString = fontString.toUpperCase().charAt(1) + fontString.substring(2);
+                    fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
 
                     fontList.add(fontString);
                 }
@@ -113,7 +114,7 @@ public class FontFragment extends BottomSheetDialogFragment {
 
                     ArrayList<String> toBeRemoved = sharedPreferenceHelper.getFontListToBeRemoved();
 
-                    if (!fontList.contains(fontString) && !toBeRemoved.contains("." + item.getName().toLowerCase())) {
+                    if (!fontList.contains(fontString) && !toBeRemoved.contains(item.getName().toLowerCase())) {
 
                         if (getContext() != null && fontDataAdapter != null) {
                             fontDataAdapter.add(fontString);
@@ -133,8 +134,8 @@ public class FontFragment extends BottomSheetDialogFragment {
             String fontString = fontList.get(position).toLowerCase() + ".ttf";
 
             StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
-            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), getString(R.string.app_name));
-            final File f = new File(localFile + File.separator + "." + fontString);
+
+            final File f = new File(requireContext().getFilesDir(), fontString);
 
             if (f.exists()) {
                 sharedPreferenceHelper.setFontPath(f.toString());
@@ -147,8 +148,6 @@ public class FontFragment extends BottomSheetDialogFragment {
                 dismiss();
 
             } else {
-
-                if (!localFile.exists()) localFile.mkdirs();
 
                 storageReference.getFile(f).addOnSuccessListener(taskSnapshot -> {
                     if (getActivity() != null) {

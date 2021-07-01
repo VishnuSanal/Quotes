@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
@@ -78,17 +76,20 @@ public class BGImagePickFragment extends BottomSheetDialogFragment {
         adapter.setOnItemClickListener(uri -> {
             final ProgressDialog dialog = ProgressDialog.show(requireContext(), "", "Please Wait....");
 
-            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), getString(R.string.app_name));
-
             final File f;
 
-            if (uri.toString().contains((BuildConfig.DEBUG) ? "https://firebasestorage.googleapis.com/v0/b/quotes-debug-q.appspot.com" : "https://firebasestorage.googleapis.com/v0/b/quotes-q.appspot.com")) {
+            if (uri.toString().contains(
+                    (BuildConfig.DEBUG) ?
+                            "https://firebasestorage.googleapis.com/v0/b/quotes-debug-q.appspot.com" :
+                            "https://firebasestorage.googleapis.com/v0/b/quotes-q.appspot.com"
+            )) {
+
                 String fileName = String.valueOf(uri).split("%2F")[1].split("\\?")[0];
 
-                f = new File(localFile + File.separator + "." + fileName);
+                f = new File(requireContext().getFilesDir(), fileName);
 
             } else {
-                f = new File(Objects.requireNonNull(uri.getPath()));
+                f = new File(uri.toString().replace("file://", requireContext().getFilesDir().getPath()));
             }
 
             if (f.exists()) {
@@ -103,9 +104,7 @@ public class BGImagePickFragment extends BottomSheetDialogFragment {
                 dismiss();
 
             } else {
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(f.getName().substring(1));
-
-                if (!localFile.exists()) localFile.mkdirs();
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images").child(f.getName());
 
                 storageReference.getFile(f).addOnSuccessListener(taskSnapshot -> {
 
@@ -152,17 +151,19 @@ public class BGImagePickFragment extends BottomSheetDialogFragment {
         final ArrayList<Uri> list = new ArrayList<>();
         final ArrayList<String> bgArrayList = new ArrayList<>();
 
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), getString(R.string.app_name));
-        File[] files = root.listFiles();
+        String[] files = requireContext().fileList();
 
         if (files != null) {
-            for (File file : files) {
+            for (String s : files) {
+                File file = new File(s);
+
                 if (file.getAbsolutePath().endsWith(".jpg")) {
-                    if (file.getName().equals(".Screenshot.jpg") || file.getName().equals(".Quotes_Background.jpg"))
+                    if (file.getName().equals("background.jpg") || file.getName().equals("screenshot.jpg"))
                         continue;
 
                     list.add(Uri.fromFile(file));
-                    bgArrayList.add(file.getName().substring(1));
+                    bgArrayList.add(file.getName());
+
                     if (adapter != null && getContext() != null) {
                         adapter.submitList(list);
                         adapter.notifyDataSetChanged();

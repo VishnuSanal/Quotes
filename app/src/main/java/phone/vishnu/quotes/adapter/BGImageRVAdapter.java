@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.Objects;
 
 import phone.vishnu.quotes.R;
@@ -44,9 +45,15 @@ public class BGImageRVAdapter extends ListAdapter<Uri, BGImageRVAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Picasso.get()
-                .load(getItem(position))
-                .into(holder.imageView);
+
+        if (getItem(position).toString().startsWith("file://"))
+            Picasso.get()
+                    .load(new File(getItem(position).toString().replace("file://", holder.itemView.getContext().getFilesDir().getPath())))
+                    .into(holder.imageView);
+        else
+            Picasso.get()
+                    .load(getItem(position))
+                    .into(holder.imageView);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {

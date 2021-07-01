@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -105,26 +106,32 @@ public class SplashActivity extends AppCompatActivity {
         Dexter.withContext(this)
                 .withPermissions(Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE);
 
-        Dexter.withContext(this)
-                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        moveToNext();
-                    }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
 
-                    @Override
-                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                        showPermissionDeniedDialog();
-                    }
+            moveToNext();
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                        Toast.makeText(SplashActivity.this, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
-                        permissionToken.continuePermissionRequest();
-                    }
-                })
-                .check();
+        else
+
+            Dexter.withContext(this)
+                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                            moveToNext();
+                        }
+
+                        @Override
+                        public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                            showPermissionDeniedDialog();
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                            Toast.makeText(SplashActivity.this, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
+                            permissionToken.continuePermissionRequest();
+                        }
+                    })
+                    .check();
     }
 
     private void showPermissionDeniedDialog() {

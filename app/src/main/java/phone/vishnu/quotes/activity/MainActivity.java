@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -532,27 +533,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showBackgroundOptionChooser(boolean isCancellable) {
 
-        Dexter.withContext(this)
-                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        BGOptionPickFragment.newInstance(isCancellable)
-                                .show(getSupportFragmentManager(), "BackgroundOptionPick");
-                    }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
 
-                    @Override
-                    public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
-                        showPermissionDeniedDialog();
-                    }
+            BGOptionPickFragment.newInstance(isCancellable)
+                    .show(getSupportFragmentManager(), "BackgroundOptionPick");
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                        Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
-                        permissionToken.continuePermissionRequest();
-                    }
-                })
-                .check();
+        else
+            Dexter.withContext(this)
+                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                            BGOptionPickFragment.newInstance(isCancellable)
+                                    .show(getSupportFragmentManager(), "BackgroundOptionPick");
+                        }
+
+                        @Override
+                        public void onPermissionDenied(final PermissionDeniedResponse permissionDeniedResponse) {
+                            showPermissionDeniedDialog();
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                            Toast.makeText(MainActivity.this, "App requires these permissions to set a background", Toast.LENGTH_SHORT).show();
+                            permissionToken.continuePermissionRequest();
+                        }
+                    })
+                    .check();
 
     }
 

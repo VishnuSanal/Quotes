@@ -2,7 +2,6 @@ package phone.vishnu.quotes.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,10 +51,8 @@ public class FontLVAdapter extends ArrayAdapter<String> {
             String fontString = objects.get(position).toLowerCase() + ".ttf";
 
             StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
-            final File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
-                    getContext().getString(R.string.app_name));
 
-            final File f = new File(localFile + File.separator + "." + fontString);
+            final File f = new File(getContext().getFilesDir(), fontString);
 
             if (f.exists()) {
 
@@ -69,8 +66,6 @@ public class FontLVAdapter extends ArrayAdapter<String> {
                     e.printStackTrace();
                 }
             } else {
-                if (!localFile.exists())
-                    localFile.mkdirs();
 
                 storageReference.getFile(f).addOnSuccessListener(taskSnapshot -> {
 
