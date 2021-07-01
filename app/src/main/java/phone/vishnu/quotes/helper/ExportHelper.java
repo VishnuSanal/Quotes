@@ -1,5 +1,7 @@
 package phone.vishnu.quotes.helper;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,12 +9,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.FileProvider;
 
@@ -22,6 +26,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
@@ -116,7 +121,7 @@ public class ExportHelper {
 
         try {
 
-            file = File.createTempFile("screenshot.jpg", null, context.getCacheDir());
+            file = File.createTempFile("screenshot", ".jpg", context.getCacheDir());
 
             FileOutputStream fileOutputStream = new FileOutputStream(file.getAbsolutePath());
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
@@ -193,20 +198,49 @@ public class ExportHelper {
         shareView.layout(0, 0, widthPixels, heightPixels);
         shareView.draw(c);
 
-        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), context.getString(R.string.app_name));
-        if (!root.exists()) root.mkdirs();
-        String imagePath = root.toString() + File.separator + "Quotes - " + System.currentTimeMillis() + ".jpg";
+        //FIXME:Check saving for <28
 
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(imagePath);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-            fileOutputStream.flush();
-            fileOutputStream.close();
-        } catch (IOException | SecurityException e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
+            saveBitmap(context, bitmap, Bitmap.CompressFormat.JPEG, "image/jpg", "Quotes - " + System.currentTimeMillis() + ".jpg");
+        } catch (Exception e) {
+            Toast.makeText(context, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
+    }
 
-        MediaScannerConnection.scanFile(context, new String[]{imagePath}, null, null);
+    private void saveBitmap(@NonNull final Context context, @NonNull final Bitmap bitmap,
+                            @NonNull final Bitmap.CompressFormat format,
+                            @NonNull final String mimeType,
+                            @NonNull final String displayName) throws IOException {
+
+        final ContentValues values = new ContentValues();
+        values.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName);
+        values.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
+        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DCIM + File.separator + context.getString(R.string.app_name));
+        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis());
+
+        final ContentResolver resolver = context.getContentResolver();
+        Uri uri = null;
+
+        try {
+            final Uri contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+            uri = resolver.insert(contentUri, values);
+
+            if (uri == null)
+                throw new IOException("Failed to create new MediaStore record.");
+
+            try (final OutputStream stream = resolver.openOutputStream(uri)) {
+                if (stream == null)
+                    throw new IOException("Failed to open output stream.");
+
+                if (!bitmap.compress(format, 100, stream))
+                    throw new IOException("Failed to save bitmap.");
+            }
+
+        } catch (IOException e) {
+            if (uri != null)
+                resolver.delete(uri, null, null);
+            throw e;
+        }
     }
 }
