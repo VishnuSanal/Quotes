@@ -9,12 +9,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -198,26 +200,44 @@ public class ExportHelper {
         shareView.layout(0, 0, widthPixels, heightPixels);
         shareView.draw(c);
 
-        //FIXME:Check saving for <28
-
         try {
-            saveBitmap(context, bitmap, Bitmap.CompressFormat.JPEG, "image/jpg", "Quotes - " + System.currentTimeMillis() + ".jpg");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+                saveImage(context, bitmap, Bitmap.CompressFormat.JPEG, "image/jpg", "Quotes - " + System.currentTimeMillis() + ".jpg");
+            else
+                saveImage(context, bitmap);
+
         } catch (Exception e) {
-            Toast.makeText(context, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
 
-    private void saveBitmap(@NonNull final Context context, @NonNull final Bitmap bitmap,
-                            @NonNull final Bitmap.CompressFormat format,
-                            @NonNull final String mimeType,
-                            @NonNull final String displayName) throws IOException {
+    private void saveImage(@NonNull final Context context, @NonNull final Bitmap bitmap) throws Exception {
+
+        Log.e("vishnu", "saveImage:" + "Hello");
+
+        File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), context.getString(R.string.app_name));
+        if (!root.exists())
+            root.mkdirs();
+        String imagePath = root.toString() + File.separator + "Quotes - " + System.currentTimeMillis() + ".jpg";
+
+        FileOutputStream fileOutputStream = new FileOutputStream(imagePath);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+        fileOutputStream.flush();
+        fileOutputStream.close();
+
+        MediaScannerConnection.scanFile(context, new String[]{imagePath}, null, null);
+
+    }
+
+    private void saveImage(@NonNull final Context context, @NonNull final Bitmap bitmap,
+                           @NonNull final Bitmap.CompressFormat format,
+                           @NonNull final String mimeType,
+                           @NonNull final String displayName) throws IOException {
 
         final ContentValues values = new ContentValues();
         values.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName);
         values.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
-        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DCIM + File.separator + context.getString(R.string.app_name));
-        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis());
+        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DCIM);
 
         final ContentResolver resolver = context.getContentResolver();
         Uri uri = null;
@@ -233,14 +253,19 @@ public class ExportHelper {
                 if (stream == null)
                     throw new IOException("Failed to open output stream.");
 
-                if (!bitmap.compress(format, 100, stream))
+                if (!bitmap.compress(format, 95, stream))
                     throw new IOException("Failed to save bitmap.");
             }
 
         } catch (IOException e) {
-            if (uri != null)
+
+            if (uri != null) {
+                // Don't leave an orphan entry in the MediaStore
                 resolver.delete(uri, null, null);
+            }
+
             throw e;
         }
+
     }
 }
