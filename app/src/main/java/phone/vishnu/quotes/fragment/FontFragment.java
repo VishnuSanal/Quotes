@@ -65,17 +65,6 @@ public class FontFragment extends BottomSheetDialogFragment {
         return inflate;
     }
 
-   /* @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-
-        Window window = dialog.getWindow();
-        window.setBackgroundDrawableResource(R.color.colorPrimaryTransparent);
-
-        return dialog;
-    }*/
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

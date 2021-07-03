@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -100,6 +100,6 @@ public class FontLVAdapter extends ArrayAdapter<String> {
 
     static class ViewHolder {
         TextView fontTV;
-        CircularProgressIndicator progressBar;
+        LinearProgressIndicator progressBar;
     }
 }
