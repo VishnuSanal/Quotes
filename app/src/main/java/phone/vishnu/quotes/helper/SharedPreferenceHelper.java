@@ -14,6 +14,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class SharedPreferenceHelper {
 
     private final String FIRST_RUN_BOOLEAN = "firstRunBoolean";
+    private final String NEW_FIRST_RUN_BOOLEAN = "newFirstRunBoolean";
 
     private final String FAV_ARRAY_STRING = "favoriteArrayString";
 
@@ -44,6 +45,14 @@ public class SharedPreferenceHelper {
 
     public void setFirstRunBoolean(boolean firstRunBoolean) {
         sharedPreferences.edit().putBoolean(FIRST_RUN_BOOLEAN, firstRunBoolean).apply();
+    }
+
+    public boolean isNewFirstRun() {
+        return sharedPreferences.getBoolean(NEW_FIRST_RUN_BOOLEAN, true);
+    }
+
+    public void setNewFirstRunBoolean(boolean newFirstRunBoolean) {
+        sharedPreferences.edit().putBoolean(NEW_FIRST_RUN_BOOLEAN, newFirstRunBoolean).apply();
     }
 
     public String getFavoriteArrayString() {
@@ -180,7 +189,7 @@ public class SharedPreferenceHelper {
         setFontPath("-1");
         setFontColorPreference("#FFFFFF");
         deleteFavPreference();
-        setFirstRunBoolean(true);
+        setNewFirstRunBoolean(true);
         setTotalQuotesCount(0);
         setShareButtonAction(1);
     }

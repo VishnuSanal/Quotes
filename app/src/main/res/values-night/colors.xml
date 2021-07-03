@@ -16,4 +16,8 @@
 
     <color name="favCardColor">#000000</color>
 
+    <color name="introIconColor">#00B0FF</color>
+    <color name="introBGColor">#121212</color>
+    <color name="introTextColor">#666666</color>
+
 </resources>

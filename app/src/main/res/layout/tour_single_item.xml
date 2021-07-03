@@ -1,50 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="@color/tourBackgroundColor"
-    android:foregroundGravity="center"
-    android:gravity="center"
-    android:orientation="vertical"
     tools:context=".fragment.TourSingleFragment"
     tools:ignore="HardcodedText">
 
     <ImageView
         android:id="@+id/tourImage"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_margin="8dp"
         android:adjustViewBounds="true"
-        app:tint="@color/colorWhite"
         android:contentDescription="Tour Fragment ImageView"
-        android:gravity="center"
-        android:scaleType="fitXY" />
+        app:layout_constraintBottom_toTopOf="@id/tourGuideLineOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tourGuideLineOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tourTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:fontFamily="serif"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/BGColor"
-        android:textSize="28sp"
-        app:layout_constraintTop_toBottomOf="@id/tourImage" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/introIconColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tourDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tourDescription"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
         android:lineSpacingExtra="4dp"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textColor="@color/cardBackgroundColor"
-        android:textSize="20sp" />
+        android:textColor="@color/introTextColor"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
