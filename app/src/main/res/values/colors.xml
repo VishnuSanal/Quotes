@@ -26,7 +26,7 @@
     <color name="introBGColor">@color/colorWhite</color>
     <color name="introTextColor">#5C5C5C</color>
 
-    <color name="favSwipeRedColor">#FF1744</color>
-    <color name="favSwipeGreenColor">#00C853</color>
+    <color name="favRedColor">#FF1744</color>
+    <color name="favGreenColor">#00C853</color>
 
 </resources>

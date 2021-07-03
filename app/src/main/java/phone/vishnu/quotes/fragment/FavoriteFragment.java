@@ -172,8 +172,8 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
                                             int actionState, boolean isCurrentlyActive) {
 
                         new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                                .addSwipeLeftBackgroundColor(getResources().getColor(R.color.favSwipeGreenColor))
-                                .addSwipeRightBackgroundColor(getResources().getColor(R.color.favSwipeRedColor))
+                                .addSwipeLeftBackgroundColor(getResources().getColor(R.color.favGreenColor))
+                                .addSwipeRightBackgroundColor(getResources().getColor(R.color.favRedColor))
                                 .addSwipeLeftActionIcon(R.drawable.ic_share)
                                 .addSwipeRightActionIcon(R.drawable.ic_delete)
                                 .create()

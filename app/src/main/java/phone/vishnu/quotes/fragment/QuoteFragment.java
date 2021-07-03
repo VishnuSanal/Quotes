@@ -126,7 +126,7 @@ public class QuoteFragment extends Fragment {
 
             final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
             shareIcon.startAnimation(shake);
-            shareIcon.setColorFilter(Color.GREEN);
+            shareIcon.setColorFilter(getResources().getColor(R.color.favGreenColor));
 
             shareButtonClicked(sharedPreferenceHelper.getShareButtonAction(),
                     new Quote(quoteText.getText().toString(), authorText.getText().toString())
@@ -145,7 +145,7 @@ public class QuoteFragment extends Fragment {
                 repository.deleteFav(quote);
                 favIcon.setColorFilter(Color.WHITE);
             } else
-                favIcon.setColorFilter(Color.RED);
+                favIcon.setColorFilter(getResources().getColor(R.color.favRedColor));
 
         });
     }
