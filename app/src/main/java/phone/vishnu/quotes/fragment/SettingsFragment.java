@@ -4,7 +4,6 @@ import android.app.Application;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.format.DateFormat;
@@ -175,7 +174,8 @@ public class SettingsFragment extends BottomSheetDialogFragment {
 
         SpannableString spannableString = new SpannableString(s);
         spannableString.setSpan(new RelativeSizeSpan(1.5f), 0, s1.length(), 0);
-        spannableString.setSpan(new ForegroundColorSpan(Color.GRAY), 0, s1.length(), 0);
+        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.textColor)), 0, s1.length(), 0);
+        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.textColorLight)), s1.length(), s.length(), 0);
 
         return spannableString;
 
