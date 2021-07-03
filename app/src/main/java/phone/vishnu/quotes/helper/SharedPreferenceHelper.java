@@ -189,7 +189,7 @@ public class SharedPreferenceHelper {
         setFontPath("-1");
         setFontColorPreference("#FFFFFF");
         deleteFavPreference();
-        setNewFirstRunBoolean(true);
+        setFirstRunBoolean(true);
         setTotalQuotesCount(0);
         setShareButtonAction(1);
     }

@@ -32,10 +32,14 @@ public class SplashActivity extends AppCompatActivity {
 
         removeFonts();
 
-        if (sharedPreferenceHelper.isNewFirstRun())
+        if (!sharedPreferenceHelper.isFirstRun() && sharedPreferenceHelper.isNewFirstRun())
+            sharedPreferenceHelper.resetSharedPreferences();
+
+        if (sharedPreferenceHelper.isNewFirstRun() || sharedPreferenceHelper.isFirstRun())
             showNewTour();
         else
             initTasks();
+
     }
 
     private void removeFonts() {

@@ -88,6 +88,7 @@ public class TourFragment extends Fragment {
 
     private void tourCompleted() {
         sharedPreferenceHelper.setNewFirstRunBoolean(false);
+        sharedPreferenceHelper.setFirstRunBoolean(false);
 
         Dexter.withContext(requireContext())
                 .withPermissions(Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE);
