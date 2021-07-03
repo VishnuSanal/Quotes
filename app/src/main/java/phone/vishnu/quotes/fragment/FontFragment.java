@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -35,7 +35,7 @@ public class FontFragment extends BottomSheetDialogFragment {
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ListView listView;
     private FontLVAdapter fontDataAdapter;
-    private LinearProgressIndicator progressBar;
+    private CircularProgressIndicator progressBar;
 
     public FontFragment() {
     }
@@ -64,6 +64,17 @@ public class FontFragment extends BottomSheetDialogFragment {
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
         return inflate;
     }
+
+   /* @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+
+        Window window = dialog.getWindow();
+        window.setBackgroundDrawableResource(R.color.colorPrimaryTransparent);
+
+        return dialog;
+    }*/
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

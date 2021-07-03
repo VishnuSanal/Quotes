@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -36,7 +36,7 @@ public class BGImagePickFragment extends BottomSheetDialogFragment {
 
     private BGImageRVAdapter adapter;
     private SharedPreferenceHelper sharedPreferenceHelper;
-    private LinearProgressIndicator progressBar;
+    private CircularProgressIndicator progressBar;
 
     public BGImagePickFragment() {
     }

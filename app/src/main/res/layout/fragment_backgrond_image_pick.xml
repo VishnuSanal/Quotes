@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.progressindicator.LinearProgressIndicator
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/imagePickProgressBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

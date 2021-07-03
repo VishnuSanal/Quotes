@@ -30,7 +30,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.7" />
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
+    <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/singleItemFontProgressBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
