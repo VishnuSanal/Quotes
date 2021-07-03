@@ -4,7 +4,6 @@ import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -173,8 +172,8 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
                                             int actionState, boolean isCurrentlyActive) {
 
                         new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                                .addSwipeLeftBackgroundColor(Color.GREEN)
-                                .addSwipeRightBackgroundColor(Color.RED)
+                                .addSwipeLeftBackgroundColor(getResources().getColor(R.color.favSwipeGreenColor))
+                                .addSwipeRightBackgroundColor(getResources().getColor(R.color.favSwipeRedColor))
                                 .addSwipeLeftActionIcon(R.drawable.ic_share)
                                 .addSwipeRightActionIcon(R.drawable.ic_delete)
                                 .create()
