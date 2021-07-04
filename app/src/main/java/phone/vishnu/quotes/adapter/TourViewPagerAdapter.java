@@ -42,15 +42,13 @@ public class TourViewPagerAdapter extends FragmentStateAdapter {
 
         ArrayList<TourItem> tourItems = new ArrayList<>();
 
-        if (!new SharedPreferenceHelper(context).isFirstRun() && new SharedPreferenceHelper(context).isNewFirstRun()) {
-
+        if (!new SharedPreferenceHelper(context).isFirstRun() && new SharedPreferenceHelper(context).isNewFirstRun())
             tourItems.add(new TourItem(R.drawable.ic_tour_announcement, "We're v2.0.0!",
                     "Quotes Status Creator got updated to v2.0.0!\nEnjoy the new and updated app!"));
-        } else
-
+        else
             tourItems.add(new TourItem(R.drawable.ic_tour_announcement, "Welcome!", "Welcome to Quotes Status Creator"));
 
-        tourItems.add(new TourItem(R.drawable.ic_tour_app, "Highly Customizable",
+        tourItems.add(new TourItem(R.drawable.ic_tour_app, "It works Like",
                 "Quotes Status Creator lets you share quotations as status images on social media"));
 
         tourItems.add(new TourItem(R.drawable.ic_tour_go, "Spread positivity with us", "Get started by sharing a Status!"));
