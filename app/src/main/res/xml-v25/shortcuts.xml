@@ -3,8 +3,8 @@
 
 <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_home"
-        android:shortcutId="shortcut_home"
+    android:icon="@drawable/ic_shortcut_home"
+    android:shortcutId="shortcut_home"
         android:shortcutLongLabel="@string/home"
         android:shortcutShortLabel="@string/home">
 
@@ -17,7 +17,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_favorite"
+        android:icon="@drawable/ic_shortcut_favourite"
         android:shortcutId="shortcut_fav"
         android:shortcutLongLabel="@string/favorites"
         android:shortcutShortLabel="@string/favorites">
@@ -31,7 +31,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_share"
+        android:icon="@drawable/ic_shortcut_share"
         android:shortcutId="shortcut_share_random"
         android:shortcutLongLabel="@string/share"
         android:shortcutShortLabel="@string/share">
