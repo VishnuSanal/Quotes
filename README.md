@@ -22,7 +22,8 @@
 
 ## ☺ Enjoying Quotes? Consider Supporting!
 
-Please consider donating a small amount to support the development. It requires a lot of time and effort to develop an application keeping it free, open source & ad-free. :D 
+Please consider donating a small amount to support the development. It requires a lot of time and
+effort to develop an application keeping it free, open source & ad-free. :D
 
 <p align="center">
   <a href="https://www.buymeacoffee.com/VishnuSanal">
@@ -57,32 +58,51 @@ Awesome people that help & support the development & maintenance of Quotes Statu
 
 ## 🚀Features
 
- - ❤Favourite Quotes – Add Quotes to Favourites
- - 😎Share Quotes – Share Quotes as a High Definition Image to Social Media
- - 📷Custom Backgrounds – Personalize Quotes Statuses with Custom Background Images, Solid Background Colors or Images from Gallery
- - 🎨Custom Card Colors – Personalize Quotes Statuses with Custom Card Colors
- - 🔠Custom Fonts – Personalize Quotes Statuses with Custom Fonts
- - 🔠Custom Font Colors – Personalize Quotes Statuses with Custom Font Colors
- - 🆕Custom Quotes – Add your own Quotes
- - 🔔Daily Notification – Get notified with your daily dose of motivation
- - 🔢Multiple Sharing Option – Multiple Sharing Options - Share as Image, Share as Text (copy as text to the clipboard) and Save to Gallery
+- ❤Favourite Quotes – Add Quotes to Favourites
+- 😎Share Quotes – Share Quotes as a High Definition Image to Social Media
+- 📷Custom Backgrounds – Personalize Quotes Statuses with Custom Background Images, Solid Background
+  Colors or Images from Gallery
+- 🎨Custom Card Colors – Personalize Quotes Statuses with Custom Card Colors
+- 🔠Custom Fonts – Personalize Quotes Statuses with Custom Fonts
+- 🔠Custom Font Colors – Personalize Quotes Statuses with Custom Font Colors
+- 🆕Custom Quotes – Add your own Quotes
+- 🔔Daily Notification – Get notified with your daily dose of motivation
+- 🔢Multiple Sharing Option – Multiple Sharing Options - Share as Image, Share as Text (copy as text
+  to the clipboard) and Save to Gallery
 
 ## 📑Libraries Used
- - [Volley](https://github.com/google/volley)
- - [Gson](https://github.com/google/gson)
- - [Picasso](https://square.github.io/picasso/)
- - [uCrop](https://github.com/Yalantis/uCrop)
- - [Dexter](https://github.com/Karumi/Dexter)
+
+- [Volley](https://github.com/google/volley)
+- [Gson](https://github.com/google/gson)
+- [Picasso](https://square.github.io/picasso/)
+- [uCrop](https://github.com/Yalantis/uCrop)
+- [Dexter](https://github.com/Karumi/Dexter)
 
 ## Screenshots
 
-![Home](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home.png) 
-![Favourites](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Favorites.png)
-![Image Picker](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/ImagePick.png)
-![Color Picker](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/ColorPick.png)
-![Font Picker](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Font.png)
-![Multiple Sharing](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Share.png)
-![Add New Quote](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/AddNew.png)
+| <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home%20One.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home%20Two.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Fav%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Fav%20Dark.png"/> |
+|:---:|:---:|:---:|:---:|
+| Home | Home | Favourites Light |  Favourites Dark |
+
+| <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Fav%20Actions%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Fav%20Actions%20Dark.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Font%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Font%20Dark.png"/> |
+|:---:|:---:|:---:|:---:|
+| Favourite Actions Light | Favourite Actions Dark | Font Pick Light |  Font Pick Dark |
+
+| <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/BG%20Option%20Pick%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/BG%20Option%20Pick%20Dark.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/BG%20Pick%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/BG%20Pick%20Dark.png"/> |
+|:---:|:---:|:---:|:---:|
+| BG Option Pick Light | BG Option Pick Dark | BG Pick Light |  BG Pick Dark |
+
+| <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Share%20Option%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Share%20Option%20Dark.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Color%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Color%20Dark.png"/> |
+|:---:|:---:|:---:|:---:|
+| Share Option Light | Share Option Dark | Color Light |  Color Dark |
+
+| <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Add%20New%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Add%20New%20Dark.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Settings%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Settings%20Dark.png"/> |
+|:---:|:---:|:---:|:---:|
+| Add New Light | Add New Dark | Settings Light |  Settings Dark |
+
+| <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/About%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/About%20Dark.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Search.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Notification.png"/> |
+|:---:|:---:|:---:|:---:|
+| About Light | About Dark | Search |  Notification |
 
 ## 🚀Quotes – Quotes Status Creator includes
 
