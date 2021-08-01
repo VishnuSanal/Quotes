@@ -69,6 +69,12 @@ Awesome people that help & support the development & maintenance of Quotes Statu
 - 🔔Daily Notification – Get notified with your daily dose of motivation
 - 🔢Multiple Sharing Option – Multiple Sharing Options - Share as Image, Share as Text (copy as text
   to the clipboard) and Save to Gallery
+- 🚪App Shortcuts – Quotes Status Creator includes App Shortcuts for Easy Access
+- 🔍Search – Search for Quotes to find Quotes you like
+- 🏠Home Screen Widget – Quotes Status Creator App includes Auto-Updating Quotes Widget
+- 🕶Dark Mode – Quotes Status Creator App includes Dark Mode
+- 👨‍💻Completely Open Source – Quotes Status Creator App is Completely Open Source
+- 🎉Completely Ad Free – Quotes Status Creator App is Completely Free from Ads
 
 ## 📑Libraries Used
 
