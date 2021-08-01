@@ -37,6 +37,8 @@ public class FontFragment extends BottomSheetDialogFragment {
     private FontLVAdapter fontDataAdapter;
     private CircularProgressIndicator progressBar;
 
+    private boolean warningShown = false;
+
     public FontFragment() {
     }
 
@@ -55,8 +57,11 @@ public class FontFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_font, container, false);
-        if (!isNetworkAvailable(requireContext()))
+
+        if (!warningShown && !isNetworkAvailable(requireContext())) {
             Toast.makeText(requireContext(), "Please connect to the Internet", Toast.LENGTH_SHORT).show();
+            warningShown = true;
+        }
 
         progressBar = inflate.findViewById(R.id.fontProgressBar);
         listView = inflate.findViewById(R.id.fontListView);

@@ -37,6 +37,7 @@ public class BGImagePickFragment extends BottomSheetDialogFragment {
     private BGImageRVAdapter adapter;
     private SharedPreferenceHelper sharedPreferenceHelper;
     private CircularProgressIndicator progressBar;
+    private boolean warningShown = false;
 
     public BGImagePickFragment() {
     }
@@ -63,8 +64,10 @@ public class BGImagePickFragment extends BottomSheetDialogFragment {
 
         progressBar = inflate.findViewById(R.id.imagePickProgressBar);
 
-        if (!isNetworkAvailable(requireContext()))
+        if (!warningShown && !isNetworkAvailable(requireContext())) {
             Toast.makeText(requireContext(), "Please connect to the Internet", Toast.LENGTH_SHORT).show();
+            warningShown = true;
+        }
 
         return inflate;
     }
@@ -177,7 +180,6 @@ public class BGImagePickFragment extends BottomSheetDialogFragment {
 
         if (bgArrayList.size() == 0 && MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing()) {
             MainActivity.bgDialog.dismiss();
-            Toast.makeText(requireContext(), "Please connect to the Internet", Toast.LENGTH_SHORT).show();
         }
 
         if (isNetworkAvailable(requireContext())) {

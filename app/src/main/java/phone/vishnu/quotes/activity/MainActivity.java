@@ -305,10 +305,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 )
         );
 
-        checkBackground();
+        new Handler().postDelayed(() -> {
 
-        if (!isNetworkAvailable())
-            Toast.makeText(this, "Please Connect to the Internet", Toast.LENGTH_SHORT).show();
+            if (progressIndicator.getVisibility() == View.VISIBLE && !isNetworkAvailable())
+                Toast.makeText(this, "Please Connect to the Internet", Toast.LENGTH_LONG).show();
+
+        }, 2000);
+
+        checkBackground();
 
         if ("At 08:30 Daily".equals(sharedPreferenceHelper.getAlarmString()))
             AlarmHelper.setDefaultAlarm(this);
