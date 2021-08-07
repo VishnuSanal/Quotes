@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="@id/homeSearchView"
         app:layout_constraintEnd_toStartOf="@id/homeSearchView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/homeSearchView" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/homeSearchView"
