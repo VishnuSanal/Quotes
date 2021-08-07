@@ -28,13 +28,36 @@
             android:id="@+id/imagePickTitleTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
             android:letterSpacing="0.15"
             android:padding="8dp"
             android:text="Pick Background Image"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/imagePickRecyclerView"
+            app:layout_constraintBottom_toTopOf="@id/imagePickPresentTitleTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imagePickProgressBar"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/imagePickPresentTitleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:letterSpacing="0.1"
+            android:padding="8dp"
+            android:text="Used Images"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/imagePickPresentRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +65,38 @@
             tools:ignore="HardcodedText" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/imagePickRecyclerView"
+            android:id="@+id/imagePickPresentRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/imagePickNewTitleTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imagePickPresentTitleTV"
+            app:spanCount="2"
+            tools:listitem="@layout/background_image_pick_single_item" />
+
+        <TextView
+            android:id="@+id/imagePickNewTitleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:letterSpacing="0.1"
+            android:padding="8dp"
+            android:text="New Images"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/imagePickNewRecyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imagePickPresentRecyclerView"
+            tools:ignore="HardcodedText" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/imagePickNewRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
@@ -51,7 +105,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imagePickTitleTV"
+            app:layout_constraintTop_toBottomOf="@id/imagePickNewTitleTV"
             app:spanCount="2"
             tools:listitem="@layout/background_image_pick_single_item" />
 
