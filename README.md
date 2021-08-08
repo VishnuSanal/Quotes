@@ -13,13 +13,12 @@
 <p align="center">
 	<a href='https://play.google.com/store/apps/details?id=phone.vishnu.quotes&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="100px" /></a>
 </p>
-
 <hr>
-
-    ☆ Huge Collection of Inspirational Quotes that can be shared on Social Media Platforms as a high definition image
+<pre> 
+    ☆ Huge Collection of Inspirational Quotes that can be shared on Social Media Platforms as a<br>      high definition image
     ☆ Quotes Status Creation without any Image Editing whatsoever - that too in User-Friendly UI
     ☆ Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
-
+<br></pre>
 ## ☺ Enjoying Quotes? Consider Supporting!
 
 Please consider donating a small amount to support the development. It requires a lot of time and
@@ -111,7 +110,7 @@ Awesome people that help & support the development & maintenance of Quotes Statu
 | About Light | About Dark | Search |  Notification |
 
 ## 🚀Quotes – Quotes Status Creator includes
-
+<pre>
     • Inspirational Quotes
     • Success Quotes
     • Life Quotes
@@ -124,7 +123,7 @@ Awesome people that help & support the development & maintenance of Quotes Statu
     • Thinking Quotes
     • Optimistic Quotes
     • Creativity Quotes
-
+</pre>
 ## 🤩Feedback and Suggestion
 
 We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Email your suggestions/feedback to us. Or feel free to create an issue! :)
