@@ -1,5 +1,7 @@
 package phone.vishnu.quotes.helper;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -8,8 +10,6 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 import phone.vishnu.quotes.model.Quote;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class SharedPreferenceHelper {
 
@@ -32,6 +32,8 @@ public class SharedPreferenceHelper {
     private final String FAV_HINT_SHOWN_COUNT = "favHintShownCount";
 
     private final String SHARE_BUTTON_ACTION = "shareButtonActionInt";
+
+    private final String FONT_SIZE = "fontSizeInt";
 
     private final SharedPreferences sharedPreferences;
 
@@ -101,6 +103,14 @@ public class SharedPreferenceHelper {
 
     public void setFontColorPreference(String colorPreference) {
         sharedPreferences.edit().putString(FONT_COLOR, colorPreference).apply();
+    }
+
+    public float getFontSizePreference() {
+        return sharedPreferences.getFloat(FONT_SIZE, 24f);
+    }
+
+    public void setFontSizePreference(float fontSize) {
+        sharedPreferences.edit().putFloat(FONT_SIZE, fontSize).apply();
     }
 
     public int getTotalQuotesCount() {
@@ -192,6 +202,7 @@ public class SharedPreferenceHelper {
         setFirstRunBoolean(true);
         setTotalQuotesCount(0);
         setShareButtonAction(1);
+        setFontSizePreference(24);
     }
 
     public ArrayList<String> getFontListToBeRemoved() {

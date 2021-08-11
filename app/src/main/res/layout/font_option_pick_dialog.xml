@@ -57,8 +57,21 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Change Font Color"
+            android:text="Change Font Colour"
             android:textColor="@color/textColor" />
+
+        <RadioButton
+            android:id="@+id/fontOptionPickSizeRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:drawableStart="@drawable/ic_size"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:paddingStart="32dp"
+            android:text="Change Font Size"
+            android:textColor="@color/textColor" />
+
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

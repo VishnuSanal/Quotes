@@ -80,6 +80,7 @@ public class ExportHelper {
         String cardColor = sharedPreferenceHelper.getCardColorPreference();
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
+        float fontSize = sharedPreferenceHelper.getFontSizePreference();
 
         String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
         if (!"-1".equals(backgroundPath))
@@ -103,6 +104,9 @@ public class ExportHelper {
 
         shareQuoteTextView.setTextColor(Color.parseColor(fontColor));
         shareAuthorTextView.setTextColor(Color.parseColor(fontColor));
+
+        shareQuoteTextView.setTextSize(fontSize);
+        shareAuthorTextView.setTextSize((float) (fontSize / 1.2));
 
         shareQuoteTextView.setText(quote);
         shareAuthorTextView.setText(author);

@@ -72,6 +72,7 @@ public class QuoteFragment extends Fragment {
         String hexColor = sharedPreferenceHelper.getCardColorPreference();
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
+        float fontSize = sharedPreferenceHelper.getFontSizePreference();
 
         if ((!fontPath.equals("-1")) && (new File(fontPath).exists())) {
             try {
@@ -90,6 +91,9 @@ public class QuoteFragment extends Fragment {
 
         quoteText.setTextColor(Color.parseColor(fontColor));
         authorText.setTextColor(Color.parseColor(fontColor));
+
+        quoteText.setTextSize(fontSize);
+        authorText.setTextSize((float) (fontSize / 1.2));
 
         ((CardView) quoteView.findViewById(R.id.cardView)).setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
