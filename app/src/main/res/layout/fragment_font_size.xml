@@ -27,14 +27,66 @@
         android:id="@+id/fontSizeSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="8dp"
+
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+
+        android:paddingStart="4dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="8dp"
+
         android:stepSize="4"
         android:valueFrom="12"
         android:valueTo="64"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fontSizeIndicatorTwo"
+        app:layout_constraintStart_toEndOf="@id/fontSizeIndicatorOne"
         app:layout_constraintTop_toBottomOf="@id/fontSizeTitleTV" />
 
+    <TextView
+        android:id="@+id/fontSizeIndicatorOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="8dp"
+        android:text="A"
+        android:textSize="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/fontSizeSlider"
+        app:layout_constraintEnd_toStartOf="@id/fontSizeSlider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fontSizeSlider"
+        tools:ignore="HardcodedText,SpUsage" />
+
+    <TextView
+        android:id="@+id/fontSizeIndicatorTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:paddingStart="4dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        android:text="A"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/fontSizeSlider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fontSizeSlider"
+        app:layout_constraintTop_toTopOf="@id/fontSizeSlider"
+        tools:ignore="HardcodedText,SpUsage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
