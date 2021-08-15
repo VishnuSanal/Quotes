@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background"
+    android:elevation="8dp"
+    tools:context=".fragment.DarkModePickFragment"
+    tools:ignore="HardcodedText">
+
+    <TextView
+        android:id="@+id/darkModePickTitleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:letterSpacing="0.15"
+        android:padding="8dp"
+        android:text="Choose a Theme"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/darkModePickRadioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/darkModePickRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/darkModePickTitleTV"
+        tools:ignore="RtlSymmetry">
+
+        <RadioButton
+            android:id="@+id/darkModePickLightRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:drawableStart="@drawable/ic_brightness_high"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:paddingStart="32dp"
+            android:text="Light Theme"
+            android:textColor="@color/textColor" />
+
+        <RadioButton
+            android:id="@+id/darkModePickDarkRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:drawableStart="@drawable/ic_brightness_low"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:paddingStart="32dp"
+            android:text="Dark Theme"
+            android:textColor="@color/textColor" />
+
+        <RadioButton
+            android:id="@+id/darkModePickSystemRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:drawableStart="@drawable/ic_brightness_auto"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:paddingStart="32dp"
+            android:text="Follow System Theme"
+            android:textColor="@color/textColor" />
+
+    </RadioGroup>
+</androidx.constraintlayout.widget.ConstraintLayout>

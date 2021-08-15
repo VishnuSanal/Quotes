@@ -39,7 +39,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
     private SwitchCompat reminderSwitch;
     private SlideToActView resetToggle;
     private SharedPreferenceHelper sharedPreferenceHelper;
-    private TextView shareActionPickTV;
+    private TextView shareActionPickTV, darkModePickTV;
 
     public SettingsFragment() {
     }
@@ -66,11 +66,13 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         reminderSwitch = inflate.findViewById(R.id.settingsReminderSwitch);
 
         shareActionPickTV = inflate.findViewById(R.id.settingsShareActionPickTV);
+        darkModePickTV = inflate.findViewById(R.id.settingsDarkModePickTV);
 
         reminderSwitch.setChecked(!sharedPreferenceHelper.getAlarmString().equals("Alarm Not Set"));
 
         reminderSwitch.setText(getSwitchText(sharedPreferenceHelper.getAlarmString()));
         shareActionPickTV.setText(getSpannableText("Share", "Share Button Action"));
+        darkModePickTV.setText(getSpannableText("Theme", "Pick a theme for the app"));
 
         return inflate;
     }
@@ -121,6 +123,15 @@ public class SettingsFragment extends BottomSheetDialogFragment {
             bottomSheet.show(requireActivity().getSupportFragmentManager(), "ShareActionPicker");
 
             dismiss();
+        });
+
+        darkModePickTV.setOnClickListener(v -> {
+
+            DarkModePickFragment bottomSheet = DarkModePickFragment.newInstance();
+            bottomSheet.show(requireActivity().getSupportFragmentManager(), "DarkModePickFragment");
+
+            dismiss();
+
         });
     }
 

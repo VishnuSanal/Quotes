@@ -43,7 +43,6 @@ import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -486,8 +485,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 quotes -> {
 
                     sharedPreferenceHelper.setTotalQuotesCount(quotes.size());
-
-                    Collections.shuffle(quotes);
 
                     allQuotesList = new ArrayList<>(quotes);
 

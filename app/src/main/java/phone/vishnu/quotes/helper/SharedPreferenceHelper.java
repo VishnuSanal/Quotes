@@ -33,7 +33,9 @@ public class SharedPreferenceHelper {
 
     private final String SHARE_BUTTON_ACTION = "shareButtonActionInt";
 
-    private final String FONT_SIZE = "fontSizeInt";
+    private final String FONT_SIZE = "fontSizeFloat";
+
+    private final String APP_THEME = "appThemeInt";
 
     private final SharedPreferences sharedPreferences;
 
@@ -111,6 +113,14 @@ public class SharedPreferenceHelper {
 
     public void setFontSizePreference(float fontSize) {
         sharedPreferences.edit().putFloat(FONT_SIZE, fontSize).apply();
+    }
+
+    public int getAppThemePreference() {
+        return sharedPreferences.getInt(APP_THEME, 2);
+    }
+
+    public void setAppThemePreference(int appTheme) {
+        sharedPreferences.edit().putInt(APP_THEME, appTheme).apply();
     }
 
     public int getTotalQuotesCount() {
@@ -203,6 +213,7 @@ public class SharedPreferenceHelper {
         setTotalQuotesCount(0);
         setShareButtonAction(1);
         setFontSizePreference(24);
+        setAppThemePreference(2);
     }
 
     public ArrayList<String> getFontListToBeRemoved() {
