@@ -2,8 +2,6 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'com.google.gms.google-services'
 
-apply plugin: 'com.google.firebase.crashlytics'
-
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
@@ -19,15 +17,12 @@ android {
 
         debug {
             applicationIdSuffix ".debug"
-
-            manifestPlaceholders = [analytics_deactivated: "true"]
         }
 
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [analytics_deactivated: "false"]
         }
     }
     compileOptions {
@@ -45,7 +40,6 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
 
-    implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-storage'
 
     implementation 'com.dubsmash.volley:library:2.0.1'

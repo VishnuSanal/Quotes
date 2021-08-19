@@ -22,8 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.FileProvider;
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -57,7 +55,6 @@ public class ExportHelper {
             sharedPreferenceHelper.setBackgroundPath(getBGPath());
 
         } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
     }
@@ -97,7 +94,6 @@ public class ExportHelper {
                 Typeface face = Typeface.createFromFile(fontPath);
                 shareQuoteTextView.setTypeface(face);
             } catch (Exception e) {
-                FirebaseCrashlytics.getInstance().recordException(e);
                 e.printStackTrace();
             }
         }
@@ -135,8 +131,6 @@ public class ExportHelper {
             fileOutputStream.close();
 
         } catch (IOException | SecurityException e) {
-
-            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
 
         } finally {
@@ -181,7 +175,6 @@ public class ExportHelper {
                 Typeface face = Typeface.createFromFile(fontPath);
                 shareQuoteTextView.setTypeface(face);
             } catch (Exception e) {
-                FirebaseCrashlytics.getInstance().recordException(e);
                 e.printStackTrace();
             }
         }

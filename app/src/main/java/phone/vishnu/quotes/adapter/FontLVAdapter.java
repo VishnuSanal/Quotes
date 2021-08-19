@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -62,7 +61,6 @@ public class FontLVAdapter extends ArrayAdapter<String> {
                     viewHolder.fontTV.setTypeface(face);
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
-                    FirebaseCrashlytics.getInstance().recordException(e);
                     e.printStackTrace();
                 }
             } else {
@@ -76,14 +74,10 @@ public class FontLVAdapter extends ArrayAdapter<String> {
                         viewHolder.fontTV.setTypeface(face);
                     } catch (Exception e) {
                         Toast.makeText(getContext(), "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
-                        FirebaseCrashlytics.getInstance().recordException(e);
                         e.printStackTrace();
                     }
 
-                }).addOnFailureListener(exception -> {
-                    FirebaseCrashlytics.getInstance().recordException(exception);
-                    exception.printStackTrace();
-                });
+                }).addOnFailureListener(Throwable::printStackTrace);
             }
         } else {
             viewHolder = (FontLVAdapter.ViewHolder) rootView.getTag();

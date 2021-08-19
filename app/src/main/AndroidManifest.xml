@@ -72,10 +72,6 @@
             </intent-filter>
         </receiver>
 
-        <meta-data
-            android:name="firebase_analytics_collection_deactivated"
-            android:value="${analytics_deactivated}" />
-
         <receiver android:name=".receiver.QuoteWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

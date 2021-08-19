@@ -18,8 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-
 import java.io.File;
 
 import phone.vishnu.quotes.R;
@@ -80,7 +78,6 @@ public class QuoteFragment extends Fragment {
                 quoteText.setTypeface(face);
             } catch (Exception e) {
                 Toast.makeText(getContext(), "Font file not found", Toast.LENGTH_SHORT).show();
-                FirebaseCrashlytics.getInstance().recordException(e);
                 e.printStackTrace();
             }
         } else {
@@ -115,7 +112,6 @@ public class QuoteFragment extends Fragment {
                 favIcon.setColorFilter(Color.RED);
 
         } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
 

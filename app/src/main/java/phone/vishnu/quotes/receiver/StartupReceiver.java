@@ -4,8 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-
 import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
@@ -24,7 +22,6 @@ public class StartupReceiver extends BroadcastReceiver {
                 }
             }
         } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
     }

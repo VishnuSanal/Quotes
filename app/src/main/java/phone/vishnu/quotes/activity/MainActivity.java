@@ -42,7 +42,6 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -282,7 +281,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             searchEditText.setTextColor(getResources().getColor(R.color.colorWhite));
             searchEditText.setHintTextColor(getResources().getColor(R.color.colorWhite));
         } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
 
