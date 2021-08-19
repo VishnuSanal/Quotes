@@ -20,7 +20,7 @@
     ☆ Quotes Status Creation without any Image Editing whatsoever - that too in User-Friendly UI
     ☆ Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
 
-## ☺ Enjoying Quotes? Consider Supporting!
+## ☕ Enjoying Quotes? Consider Supporting!
 
 Please consider donating a small amount to support the development. It requires a lot of time and
 effort to develop an application keeping it free, open source & ad-free. :D
