@@ -127,7 +127,7 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
     • Creativity Quotes
 
 ## 📬 Feedback and Suggestion
-We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Email your suggestions/feedback to us. Or feel free to create an issue! :)
+We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Leave your feedback/suggestions [here](https://t.me/QuotesStatusCreator) or feel free to create an issue! :)
 
 ## License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)
