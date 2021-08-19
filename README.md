@@ -31,6 +31,10 @@ effort to develop an application keeping it free, open source & ad-free. :D
   </a>
 </p>
 
+## ⭐ Find this repository useful?
+
+Support it by joining [Stargazers](https://github.com/VishnuSanal/Quotes/stargazers) for this repository.
+
 ## 🏠 Join Telegram Group
 If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us!!! It'll be fun :)
 
@@ -43,40 +47,39 @@ If you enjoy the app, wish to contribute or simply wish to be with like-minded p
 ## 🎨 Follow [Instagram Page](https://instagram.com/quotes_status_creator)
 Follow the Instagram Page to get your daily dose of inspiration delivered to your feed! If you enjoy the app, you'll enjoy the Instagram Page too! Come follow us & be inspired!
 
-## 📜 Join [Telegram Channel](https://t.me/DailyQuotesStatus)
+## 📢 Join [Telegram Channel](https://t.me/DailyQuotesStatus)
 Join the Telegram Channel to get a Quote as an image & as a text in your inbox - daily! Come join it & be inspired!
 
 ## ♥ Thanks to [these](https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md) awesome people
 Awesome people that help & support the development & maintenance of Quotes Status Creator
 
-## ✨ Contribute to the project
+## 🛠️ Contribute to the project
 [CONTRIBUTING.md](https://github.com/VishnuSanal/Quotes/blob/master/CONTRIBUTING.md) will be a good place to start :)
 
 <hr>
 
 ![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Quotes%20Banner.png?raw=true)
 
-## 🚀Features
+## 🚀 Features
 
 - ❤Favourite Quotes – Add Quotes to Favourites
-- 😎Share Quotes – Share Quotes as a High Definition Image to Social Media
-- 📷Custom Backgrounds – Personalize Quotes Statuses with Custom Background Images, Solid Background
-  Colors or Images from Gallery
+- 🔀Share Quotes – Share Quotes as a High Definition Image to Social Media
+- 🖼️Custom Backgrounds – Personalize Quotes Statuses with Custom Background Images, Solid Background Colors or Images from Gallery
 - 🎨Custom Card Colors – Personalize Quotes Statuses with Custom Card Colors
 - 🔠Custom Fonts – Personalize Quotes Statuses with Custom Fonts
-- 🔠Custom Font Colors – Personalize Quotes Statuses with Custom Font Colors
+- 🔡Custom Font Colors – Personalize Quotes Statuses with Custom Font Colors
 - 🆕Custom Quotes – Add your own Quotes
 - 🔔Daily Notification – Get notified with your daily dose of motivation
-- 🔢Multiple Sharing Option – Multiple Sharing Options - Share as Image, Share as Text (copy as text
+- 🔁Multiple Sharing Option – Multiple Sharing Options - Share as Image, Share as Text (copy as text
   to the clipboard) and Save to Gallery
 - 🚪App Shortcuts – Quotes Status Creator includes App Shortcuts for Easy Access
 - 🔍Search – Search for Quotes to find Quotes you like
-- 🏠Home Screen Widget – Quotes Status Creator App includes Auto-Updating Quotes Widget
+- 📱Home Screen Widget – Quotes Status Creator App includes Auto-Updating Quotes Widget
 - 🕶Dark Mode – Quotes Status Creator App includes Dark Mode
 - 👨‍💻Completely Open Source – Quotes Status Creator App is Completely Open Source
-- 🎉Completely Ad Free – Quotes Status Creator App is Completely Free from Ads
+- 🚫Completely Ad Free – Quotes Status Creator App is Completely Free from Ads
 
-## 📑Libraries Used
+## 📑 Libraries Used
 
 - [Volley](https://github.com/google/volley)
 - [Gson](https://github.com/google/gson)
@@ -84,7 +87,7 @@ Awesome people that help & support the development & maintenance of Quotes Statu
 - [uCrop](https://github.com/Yalantis/uCrop)
 - [Dexter](https://github.com/Karumi/Dexter)
 
-## Screenshots
+## 🔲 Screenshots
 
 | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home%20One.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home%20Two.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Fav%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Fav%20Dark.png"/> |
 |:---:|:---:|:---:|:---:|
@@ -110,7 +113,7 @@ Awesome people that help & support the development & maintenance of Quotes Statu
 |:---:|:---:|:---:|:---:|
 | About Light | About Dark | Search |  Notification |
 
-## 🚀Quotes – Quotes Status Creator includes
+## ➕ Quotes – Quotes Status Creator includes
 
     • Inspirational Quotes
     • Success Quotes
@@ -125,6 +128,10 @@ Awesome people that help & support the development & maintenance of Quotes Statu
     • Optimistic Quotes
     • Creativity Quotes
 
-## 🤩Feedback and Suggestion
+## ✍️ Feedback and Suggestion
 
 We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Email your suggestions/feedback to us. Or feel free to create an issue! :)
+
+## License
+
+[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)
