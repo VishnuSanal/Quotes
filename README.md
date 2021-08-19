@@ -30,9 +30,6 @@ effort to develop an application keeping it free, open source & ad-free. :D
   </a>
 </p>
 
-## ⭐ Find this repository useful?
-Support it by joining [Stargazers](https://github.com/VishnuSanal/Quotes/stargazers) for this repository.
-
 ## 🏠 Join Telegram Group
 If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us!!! It'll be fun :)
 
@@ -53,6 +50,9 @@ Awesome people that help & support the development & maintenance of Quotes Statu
 
 ## 🛠️ Contribute to the project
 [CONTRIBUTING.md](https://github.com/VishnuSanal/Quotes/blob/master/CONTRIBUTING.md) will be a good place to start :)
+
+## ⭐ Find this repository useful?
+Support the project by [starring it](https://github.com/VishnuSanal/Quotes/stargazers) :)
 
 <hr>
 
