@@ -60,13 +60,13 @@ Awesome people that help & support the development & maintenance of Quotes Statu
 
 ## 🚀 Features
 
-- ❤Favourite Quotes – Add Quotes to Favourites
+- 🔖Favourite Quotes – Add Quotes to Favourites
 - 🔀Share Quotes – Share Quotes as a High Definition Image to Social Media
 - 🖼️Custom Backgrounds – Personalize Quotes Statuses with Custom Background Images, Solid Background Colors or Images from Gallery
 - 🎨Custom Card Colors – Personalize Quotes Statuses with Custom Card Colors
 - 🔠Custom Fonts – Personalize Quotes Statuses with Custom Fonts
 - 🔡Custom Font Colors – Personalize Quotes Statuses with Custom Font Colors
-- 🆕Custom Quotes – Add your own Quotes
+- ✍Custom Quotes – Add your own Quotes
 - 🔔Daily Notification – Get notified with your daily dose of motivation
 - 🔁Multiple Sharing Option – Multiple Sharing Options - Share as Image, Share as Text (copy as text
   to the clipboard) and Save to Gallery
@@ -126,7 +126,7 @@ Awesome people that help & support the development & maintenance of Quotes Statu
     • Optimistic Quotes
     • Creativity Quotes
 
-## ✍️ Feedback and Suggestion
+## 📬 Feedback and Suggestion
 We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Email your suggestions/feedback to us. Or feel free to create an issue! :)
 
 ## License
