@@ -21,7 +21,6 @@
     ☆ Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
 
 ## ☕ Enjoying Quotes? Consider Supporting!
-
 Please consider donating a small amount to support the development. It requires a lot of time and
 effort to develop an application keeping it free, open source & ad-free. :D
 
@@ -32,7 +31,6 @@ effort to develop an application keeping it free, open source & ad-free. :D
 </p>
 
 ## ⭐ Find this repository useful?
-
 Support it by joining [Stargazers](https://github.com/VishnuSanal/Quotes/stargazers) for this repository.
 
 ## 🏠 Join Telegram Group
@@ -129,9 +127,7 @@ Awesome people that help & support the development & maintenance of Quotes Statu
     • Creativity Quotes
 
 ## ✍️ Feedback and Suggestion
-
 We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Email your suggestions/feedback to us. Or feel free to create an issue! :)
 
 ## License
-
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)
