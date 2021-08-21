@@ -78,12 +78,13 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
 - 🎨Custom Card Colors – Personalize Quotes Statuses with Custom Card Colors
 - 🔠Custom Fonts – Personalize Quotes Statuses with Custom Fonts
 - 🔡Custom Font Colors – Personalize Quotes Statuses with Custom Font Colors
-- ✍Custom Quotes – Add your own Quotes
+- ✍🏿Custom Quotes – Add your own Quotes
 - 🔔Daily Notification – Get notified with your daily dose of motivation
 - 🔁Multiple Sharing Option – Multiple Sharing Options - Share as Image, Share as Text (copy as text
   to the clipboard) and Save to Gallery
 - 🚪App Shortcuts – Quotes Status Creator includes App Shortcuts for Easy Access
 - 🔍Search – Search for Quotes to find Quotes you like
+- 🏷️Tags – Search for Quotes using Tags
 - 📱Home Screen Widget – Quotes Status Creator App includes Auto-Updating Quotes Widget
 - 🕶Dark Mode – Quotes Status Creator App includes Dark Mode
 - 👨‍💻Completely Open Source – Quotes Status Creator App is Completely Open Source
