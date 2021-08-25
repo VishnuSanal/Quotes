@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,7 @@ import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class FontSizeFragment extends BottomSheetDialogFragment {
-
+    TextView defaultSize;
     private Slider sizeSlider;
     private SharedPreferenceHelper sharedPreferenceHelper;
 
@@ -38,13 +39,19 @@ public class FontSizeFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_font_size, container, false);
-
+        defaultSize=inflate.findViewById(R.id.default_Size);
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
 
         sizeSlider = inflate.findViewById(R.id.fontSizeSlider);
         sizeSlider.setLabelFormatter(value -> (int) value + "sp");
         sizeSlider.setValue(sharedPreferenceHelper.getFontSizePreference());
 
+//        code to make size back to default(24sp)
+        defaultSize.setOnClickListener(v -> {
+            sharedPreferenceHelper.setFontSizePreference(24);
+            ((MainActivity) requireActivity()).updateViewPager();
+            sizeSlider.setValue(24);
+        });
         return inflate;
     }
 

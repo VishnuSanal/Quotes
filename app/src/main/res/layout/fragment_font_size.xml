@@ -89,4 +89,20 @@
         app:layout_constraintTop_toTopOf="@id/fontSizeSlider"
         tools:ignore="HardcodedText,SpUsage" />
 
+    <TextView
+        android:id="@+id/default_Size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+
+        android:text="@string/default_size"
+        android:textColor="#083CFA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.189"
+        app:layout_constraintStart_toEndOf="@+id/fontSizeTitleTV"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
