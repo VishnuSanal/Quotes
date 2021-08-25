@@ -1,6 +1,5 @@
 package phone.vishnu.quotes.fragment;
 
-import android.app.Application;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +31,6 @@ import phone.vishnu.quotes.activity.SplashActivity;
 import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
-import phone.vishnu.quotes.repository.FavRepository;
 
 public class SettingsFragment extends BottomSheetDialogFragment {
 
@@ -148,9 +146,6 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         sharedPreferenceHelper.resetSharedPreferences();
 
         deleteFiles(c);
-
-        new FavRepository((Application) requireContext().getApplicationContext())
-                .deleteAll();
 
     }
 
