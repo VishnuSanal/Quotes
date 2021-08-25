@@ -93,16 +93,16 @@
         android:id="@+id/default_Size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:textSize="15sp"
-        android:layout_marginTop="20dp"
-
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:padding="8dp"
         android:text="@string/default_size"
         android:textColor="#083CFA"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/fontSizeTitleTV"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.189"
-        app:layout_constraintStart_toEndOf="@+id/fontSizeTitleTV"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
