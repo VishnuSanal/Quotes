@@ -17,7 +17,7 @@ import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class FontSizeFragment extends BottomSheetDialogFragment {
-    private TextView defaultSize;
+    private TextView sizeReset;
     private Slider sizeSlider;
     private SharedPreferenceHelper sharedPreferenceHelper;
 
@@ -40,7 +40,7 @@ public class FontSizeFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_font_size, container, false);
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
-        defaultSize = inflate.findViewById(R.id.default_Size);
+        sizeReset = inflate.findViewById(R.id.fontSizeResetTV);
         sizeSlider = inflate.findViewById(R.id.fontSizeSlider);
         sizeSlider.setLabelFormatter(value -> (int) value + "sp");
         sizeSlider.setValue(sharedPreferenceHelper.getFontSizePreference());
@@ -62,8 +62,8 @@ public class FontSizeFragment extends BottomSheetDialogFragment {
 
         });
 
-//      code to make font size back to default(24sp)
-        defaultSize.setOnClickListener(v -> {
+//      code to reset font size or make font size back to default(24sp)
+        sizeReset.setOnClickListener(v -> {
             sharedPreferenceHelper.setFontSizePreference(24);
             ((MainActivity) requireActivity()).updateViewPager();
             sizeSlider.setValue(24);

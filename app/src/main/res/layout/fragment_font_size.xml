@@ -90,19 +90,21 @@
         tools:ignore="HardcodedText,SpUsage" />
 
     <TextView
-        android:id="@+id/default_Size"
+        android:id="@+id/fontSizeResetTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:background="?attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:padding="8dp"
         android:text="@string/default_size"
-        android:textColor="#083CFA"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/fontSizeTitleTV"
+        app:drawableEndCompat="@drawable/ic_reset"
+        app:layout_constraintBottom_toTopOf="@id/fontSizeSlider"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
