@@ -25,12 +25,13 @@
 </a>
 
 </p>
-
 <hr>
 
+<pre>
     ☆ Huge Collection of Inspirational Quotes that can be shared on Social Media Platforms as a high definition image
     ☆ Quotes Status Creation without any Image Editing whatsoever - that too in User-Friendly UI
     ☆ Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
+</pre>
 
 ## ☕ Enjoying Quotes? Consider Supporting!
 Please consider donating a small amount to support the development. It requires a lot of time and
@@ -126,6 +127,7 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
 
 ## ➕ Quotes – Quotes Status Creator includes
 
+<pre>
     • Inspirational Quotes
     • Success Quotes
     • Life Quotes
@@ -138,6 +140,7 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
     • Thinking Quotes
     • Optimistic Quotes
     • Creativity Quotes
+</pre>
 
 ## 📬 Feedback and Suggestion
 We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Leave your feedback/suggestions [here](https://t.me/QuotesStatusCreator) or feel free to create an issue! :)
