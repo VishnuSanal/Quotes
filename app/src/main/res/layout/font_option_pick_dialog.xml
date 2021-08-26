@@ -57,7 +57,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Change Font Colour"
+            android:text="Change Font Color"
             android:textColor="@color/textColor" />
 
         <RadioButton
