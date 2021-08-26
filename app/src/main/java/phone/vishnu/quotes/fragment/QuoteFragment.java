@@ -18,8 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-
 import java.io.File;
 
 import phone.vishnu.quotes.R;
@@ -72,6 +70,7 @@ public class QuoteFragment extends Fragment {
         String hexColor = sharedPreferenceHelper.getCardColorPreference();
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
+        float fontSize = sharedPreferenceHelper.getFontSizePreference();
 
         if ((!fontPath.equals("-1")) && (new File(fontPath).exists())) {
             try {
@@ -79,7 +78,6 @@ public class QuoteFragment extends Fragment {
                 quoteText.setTypeface(face);
             } catch (Exception e) {
                 Toast.makeText(getContext(), "Font file not found", Toast.LENGTH_SHORT).show();
-                FirebaseCrashlytics.getInstance().recordException(e);
                 e.printStackTrace();
             }
         } else {
@@ -90,6 +88,9 @@ public class QuoteFragment extends Fragment {
 
         quoteText.setTextColor(Color.parseColor(fontColor));
         authorText.setTextColor(Color.parseColor(fontColor));
+
+        quoteText.setTextSize(fontSize);
+        authorText.setTextSize((float) (fontSize / 1.2));
 
         ((CardView) quoteView.findViewById(R.id.cardView)).setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
@@ -111,7 +112,6 @@ public class QuoteFragment extends Fragment {
                 favIcon.setColorFilter(Color.RED);
 
         } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
 

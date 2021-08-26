@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -249,7 +248,6 @@ public class BGImagePickFragment extends BottomSheetDialogFragment implements BG
                 dismiss();
 
             }).addOnFailureListener(exception -> {
-                FirebaseCrashlytics.getInstance().recordException(exception);
                 exception.printStackTrace();
                 Toast.makeText(requireContext(), "Oops! Something went wrong!", Toast.LENGTH_LONG).show();
                 dialog.dismiss();

@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,11 +25,13 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        sharedPreferenceHelper = new SharedPreferenceHelper(this);
+        checkTheme(sharedPreferenceHelper.getAppThemePreference());
+
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_splash);
-
-        sharedPreferenceHelper = new SharedPreferenceHelper(this);
 
         removeFonts();
 
@@ -40,6 +43,14 @@ public class SplashActivity extends AppCompatActivity {
         else
             initTasks();
 
+    }
+
+    private void checkTheme(int i) {
+        if (i == 0) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else if (i == 1) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
     }
 
     private void removeFonts() {

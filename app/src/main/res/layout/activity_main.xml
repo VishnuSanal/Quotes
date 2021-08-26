@@ -12,10 +12,15 @@
         android:id="@+id/searchCountTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="serif"
         android:padding="2dp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/homeSearchView"
         app:layout_constraintEnd_toStartOf="@id/homeSearchView"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/homeSearchView" />
 
@@ -25,11 +30,36 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:closeIcon="@drawable/ic_close"
-        app:layout_constraintBottom_toTopOf="@id/viewPager"
+        app:layout_constraintBottom_toTopOf="@id/homeScrollView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintTop_toTopOf="parent"
         app:searchHintIcon="@drawable/ic_search"
         app:searchIcon="@drawable/ic_search" />
+
+    <HorizontalScrollView
+        android:id="@+id/homeScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/viewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/homeSearchView">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/homeChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:chipSpacing="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/homeSearchView"
+            app:singleLine="true"
+            app:singleSelection="true" />
+
+    </HorizontalScrollView>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
@@ -38,7 +68,7 @@
         app:layout_constraintBottom_toTopOf="@id/homeFAB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/homeSearchView" />
+        app:layout_constraintTop_toBottomOf="@id/homeScrollView" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/mainProgressIndicator"

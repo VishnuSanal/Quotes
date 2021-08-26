@@ -6,6 +6,7 @@ import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -36,14 +38,14 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initFABs();
         initAnimations();
         setUpSearchView();
+        setUpChipGroup();
     }
 
     @Override
@@ -278,7 +281,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             searchEditText.setTextColor(getResources().getColor(R.color.colorWhite));
             searchEditText.setHintTextColor(getResources().getColor(R.color.colorWhite));
         } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
             e.printStackTrace();
         }
 
@@ -295,6 +297,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return false;
             }
         });
+    }
+
+    private void setUpChipGroup() {
+
+        ChipGroup chipGroup = findViewById(R.id.homeChipGroup);
+
+        String[] tags = {
+                "Life", "Success", "Love", "Action", "Dream", "Fail",
+                "Thought", "Heart", "Mistake", "Wisdom", "Fear", "Courage",
+                "Friend", "Attitude", "Perseverance", "Motivation", "Inspiration"
+        };
+
+        for (String string : tags) {
+
+            Chip chip = new Chip(new ContextThemeWrapper(chipGroup.getContext(), R.style.ChipStyle));
+
+            chip.setText(string);
+            chip.setTextColor(getResources().getColor(R.color.colorWhite));
+            chip.setLetterSpacing(0.15f);
+
+            chip.setChipBackgroundColor(new ColorStateList(
+                    new int[][]{
+                            new int[]{android.R.attr.state_checked},
+                            new int[]{-android.R.attr.state_checked},
+                            new int[]{-android.R.attr.state_checked, -android.R.attr.state_focused}
+                    },
+                    new int[]{
+                            Color.parseColor("#424242"),
+                            Color.parseColor("#2A2A2A"),
+                            Color.parseColor("#2A2A2A")
+                    }
+            ));
+
+            chip.setCheckable(true);
+            chip.setCheckedIconVisible(true);
+
+            chipGroup.addView(chip);
+
+            chip.setOnCheckedChangeListener((buttonView, isChecked) -> getFilter().filter(isChecked ? buttonView.getText() : ""));
+        }
     }
 
     private void runInitChecks() {
@@ -486,8 +528,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 quotes -> {
 
                     sharedPreferenceHelper.setTotalQuotesCount(quotes.size());
-
-                    Collections.shuffle(quotes);
 
                     allQuotesList = new ArrayList<>(quotes);
 

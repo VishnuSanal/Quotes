@@ -88,16 +88,6 @@ public class AboutFragment extends BottomSheetDialogFragment {
                 openLink("https://github.com/VishnuSanal/Quotes");
             } else if (position == 5) {
                 openLink("https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md");
-            } else if (position == 6) {
-
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:"));
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{requireContext().getString(R.string.email_address_of_developer)});
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback of " + requireContext().getString(R.string.app_name));
-
-                if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
-                    startActivity(intent);
-                }
             }
         });
     }
@@ -114,8 +104,7 @@ public class AboutFragment extends BottomSheetDialogFragment {
                 new TourItem(R.drawable.ic_color_lens, "Join Telegram Channel", "Get a daily dose of inspiration on your inbox!"),
                 new TourItem(R.drawable.ic_done, "Rate the App", "Rate this app on Google Play"),
                 new TourItem(R.drawable.ic_info, "Source Code", "View source code on GitHub"),
-                new TourItem(R.drawable.ic_favorite, "Thanks To", "Thanks to these awesome people"),
-                new TourItem(R.drawable.ic_settings, " Send Feedback", " Send feedback to developer")
+                new TourItem(R.drawable.ic_favorite, "Thanks To", "Thanks to these awesome people")
         );
     }
 }

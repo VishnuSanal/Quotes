@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -171,7 +170,6 @@ public class FontFragment extends BottomSheetDialogFragment {
                     }
                 }).addOnFailureListener(exception -> {
                     exception.printStackTrace();
-                    FirebaseCrashlytics.getInstance().recordException(exception);
                     progressDialog.dismiss();
                     Toast.makeText(requireContext(), "Oops! Something went wrong!", Toast.LENGTH_LONG).show();
                 });
