@@ -14,6 +14,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "com.diffplug.spotless" version "5.14.3"
+}
+
 allprojects {
     repositories {
         google()
@@ -21,9 +25,25 @@ allprojects {
         maven {
             url "https://jitpack.io"
         }
+        maven {
+            url "https://jcenter.bintray.com"
+        }
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+spotless {
+    java {
+
+        licenseHeaderFile 'license-spotless'
+
+        importOrder('android', 'androidx', 'com', 'java', 'phone', '')
+
+        target 'app/src/**/*.java'
+
+        googleJavaFormat('1.7').aosp()
+
+        removeUnusedImports()
+
+        delete rootProject.buildDir
+    }
 }

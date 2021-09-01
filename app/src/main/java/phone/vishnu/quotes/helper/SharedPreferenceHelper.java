@@ -1,14 +1,30 @@
+/*
+ * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
+ *
+ * This file is part of Quotes Status Creator.
+ *
+ * Quotes Status Creator is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package phone.vishnu.quotes.helper;
 
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
-
 import phone.vishnu.quotes.model.Quote;
 
 public class SharedPreferenceHelper {
@@ -40,7 +56,8 @@ public class SharedPreferenceHelper {
     private final SharedPreferences sharedPreferences;
 
     public SharedPreferenceHelper(Context context) {
-        this.sharedPreferences = context.getSharedPreferences(context.getPackageName(), MODE_PRIVATE);
+        this.sharedPreferences =
+                context.getSharedPreferences(context.getPackageName(), MODE_PRIVATE);
     }
 
     public boolean isFirstRun() {
@@ -61,8 +78,7 @@ public class SharedPreferenceHelper {
 
     public String getFavoriteArrayString() {
 
-        if (!sharedPreferences.contains(FAV_ARRAY_STRING))
-            return null;
+        if (!sharedPreferences.contains(FAV_ARRAY_STRING)) return null;
 
         return sharedPreferences.getString(FAV_ARRAY_STRING, null);
     }

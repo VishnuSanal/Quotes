@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
+ *
+ * This file is part of Quotes Status Creator.
+ *
+ * Quotes Status Creator is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package phone.vishnu.quotes.fragment;
 
 import android.app.TimePickerDialog;
@@ -13,19 +32,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
-
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.ncorti.slidetoact.SlideToActView;
-
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Objects;
-
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.SplashActivity;
 import phone.vishnu.quotes.helper.AlarmHelper;
@@ -39,8 +54,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
     private SharedPreferenceHelper sharedPreferenceHelper;
     private TextView shareActionPickTV, darkModePickTV;
 
-    public SettingsFragment() {
-    }
+    public SettingsFragment() {}
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -54,10 +68,12 @@ public class SettingsFragment extends BottomSheetDialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        sharedPreferenceHelper = new SharedPreferenceHelper(Objects.requireNonNull(requireContext()));
+        sharedPreferenceHelper =
+                new SharedPreferenceHelper(Objects.requireNonNull(requireContext()));
 
         resetToggle = inflate.findViewById(R.id.settingsResetToggle);
 
@@ -81,56 +97,62 @@ public class SettingsFragment extends BottomSheetDialogFragment {
 
         resetToggle.setOnSlideCompleteListener(slideToActView -> resetSettings(requireContext()));
 
-        reminderSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
+        reminderSwitch.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> {
+                    if (isChecked) {
 
-                Calendar c = Calendar.getInstance();
+                        Calendar c = Calendar.getInstance();
 
-                //TODO: Find a way to implement this in Bottom Sheet!
+                        // TODO: Find a way to implement this in Bottom Sheet!
 
-                TimePickerDialog timePickerDialog = new TimePickerDialog(
-                        requireContext(),
-                        (view1, hourOfDay, minute) -> {
+                        TimePickerDialog timePickerDialog =
+                                new TimePickerDialog(
+                                        requireContext(),
+                                        (view1, hourOfDay, minute) -> {
+                                            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                            c.set(Calendar.MINUTE, minute);
 
-                            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                            c.set(Calendar.MINUTE, minute);
+                                            sharedPreferenceHelper.setAlarmString(
+                                                    "At " + hourOfDay + " : " + minute + " Daily");
 
-                            sharedPreferenceHelper.setAlarmString("At " + hourOfDay + " : " + minute + " Daily");
+                                            reminderSwitch.setText(
+                                                    getSwitchText(
+                                                            MessageFormat.format(
+                                                                    "At {0} : {1} Daily",
+                                                                    hourOfDay, minute)));
 
-                            reminderSwitch.setText(getSwitchText(MessageFormat.format("At {0} : {1} Daily", hourOfDay, minute)));
+                                            AlarmHelper.setAlarm(requireContext(), c);
+                                        },
+                                        c.get(Calendar.HOUR_OF_DAY),
+                                        c.get(Calendar.MINUTE),
+                                        DateFormat.is24HourFormat(requireContext()));
 
-                            AlarmHelper.setAlarm(requireContext(), c);
+                        timePickerDialog.setOnCancelListener(d -> reminderSwitch.setChecked(false));
 
-                        },
-                        c.get(Calendar.HOUR_OF_DAY),
-                        c.get(Calendar.MINUTE),
-                        DateFormat.is24HourFormat(requireContext())
-                );
+                        timePickerDialog.show();
 
-                timePickerDialog.setOnCancelListener(d -> reminderSwitch.setChecked(false));
+                    } else {
+                        alarmTurnedOff(requireContext());
+                    }
+                });
 
-                timePickerDialog.show();
+        shareActionPickTV.setOnClickListener(
+                v -> {
+                    ShareOptionPickFragment bottomSheet = ShareOptionPickFragment.newInstance();
+                    bottomSheet.show(
+                            requireActivity().getSupportFragmentManager(), "ShareActionPicker");
 
-            } else {
-                alarmTurnedOff(requireContext());
-            }
-        });
+                    dismiss();
+                });
 
-        shareActionPickTV.setOnClickListener(v -> {
-            ShareOptionPickFragment bottomSheet = ShareOptionPickFragment.newInstance();
-            bottomSheet.show(requireActivity().getSupportFragmentManager(), "ShareActionPicker");
+        darkModePickTV.setOnClickListener(
+                v -> {
+                    DarkModePickFragment bottomSheet = DarkModePickFragment.newInstance();
+                    bottomSheet.show(
+                            requireActivity().getSupportFragmentManager(), "DarkModePickFragment");
 
-            dismiss();
-        });
-
-        darkModePickTV.setOnClickListener(v -> {
-
-            DarkModePickFragment bottomSheet = DarkModePickFragment.newInstance();
-            bottomSheet.show(requireActivity().getSupportFragmentManager(), "DarkModePickFragment");
-
-            dismiss();
-
-        });
+                    dismiss();
+                });
     }
 
     private void alarmTurnedOff(Context context) {
@@ -146,7 +168,6 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         sharedPreferenceHelper.resetSharedPreferences();
 
         deleteFiles(c);
-
     }
 
     private void deleteFiles(Context c) {
@@ -155,19 +176,19 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         File BGFile = new File(exportHelper.getBGPath());
         File SSFile = new File(exportHelper.getSSPath());
 
-        if (BGFile.exists())
-            BGFile.delete();
-        if (SSFile.exists())
-            SSFile.delete();
+        if (BGFile.exists()) BGFile.delete();
+        if (SSFile.exists()) SSFile.delete();
 
         requireActivity().finish();
 
         if (getContext() != null)
-            requireActivity().startActivity(
-                    new Intent(requireContext(), SplashActivity.class
-                    ));
+            requireActivity().startActivity(new Intent(requireContext(), SplashActivity.class));
 
-        Toast.makeText(requireContext(), "Settings Reset\nRestarting App for changes to take effect", Toast.LENGTH_SHORT).show();
+        Toast.makeText(
+                        requireContext(),
+                        "Settings Reset\nRestarting App for changes to take effect",
+                        Toast.LENGTH_SHORT)
+                .show();
     }
 
     private SpannableString getSwitchText(String v) {
@@ -180,10 +201,17 @@ public class SettingsFragment extends BottomSheetDialogFragment {
 
         SpannableString spannableString = new SpannableString(s);
         spannableString.setSpan(new RelativeSizeSpan(1.5f), 0, s1.length(), 0);
-        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.textColor)), 0, s1.length(), 0);
-        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.textColorLight)), s1.length(), s.length(), 0);
+        spannableString.setSpan(
+                new ForegroundColorSpan(getResources().getColor(R.color.textColor)),
+                0,
+                s1.length(),
+                0);
+        spannableString.setSpan(
+                new ForegroundColorSpan(getResources().getColor(R.color.textColorLight)),
+                s1.length(),
+                s.length(),
+                0);
 
         return spannableString;
-
     }
 }

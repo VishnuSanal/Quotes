@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
+ *
+ * This file is part of Quotes Status Creator.
+ *
+ * Quotes Status Creator is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package phone.vishnu.quotes.fragment;
 
 import android.animation.Animator;
@@ -8,14 +27,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
 import java.util.Objects;
-
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.ShareHelper;
@@ -59,15 +74,21 @@ public class ShareOptionPickFragment extends BottomSheetDialogFragment {
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 
         if (getArguments() != null)
-            if (getArguments().containsKey(QUOTE_EXTRA) && getArguments().containsKey(QUOTE_EXTRA)) {
-                quote = new Quote(Objects.requireNonNull(getArguments().getString(QUOTE_EXTRA)), Objects.requireNonNull(getArguments().getString(AUTHOR_EXTRA)));
+            if (getArguments().containsKey(QUOTE_EXTRA)
+                    && getArguments().containsKey(QUOTE_EXTRA)) {
+                quote =
+                        new Quote(
+                                Objects.requireNonNull(getArguments().getString(QUOTE_EXTRA)),
+                                Objects.requireNonNull(getArguments().getString(AUTHOR_EXTRA)));
             }
-
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.share_action_option_pick_dialog, container, false);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
@@ -77,8 +98,7 @@ public class ShareOptionPickFragment extends BottomSheetDialogFragment {
         if (quote != null)
             radioGroup.findViewById(R.id.bottomSheetAskRadioButton).setVisibility(View.GONE);
 
-        if (quote == null)
-            setChecked(sharedPreferenceHelper.getShareButtonAction());
+        if (quote == null) setChecked(sharedPreferenceHelper.getShareButtonAction());
 
         return inflate;
     }
@@ -87,28 +107,27 @@ public class ShareOptionPickFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        radioGroup.setOnCheckedChangeListener((group, id) -> {
+        radioGroup.setOnCheckedChangeListener(
+                (group, id) -> {
+                    if (quote != null) shareButtonClicked(getInt(id), quote);
+                    else sharedPreferenceHelper.setShareButtonAction(getInt(id));
 
-            if (quote != null)
-                shareButtonClicked(getInt(id), quote);
-            else
-                sharedPreferenceHelper.setShareButtonAction(getInt(id));
+                    ((MainActivity) requireActivity()).updateViewPager();
 
-            ((MainActivity) requireActivity()).updateViewPager();
-
-            view.findViewById(R.id.bottomSheetDoneIndicatorIV)
-                    .animate()
-                    .alpha(1)
-                    .rotation(360)
-                    .translationY(70 * (getInt(id) + 1))
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            dismiss();
-                        }
-                    });
-        });
+                    view.findViewById(R.id.bottomSheetDoneIndicatorIV)
+                            .animate()
+                            .alpha(1)
+                            .rotation(360)
+                            .translationY(70 * (getInt(id) + 1))
+                            .setListener(
+                                    new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            super.onAnimationEnd(animation);
+                                            dismiss();
+                                        }
+                                    });
+                });
     }
 
     private void shareButtonClicked(int i, Quote q) {
@@ -123,30 +142,30 @@ public class ShareOptionPickFragment extends BottomSheetDialogFragment {
 
     private void setChecked(int i) {
         if (i == 0) {
-            ((RadioButton) radioGroup.findViewById(R.id.bottomSheetCopyRadioButton)).setChecked(true);
+            ((RadioButton) radioGroup.findViewById(R.id.bottomSheetCopyRadioButton))
+                    .setChecked(true);
         } else if (i == 1) {
-            ((RadioButton) radioGroup.findViewById(R.id.bottomSheetShareRadioButton)).setChecked(true);
+            ((RadioButton) radioGroup.findViewById(R.id.bottomSheetShareRadioButton))
+                    .setChecked(true);
         } else if (i == 2) {
-            ((RadioButton) radioGroup.findViewById(R.id.bottomSheetSaveRadioButton)).setChecked(true);
+            ((RadioButton) radioGroup.findViewById(R.id.bottomSheetSaveRadioButton))
+                    .setChecked(true);
         } else if (i == 3) {
-            ((RadioButton) radioGroup.findViewById(R.id.bottomSheetAskRadioButton)).setChecked(true);
+            ((RadioButton) radioGroup.findViewById(R.id.bottomSheetAskRadioButton))
+                    .setChecked(true);
         }
     }
 
     private int getInt(int id) {
-        //Copy -> 0
-        //Share -> 1
-        //Save -> 2
-        //Askqf -> 3
+        // Copy -> 0
+        // Share -> 1
+        // Save -> 2
+        // Askqf -> 3
 
-        if (id == R.id.bottomSheetCopyRadioButton)
-            return 0;
-        else if (id == R.id.bottomSheetShareRadioButton)
-            return 1;
-        else if (id == R.id.bottomSheetSaveRadioButton)
-            return 2;
-        else if (id == R.id.bottomSheetAskRadioButton)
-            return 3;
+        if (id == R.id.bottomSheetCopyRadioButton) return 0;
+        else if (id == R.id.bottomSheetShareRadioButton) return 1;
+        else if (id == R.id.bottomSheetSaveRadioButton) return 2;
+        else if (id == R.id.bottomSheetAskRadioButton) return 3;
         return 1;
     }
 }

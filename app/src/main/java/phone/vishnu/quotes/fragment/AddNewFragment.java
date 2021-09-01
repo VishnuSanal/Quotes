@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
+ *
+ * This file is part of Quotes Status Creator.
+ *
+ * Quotes Status Creator is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package phone.vishnu.quotes.fragment;
 
 import android.app.Application;
@@ -7,15 +26,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;
-
 import java.util.Objects;
-
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.repository.FavRepository;
@@ -37,7 +52,10 @@ public class AddNewFragment extends BottomSheetDialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_new, container, false);
 
         quoteTIE = view.findViewById(R.id.addNewQuoteTIE);
@@ -54,31 +72,33 @@ public class AddNewFragment extends BottomSheetDialogFragment {
 
         quoteTIE.requestFocus();
 
-        submitButton.setOnClickListener(v -> {
+        submitButton.setOnClickListener(
+                v -> {
+                    String quote = Objects.requireNonNull(quoteTIE.getText()).toString();
+                    String author = Objects.requireNonNull(authorTIE.getText()).toString();
 
-            String quote = Objects.requireNonNull(quoteTIE.getText()).toString();
-            String author = Objects.requireNonNull(authorTIE.getText()).toString();
+                    if (quote.isEmpty() || author.isEmpty()) {
+                        if (quote.isEmpty()) {
+                            quoteTIE.setError("Field Empty");
+                            quoteTIE.requestFocus();
+                        } else {
+                            authorTIE.setError("Field Empty");
+                            authorTIE.requestFocus();
+                        }
+                    } else {
+                        new FavRepository((Application) requireContext().getApplicationContext())
+                                .insertFav(new Quote(quote, author, true));
 
-            if (quote.isEmpty() || author.isEmpty()) {
-                if (quote.isEmpty()) {
-                    quoteTIE.setError("Field Empty");
-                    quoteTIE.requestFocus();
-                } else {
-                    authorTIE.setError("Field Empty");
-                    authorTIE.requestFocus();
-                }
-            } else {
-                new FavRepository((Application) requireContext().getApplicationContext())
-                        .insertFav(new Quote(quote, author, true));
+                        Toast.makeText(
+                                        requireContext(),
+                                        "Quote added to Favourites",
+                                        Toast.LENGTH_SHORT)
+                                .show();
 
-                Toast.makeText(requireContext(), "Quote added to Favourites", Toast.LENGTH_SHORT).show();
-
-                dismiss();
-            }
-
-        });
+                        dismiss();
+                    }
+                });
 
         cancelButton.setOnClickListener(v -> dismiss());
-
     }
 }
