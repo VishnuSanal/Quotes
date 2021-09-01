@@ -89,4 +89,21 @@
         app:layout_constraintTop_toTopOf="@id/fontSizeSlider"
         tools:ignore="HardcodedText,SpUsage" />
 
+    <TextView
+        android:id="@+id/fontSizeResetTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/default_size"
+        android:textSize="16sp"
+        app:drawableEndCompat="@drawable/ic_reset"
+        app:layout_constraintBottom_toTopOf="@id/fontSizeSlider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

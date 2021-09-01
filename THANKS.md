@@ -89,6 +89,7 @@
  - [Shourya Shikhar](https://github.com/danger-ahead)
  - [Shuvashish Sahoo](https://github.com/shuvashish76)
  - [Jazil T S](https://github.com/tsjazil)
+ - [Devansh Gaur](https://github.com/Devansh-gaur-1611)
 
 ## ♥ Other awesome people who helped
 
