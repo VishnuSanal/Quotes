@@ -17,7 +17,7 @@ jobs:
           java-version: 1.8
 
       - name: Spotless Test
-        run: ./gradlew spotlessCheck --stacktrace
+        run: bash ./gradlew spotlessCheck --stacktrace
 
       - name: Gradle Build
-        run: ./gradlew test --stacktrace
+        run: bash ./gradlew test --stacktrace
