@@ -15,9 +15,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+          
+      - name: Change Wrapper Permissions
+        run: chmod +x ./gradlew
 
       - name: Spotless Test
-        run: bash ./gradlew spotlessCheck --stacktrace
+        run: ./gradlew spotlessCheck --stacktrace
 
       - name: Gradle Build
-        run: bash ./gradlew test --stacktrace
+        run: ./gradlew test --stacktrace
