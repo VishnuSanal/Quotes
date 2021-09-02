@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedPreferenceHelper = new SharedPreferenceHelper(that);
+        sharedPreferenceHelper = new SharedPreferenceHelper(this);
         exportHelper = new ExportHelper(this);
 
         viewModel =
