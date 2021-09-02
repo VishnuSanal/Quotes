@@ -113,8 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewModel =
                 new ViewModelProvider(
                                 this,
-                                new ViewModelProvider.AndroidViewModelFactory(
-                                        (Application) getApplicationContext()))
+                                new ViewModelProvider.AndroidViewModelFactory((Application) getApplicationContext()))
                         .get(MainViewModel.class);
 
         setIntentListeners(savedInstanceState);
