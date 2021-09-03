@@ -1,115 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_background"
-    android:orientation="vertical"
-    tools:context=".fragment.FavoriteFragment"
-    >
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bottom_sheet_background"
+	android:orientation="vertical"
+	tools:context=".fragment.FavoriteFragment"
+	>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/favTitleTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:letterSpacing="0.15"
-            android:padding="8dp"
-            android:text="@string/favorites"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+		<TextView
+			android:id="@+id/favTitleTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:letterSpacing="0.15"
+			android:padding="8dp"
+			android:text="@string/favorites"
+			android:textColor="@color/colorPrimaryDark"
+			android:textSize="16sp"
+			app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/favAddTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="?attr/selectableItemBackground"
-            android:contentDescription="@string/add_custom_quote"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="@string/add_custom_quote"
-            android:textSize="16sp"
-            app:drawableEndCompat="@drawable/ic_post_add"
-            app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toEndOf="@id/favTitleTV"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/colorAccent" />
+		<TextView
+			android:id="@+id/favAddTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:background="?attr/selectableItemBackground"
+			android:contentDescription="@string/add_custom_quote"
+			android:gravity="center_vertical"
+			android:padding="8dp"
+			android:text="@string/add_custom_quote"
+			android:textSize="16sp"
+			app:drawableEndCompat="@drawable/ic_post_add"
+			app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="1"
+			app:layout_constraintStart_toEndOf="@id/favTitleTV"
+			app:layout_constraintTop_toTopOf="parent"
+			app:tint="@color/colorAccent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/favGuideLineOne"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="48dp" />
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/favGuideLineOne"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintGuide_begin="48dp" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/favProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/favGuideLineOne" />
+		<com.google.android.material.progressindicator.CircularProgressIndicator
+			android:id="@+id/favProgressBar"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:indeterminate="true"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/favGuideLineOne" />
 
-        <ImageView
-            android:id="@+id/recyclerViewEmptyHintIV"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="@string/fav_recyclerview_empty_hint_imageview"
-            android:src="@drawable/ic_close"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/favoriteRecyclerView"
-            app:layout_constraintEnd_toEndOf="@id/favoriteRecyclerView"
-            app:layout_constraintStart_toStartOf="@id/favoriteRecyclerView"
-            app:layout_constraintTop_toTopOf="@id/favoriteRecyclerView"
-            app:tint="@color/textColor" />
+		<ImageView
+			android:id="@+id/recyclerViewEmptyHintIV"
+			android:layout_width="72dp"
+			android:layout_height="72dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginEnd="16dp"
+			android:layout_marginBottom="8dp"
+			android:contentDescription="@string/fav_recyclerview_empty_hint_imageview"
+			android:src="@drawable/ic_close"
+			android:visibility="gone"
+			app:layout_constraintBottom_toBottomOf="@id/favoriteRecyclerView"
+			app:layout_constraintEnd_toEndOf="@id/favoriteRecyclerView"
+			app:layout_constraintStart_toStartOf="@id/favoriteRecyclerView"
+			app:layout_constraintTop_toTopOf="@id/favoriteRecyclerView"
+			app:tint="@color/textColor" />
 
-        <TextView
-            android:id="@+id/recyclerViewEmptyHintTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="serif"
-            android:textAlignment="center"
-            android:textColor="@color/textColor"
-            android:textSize="18sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/recyclerViewEmptyHintIV"
-            app:layout_constraintStart_toStartOf="@id/recyclerViewEmptyHintIV"
-            app:layout_constraintTop_toBottomOf="@id/recyclerViewEmptyHintIV" />
+		<TextView
+			android:id="@+id/recyclerViewEmptyHintTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="8dp"
+			android:layout_marginEnd="16dp"
+			android:layout_marginBottom="16dp"
+			android:fontFamily="serif"
+			android:textAlignment="center"
+			android:textColor="@color/textColor"
+			android:textSize="18sp"
+			android:visibility="gone"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="@id/recyclerViewEmptyHintIV"
+			app:layout_constraintStart_toStartOf="@id/recyclerViewEmptyHintIV"
+			app:layout_constraintTop_toBottomOf="@id/recyclerViewEmptyHintIV" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/favoriteRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/favProgressBar"
-            tools:listitem="@layout/favorite_single_item" />
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/favoriteRecyclerView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:nestedScrollingEnabled="false"
+			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/favProgressBar"
+			tools:listitem="@layout/favorite_single_item" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

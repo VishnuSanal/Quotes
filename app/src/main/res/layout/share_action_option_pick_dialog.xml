@@ -1,104 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_background"
-    android:elevation="8dp"
-    >
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bottom_sheet_background"
+	android:elevation="8dp"
+	>
 
-    <TextView
-        android:id="@+id/bottomSheetTitleTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:letterSpacing="0.15"
-        android:padding="8dp"
-        android:text="@string/pick_an_option"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/bottomSheetRadioGroup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+	<TextView
+		android:id="@+id/bottomSheetTitleTV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:letterSpacing="0.15"
+		android:padding="8dp"
+		android:text="@string/pick_an_option"
+		android:textColor="@color/colorPrimaryDark"
+		android:textSize="16sp"
+		app:layout_constraintBottom_toTopOf="@id/bottomSheetRadioGroup"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/bottomSheetDoneIndicatorIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:alpha="0"
-        android:contentDescription="@string/bottom_sheet_done_indicator"
-        android:padding="8dp"
-        android:src="@drawable/ic_done"
-        app:layout_constraintBottom_toTopOf="@id/bottomSheetRadioGroup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/bottomSheetTitleTV"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/colorAccent" />
+	<ImageView
+		android:id="@+id/bottomSheetDoneIndicatorIV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:alpha="0"
+		android:contentDescription="@string/bottom_sheet_done_indicator"
+		android:padding="8dp"
+		android:src="@drawable/ic_done"
+		app:layout_constraintBottom_toTopOf="@id/bottomSheetRadioGroup"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="1"
+		app:layout_constraintStart_toEndOf="@id/bottomSheetTitleTV"
+		app:layout_constraintTop_toTopOf="parent"
+		app:tint="@color/colorAccent" />
 
-    <RadioGroup
-        android:id="@+id/bottomSheetRadioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomSheetTitleTV"
-        tools:ignore="RtlSymmetry">
+	<RadioGroup
+		android:id="@+id/bottomSheetRadioGroup"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:orientation="vertical"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/bottomSheetTitleTV"
+		tools:ignore="RtlSymmetry">
 
-        <RadioButton
-            android:id="@+id/bottomSheetCopyRadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:drawableStart="@drawable/ic_copy"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:paddingStart="32dp"
-            android:text="@string/copy_quote_to_clipboard"
-            android:textColor="@color/textColor" />
+		<RadioButton
+			android:id="@+id/bottomSheetCopyRadioButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/colorPrimaryDark"
+			android:drawableStart="@drawable/ic_copy"
+			android:drawablePadding="8dp"
+			android:padding="8dp"
+			android:paddingStart="32dp"
+			android:text="@string/copy_quote_to_clipboard"
+			android:textColor="@color/textColor" />
 
-        <RadioButton
-            android:id="@+id/bottomSheetShareRadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:drawableStart="@drawable/ic_share"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:paddingStart="32dp"
-            android:text="@string/share_quote_as_image"
-            android:textColor="@color/textColor" />
+		<RadioButton
+			android:id="@+id/bottomSheetShareRadioButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/colorPrimaryDark"
+			android:drawableStart="@drawable/ic_share"
+			android:drawablePadding="8dp"
+			android:padding="8dp"
+			android:paddingStart="32dp"
+			android:text="@string/share_quote_as_image"
+			android:textColor="@color/textColor" />
 
-        <RadioButton
-            android:id="@+id/bottomSheetSaveRadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:drawableStart="@drawable/ic_save"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:paddingStart="32dp"
-            android:text="@string/save_to_gallery"
-            android:textColor="@color/textColor" />
+		<RadioButton
+			android:id="@+id/bottomSheetSaveRadioButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/colorPrimaryDark"
+			android:drawableStart="@drawable/ic_save"
+			android:drawablePadding="8dp"
+			android:padding="8dp"
+			android:paddingStart="32dp"
+			android:text="@string/save_to_gallery"
+			android:textColor="@color/textColor" />
 
-        <RadioButton
-            android:id="@+id/bottomSheetAskRadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:drawableStart="@drawable/ic_menu"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:paddingStart="32dp"
-            android:text="@string/ask_every_time"
-            android:textColor="@color/textColor" />
+		<RadioButton
+			android:id="@+id/bottomSheetAskRadioButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/colorPrimaryDark"
+			android:drawableStart="@drawable/ic_menu"
+			android:drawablePadding="8dp"
+			android:padding="8dp"
+			android:paddingStart="32dp"
+			android:text="@string/ask_every_time"
+			android:textColor="@color/textColor" />
 
-    </RadioGroup>
+	</RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,34 +1,34 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+	<!-- Base application theme. -->
+	<style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+		<!-- Customize your theme here. -->
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+	</style>
 
-    <style name="DialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
-        <item name="android:background">@color/BGColorLight</item>
-        <item name="android:text">@color/textColor</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+	<style name="DialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+		<item name="android:background">@color/BGColorLight</item>
+		<item name="android:text">@color/textColor</item>
+		<item name="colorAccent">@color/colorAccent</item>
+	</style>
 
-    <style name="CustomBottomSheetDialogTheme" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
+	<style name="CustomBottomSheetDialogTheme" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+		<item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:windowSoftInputMode">adjustResize</item>
+		<item name="android:statusBarColor">@android:color/transparent</item>
+	</style>
 
-    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/bottom_sheet_background</item>
-    </style>
+	<style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+		<item name="android:background">@drawable/bottom_sheet_background</item>
+	</style>
 
-    <style name="ChipStyle" parent="Theme.MaterialComponents.DayNight">
+	<style name="ChipStyle" parent="Theme.MaterialComponents.DayNight">
 
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
 
-    </style>
+	</style>
 
 </resources>
