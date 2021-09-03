@@ -25,13 +25,13 @@
         android:layout_margin="8dp"
         android:letterSpacing="0.15"
         android:padding="8dp"
-        android:text="Pick Font Style"
+        android:text="@string/pick_font_style"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fontProgressBar"
-        tools:ignore="HardcodedText" />
+         />
 
     <ListView
         android:id="@+id/fontListView"

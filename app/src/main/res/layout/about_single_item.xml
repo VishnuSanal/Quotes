@@ -7,14 +7,14 @@
     android:clickable="true"
     android:focusable="true"
     android:padding="8dp"
-    tools:ignore="HardcodedText">
+    >
 
     <ImageView
         android:id="@+id/aboutSingleItemIconIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/icon_background"
-        android:contentDescription="About Icon IV"
+        android:contentDescription="@string/about_icon_iv"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -15,12 +15,12 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="2dp"
-        android:contentDescription="Color Pick Single IV"
+        android:contentDescription="@string/color_pick_single_iv"
         app:layout_constraintBottom_toTopOf="@id/colorPickSingleTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+         />
 
     <TextView
         android:id="@+id/colorPickSingleTV"
@@ -36,6 +36,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/colorPickSingleView"
-        tools:ignore="HardcodedText" />
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
     android:focusable="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".fragment.SettingsFragment"
-    tools:ignore="HardcodedText">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,14 +23,14 @@
             android:layout_margin="8dp"
             android:letterSpacing="0.15"
             android:padding="8dp"
-            android:text="Settings"
+            android:text="@string/settings"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
+             />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/settingsReminderSwitch"
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:contentDescription="Settings Screen Notification Switch Hint"
+            android:contentDescription="@string/settings_screen_notification_switch_hint"
             android:scaleType="fitXY"
             android:src="@drawable/ic_notifications"
             app:layout_constraintBottom_toBottomOf="@id/settingsReminderSwitch"
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:contentDescription="Settings Screen Share TV Hint"
+            android:contentDescription="@string/settings_screen_share_tv_hint"
             android:scaleType="fitXY"
             android:src="@drawable/ic_share"
             app:layout_constraintBottom_toBottomOf="@id/settingsShareActionPickTV"
@@ -113,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:contentDescription="Settings Screen Share TV Hint"
+            android:contentDescription="@string/settings_screen_share_tv_hint"
             android:scaleType="fitXY"
             android:src="@drawable/ic_brightness_auto"
             app:layout_constraintBottom_toBottomOf="@id/settingsDarkModePickTV"

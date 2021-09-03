@@ -7,14 +7,14 @@
     app:cardCornerRadius="4dp"
     app:cardElevation="8dp"
     app:cardUseCompatPadding="true"
-    tools:ignore="HardcodedText">
+    >
 
     <ImageView
         android:id="@+id/defaultSingleImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:contentDescription="Default Single Image"
+        android:contentDescription="@string/default_single_image"
         android:scaleType="centerCrop"
         android:src="@color/colorAccent" />
 

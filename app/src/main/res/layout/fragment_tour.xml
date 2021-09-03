@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/introBGColor"
     tools:context=".fragment.TourFragment"
-    tools:ignore="HardcodedText">
+    >
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/splashScreenTourViewPager"
@@ -22,7 +22,7 @@
         style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SKIP"
+        android:text="@string/skip"
         android:textColor="@color/introIconColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/splashScreenTourTabLayout"
@@ -46,7 +46,7 @@
         style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NEXT"
+        android:text="@string/next"
         android:textColor="@color/introIconColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

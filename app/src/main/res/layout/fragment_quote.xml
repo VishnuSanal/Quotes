@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context=".fragment.QuoteFragment"
-    tools:ignore="HardcodedText">
+    >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -30,7 +30,7 @@
                 android:id="@+id/favoriteImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="Quote Fragment Favourite Button"
+                android:contentDescription="@string/quote_fragment_favourite_button"
                 android:src="@drawable/ic_favorite"
                 app:layout_constraintEnd_toStartOf="@id/shareImageView"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +40,7 @@
                 android:id="@+id/shareImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="Quote Fragment Share Button"
+                android:contentDescription="@string/quote_fragment_share_button"
                 android:src="@drawable/ic_share"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

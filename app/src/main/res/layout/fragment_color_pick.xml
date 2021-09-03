@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
     tools:context=".fragment.ColorPickFragment"
-    tools:ignore="HardcodedText">
+    >
 
     <TextView
         android:id="@+id/colorPickTitleTV"
@@ -15,14 +15,14 @@
         android:layout_margin="8dp"
         android:letterSpacing="0.15"
         android:padding="8dp"
-        android:text="Pick Card Color"
+        android:text="@string/pick_card_color"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toTopOf="@id/colorPickRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/colorPickRecyclerView"

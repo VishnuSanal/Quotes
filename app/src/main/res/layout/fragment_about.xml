@@ -8,7 +8,7 @@
     android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".fragment.AboutFragment"
-    tools:ignore="HardcodedText">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:layout_margin="16dp"
-                    android:contentDescription="About Screen App Icon"
+                    android:contentDescription="@string/about_screen_app_icon"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_quotes"
                     app:layout_constraintBottom_toTopOf="@id/aboutSampleAppNameTextView"
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:fontFamily="serif"
-                    android:text="Quotes Status Creator"
+                    android:text="@string/quotes_status_creator"
                     android:textColor="@color/colorAccent"
                     android:textSize="24sp"
                     android:textStyle="bold"

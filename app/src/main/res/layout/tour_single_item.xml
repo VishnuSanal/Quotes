@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.TourSingleFragment"
-    tools:ignore="HardcodedText">
+    >
 
     <ImageView
         android:id="@+id/tourImage"
@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:adjustViewBounds="true"
-        android:contentDescription="Tour Fragment ImageView"
+        android:contentDescription="@string/tour_fragment_imageview"
         app:layout_constraintBottom_toTopOf="@id/tourGuideLineOne"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

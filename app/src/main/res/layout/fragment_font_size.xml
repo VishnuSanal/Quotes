@@ -14,14 +14,14 @@
         android:layout_margin="8dp"
         android:letterSpacing="0.15"
         android:padding="8dp"
-        android:text="Font Size"
+        android:text="@string/font_size"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+         />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/fontSizeSlider"

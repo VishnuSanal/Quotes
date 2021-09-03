@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
     android:elevation="8dp"
-    tools:ignore="HardcodedText">
+    >
 
     <TextView
         android:id="@+id/bottomSheetTitleTV"
@@ -15,7 +15,7 @@
         android:layout_margin="8dp"
         android:letterSpacing="0.15"
         android:padding="8dp"
-        android:text="Pick an Option"
+        android:text="@string/pick_an_option"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/bottomSheetRadioGroup"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:alpha="0"
-        android:contentDescription="Bottom Sheet Done Indicator"
+        android:contentDescription="@string/bottom_sheet_done_indicator"
         android:padding="8dp"
         android:src="@drawable/ic_done"
         app:layout_constraintBottom_toTopOf="@id/bottomSheetRadioGroup"
@@ -61,7 +61,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Copy Quote to Clipboard"
+            android:text="@string/copy_quote_to_clipboard"
             android:textColor="@color/textColor" />
 
         <RadioButton
@@ -73,7 +73,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Share Quote as Image"
+            android:text="@string/share_quote_as_image"
             android:textColor="@color/textColor" />
 
         <RadioButton
@@ -85,7 +85,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Save to Gallery"
+            android:text="@string/save_to_gallery"
             android:textColor="@color/textColor" />
 
         <RadioButton
@@ -97,7 +97,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Ask everytime"
+            android:text="@string/ask_every_time"
             android:textColor="@color/textColor" />
 
     </RadioGroup>

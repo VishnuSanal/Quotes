@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
     android:elevation="8dp"
-    tools:ignore="HardcodedText">
+    >
 
     <TextView
         android:id="@+id/backgroundPickTitleTV"
@@ -15,14 +15,14 @@
         android:layout_margin="8dp"
         android:letterSpacing="0.15"
         android:padding="8dp"
-        android:text="Pick an Option"
+        android:text="@string/pick_an_option"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+         />
 
     <RadioGroup
         android:id="@+id/backgroundPickRadioGroup"
@@ -45,7 +45,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Plain Color"
+            android:text="@string/plain_color"
             android:textColor="@color/textColor" />
 
         <RadioButton
@@ -57,7 +57,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Image From Gallery"
+            android:text="@string/image_from_gallery"
             android:textColor="@color/textColor" />
 
         <RadioButton
@@ -69,7 +69,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Default Images"
+            android:text="@string/default_images"
             android:textColor="@color/textColor" />
     </RadioGroup>
 

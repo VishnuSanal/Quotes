@@ -7,7 +7,7 @@
     android:background="@drawable/bottom_sheet_background"
     android:elevation="8dp"
     tools:context=".fragment.DarkModePickFragment"
-    tools:ignore="HardcodedText">
+    >
 
     <TextView
         android:id="@+id/darkModePickTitleTV"
@@ -16,7 +16,7 @@
         android:layout_margin="8dp"
         android:letterSpacing="0.15"
         android:padding="8dp"
-        android:text="Choose a Theme"
+        android:text="@string/choose_a_theme"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/darkModePickRadioGroup"
@@ -46,7 +46,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Light Theme"
+            android:text="@string/light_theme"
             android:textColor="@color/textColor" />
 
         <RadioButton
@@ -58,7 +58,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Dark Theme"
+            android:text="@string/dark_theme"
             android:textColor="@color/textColor" />
 
         <RadioButton
@@ -70,7 +70,7 @@
             android:drawablePadding="8dp"
             android:padding="8dp"
             android:paddingStart="32dp"
-            android:text="Follow System Theme"
+            android:text="@string/follow_system_theme"
             android:textColor="@color/textColor" />
 
     </RadioGroup>

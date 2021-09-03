@@ -7,7 +7,7 @@
     android:background="@drawable/bottom_sheet_background"
     android:orientation="vertical"
     tools:context=".fragment.FavoriteFragment"
-    tools:ignore="HardcodedText">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,10 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:background="?attr/selectableItemBackground"
-            android:contentDescription="Fav Add IV"
+            android:contentDescription="@string/add_custom_quote"
             android:gravity="center_vertical"
             android:padding="8dp"
-            android:text="Add Custom Quote"
+            android:text="@string/add_custom_quote"
             android:textSize="16sp"
             app:drawableEndCompat="@drawable/ic_post_add"
             app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
@@ -72,7 +72,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
-            android:contentDescription="Fav RecyclerView Empty Hint ImageView"
+            android:contentDescription="@string/fav_recyclerview_empty_hint_imageview"
             android:src="@drawable/ic_close"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/favoriteRecyclerView"
@@ -89,9 +89,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:contentDescription="Fav RecyclerView Empty Hint TextVIew"
             android:fontFamily="serif"
-            android:text="Nothing Here!"
             android:textAlignment="center"
             android:textColor="@color/textColor"
             android:textSize="18sp"

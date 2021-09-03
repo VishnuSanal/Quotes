@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:ignore="HardcodedText">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:id="@+id/widgetFavoriteImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Quote Widget Favourite Button"
+            android:contentDescription="@string/quote_widget_favourite_button"
             android:padding="8dp"
             android:src="@drawable/ic_favorite" />
 
@@ -25,7 +25,7 @@
             android:id="@+id/widgetShareImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Quote Widget Share Button"
+            android:contentDescription="@string/quote_widget_share_button"
             android:padding="8dp"
             android:src="@drawable/ic_share" />
     </LinearLayout>
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Quote Loading..."
+        android:text="@string/quote_loading"
         android:textColor="@android:color/darker_gray"
         android:textSize="24sp" />
 
