@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	app:cardBackgroundColor="@color/favCardColor"
+	app:cardBackgroundColor="@color/cardBGColor"
 	app:cardCornerRadius="4dp"
 	app:cardElevation="4dp"
 	app:cardUseCompatPadding="true"

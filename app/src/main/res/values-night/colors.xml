@@ -4,20 +4,18 @@
 	<color name="colorPrimary">#2EFFE2</color>
 	<color name="colorPrimaryDark">#00AE95</color>
 
-	<color name="BGColor">#000000</color>
-	<color name="BGColorLight">#5C5C5C</color>
+	<color name="BGColor">#17191D</color>
 
 	<color name="textColor">#FFFFFF</color>
 	<color name="textColorLight">#ECE4E4</color>
 
 	<color name="noColorIconColor">#BDBDBD</color>
 
-	<color name="bottomSheetBGColor">#191823</color>
+	<color name="dialogBGColor">#5C5C5C</color>
 
-	<color name="favCardColor">#000000</color>
+	<color name="cardBGColor">#050404</color>
 
 	<color name="introIconColor">#00B0FF</color>
-	<color name="introBGColor">#121212</color>
 	<color name="introTextColor">#666666</color>
 
 </resources>

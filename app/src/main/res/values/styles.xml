@@ -8,7 +8,7 @@
 	</style>
 
 	<style name="DialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
-		<item name="android:background">@color/BGColorLight</item>
+		<item name="android:background">@color/dialogBGColor</item>
 		<item name="android:text">@color/textColor</item>
 		<item name="colorAccent">@color/colorAccent</item>
 	</style>
