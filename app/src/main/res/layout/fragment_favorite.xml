@@ -21,7 +21,7 @@
 			android:letterSpacing="0.15"
 			android:padding="8dp"
 			android:text="@string/favorites"
-			android:textColor="@color/colorPrimaryDark"
+			android:textColor="@color/accentTextColor"
 			android:textSize="16sp"
 			app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
 			app:layout_constraintEnd_toEndOf="parent"

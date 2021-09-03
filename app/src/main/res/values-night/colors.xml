@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<color name="colorPrimary">#2EFFE2</color>
-	<color name="colorPrimaryDark">#00AE95</color>
+	<color name="accentTextColor">#00AE95</color>
 
 	<color name="BGColor">#17191D</color>
 

@@ -40,6 +40,6 @@
 		app:layout_constraintHorizontal_bias="1"
 		app:layout_constraintStart_toEndOf="@id/fontGuideLineOne"
 		app:layout_constraintTop_toTopOf="parent"
-		app:trackColor="@color/colorPrimaryDark" />
+		app:trackColor="@color/accentTextColor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

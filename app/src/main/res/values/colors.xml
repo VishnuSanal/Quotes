@@ -5,6 +5,9 @@
 	<color name="colorPrimaryDark">#00574B</color>
 	<color name="colorAccent">#D81B60</color>
 
+
+	<color name="accentTextColor">#00574B</color>
+
 	<color name="BGColor">#FFFFFF</color>
 
 	<color name="textColor">#000000</color>

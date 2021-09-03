@@ -26,7 +26,7 @@
 		android:letterSpacing="0.15"
 		android:padding="8dp"
 		android:text="@string/pick_font_style"
-		android:textColor="@color/colorPrimaryDark"
+		android:textColor="@color/accentTextColor"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0"
 		app:layout_constraintStart_toStartOf="parent"

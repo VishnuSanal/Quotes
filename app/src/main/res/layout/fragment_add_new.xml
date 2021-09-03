@@ -18,7 +18,7 @@
 			android:letterSpacing="0.15"
 			android:padding="8dp"
 			android:text="@string/add_custom_quote"
-			android:textColor="@color/colorPrimaryDark"
+			android:textColor="@color/accentTextColor"
 			app:layout_constraintBottom_toTopOf="@id/addNewQuoteTIL"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0"
@@ -82,7 +82,7 @@
 			android:layout_height="wrap_content"
 			android:layout_margin="8dp"
 			android:text="@string/add"
-			android:textColor="@color/colorPrimaryDark"
+			android:textColor="@color/accentTextColor"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/addNewAuthorTIL" />
@@ -94,7 +94,7 @@
 			android:layout_height="wrap_content"
 			android:layout_margin="8dp"
 			android:text="@string/cancel"
-			android:textColor="@color/colorPrimaryDark"
+			android:textColor="@color/accentTextColor"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toStartOf="@id/addNewSubmitButton"
 			app:layout_constraintTop_toBottomOf="@id/addNewAuthorTIL" />

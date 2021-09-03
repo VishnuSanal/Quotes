@@ -16,7 +16,7 @@
 		android:letterSpacing="0.15"
 		android:padding="8dp"
 		android:text="@string/pick_card_color"
-		android:textColor="@color/colorPrimaryDark"
+		android:textColor="@color/accentTextColor"
 		app:layout_constraintBottom_toTopOf="@id/colorPickRecyclerView"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0"

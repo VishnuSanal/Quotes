@@ -31,7 +31,7 @@
 		android:layout_marginEnd="4dp"
 		android:layout_marginBottom="4dp"
 		android:padding="4dp"
-		android:textColor="@color/colorPrimaryDark"
+		android:textColor="@color/accentTextColor"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
