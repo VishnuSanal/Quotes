@@ -33,10 +33,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.FileProvider;
 import java.io.BufferedOutputStream;
@@ -241,8 +241,6 @@ public class ExportHelper {
     private void saveImage(@NonNull final Context context, @NonNull final Bitmap bitmap)
             throws Exception {
 
-        Log.e("vishnu", "saveImage:" + "Hello");
-
         File root =
                 new File(
                         Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
@@ -263,6 +261,7 @@ public class ExportHelper {
         MediaScannerConnection.scanFile(context, new String[] {imagePath}, null, null);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     private void saveImage(
             @NonNull final Context context,
             @NonNull final Bitmap bitmap,
@@ -274,7 +273,9 @@ public class ExportHelper {
         final ContentValues values = new ContentValues();
         values.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName);
         values.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
-        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DCIM);
+        values.put(
+                MediaStore.MediaColumns.RELATIVE_PATH,
+                Environment.DIRECTORY_DCIM + File.separator + context.getString(R.string.app_name));
 
         final ContentResolver resolver = context.getContentResolver();
         Uri uri = null;
