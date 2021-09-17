@@ -60,6 +60,7 @@
 	<string name="quote_fragment_favourite_button" translatable="false">Quote Fragment Favourite Button</string>
 	<string name="quote_fragment_share_button" translatable="false">Quote Fragment Share Button</string>
 	<string name="settings_screen_notification_switch_hint" translatable="false">Settings Screen Notification Switch Hint</string>
+	<string name="settings_screen_fav_reverse_switch_hint" translatable="false">Settings Screen Fav Reverse Switch Hint</string>
 	<string name="settings_screen_share_tv_hint" translatable="false">Settings Screen Share TV Hint</string>
 	<string name="quote_widget_favourite_button" translatable="false">Quote Widget Favourite Button</string>
 	<string name="quote_widget_share_button" translatable="false">Quote Widget Share Button</string>

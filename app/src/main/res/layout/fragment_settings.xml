@@ -9,8 +9,7 @@
 	android:fillViewport="true"
 	android:focusable="true"
 	app:layout_behavior="@string/appbar_scrolling_view_behavior"
-	tools:context=".fragment.SettingsFragment"
-	>
+	tools:context=".fragment.SettingsFragment">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
@@ -29,8 +28,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			/>
+			app:layout_constraintTop_toTopOf="parent" />
 
 		<androidx.appcompat.widget.SwitchCompat
 			android:id="@+id/settingsReminderSwitch"
@@ -70,6 +68,56 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/settingsReminderSwitch" />
 
+		<androidx.appcompat.widget.SwitchCompat
+			android:id="@+id/settingsFavReverseSwitch"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:checked="true"
+			android:textColor="@color/textColor"
+			app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewTwo"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/settingsFavReverseSwitchHintIV"
+			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewOne" />
+
+		<ImageView
+			android:id="@+id/settingsFavReverseSwitchHintIV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:contentDescription="@string/settings_screen_fav_reverse_switch_hint"
+			android:scaleType="fitXY"
+			android:src="@drawable/ic_favorite"
+			app:layout_constraintBottom_toBottomOf="@id/settingsFavReverseSwitch"
+			app:layout_constraintEnd_toStartOf="@id/settingsFavReverseSwitch"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/settingsFavReverseSwitch"
+			app:tint="@color/colorAccent" />
+
+		<View
+			android:id="@+id/settingsSampleSpacerViewTwo"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="12dp"
+			android:layout_marginEnd="4dp"
+			android:background="@color/spacerColor"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/settingsFavReverseSwitch" />
+
+		<TextView
+			android:id="@+id/settingsShareActionPickTV"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:background="?attr/selectableItemBackground"
+			android:padding="8dp"
+			android:textColor="@color/textColor"
+			app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewThree"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/settingsShareActionHintIV"
+			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewTwo" />
+
 		<ImageView
 			android:id="@+id/settingsShareActionHintIV"
 			android:layout_width="wrap_content"
@@ -84,20 +132,8 @@
 			app:layout_constraintTop_toTopOf="@id/settingsShareActionPickTV"
 			app:tint="@color/colorAccent" />
 
-		<TextView
-			android:id="@+id/settingsShareActionPickTV"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:background="?attr/selectableItemBackground"
-			android:padding="8dp"
-			android:textColor="@color/textColor"
-			app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewTwo"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toEndOf="@id/settingsShareActionHintIV"
-			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewOne" />
-
 		<View
-			android:id="@+id/settingsSampleSpacerViewTwo"
+			android:id="@+id/settingsSampleSpacerViewThree"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
 			android:layout_marginStart="4dp"
@@ -129,13 +165,13 @@
 			android:background="?attr/selectableItemBackground"
 			android:padding="8dp"
 			android:textColor="@color/textColor"
-			app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewThree"
+			app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewFour"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toEndOf="@id/settingsDarkModePickHintIV"
-			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewTwo" />
+			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewThree" />
 
 		<View
-			android:id="@+id/settingsSampleSpacerViewThree"
+			android:id="@+id/settingsSampleSpacerViewFour"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
 			android:layout_marginStart="4dp"
@@ -155,7 +191,7 @@
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewThree"
+			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewFour"
 			app:outer_color="@color/colorAccent"
 			app:text="@string/reset_settings" />
 	</androidx.constraintlayout.widget.ConstraintLayout>

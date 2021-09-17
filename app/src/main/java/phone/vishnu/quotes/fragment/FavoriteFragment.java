@@ -187,6 +187,8 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
                             recyclerView.requestLayout();
                         });
 
+        boolean isFavActionReversed = sharedPreferenceHelper.isFavActionReversed();
+
         new ItemTouchHelper(
                         new ItemTouchHelper.SimpleCallback(
                                 0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
@@ -209,11 +211,25 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
                                                 actionState,
                                                 isCurrentlyActive)
                                         .addSwipeLeftBackgroundColor(
-                                                getResources().getColor(R.color.favGreenColor))
+                                                getResources()
+                                                        .getColor(
+                                                                isFavActionReversed
+                                                                        ? R.color.favRedColor
+                                                                        : R.color.favGreenColor))
                                         .addSwipeRightBackgroundColor(
-                                                getResources().getColor(R.color.favRedColor))
-                                        .addSwipeLeftActionIcon(R.drawable.ic_share)
-                                        .addSwipeRightActionIcon(R.drawable.ic_delete)
+                                                getResources()
+                                                        .getColor(
+                                                                isFavActionReversed
+                                                                        ? R.color.favGreenColor
+                                                                        : R.color.favRedColor))
+                                        .addSwipeLeftActionIcon(
+                                                isFavActionReversed
+                                                        ? R.drawable.ic_delete
+                                                        : R.drawable.ic_share)
+                                        .addSwipeRightActionIcon(
+                                                isFavActionReversed
+                                                        ? R.drawable.ic_share
+                                                        : R.drawable.ic_delete)
                                         .create()
                                         .decorate();
 
@@ -240,7 +256,9 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
                                     @NonNull final RecyclerView.ViewHolder viewHolder,
                                     int direction) {
 
-                                if (direction == ItemTouchHelper.LEFT) {
+                                if ((direction == ItemTouchHelper.LEFT && !isFavActionReversed)
+                                        || (direction == ItemTouchHelper.RIGHT
+                                                && isFavActionReversed)) {
                                     shareButtonClicked(
                                             new SharedPreferenceHelper(requireContext())
                                                     .getShareButtonAction(),

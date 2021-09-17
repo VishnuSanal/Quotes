@@ -49,7 +49,7 @@ import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class SettingsFragment extends BottomSheetDialogFragment {
 
-    private SwitchCompat reminderSwitch;
+    private SwitchCompat reminderSwitch, favActionSwitch;
     private SlideToActView resetToggle;
     private SharedPreferenceHelper sharedPreferenceHelper;
     private TextView shareActionPickTV, darkModePickTV;
@@ -78,13 +78,17 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         resetToggle = inflate.findViewById(R.id.settingsResetToggle);
 
         reminderSwitch = inflate.findViewById(R.id.settingsReminderSwitch);
+        favActionSwitch = inflate.findViewById(R.id.settingsFavReverseSwitch);
 
         shareActionPickTV = inflate.findViewById(R.id.settingsShareActionPickTV);
         darkModePickTV = inflate.findViewById(R.id.settingsDarkModePickTV);
 
         reminderSwitch.setChecked(!sharedPreferenceHelper.getAlarmString().equals("Alarm Not Set"));
+        favActionSwitch.setChecked(sharedPreferenceHelper.isFavActionReversed());
 
         reminderSwitch.setText(getSwitchText(sharedPreferenceHelper.getAlarmString()));
+        favActionSwitch.setText(
+                getSpannableText("Reverse Swipe", "Reverse Swipe Action on Favourites"));
         shareActionPickTV.setText(getSpannableText("Share", "Share Button Action"));
         darkModePickTV.setText(getSpannableText("Theme", "Pick a theme for the app"));
 
@@ -134,6 +138,11 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                     } else {
                         alarmTurnedOff(requireContext());
                     }
+                });
+
+        favActionSwitch.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> {
+                    sharedPreferenceHelper.setFavActionReverse(isChecked);
                 });
 
         shareActionPickTV.setOnClickListener(

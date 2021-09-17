@@ -53,6 +53,8 @@ public class SharedPreferenceHelper {
 
     private final String APP_THEME = "appThemeInt";
 
+    private final String FAV_SWIPE_REVERSE = "favActionReverseBoolean";
+
     private final SharedPreferences sharedPreferences;
 
     public SharedPreferenceHelper(Context context) {
@@ -66,6 +68,14 @@ public class SharedPreferenceHelper {
 
     public void setFirstRunBoolean(boolean firstRunBoolean) {
         sharedPreferences.edit().putBoolean(FIRST_RUN_BOOLEAN, firstRunBoolean).apply();
+    }
+
+    public boolean isFavActionReversed() {
+        return sharedPreferences.getBoolean(FAV_SWIPE_REVERSE, false);
+    }
+
+    public void setFavActionReverse(boolean isFavActionReversed) {
+        sharedPreferences.edit().putBoolean(FAV_SWIPE_REVERSE, isFavActionReversed).apply();
     }
 
     public boolean isNewFirstRun() {
@@ -230,6 +240,7 @@ public class SharedPreferenceHelper {
         setShareButtonAction(1);
         setFontSizePreference(24);
         setAppThemePreference(2);
+        setFavActionReverse(false);
     }
 
     public ArrayList<String> getFontListToBeRemoved() {
