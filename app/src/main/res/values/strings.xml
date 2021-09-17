@@ -38,30 +38,32 @@
 	<string name="save_to_gallery">Save to Gallery</string>
 	<string name="ask_every_time">Ask every time</string>
 
+	<string name="change">Change</string>
+
 	<!--Content Descriptions-->
 
-	<string name="about_icon_iv">About Icon IV</string>
-	<string name="home_open_indicator_left">Home Open Indicator Left</string>
-	<string name="home_open_indicator_right">Home Open Indicator Right</string>
-	<string name="about_fab">About FAB</string>
-	<string name="settings_fab">Settings FAB</string>
-	<string name="font_fab">Font FAB</string>
-	<string name="home_fab">Home FAB</string>
-	<string name="bg_fab">BG FAB</string>
-	<string name="color_fab">Color FAB</string>
-	<string name="fav_fab">Fav FAB</string>
-	<string name="splash_screen_app_icon">Splash Screen App Icon</string>
-	<string name="default_single_image">Default Single Image</string>
-	<string name="color_pick_single_iv">Color Pick Single IV</string>
-	<string name="about_screen_app_icon">About Screen App Icon</string>
-	<string name="fav_recyclerview_empty_hint_imageview">Fav RecyclerView Empty Hint ImageView</string>
-	<string name="quote_fragment_favourite_button">Quote Fragment Favourite Button</string>
-	<string name="quote_fragment_share_button">Quote Fragment Share Button</string>
-	<string name="settings_screen_notification_switch_hint">Settings Screen Notification Switch Hint</string>
-	<string name="settings_screen_share_tv_hint">Settings Screen Share TV Hint</string>
-	<string name="quote_widget_favourite_button">Quote Widget Favourite Button</string>
-	<string name="quote_widget_share_button">Quote Widget Share Button</string>
-	<string name="bottom_sheet_done_indicator">Bottom Sheet Done Indicator</string>
-	<string name="tour_fragment_imageview">Tour Fragment ImageView</string>
+	<string name="about_icon_iv" translatable="false">About Icon IV</string>
+	<string name="home_open_indicator_left" translatable="false">Home Open Indicator Left</string>
+	<string name="home_open_indicator_right" translatable="false">Home Open Indicator Right</string>
+	<string name="about_fab" translatable="false">About FAB</string>
+	<string name="settings_fab" translatable="false">Settings FAB</string>
+	<string name="font_fab" translatable="false">Font FAB</string>
+	<string name="home_fab" translatable="false">Home FAB</string>
+	<string name="bg_fab" translatable="false">BG FAB</string>
+	<string name="color_fab" translatable="false">Color FAB</string>
+	<string name="fav_fab" translatable="false">Fav FAB</string>
+	<string name="splash_screen_app_icon" translatable="false">Splash Screen App Icon</string>
+	<string name="default_single_image" translatable="false">Default Single Image</string>
+	<string name="color_pick_single_iv" translatable="false">Color Pick Single IV</string>
+	<string name="about_screen_app_icon" translatable="false">About Screen App Icon</string>
+	<string name="fav_recyclerview_empty_hint_imageview" translatable="false">Fav RecyclerView Empty Hint ImageView</string>
+	<string name="quote_fragment_favourite_button" translatable="false">Quote Fragment Favourite Button</string>
+	<string name="quote_fragment_share_button" translatable="false">Quote Fragment Share Button</string>
+	<string name="settings_screen_notification_switch_hint" translatable="false">Settings Screen Notification Switch Hint</string>
+	<string name="settings_screen_share_tv_hint" translatable="false">Settings Screen Share TV Hint</string>
+	<string name="quote_widget_favourite_button" translatable="false">Quote Widget Favourite Button</string>
+	<string name="quote_widget_share_button" translatable="false">Quote Widget Share Button</string>
+	<string name="bottom_sheet_done_indicator" translatable="false">Bottom Sheet Done Indicator</string>
+	<string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
 
 </resources>
