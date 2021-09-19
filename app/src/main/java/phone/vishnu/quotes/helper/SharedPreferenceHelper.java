@@ -240,6 +240,7 @@ public class SharedPreferenceHelper {
         setShareButtonAction(1);
         setFontSizePreference(24);
         setAppThemePreference(2);
+        setFavHintShownCount(0);
         setFavActionReverse(false);
     }
 
