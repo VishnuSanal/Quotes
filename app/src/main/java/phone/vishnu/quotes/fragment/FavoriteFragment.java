@@ -173,9 +173,9 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
                                 if (sharedPreferenceHelper.getFavHintShownCount() < 2) {
                                     Toast.makeText(
                                                     requireContext(),
-                                                    isFavActionReversed
-                                                            ?   "Swipe Right to Delete\nSwipe Left to Share"
-                                                            :   "Swipe Right to Share\nSwipe Left to Delete",
+                                                    sharedPreferenceHelper.isFavActionReversed()
+                                                            ?   "Swipe Right to Share\nSwipe Left to Delete"
+                                                            :   "Swipe Right to Delete\nSwipe Left to Share",
                                                     Toast.LENGTH_LONG)
                                             .show();
                                     sharedPreferenceHelper.incrementFavHintShownCount();
