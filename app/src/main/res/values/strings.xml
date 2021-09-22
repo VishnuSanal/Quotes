@@ -38,8 +38,6 @@
 	<string name="save_to_gallery">Save to Gallery</string>
 	<string name="ask_every_time">Ask every time</string>
 
-	<string name="change">Change</string>
-
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>

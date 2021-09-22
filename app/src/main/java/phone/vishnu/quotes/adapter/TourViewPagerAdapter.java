@@ -19,7 +19,6 @@
 
 package phone.vishnu.quotes.adapter;
 
-import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -27,7 +26,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import java.util.ArrayList;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.fragment.TourSingleFragment;
-import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.TourItem;
 
 public class TourViewPagerAdapter extends FragmentStateAdapter {
@@ -36,7 +34,7 @@ public class TourViewPagerAdapter extends FragmentStateAdapter {
 
     public TourViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
-        this.tourItems = getTourItems(fragmentActivity.getApplicationContext());
+        this.tourItems = getTourItems();
     }
 
     @NonNull
@@ -54,23 +52,15 @@ public class TourViewPagerAdapter extends FragmentStateAdapter {
         return tourItems.get(position);
     }
 
-    private ArrayList<TourItem> getTourItems(Context context) {
+    private ArrayList<TourItem> getTourItems() {
 
         ArrayList<TourItem> tourItems = new ArrayList<>();
 
-        if (!new SharedPreferenceHelper(context).isFirstRun()
-                && new SharedPreferenceHelper(context).isNewFirstRun())
-            tourItems.add(
-                    new TourItem(
-                            R.drawable.ic_tour_announcement,
-                            "We're v2.0.0!",
-                            "Quotes Status Creator got updated to v2.0.0!\nEnjoy the new and updated app!"));
-        else
-            tourItems.add(
-                    new TourItem(
-                            R.drawable.ic_tour_announcement,
-                            "Welcome!",
-                            "Welcome to Quotes Status Creator"));
+        tourItems.add(
+                new TourItem(
+                        R.drawable.ic_tour_announcement,
+                        "Welcome!",
+                        "Welcome to Quotes Status Creator"));
 
         tourItems.add(
                 new TourItem(
