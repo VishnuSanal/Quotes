@@ -7,6 +7,11 @@
  - **Fixes** #---- <!-- to automatically close the linked issue -->
  - **Addresses** #---- <!-- to link the issue but not close - work pending etc. -->
 
+## Tests
+<!-- Run these tests -->
+ - [ ] `./gradlew spotlessCheck` <!-- If this fails, run `./gradlew spotlessApply` -->
+ - [ ] `./gradlew testDebug`
+
 ## Type of change
 
 <!-- Please delete options that are not relevant -->
