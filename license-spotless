@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
+ * Copyright (C) 2019 - $YEAR Vishnu Sanal. T
  *
  * This file is part of Quotes Status Creator.
  *
@@ -17,10 +17,3 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package phone.vishnu.quotes.response;
-
-import phone.vishnu.quotes.model.Quote;
-
-public interface RandomQuoteAsyncResponse {
-    void processFinished(Quote quote);
-}

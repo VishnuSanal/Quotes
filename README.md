@@ -21,7 +21,7 @@
 </a>
 
 <a href="https://github.com/VishnuSanal/Quotes/releases/">
-	<img alt="Get it on Github" src="https://raw.githubusercontent.com/flocke/andOTP/master/assets/badges/get-it-on-github.svg" height="100px">
+	<img alt="Get it on Github" src="https://raw.githubusercontent.com/VishnuSanal/Quotes/master/Screenshots/get-it-on-github.svg" height="100px">
 </a>
 
 </p>

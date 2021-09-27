@@ -1,13 +1,29 @@
+/*
+ * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
+ *
+ * This file is part of Quotes Status Creator.
+ *
+ * Quotes Status Creator is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package phone.vishnu.quotes.repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
-
 import androidx.lifecycle.LiveData;
-
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
 import phone.vishnu.quotes.dao.FavDao;
 import phone.vishnu.quotes.database.FavDatabase;
 import phone.vishnu.quotes.model.Quote;
@@ -25,7 +41,9 @@ public class FavRepository {
 
     public long insertFav(Quote quote) {
         try {
-            return new InsertFavAsyncTask(favDao).execute(quote).get(); //TODO: FInd a proper way to do this
+            return new InsertFavAsyncTask(favDao)
+                    .execute(quote)
+                    .get(); // TODO: FInd a proper way to do this
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -46,7 +64,9 @@ public class FavRepository {
 
     public boolean isPresent(Quote quote) {
         try {
-            return new CheckPresentAsyncTask(favDao).execute(quote).get(); //TODO: FInd a proper way to do this
+            return new CheckPresentAsyncTask(favDao)
+                    .execute(quote)
+                    .get(); // TODO: FInd a proper way to do this
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }

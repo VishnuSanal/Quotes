@@ -5,12 +5,10 @@
 - ## Please Note
 
 - Never start working on an issue until it's assigned to you!
-- Please rearrange the code with Andorid Studio (`Ctrl + Alt + L` or `Cmd + Alt + L`) before making a PR
+- Run `./gradlew spotlessApply` before making a PR
 - Creation of a new branch for every contribution is recommended
 - Feel free to create issues too. That too counts as a contribution!
 - Feel free to join our [community](https://t.me/QuotesStatusCreator) if you face any issue or need help on the project
-
-**Note**: If you're a user of Quotes Status Creator, copying all the contents from `Documents/Quotes` to `Documents/Quotes - Debug` will save some data by not needing to download those assets again!
 
 - ## Recommended WorkFlow
 

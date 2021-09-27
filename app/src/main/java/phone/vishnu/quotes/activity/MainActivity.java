@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
+ *
+ * This file is part of Quotes Status Creator.
+ *
+ * Quotes Status Creator is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package phone.vishnu.quotes.activity;
 
 import android.annotation.SuppressLint;
@@ -29,7 +48,6 @@ import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -37,18 +55,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.yalantis.ucrop.UCrop;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.fragment.AboutFragment;
@@ -95,13 +110,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
         exportHelper = new ExportHelper(this);
 
-        viewModel = new ViewModelProvider(
-                this,
-                new ViewModelProvider
-                        .AndroidViewModelFactory(
-                        (Application) getApplicationContext()
-                )
-        ).get(MainViewModel.class);
+        viewModel =
+                new ViewModelProvider(
+                                this,
+                                new ViewModelProvider.AndroidViewModelFactory(
+                                        (Application) getApplicationContext()))
+                        .get(MainViewModel.class);
 
         setIntentListeners(savedInstanceState);
 
@@ -140,8 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FavoriteFragment.newInstance()
                         .show(getSupportFragmentManager(), "FavoriteFragment");
             } else if (id == R.id.aboutFAB) {
-                AboutFragment.newInstance()
-                        .show(getSupportFragmentManager(), "AboutFragment");
+                AboutFragment.newInstance().show(getSupportFragmentManager(), "AboutFragment");
             } else if (id == R.id.bgFAB) {
 
                 showBackgroundOptionChooser(true);
@@ -149,18 +162,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else if (id == R.id.colorFAB) {
 
                 ColorPickFragment.newInstance(ColorPickFragment.PICK_CARD_COLOR_REQ_CODE)
-                        .show(
-                                getSupportFragmentManager(),
-                                "ColorPickBottomSheetDialogFragment"
-                        );
+                        .show(getSupportFragmentManager(), "ColorPickBottomSheetDialogFragment");
 
             } else if (id == R.id.fontFAB) {
 
                 FontOptionPickFragment.newInstance()
-                        .show(
-                                getSupportFragmentManager(),
-                                "FontOptionPickFragment"
-                        );
+                        .show(getSupportFragmentManager(), "FontOptionPickFragment");
 
             } else if (id == R.id.settingsFAB) {
                 SettingsFragment.newInstance()
@@ -177,20 +184,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             String file = exportHelper.getBGPath();
 
-            if (requestCode == PICK_IMAGE_ID &&
-                    data != null &&
-                    (null != data.getData() ||
-                            (null != data.getExtras() && data.getExtras().containsKey("data")))) {
+            if (requestCode == PICK_IMAGE_ID
+                    && data != null
+                    && (null != data.getData()
+                            || (null != data.getExtras()
+                                    && data.getExtras().containsKey("data")))) {
 
                 Uri uri = data.getData();
 
-                if (data.getData() == null &&
-                        (null != data.getExtras() && data.getExtras().containsKey("data"))) {
+                if (data.getData() == null
+                        && (null != data.getExtras() && data.getExtras().containsKey("data"))) {
 
                     uri = Uri.fromFile(new File(file));
 
                     exportHelper.exportBackgroundImage((Bitmap) data.getExtras().get("data"));
-
                 }
 
                 UCrop.of(uri, Uri.fromFile(new File(file)))
@@ -202,14 +209,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 constraintLayout.setBackground(Drawable.createFromPath(file));
                 sharedPreferenceHelper.setBackgroundPath(file);
-
             }
 
         } else {
             if (resultCode == Activity.RESULT_CANCELED)
                 Toast.makeText(this, "Action Cancelled!", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
+            else Toast.makeText(this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -230,21 +235,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     showShareActionPicker(
                             new Quote(
                                     Objects.requireNonNull(extras.getString("quote")),
-                                    Objects.requireNonNull(extras.getString("author"))
-                            )
-                    );
+                                    Objects.requireNonNull(extras.getString("author"))));
 
                 } else if (extras.getBoolean("FavButton")) {
 
                     addFavourite(
-                            new Quote(Objects.requireNonNull(extras.getString("quote")), Objects.requireNonNull(extras.getString("author"))));
-
+                            new Quote(
+                                    Objects.requireNonNull(extras.getString("quote")),
+                                    Objects.requireNonNull(extras.getString("author"))));
                 }
             }
         }
 
         if (null != getIntent() && null != getIntent().getAction()) {
-            //Shortcut
+            // Shortcut
             if ("phone.vishnu.quotes.openFavouriteFragment".equals(getIntent().getAction())) {
 
                 FavoriteFragment.newInstance()
@@ -253,15 +257,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else if ("phone.vishnu.quotes.shareRandomQuote".equals(getIntent().getAction())) {
                 shareRandomQuote();
             }
-            //Widget
+            // Widget
             else if ("phone.vishnu.quotes.widgetShareClicked".equals(getIntent().getAction())) {
                 Quote q = (sharedPreferenceHelper.getWidgetQuote());
                 if (q != null)
                     shareButtonClicked(
-                            this,
-                            new SharedPreferenceHelper(this).getShareButtonAction(),
-                            q
-                    );
+                            this, new SharedPreferenceHelper(this).getShareButtonAction(), q);
 
             } else if ("phone.vishnu.quotes.widgetFavClicked".equals(getIntent().getAction())) {
                 Quote q = (sharedPreferenceHelper.getWidgetQuote());
@@ -270,33 +271,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
-
     }
 
     private void setUpSearchView() {
         SearchView searchView = findViewById(R.id.homeSearchView);
 
         try {
-            EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+            EditText searchEditText =
+                    searchView.findViewById(androidx.appcompat.R.id.search_src_text);
             searchEditText.setTextColor(getResources().getColor(R.color.colorWhite));
             searchEditText.setHintTextColor(getResources().getColor(R.color.colorWhite));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                getFilter().filter(query);
-                return false;
-            }
+        searchView.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        getFilter().filter(query);
+                        return false;
+                    }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                getFilter().filter(newText);
-                return false;
-            }
-        });
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        getFilter().filter(newText);
+                        return false;
+                    }
+                });
     }
 
     private void setUpChipGroup() {
@@ -304,55 +306,77 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ChipGroup chipGroup = findViewById(R.id.homeChipGroup);
 
         String[] tags = {
-                "Life", "Success", "Love", "Action", "Dream", "Fail",
-                "Thought", "Heart", "Mistake", "Wisdom", "Fear", "Courage",
-                "Friend", "Attitude", "Perseverance", "Motivation", "Inspiration"
+            "Life",
+            "Success",
+            "Love",
+            "Action",
+            "Dream",
+            "Fail",
+            "Thought",
+            "Heart",
+            "Mistake",
+            "Wisdom",
+            "Fear",
+            "Courage",
+            "Friend",
+            "Attitude",
+            "Perseverance",
+            "Motivation",
+            "Inspiration"
         };
 
         for (String string : tags) {
 
-            Chip chip = new Chip(new ContextThemeWrapper(chipGroup.getContext(), R.style.ChipStyle));
+            Chip chip =
+                    new Chip(new ContextThemeWrapper(chipGroup.getContext(), R.style.ChipStyle));
 
             chip.setText(string);
             chip.setTextColor(getResources().getColor(R.color.colorWhite));
             chip.setLetterSpacing(0.15f);
 
-            chip.setChipBackgroundColor(new ColorStateList(
-                    new int[][]{
-                            new int[]{android.R.attr.state_checked},
-                            new int[]{-android.R.attr.state_checked},
-                            new int[]{-android.R.attr.state_checked, -android.R.attr.state_focused}
-                    },
-                    new int[]{
-                            Color.parseColor("#424242"),
-                            Color.parseColor("#2A2A2A"),
-                            Color.parseColor("#2A2A2A")
-                    }
-            ));
+            chip.setChipBackgroundColor(
+                    new ColorStateList(
+                            new int[][] {
+                                new int[] {android.R.attr.state_checked},
+                                new int[] {-android.R.attr.state_checked},
+                                new int[] {
+                                    -android.R.attr.state_checked, -android.R.attr.state_focused
+                                }
+                            },
+                            new int[] {
+                                Color.parseColor("#424242"),
+                                Color.parseColor("#2A2A2A"),
+                                Color.parseColor("#2A2A2A")
+                            }));
 
             chip.setCheckable(true);
             chip.setCheckedIconVisible(true);
 
             chipGroup.addView(chip);
 
-            chip.setOnCheckedChangeListener((buttonView, isChecked) -> getFilter().filter(isChecked ? buttonView.getText() : ""));
+            chip.setOnCheckedChangeListener(
+                    (buttonView, isChecked) ->
+                            getFilter().filter(isChecked ? buttonView.getText() : ""));
         }
     }
 
     private void runInitChecks() {
 
         progressIndicator.setIndicatorColor(
-                Color.parseColor(
-                        sharedPreferenceHelper.getCardColorPreference()
-                )
-        );
+                Color.parseColor(sharedPreferenceHelper.getCardColorPreference()));
 
-        new Handler().postDelayed(() -> {
-
-            if (progressIndicator.getVisibility() == View.VISIBLE && !isNetworkAvailable())
-                Toast.makeText(this, "Please Connect to the Internet", Toast.LENGTH_LONG).show();
-
-        }, 2000);
+        new Handler()
+                .postDelayed(
+                        () -> {
+                            if (progressIndicator.getVisibility() == View.VISIBLE
+                                    && !isNetworkAvailable())
+                                Toast.makeText(
+                                                this,
+                                                "Please Connect to the Internet",
+                                                Toast.LENGTH_LONG)
+                                        .show();
+                        },
+                        2000);
 
         checkBackground();
 
@@ -398,12 +422,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean isFABMenuHidden() {
-        return fontFAB.getVisibility() == View.GONE &&
-                aboutFAB.getVisibility() == View.GONE &&
-                settingsFAB.getVisibility() == View.GONE &&
-                favFAB.getVisibility() == View.GONE &&
-                colorFAB.getVisibility() == View.GONE &&
-                bgFAB.getVisibility() == View.GONE;
+        return fontFAB.getVisibility() == View.GONE
+                && aboutFAB.getVisibility() == View.GONE
+                && settingsFAB.getVisibility() == View.GONE
+                && favFAB.getVisibility() == View.GONE
+                && colorFAB.getVisibility() == View.GONE
+                && bgFAB.getVisibility() == View.GONE;
     }
 
     private void closeFABMenu() {
@@ -411,12 +435,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         float homeFABX = homeFAB.getX();
         float homeFABY = homeFAB.getY();
 
-        favFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
-        aboutFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
-        colorFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
-        settingsFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
-        bgFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
-        fontFAB.animate().x(homeFABX).y(homeFABY).rotation(360).alpha(0f).setInterpolator(new AccelerateInterpolator());
+        favFAB.animate()
+                .x(homeFABX)
+                .y(homeFABY)
+                .rotation(360)
+                .alpha(0f)
+                .setInterpolator(new AccelerateInterpolator());
+        aboutFAB.animate()
+                .x(homeFABX)
+                .y(homeFABY)
+                .rotation(360)
+                .alpha(0f)
+                .setInterpolator(new AccelerateInterpolator());
+        colorFAB.animate()
+                .x(homeFABX)
+                .y(homeFABY)
+                .rotation(360)
+                .alpha(0f)
+                .setInterpolator(new AccelerateInterpolator());
+        settingsFAB
+                .animate()
+                .x(homeFABX)
+                .y(homeFABY)
+                .rotation(360)
+                .alpha(0f)
+                .setInterpolator(new AccelerateInterpolator());
+        bgFAB.animate()
+                .x(homeFABX)
+                .y(homeFABY)
+                .rotation(360)
+                .alpha(0f)
+                .setInterpolator(new AccelerateInterpolator());
+        fontFAB.animate()
+                .x(homeFABX)
+                .y(homeFABY)
+                .rotation(360)
+                .alpha(0f)
+                .setInterpolator(new AccelerateInterpolator());
 
         homeFAB.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_menu));
 
@@ -433,14 +488,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         double cos72 = Math.cos(Math.toRadians(72));
         double sin72 = Math.sin(Math.toRadians(72));
 
-        favFAB.animate().translationX(DPtoPX(i)).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
-        aboutFAB.animate().translationX(-DPtoPX(i)).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
+        favFAB.animate()
+                .translationX(DPtoPX(i))
+                .rotationBy(360)
+                .alpha(1f)
+                .setInterpolator(new AccelerateInterpolator());
+        aboutFAB.animate()
+                .translationX(-DPtoPX(i))
+                .rotationBy(360)
+                .alpha(1f)
+                .setInterpolator(new AccelerateInterpolator());
 
-        colorFAB.animate().translationX(DPtoPX((int) (i * cos36))).translationY(-DPtoPX((int) (i * sin36))).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
-        settingsFAB.animate().translationX(-DPtoPX((int) (i * cos36))).translationY(-DPtoPX((int) (i * sin36))).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
+        colorFAB.animate()
+                .translationX(DPtoPX((int) (i * cos36)))
+                .translationY(-DPtoPX((int) (i * sin36)))
+                .rotationBy(360)
+                .alpha(1f)
+                .setInterpolator(new AccelerateInterpolator());
+        settingsFAB
+                .animate()
+                .translationX(-DPtoPX((int) (i * cos36)))
+                .translationY(-DPtoPX((int) (i * sin36)))
+                .rotationBy(360)
+                .alpha(1f)
+                .setInterpolator(new AccelerateInterpolator());
 
-        bgFAB.animate().translationX(DPtoPX((int) (i * cos72))).translationY(-DPtoPX((int) (i * sin72))).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
-        fontFAB.animate().translationX(-DPtoPX((int) (i * cos72))).translationY(-DPtoPX((int) (i * sin72))).rotationBy(360).alpha(1f).setInterpolator(new AccelerateInterpolator());
+        bgFAB.animate()
+                .translationX(DPtoPX((int) (i * cos72)))
+                .translationY(-DPtoPX((int) (i * sin72)))
+                .rotationBy(360)
+                .alpha(1f)
+                .setInterpolator(new AccelerateInterpolator());
+        fontFAB.animate()
+                .translationX(-DPtoPX((int) (i * cos72)))
+                .translationY(-DPtoPX((int) (i * sin72)))
+                .rotationBy(360)
+                .alpha(1f)
+                .setInterpolator(new AccelerateInterpolator());
 
         homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_close));
     }
@@ -461,8 +545,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initAnimations() {
         ScaleAnimation scaleAnimation =
-                new ScaleAnimation(0, 1f, 0, 1f, Animation.RELATIVE_TO_SELF, 0.5f,
-                        Animation.RELATIVE_TO_SELF, 0.5f);
+                new ScaleAnimation(
+                        0,
+                        1f,
+                        0,
+                        1f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f);
         scaleAnimation.setDuration(750);
         scaleAnimation.setFillAfter(true);
 
@@ -487,12 +578,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 ArrayList<Quote> filteredResults = new ArrayList<>();
 
-                if (constraint.toString().isEmpty())
-                    filteredResults.addAll(allQuotesList);
+                if (constraint.toString().isEmpty()) filteredResults.addAll(allQuotesList);
                 else
                     for (Quote quote : allQuotesList) {
-                        if (quote.getQuote().toLowerCase().contains(constraint.toString().toLowerCase())
-                                || quote.getAuthor().toLowerCase().contains(constraint.toString().toLowerCase()))
+                        if (quote.getQuote()
+                                        .toLowerCase()
+                                        .contains(constraint.toString().toLowerCase())
+                                || quote.getAuthor()
+                                        .toLowerCase()
+                                        .contains(constraint.toString().toLowerCase()))
                             filteredResults.add(quote);
                     }
 
@@ -504,16 +598,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                //noinspection unchecked
+                // noinspection unchecked
                 adapter.setQuoteList((List<Quote>) results.values);
                 adapter.notifyDataSetChanged();
                 viewPager.setCurrentItem(0);
 
-                String s = (adapter.getCount() == sharedPreferenceHelper.getTotalQuotesCount()) ? "" : String.valueOf(adapter.getCount());
+                String s =
+                        (adapter.getCount() == sharedPreferenceHelper.getTotalQuotesCount())
+                                ? ""
+                                : String.valueOf(adapter.getCount());
                 ((TextView) findViewById(R.id.searchCountTV)).setText(s);
             }
         };
-
     }
 
     private void initViewPager() {
@@ -523,22 +619,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         viewPager.setAdapter(adapter);
 
-        viewModel.getQuotes().observe(
-                this,
-                quotes -> {
+        viewModel
+                .getQuotes()
+                .observe(
+                        this,
+                        quotes -> {
+                            sharedPreferenceHelper.setTotalQuotesCount(quotes.size());
 
-                    sharedPreferenceHelper.setTotalQuotesCount(quotes.size());
+                            allQuotesList = new ArrayList<>(quotes);
 
-                    allQuotesList = new ArrayList<>(quotes);
+                            adapter.setQuoteList(quotes);
 
-                    adapter.setQuoteList(quotes);
+                            adapter.notifyDataSetChanged();
 
-                    adapter.notifyDataSetChanged();
-
-                    progressIndicator.setVisibility(View.GONE);
-
-                }
-        );
+                            progressIndicator.setVisibility(View.GONE);
+                        });
     }
 
     private void showShareActionPicker(Quote q) {
@@ -552,31 +647,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setTitle("Permission Denied");
         builder.setMessage("Please Accept Necessary Permissions");
         builder.setCancelable(true);
-        builder.setPositiveButton("OK", (imageDialog, which) -> {
-            imageDialog.cancel();
-            startActivity(
-                    new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                            .setData(Uri.fromParts("package", getPackageName(), null))
-            );
-        });
-        builder.setNegativeButton("Cancel", (imageDialog, which) -> {
-            imageDialog.cancel();
-            Toast.makeText(MainActivity.this, "App requires these permissions to run properly", Toast.LENGTH_SHORT).show();
-        });
+        builder.setPositiveButton(
+                "OK",
+                (imageDialog, which) -> {
+                    imageDialog.cancel();
+                    startActivity(
+                            new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                    .setData(Uri.fromParts("package", getPackageName(), null)));
+                });
+        builder.setNegativeButton(
+                "Cancel",
+                (imageDialog, which) -> {
+                    imageDialog.cancel();
+                    Toast.makeText(
+                                    MainActivity.this,
+                                    "App requires these permissions to run properly",
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                });
         builder.show();
-
     }
 
     private void showBackgroundOptionChooser(boolean isCancellable) {
 
         BGOptionPickFragment.newInstance(isCancellable)
                 .show(getSupportFragmentManager(), "BackgroundOptionPick");
-
     }
 
     private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        @SuppressLint("MissingPermission") NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        @SuppressLint("MissingPermission")
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
@@ -590,9 +692,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (l == -1)
             Toast.makeText(this, "Already Present in Favourites", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "Added to Favourites", Toast.LENGTH_SHORT).show();
-
+        else Toast.makeText(this, "Added to Favourites", Toast.LENGTH_SHORT).show();
     }
 
     public void updateViewPager() {
@@ -605,16 +705,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void shareRandomQuote() {
 
-        final ProgressDialog progressDialog = ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+        final ProgressDialog progressDialog =
+                ProgressDialog.show(MainActivity.this, "", "Please Wait....");
         progressDialog.setCancelable(false);
 
-        new QuotesRepository().getRandomQuote(quote -> {
-
-            exportHelper.shareImage(MainActivity.this, quote);
-            progressDialog.dismiss();
-
-        });
-
+        new QuotesRepository()
+                .getRandomQuote(
+                        quote -> {
+                            exportHelper.shareImage(MainActivity.this, quote);
+                            progressDialog.dismiss();
+                        });
     }
 
     private void shareButtonClicked(Context context, int i, Quote q) {

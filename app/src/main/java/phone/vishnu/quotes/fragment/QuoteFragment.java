@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
+ *
+ * This file is part of Quotes Status Creator.
+ *
+ * Quotes Status Creator is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package phone.vishnu.quotes.fragment;
 
 import android.app.Application;
@@ -12,14 +31,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-
 import java.io.File;
-
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
@@ -33,8 +49,7 @@ public class QuoteFragment extends Fragment {
     private TextView quoteText, authorText;
     private SharedPreferenceHelper sharedPreferenceHelper;
 
-    public QuoteFragment() {
-    }
+    public QuoteFragment() {}
 
     public static QuoteFragment newInstance(Quote quote) {
 
@@ -49,7 +64,8 @@ public class QuoteFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View quoteView = inflater.inflate(R.layout.fragment_quote, container, false);
 
@@ -62,10 +78,7 @@ public class QuoteFragment extends Fragment {
 
         shareIcon.setImageDrawable(
                 ShareHelper.getShareIconDrawable(
-                        requireContext(),
-                        sharedPreferenceHelper.getShareButtonAction()
-                )
-        );
+                        requireContext(), sharedPreferenceHelper.getShareButtonAction()));
 
         String hexColor = sharedPreferenceHelper.getCardColorPreference();
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
@@ -83,7 +96,8 @@ public class QuoteFragment extends Fragment {
         } else {
             if ((!fontPath.equals("-1")))
                 if (!new File(fontPath).exists())
-                    Toast.makeText(requireContext(), "Font file not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Font file not found", Toast.LENGTH_SHORT)
+                            .show();
         }
 
         quoteText.setTextColor(Color.parseColor(fontColor));
@@ -92,24 +106,22 @@ public class QuoteFragment extends Fragment {
         quoteText.setTextSize(fontSize);
         authorText.setTextSize((float) (fontSize / 1.2));
 
-        ((CardView) quoteView.findViewById(R.id.cardView)).setCardBackgroundColor(Color.parseColor(hexColor));
+        ((CardView) quoteView.findViewById(R.id.cardView))
+                .setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
 
-        //noinspection ConstantConditions
-        quote = new Quote(
-                getArguments().getString("quote"),
-                getArguments().getString("author")
-        );
+        // noinspection ConstantConditions
+        quote = new Quote(getArguments().getString("quote"), getArguments().getString("author"));
 
         quoteText.setText(quote.getQuote());
         authorText.setText(String.format("-%s", quote.getAuthor()));
 
         try {
 
-            FavRepository repository = new FavRepository((Application) requireContext().getApplicationContext());
+            FavRepository repository =
+                    new FavRepository((Application) requireContext().getApplicationContext());
 
-            if (repository.isPresent(quote))
-                favIcon.setColorFilter(Color.RED);
+            if (repository.isPresent(quote)) favIcon.setColorFilter(Color.RED);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,32 +134,37 @@ public class QuoteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        shareIcon.setOnClickListener(v -> {
+        shareIcon.setOnClickListener(
+                v -> {
+                    final Animation shake =
+                            AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
+                    shareIcon.startAnimation(shake);
+                    shareIcon.setColorFilter(getResources().getColor(R.color.favGreenColor));
 
-            final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
-            shareIcon.startAnimation(shake);
-            shareIcon.setColorFilter(getResources().getColor(R.color.favGreenColor));
+                    shareButtonClicked(
+                            sharedPreferenceHelper.getShareButtonAction(),
+                            new Quote(
+                                    quoteText.getText().toString(),
+                                    authorText.getText().toString()));
+                });
 
-            shareButtonClicked(sharedPreferenceHelper.getShareButtonAction(),
-                    new Quote(quoteText.getText().toString(), authorText.getText().toString())
-            );
-        });
+        favIcon.setOnClickListener(
+                v -> {
+                    final Animation shake =
+                            AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
+                    favIcon.startAnimation(shake);
 
-        favIcon.setOnClickListener(v -> {
-            final Animation shake = AnimationUtils.loadAnimation(requireContext(), R.anim.animate);
-            favIcon.startAnimation(shake);
+                    FavRepository repository =
+                            new FavRepository(
+                                    (Application) requireContext().getApplicationContext());
 
-            FavRepository repository = new FavRepository((Application) requireContext().getApplicationContext());
+                    long l = repository.insertFav(quote);
 
-            long l = repository.insertFav(quote);
-
-            if (l == -1) {
-                repository.deleteFav(quote);
-                favIcon.setColorFilter(Color.WHITE);
-            } else
-                favIcon.setColorFilter(getResources().getColor(R.color.favRedColor));
-
-        });
+                    if (l == -1) {
+                        repository.deleteFav(quote);
+                        favIcon.setColorFilter(Color.WHITE);
+                    } else favIcon.setColorFilter(getResources().getColor(R.color.favRedColor));
+                });
     }
 
     private void shareButtonClicked(int i, Quote q) {

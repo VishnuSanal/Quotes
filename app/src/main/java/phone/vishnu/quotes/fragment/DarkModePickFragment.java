@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
+ *
+ * This file is part of Quotes Status Creator.
+ *
+ * Quotes Status Creator is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package phone.vishnu.quotes.fragment;
 
 import android.content.Context;
@@ -8,13 +27,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
-
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
@@ -23,8 +39,7 @@ public class DarkModePickFragment extends BottomSheetDialogFragment {
     private RadioGroup radioGroup;
     private SharedPreferenceHelper sharedPreferenceHelper;
 
-    public DarkModePickFragment() {
-    }
+    public DarkModePickFragment() {}
 
     public static DarkModePickFragment newInstance() {
         return new DarkModePickFragment();
@@ -37,7 +52,8 @@ public class DarkModePickFragment extends BottomSheetDialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_dark_mode_pick, container, false);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
@@ -53,14 +69,12 @@ public class DarkModePickFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        radioGroup.setOnCheckedChangeListener((group, id) -> {
+        radioGroup.setOnCheckedChangeListener(
+                (group, id) -> {
+                    optionChecked(getInt(id));
 
-            optionChecked(getInt(id));
-
-            dismiss();
-
-        });
-
+                    dismiss();
+                });
     }
 
     private void optionChecked(int i) {
@@ -78,25 +92,25 @@ public class DarkModePickFragment extends BottomSheetDialogFragment {
 
     private void setChecked(int i) {
         if (i == 0) {
-            ((RadioButton) radioGroup.findViewById(R.id.darkModePickLightRadioButton)).setChecked(true);
+            ((RadioButton) radioGroup.findViewById(R.id.darkModePickLightRadioButton))
+                    .setChecked(true);
         } else if (i == 1) {
-            ((RadioButton) radioGroup.findViewById(R.id.darkModePickDarkRadioButton)).setChecked(true);
+            ((RadioButton) radioGroup.findViewById(R.id.darkModePickDarkRadioButton))
+                    .setChecked(true);
         } else if (i == 2) {
-            ((RadioButton) radioGroup.findViewById(R.id.darkModePickSystemRadioButton)).setChecked(true);
+            ((RadioButton) radioGroup.findViewById(R.id.darkModePickSystemRadioButton))
+                    .setChecked(true);
         }
     }
 
     private int getInt(int id) {
-        //Light -> 0
-        //Dark -> 1
-        //System -> 2
+        // Light -> 0
+        // Dark -> 1
+        // System -> 2
 
-        if (id == R.id.darkModePickLightRadioButton)
-            return 0;
-        else if (id == R.id.darkModePickDarkRadioButton)
-            return 1;
-        else if (id == R.id.darkModePickSystemRadioButton)
-            return 2;
+        if (id == R.id.darkModePickLightRadioButton) return 0;
+        else if (id == R.id.darkModePickDarkRadioButton) return 1;
+        else if (id == R.id.darkModePickSystemRadioButton) return 2;
         return 2;
     }
 
@@ -104,5 +118,4 @@ public class DarkModePickFragment extends BottomSheetDialogFragment {
         return (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
                 == Configuration.UI_MODE_NIGHT_YES;
     }
-
 }

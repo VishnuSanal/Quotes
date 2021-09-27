@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:clickable="true"
+	android:focusable="true">
 
-    <ImageView
-        android:id="@+id/colorPickSingleView"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="2dp"
-        android:contentDescription="Color Pick Single IV"
-        app:layout_constraintBottom_toTopOf="@id/colorPickSingleTV"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+	<ImageView
+		android:id="@+id/colorPickSingleView"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:layout_marginStart="4dp"
+		android:layout_marginTop="4dp"
+		android:layout_marginEnd="4dp"
+		android:layout_marginBottom="2dp"
+		android:contentDescription="@string/color_pick_single_iv"
+		app:layout_constraintBottom_toTopOf="@id/colorPickSingleTV"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		/>
 
-    <TextView
-        android:id="@+id/colorPickSingleTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        android:padding="4dp"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/colorPickSingleView"
-        tools:ignore="HardcodedText" />
+	<TextView
+		android:id="@+id/colorPickSingleTV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="4dp"
+		android:layout_marginTop="2dp"
+		android:layout_marginEnd="4dp"
+		android:layout_marginBottom="4dp"
+		android:padding="4dp"
+		android:textColor="@color/accentTextColor"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/colorPickSingleView"
+		/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

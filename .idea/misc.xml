@@ -10,6 +10,14 @@
         <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/font_single_item.xml" value="0.22135416666666666" />
         <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/fragment_backgrond_image_pick.xml" value="0.16530532866588876" />
         <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/fragment_font.xml" value="0.22135416666666666" />
+        <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/fragment_font_size.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/fragment_quote.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/fragment_tour.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/quote_widget.xml" value="0.3892445582586428" />
+        <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/share_action_option_pick_dialog.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/share_layout.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/Quotes/app/src/main/res/layout/tour_single_item.xml" value="0.1" />
         <entry key="..\:/Users/hp/Desktop/New folder (3)/Quotes/app/src/main/res/drawable/drawableEndCompat.xml" value="0.16574074074074074" />
         <entry key="..\:/Users/hp/Desktop/New folder (3)/Quotes/app/src/main/res/layout/fragment_favorite.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/hp/Desktop/New folder (3)/Quotes/app/src/main/res/layout/fragment_font_size.xml" value="0.20416666666666666" />
@@ -71,7 +79,7 @@
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

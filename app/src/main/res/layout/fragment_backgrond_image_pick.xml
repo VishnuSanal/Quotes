@@ -1,113 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_background"
-    android:fillViewport="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".fragment.BGImagePickFragment"
-    tools:ignore="HardcodedText">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bottom_sheet_background"
+	android:fillViewport="true"
+	app:layout_behavior="@string/appbar_scrolling_view_behavior"
+	tools:context=".fragment.BGImagePickFragment"
+	>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/imagePickProgressBar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            app:layout_constraintBottom_toTopOf="@id/imagePickTitleTV"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+		<com.google.android.material.progressindicator.CircularProgressIndicator
+			android:id="@+id/imagePickProgressBar"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:indeterminate="true"
+			app:layout_constraintBottom_toTopOf="@id/imagePickTitleTV"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/imagePickTitleTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:letterSpacing="0.15"
-            android:padding="8dp"
-            android:text="Pick Background Image"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/imagePickPresentTitleTV"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imagePickProgressBar"
-            tools:ignore="HardcodedText" />
+		<TextView
+			android:id="@+id/imagePickTitleTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="8dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginBottom="4dp"
+			android:letterSpacing="0.15"
+			android:padding="8dp"
+			android:text="@string/pick_background_image"
+			android:textColor="@color/accentTextColor"
+			android:textSize="16sp"
+			app:layout_constraintBottom_toTopOf="@id/imagePickPresentTitleTV"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/imagePickProgressBar"
+			/>
 
-        <TextView
-            android:id="@+id/imagePickPresentTitleTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:letterSpacing="0.1"
-            android:padding="8dp"
-            android:text="Used Images"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/imagePickPresentRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imagePickTitleTV"
-            tools:ignore="HardcodedText" />
+		<TextView
+			android:id="@+id/imagePickPresentTitleTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginBottom="8dp"
+			android:letterSpacing="0.1"
+			android:padding="8dp"
+			android:text="@string/used_images"
+			android:textColor="@color/accentTextColor"
+			android:textSize="16sp"
+			app:layout_constraintBottom_toTopOf="@id/imagePickPresentRecyclerView"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/imagePickTitleTV"
+			/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/imagePickPresentRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            android:scrollbars="vertical"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/imagePickNewTitleTV"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imagePickPresentTitleTV"
-            app:spanCount="2"
-            tools:listitem="@layout/background_image_pick_single_item" />
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/imagePickPresentRecyclerView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:nestedScrollingEnabled="false"
+			android:scrollbars="vertical"
+			app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+			app:layout_constraintBottom_toTopOf="@id/imagePickNewTitleTV"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/imagePickPresentTitleTV"
+			app:spanCount="2"
+			tools:listitem="@layout/background_image_pick_single_item" />
 
-        <TextView
-            android:id="@+id/imagePickNewTitleTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:letterSpacing="0.1"
-            android:padding="8dp"
-            android:text="New Images"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/imagePickNewRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imagePickPresentRecyclerView"
-            tools:ignore="HardcodedText" />
+		<TextView
+			android:id="@+id/imagePickNewTitleTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:letterSpacing="0.1"
+			android:padding="8dp"
+			android:text="@string/new_images"
+			android:textColor="@color/accentTextColor"
+			android:textSize="16sp"
+			app:layout_constraintBottom_toTopOf="@id/imagePickNewRecyclerView"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/imagePickPresentRecyclerView"
+			/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/imagePickNewRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            android:scrollbars="vertical"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imagePickNewTitleTV"
-            app:spanCount="2"
-            tools:listitem="@layout/background_image_pick_single_item" />
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/imagePickNewRecyclerView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:nestedScrollingEnabled="false"
+			android:scrollbars="vertical"
+			app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/imagePickNewTitleTV"
+			app:spanCount="2"
+			tools:listitem="@layout/background_image_pick_single_item" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

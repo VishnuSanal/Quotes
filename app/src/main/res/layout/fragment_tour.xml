@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/introBGColor"
-    tools:context=".fragment.TourFragment"
-    tools:ignore="HardcodedText">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/BGColor"
+	tools:context=".fragment.TourFragment"
+	>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/splashScreenTourViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/splashScreenTourTabLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+	<androidx.viewpager2.widget.ViewPager2
+		android:id="@+id/splashScreenTourViewPager"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		app:layout_constraintBottom_toTopOf="@id/splashScreenTourTabLayout"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/splashScreenSkipButton"
-        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SKIP"
-        android:textColor="@color/introIconColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/splashScreenTourTabLayout"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/splashScreenTourTabLayout" />
+	<Button
+		android:id="@+id/splashScreenSkipButton"
+		style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/skip"
+		android:textColor="@color/introIconColor"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toStartOf="@id/splashScreenTourTabLayout"
+		app:layout_constraintHorizontal_bias="0"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="@id/splashScreenTourTabLayout" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/splashScreenTourTabLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/splashScreenNextButton"
-        app:layout_constraintStart_toEndOf="@id/splashScreenSkipButton"
-        app:tabBackground="@drawable/tab_selector"
-        app:tabGravity="center"
-        app:tabIndicatorHeight="0dp" />
+	<com.google.android.material.tabs.TabLayout
+		android:id="@+id/splashScreenTourTabLayout"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toStartOf="@id/splashScreenNextButton"
+		app:layout_constraintStart_toEndOf="@id/splashScreenSkipButton"
+		app:tabBackground="@drawable/tab_selector"
+		app:tabGravity="center"
+		app:tabIndicatorHeight="0dp" />
 
-    <Button
-        android:id="@+id/splashScreenNextButton"
-        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NEXT"
-        android:textColor="@color/introIconColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/splashScreenTourTabLayout"
-        app:layout_constraintTop_toTopOf="@id/splashScreenTourTabLayout" />
+	<Button
+		android:id="@+id/splashScreenNextButton"
+		style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/next"
+		android:textColor="@color/introIconColor"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="1"
+		app:layout_constraintStart_toEndOf="@id/splashScreenTourTabLayout"
+		app:layout_constraintTop_toTopOf="@id/splashScreenTourTabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

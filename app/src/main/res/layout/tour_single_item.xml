@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.TourSingleFragment"
-    tools:ignore="HardcodedText">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".fragment.TourSingleFragment"
+	>
 
-    <ImageView
-        android:id="@+id/tourImage"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="Tour Fragment ImageView"
-        app:layout_constraintBottom_toTopOf="@id/tourGuideLineOne"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+	<ImageView
+		android:id="@+id/tourImage"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_margin="8dp"
+		android:adjustViewBounds="true"
+		android:contentDescription="@string/tour_fragment_imageview"
+		app:layout_constraintBottom_toTopOf="@id/tourGuideLineOne"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/tourGuideLineOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.8"
-        app:layout_constraintStart_toStartOf="parent" />
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/tourGuideLineOne"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintGuide_percent="0.8"
+		app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tourTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="@color/introIconColor"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/tourDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+	<TextView
+		android:id="@+id/tourTitle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="8dp"
+		android:layout_marginTop="8dp"
+		android:layout_marginEnd="8dp"
+		android:layout_marginBottom="4dp"
+		android:textColor="@color/introIconColor"
+		android:textSize="24sp"
+		android:textStyle="bold"
+		app:layout_constraintBottom_toTopOf="@id/tourDescription"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tourDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:lineSpacingExtra="4dp"
-        android:textAlignment="center"
-        android:textColor="@color/introTextColor"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+	<TextView
+		android:id="@+id/tourDescription"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="8dp"
+		android:layout_marginTop="4dp"
+		android:layout_marginEnd="8dp"
+		android:layout_marginBottom="8dp"
+		android:gravity="center"
+		android:lineSpacingExtra="4dp"
+		android:textAlignment="center"
+		android:textColor="@color/introTextColor"
+		android:textSize="20sp"
+		android:textStyle="bold"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

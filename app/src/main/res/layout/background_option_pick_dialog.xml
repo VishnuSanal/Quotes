@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_background"
-    android:elevation="8dp"
-    tools:ignore="HardcodedText">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bottom_sheet_background"
+	android:elevation="8dp"
+	>
 
-    <TextView
-        android:id="@+id/backgroundPickTitleTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:letterSpacing="0.15"
-        android:padding="8dp"
-        android:text="Pick an Option"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+	<TextView
+		android:id="@+id/backgroundPickTitleTV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:letterSpacing="0.15"
+		android:padding="8dp"
+		android:text="@string/pick_an_option"
+		android:textColor="@color/accentTextColor"
+		android:textSize="16sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		/>
 
-    <RadioGroup
-        android:id="@+id/backgroundPickRadioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/backgroundPickTitleTV"
-        tools:ignore="RtlSymmetry">
+	<RadioGroup
+		android:id="@+id/backgroundPickRadioGroup"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:orientation="vertical"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/backgroundPickTitleTV"
+		tools:ignore="RtlSymmetry">
 
-        <RadioButton
-            android:id="@+id/backgroundPickColorRadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:drawableStart="@drawable/ic_color_lens"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:paddingStart="32dp"
-            android:text="Plain Color"
-            android:textColor="@color/textColor" />
+		<RadioButton
+			android:id="@+id/backgroundPickColorRadioButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/accentTextColor"
+			android:drawableStart="@drawable/ic_color_lens"
+			android:drawablePadding="8dp"
+			android:padding="8dp"
+			android:paddingStart="32dp"
+			android:text="@string/plain_color"
+			android:textColor="@color/textColor" />
 
-        <RadioButton
-            android:id="@+id/backgroundPickGalleryRadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:drawableStart="@drawable/ic_insert_photo"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:paddingStart="32dp"
-            android:text="Image From Gallery"
-            android:textColor="@color/textColor" />
+		<RadioButton
+			android:id="@+id/backgroundPickGalleryRadioButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/accentTextColor"
+			android:drawableStart="@drawable/ic_insert_photo"
+			android:drawablePadding="8dp"
+			android:padding="8dp"
+			android:paddingStart="32dp"
+			android:text="@string/image_from_gallery"
+			android:textColor="@color/textColor" />
 
-        <RadioButton
-            android:id="@+id/backgroundPickDefaultRadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:drawableStart="@drawable/ic_whatshot"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:paddingStart="32dp"
-            android:text="Default Images"
-            android:textColor="@color/textColor" />
-    </RadioGroup>
+		<RadioButton
+			android:id="@+id/backgroundPickDefaultRadioButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/accentTextColor"
+			android:drawableStart="@drawable/ic_whatshot"
+			android:drawablePadding="8dp"
+			android:padding="8dp"
+			android:paddingStart="32dp"
+			android:text="@string/default_images"
+			android:textColor="@color/textColor" />
+	</RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

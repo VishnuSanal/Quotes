@@ -1,162 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_background"
-    android:clickable="true"
-    android:fillViewport="true"
-    android:focusable="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".fragment.SettingsFragment"
-    tools:ignore="HardcodedText">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bottom_sheet_background"
+	android:clickable="true"
+	android:fillViewport="true"
+	android:focusable="true"
+	app:layout_behavior="@string/appbar_scrolling_view_behavior"
+	tools:context=".fragment.SettingsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/settingsTitleTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:letterSpacing="0.15"
-            android:padding="8dp"
-            android:text="Settings"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
+		<TextView
+			android:id="@+id/settingsTitleTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:letterSpacing="0.15"
+			android:padding="8dp"
+			android:text="@string/settings"
+			android:textColor="@color/accentTextColor"
+			android:textSize="16sp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/settingsReminderSwitch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:checked="true"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewOne"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/settingsReminderSwitchHintIV"
-            app:layout_constraintTop_toBottomOf="@id/settingsTitleTV" />
+		<androidx.appcompat.widget.SwitchCompat
+			android:id="@+id/settingsReminderSwitch"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:checked="true"
+			android:textColor="@color/textColor"
+			app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewOne"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/settingsReminderSwitchHintIV"
+			app:layout_constraintTop_toBottomOf="@id/settingsTitleTV" />
 
-        <ImageView
-            android:id="@+id/settingsReminderSwitchHintIV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:contentDescription="Settings Screen Notification Switch Hint"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_notifications"
-            app:layout_constraintBottom_toBottomOf="@id/settingsReminderSwitch"
-            app:layout_constraintEnd_toStartOf="@id/settingsReminderSwitch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/settingsReminderSwitch"
-            app:tint="@color/colorAccent" />
+		<ImageView
+			android:id="@+id/settingsReminderSwitchHintIV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:contentDescription="@string/settings_screen_notification_switch_hint"
+			android:scaleType="fitXY"
+			android:src="@drawable/ic_notifications"
+			app:layout_constraintBottom_toBottomOf="@id/settingsReminderSwitch"
+			app:layout_constraintEnd_toStartOf="@id/settingsReminderSwitch"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/settingsReminderSwitch"
+			app:tint="@color/colorAccent" />
 
-        <View
-            android:id="@+id/settingsSampleSpacerViewOne"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="4dp"
-            android:background="@color/spacerColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/settingsReminderSwitch" />
+		<View
+			android:id="@+id/settingsSampleSpacerViewOne"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="12dp"
+			android:layout_marginEnd="4dp"
+			android:background="@color/spacerColor"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/settingsReminderSwitch" />
 
-        <ImageView
-            android:id="@+id/settingsShareActionHintIV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:contentDescription="Settings Screen Share TV Hint"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_share"
-            app:layout_constraintBottom_toBottomOf="@id/settingsShareActionPickTV"
-            app:layout_constraintEnd_toStartOf="@id/settingsShareActionPickTV"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/settingsShareActionPickTV"
-            app:tint="@color/colorAccent" />
+		<androidx.appcompat.widget.SwitchCompat
+			android:id="@+id/settingsFavReverseSwitch"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:checked="true"
+			android:textColor="@color/textColor"
+			app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewTwo"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/settingsFavReverseSwitchHintIV"
+			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewOne" />
 
-        <TextView
-            android:id="@+id/settingsShareActionPickTV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:padding="8dp"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewTwo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/settingsShareActionHintIV"
-            app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewOne" />
+		<ImageView
+			android:id="@+id/settingsFavReverseSwitchHintIV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:contentDescription="@string/settings_screen_fav_reverse_switch_hint"
+			android:scaleType="fitXY"
+			android:src="@drawable/ic_favorite"
+			app:layout_constraintBottom_toBottomOf="@id/settingsFavReverseSwitch"
+			app:layout_constraintEnd_toStartOf="@id/settingsFavReverseSwitch"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/settingsFavReverseSwitch"
+			app:tint="@color/colorAccent" />
 
-        <View
-            android:id="@+id/settingsSampleSpacerViewTwo"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/spacerColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/settingsShareActionPickTV" />
+		<View
+			android:id="@+id/settingsSampleSpacerViewTwo"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="12dp"
+			android:layout_marginEnd="4dp"
+			android:background="@color/spacerColor"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/settingsFavReverseSwitch" />
 
-        <ImageView
-            android:id="@+id/settingsDarkModePickHintIV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:contentDescription="Settings Screen Share TV Hint"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_brightness_auto"
-            app:layout_constraintBottom_toBottomOf="@id/settingsDarkModePickTV"
-            app:layout_constraintEnd_toStartOf="@id/settingsDarkModePickTV"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/settingsDarkModePickTV"
-            app:tint="@color/colorAccent" />
+		<TextView
+			android:id="@+id/settingsShareActionPickTV"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:background="?attr/selectableItemBackground"
+			android:padding="8dp"
+			android:textColor="@color/textColor"
+			app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewThree"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/settingsShareActionHintIV"
+			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewTwo" />
 
-        <TextView
-            android:id="@+id/settingsDarkModePickTV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:padding="8dp"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewThree"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/settingsDarkModePickHintIV"
-            app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewTwo" />
+		<ImageView
+			android:id="@+id/settingsShareActionHintIV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:contentDescription="@string/settings_screen_share_tv_hint"
+			android:scaleType="fitXY"
+			android:src="@drawable/ic_share"
+			app:layout_constraintBottom_toBottomOf="@id/settingsShareActionPickTV"
+			app:layout_constraintEnd_toStartOf="@id/settingsShareActionPickTV"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/settingsShareActionPickTV"
+			app:tint="@color/colorAccent" />
 
-        <View
-            android:id="@+id/settingsSampleSpacerViewThree"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/spacerColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/settingsDarkModePickTV" />
+		<View
+			android:id="@+id/settingsSampleSpacerViewThree"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginBottom="8dp"
+			android:background="@color/spacerColor"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/settingsShareActionPickTV" />
 
-        <com.ncorti.slidetoact.SlideToActView
-            android:id="@+id/settingsResetToggle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:elevation="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewThree"
-            app:outer_color="@color/colorAccent"
-            app:text="@string/reset_settings" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+		<ImageView
+			android:id="@+id/settingsDarkModePickHintIV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:contentDescription="@string/settings_screen_share_tv_hint"
+			android:scaleType="fitXY"
+			android:src="@drawable/ic_brightness_auto"
+			app:layout_constraintBottom_toBottomOf="@id/settingsDarkModePickTV"
+			app:layout_constraintEnd_toStartOf="@id/settingsDarkModePickTV"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/settingsDarkModePickTV"
+			app:tint="@color/colorAccent" />
+
+		<TextView
+			android:id="@+id/settingsDarkModePickTV"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:background="?attr/selectableItemBackground"
+			android:padding="8dp"
+			android:textColor="@color/textColor"
+			app:layout_constraintBottom_toTopOf="@id/settingsSampleSpacerViewFour"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/settingsDarkModePickHintIV"
+			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewThree" />
+
+		<View
+			android:id="@+id/settingsSampleSpacerViewFour"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginBottom="8dp"
+			android:background="@color/spacerColor"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/settingsDarkModePickTV" />
+
+		<com.ncorti.slidetoact.SlideToActView
+			android:id="@+id/settingsResetToggle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="16dp"
+			android:elevation="14dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/settingsSampleSpacerViewFour"
+			app:outer_color="@color/colorAccent"
+			app:text="@string/reset_settings" />
+	</androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
