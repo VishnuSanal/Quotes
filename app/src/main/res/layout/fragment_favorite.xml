@@ -6,8 +6,7 @@
 	android:layout_height="wrap_content"
 	android:background="@drawable/bottom_sheet_background"
 	android:orientation="vertical"
-	tools:context=".fragment.FavoriteFragment"
-	>
+	tools:context=".fragment.FavoriteFragment">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
@@ -55,14 +54,40 @@
 			android:orientation="horizontal"
 			app:layout_constraintGuide_begin="48dp" />
 
-		<com.google.android.material.progressindicator.CircularProgressIndicator
-			android:id="@+id/favProgressBar"
+		<com.google.android.material.chip.ChipGroup
+			android:id="@+id/favChipGroup"
 			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_margin="8dp"
+			app:chipSpacing="8dp"
+			app:layout_constraintBottom_toTopOf="@id/favProgressBar"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/favGuideLineOne"
+			app:singleLine="true"
+			app:singleSelection="true" />
+
+		<TextView
+			android:id="@+id/favCountTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:fontFamily="serif"
+			android:padding="2dp"
+			android:textColor="@color/textColor"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			app:layout_constraintBottom_toBottomOf="@id/favChipGroup"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="@id/favChipGroup" />
+
+		<com.google.android.material.progressindicator.LinearProgressIndicator
+			android:id="@+id/favProgressBar"
+			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:indeterminate="true"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/favGuideLineOne" />
+			app:layout_constraintTop_toBottomOf="@id/favChipGroup" />
 
 		<ImageView
 			android:id="@+id/recyclerViewEmptyHintIV"
