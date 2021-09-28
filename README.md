@@ -73,7 +73,7 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
 
 ## 🚀 Features
 
-- 🔖Favourite Quotes – Add Quotes to Favourites
+- 🔖Favorite Quotes – Add Quotes to Favorites
 - 🔀Share Quotes – Share Quotes as a High Definition Image to Social Media
 - 🖼️Custom Backgrounds – Personalize Quotes Statuses with Custom Background Images, Solid Background Colors or Images from Gallery
 - 🎨Custom Card Colors – Personalize Quotes Statuses with Custom Card Colors
