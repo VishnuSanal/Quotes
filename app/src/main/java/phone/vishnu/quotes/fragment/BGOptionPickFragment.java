@@ -83,7 +83,8 @@ public class BGOptionPickFragment extends BottomSheetDialogFragment {
         radioGroup.setOnCheckedChangeListener(
                 (group, id) -> {
                     if (id == R.id.backgroundPickColorRadioButton) {
-                        ColorPickFragment.newInstance(ColorPickFragment.PICK_BG_COLOR_REQ_CODE)
+                        ColorPickFragment.newInstance(
+                                        ColorPickFragment.PICK_BG_COLOR_REQ_CODE, isCancelable())
                                 .show(
                                         requireActivity().getSupportFragmentManager(),
                                         "ColorPickFragment");
