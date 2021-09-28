@@ -607,7 +607,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         (adapter.getCount() == sharedPreferenceHelper.getTotalQuotesCount())
                                 ? ""
                                 : String.valueOf(adapter.getCount());
-                ((TextView) findViewById(R.id.searchCountTV)).setText(s);
+                ((TextView) findViewById(R.id.homeSearchCountTV)).setText(s);
             }
         };
     }
