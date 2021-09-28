@@ -94,6 +94,7 @@
 			android:textColor="@color/textColor"
 			android:textSize="18sp"
 			android:visibility="gone"
+			android:text="@string/nothing_here"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="@id/recyclerViewEmptyHintIV"
 			app:layout_constraintStart_toStartOf="@id/recyclerViewEmptyHintIV"
