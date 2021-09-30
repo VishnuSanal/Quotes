@@ -8,134 +8,142 @@
 	android:orientation="vertical"
 	tools:context=".fragment.FavoriteFragment">
 
-	<androidx.constraintlayout.widget.ConstraintLayout
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
+		android:id="@+id/favCoordinatorLayout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
-		<TextView
-			android:id="@+id/favTitleTV"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_margin="8dp"
-			android:letterSpacing="0.15"
-			android:padding="8dp"
-			android:text="@string/favorites"
-			android:textColor="@color/accentTextColor"
-			android:textSize="16sp"
-			app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent" />
-
-		<TextView
-			android:id="@+id/favAddTV"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_margin="8dp"
-			android:background="?attr/selectableItemBackground"
-			android:contentDescription="@string/add_custom_quote"
-			android:gravity="center_vertical"
-			android:padding="8dp"
-			android:text="@string/add_custom_quote"
-			android:textSize="16sp"
-			app:drawableEndCompat="@drawable/ic_post_add"
-			app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="1"
-			app:layout_constraintStart_toEndOf="@id/favTitleTV"
-			app:layout_constraintTop_toTopOf="parent"
-			app:tint="@color/colorAccent" />
-
-		<androidx.constraintlayout.widget.Guideline
-			android:id="@+id/favGuideLineOne"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			app:layout_constraintGuide_begin="48dp" />
-
-		<com.google.android.material.chip.ChipGroup
-			android:id="@+id/favChipGroup"
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_margin="8dp"
-			app:chipSpacing="8dp"
-			app:layout_constraintBottom_toTopOf="@id/favProgressBar"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/favGuideLineOne"
-			app:singleLine="true"
-			app:singleSelection="true" />
-
-		<TextView
-			android:id="@+id/favCountTV"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_margin="8dp"
-			android:fontFamily="serif"
-			android:padding="2dp"
-			android:textColor="@color/textColor"
-			android:textSize="16sp"
-			android:textStyle="bold"
-			app:layout_constraintBottom_toBottomOf="@id/favChipGroup"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintTop_toTopOf="@id/favChipGroup" />
-
-		<com.google.android.material.progressindicator.LinearProgressIndicator
-			android:id="@+id/favProgressBar"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:indeterminate="true"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/favChipGroup" />
-
-		<ImageView
-			android:id="@+id/recyclerViewEmptyHintIV"
-			android:layout_width="72dp"
-			android:layout_height="72dp"
-			android:layout_marginStart="16dp"
-			android:layout_marginTop="16dp"
-			android:layout_marginEnd="16dp"
-			android:layout_marginBottom="8dp"
-			android:contentDescription="@string/fav_recyclerview_empty_hint_imageview"
-			android:src="@drawable/ic_close"
-			android:visibility="gone"
-			app:layout_constraintBottom_toBottomOf="@id/favoriteRecyclerView"
-			app:layout_constraintEnd_toEndOf="@id/favoriteRecyclerView"
-			app:layout_constraintStart_toStartOf="@id/favoriteRecyclerView"
-			app:layout_constraintTop_toTopOf="@id/favoriteRecyclerView"
-			app:tint="@color/textColor" />
-
-		<TextView
-			android:id="@+id/recyclerViewEmptyHintTV"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="16dp"
-			android:layout_marginTop="8dp"
-			android:layout_marginEnd="16dp"
-			android:layout_marginBottom="16dp"
-			android:fontFamily="serif"
-			android:textAlignment="center"
-			android:textColor="@color/textColor"
-			android:textSize="18sp"
-			android:visibility="gone"
-			android:text="@string/nothing_here"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="@id/recyclerViewEmptyHintIV"
-			app:layout_constraintStart_toStartOf="@id/recyclerViewEmptyHintIV"
-			app:layout_constraintTop_toBottomOf="@id/recyclerViewEmptyHintIV" />
-
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/favoriteRecyclerView"
+		<androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:nestedScrollingEnabled="false"
-			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/favProgressBar"
-			tools:listitem="@layout/favorite_single_item" />
+			android:layout_height="wrap_content">
 
-	</androidx.constraintlayout.widget.ConstraintLayout>
+			<TextView
+				android:id="@+id/favTitleTV"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="8dp"
+				android:letterSpacing="0.15"
+				android:padding="8dp"
+				android:text="@string/favorites"
+				android:textColor="@color/accentTextColor"
+				android:textSize="16sp"
+				app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<TextView
+				android:id="@+id/favAddTV"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="8dp"
+				android:background="?attr/selectableItemBackground"
+				android:contentDescription="@string/add_custom_quote"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/add_custom_quote"
+				android:textSize="16sp"
+				app:drawableEndCompat="@drawable/ic_post_add"
+				app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="1"
+				app:layout_constraintStart_toEndOf="@id/favTitleTV"
+				app:layout_constraintTop_toTopOf="parent"
+				app:tint="@color/colorAccent" />
+
+			<androidx.constraintlayout.widget.Guideline
+				android:id="@+id/favGuideLineOne"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				app:layout_constraintGuide_begin="48dp" />
+
+			<com.google.android.material.chip.ChipGroup
+				android:id="@+id/favChipGroup"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_margin="8dp"
+				app:chipSpacing="8dp"
+				app:layout_constraintBottom_toTopOf="@id/favProgressBar"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/favGuideLineOne"
+				app:singleLine="true"
+				app:singleSelection="true" />
+
+			<TextView
+				android:id="@+id/favCountTV"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="8dp"
+				android:fontFamily="serif"
+				android:padding="2dp"
+				android:textColor="@color/textColor"
+				android:textSize="16sp"
+				android:textStyle="bold"
+				app:layout_constraintBottom_toBottomOf="@id/favChipGroup"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="@id/favChipGroup" />
+
+			<com.google.android.material.progressindicator.LinearProgressIndicator
+				android:id="@+id/favProgressBar"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:indeterminate="true"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/favChipGroup" />
+
+			<ImageView
+				android:id="@+id/recyclerViewEmptyHintIV"
+				android:layout_width="72dp"
+				android:layout_height="72dp"
+				android:layout_marginStart="16dp"
+				android:layout_marginTop="16dp"
+				android:layout_marginEnd="16dp"
+				android:layout_marginBottom="8dp"
+				android:contentDescription="@string/fav_recyclerview_empty_hint_imageview"
+				android:src="@drawable/ic_close"
+				android:visibility="gone"
+				app:layout_constraintBottom_toBottomOf="@id/favoriteRecyclerView"
+				app:layout_constraintEnd_toEndOf="@id/favoriteRecyclerView"
+				app:layout_constraintStart_toStartOf="@id/favoriteRecyclerView"
+				app:layout_constraintTop_toTopOf="@id/favoriteRecyclerView"
+				app:tint="@color/textColor" />
+
+			<TextView
+				android:id="@+id/recyclerViewEmptyHintTV"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginEnd="16dp"
+				android:layout_marginBottom="16dp"
+				android:fontFamily="serif"
+				android:text="@string/nothing_here"
+				android:textAlignment="center"
+				android:textColor="@color/textColor"
+				android:textSize="18sp"
+				android:visibility="gone"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="@id/recyclerViewEmptyHintIV"
+				app:layout_constraintStart_toStartOf="@id/recyclerViewEmptyHintIV"
+				app:layout_constraintTop_toBottomOf="@id/recyclerViewEmptyHintIV" />
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/favoriteRecyclerView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:nestedScrollingEnabled="false"
+				app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/favProgressBar"
+				tools:listitem="@layout/favorite_single_item" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </androidx.core.widget.NestedScrollView>

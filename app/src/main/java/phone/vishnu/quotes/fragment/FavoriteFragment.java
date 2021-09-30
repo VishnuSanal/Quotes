@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -44,6 +45,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
@@ -69,6 +71,7 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
     private ImageView emptyHintIV;
     private TextView emptyHintTV, addTV, countTV;
     private LinearProgressIndicator progressBar;
+    private CoordinatorLayout coordinatorLayout;
 
     private ChipGroup chipGroup;
 
@@ -97,6 +100,7 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         countTV = inflate.findViewById(R.id.favCountTV);
         recyclerView = inflate.findViewById(R.id.favoriteRecyclerView);
         chipGroup = inflate.findViewById(R.id.favChipGroup);
+        coordinatorLayout = inflate.findViewById(R.id.favCoordinatorLayout);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
 
@@ -281,6 +285,9 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
 
                                     chipGroup.clearCheck();
 
+                                    showUndoSnackBar(
+                                            adapter.getFav(viewHolder.getAdapterPosition()));
+
                                     viewModel.delete(
                                             adapter.getFav(viewHolder.getAdapterPosition()));
                                     adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
@@ -291,6 +298,18 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
                             }
                         })
                 .attachToRecyclerView(recyclerView);
+    }
+
+    private void showUndoSnackBar(Quote q) {
+        Snackbar snackbar =
+                Snackbar.make(coordinatorLayout, "Removed from Favorites", Snackbar.LENGTH_SHORT);
+
+        snackbar.setAction(
+                "Undo",
+                v -> {
+                    viewModel.insert(q);
+                });
+        snackbar.show();
     }
 
     private void setUpChipGroup() {
