@@ -351,8 +351,9 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         }
 
         for (Quote quote : favArrayList)
-            if ((text.equals("Default") && !quote.isUserAdded())
-                    || (text.equals("User Added") && quote.isUserAdded()))
+            if (
+                    (text.equals("Default") && !quote.isUserAdded())
+                    || (text.equals("Custom") && quote.isUserAdded()))
                 filteredResults.add(quote);
 
         submitList(filteredResults);
