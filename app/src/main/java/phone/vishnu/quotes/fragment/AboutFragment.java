@@ -27,12 +27,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
 import java.util.Arrays;
 import java.util.List;
+
 import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.AboutRVAdapter;
@@ -42,7 +46,8 @@ public class AboutFragment extends BottomSheetDialogFragment {
 
     private RecyclerView recyclerView;
 
-    public AboutFragment() {}
+    public AboutFragment() {
+    }
 
     public static AboutFragment newInstance() {
         return new AboutFragment();
@@ -107,8 +112,14 @@ public class AboutFragment extends BottomSheetDialogFragment {
                         }
 
                     } else if (position == 4) {
-                        openLink("https://github.com/VishnuSanal/Quotes");
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        intent.putExtra(Intent.EXTRA_TEXT, "Install Quotes Status Creator - an open source app that lets you share quotations as status images on social media\n\nhttps://play.google.com/store/apps/details?id=phone.vishnu.quotes\n");
+                        Intent chooser = Intent.createChooser(intent, "Share Quotes Status Creator");
+                        startActivity(chooser);
                     } else if (position == 5) {
+                        openLink("https://github.com/VishnuSanal/Quotes");
+                    } else if (position == 6) {
                         openLink("https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md");
                     }
                 });
@@ -134,8 +145,11 @@ public class AboutFragment extends BottomSheetDialogFragment {
                         "Join Telegram Channel",
                         "Get a daily dose of inspiration on your inbox!"),
                 new TourItem(R.drawable.ic_done, "Rate the App", "Rate this app on Google Play"),
+                new TourItem(R.drawable.ic_share, "Share the App", "Share Quotes Status Creator with your friends"),
+
                 new TourItem(R.drawable.ic_info, "Source Code", "View source code on GitHub"),
                 new TourItem(
-                        R.drawable.ic_favorite, "Thanks To", "Thanks to these awesome people"));
+                        R.drawable.ic_favorite, "Thanks To", "Thanks to these awesome people")
+        );
     }
 }
