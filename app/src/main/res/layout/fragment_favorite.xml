@@ -59,6 +59,35 @@
 				android:orientation="horizontal"
 				app:layout_constraintGuide_begin="48dp" />
 
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/favSearchTIL"
+				style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="8dp"
+				android:foregroundGravity="center"
+				android:textColorHint="@color/textColorLight"
+				app:endIconMode="clear_text"
+				app:hintAnimationEnabled="true"
+				app:hintEnabled="true"
+				app:layout_constraintBottom_toTopOf="@id/favChipGroup"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/favGuideLineOne"
+				app:startIconDrawable="@drawable/ic_search">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/favSearchTIE"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="@string/search"
+					android:inputType="textCapSentences"
+					android:scrollbars="vertical"
+					android:textColor="@color/textColor"
+					android:textColorHint="@color/textColor" />
+
+			</com.google.android.material.textfield.TextInputLayout>
+
 			<com.google.android.material.chip.ChipGroup
 				android:id="@+id/favChipGroup"
 				android:layout_width="wrap_content"
@@ -67,7 +96,7 @@
 				app:chipSpacing="8dp"
 				app:layout_constraintBottom_toTopOf="@id/favProgressBar"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@id/favGuideLineOne"
+				app:layout_constraintTop_toBottomOf="@id/favSearchTIL"
 				app:singleLine="true"
 				app:singleSelection="true" />
 
