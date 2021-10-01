@@ -111,7 +111,7 @@ public class AboutFragment extends BottomSheetDialogFragment {
                         intent.setType("text/plain");
                         intent.putExtra(
                                 Intent.EXTRA_TEXT,
-                                "Install Quotes Status Creator - an open source app that lets you share quotations as status images on social media\n\nhttps://play.google.com/store/apps/details?id=phone.vishnu.quotes\n");
+                                "Install Quotes Status Creator - an open source app that lets you share quotations as status images on social media\n\nhttps://play.google.com/store/apps/details?id=phone.vishnu.quotes");
                         Intent chooser =
                                 Intent.createChooser(intent, "Share Quotes Status Creator");
                         startActivity(chooser);
