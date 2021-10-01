@@ -88,7 +88,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
 
         reminderSwitch.setText(getSwitchText(sharedPreferenceHelper.getAlarmString()));
         favActionSwitch.setText(
-                getSpannableText("Reverse Swipe", "Reverse Swipe Action on Favourites"));
+                getSpannableText("Reverse Swipe", "Reverse Swipe Action on Favorites"));
         shareActionPickTV.setText(getSpannableText("Share", "Share Button Action"));
         darkModePickTV.setText(getSpannableText("Theme", "Pick a theme for the app"));
 

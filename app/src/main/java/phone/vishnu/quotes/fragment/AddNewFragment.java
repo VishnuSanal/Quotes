@@ -91,7 +91,7 @@ public class AddNewFragment extends BottomSheetDialogFragment {
 
                         Toast.makeText(
                                         requireContext(),
-                                        "Quote added to Favourites",
+                                        "Quote added to Favorites",
                                         Toast.LENGTH_SHORT)
                                 .show();
 

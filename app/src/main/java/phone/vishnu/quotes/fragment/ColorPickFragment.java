@@ -50,13 +50,20 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
     public static final int PICK_CARD_COLOR_REQ_CODE = 1;
     public static final int PICK_FONT_COLOR_REQ_CODE = 2;
 
+    private static final String CANCELLABLE_EXTRA = "isCancellable";
+
     private ColorRVAdapter colorAdapter;
 
     public ColorPickFragment() {}
 
     public static ColorPickFragment newInstance(int COLOR_REQ_CODE) {
+        return newInstance(COLOR_REQ_CODE, true);
+    }
+
+    public static ColorPickFragment newInstance(int COLOR_REQ_CODE, boolean isCancellable) {
         Bundle args = new Bundle();
         args.putInt("ColorRequestCode", COLOR_REQ_CODE);
+        args.putBoolean(CANCELLABLE_EXTRA, isCancellable);
         ColorPickFragment fragment = new ColorPickFragment();
         fragment.setArguments(args);
         return fragment;
@@ -65,7 +72,12 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+
+        if (getArguments() != null)
+            if (getArguments().containsKey(CANCELLABLE_EXTRA))
+                setCancelable(getArguments().getBoolean(CANCELLABLE_EXTRA));
     }
 
     @SuppressLint("SetTextI18n")

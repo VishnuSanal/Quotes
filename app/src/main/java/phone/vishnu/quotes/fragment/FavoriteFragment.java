@@ -25,6 +25,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -40,11 +42,15 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import java.util.ArrayList;
+import java.util.List;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.FavoritesRVAdapter;
 import phone.vishnu.quotes.helper.ShareHelper;
@@ -56,13 +62,18 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
 
     private SharedPreferenceHelper sharedPreferenceHelper;
 
+    private ArrayList<Quote> favArrayList;
+
     private FavViewModel viewModel;
     private FavoritesRVAdapter adapter;
     private RecyclerView recyclerView;
 
     private ImageView emptyHintIV;
-    private TextView emptyHintTV, addTV;
-    private CircularProgressIndicator progressBar;
+    private TextView emptyHintTV, addTV, countTV;
+    private LinearProgressIndicator progressBar;
+    private CoordinatorLayout coordinatorLayout;
+
+    private ChipGroup chipGroup;
 
     public FavoriteFragment() {}
 
@@ -86,7 +97,10 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         emptyHintIV = inflate.findViewById(R.id.recyclerViewEmptyHintIV);
         emptyHintTV = inflate.findViewById(R.id.recyclerViewEmptyHintTV);
         addTV = inflate.findViewById(R.id.favAddTV);
+        countTV = inflate.findViewById(R.id.favCountTV);
         recyclerView = inflate.findViewById(R.id.favoriteRecyclerView);
+        chipGroup = inflate.findViewById(R.id.favChipGroup);
+        coordinatorLayout = inflate.findViewById(R.id.favCoordinatorLayout);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
 
@@ -98,15 +112,17 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setUpRecyclerView(requireContext());
+        setUpChipGroup();
 
         importFavourites();
 
         addTV.setOnClickListener(
-                v ->
-                        AddNewFragment.newInstance()
-                                .show(
-                                        requireActivity().getSupportFragmentManager(),
-                                        "AddNewFragment"));
+                v -> {
+                    AddNewFragment.newInstance()
+                            .show(requireActivity().getSupportFragmentManager(), "AddNewFragment");
+
+                    chipGroup.clearCheck();
+                });
     }
 
     private void importFavourites() {
@@ -163,30 +179,21 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
                 .observe(
                         this,
                         favList -> {
-                            if (favList.size() == 0) {
-                                emptyHintIV.setVisibility(View.VISIBLE);
-                                emptyHintTV.setVisibility(View.VISIBLE);
-                            } else {
-                                emptyHintIV.setVisibility(View.GONE);
-                                emptyHintTV.setVisibility(View.GONE);
-
-                                if (sharedPreferenceHelper.getFavHintShownCount() < 2) {
-                                    Toast.makeText(
-                                                    requireContext(),
-                                                    sharedPreferenceHelper.isFavActionReversed()
-                                                            ? "Swipe Right to Share\nSwipe Left to Delete"
-                                                            : "Swipe Right to Delete\nSwipe Left to Share",
-                                                    Toast.LENGTH_LONG)
-                                            .show();
-                                    sharedPreferenceHelper.incrementFavHintShownCount();
-                                }
+                            if (sharedPreferenceHelper.getFavHintShownCount() < 2
+                                    && !favList.isEmpty()) {
+                                Toast.makeText(
+                                                requireContext(),
+                                                sharedPreferenceHelper.isFavActionReversed()
+                                                        ? "Swipe Right to Share\nSwipe Left to Delete"
+                                                        : "Swipe Right to Delete\nSwipe Left to Share",
+                                                Toast.LENGTH_LONG)
+                                        .show();
+                                sharedPreferenceHelper.incrementFavHintShownCount();
                             }
 
-                            if (progressBar.getVisibility() == View.VISIBLE)
-                                progressBar.setVisibility(View.GONE);
+                            submitList(favList);
 
-                            adapter.submitList(favList);
-                            recyclerView.requestLayout();
+                            favArrayList = new ArrayList<>(favList);
                         });
 
         boolean isFavActionReversed = sharedPreferenceHelper.isFavActionReversed();
@@ -275,6 +282,12 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
                                                     100);
 
                                 } else {
+
+                                    chipGroup.clearCheck();
+
+                                    showUndoSnackBar(
+                                            adapter.getFav(viewHolder.getAdapterPosition()));
+
                                     viewModel.delete(
                                             adapter.getFav(viewHolder.getAdapterPosition()));
                                     adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
@@ -285,6 +298,93 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
                             }
                         })
                 .attachToRecyclerView(recyclerView);
+    }
+
+    private void showUndoSnackBar(Quote q) {
+        Snackbar snackbar =
+                Snackbar.make(coordinatorLayout, "Removed from Favorites", Snackbar.LENGTH_SHORT);
+
+        snackbar.setAction(
+                "Undo",
+                v -> {
+                    viewModel.insert(q);
+                });
+        snackbar.show();
+    }
+
+    private void setUpChipGroup() {
+        String[] tags = {"All", "Default", "Custom"};
+
+        for (String string : tags) {
+
+            Chip chip =
+                    new Chip(new ContextThemeWrapper(chipGroup.getContext(), R.style.ChipStyle));
+
+            chip.setText(string);
+            chip.setLetterSpacing(0.15f);
+
+            chip.setCheckable(true);
+            chip.setCheckedIconVisible(true);
+
+            chipGroup.addView(chip);
+
+            chipGroup.setOnCheckedChangeListener(
+                    (group, checkedId) -> {
+                        filterItems(
+                                (checkedId == View.NO_ID
+                                                || ((Chip) chipGroup.findViewById(checkedId))
+                                                        .getText()
+                                                        .equals("All"))
+                                        ? ""
+                                        : ((Chip) chipGroup.findViewById(checkedId)).getText());
+                    });
+        }
+    }
+
+    private void filterItems(CharSequence text) {
+
+        ArrayList<Quote> filteredResults = new ArrayList<>();
+
+        if (text == "") {
+            submitList(favArrayList);
+            return;
+        }
+
+        for (Quote quote : favArrayList)
+            if ((text.equals("Default") && !quote.isUserAdded())
+                    || (text.equals("Custom") && quote.isUserAdded())) filteredResults.add(quote);
+
+        submitList(filteredResults);
+    }
+
+    private void submitList(List<Quote> arrayList) {
+
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
+
+        adapter.submitList(
+                arrayList,
+                () -> {
+                    recyclerView.requestLayout();
+
+                    new Handler()
+                            .postDelayed(
+                                    () -> {
+                                        if (progressBar != null
+                                                && progressBar.getVisibility() == View.VISIBLE)
+                                            progressBar.setVisibility(View.GONE);
+                                    },
+                                    200);
+
+                    if (adapter.getItemCount() == 0) {
+                        emptyHintIV.setVisibility(View.VISIBLE);
+                        emptyHintTV.setVisibility(View.VISIBLE);
+                    } else {
+                        emptyHintIV.setVisibility(View.GONE);
+                        emptyHintTV.setVisibility(View.GONE);
+                    }
+
+                    countTV.setText(String.valueOf(adapter.getItemCount()));
+                });
     }
 
     private void shareButtonClicked(int i, Quote q) {

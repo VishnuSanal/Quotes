@@ -607,7 +607,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         (adapter.getCount() == sharedPreferenceHelper.getTotalQuotesCount())
                                 ? ""
                                 : String.valueOf(adapter.getCount());
-                ((TextView) findViewById(R.id.searchCountTV)).setText(s);
+                ((TextView) findViewById(R.id.homeSearchCountTV)).setText(s);
             }
         };
     }
@@ -691,8 +691,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         long l = new FavRepository(getApplication()).insertFav(quote);
 
         if (l == -1)
-            Toast.makeText(this, "Already Present in Favourites", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this, "Added to Favourites", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Already Present in Favorites", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show();
     }
 
     public void updateViewPager() {

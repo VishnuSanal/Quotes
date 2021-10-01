@@ -8,7 +8,7 @@
 	<string name="author">Author</string>
 	<string name="add">Add</string>
 	<string name="cancel">Cancel</string>
-	<string name="default_size">Set as Default</string>
+	<string name="default_size">Default</string>
 	<string name="reset_settings">Reset Settings</string>
 	<string name="plain_color">Plain Color</string>
 	<string name="image_from_gallery">Image From Gallery</string>
@@ -37,6 +37,7 @@
 	<string name="share_quote_as_image">Share Quote as Image</string>
 	<string name="save_to_gallery">Save to Gallery</string>
 	<string name="ask_every_time">Ask every time</string>
+	<string name="nothing_here">Nothing Here!</string>
 
 	<!--Content Descriptions-->
 

@@ -76,7 +76,6 @@ public class FontSizeFragment extends BottomSheetDialogFragment {
                     }
                 });
 
-        //      code to reset font size or make font size back to default(24sp)
         sizeReset.setOnClickListener(
                 v -> {
                     sharedPreferenceHelper.setFontSizePreference(24);
