@@ -25,10 +25,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +49,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
@@ -72,6 +76,8 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
     private TextView emptyHintTV, addTV, countTV;
     private LinearProgressIndicator progressBar;
     private CoordinatorLayout coordinatorLayout;
+
+    private TextInputEditText textInputEditText;
 
     private ChipGroup chipGroup;
 
@@ -101,6 +107,7 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         recyclerView = inflate.findViewById(R.id.favoriteRecyclerView);
         chipGroup = inflate.findViewById(R.id.favChipGroup);
         coordinatorLayout = inflate.findViewById(R.id.favCoordinatorLayout);
+        textInputEditText = inflate.findViewById(R.id.favSearchTIE);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
 
@@ -123,6 +130,66 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
 
                     chipGroup.clearCheck();
                 });
+
+        textInputEditText.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(
+                            CharSequence s, int start, int count, int after) {}
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        getFilter().filter(s);
+
+                        chipGroup.clearCheck();
+
+                        for (int i = 0; i < chipGroup.getChildCount(); i++)
+                            chipGroup
+                                    .getChildAt(i)
+                                    .setEnabled(
+                                            !((textInputEditText.getText() == null)
+                                                    || (!textInputEditText
+                                                            .getText()
+                                                            .toString()
+                                                            .equals(""))));
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {}
+                });
+    }
+
+    private Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                ArrayList<Quote> filteredResults = new ArrayList<>();
+
+                if (constraint.toString().isEmpty()) filteredResults.addAll(favArrayList);
+                else
+                    for (Quote quote : favArrayList) {
+                        if (quote.getQuote()
+                                        .toLowerCase()
+                                        .contains(constraint.toString().toLowerCase())
+                                || quote.getAuthor()
+                                        .toLowerCase()
+                                        .contains(constraint.toString().toLowerCase()))
+                            filteredResults.add(quote);
+                    }
+
+                FilterResults filterResult = new FilterResults();
+                filterResult.values = filteredResults;
+
+                return filterResult;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                // noinspection unchecked
+                submitList((List<Quote>) results.values);
+            }
+        };
     }
 
     private void importFavourites() {
@@ -304,11 +371,7 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         Snackbar snackbar =
                 Snackbar.make(coordinatorLayout, "Removed from Favorites", Snackbar.LENGTH_SHORT);
 
-        snackbar.setAction(
-                "Undo",
-                v -> {
-                    viewModel.insert(q);
-                });
+        snackbar.setAction("Undo", v -> viewModel.insert(q));
         snackbar.show();
     }
 
@@ -329,15 +392,15 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
             chipGroup.addView(chip);
 
             chipGroup.setOnCheckedChangeListener(
-                    (group, checkedId) -> {
-                        filterItems(
-                                (checkedId == View.NO_ID
-                                                || ((Chip) chipGroup.findViewById(checkedId))
-                                                        .getText()
-                                                        .equals("All"))
-                                        ? ""
-                                        : ((Chip) chipGroup.findViewById(checkedId)).getText());
-                    });
+                    (group, checkedId) ->
+                            filterItems(
+                                    (checkedId == View.NO_ID
+                                                    || ((Chip) chipGroup.findViewById(checkedId))
+                                                            .getText()
+                                                            .equals("All"))
+                                            ? ""
+                                            : ((Chip) chipGroup.findViewById(checkedId))
+                                                    .getText()));
         }
     }
 
