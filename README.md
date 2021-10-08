@@ -103,11 +103,14 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
 
 | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home%20One.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Home%20Two.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Fav%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Fav%20Dark.png"/> |
 |:---:|:---:|:---:|:---:|
-| Home | Home | Favourites Light |  Favourites Dark |
+| Home | Home | Favorites Light |  Favorites Dark |
 
 | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Fav%20Actions%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Fav%20Actions%20Dark.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Font%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Font%20Dark.png"/> |
 |:---:|:---:|:---:|:---:|
-| Favourite Actions Light | Favourite Actions Dark | Font Pick Light |  Font Pick Dark |
+| Favorite Actions Light | Favorite Actions Dark | Font Pick Light |  Font Pick Dark |
+
+<details>
+  <summary>more</summary>
 
 | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/BG%20Option%20Pick%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/BG%20Option%20Pick%20Dark.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/BG%20Pick%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/BG%20Pick%20Dark.png"/> |
 |:---:|:---:|:---:|:---:|
@@ -124,6 +127,8 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
 | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/About%20Light.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/About%20Dark.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Search.png"/> | <img src="https://github.com/VishnuSanal/Quotes/blob/master/Screenshots/Notification.png"/> |
 |:---:|:---:|:---:|:---:|
 | About Light | About Dark | Search |  Notification |
+
+</details>
 
 ## ➕ Quotes – Quotes Status Creator includes
 
@@ -143,7 +148,7 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
 </pre>
 
 ## 📬 Feedback and Suggestion
-We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Leave your feedback/suggestions [here](https://t.me/QuotesStatusCreator) or feel free to create an issue! :)
+We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Leave your feedback/suggestions [here](https://t.me/QuotesStatusCreator) or feel free to create an [issue](https://github.com/VishnuSanal/Quotes/issues/new/choose)! :)
 
 ## License
-[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![GNU GPLv3](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)
