@@ -19,6 +19,7 @@
 
 package phone.vishnu.quotes.fragment;
 
+import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -31,6 +32,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,6 +52,7 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
@@ -78,6 +81,7 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
     private CoordinatorLayout coordinatorLayout;
 
     private TextInputEditText textInputEditText;
+    private TextInputLayout textInputLayout;
 
     private ChipGroup chipGroup;
 
@@ -108,8 +112,11 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         chipGroup = inflate.findViewById(R.id.favChipGroup);
         coordinatorLayout = inflate.findViewById(R.id.favCoordinatorLayout);
         textInputEditText = inflate.findViewById(R.id.favSearchTIE);
+        textInputLayout = inflate.findViewById(R.id.favSearchTIL);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+
+        chipGroup.requestFocus();
 
         return inflate;
     }
@@ -156,6 +163,21 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
 
                     @Override
                     public void afterTextChanged(Editable s) {}
+                });
+
+        textInputLayout.setEndIconOnClickListener(
+                v -> {
+                    textInputEditText.setText("");
+                    hideKeyboard(v);
+                    chipGroup.requestFocus();
+                });
+
+        textInputLayout.setOnFocusChangeListener(
+                (v, hasFocus) -> {
+                    if (!hasFocus) {
+                        hideKeyboard(v);
+                        chipGroup.requestFocus();
+                    }
                 });
     }
 
@@ -465,5 +487,12 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
     private void showBottomSheetDialog(Quote q) {
         ShareOptionPickFragment bottomSheet = ShareOptionPickFragment.newInstance(q);
         bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager)
+                        requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

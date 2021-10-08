@@ -68,6 +68,7 @@
 				android:foregroundGravity="center"
 				android:textColorHint="@color/textColorLight"
 				app:endIconMode="clear_text"
+				app:expandedHintEnabled="false"
 				app:hintAnimationEnabled="true"
 				app:hintEnabled="true"
 				app:layout_constraintBottom_toTopOf="@id/favChipGroup"
