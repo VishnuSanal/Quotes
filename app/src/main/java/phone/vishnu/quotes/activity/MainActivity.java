@@ -611,11 +611,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 adapter.notifyDataSetChanged();
                 viewPager.setCurrentItem(0);
 
-                String s =
-                        (adapter.getCount() == sharedPreferenceHelper.getTotalQuotesCount())
-                                ? ""
-                                : String.valueOf(adapter.getCount());
-                ((TextView) findViewById(R.id.homeSearchCountTV)).setText(s);
+                ((TextView) findViewById(R.id.homeSearchCountTV))
+                        .setText(
+                                (adapter == null
+                                                || adapter.getCount()
+                                                        == sharedPreferenceHelper
+                                                                .getTotalQuotesCount())
+                                        ? ""
+                                        : String.valueOf(adapter.getCount()));
             }
         };
     }
