@@ -28,6 +28,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.util.Objects;
@@ -76,8 +78,35 @@ public class BGImageRVAdapter extends ListAdapter<Uri, BGImageRVAdapter.ViewHold
                                                             .getContext()
                                                             .getFilesDir()
                                                             .getPath())))
-                    .into(holder.imageView);
-        else Picasso.get().load(getItem(position)).into(holder.imageView);
+                    .into(
+                            holder.imageView,
+                            new Callback() {
+                                @Override
+                                public void onSuccess() {
+                                    holder.progressIndicator.setVisibility(View.GONE);
+                                }
+
+                                @Override
+                                public void onError(Exception e) {
+                                    e.printStackTrace();
+                                }
+                            });
+        else
+            Picasso.get()
+                    .load(getItem(position))
+                    .into(
+                            holder.imageView,
+                            new Callback() {
+                                @Override
+                                public void onSuccess() {
+                                    holder.progressIndicator.setVisibility(View.GONE);
+                                }
+
+                                @Override
+                                public void onError(Exception e) {
+                                    e.printStackTrace();
+                                }
+                            });
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -90,10 +119,14 @@ public class BGImageRVAdapter extends ListAdapter<Uri, BGImageRVAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;
+        private final LinearProgressIndicator progressIndicator;
 
         ViewHolder(View itemView) {
             super(itemView);
+
             imageView = itemView.findViewById(R.id.defaultSingleImage);
+            progressIndicator = itemView.findViewById(R.id.defaultSingleImageProgressIndicator);
+
             imageView.setOnClickListener(
                     v -> {
                         if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION)
