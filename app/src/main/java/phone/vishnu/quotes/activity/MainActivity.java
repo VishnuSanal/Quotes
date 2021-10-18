@@ -652,33 +652,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .show(getSupportFragmentManager(), "ShareActionPicker");
     }
 
-    private void showPermissionDeniedDialog() {
-        final androidx.appcompat.app.AlertDialog.Builder builder =
-                new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("Permission Denied");
-        builder.setMessage("Please Accept Necessary Permissions");
-        builder.setCancelable(true);
-        builder.setPositiveButton(
-                "OK",
-                (imageDialog, which) -> {
-                    imageDialog.cancel();
-                    startActivity(
-                            new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                    .setData(Uri.fromParts("package", getPackageName(), null)));
-                });
-        builder.setNegativeButton(
-                "Cancel",
-                (imageDialog, which) -> {
-                    imageDialog.cancel();
-                    Toast.makeText(
-                                    MainActivity.this,
-                                    "App requires these permissions to run properly",
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                });
-        builder.show();
-    }
-
     private void showBackgroundOptionChooser(boolean isCancellable) {
 
         BGOptionPickFragment.newInstance(isCancellable)
