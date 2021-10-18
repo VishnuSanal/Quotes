@@ -35,7 +35,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import java.io.File;
@@ -52,7 +52,7 @@ public class BGImagePickFragment extends BottomSheetDialogFragment
     private BGImageRVAdapter presentAdapter, newAdapter;
     private SharedPreferenceHelper sharedPreferenceHelper;
 
-    private CircularProgressIndicator progressBar;
+    private LinearProgressIndicator progressBar;
 
     private ArrayList<String> bgNameArrayList;
     private boolean warningShown = false;
@@ -131,7 +131,7 @@ public class BGImagePickFragment extends BottomSheetDialogFragment
                                 && MainActivity.bgDialog.isShowing())
                             MainActivity.bgDialog.dismiss();
 
-                        if (state.getItemCount() > 4) progressBar.setVisibility(View.GONE);
+                        if (state.getItemCount() > 4) progressBar.setVisibility(View.INVISIBLE);
                     }
                 };
         presentRecyclerView.setLayoutManager(layoutManager);
@@ -187,7 +187,7 @@ public class BGImagePickFragment extends BottomSheetDialogFragment
                                 && MainActivity.bgDialog.isShowing())
                             MainActivity.bgDialog.dismiss();
 
-                        if (state.getItemCount() > 4) progressBar.setVisibility(View.GONE);
+                        if (state.getItemCount() > 4) progressBar.setVisibility(View.INVISIBLE);
                     }
                 };
         newRecyclerView.setLayoutManager(layoutManager);
