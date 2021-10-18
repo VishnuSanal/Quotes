@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton fontFAB, aboutFAB, bgFAB, colorFAB, favFAB, settingsFAB, homeFAB;
 
     private CircularProgressIndicator progressIndicator;
+    private ChipGroup chipGroup;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -123,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         constraintLayout = findViewById(R.id.constraintLayout);
         progressIndicator = findViewById(R.id.mainProgressIndicator);
+        chipGroup = findViewById(R.id.homeChipGroup);
 
         initViewPager();
         runInitChecks();
@@ -296,14 +298,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public boolean onQueryTextChange(String newText) {
                         getFilter().filter(newText);
+
+                        chipGroup.clearCheck();
+
+                        for (int i = 0; i < chipGroup.getChildCount(); i++)
+                            chipGroup
+                                    .getChildAt(i)
+                                    .setEnabled(!((newText == null) || (!newText.equals(""))));
+
                         return false;
                     }
                 });
     }
 
     private void setUpChipGroup() {
-
-        ChipGroup chipGroup = findViewById(R.id.homeChipGroup);
 
         String[] tags = {
             "Life",
