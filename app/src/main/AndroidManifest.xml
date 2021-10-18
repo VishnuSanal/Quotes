@@ -23,12 +23,15 @@
 		<activity
 			android:name=".activity.SplashActivity"
 			android:launchMode="singleTop"
+			android:exported="false"
 			android:screenOrientation="portrait">
+
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
+
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
 			</intent-filter>
@@ -36,27 +39,30 @@
 			<meta-data
 				android:name="android.app.shortcuts"
 				android:resource="@xml/shortcuts" />
+
 		</activity>
 
 		<activity
 			android:name=".activity.MainActivity"
 			android:launchMode="singleTop"
-			android:screenOrientation="portrait"
-			android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+			android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+			android:screenOrientation="portrait"/>
 
 		<activity
 			android:name="com.yalantis.ucrop.UCropActivity"
-			android:screenOrientation="portrait"
-			android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+			android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+			android:screenOrientation="portrait"/>
 
 		<provider
 			android:name="androidx.core.content.FileProvider"
 			android:authorities="${applicationId}.provider"
 			android:exported="false"
 			android:grantUriPermissions="true">
+
 			<meta-data
 				android:name="android.support.FILE_PROVIDER_PATHS"
 				android:resource="@xml/provider_paths" />
+
 		</provider>
 
 		<receiver
@@ -65,14 +71,19 @@
 
 		<receiver
 			android:name=".receiver.StartupReceiver"
-			android:enabled="true">
+			android:enabled="true"
+			android:exported="false">
+
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
 				<action android:name="android.intent.action.QUICKBOOT_POWERON" />
 			</intent-filter>
+
 		</receiver>
 
-		<receiver android:name=".receiver.QuoteWidget">
+		<receiver android:name=".receiver.QuoteWidget"
+			android:exported="false">
+
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
 				<action android:name="phone.vishnu.quotes.WIDGET_CLICK_LISTENER" />
@@ -81,6 +92,7 @@
 			<meta-data
 				android:name="android.appwidget.provider"
 				android:resource="@xml/quote_widget_info" />
+
 		</receiver>
 	</application>
 </manifest>
