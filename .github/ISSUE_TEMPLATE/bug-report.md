@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Create a report to help us improve
+about: Report bugs to help us improve
 title: ''
 labels: ''
 assignees: ''
@@ -21,13 +21,13 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 **Screenshots**
-If applicable, add screenshots to help explain your problem.
+If possible, add screenshots to help explain your problem.
 
 **Crash logs**
 If applicable, add crash logs to help us figure out the problem.
 
 **Smartphone (please complete the following information):**
- - Device: [e.g. One Plus 8 Pro]
+ - Device: [e.g. OnePlus 8 Pro]
  - Andorid Version: [e.g. Android 10]
  - App Version: [e.g. v2.6.1]
 
