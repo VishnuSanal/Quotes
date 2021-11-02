@@ -605,6 +605,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                if (adapter == null) return;
+
                 // noinspection unchecked
                 adapter.setQuoteList((List<Quote>) results.values);
                 adapter.notifyDataSetChanged();
