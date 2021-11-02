@@ -128,6 +128,8 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         setUpRecyclerView(requireContext());
         setUpChipGroup();
 
+        hideKeyboard(view);
+
         importFavourites();
 
         addTV.setOnClickListener(
