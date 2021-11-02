@@ -21,10 +21,10 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 **Screenshots**
-If possible, add screenshots to help explain your problem.
+If applicable, add screenshots to help explain your problem.
 
 **Crash logs**
-If applicable, add crash logs to help us figure out the problem.
+If possible, add crash logs to help us figure out the problem.
 
 **Smartphone (please complete the following information):**
  - Device: [e.g. OnePlus 8 Pro]
