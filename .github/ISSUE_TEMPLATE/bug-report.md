@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: 'Report a bug '
+about: Create a report to help us improve
 title: ''
 labels: ''
 assignees: ''
@@ -23,9 +23,13 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
+**Crash logs**
+If applicable, add crash logs to help us figure out the problem.
+
 **Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - Andorid Version: [e.g. 22]
+ - Device: [e.g. One Plus 8 Pro]
+ - Andorid Version: [e.g. Android 10]
+ - App Version: [e.g. v2.6.1]
 
 **Additional context**
 Add any other context about the problem here.
