@@ -49,7 +49,6 @@ import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -57,18 +56,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.yalantis.ucrop.UCrop;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.fragment.AboutFragment;
@@ -119,9 +115,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         viewModel =
                 new ViewModelProvider(
-                        this,
-                        new ViewModelProvider.AndroidViewModelFactory(
-                                (Application) getApplicationContext()))
+                                this,
+                                new ViewModelProvider.AndroidViewModelFactory(
+                                        (Application) getApplicationContext()))
                         .get(MainViewModel.class);
 
         setIntentListeners(savedInstanceState);
@@ -195,8 +191,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (requestCode == PICK_IMAGE_ID
                     && data != null
                     && (null != data.getData()
-                    || (null != data.getExtras()
-                    && data.getExtras().containsKey("data")))) {
+                            || (null != data.getExtras()
+                                    && data.getExtras().containsKey("data")))) {
 
                 Uri uri = data.getData();
 
@@ -320,23 +316,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setUpChipGroup() {
 
         String[] tags = {
-                "Life",
-                "Success",
-                "Love",
-                "Action",
-                "Dream",
-                "Fail",
-                "Thought",
-                "Heart",
-                "Mistake",
-                "Wisdom",
-                "Fear",
-                "Courage",
-                "Friend",
-                "Attitude",
-                "Perseverance",
-                "Motivation",
-                "Inspiration"
+            "Life",
+            "Success",
+            "Love",
+            "Action",
+            "Dream",
+            "Fail",
+            "Thought",
+            "Heart",
+            "Mistake",
+            "Wisdom",
+            "Fear",
+            "Courage",
+            "Friend",
+            "Attitude",
+            "Perseverance",
+            "Motivation",
+            "Inspiration"
         };
 
         for (String string : tags) {
@@ -350,17 +346,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             chip.setChipBackgroundColor(
                     new ColorStateList(
-                            new int[][]{
-                                    new int[]{android.R.attr.state_checked},
-                                    new int[]{-android.R.attr.state_checked},
-                                    new int[]{
-                                            -android.R.attr.state_checked, -android.R.attr.state_focused
-                                    }
+                            new int[][] {
+                                new int[] {android.R.attr.state_checked},
+                                new int[] {-android.R.attr.state_checked},
+                                new int[] {
+                                    -android.R.attr.state_checked, -android.R.attr.state_focused
+                                }
                             },
-                            new int[]{
-                                    Color.parseColor("#424242"),
-                                    Color.parseColor("#2A2A2A"),
-                                    Color.parseColor("#2A2A2A")
+                            new int[] {
+                                Color.parseColor("#424242"),
+                                Color.parseColor("#2A2A2A"),
+                                Color.parseColor("#2A2A2A")
                             }));
 
             chip.setCheckable(true);
@@ -385,9 +381,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if (progressIndicator.getVisibility() == View.VISIBLE
                                     && !isNetworkAvailable())
                                 Toast.makeText(
-                                        this,
-                                        "Please Connect to the Internet",
-                                        Toast.LENGTH_LONG)
+                                                this,
+                                                "Please Connect to the Internet",
+                                                Toast.LENGTH_LONG)
                                         .show();
                         },
                         2000);
@@ -596,11 +592,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 else
                     for (Quote quote : allQuotesList) {
                         if (quote.getQuote()
-                                .toLowerCase()
-                                .contains(constraint.toString().toLowerCase())
+                                        .toLowerCase()
+                                        .contains(constraint.toString().toLowerCase())
                                 || quote.getAuthor()
-                                .toLowerCase()
-                                .contains(constraint.toString().toLowerCase()))
+                                        .toLowerCase()
+                                        .contains(constraint.toString().toLowerCase()))
                             filteredResults.add(quote);
                     }
 
@@ -623,9 +619,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ((TextView) findViewById(R.id.homeSearchCountTV))
                         .setText(
                                 (adapter == null
-                                        || adapter.getCount()
-                                        == sharedPreferenceHelper
-                                        .getTotalQuotesCount())
+                                                || adapter.getCount()
+                                                        == sharedPreferenceHelper
+                                                                .getTotalQuotesCount())
                                         ? ""
                                         : String.valueOf(adapter.getCount()));
             }
@@ -726,24 +722,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GestureDetector gestureDetector;
 
         SwipeListener(View view) {
-            GestureDetector.SimpleOnGestureListener listener = new GestureDetector.SimpleOnGestureListener() {
-                @Override
-                public boolean onDown(MotionEvent e) {
+            GestureDetector.SimpleOnGestureListener listener =
+                    new GestureDetector.SimpleOnGestureListener() {
+                        @Override
+                        public boolean onDown(MotionEvent e) {
 
-                    homeFAB.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.animate));
-                    if (null == homeFAB.getTag()) {
-                        if (isFABMenuHidden()) {
-                            openFABMenu();
-                        } else {
-                            closeFABMenu();
+                            homeFAB.startAnimation(
+                                    AnimationUtils.loadAnimation(
+                                            MainActivity.this, R.anim.animate));
+                            if (null == homeFAB.getTag()) {
+                                if (isFABMenuHidden()) {
+                                    openFABMenu();
+                                } else {
+                                    closeFABMenu();
+                                }
+                            } else {
+                                onBackPressed();
+                                resetHomeFAB();
+                            }
+                            return true;
                         }
-                    } else {
-                        onBackPressed();
-                        resetHomeFAB();
-                    }
-                    return true;
-                }
-            };
+                    };
             gestureDetector = new GestureDetector(listener);
             view.setOnTouchListener(this);
         }
