@@ -43,7 +43,7 @@ public class QuoteViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return quoteList.size();
+        return (quoteList == null) ? 0 : quoteList.size();
     }
 
     @Override

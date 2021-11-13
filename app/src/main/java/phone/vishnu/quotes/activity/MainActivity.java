@@ -34,7 +34,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -102,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton fontFAB, aboutFAB, bgFAB, colorFAB, favFAB, settingsFAB, homeFAB;
 
     private CircularProgressIndicator progressIndicator;
+    private ChipGroup chipGroup;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         constraintLayout = findViewById(R.id.constraintLayout);
         progressIndicator = findViewById(R.id.mainProgressIndicator);
+        chipGroup = findViewById(R.id.homeChipGroup);
 
         initViewPager();
         runInitChecks();
@@ -296,14 +297,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public boolean onQueryTextChange(String newText) {
                         getFilter().filter(newText);
+
+                        chipGroup.clearCheck();
+
+                        for (int i = 0; i < chipGroup.getChildCount(); i++)
+                            chipGroup
+                                    .getChildAt(i)
+                                    .setEnabled(!((newText == null) || (!newText.equals(""))));
+
                         return false;
                     }
                 });
     }
 
     private void setUpChipGroup() {
-
-        ChipGroup chipGroup = findViewById(R.id.homeChipGroup);
 
         String[] tags = {
             "Life",
@@ -598,16 +605,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                if (adapter == null) return;
+
                 // noinspection unchecked
                 adapter.setQuoteList((List<Quote>) results.values);
                 adapter.notifyDataSetChanged();
                 viewPager.setCurrentItem(0);
 
-                String s =
-                        (adapter.getCount() == sharedPreferenceHelper.getTotalQuotesCount())
-                                ? ""
-                                : String.valueOf(adapter.getCount());
-                ((TextView) findViewById(R.id.homeSearchCountTV)).setText(s);
+                ((TextView) findViewById(R.id.homeSearchCountTV))
+                        .setText(
+                                (adapter == null
+                                                || adapter.getCount()
+                                                        == sharedPreferenceHelper
+                                                                .getTotalQuotesCount())
+                                        ? ""
+                                        : String.valueOf(adapter.getCount()));
             }
         };
     }
@@ -639,33 +652,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void showShareActionPicker(Quote q) {
         ShareOptionPickFragment.newInstance(q)
                 .show(getSupportFragmentManager(), "ShareActionPicker");
-    }
-
-    private void showPermissionDeniedDialog() {
-        final androidx.appcompat.app.AlertDialog.Builder builder =
-                new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("Permission Denied");
-        builder.setMessage("Please Accept Necessary Permissions");
-        builder.setCancelable(true);
-        builder.setPositiveButton(
-                "OK",
-                (imageDialog, which) -> {
-                    imageDialog.cancel();
-                    startActivity(
-                            new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                    .setData(Uri.fromParts("package", getPackageName(), null)));
-                });
-        builder.setNegativeButton(
-                "Cancel",
-                (imageDialog, which) -> {
-                    imageDialog.cancel();
-                    Toast.makeText(
-                                    MainActivity.this,
-                                    "App requires these permissions to run properly",
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                });
-        builder.show();
     }
 
     private void showBackgroundOptionChooser(boolean isCancellable) {

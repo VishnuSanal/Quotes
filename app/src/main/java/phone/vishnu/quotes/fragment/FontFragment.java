@@ -32,7 +32,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import java.io.File;
@@ -49,7 +49,7 @@ public class FontFragment extends BottomSheetDialogFragment {
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ListView listView;
     private FontLVAdapter fontDataAdapter;
-    private CircularProgressIndicator progressBar;
+    private LinearProgressIndicator progressBar;
 
     private boolean warningShown = false;
 

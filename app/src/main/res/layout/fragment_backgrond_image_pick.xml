@@ -7,22 +7,11 @@
 	android:background="@drawable/bottom_sheet_background"
 	android:fillViewport="true"
 	app:layout_behavior="@string/appbar_scrolling_view_behavior"
-	tools:context=".fragment.BGImagePickFragment"
-	>
+	tools:context=".fragment.BGImagePickFragment" >
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
-
-		<com.google.android.material.progressindicator.CircularProgressIndicator
-			android:id="@+id/imagePickProgressBar"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:indeterminate="true"
-			app:layout_constraintBottom_toTopOf="@id/imagePickTitleTV"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent" />
 
 		<TextView
 			android:id="@+id/imagePickTitleTV"
@@ -37,12 +26,21 @@
 			android:text="@string/pick_background_image"
 			android:textColor="@color/accentTextColor"
 			android:textSize="16sp"
-			app:layout_constraintBottom_toTopOf="@id/imagePickPresentTitleTV"
+			app:layout_constraintBottom_toTopOf="@id/imagePickProgressBar"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/imagePickProgressBar"
-			/>
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<com.google.android.material.progressindicator.LinearProgressIndicator
+			android:id="@+id/imagePickProgressBar"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:indeterminate="true"
+			app:layout_constraintBottom_toTopOf="@id/imagePickPresentTitleTV"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/imagePickNewTitleTV" />
 
 		<TextView
 			android:id="@+id/imagePickPresentTitleTV"
@@ -61,8 +59,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/imagePickTitleTV"
-			/>
+			app:layout_constraintTop_toBottomOf="@id/imagePickProgressBar" />
 
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/imagePickPresentRecyclerView"
@@ -92,8 +89,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/imagePickPresentRecyclerView"
-			/>
+			app:layout_constraintTop_toBottomOf="@id/imagePickPresentRecyclerView" />
 
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/imagePickNewRecyclerView"
