@@ -36,6 +36,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -124,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         constraintLayout = findViewById(R.id.constraintLayout);
         progressIndicator = findViewById(R.id.mainProgressIndicator);
         chipGroup = findViewById(R.id.homeChipGroup);
-
         initViewPager();
         runInitChecks();
         initFABs();
@@ -421,6 +422,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         colorFAB.setOnClickListener(this);
         bgFAB.setOnClickListener(this);
         aboutFAB.setOnClickListener(this);
+        new SwipeListener(homeFAB);
     }
 
     private void resetHomeFAB() {
@@ -712,6 +714,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ShareHelper.saveQuote(context, q);
         } else if (i == 3) {
             showShareActionPicker(q);
+        }
+    }
+
+    private class SwipeListener implements View.OnTouchListener {
+        private final GestureDetector gestureDetector;
+
+        private SwipeListener(View view) {
+            GestureDetector.SimpleOnGestureListener listener =
+                    new GestureDetector.SimpleOnGestureListener() {
+                        @Override
+                        public boolean onDown(MotionEvent e) {
+                            onClick(homeFAB);
+                            return true;
+                        }
+                    };
+            gestureDetector = new GestureDetector(listener);
+            view.setOnTouchListener(this);
+        }
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return gestureDetector.onTouchEvent(event);
         }
     }
 }
