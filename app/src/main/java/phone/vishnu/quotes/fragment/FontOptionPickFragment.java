@@ -75,7 +75,7 @@ public class FontOptionPickFragment extends BottomSheetDialogFragment {
                         FontFragment.newInstance()
                                 .show(
                                         requireActivity().getSupportFragmentManager(),
-                                        "FontFragment");
+                                        "FontOptionPickFragment");
 
                         dismiss();
 
@@ -84,7 +84,7 @@ public class FontOptionPickFragment extends BottomSheetDialogFragment {
                         ColorPickFragment.newInstance(ColorPickFragment.PICK_FONT_COLOR_REQ_CODE)
                                 .show(
                                         requireActivity().getSupportFragmentManager(),
-                                        "ColorPickFragment");
+                                        "FontOptionPickFragment");
 
                         dismiss();
 
@@ -93,7 +93,7 @@ public class FontOptionPickFragment extends BottomSheetDialogFragment {
                         FontSizeFragment.newInstance()
                                 .show(
                                         requireActivity().getSupportFragmentManager(),
-                                        "FontSizeFragment");
+                                        "FontOptionPickFragment");
 
                         dismiss();
                     }

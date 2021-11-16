@@ -153,10 +153,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             closeFABMenu();
             if (id == R.id.favFAB) {
-                FavoriteFragment.newInstance()
-                        .show(getSupportFragmentManager(), "FavoriteFragment");
+                FavoriteFragment.newInstance().show(getSupportFragmentManager(), null);
             } else if (id == R.id.aboutFAB) {
-                AboutFragment.newInstance().show(getSupportFragmentManager(), "AboutFragment");
+                AboutFragment.newInstance().show(getSupportFragmentManager(), null);
             } else if (id == R.id.bgFAB) {
 
                 showBackgroundOptionChooser(true);
@@ -164,16 +163,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else if (id == R.id.colorFAB) {
 
                 ColorPickFragment.newInstance(ColorPickFragment.PICK_CARD_COLOR_REQ_CODE)
-                        .show(getSupportFragmentManager(), "ColorPickBottomSheetDialogFragment");
+                        .show(getSupportFragmentManager(), null);
 
             } else if (id == R.id.fontFAB) {
 
-                FontOptionPickFragment.newInstance()
-                        .show(getSupportFragmentManager(), "FontOptionPickFragment");
+                FontOptionPickFragment.newInstance().show(getSupportFragmentManager(), null);
 
             } else if (id == R.id.settingsFAB) {
-                SettingsFragment.newInstance()
-                        .show(getSupportFragmentManager(), "SettingsFragment");
+                SettingsFragment.newInstance().show(getSupportFragmentManager(), null);
             }
         }
     }
@@ -253,8 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // Shortcut
             if ("phone.vishnu.quotes.openFavouriteFragment".equals(getIntent().getAction())) {
 
-                FavoriteFragment.newInstance()
-                        .show(getSupportFragmentManager(), "FavoriteFragment");
+                FavoriteFragment.newInstance().show(getSupportFragmentManager(), null);
 
             } else if ("phone.vishnu.quotes.shareRandomQuote".equals(getIntent().getAction())) {
                 shareRandomQuote();
@@ -652,14 +648,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showShareActionPicker(Quote q) {
-        ShareOptionPickFragment.newInstance(q)
-                .show(getSupportFragmentManager(), "ShareActionPicker");
+        ShareOptionPickFragment.newInstance(q).show(getSupportFragmentManager(), null);
     }
 
     private void showBackgroundOptionChooser(boolean isCancellable) {
 
-        BGOptionPickFragment.newInstance(isCancellable)
-                .show(getSupportFragmentManager(), "BackgroundOptionPick");
+        BGOptionPickFragment.newInstance(isCancellable).show(getSupportFragmentManager(), null);
     }
 
     private boolean isNetworkAvailable() {

@@ -149,7 +149,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                 v -> {
                     ShareOptionPickFragment bottomSheet = ShareOptionPickFragment.newInstance();
                     bottomSheet.show(
-                            requireActivity().getSupportFragmentManager(), "ShareActionPicker");
+                            requireActivity().getSupportFragmentManager(), "SettingsFragment");
 
                     dismiss();
                 });
@@ -158,7 +158,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                 v -> {
                     DarkModePickFragment bottomSheet = DarkModePickFragment.newInstance();
                     bottomSheet.show(
-                            requireActivity().getSupportFragmentManager(), "DarkModePickFragment");
+                            requireActivity().getSupportFragmentManager(), "SettingsFragment");
 
                     dismiss();
                 });

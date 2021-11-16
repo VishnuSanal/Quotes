@@ -135,7 +135,9 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
         addTV.setOnClickListener(
                 v -> {
                     AddNewFragment.newInstance()
-                            .show(requireActivity().getSupportFragmentManager(), "AddNewFragment");
+                            .show(
+                                    requireActivity().getSupportFragmentManager(),
+                                    "FavoriteFragment");
 
                     chipGroup.clearCheck();
                 });
@@ -488,7 +490,7 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
 
     private void showBottomSheetDialog(Quote q) {
         ShareOptionPickFragment bottomSheet = ShareOptionPickFragment.newInstance(q);
-        bottomSheet.show(requireActivity().getSupportFragmentManager(), "ModalBottomSheet");
+        bottomSheet.show(requireActivity().getSupportFragmentManager(), "FavoriteFragment");
     }
 
     private void hideKeyboard(View view) {

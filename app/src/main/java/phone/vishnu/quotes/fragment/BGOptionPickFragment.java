@@ -87,7 +87,7 @@ public class BGOptionPickFragment extends BottomSheetDialogFragment {
                                         ColorPickFragment.PICK_BG_COLOR_REQ_CODE, isCancelable())
                                 .show(
                                         requireActivity().getSupportFragmentManager(),
-                                        "ColorPickFragment");
+                                        "BGOptionPickFragment");
 
                         dismiss();
 
@@ -110,7 +110,7 @@ public class BGOptionPickFragment extends BottomSheetDialogFragment {
                         BGImagePickFragment.newInstance()
                                 .show(
                                         requireActivity().getSupportFragmentManager(),
-                                        "BGImagePickFragment");
+                                        "BGOptionPickFragment");
 
                         dismiss();
                     }
