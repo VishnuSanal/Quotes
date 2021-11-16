@@ -22,6 +22,7 @@
 
 		<activity
 			android:name=".activity.SplashActivity"
+			android:exported="true"
 			android:launchMode="singleTop"
 			android:screenOrientation="portrait">
 			<intent-filter>
@@ -40,12 +41,14 @@
 
 		<activity
 			android:name=".activity.MainActivity"
+			android:exported="false"
 			android:launchMode="singleTop"
 			android:screenOrientation="portrait"
 			android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
 		<activity
 			android:name="com.yalantis.ucrop.UCropActivity"
+			android:exported="false"
 			android:screenOrientation="portrait"
 			android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
@@ -65,14 +68,17 @@
 
 		<receiver
 			android:name=".receiver.StartupReceiver"
-			android:enabled="true">
+			android:enabled="true"
+			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
 				<action android:name="android.intent.action.QUICKBOOT_POWERON" />
 			</intent-filter>
 		</receiver>
 
-		<receiver android:name=".receiver.QuoteWidget">
+		<receiver
+			android:name=".receiver.QuoteWidget"
+			android:exported="false">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
 				<action android:name="phone.vishnu.quotes.WIDGET_CLICK_LISTENER" />
