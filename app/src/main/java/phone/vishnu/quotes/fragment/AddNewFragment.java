@@ -32,26 +32,19 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.Objects;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.repository.FavRepository;
 
-public class AddNewFragment extends BottomSheetDialogFragment {
+public class AddNewFragment extends BaseBottomSheetDialogFragment {
 
     private TextInputEditText quoteTIE, authorTIE;
     private Button submitButton, cancelButton;
 
     public static AddNewFragment newInstance() {
         return new AddNewFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
     @Nullable

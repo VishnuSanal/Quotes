@@ -29,7 +29,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.Objects;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
@@ -37,7 +36,7 @@ import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 
-public class ShareOptionPickFragment extends BottomSheetDialogFragment {
+public class ShareOptionPickFragment extends BaseBottomSheetDialogFragment {
 
     private static final String QUOTE_EXTRA = "quote";
     private static final String AUTHOR_EXTRA = "author";
@@ -71,7 +70,6 @@ public class ShareOptionPickFragment extends BottomSheetDialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 
         if (getArguments() != null)
             if (getArguments().containsKey(QUOTE_EXTRA)

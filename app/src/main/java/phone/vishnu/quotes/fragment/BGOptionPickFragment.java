@@ -30,11 +30,10 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 
-public class BGOptionPickFragment extends BottomSheetDialogFragment {
+public class BGOptionPickFragment extends BaseBottomSheetDialogFragment {
 
     private static final String CANCELLABLE_EXTRA = "isCancellable";
 
@@ -55,8 +54,6 @@ public class BGOptionPickFragment extends BottomSheetDialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 
         if (getArguments() != null)
             if (getArguments().containsKey(CANCELLABLE_EXTRA))

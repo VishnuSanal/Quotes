@@ -46,7 +46,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -65,7 +64,7 @@ import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.viewmodel.FavViewModel;
 
-public class FavoriteFragment extends BottomSheetDialogFragment {
+public class FavoriteFragment extends BaseBottomSheetDialogFragment {
 
     private SharedPreferenceHelper sharedPreferenceHelper;
 
@@ -89,13 +88,6 @@ public class FavoriteFragment extends BottomSheetDialogFragment {
 
     public static FavoriteFragment newInstance() {
         return new FavoriteFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
     @Override

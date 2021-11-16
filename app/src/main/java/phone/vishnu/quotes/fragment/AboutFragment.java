@@ -30,7 +30,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.Arrays;
 import java.util.List;
 import phone.vishnu.quotes.BuildConfig;
@@ -38,7 +37,7 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.AboutRVAdapter;
 import phone.vishnu.quotes.model.TourItem;
 
-public class AboutFragment extends BottomSheetDialogFragment {
+public class AboutFragment extends BaseBottomSheetDialogFragment {
 
     private RecyclerView recyclerView;
 
@@ -46,13 +45,6 @@ public class AboutFragment extends BottomSheetDialogFragment {
 
     public static AboutFragment newInstance() {
         return new AboutFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
     @Override

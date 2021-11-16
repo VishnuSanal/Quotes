@@ -30,11 +30,10 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class DarkModePickFragment extends BottomSheetDialogFragment {
+public class DarkModePickFragment extends BaseBottomSheetDialogFragment {
 
     private RadioGroup radioGroup;
     private SharedPreferenceHelper sharedPreferenceHelper;
@@ -43,12 +42,6 @@ public class DarkModePickFragment extends BottomSheetDialogFragment {
 
     public static DarkModePickFragment newInstance() {
         return new DarkModePickFragment();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
     @Override

@@ -31,7 +31,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -43,7 +42,7 @@ import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.FontLVAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class FontFragment extends BottomSheetDialogFragment {
+public class FontFragment extends BaseBottomSheetDialogFragment {
 
     private final ArrayList<String> fontList = new ArrayList<>();
     private SharedPreferenceHelper sharedPreferenceHelper;
@@ -57,13 +56,6 @@ public class FontFragment extends BottomSheetDialogFragment {
 
     public static FontFragment newInstance() {
         return new FontFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
     @Override

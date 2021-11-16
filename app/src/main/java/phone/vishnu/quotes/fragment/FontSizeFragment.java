@@ -26,13 +26,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.slider.Slider;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class FontSizeFragment extends BottomSheetDialogFragment {
+public class FontSizeFragment extends BaseBottomSheetDialogFragment {
     private TextView sizeReset;
     private Slider sizeSlider;
     private SharedPreferenceHelper sharedPreferenceHelper;
@@ -41,13 +40,6 @@ public class FontSizeFragment extends BottomSheetDialogFragment {
 
     public static FontSizeFragment newInstance() {
         return new FontSizeFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
     @Override

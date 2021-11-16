@@ -34,7 +34,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -44,7 +43,7 @@ import phone.vishnu.quotes.adapter.ColorRVAdapter;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class ColorPickFragment extends BottomSheetDialogFragment {
+public class ColorPickFragment extends BaseBottomSheetDialogFragment {
 
     public static final int PICK_BG_COLOR_REQ_CODE = 0;
     public static final int PICK_CARD_COLOR_REQ_CODE = 1;
@@ -72,8 +71,6 @@ public class ColorPickFragment extends BottomSheetDialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 
         if (getArguments() != null)
             if (getArguments().containsKey(CANCELLABLE_EXTRA))

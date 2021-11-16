@@ -34,7 +34,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -46,7 +45,7 @@ import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.BGImageRVAdapter;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
-public class BGImagePickFragment extends BottomSheetDialogFragment
+public class BGImagePickFragment extends BaseBottomSheetDialogFragment
         implements BGImageRVAdapter.OnItemClickListener {
 
     private BGImageRVAdapter presentAdapter, newAdapter;
@@ -61,13 +60,6 @@ public class BGImagePickFragment extends BottomSheetDialogFragment
 
     public static BGImagePickFragment newInstance() {
         return new BGImagePickFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
     @Override

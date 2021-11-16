@@ -29,10 +29,9 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import phone.vishnu.quotes.R;
 
-public class FontOptionPickFragment extends BottomSheetDialogFragment {
+public class FontOptionPickFragment extends BaseBottomSheetDialogFragment {
 
     private RadioGroup radioGroup;
 
@@ -40,13 +39,6 @@ public class FontOptionPickFragment extends BottomSheetDialogFragment {
 
     public static FontOptionPickFragment newInstance() {
         return new FontOptionPickFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
     @Override
