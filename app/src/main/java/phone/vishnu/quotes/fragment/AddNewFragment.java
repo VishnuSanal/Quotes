@@ -19,7 +19,11 @@
 
 package phone.vishnu.quotes.fragment;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import android.app.Application;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +76,8 @@ public class AddNewFragment extends BottomSheetDialogFragment {
 
         quoteTIE.requestFocus();
 
+        checkClipboard();
+
         submitButton.setOnClickListener(
                 v -> {
                     String quote = Objects.requireNonNull(quoteTIE.getText()).toString();
@@ -100,5 +106,31 @@ public class AddNewFragment extends BottomSheetDialogFragment {
                 });
 
         cancelButton.setOnClickListener(v -> dismiss());
+    }
+
+    private void checkClipboard() {
+        ClipboardManager clipBoard =
+                (ClipboardManager) requireActivity().getSystemService(CLIPBOARD_SERVICE);
+
+        ClipData clipData = clipBoard.getPrimaryClip();
+
+        if (clipData == null || clipData.getItemCount() == 0) return;
+
+        String text = clipData.getItemAt(0).getText().toString();
+
+        if (text.contains("-")) {
+
+            String[] split = text.split("-");
+
+            if (split.length < 2
+                    || split[0] == null
+                    || split[0].isEmpty()
+                    || !split[0].contains("\"")
+                    || split[1] == null
+                    || split[1].isEmpty()) return;
+
+            quoteTIE.setText(split[0].replace("\"", "").trim());
+            authorTIE.setText(split[1].replace("-", "").trim());
+        }
     }
 }
