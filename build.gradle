@@ -50,6 +50,20 @@ spotless {
         delete rootProject.buildDir
     }
 
+    kotlin {
+
+        licenseHeaderFile 'license-spotless'
+
+        target 'app/src/**/*.kt'
+
+        ktlint("0.39.0").userData(['kotlin_imports_layout': 'idea',
+                                   'indent_size': '4'])
+
+        trimTrailingWhitespace()
+
+        delete rootProject.buildDir
+    }
+
     format 'xml',  {
 
         target 'app/src/**/*.xml'
