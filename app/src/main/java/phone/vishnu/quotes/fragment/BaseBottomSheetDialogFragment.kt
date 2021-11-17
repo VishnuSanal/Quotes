@@ -19,7 +19,9 @@
 
 package phone.vishnu.quotes.fragment
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.view.KeyEvent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import phone.vishnu.quotes.R
 
@@ -30,4 +32,32 @@ open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
         setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (dialog != null)
+            dialog?.setOnKeyListener(
+                fun(_: DialogInterface?, keyCode: Int, event: KeyEvent?): Boolean {
+
+                    if (keyCode == KeyEvent.KEYCODE_BACK && event?.action == KeyEvent.ACTION_DOWN && tag != null)
+
+                        when (tag) {
+                            "BGOptionPickFragment" ->
+                                BGOptionPickFragment.newInstance(true)
+                                    .show(requireActivity().supportFragmentManager, null)
+                            "FavoriteFragment" ->
+                                FavoriteFragment.newInstance()
+                                    .show(requireActivity().supportFragmentManager, null)
+                            "FontOptionPickFragment" ->
+                                FontOptionPickFragment.newInstance()
+                                    .show(requireActivity().supportFragmentManager, null)
+                            "SettingsFragment" ->
+                                SettingsFragment.newInstance()
+                                    .show(requireActivity().supportFragmentManager, null)
+                        }
+
+                    return false
+                }
+            )
+    }
 }
