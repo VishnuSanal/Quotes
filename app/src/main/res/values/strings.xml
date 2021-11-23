@@ -39,6 +39,10 @@
 	<string name="ask_every_time">Ask every time</string>
 	<string name="nothing_here">Nothing Here!</string>
 	<string name="search">Search</string>
+	<string name="report_via_telegram">Report via Telegram</string>
+	<string name="report_via_github">Report via GitHub</string>
+	<string name="error_report_note">To diagnose and fix these issues, please send us a crash report.</string>
+	<string name="your_comment">Your comment (optional)</string>
 
 	<!--Content Descriptions-->
 

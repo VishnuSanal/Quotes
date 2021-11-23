@@ -20,9 +20,14 @@
 package phone.vishnu.quotes.controller;
 
 import android.app.Application;
+import android.content.Context;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import org.acra.ACRA;
+import org.acra.config.CoreConfigurationBuilder;
+import org.acra.data.StringFormat;
+import phone.vishnu.quotes.BuildConfig;
 
 public class AppController extends Application {
 
@@ -38,6 +43,17 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+        ACRA.init(
+                this,
+                new CoreConfigurationBuilder(this)
+                        .withBuildConfigClass(BuildConfig.class)
+                        .withReportFormat(StringFormat.JSON));
     }
 
     private RequestQueue getRequestQueue() {

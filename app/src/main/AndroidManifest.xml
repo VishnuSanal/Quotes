@@ -4,11 +4,9 @@
 
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 	<uses-permission
 		android:name="android.permission.WRITE_EXTERNAL_STORAGE"
 		android:maxSdkVersion="28" />
-
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 	<application
@@ -52,6 +50,18 @@
 			android:screenOrientation="portrait"
 			android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
+		<activity
+			android:name=".acra.ACRAErrorActivity"
+			android:exported="true"
+			android:parentActivityName=".activity.SplashActivity"
+			android:screenOrientation="portrait">
+
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value=".activity.SplashActivity" />
+
+		</activity>
+
 		<provider
 			android:name="androidx.core.content.FileProvider"
 			android:authorities="${applicationId}.provider"
@@ -65,7 +75,6 @@
 		<receiver
 			android:name=".receiver.NotificationReceiver"
 			android:enabled="true" />
-
 		<receiver
 			android:name=".receiver.StartupReceiver"
 			android:enabled="true"
@@ -75,7 +84,6 @@
 				<action android:name="android.intent.action.QUICKBOOT_POWERON" />
 			</intent-filter>
 		</receiver>
-
 		<receiver
 			android:name=".receiver.QuoteWidget"
 			android:exported="false">
@@ -89,4 +97,5 @@
 				android:resource="@xml/quote_widget_info" />
 		</receiver>
 	</application>
+
 </manifest>
