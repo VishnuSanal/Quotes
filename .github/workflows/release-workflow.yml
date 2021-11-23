@@ -1,7 +1,6 @@
-name: Android Build
+name: Validate Fastlane
 
-# TODO: Change this - only for testing
-on: push
+on: release
 
 jobs:
   validate:
