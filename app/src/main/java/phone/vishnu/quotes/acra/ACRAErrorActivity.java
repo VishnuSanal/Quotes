@@ -164,7 +164,11 @@ public class ACRAErrorActivity extends AppCompatActivity {
                         + "\n\n"
                         + appStartDateTV.getText()
                         + "\n\n"
+                        + "```"
+                        + "\n"
                         + stackTraceTV.getText()
+                        + "\n"
+                        + "```"
                         + "\n\n"
                         + comment;
 
