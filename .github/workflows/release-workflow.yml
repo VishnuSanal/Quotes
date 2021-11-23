@@ -1,0 +1,13 @@
+name: Android Build
+
+# TODO: Change this - only for testing
+on: push
+
+jobs:
+  validate:
+    name: Validate Fastlane
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ashutoshgngwr/validate-fastlane-supply-metadata@v1
