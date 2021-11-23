@@ -1,0 +1,4 @@
+- New bottom sheet back button behaviour
+- Auto recognise Quote whilst adding custom Quotes
+- Minor improvement to home menu button
+- Implement ACRA for crash reporting
