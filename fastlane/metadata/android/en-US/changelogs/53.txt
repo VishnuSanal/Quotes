@@ -1,4 +1,6 @@
-- New bottom sheet back button behaviour
-- Auto recognise Quote whilst adding custom Quotes
+- New bottom sheet back button behavior
+- Auto recognize Quote whilst adding custom Quotes
 - Minor improvement to home menu button
 - Implement ACRA for crash reporting
+
+Full changelog -> https://github.com/VishnuSanal/Quotes/compare/v2.6.2...v2.7.0
