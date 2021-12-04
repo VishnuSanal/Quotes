@@ -25,6 +25,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.widget.RemoteViews;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
@@ -88,7 +89,9 @@ public class QuoteWidget extends AppWidgetProvider {
                 new Intent(context, QuoteWidget.class)
                         .setAction("phone.vishnu.quotes.WIDGET_CLICK_LISTENER")
                         .putExtra("WIDGET_REQ_CODE", REQ_CODE),
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                        ? PendingIntent.FLAG_IMMUTABLE
+                        : PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private void updateQuoteWidget(Context context, Quote quote) {

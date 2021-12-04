@@ -25,6 +25,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,8 +40,16 @@ public class AlarmHelper {
         if (calendar.getTime().compareTo(new Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1);
 
         Intent intent = new Intent(context, NotificationReceiver.class);
+
         PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.getBroadcast(
+                        context,
+                        0,
+                        intent,
+                        (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                                ? PendingIntent.FLAG_IMMUTABLE
+                                : PendingIntent.FLAG_ONE_SHOT);
+
         AlarmManager alarmManager =
                 (AlarmManager) context.getApplicationContext().getSystemService(ALARM_SERVICE);
 
@@ -74,7 +83,9 @@ public class AlarmHelper {
                         context.getApplicationContext(),
                         0,
                         intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                        (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                                ? PendingIntent.FLAG_IMMUTABLE
+                                : PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
         if (alarmManager != null) {
@@ -89,7 +100,13 @@ public class AlarmHelper {
     public static void cancelAlarm(Context context) {
         Intent intent = new Intent(context, NotificationReceiver.class);
         PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.getBroadcast(
+                        context,
+                        0,
+                        intent,
+                        (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                                ? PendingIntent.FLAG_IMMUTABLE
+                                : PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
         if (alarmManager != null) {
@@ -115,7 +132,13 @@ public class AlarmHelper {
 
             Intent i = new Intent(context, NotificationReceiver.class);
             PendingIntent pendingIntent =
-                    PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent.getBroadcast(
+                            context,
+                            0,
+                            i,
+                            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                                    ? PendingIntent.FLAG_IMMUTABLE
+                                    : PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
             if (alarmManager != null) {
@@ -138,7 +161,14 @@ public class AlarmHelper {
 
             Intent intent = new Intent(context, QuoteWidget.class);
             intent.setAction(QUOTE_WIDGET_UPDATE);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            PendingIntent pendingIntent =
+                    PendingIntent.getBroadcast(
+                            context,
+                            0,
+                            intent,
+                            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                                    ? PendingIntent.FLAG_IMMUTABLE
+                                    : 0);
 
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -163,7 +193,13 @@ public class AlarmHelper {
         Intent intent = new Intent(context, QuoteWidget.class);
         intent.setAction(QUOTE_WIDGET_UPDATE);
         PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.getBroadcast(
+                        context,
+                        0,
+                        intent,
+                        (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                                ? PendingIntent.FLAG_IMMUTABLE
+                                : PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -187,7 +223,13 @@ public class AlarmHelper {
         Intent intent = new Intent(context, QuoteWidget.class);
         intent.setAction(QUOTE_WIDGET_UPDATE);
         PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.getBroadcast(
+                        context,
+                        0,
+                        intent,
+                        (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                                ? PendingIntent.FLAG_IMMUTABLE
+                                : PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (alarmManager != null) alarmManager.cancel(pendingIntent);
     }

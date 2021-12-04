@@ -24,6 +24,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.provider.Settings;
 import androidx.core.app.NotificationCompat;
 import phone.vishnu.quotes.R;
@@ -117,6 +118,8 @@ public class NotificationHelper {
                         .putExtra(actionName, true)
                         .putExtra("quote", quote.getQuote())
                         .putExtra("author", quote.getAuthor()),
-                PendingIntent.FLAG_ONE_SHOT);
+                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                        ? PendingIntent.FLAG_IMMUTABLE
+                        : PendingIntent.FLAG_ONE_SHOT);
     }
 }
