@@ -32,6 +32,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Filter;
 import android.widget.ImageView;
@@ -120,6 +121,10 @@ public class FavoriteFragment extends BaseBottomSheetDialogFragment {
         setUpRecyclerView(requireContext());
         setUpChipGroup();
 
+        if (getActivity() != null)
+            requireActivity()
+                    .getWindow()
+                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         hideKeyboard(view);
 
         importFavourites();
