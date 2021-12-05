@@ -1,7 +1,5 @@
 <b>Quotes Status Creator</b>
 
-Quotes Status Creator lets you share quotations as status images on social media
-
 Quotes Status Creator lets you share quotations as status images on social media – Quotes Status Creator App
 
     ☆ Huge Collection of Inspirational Quotes that can be shared on Social Media Platforms as a high definition image
@@ -59,7 +57,7 @@ Join the Telegram Channel to get a Quote as an image & as a text in your inbox -
 
 <b>🤩Feedback and Suggestion</b>
 
-We appreciate your effort to help us in making Quotes - Quotes Status Creator App more awesome. Your feedback is immensely helpful to us. We love to hear your suggestions/feedback – Send us an email at t.v.s10123@gmail.com.
+We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Leave your feedback/suggestions on our community on Telegram https://t.me/QuotesStatusCreator or feel free to create an issue here https://github.com/VishnuSanal/Quotes/issues/new/choose :)
 
 <b>👨‍💻Source Code</b>
 
