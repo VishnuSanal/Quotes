@@ -19,42 +19,69 @@
 
 package phone.vishnu.quotes.fragment;
 
-import android.app.ProgressDialog;
+import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import java.io.File;
 import java.util.ArrayList;
-import phone.vishnu.quotes.BuildConfig;
+import java.util.Arrays;
+import java.util.List;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.BGImageRVAdapter;
+import phone.vishnu.quotes.adapter.UnsplashRVAdapter;
+import phone.vishnu.quotes.controller.AppController;
+import phone.vishnu.quotes.helper.DownloadImageTask;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
+import phone.vishnu.quotes.model.UnsplashItem;
+import phone.vishnu.quotes.viewmodel.BGImagePickViewModel;
 
 public class BGImagePickFragment extends BaseBottomSheetDialogFragment
-        implements BGImageRVAdapter.OnItemClickListener {
+        implements BGImageRVAdapter.OnItemClickListener, UnsplashRVAdapter.OnItemClickListener {
 
-    private BGImageRVAdapter presentAdapter, newAdapter;
     private SharedPreferenceHelper sharedPreferenceHelper;
 
-    private LinearProgressIndicator progressBar;
+    private LinearProgressIndicator progressBar, newProgressBar;
 
-    private ArrayList<String> bgNameArrayList;
+    private TextInputEditText textInputEditText;
+    private TextInputLayout textInputLayout;
+
+    private TextView presentTitleTV, newTitleTV, unsplashCreditTV;
+
+    private BGImagePickViewModel viewModel;
+
+    private BGImageRVAdapter presentAdapter;
+    private UnsplashRVAdapter newAdapter;
+    private RecyclerView presentRecyclerView, newRecyclerView;
+
     private boolean warningShown = false;
+
+    private  String quotesstatuscreator;
 
     public BGImagePickFragment() {}
 
@@ -67,11 +94,32 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_backgrond_image_pick, container, false);
 
+        quotesstatuscreator = new StringBuilder(Arrays.toString(getResources()
+                .getTextArray(R.array.quotesstatuscreator))
+                .replace("[", "")
+                .replace("]", "")
+                .replace(",", "")
+                .replace(" ", "")
+                .trim()).reverse().toString();
+
+        viewModel =
+                new ViewModelProvider(
+                                this,
+                                new ViewModelProvider.AndroidViewModelFactory(
+                                        (Application) requireContext().getApplicationContext()))
+                        .get(BGImagePickViewModel.class);
+
         setUpRecyclerView(inflate);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+        textInputEditText = inflate.findViewById(R.id.imagePickSearchTIE);
+        textInputLayout = inflate.findViewById(R.id.imagePickSearchTIL);
+        presentTitleTV = inflate.findViewById(R.id.imagePickPresentTitleTV);
+        newTitleTV = inflate.findViewById(R.id.imagePickNewTitleTV);
+        unsplashCreditTV = inflate.findViewById(R.id.imagePickUnsplashCreditTV);
 
         progressBar = inflate.findViewById(R.id.imagePickProgressBar);
+        newProgressBar = inflate.findViewById(R.id.imagePickNewProgressBar);
 
         if (!isNetworkAvailable(requireContext())) {
 
@@ -97,121 +145,93 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
         newAdapter.setOnItemClickListener(this);
 
         presentAdapter.setOnItemClickListener(this);
+
+        textInputLayout.setEndIconOnClickListener(this::onClick);
+
+        unsplashCreditTV.setOnClickListener(
+                v ->
+                        requireContext()
+                                .startActivity(
+                                        new Intent(
+                                                Intent.ACTION_VIEW,
+                                                Uri.parse(
+                                                        "https://unsplash.com/?utm_source=Quotes%20Status%20Creator%26utm_medium=referral"))));
+
+        textInputEditText.setOnEditorActionListener(
+                (v, actionId, event) -> {
+                    if (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER
+                            || actionId == EditorInfo.IME_ACTION_DONE) this.onClick(v);
+                    return false;
+                });
     }
 
     private void setUpRecyclerView(View inflate) {
-        bgNameArrayList = new ArrayList<>();
-        loadPresentImages(inflate);
-        loadNewImages(inflate);
-    }
-
-    private void loadPresentImages(View inflate) {
-
-        RecyclerView presentRecyclerView = inflate.findViewById(R.id.imagePickPresentRecyclerView);
+        presentRecyclerView = inflate.findViewById(R.id.imagePickPresentRecyclerView);
         presentAdapter = new BGImageRVAdapter();
         presentRecyclerView.setAdapter(presentAdapter);
-
-        presentRecyclerView.setHasFixedSize(true);
-
-        RecyclerView.LayoutManager layoutManager =
+        presentRecyclerView.setHasFixedSize(false);
+        presentRecyclerView.setLayoutManager(
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) {
                     @Override
                     public void onLayoutCompleted(RecyclerView.State state) {
                         super.onLayoutCompleted(state);
-                        if (state.getItemCount() > 0
-                                && MainActivity.bgDialog != null
-                                && MainActivity.bgDialog.isShowing())
-                            MainActivity.bgDialog.dismiss();
+
+                        dismissProgressDialog();
 
                         if (state.getItemCount() > 4) progressBar.setVisibility(View.INVISIBLE);
                     }
-                };
-        presentRecyclerView.setLayoutManager(layoutManager);
+                });
 
-        final ArrayList<Uri> list = new ArrayList<>();
-        bgNameArrayList = new ArrayList<>();
+        newRecyclerView = inflate.findViewById(R.id.imagePickNewRecyclerView);
+        newAdapter = new UnsplashRVAdapter();
+        newRecyclerView.setAdapter(newAdapter);
+        presentRecyclerView.setHasFixedSize(false);
+        newRecyclerView.setLayoutManager(
+                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) {
+                    @Override
+                    public void onLayoutCompleted(RecyclerView.State state) {
+                        super.onLayoutCompleted(state);
 
-        String[] files = requireContext().fileList();
+                        dismissProgressDialog();
 
-        if (files != null) {
-            for (String s : files) {
-                File file = new File(s);
-
-                if (file.getAbsolutePath().endsWith(".jpg")) {
-                    if (file.getName().equals("background.jpg")
-                            || file.getName().equals("screenshot.jpg")) continue;
-
-                    list.add(Uri.fromFile(file));
-                    bgNameArrayList.add(file.getName());
-
-                    if (presentAdapter != null && getContext() != null) {
-                        presentAdapter.submitList(list);
-                        presentAdapter.notifyDataSetChanged();
+                        if (state.getItemCount() > 4) progressBar.setVisibility(View.INVISIBLE);
                     }
-                }
-            }
-        } else {
-            if (MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing())
-                MainActivity.bgDialog.dismiss();
-        }
+                });
 
-        if (bgNameArrayList.size() == 0
-                && MainActivity.bgDialog != null
-                && MainActivity.bgDialog.isShowing()) {
-            MainActivity.bgDialog.dismiss();
-        }
+        loadPresentImages();
+        loadNewImages();
     }
 
-    private void loadNewImages(View inflate) {
-        RecyclerView newRecyclerView = inflate.findViewById(R.id.imagePickNewRecyclerView);
-        newAdapter = new BGImageRVAdapter();
-        newRecyclerView.setAdapter(newAdapter);
+    @SuppressLint("NotifyDataSetChanged")
+    private void loadPresentImages() {
+        MutableLiveData<List<Uri>> presentImagesMutableLiveData = viewModel.getPresentImages();
 
-        newRecyclerView.setHasFixedSize(true);
+        if (presentImagesMutableLiveData != null)
+            presentImagesMutableLiveData.observe(
+                    this,
+                    list -> {
+                        presentAdapter.submitList(new ArrayList<>(list));
+                        presentAdapter.notifyDataSetChanged();
+                        presentRecyclerView.invalidate();
+                    });
+    }
 
-        RecyclerView.LayoutManager layoutManager =
-                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) {
-                    @Override
-                    public void onLayoutCompleted(RecyclerView.State state) {
-                        super.onLayoutCompleted(state);
-                        if (state.getItemCount() > 0
-                                && MainActivity.bgDialog != null
-                                && MainActivity.bgDialog.isShowing())
-                            MainActivity.bgDialog.dismiss();
+    @SuppressLint("NotifyDataSetChanged")
+    private void loadNewImages() {
+        MutableLiveData<List<UnsplashItem>> searchImagesMutableLiveData =
+                viewModel.searchImages(
+                        "wallpaper",
+                        quotesstatuscreator
+                );
 
-                        if (state.getItemCount() > 4) progressBar.setVisibility(View.INVISIBLE);
-                    }
-                };
-        newRecyclerView.setLayoutManager(layoutManager);
-
-        if (bgNameArrayList.isEmpty()) {
-            inflate.findViewById(R.id.imagePickPresentTitleTV).setVisibility(View.GONE);
-        }
-
-        final ArrayList<Uri> list = new ArrayList<>();
-
-        if (isNetworkAvailable(requireContext())) {
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference().child("images");
-
-            storageRef
-                    .listAll()
-                    .addOnSuccessListener(
-                            listResult -> {
-                                for (StorageReference item : listResult.getItems())
-                                    if (!bgNameArrayList.contains(item.getName()))
-                                        item.getDownloadUrl()
-                                                .addOnSuccessListener(
-                                                        uri -> {
-                                                            list.add(uri);
-                                                            if (newAdapter != null
-                                                                    && getContext() != null) {
-                                                                newAdapter.submitList(list);
-                                                                newAdapter.notifyDataSetChanged();
-                                                            }
-                                                        });
-                            });
-        }
+        if (searchImagesMutableLiveData != null)
+            searchImagesMutableLiveData.observe(
+                    this,
+                    list -> {
+                        newAdapter.submitList(new ArrayList<>(list));
+                        newAdapter.notifyDataSetChanged();
+                        newRecyclerView.invalidate();
+                    });
     }
 
     private boolean isNetworkAvailable(Context context) {
@@ -223,78 +243,99 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
 
     @Override
     public void onItemClick(Uri uri) {
-        final ProgressDialog dialog = ProgressDialog.show(requireContext(), "", "Please Wait....");
 
-        final File f;
+        String s = uri.toString().replace("file://", requireContext().getFilesDir().getPath());
 
-        if (uri.toString()
-                .contains(
-                        (BuildConfig.DEBUG)
-                                ? "https://firebasestorage.googleapis.com/v0/b/quotes-debug-q.appspot.com"
-                                : "https://firebasestorage.googleapis.com/v0/b/quotes-q.appspot.com")) {
+        ((MainActivity) requireActivity())
+                .findViewById(R.id.constraintLayout)
+                .setBackground(Drawable.createFromPath(s));
 
-            String fileName = String.valueOf(uri).split("%2F")[1].split("\\?")[0];
+        new SharedPreferenceHelper(requireContext()).setBackgroundPath(s);
 
-            f = new File(requireContext().getFilesDir(), fileName);
+        dismiss();
+    }
 
-        } else {
-            f =
-                    new File(
-                            uri.toString()
-                                    .replace("file://", requireContext().getFilesDir().getPath()));
-        }
+    @Override
+    public void onItemClick(UnsplashItem item) {
 
-        if (f.exists()) {
-            sharedPreferenceHelper.setBackgroundPath(f.getAbsolutePath());
-
-            dialog.dismiss();
-
-            Toast.makeText(
-                            requireContext(),
-                            "Background Set \n Applying Changes",
-                            Toast.LENGTH_LONG)
-                    .show();
-
-            ((MainActivity) requireContext())
-                    .findViewById(R.id.constraintLayout)
-                    .setBackground(Drawable.createFromPath(f.getAbsolutePath()));
-
+        if (!isNetworkAvailable(requireContext())) {
+            Toast.makeText(requireContext(), "No network connection", Toast.LENGTH_SHORT).show();
             dismiss();
-
-        } else {
-            StorageReference storageReference =
-                    FirebaseStorage.getInstance().getReference().child("images").child(f.getName());
-
-            storageReference
-                    .getFile(f)
-                    .addOnSuccessListener(
-                            taskSnapshot -> {
-                                sharedPreferenceHelper.setBackgroundPath(f.getAbsolutePath());
-
-                                dialog.dismiss();
-
-                                Toast.makeText(
-                                                requireContext(),
-                                                "Background Set \n Applying Changes",
-                                                Toast.LENGTH_LONG)
-                                        .show();
-
-                                ((MainActivity) requireContext())
-                                        .findViewById(R.id.constraintLayout)
-                                        .setBackground(Drawable.createFromPath(f.toString()));
-
-                                dismiss();
-                            })
-                    .addOnFailureListener(
-                            exception -> {
-                                exception.printStackTrace();
-                                Toast.makeText(
-                                                requireContext(),
-                                                "Oops! Something went wrong!",
-                                                Toast.LENGTH_LONG)
-                                        .show();
-                                dialog.dismiss();
-                            });
+            return;
         }
+
+        if (MainActivity.bgDialog != null) MainActivity.bgDialog.show();
+
+        String s =
+                requireContext().getFilesDir().getPath()
+                        + File.separator
+                        + item.getRegularUri().getLastPathSegment()
+                        + ".jpg";
+
+        new DownloadImageTask(
+                        s,
+                        () -> {
+                            sharedPreferenceHelper.setBackgroundPath(s);
+
+                            ((MainActivity) requireActivity())
+                                    .findViewById(R.id.constraintLayout)
+                                    .setBackground(Drawable.createFromPath(s));
+
+                            AppController.getInstance()
+                                    .addToRequestQueue(
+                                            new StringRequest(
+                                                    Request.Method.GET,
+                                                    item.getDownloadTrigger().toString()
+                                                            + "?client_id="
+                                                            + quotesstatuscreator,
+                                                    null,
+                                                    null));
+
+                            dismissProgressDialog();
+                            dismiss();
+                        })
+                .execute(String.valueOf(item.getRegularUri()));
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void onClick(View v) {
+
+        newProgressBar.setVisibility(View.VISIBLE);
+
+        presentRecyclerView.setVisibility(View.GONE);
+        presentTitleTV.setVisibility(View.GONE);
+
+        if (textInputEditText.getText() != null) {
+
+            MutableLiveData<List<UnsplashItem>> searchImagesMutableLiveData =
+                    viewModel.searchImages(
+                            textInputEditText.getText().toString(),
+                            quotesstatuscreator
+                    );
+
+            if (searchImagesMutableLiveData != null)
+                searchImagesMutableLiveData.observe(
+                        this,
+                        list -> {
+                            newAdapter.submitList(new ArrayList<>(list));
+                            newAdapter.notifyDataSetChanged();
+                            newRecyclerView.invalidate();
+
+                            new Handler()
+                                    .postDelayed(
+                                            () -> {
+                                                if (newProgressBar != null
+                                                        && newProgressBar.getVisibility()
+                                                                == View.VISIBLE)
+                                                    newProgressBar.setVisibility(View.GONE);
+                                            },
+                                            200);
+                        });
+        }
+    }
+
+    private void dismissProgressDialog() {
+        if (MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing())
+            MainActivity.bgDialog.dismiss();
     }
 }

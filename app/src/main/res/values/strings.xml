@@ -43,6 +43,7 @@
 	<string name="report_via_github">Report via GitHub</string>
 	<string name="error_report_note">To diagnose and fix this issue, please send us a crash report.</string>
 	<string name="your_comment">Your comment (optional)</string>
+	<string name="unsplash_credit">All images are from <a href="https://unsplash.com/?utm_source=Quotes%20Status%20Creator%26utm_medium=referral">Unsplash</a></string>
 
 	<!--Content Descriptions-->
 
@@ -70,5 +71,6 @@
 	<string name="quote_widget_share_button" translatable="false">Quote Widget Share Button</string>
 	<string name="bottom_sheet_done_indicator" translatable="false">Bottom Sheet Done Indicator</string>
 	<string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
+	<string name="unsplash_single_image" translatable="false">Unsplash single image</string>
 
 </resources>

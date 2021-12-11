@@ -7,7 +7,7 @@
 	android:background="@drawable/bottom_sheet_background"
 	android:fillViewport="true"
 	app:layout_behavior="@string/appbar_scrolling_view_behavior"
-	tools:context=".fragment.BGImagePickFragment" >
+	tools:context=".fragment.BGImagePickFragment">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
@@ -37,10 +37,37 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:indeterminate="true"
-			app:layout_constraintBottom_toTopOf="@id/imagePickPresentTitleTV"
+			app:layout_constraintBottom_toTopOf="@id/imagePickSearchTIL"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/imagePickNewTitleTV" />
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/imagePickSearchTIL"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:foregroundGravity="center"
+			app:endIconDrawable="@drawable/ic_search"
+			app:endIconMode="custom"
+			app:hintAnimationEnabled="true"
+			app:hintEnabled="true"
+			app:layout_constraintBottom_toTopOf="@id/imagePickPresentTitleTV"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/imagePickProgressBar">
+
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/imagePickSearchTIE"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/search"
+				android:imeOptions="actionDone"
+				android:inputType="textCapWords"
+				android:textColor="@color/textColor"
+				android:textColorHint="@color/textColor" />
+
+		</com.google.android.material.textfield.TextInputLayout>
 
 		<TextView
 			android:id="@+id/imagePickPresentTitleTV"
@@ -59,7 +86,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/imagePickProgressBar" />
+			app:layout_constraintTop_toBottomOf="@id/imagePickSearchTIL" />
 
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/imagePickPresentRecyclerView"
@@ -73,7 +100,7 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/imagePickPresentTitleTV"
 			app:spanCount="2"
-			tools:listitem="@layout/background_image_pick_single_item" />
+			tools:listitem="@layout/present_image_pick_single_item" />
 
 		<TextView
 			android:id="@+id/imagePickNewTitleTV"
@@ -85,11 +112,22 @@
 			android:text="@string/new_images"
 			android:textColor="@color/accentTextColor"
 			android:textSize="16sp"
-			app:layout_constraintBottom_toTopOf="@id/imagePickNewRecyclerView"
+			app:layout_constraintBottom_toTopOf="@id/imagePickNewProgressBar"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/imagePickPresentRecyclerView" />
+
+		<com.google.android.material.progressindicator.LinearProgressIndicator
+			android:id="@+id/imagePickNewProgressBar"
+			android:visibility="gone"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:indeterminate="true"
+			app:layout_constraintBottom_toTopOf="@id/imagePickNewRecyclerView"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/imagePickNewTitleTV" />
 
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/imagePickNewRecyclerView"
@@ -98,12 +136,27 @@
 			android:nestedScrollingEnabled="false"
 			android:scrollbars="vertical"
 			app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+			app:layout_constraintBottom_toTopOf="@id/imagePickUnsplashCreditTV"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/imagePickNewProgressBar"
+			app:spanCount="2"
+			tools:listitem="@layout/present_image_pick_single_item" />
+
+		<TextView
+			android:id="@+id/imagePickUnsplashCreditTV"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:letterSpacing="0.1"
+			android:padding="8dp"
+			android:text="@string/unsplash_credit"
+			android:textColor="@color/accentTextColor"
+			android:textSize="16sp"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/imagePickNewTitleTV"
-			app:spanCount="2"
-			tools:listitem="@layout/background_image_pick_single_item" />
+			app:layout_constraintTop_toBottomOf="@id/imagePickNewRecyclerView" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

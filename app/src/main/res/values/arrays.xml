@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string-array name="quotesstatuscreator">
+		<item>Y</item>
+		<item>G</item>
+		<item>O</item>
+		<item>K</item>
+		<item>7</item>
+		<item>j</item>
+		<item>Z</item>
+		<item>P</item>
+		<item>m</item>
+		<item>B</item>
+		<item>G</item>
+		<item>N</item>
+		<item>c</item>
+		<item>R</item>
+		<item>J</item>
+		<item>6</item>
+		<item>k</item>
+		<item>a</item>
+		<item>c</item>
+		<item>7</item>
+		<item>H</item>
+		<item>9</item>
+		<item>u</item>
+		<item>6</item>
+		<item>x</item>
+		<item>M</item>
+		<item>a</item>
+		<item>G</item>
+		<item>B</item>
+		<item>N</item>
+		<item>p</item>
+		<item>M</item>
+		<item>s</item>
+		<item>s</item>
+		<item>V</item>
+		<item>q</item>
+		<item>0</item>
+		<item>j</item>
+		<item>v</item>
+		<item>y</item>
+		<item>y</item>
+		<item>6</item>
+		<item>w</item>z
+	</string-array>
+
+</resources>

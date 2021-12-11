@@ -11,8 +11,8 @@ android {
         applicationId "phone.vishnu.quotes"
         minSdkVersion 22
         targetSdkVersion 31
-        versionCode 55
-        versionName "2.7.2"
+        versionCode 54
+        versionName "v3.0.0-alpha-unsplash-test"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -51,6 +51,7 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.1'
     implementation "com.ncorti:slidetoact:0.9.0"
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
+    implementation 'com.keenencharles:androidunsplash:3.1.2'
 
     def lifecycle_version = "2.4.0"
     def room_version = "2.3.0"
