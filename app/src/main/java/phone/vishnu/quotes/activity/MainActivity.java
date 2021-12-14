@@ -40,11 +40,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.ScaleAnimation;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.TextView;
@@ -129,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initViewPager();
         runInitChecks();
         initFABs();
-        initAnimations();
         setUpSearchView();
         setUpChipGroup();
     }
@@ -546,33 +541,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int DPtoPX(int DP) {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         return Math.round(DP * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-    }
-
-    private void initAnimations() {
-        ScaleAnimation scaleAnimation =
-                new ScaleAnimation(
-                        0,
-                        1f,
-                        0,
-                        1f,
-                        Animation.RELATIVE_TO_SELF,
-                        0.5f,
-                        Animation.RELATIVE_TO_SELF,
-                        0.5f);
-        scaleAnimation.setDuration(750);
-        scaleAnimation.setFillAfter(true);
-
-        AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
-        alphaAnimation.setDuration(750);
-        alphaAnimation.setInterpolator(new LinearInterpolator());
-        alphaAnimation.setRepeatCount(Animation.INFINITE);
-        alphaAnimation.setRepeatMode(Animation.REVERSE);
-
-        findViewById(R.id.openIndicatorLeft).setAnimation(scaleAnimation);
-        findViewById(R.id.openIndicatorLeft).setAnimation(alphaAnimation);
-
-        findViewById(R.id.openIndicatorRight).setAnimation(scaleAnimation);
-        findViewById(R.id.openIndicatorRight).setAnimation(alphaAnimation);
     }
 
     private Filter getFilter() {

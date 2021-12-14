@@ -5,8 +5,7 @@
 	android:id="@+id/constraintLayout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".activity.MainActivity"
-	>
+	tools:context=".activity.MainActivity">
 
 	<TextView
 		android:id="@+id/homeSearchCountTV"
@@ -79,34 +78,6 @@
 		app:layout_constraintEnd_toEndOf="@id/viewPager"
 		app:layout_constraintStart_toStartOf="@id/viewPager"
 		app:layout_constraintTop_toTopOf="@id/viewPager" />
-
-	<ImageView
-		android:id="@+id/openIndicatorLeft"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="8dp"
-		android:contentDescription="@string/home_open_indicator_left"
-		android:rotation="180"
-		android:src="@drawable/ic_arrow"
-		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
-		app:layout_constraintEnd_toStartOf="@id/homeFAB"
-		app:layout_constraintHorizontal_bias="1"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="@id/homeFAB" />
-
-	<ImageView
-		android:id="@+id/openIndicatorRight"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="8dp"
-		android:contentDescription="@string/home_open_indicator_right"
-		android:src="@drawable/ic_arrow"
-		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0"
-		app:layout_constraintStart_toEndOf="@id/homeFAB"
-		app:layout_constraintTop_toTopOf="@id/homeFAB" />
-
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/aboutFAB"
