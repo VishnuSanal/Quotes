@@ -72,7 +72,7 @@ public class TourViewPagerAdapter extends FragmentStateAdapter {
                 new TourItem(
                         R.drawable.ic_tour_go,
                         "Spread positivity with us",
-                        "Get started by sharing a Status!"));
+                        "Get started by sharing a Quote!"));
 
         return tourItems;
     }
