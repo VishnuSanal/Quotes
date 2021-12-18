@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
+import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.model.Quote;
 
 public class SharedPreferenceHelper {
@@ -94,7 +95,8 @@ public class SharedPreferenceHelper {
     }
 
     public String getAlarmString() {
-        return sharedPreferences.getString(ALARM_TIME, "At 08:30 Daily");
+        return sharedPreferences.getString(
+                ALARM_TIME, (BuildConfig.DEBUG) ? "Alarm Not Set" : "At 08:30 Daily");
     }
 
     public void setAlarmString(String alarmString) {

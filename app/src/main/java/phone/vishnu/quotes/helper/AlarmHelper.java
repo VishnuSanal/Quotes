@@ -29,7 +29,6 @@ import android.os.Build;
 import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
-import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 import phone.vishnu.quotes.receiver.QuoteWidget;
@@ -71,8 +70,6 @@ public class AlarmHelper {
     }
 
     public static void setDefaultAlarm(Context context) {
-
-        if (BuildConfig.DEBUG) return;
 
         Calendar calendar = Calendar.getInstance();
         // calendar.setTimeInMillis(System.currentTimeMillis());
