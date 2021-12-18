@@ -44,6 +44,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
 
@@ -124,6 +125,19 @@ public class ExportHelper {
 
         shareQuoteTextView.setText(quote);
         shareAuthorTextView.setText(author);
+
+        if (BuildConfig.DEBUG) {
+
+            TextView shareVersionTV = shareView.findViewById(R.id.shareDebugVersionTV);
+            TextView shareDebugAppNameTV = shareView.findViewById(R.id.shareDebugAppNameTV);
+
+            shareVersionTV.setVisibility(View.VISIBLE);
+            shareDebugAppNameTV.setVisibility(View.VISIBLE);
+
+            shareVersionTV.setText(String.format("Debug build v%s", BuildConfig.VERSION_NAME));
+            shareDebugAppNameTV.setText(
+                    String.format("%s", context.getString(R.string.quotes_status_creator)));
+        }
 
         int widthPixels = 1080;
         int heightPixels = 1920;
@@ -213,6 +227,19 @@ public class ExportHelper {
 
         shareQuoteTextView.setText(quote);
         shareAuthorTextView.setText(author);
+
+        if (BuildConfig.DEBUG) {
+
+            TextView shareVersionTV = shareView.findViewById(R.id.shareDebugVersionTV);
+            TextView shareDebugAppNameTV = shareView.findViewById(R.id.shareDebugAppNameTV);
+
+            shareVersionTV.setVisibility(View.VISIBLE);
+            shareDebugAppNameTV.setVisibility(View.VISIBLE);
+
+            shareVersionTV.setText(String.format("Debug build v%s", BuildConfig.VERSION_NAME));
+            shareDebugAppNameTV.setText(
+                    String.format("%s", context.getString(R.string.quotes_status_creator)));
+        }
 
         int widthPixels = 1080;
         int heightPixels = 1920;

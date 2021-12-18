@@ -5,13 +5,13 @@
 	android:id="@+id/shareRelativeLayout"
 	android:layout_width="1080px"
 	android:layout_height="1920px"
-	android:gravity="center"
 	tools:ignore="PxUsage,SpUsage">
 
 	<androidx.cardview.widget.CardView
 		android:id="@+id/shareCardView"
 		android:layout_width="920px"
 		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
 		android:layout_margin="36dp"
 		app:cardBackgroundColor="@color/defaultCardBackgroundColor"
 		app:cardCornerRadius="8dp"
@@ -51,4 +51,33 @@
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 	</androidx.cardview.widget.CardView>
+
+	<TextView
+		android:id="@+id/shareDebugAppNameTV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentBottom="true"
+		android:layout_margin="8dp"
+		android:letterSpacing="0.15"
+		android:padding="8dp"
+		android:textColor="@color/accentTextColor"
+		android:visibility="gone" />
+
+	<TextView
+		android:id="@+id/shareDebugVersionTV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentBottom="true"
+		android:layout_marginStart="8dp"
+		android:layout_marginTop="8dp"
+		android:layout_marginEnd="8dp"
+		android:layout_marginBottom="8dp"
+		android:letterSpacing="0.15"
+		android:padding="8dp"
+		android:textColor="@color/accentTextColor"
+		android:visibility="gone"
+		tools:ignore="HardcodedText" />
+
 </RelativeLayout>
