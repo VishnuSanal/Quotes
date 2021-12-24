@@ -43,6 +43,7 @@
 	<string name="report_via_github">Report via GitHub</string>
 	<string name="error_report_note">To diagnose and fix this issue, please send us a crash report.</string>
 	<string name="your_comment">Your comment (optional)</string>
+	<string name="about">About</string>
 
 	<!--Content Descriptions-->
 
