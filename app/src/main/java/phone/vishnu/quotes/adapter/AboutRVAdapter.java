@@ -19,8 +19,6 @@
 
 package phone.vishnu.quotes.adapter;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,25 +66,9 @@ public class AboutRVAdapter extends ListAdapter<TourItem, AboutRVAdapter.ViewHol
         TourItem item = getItem(position);
 
         holder.iconIV.setImageResource(item.getImgId());
-        holder.iconIV.setBackgroundTintList(ColorStateList.valueOf(getColor(position)));
 
         holder.titleTV.setText(item.getTitle());
         holder.descTV.setText(item.getDesc());
-    }
-
-    private int getColor(int position) {
-
-        String[] colorArray = {
-            "#D0FF1744",
-            "#D0FFD600",
-            "#D07C4DFF",
-            "#D02979FF",
-            "#D000C853",
-            "#D01DE9B6",
-            "#D0FF5722"
-        };
-
-        return Color.parseColor(colorArray[position % colorArray.length]);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {

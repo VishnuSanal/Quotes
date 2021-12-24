@@ -1,50 +1,54 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/aboutConstraintLayout"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:clickable="true"
 	android:focusable="true"
-	android:padding="8dp"
-	>
+	android:padding="8dp">
 
 	<ImageView
 		android:id="@+id/aboutSingleItemIconIV"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:background="@drawable/icon_background"
 		android:contentDescription="@string/about_icon_iv"
 		android:padding="8dp"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
-		app:tint="@color/colorWhite" />
+		app:tint="@color/textColor" />
 
 	<com.google.android.material.textview.MaterialTextView
 		android:id="@+id/aboutSingleItemTitleTV"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_margin="8dp"
+		android:layout_marginStart="4dp"
+		android:layout_marginTop="4dp"
+		android:layout_marginEnd="4dp"
+		android:layout_marginBottom="1dp"
 		android:textColor="@color/textColor"
 		android:textSize="16sp"
-		android:textStyle="bold"
 		app:layout_constraintBottom_toTopOf="@id/aboutSingleItemDescriptionTV"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0"
 		app:layout_constraintStart_toEndOf="@id/aboutSingleItemIconIV"
-		app:layout_constraintTop_toTopOf="parent" />
+		app:layout_constraintTop_toTopOf="@id/aboutSingleItemIconIV" />
 
 	<com.google.android.material.textview.MaterialTextView
 		android:id="@+id/aboutSingleItemDescriptionTV"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_margin="8dp"
+		android:layout_marginStart="4dp"
+		android:layout_marginEnd="4dp"
+		android:layout_marginBottom="4dp"
+		android:letterSpacing="0.1"
 		android:textColor="@color/textColorLight"
-		android:textSize="16sp"
-		android:textStyle="normal"
+		android:textSize="14sp"
+		app:layout_constraintBottom_toBottomOf="@id/aboutSingleItemIconIV"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0"
 		app:layout_constraintStart_toEndOf="@id/aboutSingleItemIconIV"
-		app:layout_constraintTop_toBottomOf="@id/aboutSingleItemTitleTV" />
+		app:layout_constraintTop_toBottomOf="@id/aboutSingleItemTitleTV"
+		app:layout_goneMarginTop="1dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
