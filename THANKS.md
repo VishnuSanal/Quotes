@@ -91,6 +91,7 @@
  - [Jazil T S](https://github.com/tsjazil)
  - [Devansh Gaur](https://github.com/Devansh-gaur-1611)
  - [Abhiram V](https://github.com/abhiram-anand)
+ - [Ayush I](https://github.com/AyushIyankan)
 
 ## ♥ Other awesome people who helped
 
