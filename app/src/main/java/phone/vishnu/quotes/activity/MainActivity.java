@@ -269,6 +269,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setUpSearchView() {
         SearchView searchView = findViewById(R.id.homeSearchView);
 
+        searchView.setOnSearchClickListener(
+                view -> {
+                    chipGroup.setVisibility(View.GONE);
+                });
+
+        searchView.setOnCloseListener(
+                () -> {
+                    chipGroup.setVisibility(View.VISIBLE);
+                    return false;
+                });
+
         try {
             EditText searchEditText =
                     searchView.findViewById(androidx.appcompat.R.id.search_src_text);
