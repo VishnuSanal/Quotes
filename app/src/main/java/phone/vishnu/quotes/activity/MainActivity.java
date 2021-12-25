@@ -271,12 +271,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         searchView.setOnSearchClickListener(
                 view -> {
-                    chipGroup.setVisibility(View.GONE);
+                    findViewById(R.id.homeScrollView).setVisibility(View.GONE);
+                    ((TextView) findViewById(R.id.homeSearchCountTV)).setText("");
                 });
 
         searchView.setOnCloseListener(
                 () -> {
-                    chipGroup.setVisibility(View.VISIBLE);
+                    findViewById(R.id.homeScrollView).setVisibility(View.VISIBLE);
                     return false;
                 });
 

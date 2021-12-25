@@ -18,9 +18,9 @@
 		android:textSize="16sp"
 		android:textStyle="bold"
 		app:layout_constraintBottom_toBottomOf="@id/homeSearchView"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintEnd_toStartOf="@id/homeSearchView"
+		app:layout_constraintEnd_toStartOf="@id/homeScrollView"
 		app:layout_constraintHorizontal_bias="0"
+		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="@id/homeSearchView" />
 
 	<androidx.appcompat.widget.SearchView
@@ -46,7 +46,7 @@
 		android:scrollbars="none"
 		app:layout_constraintBottom_toTopOf="@id/viewPager"
 		app:layout_constraintEnd_toStartOf="@id/homeSearchView"
-		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintStart_toEndOf="@id/homeSearchCountTV"
 		app:layout_constraintTop_toTopOf="parent">
 
 		<com.google.android.material.chip.ChipGroup
