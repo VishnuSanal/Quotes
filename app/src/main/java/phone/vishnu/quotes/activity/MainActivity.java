@@ -34,20 +34,24 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Filter;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -56,6 +60,8 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.yalantis.ucrop.UCrop;
 import java.io.File;
 import java.util.ArrayList;
@@ -100,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private CircularProgressIndicator progressIndicator;
     private ChipGroup chipGroup;
+    private HorizontalScrollView chipGroupScrollView;
+    private TextView countTV;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -122,6 +130,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         constraintLayout = findViewById(R.id.constraintLayout);
         progressIndicator = findViewById(R.id.mainProgressIndicator);
         chipGroup = findViewById(R.id.homeChipGroup);
+        chipGroupScrollView = findViewById(R.id.homeScrollView);
+        countTV = findViewById(R.id.homeSearchCountTV);
+
         initViewPager();
         runInitChecks();
         initFABs();
@@ -267,50 +278,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setUpSearchView() {
-        SearchView searchView = findViewById(R.id.homeSearchView);
 
-        searchView.setOnSearchClickListener(
+        ImageView searchIV = findViewById(R.id.homeSearchIV);
+        TextInputLayout searchTIL = findViewById(R.id.homeSearchTIL);
+        TextInputEditText searchTIE = findViewById(R.id.homeSearchTIE);
+
+        searchIV.setOnClickListener(
                 view -> {
-                    findViewById(R.id.homeScrollView).setVisibility(View.GONE);
-                    ((TextView) findViewById(R.id.homeSearchCountTV)).setText("");
+                    countTV.setText("");
+                    searchTIE.setText("");
+                    chipGroup.clearCheck();
+
+                    if (searchIV.getTag() == null) {
+                        searchIV.setTag(true);
+                        searchIV.setImageDrawable(
+                                ContextCompat.getDrawable(this, R.drawable.ic_close));
+
+                        searchTIE.requestFocus();
+
+                        InputMethodManager inputMethodManager =
+                                (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                        if (inputMethodManager != null)
+                            inputMethodManager.showSoftInput(
+                                    searchTIE, InputMethodManager.SHOW_IMPLICIT);
+
+                        chipGroupScrollView.setVisibility(View.GONE);
+                        searchTIL.setVisibility(View.VISIBLE);
+                    } else {
+                        searchIV.setTag(null);
+                        searchIV.setImageDrawable(
+                                ContextCompat.getDrawable(this, R.drawable.ic_search));
+
+                        hideKeyboard(getWindow().getDecorView());
+
+                        searchTIL.setVisibility(View.GONE);
+                        chipGroupScrollView.setVisibility(View.VISIBLE);
+                    }
                 });
 
-        searchView.setOnCloseListener(
-                () -> {
-                    findViewById(R.id.homeScrollView).setVisibility(View.VISIBLE);
-                    return false;
-                });
-
-        try {
-            EditText searchEditText =
-                    searchView.findViewById(androidx.appcompat.R.id.search_src_text);
-            searchEditText.setTextColor(getResources().getColor(R.color.colorWhite));
-            searchEditText.setHintTextColor(getResources().getColor(R.color.colorWhite));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        searchView.setOnQueryTextListener(
-                new SearchView.OnQueryTextListener() {
+        searchTIE.addTextChangedListener(
+                new TextWatcher() {
                     @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        getFilter().filter(query);
-                        return false;
+                    public void beforeTextChanged(
+                            CharSequence s, int start, int count, int after) {}
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        getFilter().filter(s);
                     }
 
                     @Override
-                    public boolean onQueryTextChange(String newText) {
-                        getFilter().filter(newText);
-
-                        chipGroup.clearCheck();
-
-                        for (int i = 0; i < chipGroup.getChildCount(); i++)
-                            chipGroup
-                                    .getChildAt(i)
-                                    .setEnabled(!((newText == null) || (!newText.equals(""))));
-
-                        return false;
-                    }
+                    public void afterTextChanged(Editable editable) {}
                 });
     }
 
@@ -591,14 +610,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 adapter.notifyDataSetChanged();
                 viewPager.setCurrentItem(0);
 
-                ((TextView) findViewById(R.id.homeSearchCountTV))
-                        .setText(
-                                (adapter == null
-                                                || adapter.getCount()
-                                                        == sharedPreferenceHelper
-                                                                .getTotalQuotesCount())
-                                        ? ""
-                                        : String.valueOf(adapter.getCount()));
+                countTV.setVisibility(View.VISIBLE);
+                countTV.setText(
+                        (adapter == null
+                                        || adapter.getCount()
+                                                == sharedPreferenceHelper.getTotalQuotesCount())
+                                ? ""
+                                : String.valueOf(adapter.getCount()));
             }
         };
     }
@@ -689,6 +707,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (i == 3) {
             showShareActionPicker(q);
         }
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+        if (inputMethodManager != null)
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     private class SwipeListener implements View.OnTouchListener {

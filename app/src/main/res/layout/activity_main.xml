@@ -5,6 +5,7 @@
 	android:id="@+id/constraintLayout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:animateLayoutChanges="true"
 	tools:context=".activity.MainActivity">
 
 	<TextView
@@ -12,40 +13,27 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_margin="8dp"
+		android:animateLayoutChanges="true"
 		android:fontFamily="serif"
 		android:padding="2dp"
 		android:textColor="@color/textColor"
 		android:textSize="16sp"
 		android:textStyle="bold"
-		app:layout_constraintBottom_toBottomOf="@id/homeSearchView"
+		android:visibility="gone"
+		app:layout_constraintBottom_toTopOf="@id/homeGuideLineOne"
 		app:layout_constraintEnd_toStartOf="@id/homeScrollView"
-		app:layout_constraintHorizontal_bias="0"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="@id/homeSearchView" />
-
-	<androidx.appcompat.widget.SearchView
-		android:id="@+id/homeSearchView"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="8dp"
-		android:animateLayoutChanges="true"
-		app:closeIcon="@drawable/ic_close"
-		app:layout_constraintBottom_toTopOf="@id/viewPager"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="1"
-		app:layout_constraintStart_toEndOf="@id/homeScrollView"
-		app:layout_constraintTop_toTopOf="parent"
-		app:searchHintIcon="@drawable/ic_search"
-		app:searchIcon="@drawable/ic_search" />
+		app:layout_constraintTop_toTopOf="parent" />
 
 	<HorizontalScrollView
 		android:id="@+id/homeScrollView"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_margin="8dp"
+		android:animateLayoutChanges="true"
 		android:scrollbars="none"
-		app:layout_constraintBottom_toTopOf="@id/viewPager"
-		app:layout_constraintEnd_toStartOf="@id/homeSearchView"
+		app:layout_constraintBottom_toTopOf="@id/homeGuideLineOne"
+		app:layout_constraintEnd_toStartOf="@id/homeSearchTIL"
 		app:layout_constraintStart_toEndOf="@id/homeSearchCountTV"
 		app:layout_constraintTop_toTopOf="parent">
 
@@ -53,11 +41,62 @@
 			android:id="@+id/homeChipGroup"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
+			android:animateLayoutChanges="true"
 			app:chipSpacing="8dp"
 			app:singleLine="true"
 			app:singleSelection="true" />
 
 	</HorizontalScrollView>
+
+	<com.google.android.material.textfield.TextInputLayout
+		android:id="@+id/homeSearchTIL"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:animateLayoutChanges="true"
+		android:foregroundGravity="center"
+		android:textColorHint="@color/textColorLight"
+		android:visibility="gone"
+		app:hintAnimationEnabled="true"
+		app:hintEnabled="true"
+		app:layout_constraintBottom_toTopOf="@id/homeGuideLineOne"
+		app:layout_constraintEnd_toStartOf="@id/homeSearchIV"
+		app:layout_constraintStart_toEndOf="@id/homeScrollView"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<com.google.android.material.textfield.TextInputEditText
+			android:id="@+id/homeSearchTIE"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:animateLayoutChanges="true"
+			android:hint="@string/search"
+			android:inputType="textCapSentences"
+			android:scrollbars="vertical"
+			android:textColor="@color/textColor"
+			android:textColorHint="@color/textColor" />
+
+	</com.google.android.material.textfield.TextInputLayout>
+
+	<ImageView
+		android:id="@+id/homeSearchIV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:animateLayoutChanges="true"
+		android:contentDescription="@string/home_search_image_view"
+		android:src="@drawable/ic_search"
+		app:layout_constraintBottom_toTopOf="@id/homeGuideLineOne"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/homeSearchTIL"
+		app:layout_constraintTop_toTopOf="parent"
+		app:tint="@color/colorWhite" />
+
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/homeGuideLineOne"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		app:layout_constraintGuide_percent="0.1" />
 
 	<androidx.viewpager.widget.ViewPager
 		android:id="@+id/viewPager"
@@ -66,7 +105,7 @@
 		app:layout_constraintBottom_toTopOf="@id/homeFAB"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/homeScrollView" />
+		app:layout_constraintTop_toTopOf="@id/homeGuideLineOne" />
 
 	<com.google.android.material.progressindicator.CircularProgressIndicator
 		android:id="@+id/mainProgressIndicator"
@@ -87,6 +126,7 @@
 		android:contentDescription="@string/about_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
+		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
 		app:elevation="8dp"
 		app:fabSize="mini"
@@ -106,6 +146,7 @@
 		android:contentDescription="@string/settings_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
+		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
@@ -124,6 +165,7 @@
 		android:contentDescription="@string/font_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
+		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
 		app:elevation="8dp"
 		app:fabSize="mini"
@@ -143,6 +185,7 @@
 		android:contentDescription="@string/home_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
+		android:tint="@color/colorPrimaryDark"
 		app:elevation="12dp"
 		app:fabSize="normal"
 		app:layout_constraintBottom_toBottomOf="parent"
@@ -160,6 +203,7 @@
 		android:contentDescription="@string/bg_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
+		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
 		app:elevation="8dp"
 		app:fabSize="mini"
@@ -179,6 +223,7 @@
 		android:contentDescription="@string/color_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
+		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
 		app:elevation="8dp"
 		app:fabSize="mini"
@@ -198,6 +243,7 @@
 		android:contentDescription="@string/fav_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
+		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
 		app:elevation="8dp"
 		app:fabSize="mini"

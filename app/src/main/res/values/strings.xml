@@ -71,5 +71,6 @@
 	<string name="quote_widget_share_button" translatable="false">Quote Widget Share Button</string>
 	<string name="bottom_sheet_done_indicator" translatable="false">Bottom Sheet Done Indicator</string>
 	<string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
+	<string name="home_search_image_view" translatable="false">Home Search ImageView</string>
 
 </resources>
