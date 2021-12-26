@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="cancel">ବାତିଲ୍ କରନ୍ତୁ</string>
+    <string name="search">ସନ୍ଧାନ କରନ୍ତୁ</string>
+    <string name="about">ବିଷୟରେ</string>
+    <string name="author">ଲେଖକ</string>
+    <string name="next">ପରବର୍ତ୍ତୀ</string>
+    <string name="default_size">ଡିଫଲ୍ଟ</string>
+    <string name="add">ଯୋଗକରନ୍ତୁ</string>
+    <string name="favorites">ପସନ୍ଦଗୁଡିକ</string>
+</resources>
