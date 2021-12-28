@@ -1,2 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="image_from_gallery">Image de la galerie</string>
+    <string name="quote">Citation</string>
+    <string name="home">Accueil</string>
+    <string name="share">Partager une citation au hasard</string>
+    <string name="author">Auteur/Autrice</string>
+    <string name="ask_every_time">Demander à chaque fois</string>
+    <string name="app_name">Citations</string>
+    <string name="favorites">Favoris</string>
+    <string name="default_size">Par défaut</string>
+    <string name="reset_settings">Réinitialiser les paramètres</string>
+    <string name="add">Ajouter</string>
+    <string name="cancel">Annuler</string>
+    <string name="plain_color">Couleur unie</string>
+    <string name="default_images">Images par défaut</string>
+    <string name="change_font_style">Modifier le style de police</string>
+    <string name="change_font_color">Modifier la couleur de la police</string>
+    <string name="change_font_size">Modifier la taille de la police</string>
+    <string name="quotes_status_creator">Créateur de statut de citation</string>
+    <string name="add_custom_quote">Ajouter une citation personnalisée</string>
+    <string name="pick_background_image">Choisir une image d’arrière-plan</string>
+    <string name="used_images">Images utilisées</string>
+    <string name="new_images">Nouvelles images</string>
+    <string name="pick_card_color">Choisissez la couleur de la carte</string>
+    <string name="choose_a_theme">Choisissez un thème</string>
+    <string name="light_theme">Thème clair</string>
+    <string name="dark_theme">Thème sombre</string>
+    <string name="follow_system_theme">Suivre le thème du système</string>
+    <string name="pick_font_style">Choisissez un style de police</string>
+    <string name="font_size">Taille de la police</string>
+    <string name="settings">Paramètres</string>
+    <string name="skip">IGNORER</string>
+    <string name="next">SUIVANT</string>
+    <string name="quote_loading">Chargement de la citation…</string>
+    <string name="share_quote_as_image">Partager la citation comme image</string>
+    <string name="report_via_telegram">Signaler via Telegram</string>
+    <string name="pick_an_option">Choisissez une option</string>
+    <string name="copy_quote_to_clipboard">Copier la citation dans le presse-papiers</string>
+    <string name="save_to_gallery">Enregistrer dans la galerie</string>
+    <string name="nothing_here">Rien ici !</string>
+    <string name="search">Recherche</string>
+    <string name="report_via_github">Signaler via GitHub</string>
+    <string name="error_report_note">Pour diagnostiquer et corriger ce problème, veuillez nous envoyer un rapport d’incident.</string>
+    <string name="about">À propos</string>
+    <string name="your_comment">Votre commentaire (facultatif)</string>
+</resources>
