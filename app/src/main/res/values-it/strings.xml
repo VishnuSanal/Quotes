@@ -1,2 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dark_theme">Tema scuro</string>
+    <string name="quote">Citazione</string>
+    <string name="favorites">Preferiti</string>
+    <string name="plain_color">Tinta unita</string>
+    <string name="change_font_color">Cambia il colore del carattere</string>
+    <string name="default_size">Predefinito</string>
+    <string name="default_images">Immagini predefinite</string>
+    <string name="add_custom_quote">Aggiungi una citazione personalizzata</string>
+    <string name="font_size">Dimensione del carattere</string>
+    <string name="ask_every_time">Chiedi ogni volta</string>
+    <string name="report_via_github">Segnala via GitHub</string>
+    <string name="home">Pagina principale</string>
+    <string name="share">Condividi una citazione casuale</string>
+    <string name="author">Autore/Autrice</string>
+    <string name="add">Aggiungi</string>
+    <string name="cancel">Annulla</string>
+    <string name="image_from_gallery">Immagine dalla galleria</string>
+    <string name="app_name">Citazioni</string>
+    <string name="reset_settings">Ripristina le impostazioni</string>
+    <string name="change_font_style">Cambia lo stile del carattere</string>
+    <string name="quotes_status_creator">Creatore di stato di citazione</string>
+    <string name="quote_loading">Caricamento della citazione…</string>
+    <string name="pick_an_option">Scegli un’opzione</string>
+    <string name="change_font_size">Cambia la dimensione del carattere</string>
+    <string name="used_images">Immagini usate</string>
+    <string name="copy_quote_to_clipboard">Copia la citazione negli appunti</string>
+    <string name="pick_background_image">Scegli un’immagine di sfondo</string>
+    <string name="new_images">Nuove immagini</string>
+    <string name="pick_card_color">Scegli il colore della carta</string>
+    <string name="choose_a_theme">Scegli un tema</string>
+    <string name="light_theme">Tema chiaro</string>
+    <string name="follow_system_theme">Segui il tema del sistema</string>
+    <string name="pick_font_style">Scegli lo stile del carattere</string>
+    <string name="next">Successivo</string>
+    <string name="share_quote_as_image">Condividi la citazione come immagine</string>
+    <string name="nothing_here">Niente qui!</string>
+    <string name="settings">Impostazioni</string>
+    <string name="skip">IGNORA</string>
+    <string name="save_to_gallery">Salva nella galleria</string>
+    <string name="search">Cerca</string>
+    <string name="report_via_telegram">Segnala via Telegram</string>
+    <string name="error_report_note">Per diagnosticare e risolvere questo problema, inviaci un signalazione di errore.</string>
+    <string name="your_comment">Il tuo commento (facoltativo)</string>
+    <string name="about">Informazioni</string>
+</resources>
