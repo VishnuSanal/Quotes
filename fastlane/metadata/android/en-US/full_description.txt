@@ -2,8 +2,8 @@
 
 Quotes Status Creator lets you share quotations as status images on social media – Quotes Status Creator App
 
-    ☆ Huge Collection of Inspirational Quotes that can be shared on Social Media Platforms as a high definition image
-    ☆ Quotes Status Creation without any Image Editing whatsoever - that too in User-Friendly UI
+    ☆ Lots of inspirational quotes that can be shared on social media as a high definition images
+    ☆ Quotes Status Creation without any Image Editing whatsoever — in the same user-friendly UI
     ☆ Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
 
 <b>⚙How it Works</b>
@@ -12,21 +12,22 @@ Quotes Status Creator App presents you with Famous Quotations. Browse through th
 
 <b>🚀Features</b>
 
-    • <b>❤Favourite Quotes</b> – Add Quotes to Favourites
-    • <b>😎Share Quotes</b> – Share Quotes as a High Definition Image to Social Media
-    • <b>📷Custom Backgrounds</b> – Personalize Quotes Statuses with Custom Background Images, Solid Background Colors or Images from Gallery
-    • <b>🎨Custom Card Colors</b> – Personalize Quotes Statuses with Custom Card Colors
-    • <b>🔠Custom Fonts</b> – Personalize Quotes Statuses with Custom Fonts
-    • <b>🔠Custom Font Colors</b> – Personalize Quotes Statuses with Custom Font Colors
-    • <b>🆕Custom Quotes</b> – Add your own Quotes
-    • <b>🔔Daily Notification</b> – Get notified with your daily dose of motivation
-    • <b>🔢Multiple Sharing Option</b> – Multiple Sharing Options - Share as Image, Share as Text (copy as text to the clipboard) and Save to Gallery
-    • <b>🚪App Shortcuts</b> – Quotes Status Creator includes App Shortcuts for Easy Access
-• <b>🔍Search</b> – Search for Quotes to find Quotes you like
-    • <b>🏠Home Screen Widget</b> – Quotes Status Creator App includes Auto-Updating Quotes Widget
-    • <b>🕶Dark Mode</b> – Quotes Status Creator App includes Dark Mode
-    • <b>👨‍💻Completely Open Source</b> – Quotes Status Creator App is Completely Open Source
-    • <b>🎉Completely Ad Free</b> – Quotes Status Creator App is Completely Free from Ads
+    • <b>🔖Favorite Quotes</b> — Add quotes to favorites
+    • <b>🔀Share Quotes</b> — Share quotes as a high definition images on social media
+    • <b>🖼️Custom Backgrounds</b> — Personalized quote statuses with custom background images, solid background colors or images from gallery
+    • <b>🎨Custom Card Colors</b> — Personalized quote statuses with custom card colors
+    • <b>🔠Custom Fonts</b> — Personalize quotes statuses with custom fonts
+    • <b>🔡Custom Font Colors</b> — Personalize quotes statuses with custom font colors
+    • <b>✍🏿Custom Quotes</b> — Add your own quotes
+    • <b>🔔Daily Notification</b> — Get notified with your daily dose of motivation
+    • <b>🔁Multiple Sharing Option</b> — Multiple sharing options</b> — Share as image, as text (copy as text to the clipboard) and save to gallery
+    • <b>🚪App Shortcuts</b> — App shortcuts for easy access
+    • <b>🔍Search</b> — Search for quotes to find ones you like
+    • <b>🏷️Tags</b> — Search for quotes using tags
+    • <b>📱Home Screen Widget</b> — There is an auto-updating quote widget
+    • <b>🕶Dark Mode</b> — It fits your soul
+    • <b>👨‍💻Completely libre software</b> — Copylefted libre software, licensed GPLv3+
+    • <b>🚫Completely Ad Free</b> — No ads anywhere
 
 <b>🚀Quotes – Quotes Status Creator App → Quotes Categories</b>
 
@@ -43,21 +44,25 @@ Quotes Status Creator App presents you with Famous Quotations. Browse through th
     • Optimistic Quotes
     • Creativity Quotes
 
+<b>☕ Enjoying Quotes? Consider Supporting!</b>
+
+Donate to support the development. It requires a lot of time and effort to develop the copylefted libre software app, gratis and ad-free. :D - https://www.buymeacoffee.com/VishnuSanal
+
 <b>🏠 Join Telegram Group</b>
 
-If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us!!! It'll be fun :) - https://t.me/QuotesStatusCreator
+If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us. It is fun :) - https://t.me/QuotesStatusCreator
 
 <b>🎨 Follow Instagram Page</b>
 
-Follow the Instagram Page to get your daily dose of inspiration delivered to your feed! If you enjoy the app, you'll enjoy the Instagram Page too! Come follow us & be inspired! - https://instagram.com/quotes_status_creator
+Follow the Instagram page to get your daily dose of inspiration delivered to your feed. If you enjoy the app, you'll enjoy the Instagram page too. Follow and be inspired. - https://instagram.com/quotes_status_creator
 
 <b>📜 Join Telegram Channel</b>
 
-Join the Telegram Channel to get a Quote as an image & as a text in your inbox - daily! Come join it & be inspired! - https://t.me/DailyQuotesStatus
+Join the Telegram Channel to get a Quote as an image & as a text in your inbox — daily. Join it and be inspired. - https://t.me/DailyQuotesStatus
 
 <b>🤩Feedback and Suggestion</b>
 
-We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Leave your feedback/suggestions on our community on Telegram https://t.me/QuotesStatusCreator or feel free to create an issue here https://github.com/VishnuSanal/Quotes/issues/new/choose :)
+Helpful advice makes the app better. Your feedback is immensely helpful, and we love to hear from you. Send your feedback/suggestions on our community on Telegram https://t.me/QuotesStatusCreator or feel free to create an issue here https://github.com/VishnuSanal/Quotes/issues/new/choose :)
 
 <b>👨‍💻Source Code</b>
 
