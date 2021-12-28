@@ -7,17 +7,17 @@
 </h1>
 
 <p align="center">
-	Quotes Status Creator lets you share quotations as status images on social media
+	Share quotes as status images on social media
 </p>
 
 <p align="center">
 
-<a href='https://play.google.com/store/apps/details?id=phone.vishnu.quotes&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
-	<img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="100px" />
-</a>
-
 <a href='https://apt.izzysoft.de/fdroid/index/apk/phone.vishnu.quotes'>
 	<img alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png' height="100px" />
+</a>	
+
+<a href='https://play.google.com/store/apps/details?id=phone.vishnu.quotes&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+	<img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="100px" />
 </a>
 
 <a href="https://github.com/VishnuSanal/Quotes/releases/">
@@ -25,17 +25,20 @@
 </a>
 
 </p>
+<a href="https://hosted.weblate.org/engage/quotes-status-creator/">
+<img src="https://hosted.weblate.org/widgets/quotes-status-creator/-/quotes-status-creator/horizontal-blue.svg" alt="Oversettelsesstatus" />
+</a>
 <hr>
 
 <pre>
-    ☆ Huge Collection of Inspirational Quotes that can be shared on Social Media Platforms as a high definition image
-    ☆ Quotes Status Creation without any Image Editing whatsoever - that too in User-Friendly UI
+    ☆ Lots of inspirational quotes that can be shared on social media as a high definition images
+    ☆ Quotes Status Creation without any Image Editing whatsoever — in the same user-friendly UI
     ☆ Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
 </pre>
 
 ## ☕ Enjoying Quotes? Consider Supporting!
-Please consider donating a small amount to support the development. It requires a lot of time and
-effort to develop an application keeping it free, open source & ad-free. :D
+Donate to support the development. It requires a lot of time and
+effort to develop the copylefted libre software app, gratis and ad-free. :D
 
 <p align="center">
   <a href="https://www.buymeacoffee.com/VishnuSanal">
@@ -44,7 +47,7 @@ effort to develop an application keeping it free, open source & ad-free. :D
 </p>
 
 ## 🏠 Join Telegram Group
-If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us!!! It'll be fun :)
+If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us. It is fun :)
 
 <p align="center">
   <a href="https://t.me/QuotesStatusCreator">
@@ -53,16 +56,17 @@ If you enjoy the app, wish to contribute or simply wish to be with like-minded p
 </p>
 
 ## 🎨 Follow [Instagram Page](https://instagram.com/quotes_status_creator)
-Follow the Instagram Page to get your daily dose of inspiration delivered to your feed! If you enjoy the app, you'll enjoy the Instagram Page too! Come follow us & be inspired!
+Follow the Instagram page to get your daily dose of inspiration delivered to your feed. \
+If you enjoy the app, you'll enjoy the Instagram page too. Follow and be inspired.
 
 ## 📢 Join [Telegram Channel](https://t.me/DailyQuotesStatus)
-Join the Telegram Channel to get a Quote as an image & as a text in your inbox - daily! Come join it & be inspired!
+Join the Telegram Channel to get a Quote as an image & as a text in your inbox — daily. Join it and be inspired.
 
-## ♥ Thanks to [these](https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md) awesome people
-Awesome people that help & support the development & maintenance of Quotes Status Creator
+## ♥ Many thanks to [these](https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md) awesome people
+They helped support the development and maintenance of Quotes Status Creator.
 
 ## 🛠️ Contribute to the project
-[CONTRIBUTING.md](https://github.com/VishnuSanal/Quotes/blob/master/CONTRIBUTING.md) will be a good place to start :)
+[CONTRIBUTING.md](https://github.com/VishnuSanal/Quotes/blob/master/CONTRIBUTING.md) is a good place to start :)
 
 ## ⭐ Find this repository useful?
 Support the project by [starring it](https://github.com/VishnuSanal/Quotes/stargazers) :)
@@ -73,23 +77,23 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
 
 ## 🚀 Features
 
-- 🔖Favorite Quotes – Add Quotes to Favorites
-- 🔀Share Quotes – Share Quotes as a High Definition Image to Social Media
-- 🖼️Custom Backgrounds – Personalize Quotes Statuses with Custom Background Images, Solid Background Colors or Images from Gallery
-- 🎨Custom Card Colors – Personalize Quotes Statuses with Custom Card Colors
-- 🔠Custom Fonts – Personalize Quotes Statuses with Custom Fonts
-- 🔡Custom Font Colors – Personalize Quotes Statuses with Custom Font Colors
-- ✍🏿Custom Quotes – Add your own Quotes
-- 🔔Daily Notification – Get notified with your daily dose of motivation
-- 🔁Multiple Sharing Option – Multiple Sharing Options - Share as Image, Share as Text (copy as text
-  to the clipboard) and Save to Gallery
-- 🚪App Shortcuts – Quotes Status Creator includes App Shortcuts for Easy Access
-- 🔍Search – Search for Quotes to find Quotes you like
-- 🏷️Tags – Search for Quotes using Tags
-- 📱Home Screen Widget – Quotes Status Creator App includes Auto-Updating Quotes Widget
-- 🕶Dark Mode – Quotes Status Creator App includes Dark Mode
-- 👨‍💻Completely Open Source – Quotes Status Creator App is Completely Open Source
-- 🚫Completely Ad Free – Quotes Status Creator App is Completely Free from Ads
+- 🔖Favorite Quotes — Add quotes to favorites
+- 🔀Share Quotes — Share quotes as a high definition images on social media
+- 🖼️Custom Backgrounds — Personalized quote statuses with custom background images, solid background colors or images from gallery
+- 🎨Custom Card Colors — Personalized quote statuses with custom card colors
+- 🔠Custom Fonts — Personalize quotes statuses with custom fonts
+- 🔡Custom Font Colors — Personalize quotes statuses with custom font colors
+- ✍🏿Custom Quotes — Add your own quotes
+- 🔔Daily Notification — Get notified with your daily dose of motivation
+- 🔁Multiple Sharing Option — Multiple sharing options — Share as image, as text (copy as text
+  to the clipboard) and save to gallery
+- 🚪App Shortcuts — App shortcuts for easy access
+- 🔍Search — Search for quotes to find ones you like
+- 🏷️Tags — Search for quotes using tags
+- 📱Home Screen Widget — There is an auto-updating quote widget
+- 🕶Dark Mode — It fits your soul
+- 👨‍💻Completely libre software — Copylefted libre software, licensed GPLv3+
+- 🚫Completely Ad Free — No ads anywhere
 
 ## 📑 Libraries Used
 
@@ -148,7 +152,8 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
 </pre>
 
 ## 📬 Feedback and Suggestion
-We appreciate your effort to help us in making this app more awesome. Your feedback is immensely helpful to us and we love to hear from you. Leave your feedback/suggestions [here](https://t.me/QuotesStatusCreator) or feel free to create an [issue](https://github.com/VishnuSanal/Quotes/issues/new/choose)! :)
+Helpful advice makes the app better. Your feedback is immensely helpful, and we love to hear from you. \
+Send your feedback/suggestions [here](https://t.me/QuotesStatusCreator) or create an [issue](https://github.com/VishnuSanal/Quotes/issues/new/choose). :)
 
 ## License
-[![GNU GPLv3](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![GNU GPLv3+](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)
