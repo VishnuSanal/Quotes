@@ -1,0 +1,4 @@
+- UI updates on About screen
+- Update to Search and Tags
+
+Full Changelog -> https://github.com/VishnuSanal/Quotes/compare/v2.7.2...v2.8.0
