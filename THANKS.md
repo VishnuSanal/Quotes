@@ -92,6 +92,7 @@
  - [Devansh Gaur](https://github.com/Devansh-gaur-1611)
  - [Abhiram V](https://github.com/abhiram-anand)
  - [Ayush I](https://github.com/AyushIyankan)
+ - [Allan Nordhøy](https://github.com/comradekingu)
 
 ## ♥ Other awesome people who helped
 
