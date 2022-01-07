@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Zitate</string>
+	<string name="favorites">Favoriten</string>
+	<string name="home">Startseite</string>
+	<string name="share">Zufälliges Zitat teilen</string>
+	<string name="quote">Zitat</string>
+	<string name="add">Hinzufügen</string>
+	<string name="cancel">Abbrechen</string>
+	<string name="default_size">Standard</string>
+	<string name="reset_settings">Einstellungen zurücksetzen</string>
+	<string name="plain_color">Einfarbig</string>
+	<string name="about">Über</string>
+	<string name="image_from_gallery">Bild aus der Galerie</string>
+	<string name="default_images">Standard-Bilder</string>
+	<string name="change_font_style">Schriftstil ändern</string>
+	<string name="change_font_color">Schriftfarbe ändern</string>
+	<string name="change_font_size">Schriftgröße ändern</string>
+	<string name="quotes_status_creator">Zitatstatusersteller</string>
+	<string name="add_custom_quote">Benutzerdefiniertes Zitat hinzufügen</string>
+	<string name="pick_background_image">Hintergrundbild auswählen</string>
+	<string name="used_images">Verwendete Bilder</string>
+	<string name="new_images">Neue Bilder</string>
+	<string name="choose_a_theme">Wählen Sie ein Farbschema</string>
+	<string name="light_theme">Helles Farbschema</string>
+	<string name="dark_theme">Dunkles Farbschema</string>
+	<string name="pick_card_color">Kartenfarbe auswählen</string>
+	<string name="follow_system_theme">System folgen</string>
+	<string name="pick_font_style">Schriftstil auswählen</string>
+	<string name="font_size">Schriftgröße</string>
+	<string name="next">Nächste</string>
+	<string name="settings">Einstellungen</string>
+	<string name="skip">Überspringen</string>
+	<string name="quote_loading">Zitat wird geladen …</string>
+	<string name="pick_an_option">Wählen Sie eine Option</string>
+	<string name="copy_quote_to_clipboard">Zitat in Zwischenablage kopieren</string>
+	<string name="share_quote_as_image">Zitat als Bild teilen</string>
+	<string name="save_to_gallery">In Galerie speichern</string>
+	<string name="ask_every_time">Jedes Mal fragen</string>
+	<string name="nothing_here">Hier ist nichts!</string>
+	<string name="search">Suche</string>
+	<string name="report_via_telegram">Per Telegram melden</string>
+	<string name="report_via_github">Per GitHub melden</string>
+	<string name="error_report_note">Um dieses Problem festzustellen und zu beheben, senden Sie uns bitte einen Absturzbericht.</string>
+	<string name="your_comment">Ihr Kommentar (optional)</string>
+	<string name="author">Autor/in</string>
+</resources>

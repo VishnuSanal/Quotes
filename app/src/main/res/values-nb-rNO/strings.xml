@@ -1,2 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+	<string name="app_name">Sitater</string>
+	<string name="home">Hjem</string>
+	<string name="favorites">Favoritter</string>
+	<string name="share">Del tilfeldig sitat</string>
+	<string name="quote">Sitat</string>
+	<string name="author">Opphavsmann</string>
+	<string name="image_from_gallery">Bilde fra galleri</string>
+	<string name="default_images">Forvalgte bilder</string>
+	<string name="change_font_style">Endre skriftstil</string>
+	<string name="change_font_color">Endre skriftfarge</string>
+	<string name="change_font_size">Endre skriftstørrelse</string>
+	<string name="add_custom_quote">Legg til egendefinert sitat</string>
+	<string name="pick_background_image">Velg bakgrunnsbilde</string>
+	<string name="used_images">Brukte bilder</string>
+	<string name="new_images">Nye bilder</string>
+	<string name="quotes_status_creator">Sitatstatusoppretter</string>
+	<string name="plain_color">Vanlig farge</string>
+	<string name="pick_card_color">Velg kortfarge</string>
+	<string name="choose_a_theme">Draktvalg</string>
+	<string name="pick_font_style">Skriftstil</string>
+	<string name="font_size">Skriftstørrelse</string>
+	<string name="settings">Innstillinger</string>
+	<string name="skip">Hopp over</string>
+	<string name="nothing_here">Ingenting her.</string>
+	<string name="search">Søk</string>
+	<string name="report_via_telegram">Rapporter via Telegram</string>
+	<string name="report_via_github">Rapporter via GitHub</string>
+	<string name="error_report_note">For å avluse problemet kan du sende en krasjrapport.</string>
+	<string name="your_comment">Din kommentar (valgfritt)</string>
+	<string name="dark_theme">Mørk</string>
+	<string name="reset_settings">Tilbakestill innstillinger</string>
+	<string name="about">Om</string>
+	<string name="add">Legg til</string>
+	<string name="cancel">Avbryt</string>
+	<string name="ask_every_time">Spør hver gang</string>
+	<string name="default_size">Forvalg</string>
+	<string name="light_theme">Lys</string>
+	<string name="follow_system_theme">System</string>
+	<string name="next">Neste</string>
+	<string name="quote_loading">Laster inn sitat …</string>
+	<string name="pick_an_option">Velg et alternativ</string>
+	<string name="copy_quote_to_clipboard">Kopier sitat til utklippstavle</string>
+	<string name="share_quote_as_image">Del sitat som bilde</string>
+	<string name="save_to_gallery">Lagre i galleri</string>
+</resources>

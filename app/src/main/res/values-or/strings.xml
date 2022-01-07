@@ -1,2 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+	<string name="cancel">ବାତିଲ୍ କରନ୍ତୁ</string>
+	<string name="search">ସନ୍ଧାନ କରନ୍ତୁ</string>
+	<string name="about">ବିଷୟରେ</string>
+	<string name="author">ଲେଖକ</string>
+	<string name="next">ପରବର୍ତ୍ତୀ</string>
+	<string name="default_size">ଡିଫଲ୍ଟ</string>
+	<string name="add">ଯୋଗକରନ୍ତୁ</string>
+	<string name="favorites">ପସନ୍ଦଗୁଡିକ</string>
+	<string name="home">ହୋମ୍</string>
+	<string name="app_name">କୋଟସ୍</string>
+	<string name="share">ଅନିର୍ଦ୍ଧିର୍ଷ୍ଟ କୋଟ୍ ଅଂଶୀଦାର କରନ୍ତୁ</string>
+	<string name="quote">କୋଟ</string>
+	<string name="reset_settings">ସେଟିଂ ପୁନସେଟ୍ କରନ୍ତୁ</string>
+	<string name="plain_color">ସାଧା ରଙ୍ଗ</string>
+	<string name="image_from_gallery">ଗ୍ୟାଲେରୀରୁ ପ୍ରତିଛବି</string>
+	<string name="default_images">ଡିଫଲ୍ଟ ପ୍ରତିଛବିଗୁଡ଼ିକ</string>
+	<string name="change_font_style">ଫଣ୍ଟ୍ ଷ୍ଟାଇଲ୍ ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+	<string name="change_font_color">ଫଣ୍ଟ ରଙ୍ଗ ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+	<string name="change_font_size">ଫଣ୍ଟ ଆକାର ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+	<string name="quotes_status_creator">କୋଟସ୍ ସ୍ଥିତି ସୃଷ୍ଟିକର୍ତ୍ତା</string>
+	<string name="add_custom_quote">କଷ୍ଟମ୍ କୋଟ୍ ଯୋଡନ୍ତୁ</string>
+	<string name="pick_background_image">ପୃଷ୍ଠଭୂମି ପ୍ରତିଛବି ବାଛନ୍ତୁ</string>
+	<string name="new_images">ନୂତନ ପ୍ରତିଛବିଗୁଡ଼ିକ</string>
+	<string name="pick_card_color">କାର୍ଡ ରଙ୍ଗ ବାଛନ୍ତୁ</string>
+	<string name="choose_a_theme">ଏକ ଥିମ୍ ବାଛନ୍ତୁ</string>
+	<string name="used_images">ବ୍ୟବହୃତ ପ୍ରତିଛବିଗୁଡ଼ିକ</string>
+</resources>
