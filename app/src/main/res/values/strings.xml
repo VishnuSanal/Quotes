@@ -100,6 +100,13 @@
 	<string name="added_to_favorites">Added to Favorites</string>
 	<string name="please_wait">Please Wait....</string>
 
+	<string name="welcome">Welcome!</string>
+	<string name="welcome_to_quotes_status_creator">Welcome to Quotes Status Creator</string>
+	<string name="it_works_like">It works Like</string>
+	<string name="quotes_status_creator_lets_you_share_quotations_as_status_images_on_social_media">Quotes Status Creator lets you share quotations as status images on social media</string>
+	<string name="spread_positivity_with_us">Spread positivity with us</string>
+	<string name="get_started_by_sharing_a_quote">Get started by sharing a Quote!</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>
