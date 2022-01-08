@@ -35,7 +35,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.ColorRVAdapter;
@@ -82,21 +81,18 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false));
 
-        colorAdapter =
-                new ColorRVAdapter(
-                        Objects.requireNonNull(getArguments())
-                                .getInt(Constants.COLOR_REQUEST_CODE));
+        colorAdapter = new ColorRVAdapter(requireArguments().getInt(Constants.COLOR_REQUEST_CODE));
 
         colorAdapter.submitList(
-                Objects.requireNonNull(getArguments()).getInt(Constants.COLOR_REQUEST_CODE)
+                requireArguments().getInt(Constants.COLOR_REQUEST_CODE)
                                 == Constants.PICK_FONT_COLOR_REQ_CODE
                         ? getFontColorList()
                         : getColorList());
 
-        if (Objects.requireNonNull(getArguments()).getInt(Constants.COLOR_REQUEST_CODE)
+        if (requireArguments().getInt(Constants.COLOR_REQUEST_CODE)
                 == Constants.PICK_FONT_COLOR_REQ_CODE)
             ((TextView) i.findViewById(R.id.colorPickTitleTV)).setText(R.string.pick_font_color);
-        else if (Objects.requireNonNull(getArguments()).getInt(Constants.COLOR_REQUEST_CODE)
+        else if (requireArguments().getInt(Constants.COLOR_REQUEST_CODE)
                 == Constants.PICK_BG_COLOR_REQ_CODE)
             ((TextView) i.findViewById(R.id.colorPickTitleTV))
                     .setText(R.string.pick_background_color);
@@ -111,8 +107,7 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final int colorRequestCode =
-                Objects.requireNonNull(getArguments()).getInt(Constants.COLOR_REQUEST_CODE);
+        final int colorRequestCode = requireArguments().getInt(Constants.COLOR_REQUEST_CODE);
 
         final SharedPreferenceHelper sharedPreferenceHelper =
                 new SharedPreferenceHelper(requireContext());
