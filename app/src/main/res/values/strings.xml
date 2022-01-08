@@ -74,6 +74,32 @@
 	<string name="crash_report_for">Crash report for</string>
 	<string name="report_copied_to_clipboard">Report Copied to Clipboard</string>
 
+	<string name="life">Life</string>
+	<string name="success">Success</string>
+	<string name="love">Love</string>
+	<string name="action">Action</string>
+	<string name="dream">Dream</string>
+	<string name="fail">Fail</string>
+	<string name="thought">Thought</string>
+	<string name="heart">Heart</string>
+	<string name="mistake">Mistake</string>
+	<string name="wisdom">Wisdom</string>
+	<string name="fear">Fear</string>
+	<string name="courage">Courage</string>
+	<string name="friend">Friend</string>
+	<string name="attitude">Attitude</string>
+	<string name="perseverance">Perseverance</string>
+	<string name="motivation">Motivation</string>
+	<string name="inspiration">Inspiration</string>
+
+	<string name="action_cancelled">Action Cancelled!</string>
+	<string name="oops_something_went_wrong">Oops! Something went wrong!</string>
+	<string name="please_connect_to_the_internet">Please Connect to the Internet</string>
+	<string name="choose_a_background">Choose a background</string>
+	<string name="already_present_in_favorites">Already Present in Favorites</string>
+	<string name="added_to_favorites">Added to Favorites</string>
+	<string name="please_wait">Please Wait....</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>

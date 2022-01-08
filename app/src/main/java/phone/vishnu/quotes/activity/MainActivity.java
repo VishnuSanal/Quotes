@@ -77,6 +77,7 @@ import phone.vishnu.quotes.fragment.FontOptionPickFragment;
 import phone.vishnu.quotes.fragment.SettingsFragment;
 import phone.vishnu.quotes.fragment.ShareOptionPickFragment;
 import phone.vishnu.quotes.helper.AlarmHelper;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
@@ -193,16 +194,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     && data != null
                     && (null != data.getData()
                             || (null != data.getExtras()
-                                    && data.getExtras().containsKey("data")))) {
+                                    && data.getExtras().containsKey(Constants.DATA)))) {
 
                 Uri uri = data.getData();
 
                 if (data.getData() == null
-                        && (null != data.getExtras() && data.getExtras().containsKey("data"))) {
+                        && (null != data.getExtras()
+                                && data.getExtras().containsKey(Constants.DATA))) {
 
                     uri = Uri.fromFile(new File(file));
 
-                    exportHelper.exportBackgroundImage((Bitmap) data.getExtras().get("data"));
+                    exportHelper.exportBackgroundImage(
+                            (Bitmap) data.getExtras().get(Constants.DATA));
                 }
 
                 UCrop.of(uri, Uri.fromFile(new File(file)))
@@ -218,8 +221,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else {
             if (resultCode == Activity.RESULT_CANCELED)
-                Toast.makeText(this, "Action Cancelled!", Toast.LENGTH_SHORT).show();
-            else Toast.makeText(this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.action_cancelled, Toast.LENGTH_SHORT)
+                        .show();
+            else
+                Toast.makeText(
+                                MainActivity.this,
+                                R.string.oops_something_went_wrong,
+                                Toast.LENGTH_SHORT)
+                        .show();
         }
     }
 
@@ -239,36 +248,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     showShareActionPicker(
                             new Quote(
-                                    Objects.requireNonNull(extras.getString("quote")),
-                                    Objects.requireNonNull(extras.getString("author"))));
+                                    Objects.requireNonNull(extras.getString(Constants.QUOTE)),
+                                    Objects.requireNonNull(extras.getString(Constants.AUTHOR))));
 
                 } else if (extras.getBoolean("FavButton")) {
 
                     addFavourite(
                             new Quote(
-                                    Objects.requireNonNull(extras.getString("quote")),
-                                    Objects.requireNonNull(extras.getString("author"))));
+                                    Objects.requireNonNull(extras.getString(Constants.QUOTE)),
+                                    Objects.requireNonNull(extras.getString(Constants.AUTHOR))));
                 }
             }
         }
 
         if (null != getIntent() && null != getIntent().getAction()) {
             // Shortcut
-            if ("phone.vishnu.quotes.openFavouriteFragment".equals(getIntent().getAction())) {
+            if (Constants.SHORTCUT_FAV_ACTION.equals(getIntent().getAction())) {
 
                 FavoriteFragment.newInstance().show(getSupportFragmentManager(), null);
 
-            } else if ("phone.vishnu.quotes.shareRandomQuote".equals(getIntent().getAction())) {
+            } else if (Constants.SHORTCUT_RANDOM_ACTION.equals(getIntent().getAction())) {
                 shareRandomQuote();
             }
             // Widget
-            else if ("phone.vishnu.quotes.widgetShareClicked".equals(getIntent().getAction())) {
+            else if (Constants.WIDGET_SHARE_ACTION.equals(getIntent().getAction())) {
                 Quote q = (sharedPreferenceHelper.getWidgetQuote());
                 if (q != null)
                     shareButtonClicked(
                             this, new SharedPreferenceHelper(this).getShareButtonAction(), q);
 
-            } else if ("phone.vishnu.quotes.widgetFavClicked".equals(getIntent().getAction())) {
+            } else if (Constants.WIDGET_FAV_ACTION.equals(getIntent().getAction())) {
                 Quote q = (sharedPreferenceHelper.getWidgetQuote());
                 if (q != null) {
                     addFavourite(q);
@@ -336,23 +345,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setUpChipGroup() {
 
         String[] tags = {
-            "Life",
-            "Success",
-            "Love",
-            "Action",
-            "Dream",
-            "Fail",
-            "Thought",
-            "Heart",
-            "Mistake",
-            "Wisdom",
-            "Fear",
-            "Courage",
-            "Friend",
-            "Attitude",
-            "Perseverance",
-            "Motivation",
-            "Inspiration"
+            getString(R.string.life),
+            getString(R.string.success),
+            getString(R.string.love),
+            getString(R.string.action),
+            getString(R.string.dream),
+            getString(R.string.fail),
+            getString(R.string.thought),
+            getString(R.string.heart),
+            getString(R.string.mistake),
+            getString(R.string.wisdom),
+            getString(R.string.fear),
+            getString(R.string.courage),
+            getString(R.string.friend),
+            getString(R.string.attitude),
+            getString(R.string.perseverance),
+            getString(R.string.motivation),
+            getString(R.string.inspiration)
         };
 
         for (String string : tags) {
@@ -401,8 +410,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if (progressIndicator.getVisibility() == View.VISIBLE
                                     && !isNetworkAvailable())
                                 Toast.makeText(
-                                                this,
-                                                "Please Connect to the Internet",
+                                                MainActivity.this,
+                                                R.string.please_connect_to_the_internet,
                                                 Toast.LENGTH_LONG)
                                         .show();
                         },
@@ -422,7 +431,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!("-1".equals(backgroundPath)) && (f.exists()))
             constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
         else {
-            Toast.makeText(this, "Choose a background", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.choose_a_background, Toast.LENGTH_LONG).show();
 
             showBackgroundOptionChooser(false);
         }
@@ -671,8 +680,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         long l = new FavRepository(getApplication()).insertFav(quote);
 
         if (l == -1)
-            Toast.makeText(this, "Already Present in Favorites", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                            MainActivity.this,
+                            R.string.already_present_in_favorites,
+                            Toast.LENGTH_SHORT)
+                    .show();
+        else
+            Toast.makeText(MainActivity.this, R.string.added_to_favorites, Toast.LENGTH_SHORT)
+                    .show();
     }
 
     public void updateViewPager() {
@@ -686,7 +701,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void shareRandomQuote() {
 
         final ProgressDialog progressDialog =
-                ProgressDialog.show(MainActivity.this, "", "Please Wait....");
+                ProgressDialog.show(MainActivity.this, "", getString(R.string.please_wait));
         progressDialog.setCancelable(false);
 
         new QuotesRepository()

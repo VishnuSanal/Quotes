@@ -30,6 +30,7 @@ import android.widget.RemoteViews;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.AlarmHelper;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.repository.QuotesRepository;
@@ -135,14 +136,14 @@ public class QuoteWidget extends AppWidgetProvider {
     private void widgetFavButtonClicked(Context context) {
         context.startActivity(
                 new Intent(context, MainActivity.class)
-                        .setAction("phone.vishnu.quotes.widgetFavClicked")
+                        .setAction(Constants.WIDGET_FAV_ACTION)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     private void widgetShareButtonClicked(Context context) {
         context.startActivity(
                 new Intent(context, MainActivity.class)
-                        .setAction("phone.vishnu.quotes.widgetShareClicked")
+                        .setAction(Constants.WIDGET_SHARE_ACTION)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }

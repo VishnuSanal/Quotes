@@ -28,4 +28,14 @@ object Constants {
     const val ACRA_APP_VERSION_NAME = "ACRA_APP_VERSION_NAME"
     const val ACRA_PACKAGE_NAME = "ACRA_PACKAGE_NAME"
     const val ACRA_USER_APP_START_DATE = "ACRA_USER_APP_START_DATE"
+
+    const val DATA = "data"
+    const val QUOTE = "quote"
+    const val AUTHOR = "author"
+
+    const val SHORTCUT_FAV_ACTION = "phone.vishnu.quotes.openFavouriteFragment"
+    const val SHORTCUT_RANDOM_ACTION = "phone.vishnu.quotes.shareRandomQuote"
+
+    const val WIDGET_FAV_ACTION = "phone.vishnu.quotes.widgetFavClicked"
+    const val WIDGET_SHARE_ACTION = "phone.vishnu.quotes.widgetShareClicked"
 }
