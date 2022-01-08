@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.model.TourItem;
 
 public class TourSingleFragment extends Fragment {
@@ -36,9 +37,9 @@ public class TourSingleFragment extends Fragment {
     public static TourSingleFragment newInstance(TourItem tourItem) {
         Bundle args = new Bundle();
 
-        args.putInt("tourImg", tourItem.getImgId());
-        args.putString("tourTitle", tourItem.getTitle());
-        args.putString("tourDescription", tourItem.getDesc());
+        args.putInt(Constants.TOUR_IMG_EXTRA, tourItem.getImgId());
+        args.putString(Constants.TOUR_TITLE_EXTRA, tourItem.getTitle());
+        args.putString(Constants.TOUR_DESCRIPTION_EXTRA, tourItem.getDesc());
 
         TourSingleFragment fragment = new TourSingleFragment();
         fragment.setArguments(args);
@@ -53,10 +54,12 @@ public class TourSingleFragment extends Fragment {
         Bundle args = getArguments();
 
         if (args != null) {
-            ((ImageView) i.findViewById(R.id.tourImage)).setImageResource(args.getInt("tourImg"));
-            ((TextView) i.findViewById(R.id.tourTitle)).setText(args.getString("tourTitle"));
+            ((ImageView) i.findViewById(R.id.tourImage))
+                    .setImageResource(args.getInt(Constants.TOUR_IMG_EXTRA));
+            ((TextView) i.findViewById(R.id.tourTitle))
+                    .setText(args.getString(Constants.TOUR_TITLE_EXTRA));
             ((TextView) i.findViewById(R.id.tourDescription))
-                    .setText(args.getString("tourDescription"));
+                    .setText(args.getString(Constants.TOUR_DESCRIPTION_EXTRA));
         }
 
         return i;

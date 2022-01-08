@@ -48,4 +48,8 @@ object Constants {
     const val PICK_FONT_COLOR_REQ_CODE = 2
 
     const val COLOR_REQUEST_CODE = "ColorRequestCode"
+
+    const val TOUR_IMG_EXTRA = "tourImg"
+    const val TOUR_TITLE_EXTRA = "tourTitle"
+    const val TOUR_DESCRIPTION_EXTRA = "tourDescription"
 }
