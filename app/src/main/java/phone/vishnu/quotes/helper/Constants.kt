@@ -40,4 +40,6 @@ object Constants {
 
     const val WIDGET_FAV_ACTION = "phone.vishnu.quotes.widgetFavClicked"
     const val WIDGET_SHARE_ACTION = "phone.vishnu.quotes.widgetShareClicked"
+
+    const val CANCELLABLE_EXTRA = "isCancellable"
 }

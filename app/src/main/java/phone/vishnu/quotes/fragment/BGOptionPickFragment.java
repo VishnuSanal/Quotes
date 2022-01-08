@@ -32,10 +32,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
+import phone.vishnu.quotes.helper.Constants;
 
 public class BGOptionPickFragment extends BaseBottomSheetDialogFragment {
-
-    private static final String CANCELLABLE_EXTRA = "isCancellable";
 
     private RadioGroup radioGroup;
 
@@ -44,7 +43,7 @@ public class BGOptionPickFragment extends BaseBottomSheetDialogFragment {
 
         Bundle bundle = new Bundle();
 
-        bundle.putBoolean(CANCELLABLE_EXTRA, isCancellable);
+        bundle.putBoolean(Constants.CANCELLABLE_EXTRA, isCancellable);
 
         bottomSheetFragment.setArguments(bundle);
 
@@ -56,8 +55,8 @@ public class BGOptionPickFragment extends BaseBottomSheetDialogFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null)
-            if (getArguments().containsKey(CANCELLABLE_EXTRA))
-                setCancelable(getArguments().getBoolean(CANCELLABLE_EXTRA));
+            if (getArguments().containsKey(Constants.CANCELLABLE_EXTRA))
+                setCancelable(getArguments().getBoolean(Constants.CANCELLABLE_EXTRA));
     }
 
     @Nullable
@@ -100,7 +99,7 @@ public class BGOptionPickFragment extends BaseBottomSheetDialogFragment {
                     } else if (id == R.id.backgroundPickDefaultRadioButton) {
 
                         bgDialog = new ProgressDialog(requireContext(), R.style.DialogTheme);
-                        bgDialog.setMessage("Please Wait....");
+                        bgDialog.setMessage(getString(R.string.please_wait));
                         bgDialog.show();
                         bgDialog.setCancelable(false);
 
