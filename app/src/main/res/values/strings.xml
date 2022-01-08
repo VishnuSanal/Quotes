@@ -152,6 +152,14 @@
 	<string name="add_to_favorites">Add to Favorites</string>
 	<string name="quote_of_the_day">Quote of the day</string>
 
+	<string name="share_via">Share via</string>
+	<string name="copied_to_clipboard">Copied to Clipboard</string>
+	<string name="saving_to_gallery">Saving to Gallery</string>
+	<string name="app_requires_these_permissions_to_share_the_quote">App requires these permissions to share the quote</string>
+	<string name="permission_denied">Permission Denied</string>
+	<string name="please_accept_necessary_permissions">Please Accept Necessary Permissions</string>
+	<string name="app_requires_these_permissions_to_run_properly">App requires these permissions to run properly</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>
@@ -179,6 +187,5 @@
 	<string name="bottom_sheet_done_indicator" translatable="false">Bottom Sheet Done Indicator</string>
 	<string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
 	<string name="home_search_image_view" translatable="false">Home Search ImageView</string>
-	<string name="share_via">Share via</string>
 
 </resources>

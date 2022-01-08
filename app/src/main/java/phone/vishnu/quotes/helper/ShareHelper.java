@@ -59,14 +59,19 @@ public class ShareHelper {
                 ClipData.newPlainText(context.getResources().getString(R.string.app_name), q);
         clipboard.setPrimaryClip(clip);
 
-        Toast.makeText(context, "Copied to Clipboard", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, context.getString(R.string.copied_to_clipboard), Toast.LENGTH_SHORT)
+                .show();
     }
 
     public static void saveQuote(Context context, final Quote q) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 
-            Toast.makeText(context, "Saving to Gallery", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                            context,
+                            context.getString(R.string.saving_to_gallery),
+                            Toast.LENGTH_SHORT)
+                    .show();
             AsyncTask.execute(() -> new ExportHelper(context).saveImage(context, q));
 
         } else
@@ -77,7 +82,10 @@ public class ShareHelper {
                                 @Override
                                 public void onPermissionGranted(
                                         PermissionGrantedResponse permissionGrantedResponse) {
-                                    Toast.makeText(context, "Saving to Gallery", Toast.LENGTH_SHORT)
+                                    Toast.makeText(
+                                                    context,
+                                                    context.getString(R.string.saving_to_gallery),
+                                                    Toast.LENGTH_SHORT)
                                             .show();
                                     AsyncTask.execute(
                                             () -> new ExportHelper(context).saveImage(context, q));
@@ -95,7 +103,9 @@ public class ShareHelper {
                                         PermissionToken permissionToken) {
                                     Toast.makeText(
                                                     context,
-                                                    "App requires these permissions to share the quote",
+                                                    context.getString(
+                                                            R.string
+                                                                    .app_requires_these_permissions_to_share_the_quote),
                                                     Toast.LENGTH_SHORT)
                                             .show();
                                     permissionToken.continuePermissionRequest();
@@ -111,8 +121,8 @@ public class ShareHelper {
     private static void showPermissionDeniedDialog(Context context) {
         final androidx.appcompat.app.AlertDialog.Builder builder =
                 new androidx.appcompat.app.AlertDialog.Builder(context);
-        builder.setTitle("Permission Denied");
-        builder.setMessage("Please Accept Necessary Permissions");
+        builder.setTitle(R.string.permission_denied);
+        builder.setMessage(R.string.please_accept_necessary_permissions);
         builder.setCancelable(true);
         builder.setPositiveButton(
                 "OK",
@@ -125,12 +135,14 @@ public class ShareHelper {
                                                     "package", context.getPackageName(), null)));
                 });
         builder.setNegativeButton(
-                "Cancel",
+                context.getString(R.string.cancel),
                 (imageDialog, which) -> {
                     imageDialog.cancel();
                     Toast.makeText(
                                     context,
-                                    "App requires these permissions to run properly",
+                                    context.getString(
+                                            R.string
+                                                    .app_requires_these_permissions_to_run_properly),
                                     Toast.LENGTH_SHORT)
                             .show();
                 });
