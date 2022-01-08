@@ -32,6 +32,7 @@ object Constants {
     const val DATA = "data"
     const val QUOTE = "quote"
     const val AUTHOR = "author"
+    const val FONTS = "fonts"
 
     const val SHORTCUT_FAV_ACTION = "phone.vishnu.quotes.openFavouriteFragment"
     const val SHORTCUT_RANDOM_ACTION = "phone.vishnu.quotes.shareRandomQuote"
