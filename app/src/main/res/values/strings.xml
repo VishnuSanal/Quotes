@@ -63,6 +63,17 @@
 	<string name="thanks_to">Thanks To</string>
 	<string name="thanks_to_these_awesome_people">Thanks to these awesome people</string>
 
+	<string name="crashed"> crashed</string>
+	<string name="package_name">Package Name:</string>
+	<string name="app_version">App Version:</string>
+	<string name="version_code">Version Code:</string>
+	<string name="android_version">Android Version:</string>
+	<string name="app_start_date">App Start Date:</string>
+	<string name="stack_trace">Stack Trace:</string>
+	<string name="comment">Comment:</string>
+	<string name="crash_report_for">Crash report for</string>
+	<string name="report_copied_to_clipboard">Report Copied to Clipboard</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>
