@@ -52,4 +52,11 @@ object Constants {
     const val TOUR_IMG_EXTRA = "tourImg"
     const val TOUR_TITLE_EXTRA = "tourTitle"
     const val TOUR_DESCRIPTION_EXTRA = "tourDescription"
+
+    const val NOTIFICATION_REQUEST_CODE = 2222
+    const val NOTIFICATION_CHANNEL_ID = "phone.vishnu.quotes"
+    const val NOTIFICATION_CHANNEL_NAME = "QuotesNotificationChannel"
+    const val NOTIFICATION_CLICK = "NotificationClick"
+    const val NOTIFICATION_FAV_ACTION = "FavButton"
+    const val NOTIFICATION_SHARE_ACTION = "ShareButton"
 }

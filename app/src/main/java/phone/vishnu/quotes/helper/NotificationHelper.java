@@ -34,11 +34,6 @@ import phone.vishnu.quotes.repository.QuotesRepository;
 
 public class NotificationHelper {
 
-    private final int NOTIFICATION_REQUEST_CODE = 2222;
-
-    private final String NOTIFICATION_CHANNEL_ID = "phone.vishnu.quotes";
-    private final String NOTIFICATION_CHANNEL_NAME = "QuotesNotificationChannel";
-
     private final Context context;
 
     public NotificationHelper(Context context) {
@@ -51,7 +46,8 @@ public class NotificationHelper {
                 .getRandomQuote(
                         quote -> {
                             NotificationCompat.Builder builder =
-                                    new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
+                                    new NotificationCompat.Builder(
+                                                    context, Constants.NOTIFICATION_CHANNEL_ID)
                                             .setSmallIcon(R.drawable.ic_quotes_round)
                                             .setAutoCancel(true)
                                             .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -59,14 +55,16 @@ public class NotificationHelper {
                                             .addAction(
                                                     new NotificationCompat.Action(
                                                             R.drawable.ic_share,
-                                                            "Share",
+                                                            context.getString(R.string.share),
                                                             getSharePendingIntent(quote)))
                                             .addAction(
                                                     new NotificationCompat.Action(
                                                             R.drawable.ic_favorite,
-                                                            "Add to Favorites",
+                                                            context.getString(
+                                                                    R.string.add_to_favorites),
                                                             getFavPendingIntent(quote)))
-                                            .setContentTitle("Today's Quote")
+                                            .setContentTitle(
+                                                    context.getString(R.string.quote_of_the_day))
                                             .setContentText(
                                                     quote.getQuote()
                                                             + "\n"
@@ -86,27 +84,27 @@ public class NotificationHelper {
                             if (android.os.Build.VERSION.SDK_INT
                                     >= android.os.Build.VERSION_CODES.O) {
 
-                                builder.setChannelId(NOTIFICATION_CHANNEL_ID);
+                                builder.setChannelId(Constants.NOTIFICATION_CHANNEL_ID);
 
                                 notificationManager.createNotificationChannel(
                                         new NotificationChannel(
-                                                NOTIFICATION_CHANNEL_ID,
-                                                NOTIFICATION_CHANNEL_NAME,
+                                                Constants.NOTIFICATION_CHANNEL_ID,
+                                                Constants.NOTIFICATION_CHANNEL_NAME,
                                                 NotificationManager.IMPORTANCE_HIGH));
                             }
 
                             if (notificationManager != null)
                                 notificationManager.notify(
-                                        NOTIFICATION_REQUEST_CODE, builder.build());
+                                        Constants.NOTIFICATION_REQUEST_CODE, builder.build());
                         });
     }
 
     private PendingIntent getFavPendingIntent(Quote quote) {
-        return getPendingIntent(1, "FavButton", quote);
+        return getPendingIntent(1, Constants.NOTIFICATION_FAV_ACTION, quote);
     }
 
     private PendingIntent getSharePendingIntent(Quote quote) {
-        return getPendingIntent(2, "ShareButton", quote);
+        return getPendingIntent(2, Constants.NOTIFICATION_SHARE_ACTION, quote);
     }
 
     private PendingIntent getPendingIntent(int i, String actionName, Quote quote) {
@@ -114,10 +112,10 @@ public class NotificationHelper {
                 context,
                 i,
                 new Intent(context, MainActivity.class)
-                        .putExtra("NotificationClick", true)
+                        .putExtra(Constants.NOTIFICATION_CLICK, true)
                         .putExtra(actionName, true)
-                        .putExtra("quote", quote.getQuote())
-                        .putExtra("author", quote.getAuthor()),
+                        .putExtra(Constants.QUOTE, quote.getQuote())
+                        .putExtra(Constants.AUTHOR, quote.getAuthor()),
                 (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
                         ? PendingIntent.FLAG_IMMUTABLE
                         : PendingIntent.FLAG_ONE_SHOT);

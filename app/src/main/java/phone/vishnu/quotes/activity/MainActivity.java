@@ -242,16 +242,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (savedInstanceState == null) {
             final Bundle extras = getIntent().getExtras();
-            if (extras != null && extras.getBoolean("NotificationClick")) {
+            if (extras != null && extras.getBoolean(Constants.NOTIFICATION_CLICK)) {
 
-                if (extras.getBoolean("ShareButton")) {
+                if (extras.getBoolean(Constants.NOTIFICATION_SHARE_ACTION)) {
 
                     showShareActionPicker(
                             new Quote(
                                     Objects.requireNonNull(extras.getString(Constants.QUOTE)),
                                     Objects.requireNonNull(extras.getString(Constants.AUTHOR))));
 
-                } else if (extras.getBoolean("FavButton")) {
+                } else if (extras.getBoolean(Constants.NOTIFICATION_FAV_ACTION)) {
 
                     addFavourite(
                             new Quote(
