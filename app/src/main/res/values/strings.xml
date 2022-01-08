@@ -123,6 +123,14 @@
 
 	<string name="font_set">Font set</string>
 
+	<string name="removed_from_favorites">Removed from Favorites</string>
+	<string name="undo">Undo</string>
+	<string name="all">All</string>
+	<string name="default_string">Default</string>
+	<string name="custom">Custom</string>
+
+	<string name="font_file_not_found">Font file not found</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>
@@ -150,11 +158,5 @@
 	<string name="bottom_sheet_done_indicator" translatable="false">Bottom Sheet Done Indicator</string>
 	<string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
 	<string name="home_search_image_view" translatable="false">Home Search ImageView</string>
-
-	<string name="removed_from_favorites">Removed from Favorites</string>
-	<string name="undo">Undo</string>
-	<string name="all">All</string>
-	<string name="default_string">Default</string>
-	<string name="custom">Custom</string>
 
 </resources>
