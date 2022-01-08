@@ -107,6 +107,9 @@
 	<string name="spread_positivity_with_us">Spread positivity with us</string>
 	<string name="get_started_by_sharing_a_quote">Get started by sharing a Quote!</string>
 
+	<string name="field_empty">Field Empty</string>
+	<string name="quote_added_to_favorites">Quote added to Favorites</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>

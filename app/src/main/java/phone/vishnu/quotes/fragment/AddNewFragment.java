@@ -78,10 +78,10 @@ public class AddNewFragment extends BaseBottomSheetDialogFragment {
 
                     if (quote.isEmpty() || author.isEmpty()) {
                         if (quote.isEmpty()) {
-                            quoteTIE.setError("Field Empty");
+                            quoteTIE.setError(getString(R.string.field_empty));
                             quoteTIE.requestFocus();
                         } else {
-                            authorTIE.setError("Field Empty");
+                            authorTIE.setError(getString(R.string.field_empty));
                             authorTIE.requestFocus();
                         }
                     } else {
@@ -90,7 +90,7 @@ public class AddNewFragment extends BaseBottomSheetDialogFragment {
 
                         Toast.makeText(
                                         requireContext(),
-                                        "Quote added to Favorites",
+                                        getString(R.string.quote_added_to_favorites),
                                         Toast.LENGTH_SHORT)
                                 .show();
 
