@@ -32,14 +32,12 @@ import androidx.annotation.Nullable;
 import java.util.Objects;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 
 public class ShareOptionPickFragment extends BaseBottomSheetDialogFragment {
-
-    private static final String QUOTE_EXTRA = "quote";
-    private static final String AUTHOR_EXTRA = "author";
 
     private RadioGroup radioGroup;
     private SharedPreferenceHelper sharedPreferenceHelper;
@@ -59,8 +57,8 @@ public class ShareOptionPickFragment extends BaseBottomSheetDialogFragment {
 
         Bundle bundle = new Bundle();
 
-        bundle.putString(QUOTE_EXTRA, q.getQuote());
-        bundle.putString(AUTHOR_EXTRA, q.getAuthor());
+        bundle.putString(Constants.QUOTE, q.getQuote());
+        bundle.putString(Constants.AUTHOR, q.getAuthor());
 
         bottomSheetFragment.setArguments(bundle);
 
@@ -72,12 +70,12 @@ public class ShareOptionPickFragment extends BaseBottomSheetDialogFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null)
-            if (getArguments().containsKey(QUOTE_EXTRA)
-                    && getArguments().containsKey(QUOTE_EXTRA)) {
+            if (getArguments().containsKey(Constants.QUOTE)
+                    && getArguments().containsKey(Constants.QUOTE)) {
                 quote =
                         new Quote(
-                                Objects.requireNonNull(getArguments().getString(QUOTE_EXTRA)),
-                                Objects.requireNonNull(getArguments().getString(AUTHOR_EXTRA)));
+                                Objects.requireNonNull(getArguments().getString(Constants.QUOTE)),
+                                Objects.requireNonNull(getArguments().getString(Constants.AUTHOR)));
             }
     }
 
