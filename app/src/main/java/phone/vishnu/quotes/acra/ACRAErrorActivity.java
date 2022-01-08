@@ -37,6 +37,7 @@ import org.acra.ReportField;
 import org.acra.data.CrashReportData;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.SplashActivity;
+import phone.vishnu.quotes.helper.Constants;
 
 public class ACRAErrorActivity extends AppCompatActivity {
 
@@ -57,27 +58,29 @@ public class ACRAErrorActivity extends AppCompatActivity {
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         intent.putExtra(
-                "ACRA_STACK_TRACE", checkNullity(errorContent.getString(ReportField.STACK_TRACE)));
+                Constants.ACRA_STACK_TRACE,
+                checkNullity(errorContent.getString(ReportField.STACK_TRACE)));
         intent.putExtra(
-                "ACRA_ANDROID_VERSION",
+                Constants.ACRA_ANDROID_VERSION,
                 checkNullity(errorContent.getString(ReportField.ANDROID_VERSION)));
         intent.putExtra(
-                "ACRA_APP_VERSION_CODE",
+                Constants.ACRA_APP_VERSION_CODE,
                 checkNullity(errorContent.getString(ReportField.APP_VERSION_CODE)));
         intent.putExtra(
-                "ACRA_APP_VERSION_NAME",
+                Constants.ACRA_APP_VERSION_NAME,
                 checkNullity(errorContent.getString(ReportField.APP_VERSION_NAME)));
         intent.putExtra(
-                "ACRA_PACKAGE_NAME",
+                Constants.ACRA_PACKAGE_NAME,
                 checkNullity(errorContent.getString(ReportField.PACKAGE_NAME)));
         intent.putExtra(
-                "ACRA_USER_APP_START_DATE",
+                Constants.ACRA_USER_APP_START_DATE,
                 checkNullity(errorContent.getString(ReportField.USER_APP_START_DATE)));
 
         context.startActivity(intent);
     }
 
     private static String checkNullity(String s) {
+        // TODO
         return s == null ? "Property not found" : s;
     }
 
@@ -85,7 +88,10 @@ public class ACRAErrorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acra_error);
-        setTitle(getString(R.string.quotes_status_creator) + " crashed");
+        setTitle(
+                String.format(
+                        "%s %s",
+                        getString(R.string.quotes_status_creator), getString(R.string.crashed)));
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         stackTraceTV = findViewById(R.id.errorActivityStackTraceTV);
@@ -104,28 +110,35 @@ public class ACRAErrorActivity extends AppCompatActivity {
 
             packageNameTV.setText(
                     String.format(
-                            "Package Name: %s",
-                            checkNullity(intent.getStringExtra("ACRA_PACKAGE_NAME"))));
+                            "%s %s",
+                            getString(R.string.package_name),
+                            checkNullity(intent.getStringExtra(Constants.ACRA_PACKAGE_NAME))));
             versionNameTV.setText(
                     String.format(
-                            "App Version: %s",
-                            checkNullity(intent.getStringExtra("ACRA_APP_VERSION_NAME"))));
+                            "%s %s",
+                            getString(R.string.app_version),
+                            checkNullity(intent.getStringExtra(Constants.ACRA_APP_VERSION_NAME))));
             versionCodeTV.setText(
                     String.format(
-                            "Version Code: %s",
-                            checkNullity(intent.getStringExtra("ACRA_APP_VERSION_CODE"))));
+                            "%s %s",
+                            getString(R.string.version_code),
+                            checkNullity(intent.getStringExtra(Constants.ACRA_APP_VERSION_CODE))));
             androidVersionTV.setText(
                     String.format(
-                            "Android Version: %s",
-                            checkNullity(intent.getStringExtra("ACRA_ANDROID_VERSION"))));
+                            "%s %s",
+                            getString(R.string.android_version),
+                            checkNullity(intent.getStringExtra(Constants.ACRA_ANDROID_VERSION))));
             appStartDateTV.setText(
                     String.format(
-                            "App Start Date: %s",
-                            checkNullity(intent.getStringExtra("ACRA_USER_APP_START_DATE"))));
+                            "%s %s",
+                            getString(R.string.app_start_date),
+                            checkNullity(
+                                    intent.getStringExtra(Constants.ACRA_USER_APP_START_DATE))));
             stackTraceTV.setText(
                     String.format(
-                            "Stack Trace:\n\n%s",
-                            checkNullity(intent.getStringExtra("ACRA_STACK_TRACE"))));
+                            "%s\n\n%s",
+                            getString(R.string.stack_trace),
+                            checkNullity(intent.getStringExtra(Constants.ACRA_STACK_TRACE))));
         }
 
         telegramButton.setOnClickListener(
@@ -147,37 +160,30 @@ public class ACRAErrorActivity extends AppCompatActivity {
 
         String comment =
                 commentText != null && !commentText.toString().isEmpty()
-                        ? "Comment: " + commentText.toString()
+                        ? String.format(
+                                "%s %s", getString(R.string.comment), commentText.toString())
                         : "";
 
         String s =
-                "Crash report for "
-                        + getString(R.string.quotes_status_creator)
-                        + "\n\n\n"
-                        + packageNameTV.getText()
-                        + "\n\n"
-                        + versionNameTV.getText()
-                        + "\n\n"
-                        + versionCodeTV.getText()
-                        + "\n\n"
-                        + androidVersionTV.getText()
-                        + "\n\n"
-                        + appStartDateTV.getText()
-                        + "\n\n"
-                        + "```"
-                        + "\n"
-                        + stackTraceTV.getText()
-                        + "\n"
-                        + "```"
-                        + "\n\n"
-                        + comment;
+                String.format(
+                        "%s %s\n\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n```\n%s\n```\n\n%s",
+                        getString(R.string.crash_report_for),
+                        getString(R.string.quotes_status_creator),
+                        packageNameTV.getText(),
+                        versionNameTV.getText(),
+                        versionCodeTV.getText(),
+                        androidVersionTV.getText(),
+                        appStartDateTV.getText(),
+                        stackTraceTV.getText(),
+                        comment);
 
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip =
                 ClipData.newPlainText(getResources().getString(R.string.app_name), s.trim());
         clipboard.setPrimaryClip(clip);
 
-        Toast.makeText(this, "Report Copied to Clipboard", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.report_copied_to_clipboard), Toast.LENGTH_SHORT)
+                .show();
     }
 
     private void openLink(String s) {
@@ -188,7 +194,7 @@ public class ACRAErrorActivity extends AppCompatActivity {
     private boolean checkIntent(Intent intent) {
         return intent != null
                 && intent.getExtras() != null
-                && intent.getExtras().containsKey("ACRA_STACK_TRACE");
+                && intent.getExtras().containsKey(Constants.ACRA_STACK_TRACE);
     }
 
     @Override

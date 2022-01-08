@@ -52,7 +52,9 @@ public class AboutFragment extends BaseBottomSheetDialogFragment {
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_about, container, false);
         ((TextView) inflate.findViewById(R.id.aboutSampleVersion))
-                .setText(String.format("Version %s", BuildConfig.VERSION_NAME));
+                .setText(
+                        String.format(
+                                "%s %s", getString(R.string.version), BuildConfig.VERSION_NAME));
 
         recyclerView = inflate.findViewById(R.id.aboutRecyclerView);
 
@@ -103,9 +105,13 @@ public class AboutFragment extends BaseBottomSheetDialogFragment {
                         intent.setType("text/plain");
                         intent.putExtra(
                                 Intent.EXTRA_TEXT,
-                                "Install Quotes Status Creator - an open source app that lets you share quotations as status images on social media\n\nhttps://play.google.com/store/apps/details?id=phone.vishnu.quotes");
+                                String.format(
+                                        "%s\n\n%s",
+                                        getString(R.string.share_text),
+                                        "https://play.google.com/store/apps/details?id=phone.vishnu.quotes"));
                         Intent chooser =
-                                Intent.createChooser(intent, "Share Quotes Status Creator");
+                                Intent.createChooser(
+                                        intent, getString(R.string.share_quotes_status_creator));
                         startActivity(chooser);
                     } else if (position == 5) {
                         openLink("https://github.com/VishnuSanal/Quotes");
@@ -124,23 +130,31 @@ public class AboutFragment extends BaseBottomSheetDialogFragment {
         return Arrays.asList(
                 new TourItem(
                         R.drawable.ic_home,
-                        "Join Telegram Group",
-                        "Join our community on Telegram"),
+                        getString(R.string.join_telegram_group),
+                        getString(R.string.join_our_community_on_telegram)),
                 new TourItem(
                         R.drawable.ic_whatshot,
-                        "Follow on Instagram",
-                        "Follow Quotes Status Creator on Instagram"),
+                        getString(R.string.follow_on_instagram),
+                        getString(R.string.follow_quotes_status_creator_on_instagram)),
                 new TourItem(
                         R.drawable.ic_color_lens,
-                        "Join Telegram Channel",
-                        "Get a daily dose of inspiration on your inbox!"),
-                new TourItem(R.drawable.ic_done, "Rate the App", "Rate this app on Google Play"),
+                        getString(R.string.join_telegram_channel),
+                        getString(R.string.get_a_daily_dose_of_inspiration_on_your_inbox)),
+                new TourItem(
+                        R.drawable.ic_done,
+                        getString(R.string.rate_the_app),
+                        getString(R.string.rate_this_app_on_google_play)),
                 new TourItem(
                         R.drawable.ic_share,
-                        "Share the App",
-                        "Share Quotes Status Creator with your friends"),
-                new TourItem(R.drawable.ic_info, "Source Code", "View source code on GitHub"),
+                        getString(R.string.share_the_app),
+                        getString(R.string.share_quotes_status_creator_with_your_friends)),
                 new TourItem(
-                        R.drawable.ic_favorite, "Thanks To", "Thanks to these awesome people"));
+                        R.drawable.ic_info,
+                        getString(R.string.source_code),
+                        getString(R.string.view_source_code_on_github)),
+                new TourItem(
+                        R.drawable.ic_favorite,
+                        getString(R.string.thanks_to),
+                        getString(R.string.thanks_to_these_awesome_people)));
     }
 }

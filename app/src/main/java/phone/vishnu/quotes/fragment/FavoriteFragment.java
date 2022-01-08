@@ -222,7 +222,7 @@ public class FavoriteFragment extends BaseBottomSheetDialogFragment {
             ProgressDialog progressDialog =
                     new ProgressDialog(requireContext(), R.style.DialogTheme);
 
-            progressDialog.setMessage("Please Wait....");
+            progressDialog.setMessage(getString(R.string.please_wait));
             progressDialog.show();
             progressDialog.setCancelable(false);
 
@@ -272,8 +272,22 @@ public class FavoriteFragment extends BaseBottomSheetDialogFragment {
                                 Toast.makeText(
                                                 requireContext(),
                                                 sharedPreferenceHelper.isFavActionReversed()
-                                                        ? "Swipe Right to Share\nSwipe Left to Delete"
-                                                        : "Swipe Right to Delete\nSwipe Left to Share",
+                                                        ? String.format(
+                                                                "%s\n%s",
+                                                                getString(
+                                                                        R.string
+                                                                                .swipe_right_to_share),
+                                                                getString(
+                                                                        R.string
+                                                                                .swipe_left_to_delete))
+                                                        : String.format(
+                                                                "%s\n%s",
+                                                                getString(
+                                                                        R.string
+                                                                                .swipe_right_to_delete),
+                                                                getString(
+                                                                        R.string
+                                                                                .swipe_left_to_share)),
                                                 Toast.LENGTH_LONG)
                                         .show();
                                 sharedPreferenceHelper.incrementFavHintShownCount();
@@ -390,14 +404,17 @@ public class FavoriteFragment extends BaseBottomSheetDialogFragment {
 
     private void showUndoSnackBar(Quote q) {
         Snackbar snackbar =
-                Snackbar.make(coordinatorLayout, "Removed from Favorites", Snackbar.LENGTH_SHORT);
+                Snackbar.make(
+                        coordinatorLayout, R.string.removed_from_favorites, Snackbar.LENGTH_SHORT);
 
-        snackbar.setAction("Undo", v -> viewModel.insert(q));
+        snackbar.setAction(R.string.undo, v -> viewModel.insert(q));
         snackbar.show();
     }
 
     private void setUpChipGroup() {
-        String[] tags = {"All", "Default", "Custom"};
+        String[] tags = {
+            getString(R.string.all), getString(R.string.default_string), getString(R.string.custom)
+        };
 
         for (String string : tags) {
 
@@ -418,7 +435,7 @@ public class FavoriteFragment extends BaseBottomSheetDialogFragment {
                                     (checkedId == View.NO_ID
                                                     || ((Chip) chipGroup.findViewById(checkedId))
                                                             .getText()
-                                                            .equals("All"))
+                                                            .equals(getString(R.string.all)))
                                             ? ""
                                             : ((Chip) chipGroup.findViewById(checkedId))
                                                     .getText()));
@@ -435,8 +452,9 @@ public class FavoriteFragment extends BaseBottomSheetDialogFragment {
         }
 
         for (Quote quote : favArrayList)
-            if ((text.equals("Default") && !quote.isUserAdded())
-                    || (text.equals("Custom") && quote.isUserAdded())) filteredResults.add(quote);
+            if ((text.equals(getString(R.string.default_string)) && !quote.isUserAdded())
+                    || (text.equals(getString(R.string.custom)) && quote.isUserAdded()))
+                filteredResults.add(quote);
 
         submitList(filteredResults);
     }

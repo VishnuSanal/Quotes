@@ -37,6 +37,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import java.io.File;
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
@@ -56,8 +57,8 @@ public class QuoteFragment extends Fragment {
         QuoteFragment fragment = new QuoteFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putString("quote", quote.getQuote());
-        bundle.putString("author", quote.getAuthor());
+        bundle.putString(Constants.QUOTE, quote.getQuote());
+        bundle.putString(Constants.AUTHOR, quote.getAuthor());
         fragment.setArguments(bundle);
 
         return fragment;
@@ -90,13 +91,20 @@ public class QuoteFragment extends Fragment {
                 Typeface face = Typeface.createFromFile(fontPath);
                 quoteText.setTypeface(face);
             } catch (Exception e) {
-                Toast.makeText(getContext(), "Font file not found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                                getContext(),
+                                getString(R.string.font_file_not_found),
+                                Toast.LENGTH_SHORT)
+                        .show();
                 e.printStackTrace();
             }
         } else {
             if ((!fontPath.equals("-1")))
                 if (!new File(fontPath).exists())
-                    Toast.makeText(requireContext(), "Font file not found", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                                    requireContext(),
+                                    getString(R.string.font_file_not_found),
+                                    Toast.LENGTH_SHORT)
                             .show();
         }
 
@@ -111,7 +119,10 @@ public class QuoteFragment extends Fragment {
         authorText.setBackgroundColor(Color.parseColor(hexColor));
 
         // noinspection ConstantConditions
-        quote = new Quote(getArguments().getString("quote"), getArguments().getString("author"));
+        quote =
+                new Quote(
+                        getArguments().getString(Constants.QUOTE),
+                        getArguments().getString(Constants.AUTHOR));
 
         quoteText.setText(quote.getQuote());
         authorText.setText(String.format("-%s", quote.getAuthor()));

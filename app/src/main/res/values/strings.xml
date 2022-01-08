@@ -3,7 +3,7 @@
 
 	<string name="home">Home</string>
 	<string name="favorites">Favorites</string>
-	<string name="share">Share Random Quote</string>
+	<string name="share_random_quote">Share Random Quote</string>
 	<string name="quote">Quote</string>
 	<string name="author">Author</string>
 	<string name="add">Add</string>
@@ -44,6 +44,121 @@
 	<string name="error_report_note">To diagnose and fix this issue, please send us a crash report.</string>
 	<string name="your_comment">Your comment (optional)</string>
 	<string name="about">About</string>
+
+	<string name="version">Version</string>
+	<string name="share_text">Install Quotes Status Creator - an open source app that lets you share quotations as status images on social media</string>
+	<string name="share_quotes_status_creator">Share Quotes Status Creator</string>
+	<string name="join_telegram_group">Join Telegram Group</string>
+	<string name="join_our_community_on_telegram">Join our community on Telegram</string>
+	<string name="follow_on_instagram">Follow on Instagram</string>
+	<string name="follow_quotes_status_creator_on_instagram">Follow Quotes Status Creator on Instagram</string>
+	<string name="join_telegram_channel">Join Telegram Channel</string>
+	<string name="get_a_daily_dose_of_inspiration_on_your_inbox">Get a daily dose of inspiration on your inbox!</string>
+	<string name="rate_the_app">Rate the App</string>
+	<string name="rate_this_app_on_google_play">Rate this app on Google Play</string>
+	<string name="share_the_app">Share the App</string>
+	<string name="share_quotes_status_creator_with_your_friends">Share Quotes Status Creator with your friends</string>
+	<string name="source_code">Source Code</string>
+	<string name="view_source_code_on_github">View source code on GitHub</string>
+	<string name="thanks_to">Thanks To</string>
+	<string name="thanks_to_these_awesome_people">Thanks to these awesome people</string>
+
+	<string name="crashed"> crashed</string>
+	<string name="package_name">Package Name:</string>
+	<string name="app_version">App Version:</string>
+	<string name="version_code">Version Code:</string>
+	<string name="android_version">Android Version:</string>
+	<string name="app_start_date">App Start Date:</string>
+	<string name="stack_trace">Stack Trace:</string>
+	<string name="comment">Comment:</string>
+	<string name="crash_report_for">Crash report for</string>
+	<string name="report_copied_to_clipboard">Report Copied to Clipboard</string>
+
+	<string name="life">Life</string>
+	<string name="success">Success</string>
+	<string name="love">Love</string>
+	<string name="action">Action</string>
+	<string name="dream">Dream</string>
+	<string name="fail">Fail</string>
+	<string name="thought">Thought</string>
+	<string name="heart">Heart</string>
+	<string name="mistake">Mistake</string>
+	<string name="wisdom">Wisdom</string>
+	<string name="fear">Fear</string>
+	<string name="courage">Courage</string>
+	<string name="friend">Friend</string>
+	<string name="attitude">Attitude</string>
+	<string name="perseverance">Perseverance</string>
+	<string name="motivation">Motivation</string>
+	<string name="inspiration">Inspiration</string>
+
+	<string name="action_cancelled">Action Cancelled!</string>
+	<string name="oops_something_went_wrong">Oops! Something went wrong!</string>
+	<string name="please_connect_to_the_internet">Please Connect to the Internet</string>
+	<string name="choose_a_background">Choose a background</string>
+	<string name="already_present_in_favorites">Already Present in Favorites</string>
+	<string name="added_to_favorites">Added to Favorites</string>
+	<string name="please_wait">Please Wait....</string>
+
+	<string name="welcome">Welcome!</string>
+	<string name="welcome_to_quotes_status_creator">Welcome to Quotes Status Creator</string>
+	<string name="it_works_like">It works Like</string>
+	<string name="quotes_status_creator_lets_you_share_quotations_as_status_images_on_social_media">Quotes Status Creator lets you share quotations as status images on social media</string>
+	<string name="spread_positivity_with_us">Spread positivity with us</string>
+	<string name="get_started_by_sharing_a_quote">Get started by sharing a Quote!</string>
+
+	<string name="field_empty">Field Empty</string>
+	<string name="quote_added_to_favorites">Quote added to Favorites</string>
+
+	<string name="background_set">Background Set</string>
+	<string name="applying_changes">Applying Changes</string>
+
+	<string name="pick_font_color">Pick Font Color</string>
+	<string name="pick_background_color">Pick Background Color</string>
+
+	<string name="swipe_right_to_share">Swipe Right to Share</string>
+	<string name="swipe_left_to_delete">Swipe Left to Delete</string>
+	<string name="swipe_right_to_delete">Swipe Right to Delete</string>
+	<string name="swipe_left_to_share">Swipe Left to Share</string>
+
+	<string name="font_set">Font set</string>
+
+	<string name="removed_from_favorites">Removed from Favorites</string>
+	<string name="undo">Undo</string>
+	<string name="all">All</string>
+	<string name="default_string">Default</string>
+	<string name="custom">Custom</string>
+
+	<string name="font_file_not_found">Font file not found</string>
+
+	<string name="reverse_swipe">Reverse Swipe</string>
+	<string name="reverse_swipe_action_on_favorites">Reverse Swipe Action on Favorites</string>
+	<string name="share">Share</string>
+	<string name="share_button_action">Share Button Action</string>
+	<string name="theme">Theme</string>
+	<string name="pick_a_theme_for_the_app">Pick a theme for the app</string>
+	<string name="settings_reset">Settings Reset</string>
+	<string name="restarting_app_for_changes_to_take_effect">Restarting App for changes to take effect</string>
+	<string name="daily_reminder">Daily Reminder</string>
+
+	<string name="daily_notifications">Daily notifications</string>
+	<string name="turned_on">Turned on</string>
+	<string name="turned_off">Turned off</string>
+	<string name="daily_notification_not_set">Daily Notification not set</string>
+	<string name="try_again">Try again</string>
+
+	<string name="debug_build">Debug build</string>
+
+	<string name="add_to_favorites">Add to Favorites</string>
+	<string name="quote_of_the_day">Quote of the day</string>
+
+	<string name="share_via">Share via</string>
+	<string name="copied_to_clipboard">Copied to Clipboard</string>
+	<string name="saving_to_gallery">Saving to Gallery</string>
+	<string name="app_requires_these_permissions_to_share_the_quote">App requires these permissions to share the quote</string>
+	<string name="permission_denied">Permission Denied</string>
+	<string name="please_accept_necessary_permissions">Please Accept Necessary Permissions</string>
+	<string name="app_requires_these_permissions_to_run_properly">App requires these permissions to run properly</string>
 
 	<!--Content Descriptions-->
 

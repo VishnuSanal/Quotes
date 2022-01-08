@@ -30,20 +30,17 @@ import android.widget.RemoteViews;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.AlarmHelper;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.repository.QuotesRepository;
 
 public class QuoteWidget extends AppWidgetProvider {
 
-    private final String QUOTE_WIDGET_UPDATE = "phone.vishnu.quotes.QUOTE_WIDGET_UPDATE";
-    private final int FAVOURITE_REQ_CODE = 1;
-    private final int SHARE_REQ_CODE = 2;
-
     @Override
     public void onEnabled(Context context) {
         super.onEnabled(context);
-        AlarmHelper.scheduleWidgetUpdate(context, QUOTE_WIDGET_UPDATE);
+        AlarmHelper.scheduleWidgetUpdate(context, Constants.WIDGET_UPDATE_ACTION);
         Quote widgetQuote = new SharedPreferenceHelper(context).getWidgetQuote();
         if (widgetQuote != null) updateQuoteWidget(context, widgetQuote);
         else initAppWidget(context);
@@ -53,14 +50,14 @@ public class QuoteWidget extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
         new SharedPreferenceHelper(context).deleteWidgetQuote();
-        AlarmHelper.removeWidgetUpdate(context, QUOTE_WIDGET_UPDATE);
+        AlarmHelper.removeWidgetUpdate(context, Constants.WIDGET_UPDATE_ACTION);
     }
 
     @Override
     public void onDisabled(Context context) {
         super.onDisabled(context);
         new SharedPreferenceHelper(context).deleteWidgetQuote();
-        AlarmHelper.removeWidgetUpdate(context, QUOTE_WIDGET_UPDATE);
+        AlarmHelper.removeWidgetUpdate(context, Constants.WIDGET_UPDATE_ACTION);
     }
 
     @Override
@@ -74,11 +71,13 @@ public class QuoteWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         if (intent != null && intent.getAction() != null) {
-            if ((intent.getAction().equals("phone.vishnu.quotes.WIDGET_CLICK_LISTENER")))
-                if (intent.getExtras() != null && intent.getExtras().containsKey("WIDGET_REQ_CODE"))
-                    onWidgetClickListener(context, intent.getExtras().getInt("WIDGET_REQ_CODE"));
+            if ((intent.getAction().equals(Constants.WIDGET_CLICK_ACTION)))
+                if (intent.getExtras() != null
+                        && intent.getExtras().containsKey(Constants.WIDGET_REQ_CODE))
+                    onWidgetClickListener(
+                            context, intent.getExtras().getInt(Constants.WIDGET_REQ_CODE));
 
-            if ((intent.getAction().equals(QUOTE_WIDGET_UPDATE))) initAppWidget(context);
+            if ((intent.getAction().equals(Constants.WIDGET_UPDATE_ACTION))) initAppWidget(context);
         }
     }
 
@@ -87,8 +86,8 @@ public class QuoteWidget extends AppWidgetProvider {
                 context,
                 REQ_CODE,
                 new Intent(context, QuoteWidget.class)
-                        .setAction("phone.vishnu.quotes.WIDGET_CLICK_LISTENER")
-                        .putExtra("WIDGET_REQ_CODE", REQ_CODE),
+                        .setAction(Constants.WIDGET_CLICK_ACTION)
+                        .putExtra(Constants.WIDGET_REQ_CODE, REQ_CODE),
                 (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
                         ? PendingIntent.FLAG_IMMUTABLE
                         : PendingIntent.FLAG_UPDATE_CURRENT);
@@ -102,10 +101,12 @@ public class QuoteWidget extends AppWidgetProvider {
                 R.id.widgetAuthorTextView, String.format("-%s", quote.getAuthor()));
 
         remoteViews.setOnClickPendingIntent(
-                R.id.widgetShareImageView, getPendingIntent(context, SHARE_REQ_CODE));
+                R.id.widgetShareImageView,
+                getPendingIntent(context, Constants.WIDGET_SHARE_REQ_CODE));
 
         remoteViews.setOnClickPendingIntent(
-                R.id.widgetFavoriteImageView, getPendingIntent(context, FAVOURITE_REQ_CODE));
+                R.id.widgetFavoriteImageView,
+                getPendingIntent(context, Constants.WIDGET_FAVOURITE_REQ_CODE));
 
         AppWidgetManager.getInstance(context)
                 .updateAppWidget(new ComponentName(context, QuoteWidget.class), remoteViews);
@@ -128,21 +129,21 @@ public class QuoteWidget extends AppWidgetProvider {
     }
 
     private void onWidgetClickListener(Context context, int i) {
-        if (i == SHARE_REQ_CODE) widgetShareButtonClicked(context);
-        else if (i == FAVOURITE_REQ_CODE) widgetFavButtonClicked(context);
+        if (i == Constants.WIDGET_SHARE_REQ_CODE) widgetShareButtonClicked(context);
+        else if (i == Constants.WIDGET_FAVOURITE_REQ_CODE) widgetFavButtonClicked(context);
     }
 
     private void widgetFavButtonClicked(Context context) {
         context.startActivity(
                 new Intent(context, MainActivity.class)
-                        .setAction("phone.vishnu.quotes.widgetFavClicked")
+                        .setAction(Constants.WIDGET_FAV_ACTION)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     private void widgetShareButtonClicked(Context context) {
         context.startActivity(
                 new Intent(context, MainActivity.class)
-                        .setAction("phone.vishnu.quotes.widgetShareClicked")
+                        .setAction(Constants.WIDGET_SHARE_ACTION)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }

@@ -34,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.util.ArrayList;
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.Constants;
 
 public class FontLVAdapter extends ArrayAdapter<String> {
 
@@ -65,7 +66,10 @@ public class FontLVAdapter extends ArrayAdapter<String> {
             String fontString = objects.get(position).toLowerCase() + ".ttf";
 
             StorageReference storageReference =
-                    FirebaseStorage.getInstance().getReference().child("fonts").child(fontString);
+                    FirebaseStorage.getInstance()
+                            .getReference()
+                            .child(Constants.FONTS)
+                            .child(fontString);
 
             final File f = new File(getContext().getFilesDir(), fontString);
 
@@ -76,7 +80,10 @@ public class FontLVAdapter extends ArrayAdapter<String> {
                     Typeface face = Typeface.createFromFile(f);
                     viewHolder.fontTV.setTypeface(face);
                 } catch (Exception e) {
-                    Toast.makeText(getContext(), "Oops! Something went wrong", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                                    getContext(),
+                                    getContext().getString(R.string.oops_something_went_wrong),
+                                    Toast.LENGTH_SHORT)
                             .show();
                     e.printStackTrace();
                 }
@@ -94,7 +101,10 @@ public class FontLVAdapter extends ArrayAdapter<String> {
                                     } catch (Exception e) {
                                         Toast.makeText(
                                                         getContext(),
-                                                        "Oops! Something went wrong",
+                                                        getContext()
+                                                                .getString(
+                                                                        R.string
+                                                                                .oops_something_went_wrong),
                                                         Toast.LENGTH_SHORT)
                                                 .show();
                                         e.printStackTrace();

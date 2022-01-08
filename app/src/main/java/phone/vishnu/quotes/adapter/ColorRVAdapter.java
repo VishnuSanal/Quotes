@@ -35,7 +35,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.fragment.ColorPickFragment;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class ColorRVAdapter extends ListAdapter<String, ColorRVAdapter.ViewHolder> {
@@ -104,12 +104,12 @@ public class ColorRVAdapter extends ListAdapter<String, ColorRVAdapter.ViewHolde
     }
 
     private boolean isCardColor(Context context, String s) {
-        return REQ_CODE == ColorPickFragment.PICK_CARD_COLOR_REQ_CODE
+        return REQ_CODE == Constants.PICK_CARD_COLOR_REQ_CODE
                 && s.equals(new SharedPreferenceHelper(context).getCardColorPreference());
     }
 
     private boolean isFontColor(Context context, String s) {
-        return REQ_CODE == ColorPickFragment.PICK_FONT_COLOR_REQ_CODE
+        return REQ_CODE == Constants.PICK_FONT_COLOR_REQ_CODE
                 && s.equals(new SharedPreferenceHelper(context).getFontColorPreference());
     }
 

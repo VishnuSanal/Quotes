@@ -134,7 +134,10 @@ public class ExportHelper {
             shareVersionTV.setVisibility(View.VISIBLE);
             shareDebugAppNameTV.setVisibility(View.VISIBLE);
 
-            shareVersionTV.setText(String.format("Debug build v%s", BuildConfig.VERSION_NAME));
+            shareVersionTV.setText(
+                    String.format(
+                            "%s v%s",
+                            context.getString(R.string.debug_build), BuildConfig.VERSION_NAME));
             shareDebugAppNameTV.setText(
                     String.format("%s", context.getString(R.string.quotes_status_creator)));
         }
@@ -181,7 +184,8 @@ public class ExportHelper {
                 sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
                 sharingIntent.putExtra(Intent.EXTRA_TEXT, "kutt.it/Quotes");
 
-                context.startActivity(Intent.createChooser(sharingIntent, "Share via"));
+                context.startActivity(
+                        Intent.createChooser(sharingIntent, context.getString(R.string.share_via)));
             }
         }
     }
@@ -236,7 +240,10 @@ public class ExportHelper {
             shareVersionTV.setVisibility(View.VISIBLE);
             shareDebugAppNameTV.setVisibility(View.VISIBLE);
 
-            shareVersionTV.setText(String.format("Debug build v%s", BuildConfig.VERSION_NAME));
+            shareVersionTV.setText(
+                    String.format(
+                            "%s v%s",
+                            context.getString(R.string.debug_build), BuildConfig.VERSION_NAME));
             shareDebugAppNameTV.setText(
                     String.format("%s", context.getString(R.string.quotes_status_creator)));
         }

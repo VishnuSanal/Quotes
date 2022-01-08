@@ -34,7 +34,7 @@ public class TourViewPagerAdapter extends FragmentStateAdapter {
 
     public TourViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
-        this.tourItems = getTourItems();
+        this.tourItems = getTourItems(fragmentActivity);
     }
 
     @NonNull
@@ -52,27 +52,29 @@ public class TourViewPagerAdapter extends FragmentStateAdapter {
         return tourItems.get(position);
     }
 
-    private ArrayList<TourItem> getTourItems() {
+    private ArrayList<TourItem> getTourItems(FragmentActivity fragmentActivity) {
 
         ArrayList<TourItem> tourItems = new ArrayList<>();
 
         tourItems.add(
                 new TourItem(
                         R.drawable.ic_tour_announcement,
-                        "Welcome!",
-                        "Welcome to Quotes Status Creator"));
+                        fragmentActivity.getString(R.string.welcome),
+                        fragmentActivity.getString(R.string.welcome_to_quotes_status_creator)));
 
         tourItems.add(
                 new TourItem(
                         R.drawable.ic_tour_app,
-                        "It works Like",
-                        "Quotes Status Creator lets you share quotations as status images on social media"));
+                        fragmentActivity.getString(R.string.it_works_like),
+                        fragmentActivity.getString(
+                                R.string
+                                        .quotes_status_creator_lets_you_share_quotations_as_status_images_on_social_media)));
 
         tourItems.add(
                 new TourItem(
                         R.drawable.ic_tour_go,
-                        "Spread positivity with us",
-                        "Get started by sharing a Quote!"));
+                        fragmentActivity.getString(R.string.spread_positivity_with_us),
+                        fragmentActivity.getString(R.string.get_started_by_sharing_a_quote)));
 
         return tourItems;
     }

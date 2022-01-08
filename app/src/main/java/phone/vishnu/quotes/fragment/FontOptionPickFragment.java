@@ -30,6 +30,7 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.Constants;
 
 public class FontOptionPickFragment extends BaseBottomSheetDialogFragment {
 
@@ -60,7 +61,7 @@ public class FontOptionPickFragment extends BaseBottomSheetDialogFragment {
                     if (id == R.id.fontOptionPickFontRadioButton) {
 
                         fontDialog = new ProgressDialog(requireContext(), R.style.DialogTheme);
-                        fontDialog.setMessage("Please Wait....");
+                        fontDialog.setMessage(getString(R.string.please_wait));
                         fontDialog.show();
                         fontDialog.setCancelable(false);
 
@@ -73,7 +74,7 @@ public class FontOptionPickFragment extends BaseBottomSheetDialogFragment {
 
                     } else if (id == R.id.fontOptionPickColorRadioButton) {
 
-                        ColorPickFragment.newInstance(ColorPickFragment.PICK_FONT_COLOR_REQ_CODE)
+                        ColorPickFragment.newInstance(Constants.PICK_FONT_COLOR_REQ_CODE)
                                 .show(
                                         requireActivity().getSupportFragmentManager(),
                                         "FontOptionPickFragment");
