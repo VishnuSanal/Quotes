@@ -61,7 +61,7 @@ public class FontOptionPickFragment extends BaseBottomSheetDialogFragment {
                     if (id == R.id.fontOptionPickFontRadioButton) {
 
                         fontDialog = new ProgressDialog(requireContext(), R.style.DialogTheme);
-                        fontDialog.setMessage("Please Wait....");
+                        fontDialog.setMessage(getString(R.string.please_wait));
                         fontDialog.show();
                         fontDialog.setCancelable(false);
 
