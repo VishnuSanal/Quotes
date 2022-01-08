@@ -45,6 +45,24 @@
 	<string name="your_comment">Your comment (optional)</string>
 	<string name="about">About</string>
 
+	<string name="version">Version</string>
+	<string name="share_text">Install Quotes Status Creator - an open source app that lets you share quotations as status images on social media</string>
+	<string name="share_quotes_status_creator">Share Quotes Status Creator</string>
+	<string name="join_telegram_group">Join Telegram Group</string>
+	<string name="join_our_community_on_telegram">Join our community on Telegram</string>
+	<string name="follow_on_instagram">Follow on Instagram</string>
+	<string name="follow_quotes_status_creator_on_instagram">Follow Quotes Status Creator on Instagram</string>
+	<string name="join_telegram_channel">Join Telegram Channel</string>
+	<string name="get_a_daily_dose_of_inspiration_on_your_inbox">Get a daily dose of inspiration on your inbox!</string>
+	<string name="rate_the_app">Rate the App</string>
+	<string name="rate_this_app_on_google_play">Rate this app on Google Play</string>
+	<string name="share_the_app">Share the App</string>
+	<string name="share_quotes_status_creator_with_your_friends">Share Quotes Status Creator with your friends</string>
+	<string name="source_code">Source Code</string>
+	<string name="view_source_code_on_github">View source code on GitHub</string>
+	<string name="thanks_to">Thanks To</string>
+	<string name="thanks_to_these_awesome_people">Thanks to these awesome people</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>
