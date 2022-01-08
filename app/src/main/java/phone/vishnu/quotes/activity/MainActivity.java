@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             } else if (id == R.id.colorFAB) {
 
-                ColorPickFragment.newInstance(ColorPickFragment.PICK_CARD_COLOR_REQ_CODE)
+                ColorPickFragment.newInstance(Constants.PICK_CARD_COLOR_REQ_CODE)
                         .show(getSupportFragmentManager(), null);
 
             } else if (id == R.id.fontFAB) {

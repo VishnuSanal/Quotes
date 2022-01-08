@@ -42,4 +42,10 @@ object Constants {
     const val WIDGET_SHARE_ACTION = "phone.vishnu.quotes.widgetShareClicked"
 
     const val CANCELLABLE_EXTRA = "isCancellable"
+
+    const val PICK_BG_COLOR_REQ_CODE = 0
+    const val PICK_CARD_COLOR_REQ_CODE = 1
+    const val PICK_FONT_COLOR_REQ_CODE = 2
+
+    const val COLOR_REQUEST_CODE = "ColorRequestCode"
 }

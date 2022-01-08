@@ -113,6 +113,9 @@
 	<string name="background_set">Background Set</string>
 	<string name="applying_changes">Applying Changes</string>
 
+	<string name="pick_font_color">Pick Font Color</string>
+	<string name="pick_background_color">Pick Background Color</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>

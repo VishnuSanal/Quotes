@@ -80,7 +80,7 @@ public class BGOptionPickFragment extends BaseBottomSheetDialogFragment {
                 (group, id) -> {
                     if (id == R.id.backgroundPickColorRadioButton) {
                         ColorPickFragment.newInstance(
-                                        ColorPickFragment.PICK_BG_COLOR_REQ_CODE, isCancelable())
+                                        Constants.PICK_BG_COLOR_REQ_CODE, isCancelable())
                                 .show(
                                         requireActivity().getSupportFragmentManager(),
                                         "BGOptionPickFragment");

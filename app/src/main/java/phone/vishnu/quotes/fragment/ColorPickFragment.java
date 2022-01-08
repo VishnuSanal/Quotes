@@ -19,7 +19,6 @@
 
 package phone.vishnu.quotes.fragment;
 
-import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -40,16 +39,11 @@ import java.util.Objects;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.ColorRVAdapter;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class ColorPickFragment extends BaseBottomSheetDialogFragment {
-
-    public static final int PICK_BG_COLOR_REQ_CODE = 0;
-    public static final int PICK_CARD_COLOR_REQ_CODE = 1;
-    public static final int PICK_FONT_COLOR_REQ_CODE = 2;
-
-    private static final String CANCELLABLE_EXTRA = "isCancellable";
 
     private ColorRVAdapter colorAdapter;
 
@@ -61,8 +55,8 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
 
     public static ColorPickFragment newInstance(int COLOR_REQ_CODE, boolean isCancellable) {
         Bundle args = new Bundle();
-        args.putInt("ColorRequestCode", COLOR_REQ_CODE);
-        args.putBoolean(CANCELLABLE_EXTRA, isCancellable);
+        args.putInt(Constants.COLOR_REQUEST_CODE, COLOR_REQ_CODE);
+        args.putBoolean(Constants.CANCELLABLE_EXTRA, isCancellable);
         ColorPickFragment fragment = new ColorPickFragment();
         fragment.setArguments(args);
         return fragment;
@@ -73,11 +67,10 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null)
-            if (getArguments().containsKey(CANCELLABLE_EXTRA))
-                setCancelable(getArguments().getBoolean(CANCELLABLE_EXTRA));
+            if (getArguments().containsKey(Constants.CANCELLABLE_EXTRA))
+                setCancelable(getArguments().getBoolean(Constants.CANCELLABLE_EXTRA));
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,21 +84,23 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
 
         colorAdapter =
                 new ColorRVAdapter(
-                        Objects.requireNonNull(getArguments()).getInt("ColorRequestCode"));
+                        Objects.requireNonNull(getArguments())
+                                .getInt(Constants.COLOR_REQUEST_CODE));
 
         colorAdapter.submitList(
-                Objects.requireNonNull(getArguments()).getInt("ColorRequestCode")
-                                == PICK_FONT_COLOR_REQ_CODE
+                Objects.requireNonNull(getArguments()).getInt(Constants.COLOR_REQUEST_CODE)
+                                == Constants.PICK_FONT_COLOR_REQ_CODE
                         ? getFontColorList()
                         : getColorList());
 
-        if (Objects.requireNonNull(getArguments()).getInt("ColorRequestCode")
-                == PICK_FONT_COLOR_REQ_CODE)
-            ((TextView) i.findViewById(R.id.colorPickTitleTV)).setText("Pick Font Color");
-        else if (Objects.requireNonNull(getArguments()).getInt("ColorRequestCode")
-                == PICK_BG_COLOR_REQ_CODE)
-            ((TextView) i.findViewById(R.id.colorPickTitleTV)).setText("Pick Background Color");
-        else ((TextView) i.findViewById(R.id.colorPickTitleTV)).setText("Pick Card Color");
+        if (Objects.requireNonNull(getArguments()).getInt(Constants.COLOR_REQUEST_CODE)
+                == Constants.PICK_FONT_COLOR_REQ_CODE)
+            ((TextView) i.findViewById(R.id.colorPickTitleTV)).setText(R.string.pick_font_color);
+        else if (Objects.requireNonNull(getArguments()).getInt(Constants.COLOR_REQUEST_CODE)
+                == Constants.PICK_BG_COLOR_REQ_CODE)
+            ((TextView) i.findViewById(R.id.colorPickTitleTV))
+                    .setText(R.string.pick_background_color);
+        else ((TextView) i.findViewById(R.id.colorPickTitleTV)).setText(R.string.pick_card_color);
 
         recyclerView.setAdapter(colorAdapter);
 
@@ -117,14 +112,14 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         final int colorRequestCode =
-                Objects.requireNonNull(getArguments()).getInt("ColorRequestCode");
+                Objects.requireNonNull(getArguments()).getInt(Constants.COLOR_REQUEST_CODE);
 
         final SharedPreferenceHelper sharedPreferenceHelper =
                 new SharedPreferenceHelper(requireContext());
 
         colorAdapter.setOnItemClickListener(
                 colorString -> {
-                    if (colorRequestCode == PICK_BG_COLOR_REQ_CODE) {
+                    if (colorRequestCode == Constants.PICK_BG_COLOR_REQ_CODE) {
 
                         DisplayMetrics metrics = new DisplayMetrics();
                         metrics.widthPixels = 1080;
@@ -147,7 +142,7 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
 
                         dismiss();
 
-                    } else if (colorRequestCode == PICK_CARD_COLOR_REQ_CODE) {
+                    } else if (colorRequestCode == Constants.PICK_CARD_COLOR_REQ_CODE) {
 
                         sharedPreferenceHelper.setColorPreference(colorString);
 
@@ -155,7 +150,7 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
 
                         dismiss();
 
-                    } else if (colorRequestCode == PICK_FONT_COLOR_REQ_CODE) {
+                    } else if (colorRequestCode == Constants.PICK_FONT_COLOR_REQ_CODE) {
 
                         if (colorString.equals("#00000000")) colorString = "#FFFFFF";
 
