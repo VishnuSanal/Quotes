@@ -141,6 +141,12 @@
 	<string name="restarting_app_for_changes_to_take_effect">Restarting App for changes to take effect</string>
 	<string name="daily_reminder">Daily Reminder</string>
 
+	<string name="daily_notifications">Daily notifications</string>
+	<string name="turned_on">Turned on</string>
+	<string name="turned_off">Turned off</string>
+	<string name="daily_notification_not_set">Daily Notification not set</string>
+	<string name="try_again">Try again</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>

@@ -29,6 +29,7 @@ import android.os.Build;
 import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
+import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.receiver.NotificationReceiver;
 import phone.vishnu.quotes.receiver.QuoteWidget;
@@ -59,11 +60,22 @@ public class AlarmHelper {
                     calendar.getTimeInMillis(),
                     AlarmManager.INTERVAL_DAY,
                     pendingIntent);
-            Toast.makeText(context, "Daily notifications\nTurned on", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                            context,
+                            String.format(
+                                    "%s\n%s",
+                                    context.getString(R.string.daily_notifications),
+                                    context.getString(R.string.turned_on)),
+                            Toast.LENGTH_SHORT)
+                    .show();
         } else {
             Toast.makeText(
                             context,
-                            "Oops! Something went wrong!\nDaily Notification not set\nTry again",
+                            String.format(
+                                    "%s\n%s\n%s",
+                                    context.getString(R.string.oops_something_went_wrong),
+                                    context.getString(R.string.daily_notification_not_set),
+                                    context.getString(R.string.try_again)),
                             Toast.LENGTH_LONG)
                     .show();
         }
@@ -112,7 +124,14 @@ public class AlarmHelper {
 
         if (alarmManager != null) {
             alarmManager.cancel(pendingIntent);
-            Toast.makeText(context, "Daily notifications\nTurned off", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                            context,
+                            String.format(
+                                    "%s\n%s",
+                                    context.getString(R.string.daily_notifications),
+                                    context.getString(R.string.turned_off)),
+                            Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 
