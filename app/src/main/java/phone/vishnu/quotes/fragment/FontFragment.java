@@ -40,6 +40,7 @@ import java.util.Objects;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.FontLVAdapter;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class FontFragment extends BaseBottomSheetDialogFragment {
@@ -64,7 +65,10 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
         View inflate = inflater.inflate(R.layout.fragment_font, container, false);
 
         if (!warningShown && !isNetworkAvailable(requireContext())) {
-            Toast.makeText(requireContext(), "Please connect to the Internet", Toast.LENGTH_SHORT)
+            Toast.makeText(
+                            requireContext(),
+                            getString(R.string.please_connect_to_the_internet),
+                            Toast.LENGTH_SHORT)
                     .show();
             warningShown = true;
         }
@@ -115,7 +119,7 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
         if (isNetworkAvailable(requireContext())) {
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference().child("fonts");
+            StorageReference storageRef = storage.getReference().child(Constants.FONTS);
             storageRef
                     .listAll()
                     .addOnSuccessListener(
@@ -149,14 +153,15 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
         listView.setOnItemClickListener(
                 (parent, view1, position, id) -> {
                     final ProgressDialog progressDialog =
-                            ProgressDialog.show(requireContext(), "", "Please Wait....");
+                            ProgressDialog.show(
+                                    requireContext(), "", getString(R.string.please_wait));
 
                     String fontString = fontList.get(position).toLowerCase() + ".ttf";
 
                     StorageReference storageReference =
                             FirebaseStorage.getInstance()
                                     .getReference()
-                                    .child("fonts")
+                                    .child(Constants.FONTS)
                                     .child(fontString);
 
                     final File f = new File(requireContext().getFilesDir(), fontString);
@@ -166,7 +171,10 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
                         Toast.makeText(
                                         requireContext(),
-                                        "Font Set \n Applying Changes",
+                                        String.format(
+                                                "%s\n%s",
+                                                getString(R.string.font_set),
+                                                getString(R.string.applying_changes)),
                                         Toast.LENGTH_SHORT)
                                 .show();
                         progressDialog.dismiss();
@@ -189,7 +197,13 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
                                                 Toast.makeText(
                                                                 requireContext(),
-                                                                "Font Set \n Applying Changes",
+                                                                String.format(
+                                                                        "%s\n%s",
+                                                                        getString(
+                                                                                R.string.font_set),
+                                                                        getString(
+                                                                                R.string
+                                                                                        .applying_changes)),
                                                                 Toast.LENGTH_SHORT)
                                                         .show();
                                                 progressDialog.dismiss();
@@ -210,7 +224,9 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                                             progressDialog.dismiss();
                                             Toast.makeText(
                                                             requireContext(),
-                                                            "Oops! Something went wrong!",
+                                                            getString(
+                                                                    R.string
+                                                                            .oops_something_went_wrong),
                                                             Toast.LENGTH_LONG)
                                                     .show();
                                         });

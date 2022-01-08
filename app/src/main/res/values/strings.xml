@@ -121,6 +121,8 @@
 	<string name="swipe_right_to_delete">Swipe Right to Delete</string>
 	<string name="swipe_left_to_share">Swipe Left to Share</string>
 
+	<string name="font_set">Font set</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>
