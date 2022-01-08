@@ -116,6 +116,11 @@
 	<string name="pick_font_color">Pick Font Color</string>
 	<string name="pick_background_color">Pick Background Color</string>
 
+	<string name="swipe_right_to_share">Swipe Right to Share</string>
+	<string name="swipe_left_to_delete">Swipe Left to Delete</string>
+	<string name="swipe_right_to_delete">Swipe Right to Delete</string>
+	<string name="swipe_left_to_share">Swipe Left to Share</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>
@@ -143,5 +148,11 @@
 	<string name="bottom_sheet_done_indicator" translatable="false">Bottom Sheet Done Indicator</string>
 	<string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
 	<string name="home_search_image_view" translatable="false">Home Search ImageView</string>
+
+	<string name="removed_from_favorites">Removed from Favorites</string>
+	<string name="undo">Undo</string>
+	<string name="all">All</string>
+	<string name="default_string">Default</string>
+	<string name="custom">Custom</string>
 
 </resources>
