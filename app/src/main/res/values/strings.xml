@@ -110,6 +110,9 @@
 	<string name="field_empty">Field Empty</string>
 	<string name="quote_added_to_favorites">Quote added to Favorites</string>
 
+	<string name="background_set">Background Set</string>
+	<string name="applying_changes">Applying Changes</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>

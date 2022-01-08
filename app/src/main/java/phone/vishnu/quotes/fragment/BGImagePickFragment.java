@@ -43,6 +43,7 @@ import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.BGImageRVAdapter;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class BGImagePickFragment extends BaseBottomSheetDialogFragment
@@ -80,7 +81,7 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
             if (!warningShown) {
                 Toast.makeText(
                                 requireContext(),
-                                "Please connect to the Internet",
+                                getString(R.string.please_connect_to_the_internet),
                                 Toast.LENGTH_SHORT)
                         .show();
                 warningShown = true;
@@ -192,7 +193,7 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
 
         if (isNetworkAvailable(requireContext())) {
             FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference().child("images");
+            StorageReference storageRef = storage.getReference().child(Constants.IMAGES);
 
             storageRef
                     .listAll()
@@ -223,7 +224,8 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
 
     @Override
     public void onItemClick(Uri uri) {
-        final ProgressDialog dialog = ProgressDialog.show(requireContext(), "", "Please Wait....");
+        final ProgressDialog dialog =
+                ProgressDialog.show(requireContext(), "", getString(R.string.please_wait));
 
         final File f;
 
@@ -251,7 +253,10 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
 
             Toast.makeText(
                             requireContext(),
-                            "Background Set \n Applying Changes",
+                            String.format(
+                                    "%s\n%s",
+                                    getString(R.string.background_set),
+                                    getString(R.string.applying_changes)),
                             Toast.LENGTH_LONG)
                     .show();
 
@@ -263,7 +268,10 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
 
         } else {
             StorageReference storageReference =
-                    FirebaseStorage.getInstance().getReference().child("images").child(f.getName());
+                    FirebaseStorage.getInstance()
+                            .getReference()
+                            .child(Constants.IMAGES)
+                            .child(f.getName());
 
             storageReference
                     .getFile(f)
@@ -275,7 +283,10 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
 
                                 Toast.makeText(
                                                 requireContext(),
-                                                "Background Set \n Applying Changes",
+                                                String.format(
+                                                        "%s\n%s",
+                                                        getString(R.string.background_set),
+                                                        getString(R.string.applying_changes)),
                                                 Toast.LENGTH_LONG)
                                         .show();
 
@@ -290,7 +301,7 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
                                 exception.printStackTrace();
                                 Toast.makeText(
                                                 requireContext(),
-                                                "Oops! Something went wrong!",
+                                                getString(R.string.oops_something_went_wrong),
                                                 Toast.LENGTH_LONG)
                                         .show();
                                 dialog.dismiss();
