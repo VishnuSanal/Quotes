@@ -147,6 +147,8 @@
 	<string name="daily_notification_not_set">Daily Notification not set</string>
 	<string name="try_again">Try again</string>
 
+	<string name="debug_build">Debug build</string>
+
 	<!--Content Descriptions-->
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>
@@ -174,5 +176,6 @@
 	<string name="bottom_sheet_done_indicator" translatable="false">Bottom Sheet Done Indicator</string>
 	<string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
 	<string name="home_search_image_view" translatable="false">Home Search ImageView</string>
+	<string name="share_via">Share via</string>
 
 </resources>
