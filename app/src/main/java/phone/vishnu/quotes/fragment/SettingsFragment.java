@@ -80,9 +80,15 @@ public class SettingsFragment extends BaseBottomSheetDialogFragment {
 
         reminderSwitch.setText(getSwitchText(sharedPreferenceHelper.getAlarmString()));
         favActionSwitch.setText(
-                getSpannableText("Reverse Swipe", "Reverse Swipe Action on Favorites"));
-        shareActionPickTV.setText(getSpannableText("Share", "Share Button Action"));
-        darkModePickTV.setText(getSpannableText("Theme", "Pick a theme for the app"));
+                getSpannableText(
+                        getString(R.string.reverse_swipe),
+                        getString(R.string.reverse_swipe_action_on_favorites)));
+        shareActionPickTV.setText(
+                getSpannableText(
+                        getString(R.string.share), getString(R.string.share_button_action)));
+        darkModePickTV.setText(
+                getSpannableText(
+                        getString(R.string.theme), getString(R.string.pick_a_theme_for_the_app)));
 
         return inflate;
     }
@@ -187,13 +193,16 @@ public class SettingsFragment extends BaseBottomSheetDialogFragment {
 
         Toast.makeText(
                         requireContext(),
-                        "Settings Reset\nRestarting App for changes to take effect",
+                        String.format(
+                                "%s\n%s",
+                                getString(R.string.settings_reset),
+                                getString(R.string.restarting_app_for_changes_to_take_effect)),
                         Toast.LENGTH_SHORT)
                 .show();
     }
 
     private SpannableString getSwitchText(String v) {
-        return getSpannableText("Daily Reminder", v);
+        return getSpannableText(getString(R.string.daily_reminder), v);
     }
 
     private SpannableString getSpannableText(String s1, String s2) {

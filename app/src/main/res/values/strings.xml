@@ -3,7 +3,7 @@
 
 	<string name="home">Home</string>
 	<string name="favorites">Favorites</string>
-	<string name="share">Share Random Quote</string>
+	<string name="share_random_quote">Share Random Quote</string>
 	<string name="quote">Quote</string>
 	<string name="author">Author</string>
 	<string name="add">Add</string>
@@ -130,6 +130,16 @@
 	<string name="custom">Custom</string>
 
 	<string name="font_file_not_found">Font file not found</string>
+
+	<string name="reverse_swipe">Reverse Swipe</string>
+	<string name="reverse_swipe_action_on_favorites">Reverse Swipe Action on Favorites</string>
+	<string name="share">Share</string>
+	<string name="share_button_action">Share Button Action</string>
+	<string name="theme">Theme</string>
+	<string name="pick_a_theme_for_the_app">Pick a theme for the app</string>
+	<string name="settings_reset">Settings Reset</string>
+	<string name="restarting_app_for_changes_to_take_effect">Restarting App for changes to take effect</string>
+	<string name="daily_reminder">Daily Reminder</string>
 
 	<!--Content Descriptions-->
 
