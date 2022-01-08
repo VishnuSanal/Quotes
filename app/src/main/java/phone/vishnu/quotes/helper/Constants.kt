@@ -59,4 +59,10 @@ object Constants {
     const val NOTIFICATION_CLICK = "NotificationClick"
     const val NOTIFICATION_FAV_ACTION = "FavButton"
     const val NOTIFICATION_SHARE_ACTION = "ShareButton"
+
+    const val WIDGET_UPDATE_ACTION = "phone.vishnu.quotes.QUOTE_WIDGET_UPDATE"
+    const val WIDGET_CLICK_ACTION = "phone.vishnu.quotes.WIDGET_CLICK_LISTENER"
+    const val WIDGET_REQ_CODE = "WIDGET_REQ_CODE"
+    const val WIDGET_FAVOURITE_REQ_CODE = 1
+    const val WIDGET_SHARE_REQ_CODE = 2
 }
