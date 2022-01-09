@@ -26,7 +26,7 @@
 
 </p>
 <a href="https://hosted.weblate.org/engage/quotes-status-creator/">
-<img src="https://hosted.weblate.org/widgets/quotes-status-creator/-/quotes-status-creator/horizontal-blue.svg" alt="Oversettelsesstatus" />
+<img src="https://hosted.weblate.org/widgets/quotes-status-creator/-/quotes-status-creator/horizontal-auto.svg" alt="Translation status" />
 </a>
 <hr>
 
