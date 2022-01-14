@@ -288,6 +288,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     chipGroup.clearCheck();
 
                     if (searchIV.getTag() == null) {
+
+                        homeFAB.setVisibility(View.GONE);
+                        setVisibility(View.GONE);
+
                         searchIV.setTag(true);
                         searchIV.setImageDrawable(
                                 ContextCompat.getDrawable(this, R.drawable.ic_close));
@@ -312,6 +316,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         searchTIL.setVisibility(View.GONE);
                         chipGroupScrollView.setVisibility(View.VISIBLE);
+
+                        homeFAB.setVisibility(View.VISIBLE);
+                        if (null != homeFAB.getTag()) setVisibility(View.VISIBLE);
                     }
                 });
 
