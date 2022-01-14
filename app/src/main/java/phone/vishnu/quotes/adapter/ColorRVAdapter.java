@@ -23,7 +23,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
+import phone.vishnu.quotes.helper.Utils;
 
 public class ColorRVAdapter extends ListAdapter<String, ColorRVAdapter.ViewHolder> {
 
@@ -87,13 +87,14 @@ public class ColorRVAdapter extends ListAdapter<String, ColorRVAdapter.ViewHolde
 
             GradientDrawable gradientDrawable = new GradientDrawable();
             gradientDrawable.setColor(Color.parseColor(getItem(position)));
-            gradientDrawable.setCornerRadius(DPtoPX(holder.itemView.getContext(), 96));
+            gradientDrawable.setCornerRadius(
+                    Utils.Companion.DPtoPX(holder.itemView.getContext(), 96));
 
             if (isFontColor(holder.itemView.getContext(), getItem(position))
                     || isCardColor(holder.itemView.getContext(), getItem(position))) {
 
                 gradientDrawable.setStroke(
-                        DPtoPX(holder.itemView.getContext(), 2),
+                        Utils.Companion.DPtoPX(holder.itemView.getContext(), 2),
                         holder.itemView.getContext().getResources().getColor(R.color.spacerColor));
             }
 
@@ -115,11 +116,6 @@ public class ColorRVAdapter extends ListAdapter<String, ColorRVAdapter.ViewHolde
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
-    }
-
-    private int DPtoPX(Context context, int DP) {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        return Math.round(DP * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     public interface OnItemClickListener {

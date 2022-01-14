@@ -36,7 +36,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -81,6 +80,7 @@ import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.ExportHelper;
 import phone.vishnu.quotes.helper.ShareHelper;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
+import phone.vishnu.quotes.helper.Utils;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.repository.FavRepository;
 import phone.vishnu.quotes.repository.QuotesRepository;
@@ -579,8 +579,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private int DPtoPX(int DP) {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        return Math.round(DP * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return Utils.Companion.DPtoPX(this, DP);
     }
 
     private Filter getFilter() {
