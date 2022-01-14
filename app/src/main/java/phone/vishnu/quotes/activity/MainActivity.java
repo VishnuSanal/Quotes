@@ -148,14 +148,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.homeFAB) {
             homeFAB.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animate));
             if (null == homeFAB.getTag()) {
-                if (isFABMenuHidden()) {
-                    openFABMenu();
-                } else {
-                    closeFABMenu();
-                }
+                openFABMenu();
             } else {
-                onBackPressed();
-                resetHomeFAB();
+                closeFABMenu();
             }
         } else {
             closeFABMenu();
@@ -230,12 +225,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.LENGTH_SHORT)
                         .show();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        resetHomeFAB();
-        super.onBackPressed();
     }
 
     private void setIntentListeners(Bundle savedInstanceState) {
@@ -456,21 +445,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new SwipeListener(homeFAB);
     }
 
-    private void resetHomeFAB() {
-        homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_menu));
-        homeFAB.setTag(null);
-    }
-
-    private boolean isFABMenuHidden() {
-        return fontFAB.getVisibility() == View.GONE
-                && aboutFAB.getVisibility() == View.GONE
-                && settingsFAB.getVisibility() == View.GONE
-                && favFAB.getVisibility() == View.GONE
-                && colorFAB.getVisibility() == View.GONE
-                && bgFAB.getVisibility() == View.GONE;
-    }
-
     private void closeFABMenu() {
+        homeFAB.setTag(null);
 
         float homeFABX = homeFAB.getX();
         float homeFABY = homeFAB.getY();
@@ -519,6 +495,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void openFABMenu() {
+        homeFAB.setTag(true);
         setVisibility(View.VISIBLE);
 
         int i = 120;
