@@ -75,6 +75,7 @@
 		<receiver
 			android:name=".receiver.NotificationReceiver"
 			android:enabled="true" />
+
 		<receiver
 			android:name=".receiver.StartupReceiver"
 			android:enabled="true"
@@ -84,6 +85,7 @@
 				<action android:name="android.intent.action.QUICKBOOT_POWERON" />
 			</intent-filter>
 		</receiver>
+
 		<receiver
 			android:name=".receiver.QuoteWidget"
 			android:exported="false">
@@ -96,6 +98,7 @@
 				android:name="android.appwidget.provider"
 				android:resource="@xml/quote_widget_info" />
 		</receiver>
+
 	</application>
 
 </manifest>
