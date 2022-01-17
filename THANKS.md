@@ -101,3 +101,4 @@
  - [Vidhu Vinodh](https://www.instagram.com/vidhu_vinodh/)
  - Jaseel Ahamed M
  - [Yadhu Krishnan E T](https://www.instagram.com/yadhu1020/)
+ - Members of [@QuotesStatusCreator](https://t.me/QuotesStatusCreator)
