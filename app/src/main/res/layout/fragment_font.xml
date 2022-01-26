@@ -17,10 +17,38 @@
 		android:padding="8dp"
 		android:text="@string/pick_font_style"
 		android:textColor="@color/accentTextColor"
+		android:textSize="16sp"
+		app:layout_constraintBottom_toTopOf="@id/fontGuideLineOne"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
+
+	<TextView
+		android:id="@+id/fontOpenTV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:background="?attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true"
+		android:gravity="center_vertical"
+		android:padding="8dp"
+		android:text="@string/choose_from_device"
+		android:textSize="16sp"
+		app:drawableEndCompat="@drawable/ic_open"
+		app:layout_constraintBottom_toTopOf="@id/fontGuideLineOne"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="1"
+		app:layout_constraintStart_toEndOf="@id/fontTitleTV"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/fontGuideLineOne"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		app:layout_constraintGuide_begin="48dp" />
 
 	<com.google.android.material.progressindicator.LinearProgressIndicator
 		android:id="@+id/fontProgressBar"
@@ -29,7 +57,7 @@
 		android:indeterminate="true"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/fontTitleTV" />
+		app:layout_constraintTop_toBottomOf="@id/fontGuideLineOne" />
 
 	<ListView
 		android:id="@+id/fontListView"

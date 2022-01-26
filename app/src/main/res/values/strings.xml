@@ -159,6 +159,7 @@
 	<string name="permission_denied">Permission Denied</string>
 	<string name="please_accept_necessary_permissions">Please Accept Necessary Permissions</string>
 	<string name="app_requires_these_permissions_to_run_properly">App requires these permissions to run properly</string>
+	<string name="choose_from_device">Choose from device</string>
 
 	<!--Content Descriptions-->
 

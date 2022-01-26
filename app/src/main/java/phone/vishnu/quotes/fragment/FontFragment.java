@@ -19,8 +19,10 @@
 
 package phone.vishnu.quotes.fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,15 +44,19 @@ import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.FontLVAdapter;
 import phone.vishnu.quotes.helper.Constants;
+import phone.vishnu.quotes.helper.FileUtils;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 
 public class FontFragment extends BaseBottomSheetDialogFragment {
+
+    private static final int FONT_PICK_REQUEST_CODE = 2;
 
     private final ArrayList<String> fontList = new ArrayList<>();
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ListView listView;
     private FontLVAdapter fontDataAdapter;
     private LinearProgressIndicator progressBar;
+    private TextView openTV;
 
     private boolean warningShown = false;
 
@@ -75,6 +82,7 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
         progressBar = inflate.findViewById(R.id.fontProgressBar);
         listView = inflate.findViewById(R.id.fontListView);
+        openTV = inflate.findViewById(R.id.fontOpenTV);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
         return inflate;
@@ -232,6 +240,59 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                                         });
                     }
                 });
+
+        openTV.setOnClickListener(
+                v ->
+                        startActivityForResult(
+                                new Intent(Intent.ACTION_OPEN_DOCUMENT)
+                                        .addCategory(Intent.CATEGORY_OPENABLE)
+                                        .setType("*/*")
+                                        .putExtra(
+                                                Intent.EXTRA_MIME_TYPES, new String[] {"font/ttf"}),
+                                FONT_PICK_REQUEST_CODE));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == Activity.RESULT_OK
+                && requestCode == FontFragment.FONT_PICK_REQUEST_CODE
+                && data != null) {
+
+            final ProgressDialog progressDialog =
+                    ProgressDialog.show(requireContext(), "", getString(R.string.please_wait));
+
+            String path = FileUtils.copy(requireContext(), data.getData());
+
+            if (path == null) {
+                Toast.makeText(
+                                requireContext(),
+                                getString(R.string.oops_something_went_wrong),
+                                Toast.LENGTH_LONG)
+                        .show();
+                progressDialog.dismiss();
+                dismiss();
+                return;
+            }
+
+            sharedPreferenceHelper.setFontPath(path);
+
+            Toast.makeText(
+                            requireContext(),
+                            String.format(
+                                    "%s\n%s",
+                                    getString(R.string.font_set),
+                                    getString(R.string.applying_changes)),
+                            Toast.LENGTH_SHORT)
+                    .show();
+            progressDialog.dismiss();
+
+            ((MainActivity) requireContext()).getQuoteViewPagerAdapter().notifyDataSetChanged();
+
+            dismiss();
+
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private boolean isNetworkAvailable(Context context) {
