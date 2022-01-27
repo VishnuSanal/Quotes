@@ -73,11 +73,15 @@ public class FontLVAdapter extends ArrayAdapter<String> {
 
             final File f = new File(getContext().getFilesDir(), fontString);
 
-            if (f.exists()) {
+            File otfFile = new File(getContext().getFilesDir(), fontString.replace(".ttf", ".otf"));
+
+            if (f.exists() || otfFile.exists()) {
+
+                File file = (f.exists()) ? f : otfFile;
 
                 viewHolder.progressBar.setVisibility(View.GONE);
                 try {
-                    Typeface face = Typeface.createFromFile(f);
+                    Typeface face = Typeface.createFromFile(file);
                     viewHolder.fontTV.setTypeface(face);
                 } catch (Exception e) {
                     Toast.makeText(
@@ -116,7 +120,7 @@ public class FontLVAdapter extends ArrayAdapter<String> {
             viewHolder = (FontLVAdapter.ViewHolder) rootView.getTag();
         }
 
-        String fontString = objects.get(position).replace(".ttf", "");
+        String fontString = objects.get(position).replace(".ttf", "").replace(".otf", "");
 
         fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
 

@@ -103,9 +103,10 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
                 File file = new File(s);
 
-                if (file.getAbsolutePath().endsWith(".ttf")) {
+                if (file.getAbsolutePath().endsWith(".ttf")
+                        || file.getAbsolutePath().endsWith(".otf")) {
 
-                    String fontString = file.getName().replace(".ttf", "");
+                    String fontString = file.getName().replace(".ttf", "").replace(".otf", "");
 
                     fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
 
@@ -134,7 +135,8 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                             listResult -> {
                                 for (StorageReference item : listResult.getItems()) {
 
-                                    String fontString = item.getName().replace(".ttf", "");
+                                    String fontString =
+                                            item.getName().replace(".ttf", "").replace(".otf", "");
 
                                     fontString =
                                             fontString.toUpperCase().charAt(0)
@@ -174,8 +176,16 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
                     final File f = new File(requireContext().getFilesDir(), fontString);
 
-                    if (f.exists()) {
-                        sharedPreferenceHelper.setFontPath(f.toString());
+                    File otfFile =
+                            new File(
+                                    requireContext().getFilesDir(),
+                                    fontString.replace(".ttf", ".otf"));
+
+                    if (f.exists() || otfFile.exists()) {
+
+                        File file = (f.exists()) ? f : otfFile;
+
+                        sharedPreferenceHelper.setFontPath(file.toString());
 
                         Toast.makeText(
                                         requireContext(),
@@ -248,7 +258,8 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                                         .addCategory(Intent.CATEGORY_OPENABLE)
                                         .setType("*/*")
                                         .putExtra(
-                                                Intent.EXTRA_MIME_TYPES, new String[] {"font/ttf"}),
+                                                Intent.EXTRA_MIME_TYPES,
+                                                new String[] {"font/ttf", "font/otf"}),
                                 FONT_PICK_REQUEST_CODE));
     }
 
