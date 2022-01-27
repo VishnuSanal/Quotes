@@ -233,7 +233,7 @@ public class SharedPreferenceHelper {
     public void resetSharedPreferences() {
         setColorPreference("#607D8B");
         setBackgroundPath("-1");
-        setAlarmString("At 08:30 Daily");
+        setAlarmString((BuildConfig.DEBUG) ? "Alarm Not Set" : "At 08:30 Daily");
         setFontPath("-1");
         setFontColorPreference("#FFFFFF");
         deleteFavPreference();
