@@ -1,4 +1,0 @@
-- Add translations
-- Fix bugs and glitches
-
-Full Changelog -> https://github.com/VishnuSanal/Quotes/compare/v2.8.0...v2.8.1
