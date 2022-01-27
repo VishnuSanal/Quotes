@@ -1,72 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="@drawable/bottom_sheet_background"
+	android:fillViewport="true"
 	android:orientation="vertical"
+	app:layout_behavior="@string/appbar_scrolling_view_behavior"
 	tools:context=".fragment.FontFragment">
 
-	<TextView
-		android:id="@+id/fontTitleTV"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="8dp"
-		android:letterSpacing="0.15"
-		android:padding="8dp"
-		android:text="@string/pick_font_style"
-		android:textColor="@color/accentTextColor"
-		android:textSize="16sp"
-		app:layout_constraintBottom_toTopOf="@id/fontGuideLineOne"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
-
-	<TextView
-		android:id="@+id/fontOpenTV"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="8dp"
-		android:background="?attr/selectableItemBackground"
-		android:clickable="true"
-		android:focusable="true"
-		android:gravity="center_vertical"
-		android:padding="8dp"
-		android:text="@string/choose_from_device"
-		android:textSize="16sp"
-		app:drawableEndCompat="@drawable/ic_open"
-		app:layout_constraintBottom_toTopOf="@id/fontGuideLineOne"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="1"
-		app:layout_constraintStart_toEndOf="@id/fontTitleTV"
-		app:layout_constraintTop_toTopOf="parent" />
-
-	<androidx.constraintlayout.widget.Guideline
-		android:id="@+id/fontGuideLineOne"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		app:layout_constraintGuide_begin="48dp" />
-
-	<com.google.android.material.progressindicator.LinearProgressIndicator
-		android:id="@+id/fontProgressBar"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:indeterminate="true"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/fontGuideLineOne" />
-
-	<ListView
-		android:id="@+id/fontListView"
+	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/fontProgressBar" />
+		android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+		<TextView
+			android:id="@+id/fontTitleTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:letterSpacing="0.15"
+			android:padding="8dp"
+			android:text="@string/pick_font_style"
+			android:textColor="@color/accentTextColor"
+			android:textSize="16sp"
+			app:layout_constraintBottom_toTopOf="@id/fontGuideLineOne"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<TextView
+			android:id="@+id/fontOpenTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:background="?attr/selectableItemBackground"
+			android:clickable="true"
+			android:focusable="true"
+			android:gravity="center_vertical"
+			android:padding="8dp"
+			android:text="@string/choose_from_device"
+			android:textSize="16sp"
+			app:drawableEndCompat="@drawable/ic_open"
+			app:layout_constraintBottom_toTopOf="@id/fontGuideLineOne"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="1"
+			app:layout_constraintStart_toEndOf="@id/fontTitleTV"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/fontGuideLineOne"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintGuide_begin="48dp" />
+
+		<com.google.android.material.progressindicator.LinearProgressIndicator
+			android:id="@+id/fontProgressBar"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:indeterminate="true"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/fontGuideLineOne" />
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/fontRecyclerView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:nestedScrollingEnabled="false"
+			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/fontProgressBar"
+			tools:listitem="@layout/font_single_item" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

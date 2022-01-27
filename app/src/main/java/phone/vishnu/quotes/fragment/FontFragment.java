@@ -29,20 +29,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Objects;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
-import phone.vishnu.quotes.adapter.FontLVAdapter;
+import phone.vishnu.quotes.adapter.FontRVAdapter;
 import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.FileUtils;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
@@ -50,13 +49,13 @@ import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 public class FontFragment extends BaseBottomSheetDialogFragment {
 
     private static final int FONT_PICK_REQUEST_CODE = 2;
-
-    private final ArrayList<String> fontList = new ArrayList<>();
-    private SharedPreferenceHelper sharedPreferenceHelper;
-    private ListView listView;
-    private FontLVAdapter fontDataAdapter;
+    private final ArrayList<String> list = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private FontRVAdapter adapter;
     private LinearProgressIndicator progressBar;
     private TextView openTV;
+
+    private SharedPreferenceHelper sharedPreferenceHelper;
 
     private boolean warningShown = false;
 
@@ -81,10 +80,14 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
         }
 
         progressBar = inflate.findViewById(R.id.fontProgressBar);
-        listView = inflate.findViewById(R.id.fontListView);
+        recyclerView = inflate.findViewById(R.id.fontRecyclerView);
         openTV = inflate.findViewById(R.id.fontOpenTV);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
+
+        adapter = new FontRVAdapter();
+        recyclerView.setAdapter(adapter);
+
         return inflate;
     }
 
@@ -110,19 +113,13 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
                     fontString = fontString.toUpperCase().charAt(0) + fontString.substring(1);
 
-                    fontList.add(fontString);
+                    list.add(fontString);
                 }
             }
-            if (getContext() != null)
-                if (fontDataAdapter == null) {
-                    fontDataAdapter =
-                            new FontLVAdapter(Objects.requireNonNull(requireContext()), fontList);
-                    listView.setAdapter(fontDataAdapter);
-                } else {
-                    fontDataAdapter.clear();
-                    fontDataAdapter.addAll(fontList);
-                    fontDataAdapter.notifyDataSetChanged();
-                }
+            if (getContext() != null && adapter != null) {
+                adapter.submitList(list);
+                adapter.notifyDataSetChanged();
+            }
         }
 
         if (isNetworkAvailable(requireContext())) {
@@ -145,13 +142,15 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                                     ArrayList<String> toBeRemoved =
                                             sharedPreferenceHelper.getFontListToBeRemoved();
 
-                                    if (!fontList.contains(fontString)
+                                    if (!list.contains(fontString)
                                             && !toBeRemoved.contains(
                                                     item.getName().toLowerCase())) {
 
-                                        if (getContext() != null && fontDataAdapter != null) {
-                                            fontDataAdapter.add(fontString);
-                                            fontDataAdapter.notifyDataSetChanged();
+                                        list.add(fontString);
+
+                                        if (getContext() != null && adapter != null) {
+                                            adapter.submitList(list);
+                                            adapter.notifyDataSetChanged();
                                         }
                                     }
                                 }
@@ -160,13 +159,24 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                             });
         }
 
-        listView.setOnItemClickListener(
-                (parent, view1, position, id) -> {
+        openTV.setOnClickListener(
+                v ->
+                        startActivityForResult(
+                                new Intent(Intent.ACTION_OPEN_DOCUMENT)
+                                        .addCategory(Intent.CATEGORY_OPENABLE)
+                                        .setType("*/*")
+                                        .putExtra(
+                                                Intent.EXTRA_MIME_TYPES,
+                                                new String[] {"font/ttf", "font/otf"}),
+                                FONT_PICK_REQUEST_CODE));
+
+        adapter.setOnItemClickListener(
+                s -> {
                     final ProgressDialog progressDialog =
                             ProgressDialog.show(
                                     requireContext(), "", getString(R.string.please_wait));
 
-                    String fontString = fontList.get(position).toLowerCase() + ".ttf";
+                    String fontString = s.toLowerCase() + ".ttf";
 
                     StorageReference storageReference =
                             FirebaseStorage.getInstance()
@@ -250,17 +260,6 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                                         });
                     }
                 });
-
-        openTV.setOnClickListener(
-                v ->
-                        startActivityForResult(
-                                new Intent(Intent.ACTION_OPEN_DOCUMENT)
-                                        .addCategory(Intent.CATEGORY_OPENABLE)
-                                        .setType("*/*")
-                                        .putExtra(
-                                                Intent.EXTRA_MIME_TYPES,
-                                                new String[] {"font/ttf", "font/otf"}),
-                                FONT_PICK_REQUEST_CODE));
     }
 
     @Override
