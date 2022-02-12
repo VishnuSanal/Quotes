@@ -114,8 +114,10 @@ public class AboutFragment extends BaseBottomSheetDialogFragment {
                                         intent, getString(R.string.share_quotes_status_creator));
                         startActivity(chooser);
                     } else if (position == 5) {
-                        openLink("https://github.com/VishnuSanal/Quotes");
+                        openLink("https://hosted.weblate.org/engage/quotes-status-creator/");
                     } else if (position == 6) {
+                        openLink("https://github.com/VishnuSanal/Quotes");
+                    } else if (position == 7) {
                         openLink("https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md");
                     }
                 });
@@ -148,6 +150,10 @@ public class AboutFragment extends BaseBottomSheetDialogFragment {
                         R.drawable.ic_share,
                         getString(R.string.share_the_app),
                         getString(R.string.share_quotes_status_creator_with_your_friends)),
+                new TourItem(
+                        R.drawable.ic_translate,
+                        getString(R.string.translate_the_app),
+                        getString(R.string.help_in_localization)),
                 new TourItem(
                         R.drawable.ic_info,
                         getString(R.string.source_code),
