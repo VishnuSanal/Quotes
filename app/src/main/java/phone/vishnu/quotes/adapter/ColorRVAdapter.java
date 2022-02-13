@@ -77,11 +77,19 @@ public class ColorRVAdapter extends ListAdapter<String, ColorRVAdapter.ViewHolde
 
         if (getItem(position).equals("#00000000")) {
 
-            holder.imageView.setImageDrawable(
-                    ContextCompat.getDrawable(
-                            holder.itemView.getContext(), R.drawable.ic_no_color));
+            if (position == 0) {
+                holder.imageView.setImageDrawable(
+                        ContextCompat.getDrawable(
+                                holder.itemView.getContext(), R.drawable.ic_custom));
 
-            holder.textView.setText("TRANSPARENT");
+                holder.textView.setText("CUSTOM");
+            } else {
+                holder.imageView.setImageDrawable(
+                        ContextCompat.getDrawable(
+                                holder.itemView.getContext(), R.drawable.ic_no_color));
+
+                holder.textView.setText("TRANSPARENT");
+            }
 
         } else {
 
@@ -119,7 +127,7 @@ public class ColorRVAdapter extends ListAdapter<String, ColorRVAdapter.ViewHolde
     }
 
     public interface OnItemClickListener {
-        void onItemClick(String colorString);
+        void onItemClick(String colorString, boolean isCustom);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -140,7 +148,7 @@ public class ColorRVAdapter extends ListAdapter<String, ColorRVAdapter.ViewHolde
         @Override
         public void onClick(View v) {
             if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION)
-                listener.onItemClick(getItem(getAdapterPosition()));
+                listener.onItemClick(getItem(getAdapterPosition()), getAdapterPosition() == 0);
         }
     }
 }

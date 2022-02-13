@@ -113,7 +113,15 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
                 new SharedPreferenceHelper(requireContext());
 
         colorAdapter.setOnItemClickListener(
-                colorString -> {
+                (colorString, isCustom) -> {
+                    if (isCustom) {
+                        CustomColorFragment.newInstance(colorRequestCode)
+                                .show(requireActivity().getSupportFragmentManager(), getTag());
+
+                        dismiss();
+                        return;
+                    }
+
                     if (colorRequestCode == Constants.PICK_BG_COLOR_REQ_CODE) {
 
                         DisplayMetrics metrics = new DisplayMetrics();
@@ -160,6 +168,7 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
 
     private List<String> getColorList() {
         return Arrays.asList(
+                "#00000000",
                 "#FFF44336",
                 "#FFE91E63",
                 "#FF9C27B0",
@@ -185,6 +194,7 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
 
     private List<String> getFontColorList() {
         return Arrays.asList(
+                "#00000000",
                 "#FFF44336",
                 "#FFE91E63",
                 "#FF9C27B0",
