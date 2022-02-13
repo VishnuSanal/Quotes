@@ -1,0 +1,7 @@
+- Add custom color picker
+- Add Translate section to about
+- Fix bugs and glitches
+
+Now you can support this app by adding translations in your language: https://hosted.weblate.org/engage/quotes-status-creator/
+
+Full Changelog -> https://github.com/VishnuSanal/Quotes/compare/v2.9.0...v2.10.0

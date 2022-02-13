@@ -1,5 +1,0 @@
-- Import fonts from device
-- Update Font pick UI
-- Update translations
-
-Full Changelog -> https://github.com/VishnuSanal/Quotes/compare/v2.8.1...v2.9.0
