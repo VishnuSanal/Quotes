@@ -21,7 +21,6 @@ package phone.vishnu.quotes.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -117,12 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
         exportHelper = new ExportHelper(this);
 
-        viewModel =
-                new ViewModelProvider(
-                                this,
-                                new ViewModelProvider.AndroidViewModelFactory(
-                                        (Application) getApplicationContext()))
-                        .get(MainViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         setIntentListeners(savedInstanceState);
 
