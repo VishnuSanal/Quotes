@@ -313,6 +313,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         homeFAB.setVisibility(View.VISIBLE);
                         if (null != homeFAB.getTag()) setVisibility(View.VISIBLE);
+
+                        updateViewPager();
                     }
                 });
 
