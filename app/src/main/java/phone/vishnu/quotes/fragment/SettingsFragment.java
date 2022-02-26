@@ -19,9 +19,11 @@
 
 package phone.vishnu.quotes.fragment;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.format.DateFormat;
@@ -110,6 +112,7 @@ public class SettingsFragment extends BaseBottomSheetDialogFragment {
                         TimePickerDialog timePickerDialog =
                                 new TimePickerDialog(
                                         requireContext(),
+                                        getPickerTheme(requireContext()),
                                         (view1, hourOfDay, minute) -> {
                                             c.set(Calendar.HOUR_OF_DAY, hourOfDay);
                                             c.set(Calendar.MINUTE, minute);
@@ -223,5 +226,15 @@ public class SettingsFragment extends BaseBottomSheetDialogFragment {
                 0);
 
         return spannableString;
+    }
+
+    private int getPickerTheme(Context context) {
+        return (sharedPreferenceHelper.getAppThemePreference() == 1
+                        || (sharedPreferenceHelper.getAppThemePreference() == 2
+                                && (context.getResources().getConfiguration().uiMode
+                                                & Configuration.UI_MODE_NIGHT_MASK)
+                                        == Configuration.UI_MODE_NIGHT_YES))
+                ? AlertDialog.THEME_DEVICE_DEFAULT_DARK
+                : AlertDialog.THEME_DEVICE_DEFAULT_LIGHT;
     }
 }
