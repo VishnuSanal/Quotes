@@ -5,12 +5,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         applicationId "phone.vishnu.quotes"
         minSdkVersion 22
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 59
         versionName "2.10.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -53,8 +53,8 @@ dependencies {
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
     implementation "com.github.skydoves:colorpickerview:2.2.4"
 
-    def lifecycle_version = "2.4.0"
-    def room_version = "2.4.1"
+    def lifecycle_version = "2.4.1"
+    def room_version = "2.4.2"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
