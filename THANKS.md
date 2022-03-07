@@ -10,6 +10,12 @@
 	Awesome people that helps build & run this app
 </p>
 
+## 🌐 Translators from [Weblate](https://hosted.weblate.org/projects/quotes-status-creator/quotes-status-creator/)
+
+ - [Allan Nordhøy](https://hosted.weblate.org/user/kingu/) - **Norwegian Bokmål**
+ - [Shuvashish Sahoo](https://hosted.weblate.org/user/shuvashish76/) - **Odia & Hindi**
+ - [J. Lavoie](https://hosted.weblate.org/user/Edanas/) - **French, German & Italian**
+
 ## 📷 Background Images -> From [Pexels](https://www.pexels.com)
 
  - [Alesia Kozik](https://www.pexels.com/@alesiakozik)
