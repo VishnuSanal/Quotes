@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - 2022 Vishnu Sanal. T
+ * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
  *
  * This file is part of Quotes Status Creator.
  *
@@ -19,11 +19,14 @@
 
 package phone.vishnu.quotes.adapter;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -31,25 +34,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import java.io.File;
 import java.util.Objects;
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.model.UnsplashItem;
 
-public class BGImageRVAdapter extends ListAdapter<Uri, BGImageRVAdapter.ViewHolder> {
+public class UnsplashRVAdapter extends ListAdapter<UnsplashItem, UnsplashRVAdapter.ViewHolder> {
 
     private OnItemClickListener listener;
 
-    public BGImageRVAdapter() {
+    public UnsplashRVAdapter() {
         super(
-                new DiffUtil.ItemCallback<Uri>() {
+                new DiffUtil.ItemCallback<UnsplashItem>() {
                     @Override
-                    public boolean areItemsTheSame(@NonNull Uri oldItem, @NonNull Uri newItem) {
-                        return Objects.equals(oldItem.getEncodedPath(), newItem.getEncodedPath());
+                    public boolean areItemsTheSame(
+                            @NonNull UnsplashItem oldItem, @NonNull UnsplashItem newItem) {
+                        return Objects.equals(oldItem, newItem);
                     }
 
                     @Override
-                    public boolean areContentsTheSame(@NonNull Uri oldItem, @NonNull Uri newItem) {
-                        return Objects.equals(oldItem.getEncodedPath(), newItem.getEncodedPath());
+                    public boolean areContentsTheSame(
+                            @NonNull UnsplashItem oldItem, @NonNull UnsplashItem newItem) {
+                        return Objects.equals(oldItem, newItem);
                     }
                 });
     }
@@ -59,7 +64,7 @@ public class BGImageRVAdapter extends ListAdapter<Uri, BGImageRVAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v =
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.present_image_pick_single_item, parent, false);
+                        .inflate(R.layout.unsplash_image_pick_single_item, parent, false);
         return new ViewHolder(v);
     }
 
@@ -67,18 +72,9 @@ public class BGImageRVAdapter extends ListAdapter<Uri, BGImageRVAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Picasso.get()
-                .load(
-                        new File(
-                                getItem(position)
-                                        .toString()
-                                        .replace(
-                                                "file://",
-                                                holder.itemView
-                                                        .getContext()
-                                                        .getFilesDir()
-                                                        .getPath())))
+                .load(getItem(position).getThumbUri())
                 .into(
-                        holder.imageView,
+                        holder.imageIV,
                         new Callback() {
                             @Override
                             public void onSuccess() {
@@ -90,6 +86,12 @@ public class BGImageRVAdapter extends ListAdapter<Uri, BGImageRVAdapter.ViewHold
                                 e.printStackTrace();
                             }
                         });
+
+        Picasso.get()
+                .load(getItem(position).getUserProfile())
+                .into(holder.profileIV); // TODO: Circular
+
+        holder.nameTV.setText(getItem(position).getUserName());
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -97,24 +99,48 @@ public class BGImageRVAdapter extends ListAdapter<Uri, BGImageRVAdapter.ViewHold
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Uri uri);
+        void onItemClick(UnsplashItem item);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private final ImageView imageView;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final ImageView imageIV, profileIV;
+        private final TextView nameTV;
         private final LinearProgressIndicator progressIndicator;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.defaultSingleImage);
-            progressIndicator = itemView.findViewById(R.id.defaultSingleImageProgressIndicator);
+            imageIV = itemView.findViewById(R.id.unsplashSingleImage);
+            profileIV = itemView.findViewById(R.id.unsplashSingleImageUserProfile);
 
-            imageView.setOnClickListener(
+            nameTV = itemView.findViewById(R.id.unsplashSingleImageUserName);
+
+            progressIndicator = itemView.findViewById(R.id.unsplashSingleImageProgressIndicator);
+
+            imageIV.setOnClickListener(
                     v -> {
                         if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION)
                             listener.onItemClick(getItem(getAdapterPosition()));
                     });
+
+            nameTV.setOnClickListener(this);
+
+            profileIV.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Uri uri = getItem(getAdapterPosition()).getUserProfileLink();
+
+            if (getAdapterPosition() != RecyclerView.NO_POSITION)
+                if (uri != null && uri != Uri.EMPTY)
+                    itemView.getContext().startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                else
+                    Toast.makeText(
+                                    itemView.getContext(),
+                                    "Profile link not found",
+                                    Toast.LENGTH_SHORT)
+                            .show();
         }
     }
 }

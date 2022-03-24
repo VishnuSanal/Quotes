@@ -52,6 +52,7 @@ dependencies {
     implementation "com.ncorti:slidetoact:0.9.0"
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
     implementation "com.github.skydoves:colorpickerview:2.2.4"
+    implementation 'com.keenencharles:androidunsplash:3.1.2'
 
     def lifecycle_version = "2.4.1"
     def room_version = "2.4.2"

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:cardBackgroundColor="@color/BGColor"
+	app:cardCornerRadius="4dp"
+	app:cardElevation="8dp"
+	app:cardUseCompatPadding="true">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<com.google.android.material.progressindicator.LinearProgressIndicator
+			android:id="@+id/unsplashSingleImageProgressIndicator"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:indeterminate="true"
+			app:layout_constraintBottom_toTopOf="@id/unsplashSingleImage"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<ImageView
+			android:id="@+id/unsplashSingleImage"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:adjustViewBounds="true"
+			android:contentDescription="@string/default_single_image"
+			android:scaleType="centerCrop"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/unsplashSingleImageProgressIndicator" />
+
+		<ImageView
+			android:id="@+id/unsplashSingleImageUserProfile"
+			android:layout_width="wrap_content"
+			android:contentDescription="@string/unsplash_single_image"
+			android:layout_height="wrap_content"
+			android:layout_margin="16dp"
+			android:elevation="12dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/unsplashSingleImage" />
+
+		<TextView
+			android:id="@+id/unsplashSingleImageUserName"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:elevation="12dp"
+			android:textSize="16sp"
+			android:typeface="serif"
+			app:layout_constraintBottom_toBottomOf="@id/unsplashSingleImageUserProfile"
+			app:layout_constraintStart_toEndOf="@id/unsplashSingleImageUserProfile"
+			app:layout_constraintTop_toTopOf="@id/unsplashSingleImageUserProfile" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

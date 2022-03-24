@@ -164,6 +164,7 @@
 	<string name="please_accept_necessary_permissions">Please Accept Necessary Permissions</string>
 	<string name="app_requires_these_permissions_to_run_properly">App requires these permissions to run properly</string>
 	<string name="choose_from_device">Choose from device</string>
+	<string name="unsplash_credit">All images are from <a href="https://unsplash.com/?utm_source=Quotes%20Status%20Creator%26utm_medium=referral">Unsplash</a></string>
 
 	<!--Content Descriptions-->
 
@@ -191,5 +192,6 @@
 	<string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
 	<string name="home_search_image_view" translatable="false">Home Search ImageView</string>
 	<string name="custom_flag_iv" translatable="false">Custom Flag IV</string>
+	<string name="unsplash_single_image" translatable="false">Unsplash single image</string>
 
 </resources>
