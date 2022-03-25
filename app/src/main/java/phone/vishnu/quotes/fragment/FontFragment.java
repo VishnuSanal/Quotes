@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,16 +36,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.util.ArrayList;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.FontRVAdapter;
-import phone.vishnu.quotes.helper.Constants;
+import phone.vishnu.quotes.helper.DownloadFontTask;
 import phone.vishnu.quotes.helper.FileUtils;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
+import phone.vishnu.quotes.repository.FontsRepository;
 
 public class FontFragment extends BaseBottomSheetDialogFragment {
 
@@ -124,16 +124,15 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
         if (isNetworkAvailable(requireContext())) {
 
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference().child(Constants.FONTS);
-            storageRef
-                    .listAll()
-                    .addOnSuccessListener(
-                            listResult -> {
-                                for (StorageReference item : listResult.getItems()) {
+            new FontsRepository()
+                    .getFontPaths(
+                            fontPaths -> {
+                                for (Uri fontPath : fontPaths) {
 
                                     String fontString =
-                                            item.getName().replace(".ttf", "").replace(".otf", "");
+                                            fontPath.getLastPathSegment()
+                                                    .replace(".ttf", "")
+                                                    .replace(".otf", "");
 
                                     fontString =
                                             fontString.toUpperCase().charAt(0)
@@ -144,7 +143,7 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
                                     if (!list.contains(fontString)
                                             && !toBeRemoved.contains(
-                                                    item.getName().toLowerCase())) {
+                                                    fontPath.getLastPathSegment().toLowerCase())) {
 
                                         list.add(fontString);
 
@@ -178,12 +177,6 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
                     String fontString = s.toLowerCase() + ".ttf";
 
-                    StorageReference storageReference =
-                            FirebaseStorage.getInstance()
-                                    .getReference()
-                                    .child(Constants.FONTS)
-                                    .child(fontString);
-
                     final File f = new File(requireContext().getFilesDir(), fontString);
 
                     File otfFile =
@@ -215,10 +208,9 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
                     } else {
 
-                        storageReference
-                                .getFile(f)
-                                .addOnSuccessListener(
-                                        taskSnapshot -> {
+                        new DownloadFontTask(
+                                        f.toString(),
+                                        () -> {
                                             if (getActivity() != null) {
 
                                                 sharedPreferenceHelper.setFontPath(f.toString());
@@ -246,18 +238,7 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                                                 progressDialog.dismiss();
                                             }
                                         })
-                                .addOnFailureListener(
-                                        exception -> {
-                                            exception.printStackTrace();
-                                            progressDialog.dismiss();
-                                            Toast.makeText(
-                                                            requireContext(),
-                                                            getString(
-                                                                    R.string
-                                                                            .oops_something_went_wrong),
-                                                            Toast.LENGTH_LONG)
-                                                    .show();
-                                        });
+                                .execute(FontsRepository.fontPrefix + fontString);
                     }
                 });
     }

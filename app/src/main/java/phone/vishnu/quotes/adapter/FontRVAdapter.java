@@ -30,12 +30,11 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.util.Objects;
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.helper.Constants;
+import phone.vishnu.quotes.helper.DownloadFontTask;
+import phone.vishnu.quotes.repository.FontsRepository;
 
 public class FontRVAdapter extends ListAdapter<String, FontRVAdapter.ViewHolder> {
 
@@ -72,12 +71,6 @@ public class FontRVAdapter extends ListAdapter<String, FontRVAdapter.ViewHolder>
 
         String fontString = getItem(position).toLowerCase() + ".ttf";
 
-        StorageReference storageReference =
-                FirebaseStorage.getInstance()
-                        .getReference()
-                        .child(Constants.FONTS)
-                        .child(fontString);
-
         final File f = new File(holder.itemView.getContext().getFilesDir(), fontString);
 
         File otfFile =
@@ -104,12 +97,12 @@ public class FontRVAdapter extends ListAdapter<String, FontRVAdapter.ViewHolder>
                         .show();
                 e.printStackTrace();
             }
+
         } else {
 
-            storageReference
-                    .getFile(f)
-                    .addOnSuccessListener(
-                            taskSnapshot -> {
+            new DownloadFontTask(
+                            f.toString(),
+                            () -> {
                                 holder.progressBar.setVisibility(View.GONE);
 
                                 try {
@@ -128,7 +121,7 @@ public class FontRVAdapter extends ListAdapter<String, FontRVAdapter.ViewHolder>
                                     e.printStackTrace();
                                 }
                             })
-                    .addOnFailureListener(Throwable::printStackTrace);
+                    .execute(FontsRepository.fontPrefix + fontString);
         }
 
         fontString = fontString.replace(".ttf", "").replace(".otf", "");
