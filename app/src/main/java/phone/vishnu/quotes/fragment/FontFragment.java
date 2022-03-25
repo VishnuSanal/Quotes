@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.FontRVAdapter;
-import phone.vishnu.quotes.helper.DownloadFontTask;
+import phone.vishnu.quotes.asynctask.DownloadFontTask;
 import phone.vishnu.quotes.helper.FileUtils;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.repository.FontsRepository;

@@ -17,21 +17,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package phone.vishnu.quotes.helper;
+package phone.vishnu.quotes.asynctask;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-public class DownloadFontTask extends AsyncTask<String, Void, Void> {
+public class DownloadImageTask extends AsyncTask<String, Void, Void> {
 
     private final String targetPath;
     private final OnTaskCompleted listener;
 
-    public DownloadFontTask(String targetPath, OnTaskCompleted listener) {
+    public DownloadImageTask(String targetPath, OnTaskCompleted listener) {
         this.targetPath = targetPath;
         this.listener = listener;
     }
@@ -39,30 +41,27 @@ public class DownloadFontTask extends AsyncTask<String, Void, Void> {
     @Override
     protected Void doInBackground(String... strings) {
 
-        String fontURL = strings[0] + "?raw=true";
+        String imageURL = strings[0];
 
         try {
 
+            InputStream inputStream = new URL(imageURL).openStream();
+
             File file = new File(targetPath);
 
-            InputStream inputStream = new URL(fontURL).openConnection().getInputStream();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            BitmapFactory.decodeStream(inputStream)
+                    .compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
 
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(outputStream.toByteArray());
 
-            byte[] buffer = new byte[1024];
-            int bufferLength = 0;
+            fos.flush();
+            fos.close();
 
-            while ((bufferLength = inputStream.read(buffer)) > 0)
-                fileOutputStream.write(buffer, 0, bufferLength);
-
-            fileOutputStream.flush();
-            inputStream.close();
-            fileOutputStream.close();
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

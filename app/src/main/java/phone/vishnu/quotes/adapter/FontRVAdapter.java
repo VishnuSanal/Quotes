@@ -33,7 +33,7 @@ import com.google.android.material.progressindicator.LinearProgressIndicator;
 import java.io.File;
 import java.util.Objects;
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.helper.DownloadFontTask;
+import phone.vishnu.quotes.asynctask.DownloadFontTask;
 import phone.vishnu.quotes.repository.FontsRepository;
 
 public class FontRVAdapter extends ListAdapter<String, FontRVAdapter.ViewHolder> {
