@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - 2019-2021 Vishnu Sanal. T
+ * Copyright (C) 2019 - 2022 Vishnu Sanal. T
  *
  * This file is part of Quotes Status Creator.
  *
@@ -81,7 +81,7 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
 
     private boolean warningShown = false;
 
-    private  String quotesstatuscreator;
+    private String quotesstatuscreator;
 
     public BGImagePickFragment() {}
 
@@ -94,13 +94,18 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_backgrond_image_pick, container, false);
 
-        quotesstatuscreator = new StringBuilder(Arrays.toString(getResources()
-                .getTextArray(R.array.quotesstatuscreator))
-                .replace("[", "")
-                .replace("]", "")
-                .replace(",", "")
-                .replace(" ", "")
-                .trim()).reverse().toString();
+        quotesstatuscreator =
+                new StringBuilder(
+                                Arrays.toString(
+                                                getResources()
+                                                        .getTextArray(R.array.quotesstatuscreator))
+                                        .replace("[", "")
+                                        .replace("]", "")
+                                        .replace(",", "")
+                                        .replace(" ", "")
+                                        .trim())
+                        .reverse()
+                        .toString();
 
         viewModel =
                 new ViewModelProvider(
@@ -219,10 +224,7 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
     @SuppressLint("NotifyDataSetChanged")
     private void loadNewImages() {
         MutableLiveData<List<UnsplashItem>> searchImagesMutableLiveData =
-                viewModel.searchImages(
-                        "wallpaper",
-                        quotesstatuscreator
-                );
+                viewModel.searchImages("wallpaper", quotesstatuscreator);
 
         if (searchImagesMutableLiveData != null)
             searchImagesMutableLiveData.observe(
@@ -309,9 +311,7 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
 
             MutableLiveData<List<UnsplashItem>> searchImagesMutableLiveData =
                     viewModel.searchImages(
-                            textInputEditText.getText().toString(),
-                            quotesstatuscreator
-                    );
+                            textInputEditText.getText().toString(), quotesstatuscreator);
 
             if (searchImagesMutableLiveData != null)
                 searchImagesMutableLiveData.observe(

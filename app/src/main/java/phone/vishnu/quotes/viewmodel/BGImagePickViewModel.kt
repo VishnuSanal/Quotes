@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - 2021 Vishnu Sanal. T
+ * Copyright (C) 2019 - 2022 Vishnu Sanal. T
  *
  * This file is part of Quotes Status Creator.
  *
