@@ -42,6 +42,9 @@ allprojects {
         maven {
             url "https://jcenter.bintray.com"
         }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 }
 
