@@ -9,8 +9,8 @@ android {
         applicationId "phone.vishnu.quotes"
         minSdkVersion 22
         targetSdkVersion 32
-        versionCode 60
-        versionName "2.10.1"
+        versionCode 61
+        versionName "v3.0.0-alpha"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
