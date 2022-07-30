@@ -15,7 +15,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.2.1'
         classpath 'com.google.gms:google-services:4.3.13'
-        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.5.0"
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.9.0"
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
@@ -25,7 +25,7 @@ buildscript {
 }
 
 plugins {
-    id "com.diffplug.spotless" version "6.2.0"
+    id "com.diffplug.spotless" version "6.9.0"
 }
 
 allprojects {
@@ -33,6 +33,9 @@ allprojects {
         google()
         maven {
             url "https://jitpack.io"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
         }
         mavenCentral()
     }
@@ -60,7 +63,7 @@ spotless {
 
         target 'app/src/**/*.kt'
 
-        ktlint("0.39.0").userData(['kotlin_imports_layout': 'idea',
+        ktlint("0.46.1").userData(['kotlin_imports_layout': 'idea',
                                    'indent_size': '4'])
 
         trimTrailingWhitespace()
