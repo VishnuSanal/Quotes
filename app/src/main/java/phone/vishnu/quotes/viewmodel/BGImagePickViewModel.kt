@@ -49,7 +49,7 @@ class BGImagePickViewModel(application: Application) : AndroidViewModel(applicat
         presentImagesArrayList = ArrayList()
         val files = getApplication<Application>().applicationContext.fileList()
 
-        if (files != null)
+        if (files != null) {
             for (s in files) {
                 val file = File(s)
                 if (file.absolutePath.endsWith(".jpg")) {
@@ -58,10 +58,10 @@ class BGImagePickViewModel(application: Application) : AndroidViewModel(applicat
                     presentImagesMutableLiveData!!.value = presentImagesArrayList
                 }
             }
+        }
     }
 
     fun searchImages(query: String, key: String): MutableLiveData<List<UnsplashItem>>? {
-
         searchImagesMutableLiveData = MutableLiveData()
         searchImagesArrayList = ArrayList()
 
@@ -76,14 +76,12 @@ class BGImagePickViewModel(application: Application) : AndroidViewModel(applicat
             ContentFilter.HIGH,
             null,
             onComplete = {
-
                 for (photo in it.results) {
-
                     val regularUri = Uri.parse(photo.urls?.regular)
 
                     if (!getApplication<Application>().applicationContext.fileList()
                         .contains(regularUri.lastPathSegment + ".jpg")
-                    )
+                    ) {
                         searchImagesArrayList!!.add(
                             UnsplashItem(
                                 Uri.parse(photo.urls?.thumb),
@@ -94,6 +92,7 @@ class BGImagePickViewModel(application: Application) : AndroidViewModel(applicat
                                 "https://unsplash.com/@${photo.user?.username}?utm_source=Quotes%20Status%20Creator&utm_medium=referral"
                             )
                         )
+                    }
                     searchImagesMutableLiveData!!.value = searchImagesArrayList
                 }
             },

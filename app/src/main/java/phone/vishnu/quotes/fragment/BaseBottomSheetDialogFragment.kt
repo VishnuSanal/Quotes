@@ -35,12 +35,10 @@ open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
     override fun onResume() {
         super.onResume()
 
-        if (dialog != null)
+        if (dialog != null) {
             dialog?.setOnKeyListener(
                 fun(_: DialogInterface?, keyCode: Int, event: KeyEvent?): Boolean {
-
-                    if (keyCode == KeyEvent.KEYCODE_BACK && event?.action == KeyEvent.ACTION_DOWN && tag != null)
-
+                    if (keyCode == KeyEvent.KEYCODE_BACK && event?.action == KeyEvent.ACTION_DOWN && tag != null) {
                         when (tag) {
                             "BGOptionPickFragment" ->
                                 BGOptionPickFragment.newInstance(true)
@@ -55,9 +53,11 @@ open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
                                 SettingsFragment.newInstance()
                                     .show(requireActivity().supportFragmentManager, null)
                         }
+                    }
 
                     return false
                 }
             )
+        }
     }
 }
