@@ -151,9 +151,12 @@ Support the project by [starring it](https://github.com/VishnuSanal/Quotes/starg
     • Creativity Quotes
 </pre>
 
-## 📬 Feedback and Suggestion
-Helpful advice makes the app better. Your feedback is immensely helpful, and we love to hear from you. \
-Send your feedback/suggestions [here](https://t.me/QuotesStatusCreator) or create an [issue](https://github.com/VishnuSanal/Quotes/issues/new/choose). :)
+## 👥 Participate in the community
+**Communities keep FOSS projects alive.** Without them, projects usually fade into obscurity when the primary developer loses interest or becomes busy in other parts of their life. That's where you come in! You can:
+- Read through the [issues](https://github.com/VishnuSanal/Quotes/issues) and give a 👍 to the ones you care about most.
+- Open [new issues](https://github.com/VishnuSanal/Quotes/issues/new/choose) with feedback, feature requests, or bug reports.
+- Help translate using [Weblate](https://hosted.weblate.org/engage/quotes-status-creator/).
+- Come chat at [Telegram](https://t.me/QuotesStatusCreator).
 
 ## License
 [![GNU GPLv3+](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)
