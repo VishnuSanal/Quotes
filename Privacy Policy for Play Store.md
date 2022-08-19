@@ -1,4 +1,4 @@
-**Privacy Policy**
+# Privacy Policy
 
 Vishnu Sanal. T built the Quotes – Quotes Status Creator app as an Open Source app. This SERVICE is provided by Vishnu Sanal. T at no cost and is intended for use as is.
 
