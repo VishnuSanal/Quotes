@@ -33,6 +33,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -91,10 +92,15 @@ public class ExportHelper {
 
         View shareView = View.inflate(context, R.layout.share_layout, null);
 
+        int widthPixels = 1080;
+        int heightPixels = 1920;
+
         String cardColor = sharedPreferenceHelper.getCardColorPreference();
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
         float fontSize = sharedPreferenceHelper.getFontSizePreference();
+        float cardX = sharedPreferenceHelper.getCardX();
+        float cardY = sharedPreferenceHelper.getCardY();
 
         String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
         if (!"-1".equals(backgroundPath))
@@ -126,6 +132,17 @@ public class ExportHelper {
         shareQuoteTextView.setText(quote);
         shareAuthorTextView.setText(author);
 
+        if (cardX != -1) cardView.setX(widthPixels / cardX);
+        if (cardY != -1) cardView.setY(heightPixels / cardY);
+
+        Log.e(
+                "vishnu",
+                "ExportHelper: cardView: "
+                        + " cardView.getX() "
+                        + cardView.getX()
+                        + " cardView.getY() "
+                        + cardView.getY());
+
         if (BuildConfig.DEBUG) {
 
             TextView shareVersionTV = shareView.findViewById(R.id.shareDebugVersionTV);
@@ -141,9 +158,6 @@ public class ExportHelper {
             shareDebugAppNameTV.setText(
                     String.format("%s", context.getString(R.string.quotes_status_creator)));
         }
-
-        int widthPixels = 1080;
-        int heightPixels = 1920;
 
         shareView.measure(
                 View.MeasureSpec.makeMeasureSpec(widthPixels, View.MeasureSpec.EXACTLY),

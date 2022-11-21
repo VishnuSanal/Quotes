@@ -70,6 +70,7 @@ import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
 import phone.vishnu.quotes.fragment.AboutFragment;
 import phone.vishnu.quotes.fragment.BGOptionPickFragment;
 import phone.vishnu.quotes.fragment.ColorPickFragment;
+import phone.vishnu.quotes.fragment.CustomiseFragment;
 import phone.vishnu.quotes.fragment.FavoriteFragment;
 import phone.vishnu.quotes.fragment.FontOptionPickFragment;
 import phone.vishnu.quotes.fragment.SettingsFragment;
@@ -149,7 +150,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             closeFABMenu();
             if (id == R.id.favFAB) {
-                FavoriteFragment.newInstance().show(getSupportFragmentManager(), null);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.constraintLayout, CustomiseFragment.newInstance(), null)
+                        .addToBackStack(null)
+                        .commit(); // FIXME
+                homeFAB.hide(); // FIXME
             } else if (id == R.id.aboutFAB) {
                 AboutFragment.newInstance().show(getSupportFragmentManager(), null);
             } else if (id == R.id.bgFAB) {
@@ -671,6 +677,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void updateViewPager() {
         adapter.notifyDataSetChanged();
+        homeFAB.show(); // FIXME
     }
 
     public void setConstraintLayoutBackground(Drawable drawable) {

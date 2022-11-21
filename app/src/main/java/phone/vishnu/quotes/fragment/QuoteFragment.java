@@ -23,6 +23,7 @@ import android.app.Application;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import java.io.File;
 import phone.vishnu.quotes.R;
@@ -46,8 +48,10 @@ import phone.vishnu.quotes.repository.FavRepository;
 public class QuoteFragment extends Fragment {
 
     private Quote quote;
+    private CardView cardView;
     private ImageView shareIcon, favIcon;
     private TextView quoteText, authorText;
+    private ConstraintLayout constraintLayout;
     private SharedPreferenceHelper sharedPreferenceHelper;
 
     public QuoteFragment() {}
@@ -76,6 +80,8 @@ public class QuoteFragment extends Fragment {
         authorText = quoteView.findViewById(R.id.authorTextView);
         shareIcon = quoteView.findViewById(R.id.shareImageView);
         favIcon = quoteView.findViewById(R.id.favoriteImageView);
+        cardView = quoteView.findViewById(R.id.cardView);
+        constraintLayout = quoteView.findViewById(R.id.quoteFragmentContainer);
 
         shareIcon.setImageDrawable(
                 ShareHelper.getShareIconDrawable(
@@ -85,6 +91,8 @@ public class QuoteFragment extends Fragment {
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
         float fontSize = sharedPreferenceHelper.getFontSizePreference();
+        //        float cardX = sharedPreferenceHelper.getCardX();
+        //        float cardY = sharedPreferenceHelper.getCardY();
 
         if ((!fontPath.equals("-1")) && (new File(fontPath).exists())) {
             try {
@@ -114,9 +122,17 @@ public class QuoteFragment extends Fragment {
         quoteText.setTextSize(fontSize);
         authorText.setTextSize((float) (fontSize / 1.2));
 
-        ((CardView) quoteView.findViewById(R.id.cardView))
-                .setCardBackgroundColor(Color.parseColor(hexColor));
+        cardView.setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
+
+        //        Rect offsetViewBounds = new Rect();
+        //        cardView.getDrawingRect(offsetViewBounds);
+        //        constraintLayout.offsetDescendantRectToMyCoords(cardView, offsetViewBounds);
+
+        //        if (cardX != -1) cardView.setX(cardX - offsetViewBounds.left);
+        //        if (cardY != -1) cardView.setY(cardY - offsetViewBounds.top);
+
+        // TODO: Negative values not being read
 
         // noinspection ConstantConditions
         quote =
@@ -144,6 +160,36 @@ public class QuoteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        cardView.post(
+                () -> {
+                    Log.e(
+                            "vishnu",
+                            "QuoteFragment: cardView: "
+                                    + " cardView.getX() "
+                                    + cardView.getX()
+                                    + " cardView.getY() "
+                                    + cardView.getY());
+                });
+
+        constraintLayout.post(
+                () ->
+                        Log.e(
+                                "vishnu",
+                                "QuoteFragment: constraintLayout: "
+                                        + " Width "
+                                        + constraintLayout.getWidth()
+                                        + " Height "
+                                        + constraintLayout.getHeight()));
+
+        constraintLayout.post(
+                () -> {
+                    float cardX = sharedPreferenceHelper.getCardX();
+                    float cardY = sharedPreferenceHelper.getCardY();
+
+                    if (cardX != -1) cardView.setX(constraintLayout.getWidth() / cardX);
+                    if (cardY != -1) cardView.setY(constraintLayout.getHeight() / cardY);
+                });
 
         shareIcon.setOnClickListener(
                 v -> {

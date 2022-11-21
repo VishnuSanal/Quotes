@@ -20,6 +20,7 @@
 package phone.vishnu.quotes.helper
 
 import android.content.Context
+import android.content.res.Resources
 import android.util.DisplayMetrics
 import kotlin.math.roundToInt
 
@@ -29,6 +30,14 @@ class Utils {
 
         fun DPtoPX(context: Context, DP: Int): Int {
             return (DP * (context.resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
+        }
+
+        fun getScreenWidth(): Int {
+            return Resources.getSystem().displayMetrics.widthPixels
+        }
+
+        fun getScreenHeight(): Int {
+            return Resources.getSystem().displayMetrics.heightPixels
         }
     }
 }

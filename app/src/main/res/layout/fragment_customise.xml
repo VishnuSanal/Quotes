@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/quoteFragmentContainer"
+	android:id="@+id/customiseConstraintLayout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".fragment.QuoteFragment">
+	tools:context=".fragment.CustomiseFragment">
 
 	<androidx.cardview.widget.CardView
-		android:id="@+id/cardView"
+		android:id="@+id/customiseCardView"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		app:cardCornerRadius="8dp"
@@ -27,17 +27,17 @@
 			android:padding="4dp">
 
 			<ImageView
-				android:id="@+id/favoriteImageView"
+				android:id="@+id/customiseFavoriteImageView"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:contentDescription="@string/quote_fragment_favourite_button"
 				android:src="@drawable/ic_favorite"
-				app:layout_constraintEnd_toStartOf="@id/shareImageView"
+				app:layout_constraintEnd_toStartOf="@id/customiseShareImageView"
 				app:layout_constraintTop_toTopOf="parent"
 				app:tint="@color/colorWhite" />
 
 			<ImageView
-				android:id="@+id/shareImageView"
+				android:id="@+id/customiseShareImageView"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:contentDescription="@string/quote_fragment_share_button"
@@ -47,19 +47,19 @@
 				app:tint="@color/colorWhite" />
 
 			<TextView
-				android:id="@+id/quoteTextView"
+				android:id="@+id/customiseQuoteTextView"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:fontFamily="serif"
 				android:textColor="#FFFFFF"
 				android:textSize="24sp"
-				app:layout_constraintBottom_toTopOf="@id/authorTextView"
+				app:layout_constraintBottom_toTopOf="@id/customiseAuthorTextView"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@id/favoriteImageView" />
+				app:layout_constraintTop_toBottomOf="@id/customiseFavoriteImageView" />
 
 			<TextView
-				android:id="@+id/authorTextView"
+				android:id="@+id/customiseAuthorTextView"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:fontFamily="cursive"
@@ -67,8 +67,49 @@
 				android:textSize="20sp"
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintEnd_toEndOf="parent" />
+
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
 	</androidx.cardview.widget.CardView>
+
+	<ImageView
+		android:id="@+id/customiseCloseIV"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:src="@drawable/ic_close"
+		app:layout_constraintEnd_toStartOf="@id/customiseMoveIV"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:tint="@color/textColor" />
+
+	<ImageView
+		android:id="@+id/customiseMoveIV"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:src="@drawable/ic_move"
+		app:layout_constraintEnd_toStartOf="@id/customiseRotateIV"
+		app:layout_constraintStart_toEndOf="@id/customiseCloseIV"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:tint="@color/textColor" />
+
+	<ImageView
+		android:id="@+id/customiseRotateIV"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:src="@drawable/ic_rotate"
+		app:layout_constraintEnd_toStartOf="@id/customiseSizeIV"
+		app:layout_constraintStart_toEndOf="@id/customiseMoveIV"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:tint="@color/textColor" />
+
+	<ImageView
+		android:id="@+id/customiseSizeIV"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:src="@drawable/ic_size"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/customiseRotateIV"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:tint="@color/textColor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

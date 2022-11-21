@@ -56,6 +56,9 @@ public class SharedPreferenceHelper {
 
     private final String FAV_SWIPE_REVERSE = "favActionReverseBoolean";
 
+    private final String CARD_X = "cardXFloat";
+    private final String CARD_Y = "cardYFloat";
+
     private final SharedPreferences sharedPreferences;
 
     public SharedPreferenceHelper(Context context) {
@@ -175,6 +178,22 @@ public class SharedPreferenceHelper {
         return sharedPreferences.getInt(SHARE_BUTTON_ACTION, 1);
     }
 
+    public void setCardX(float X) {
+        sharedPreferences.edit().putFloat(CARD_X, X).apply();
+    }
+
+    public float getCardX() {
+        return sharedPreferences.getFloat(CARD_X, -1);
+    }
+
+    public void setCardY(float Y) {
+        sharedPreferences.edit().putFloat(CARD_Y, Y).apply();
+    }
+
+    public float getCardY() {
+        return sharedPreferences.getFloat(CARD_Y, -1);
+    }
+
     public void setShareButtonAction(int action) {
         sharedPreferences.edit().putInt(SHARE_BUTTON_ACTION, action).apply();
     }
@@ -244,6 +263,8 @@ public class SharedPreferenceHelper {
         setAppThemePreference(2);
         setFavHintShownCount(0);
         setFavActionReverse(false);
+        setCardX(-1);
+        setCardY(-1);
     }
 
     public ArrayList<String> getFontListToBeRemoved() {
