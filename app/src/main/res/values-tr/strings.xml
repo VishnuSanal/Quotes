@@ -1,2 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Alıntılar</string>
+    <string name="home">Anasayfa</string>
+    <string name="favorites">Favoriler</string>
+    <string name="share_random_quote">Rastgele bir alıntıyı paylaş</string>
+    <string name="quote">Alıntı</string>
+    <string name="author">Sahibi</string>
+    <string name="add">Ekle</string>
+    <string name="cancel">İptal</string>
+    <string name="submit">Tamam</string>
+    <string name="default_size">Normal</string>
+    <string name="reset_settings">Ayarları sıfırla</string>
+    <string name="plain_color">Ana renkler</string>
+    <string name="image_from_gallery">Galeriden Seç</string>
+    <string name="default_images">Standart Resimler</string>
+    <string name="change_font_style">Yazı Tipini Değiştir</string>
+    <string name="change_font_color">Yazı Rengini Değiştir</string>
+    <string name="change_font_size">Yazı Boyutunu Değiştir</string>
+    <string name="quotes_status_creator">Alıntı Durumu Oluştur</string>
+    <string name="add_custom_quote">Kullanıcı Alıntısı Ekle</string>
+    <string name="pick_background_image">Arka Plan Resmi Seç</string>
+    <string name="used_images">Kullanılmış Resimler</string>
+    <string name="new_images">Yeni Resimler</string>
+    <string name="pick_card_color">Kart Rengini Seç</string>
+    <string name="pick_a_color">Renk Seç</string>
+    <string name="light_theme">Açık Tema</string>
+    <string name="follow_system_theme">Sistem Temasını Uygula</string>
+    <string name="pick_font_style">Yazı Tipini Seç</string>
+    <string name="font_size">Yazı Boyutu</string>
+    <string name="settings">Ayarlar</string>
+    <string name="skip">GEÇ</string>
+    <string name="next">İLERİ</string>
+    <string name="pick_an_option">Birini Seç</string>
+    <string name="copy_quote_to_clipboard">Alıntıyı Kopyala</string>
+    <string name="report_via_github">Github ile Sorun Bildir</string>
+    <string name="error_report_note">Bu sorunu teşhis etmek ve düzeltmek için lütfen bize bir hata raporu gönderin.</string>
+    <string name="your_comment">Yorumunuz (zorunlu değil)</string>
+    <string name="about">Hakkında</string>
+    <string name="version">Versiyon</string>
+    <string name="share_text">Alıntıları sosyal medyada durum görüntüleri olarak paylaşmanıza izin veren açık kaynaklı bir uygulama olan Quotes Status Creator\'ı yükleyin</string>
+    <string name="choose_a_theme">Temayı Seç</string>
+    <string name="dark_theme">Karanlık Tema</string>
+    <string name="quote_loading">Alıntı Yükleniyor...</string>
+    <string name="share_quote_as_image">Alıntıyı Resim Olarak Paylaş</string>
+    <string name="ask_every_time">Her defasında sor</string>
+    <string name="nothing_here">Bir Şey Yok!</string>
+    <string name="search">Ara</string>
+    <string name="save_to_gallery">Alıntıyı Galeriye Kaydet</string>
+    <string name="report_via_telegram">Telegram ile Sorun Bildir</string>
+</resources>
