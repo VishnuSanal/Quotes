@@ -25,10 +25,10 @@ import kotlin.math.roundToInt
 
 class Utils {
 
-    companion object {
+	companion object {
 
-        fun DPtoPX(context: Context, DP: Int): Int {
-            return (DP * (context.resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
-        }
-    }
+		fun DPtoPX(context: Context, DP: Int): Int {
+			return (DP * (context.resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
+		}
+	}
 }
