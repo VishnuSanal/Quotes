@@ -67,7 +67,6 @@ import java.util.List;
 import java.util.Objects;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
-import phone.vishnu.quotes.fragment.AboutFragment;
 import phone.vishnu.quotes.fragment.BGOptionPickFragment;
 import phone.vishnu.quotes.fragment.ColorPickFragment;
 import phone.vishnu.quotes.fragment.CustomiseFragment;
@@ -144,20 +143,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             homeFAB.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animate));
             if (null == homeFAB.getTag()) {
                 openFABMenu();
+            } else if ("CustomiseFragment".equals(homeFAB.getTag())) {
+
+                homeFAB.setTag(null);
+                homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_menu));
+
+                updateViewPager();
+                onBackPressed();
             } else {
                 closeFABMenu();
             }
         } else {
             closeFABMenu();
             if (id == R.id.favFAB) {
+                FavoriteFragment.newInstance().show(getSupportFragmentManager(), null);
+            } else if (id == R.id.aboutFAB) {
+                //                AboutFragment.newInstance().show(getSupportFragmentManager(),
+                // null); FIXME
+
                 getSupportFragmentManager()
                         .beginTransaction()
                         .add(R.id.constraintLayout, CustomiseFragment.newInstance(), null)
                         .addToBackStack(null)
-                        .commit(); // FIXME
-                homeFAB.hide(); // FIXME
-            } else if (id == R.id.aboutFAB) {
-                AboutFragment.newInstance().show(getSupportFragmentManager(), null);
+                        .commit();
+
+                homeFAB.setTag("CustomiseFragment");
+                homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_done));
             } else if (id == R.id.bgFAB) {
 
                 showBackgroundOptionChooser(true);

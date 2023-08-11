@@ -27,6 +27,16 @@
 			android:padding="4dp">
 
 			<ImageView
+				android:id="@+id/customiseMoveIV"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:elevation="12dp"
+				android:src="@drawable/ic_move"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:tint="@color/textColor" />
+
+			<ImageView
 				android:id="@+id/customiseFavoriteImageView"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -71,45 +81,5 @@
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
 	</androidx.cardview.widget.CardView>
-
-	<ImageView
-		android:id="@+id/customiseCloseIV"
-		android:layout_width="48dp"
-		android:layout_height="48dp"
-		android:src="@drawable/ic_close"
-		app:layout_constraintEnd_toStartOf="@id/customiseMoveIV"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:tint="@color/textColor" />
-
-	<ImageView
-		android:id="@+id/customiseMoveIV"
-		android:layout_width="48dp"
-		android:layout_height="48dp"
-		android:src="@drawable/ic_move"
-		app:layout_constraintEnd_toStartOf="@id/customiseRotateIV"
-		app:layout_constraintStart_toEndOf="@id/customiseCloseIV"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:tint="@color/textColor" />
-
-	<ImageView
-		android:id="@+id/customiseRotateIV"
-		android:layout_width="48dp"
-		android:layout_height="48dp"
-		android:src="@drawable/ic_rotate"
-		app:layout_constraintEnd_toStartOf="@id/customiseSizeIV"
-		app:layout_constraintStart_toEndOf="@id/customiseMoveIV"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:tint="@color/textColor" />
-
-	<ImageView
-		android:id="@+id/customiseSizeIV"
-		android:layout_width="48dp"
-		android:layout_height="48dp"
-		android:src="@drawable/ic_size"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toEndOf="@id/customiseRotateIV"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:tint="@color/textColor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

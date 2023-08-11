@@ -24,7 +24,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,19 +38,17 @@ import androidx.fragment.app.Fragment;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicReference;
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 
-public class CustomiseFragment extends Fragment implements View.OnClickListener {
+public class CustomiseFragment extends Fragment {
 
     private SharedPreferenceHelper sharedPreferenceHelper;
 
     private ConstraintLayout constraintLayout;
     private TextView quoteTextView, authorTextView;
     private CardView cardView;
-    private ImageView closeIV, moveIV, rotateIV, sizeIV;
-    private boolean isMoveEnabled = false;
+    private ImageView moveIV;
 
     public CustomiseFragment() {}
 
@@ -72,10 +69,7 @@ public class CustomiseFragment extends Fragment implements View.OnClickListener 
         authorTextView = inflate.findViewById(R.id.customiseAuthorTextView);
         cardView = inflate.findViewById(R.id.customiseCardView);
 
-        closeIV = inflate.findViewById(R.id.customiseCloseIV);
         moveIV = inflate.findViewById(R.id.customiseMoveIV);
-        rotateIV = inflate.findViewById(R.id.customiseRotateIV);
-        sizeIV = inflate.findViewById(R.id.customiseSizeIV);
 
         return inflate;
     }
@@ -86,24 +80,6 @@ public class CustomiseFragment extends Fragment implements View.OnClickListener 
             @NonNull View view,
             @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Log.e(
-                "vishnu",
-                "CustomiseFragment: "
-                        + "\ncardView.getX() "
-                        + cardView.getX()
-                        + "\ncardView.getY() "
-                        + cardView.getY());
-
-        constraintLayout.post(
-                () ->
-                        Log.e(
-                                "vishnu",
-                                "CustomiseFragment: "
-                                        + "\nWidth "
-                                        + constraintLayout.getWidth()
-                                        + "\nHeight "
-                                        + constraintLayout.getHeight()));
 
         Quote q =
                 new Quote(
@@ -142,22 +118,15 @@ public class CustomiseFragment extends Fragment implements View.OnClickListener 
         quoteTextView.setText(quote);
         authorTextView.setText(author);
 
-        closeIV.setOnClickListener(this);
-        moveIV.setOnClickListener(this);
-        rotateIV.setOnClickListener(this);
-        sizeIV.setOnClickListener(this);
+        AtomicReference<Float> dX = new AtomicReference<>(cardView.getX());
+        AtomicReference<Float> dY = new AtomicReference<>(cardView.getY());
 
-        AtomicReference<Float> dX = new AtomicReference<>((float) 0);
-        AtomicReference<Float> dY = new AtomicReference<>((float) 0);
-
-        cardView.setOnTouchListener(
+        moveIV.setOnTouchListener(
                 (v, event) -> {
-                    if (!isMoveEnabled) return false;
-
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
-                            dX.set(v.getX() - event.getRawX());
-                            dY.set(v.getY() - event.getRawY());
+                            dX.set(cardView.getX() + v.getX() - event.getRawX());
+                            dY.set(cardView.getY() + v.getY() - event.getRawY());
                             break;
 
                         case MotionEvent.ACTION_MOVE:
@@ -166,49 +135,21 @@ public class CustomiseFragment extends Fragment implements View.OnClickListener 
 
                             break;
 
+                        case MotionEvent.ACTION_UP:
+                            int[] array = new int[2];
+                            cardView.getLocationOnScreen(array);
+
+                            sharedPreferenceHelper.setCardX(
+                                    constraintLayout.getWidth() / (float) array[0]);
+                            sharedPreferenceHelper.setCardY(
+                                    constraintLayout.getHeight() / (float) array[1]);
+
+                            break;
+
                         default:
                             return false;
                     }
                     return true;
                 });
-    }
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-
-        if (id == R.id.customiseCloseIV) {
-
-            ((MainActivity) requireActivity()).updateViewPager();
-            requireActivity().onBackPressed();
-
-        } else if (id == R.id.customiseMoveIV) {
-
-            if (!isMoveEnabled) isMoveEnabled = true;
-            else {
-                isMoveEnabled = false;
-
-                int[] array = new int[2];
-                cardView.getLocationOnScreen(array);
-
-                Log.e(
-                        "vishnu",
-                        "CustomiseFragment#onClick: "
-                                + "\nWidth "
-                                + constraintLayout.getWidth() / (float) array[0]
-                                + "\nHeight "
-                                + constraintLayout.getHeight() / (float) array[1]);
-
-                sharedPreferenceHelper.setCardX(constraintLayout.getWidth() / (float) array[0]);
-                sharedPreferenceHelper.setCardY(constraintLayout.getHeight() / (float) array[1]);
-
-                ((MainActivity) requireActivity()).updateViewPager();
-            }
-
-        } else if (id == R.id.customiseRotateIV) {
-
-        } else if (id == R.id.customiseSizeIV) {
-
-        }
     }
 }

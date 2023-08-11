@@ -33,8 +33,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -102,11 +102,11 @@ public class ExportHelper {
         float cardX = sharedPreferenceHelper.getCardX();
         float cardY = sharedPreferenceHelper.getCardY();
 
+        RelativeLayout relativeLayout = shareView.findViewById(R.id.shareRelativeLayout);
+
         String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
         if (!"-1".equals(backgroundPath))
-            shareView
-                    .findViewById(R.id.shareRelativeLayout)
-                    .setBackground(Drawable.createFromPath(backgroundPath));
+            relativeLayout.setBackground(Drawable.createFromPath(backgroundPath));
 
         CardView cardView = shareView.findViewById(R.id.shareCardView);
         cardView.setCardBackgroundColor(Color.parseColor(cardColor));
@@ -132,17 +132,6 @@ public class ExportHelper {
         shareQuoteTextView.setText(quote);
         shareAuthorTextView.setText(author);
 
-        if (cardX != -1) cardView.setX(widthPixels / cardX);
-        if (cardY != -1) cardView.setY(heightPixels / cardY);
-
-        Log.e(
-                "vishnu",
-                "ExportHelper: cardView: "
-                        + " cardView.getX() "
-                        + cardView.getX()
-                        + " cardView.getY() "
-                        + cardView.getY());
-
         if (BuildConfig.DEBUG) {
 
             TextView shareVersionTV = shareView.findViewById(R.id.shareDebugVersionTV);
@@ -162,6 +151,9 @@ public class ExportHelper {
         shareView.measure(
                 View.MeasureSpec.makeMeasureSpec(widthPixels, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(heightPixels, View.MeasureSpec.EXACTLY));
+
+        if (cardX != -1) cardView.setX(widthPixels / cardX);
+        if (cardY != -1) cardView.setY(heightPixels / cardY - 960);
 
         Bitmap bitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
 

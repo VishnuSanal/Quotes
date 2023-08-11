@@ -23,7 +23,6 @@ import android.app.Application;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -160,27 +159,6 @@ public class QuoteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        cardView.post(
-                () -> {
-                    Log.e(
-                            "vishnu",
-                            "QuoteFragment: cardView: "
-                                    + " cardView.getX() "
-                                    + cardView.getX()
-                                    + " cardView.getY() "
-                                    + cardView.getY());
-                });
-
-        constraintLayout.post(
-                () ->
-                        Log.e(
-                                "vishnu",
-                                "QuoteFragment: constraintLayout: "
-                                        + " Width "
-                                        + constraintLayout.getWidth()
-                                        + " Height "
-                                        + constraintLayout.getHeight()));
 
         constraintLayout.post(
                 () -> {
