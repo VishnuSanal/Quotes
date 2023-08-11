@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "phone.vishnu.quotes"
         minSdkVersion 22
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 61
         versionName "v3.0.0-alpha"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -33,23 +33,23 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.dubsmash.volley:library:2.0.1'
-    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.yalantis:ucrop:2.2.6'
-    implementation 'com.karumi:dexter:6.2.1'
+    implementation 'com.karumi:dexter:6.2.3'
     implementation "com.ncorti:slidetoact:0.9.0"
-    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.4'
     implementation "com.github.skydoves:colorpickerview:2.2.4"
     implementation 'com.keenencharles:androidunsplash:3.1.2'
 
-    def lifecycle_version = "2.5.1"
-    def room_version = "2.4.3"
+    def lifecycle_version = "2.6.1"
+    def room_version = "2.5.2"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -59,7 +59,9 @@ dependencies {
 
     implementation "ch.acra:acra-core:5.8.4"
 
-    compileOnly "com.google.auto.service:auto-service-annotations:1.0.1"
+	implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+
+	compileOnly "com.google.auto.service:auto-service-annotations:1.0.1"
     annotationProcessor "com.google.auto.service:auto-service:1.0.1"
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -67,8 +69,8 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.2'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation 'androidx.test:rules:1.5.0'
 
 }
