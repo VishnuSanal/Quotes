@@ -28,16 +28,16 @@ class Utils {
 
 	companion object {
 
-        fun DPtoPX(context: Context, DP: Int): Int {
-            return (DP * (context.resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
-        }
+		fun DPtoPX(context: Context, DP: Int): Int {
+			return (DP * (context.resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
+		}
 
-        fun getScreenWidth(): Int {
-            return Resources.getSystem().displayMetrics.widthPixels
-        }
+		fun getScreenWidth(): Int {
+			return Resources.getSystem().displayMetrics.widthPixels
+		}
 
-        fun getScreenHeight(): Int {
-            return Resources.getSystem().displayMetrics.heightPixels
-        }
-    }
+		fun getScreenHeight(): Int {
+			return Resources.getSystem().displayMetrics.heightPixels
+		}
+	}
 }
