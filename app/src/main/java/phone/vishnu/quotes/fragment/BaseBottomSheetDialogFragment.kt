@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - 2022 Vishnu Sanal. T
+ * Copyright (C) 2019 - 2023 Vishnu Sanal. T
  *
  * This file is part of Quotes Status Creator.
  *
@@ -27,37 +27,37 @@ import phone.vishnu.quotes.R
 
 open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
-    }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
+	}
 
-    override fun onResume() {
-        super.onResume()
+	override fun onResume() {
+		super.onResume()
 
-        if (dialog != null) {
-            dialog?.setOnKeyListener(
-                fun(_: DialogInterface?, keyCode: Int, event: KeyEvent?): Boolean {
-                    if (keyCode == KeyEvent.KEYCODE_BACK && event?.action == KeyEvent.ACTION_DOWN && tag != null) {
-                        when (tag) {
-                            "BGOptionPickFragment" ->
-                                BGOptionPickFragment.newInstance(true)
-                                    .show(requireActivity().supportFragmentManager, null)
-                            "FavoriteFragment" ->
-                                FavoriteFragment.newInstance()
-                                    .show(requireActivity().supportFragmentManager, null)
-                            "FontOptionPickFragment" ->
-                                FontOptionPickFragment.newInstance()
-                                    .show(requireActivity().supportFragmentManager, null)
-                            "SettingsFragment" ->
-                                SettingsFragment.newInstance()
-                                    .show(requireActivity().supportFragmentManager, null)
-                        }
-                    }
+		if (dialog != null) {
+			dialog?.setOnKeyListener(
+				fun(_: DialogInterface?, keyCode: Int, event: KeyEvent?): Boolean {
+					if (keyCode == KeyEvent.KEYCODE_BACK && event?.action == KeyEvent.ACTION_DOWN && tag != null) {
+						when (tag) {
+							"BGOptionPickFragment" ->
+								BGOptionPickFragment.newInstance(true)
+									.show(requireActivity().supportFragmentManager, null)
+							"FavoriteFragment" ->
+								FavoriteFragment.newInstance()
+									.show(requireActivity().supportFragmentManager, null)
+							"FontOptionPickFragment" ->
+								FontOptionPickFragment.newInstance()
+									.show(requireActivity().supportFragmentManager, null)
+							"SettingsFragment" ->
+								SettingsFragment.newInstance()
+									.show(requireActivity().supportFragmentManager, null)
+						}
+					}
 
-                    return false
-                }
-            )
-        }
-    }
+					return false
+				},
+			)
+		}
+	}
 }

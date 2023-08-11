@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - 2022 Vishnu Sanal. T
+ * Copyright (C) 2019 - 2023 Vishnu Sanal. T
  *
  * This file is part of Quotes Status Creator.
  *
@@ -26,7 +26,7 @@ import kotlin.math.roundToInt
 
 class Utils {
 
-    companion object {
+	companion object {
 
         fun DPtoPX(context: Context, DP: Int): Int {
             return (DP * (context.resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()

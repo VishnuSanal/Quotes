@@ -15,6 +15,7 @@
  - [Allan Nordhøy](https://hosted.weblate.org/user/kingu/) - **Norwegian Bokmål**
  - [Shuvashish Sahoo](https://hosted.weblate.org/user/shuvashish76/) - **Odia & Hindi**
  - [J. Lavoie](https://hosted.weblate.org/user/Edanas/) - **French, German & Italian**
+ - [Ali Gagarin](https://hosted.weblate.org/user/Gagarin/) - **Turkish**
 
 ## 📷 Background Images -> From [Pexels](https://www.pexels.com)
 
