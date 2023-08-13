@@ -88,6 +88,63 @@ public class ExportHelper {
 
     public void shareImage(Context context, Quote q) {
 
+        Bitmap bitmap = getBitmap(context, q);
+
+        File file = null;
+
+        try {
+
+            file = File.createTempFile("screenshot", ".jpg", context.getCacheDir());
+
+            FileOutputStream fileOutputStream = new FileOutputStream(file.getAbsolutePath());
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+
+        } catch (IOException | SecurityException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            if (file != null) {
+
+                Uri uri =
+                        FileProvider.getUriForFile(
+                                context,
+                                context.getApplicationContext().getPackageName() + ".provider",
+                                new File(file.getAbsolutePath()));
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("image/*");
+                sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, "kutt.it/Quotes");
+
+                context.startActivity(
+                        Intent.createChooser(sharingIntent, context.getString(R.string.share_via)));
+            }
+        }
+    }
+
+    public void saveImage(Context context, Quote q) {
+
+        Bitmap bitmap = getBitmap(context, q);
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+                saveImage(
+                        context,
+                        bitmap,
+                        Bitmap.CompressFormat.JPEG,
+                        "image/jpg",
+                        "Quotes - " + System.currentTimeMillis() + ".jpg");
+            else saveImage(context, bitmap);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Bitmap getBitmap(Context context, Quote q) {
         String quote = q.getQuote();
         String author = q.getAuthor();
 
@@ -166,125 +223,7 @@ public class ExportHelper {
         shareView.layout(0, 0, widthPixels, heightPixels);
         shareView.draw(c);
 
-        File file = null;
-
-        try {
-
-            file = File.createTempFile("screenshot", ".jpg", context.getCacheDir());
-
-            FileOutputStream fileOutputStream = new FileOutputStream(file.getAbsolutePath());
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-            fileOutputStream.flush();
-            fileOutputStream.close();
-
-        } catch (IOException | SecurityException e) {
-            e.printStackTrace();
-
-        } finally {
-
-            if (file != null) {
-
-                Uri uri =
-                        FileProvider.getUriForFile(
-                                context,
-                                context.getApplicationContext().getPackageName() + ".provider",
-                                new File(file.getAbsolutePath()));
-                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                sharingIntent.setType("image/*");
-                sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                sharingIntent.putExtra(Intent.EXTRA_TEXT, "kutt.it/Quotes");
-
-                context.startActivity(
-                        Intent.createChooser(sharingIntent, context.getString(R.string.share_via)));
-            }
-        }
-    }
-
-    public void saveImage(Context context, Quote q) {
-
-        String quote = q.getQuote();
-        String author = q.getAuthor();
-
-        View shareView = View.inflate(context, R.layout.share_layout, null);
-
-        String cardColor = sharedPreferenceHelper.getCardColorPreference();
-        String fontColor = sharedPreferenceHelper.getFontColorPreference();
-        String fontPath = sharedPreferenceHelper.getFontPath();
-        float fontSize = sharedPreferenceHelper.getFontSizePreference();
-
-        String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
-        if (!"-1".equals(backgroundPath))
-            shareView
-                    .findViewById(R.id.shareRelativeLayout)
-                    .setBackground(Drawable.createFromPath(backgroundPath));
-
-        CardView cardView = shareView.findViewById(R.id.shareCardView);
-        cardView.setCardBackgroundColor(Color.parseColor(cardColor));
-
-        TextView shareQuoteTextView = shareView.findViewById(R.id.shareQuoteTextView);
-        TextView shareAuthorTextView = shareView.findViewById(R.id.shareAuthorTextView);
-
-        if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
-            try {
-                Typeface face = Typeface.createFromFile(fontPath);
-                shareQuoteTextView.setTypeface(face);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        shareQuoteTextView.setTextColor(Color.parseColor(fontColor));
-        shareAuthorTextView.setTextColor(Color.parseColor(fontColor));
-
-        shareQuoteTextView.setTextSize(fontSize);
-        shareAuthorTextView.setTextSize((float) (fontSize / 1.2));
-
-        shareQuoteTextView.setText(quote);
-        shareAuthorTextView.setText(author);
-
-        if (BuildConfig.DEBUG) {
-
-            TextView shareVersionTV = shareView.findViewById(R.id.shareDebugVersionTV);
-            TextView shareDebugAppNameTV = shareView.findViewById(R.id.shareDebugAppNameTV);
-
-            shareVersionTV.setVisibility(View.VISIBLE);
-            shareDebugAppNameTV.setVisibility(View.VISIBLE);
-
-            shareVersionTV.setText(
-                    String.format(
-                            "%s v%s",
-                            context.getString(R.string.debug_build), BuildConfig.VERSION_NAME));
-            shareDebugAppNameTV.setText(
-                    String.format("%s", context.getString(R.string.quotes_status_creator)));
-        }
-
-        int widthPixels = 1080;
-        int heightPixels = 1920;
-
-        shareView.measure(
-                View.MeasureSpec.makeMeasureSpec(widthPixels, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(heightPixels, View.MeasureSpec.EXACTLY));
-
-        Bitmap bitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
-
-        Canvas c = new Canvas(bitmap);
-        shareView.layout(0, 0, widthPixels, heightPixels);
-        shareView.draw(c);
-
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-                saveImage(
-                        context,
-                        bitmap,
-                        Bitmap.CompressFormat.JPEG,
-                        "image/jpg",
-                        "Quotes - " + System.currentTimeMillis() + ".jpg");
-            else saveImage(context, bitmap);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return bitmap;
     }
 
     private void saveImage(@NonNull final Context context, @NonNull final Bitmap bitmap)
