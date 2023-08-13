@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
@@ -152,8 +153,12 @@ public class ExportHelper {
                 View.MeasureSpec.makeMeasureSpec(widthPixels, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(heightPixels, View.MeasureSpec.EXACTLY));
 
-        if (cardX != -1) cardView.setX(widthPixels / cardX);
-        if (cardY != -1) cardView.setY(heightPixels / cardY - 960);
+        Rect offsetViewBounds = new Rect();
+        cardView.getDrawingRect(offsetViewBounds);
+        relativeLayout.offsetDescendantRectToMyCoords(cardView, offsetViewBounds);
+
+        if (cardX != -1) cardView.setX((widthPixels - offsetViewBounds.left) / cardX);
+        if (cardY != -1) cardView.setY((heightPixels - offsetViewBounds.top) / cardY - 960);
 
         Bitmap bitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
 

@@ -21,6 +21,7 @@ package phone.vishnu.quotes.fragment;
 
 import android.app.Application;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -124,15 +125,6 @@ public class QuoteFragment extends Fragment {
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
 
-        //        Rect offsetViewBounds = new Rect();
-        //        cardView.getDrawingRect(offsetViewBounds);
-        //        constraintLayout.offsetDescendantRectToMyCoords(cardView, offsetViewBounds);
-
-        //        if (cardX != -1) cardView.setX(cardX - offsetViewBounds.left);
-        //        if (cardY != -1) cardView.setY(cardY - offsetViewBounds.top);
-
-        // TODO: Negative values not being read
-
         // noinspection ConstantConditions
         quote =
                 new Quote(
@@ -162,11 +154,19 @@ public class QuoteFragment extends Fragment {
 
         constraintLayout.post(
                 () -> {
+                    Rect offsetViewBounds = new Rect();
+                    cardView.getDrawingRect(offsetViewBounds);
+                    constraintLayout.offsetDescendantRectToMyCoords(cardView, offsetViewBounds);
+
                     float cardX = sharedPreferenceHelper.getCardX();
                     float cardY = sharedPreferenceHelper.getCardY();
 
-                    if (cardX != -1) cardView.setX(constraintLayout.getWidth() / cardX);
-                    if (cardY != -1) cardView.setY(constraintLayout.getHeight() / cardY);
+                    if (cardX != -1)
+                        cardView.setX(
+                                (constraintLayout.getWidth() - offsetViewBounds.left) / cardX);
+                    if (cardY != -1)
+                        cardView.setY(
+                                (constraintLayout.getHeight() - offsetViewBounds.top) / cardY);
                 });
 
         shareIcon.setOnClickListener(
