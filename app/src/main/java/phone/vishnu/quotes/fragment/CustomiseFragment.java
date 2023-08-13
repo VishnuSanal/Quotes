@@ -21,6 +21,7 @@ package phone.vishnu.quotes.fragment;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -117,6 +118,23 @@ public class CustomiseFragment extends Fragment {
 
         quoteTextView.setText(quote);
         authorTextView.setText(author);
+
+        constraintLayout.post(
+                () -> {
+                    Rect offsetViewBounds = new Rect();
+                    cardView.getDrawingRect(offsetViewBounds);
+                    constraintLayout.offsetDescendantRectToMyCoords(cardView, offsetViewBounds);
+
+                    float cardX = sharedPreferenceHelper.getCardX();
+                    float cardY = sharedPreferenceHelper.getCardY();
+
+                    if (cardX != -1)
+                        cardView.setX(
+                                (constraintLayout.getWidth() - offsetViewBounds.left) / cardX);
+                    if (cardY != -1)
+                        cardView.setY(
+                                (constraintLayout.getHeight() - offsetViewBounds.top) / cardY);
+                });
 
         AtomicReference<Float> dX = new AtomicReference<>(cardView.getX());
         AtomicReference<Float> dY = new AtomicReference<>(cardView.getY());
