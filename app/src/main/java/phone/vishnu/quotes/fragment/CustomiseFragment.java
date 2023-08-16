@@ -141,6 +141,11 @@ public class CustomiseFragment extends Fragment {
 
         moveIV.setOnTouchListener(
                 (v, event) -> {
+                    int constraintLayoutWidth = constraintLayout.getWidth();
+                    int constraintLayoutHeight = constraintLayout.getHeight();
+                    int cardViewWidth = cardView.getWidth();
+                    int cardViewHeight = cardView.getHeight();
+
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             dX.set(cardView.getX() + v.getX() - event.getRawX());
@@ -148,8 +153,18 @@ public class CustomiseFragment extends Fragment {
                             break;
 
                         case MotionEvent.ACTION_MOVE:
-                            cardView.setX(event.getRawX() + dX.get());
-                            cardView.setY(event.getRawY() + dY.get());
+                            float finalX = Math.max(0, event.getRawX() + dX.get()); // left bound
+                            float finalY = Math.max(0, event.getRawY() + dY.get()); // top bound
+
+                            cardView.setX(
+                                    finalX + cardViewWidth > constraintLayoutWidth
+                                            ? constraintLayoutWidth - cardViewWidth
+                                            : finalX); // right bound
+
+                            cardView.setY(
+                                    finalY + cardViewHeight > constraintLayoutHeight
+                                            ? constraintLayoutHeight - cardViewHeight
+                                            : finalY); // bottom bound
 
                             break;
 
@@ -158,9 +173,9 @@ public class CustomiseFragment extends Fragment {
                             cardView.getLocationOnScreen(array);
 
                             sharedPreferenceHelper.setCardX(
-                                    constraintLayout.getWidth() / (float) array[0]);
+                                    constraintLayoutWidth / (float) array[0]);
                             sharedPreferenceHelper.setCardY(
-                                    constraintLayout.getHeight() / (float) array[1]);
+                                    constraintLayoutHeight / (float) array[1]);
 
                             break;
 
