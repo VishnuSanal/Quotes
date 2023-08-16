@@ -26,7 +26,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
@@ -153,6 +152,8 @@ public class ExportHelper {
         int widthPixels = 1080;
         int heightPixels = 1920;
 
+        int DP_8 = Utils.Companion.DPtoPX(context, 8);
+
         String cardColor = sharedPreferenceHelper.getCardColorPreference();
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
@@ -209,19 +210,28 @@ public class ExportHelper {
         shareView.measure(
                 View.MeasureSpec.makeMeasureSpec(widthPixels, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(heightPixels, View.MeasureSpec.EXACTLY));
+        shareView.layout(0, 0, widthPixels, heightPixels);
 
-        Rect offsetViewBounds = new Rect();
-        cardView.getDrawingRect(offsetViewBounds);
-        relativeLayout.offsetDescendantRectToMyCoords(cardView, offsetViewBounds);
+        int cardViewWidth = cardView.getWidth();
+        int cardViewHeight = cardView.getHeight();
 
-        if (cardX != -1) cardView.setX((widthPixels - offsetViewBounds.left) / cardX);
-        if (cardY != -1) cardView.setY((heightPixels - offsetViewBounds.top) / cardY - 960);
+        float finalX = Math.max(0, widthPixels / cardX); // left bound
+        float finalY = Math.max(0, heightPixels / cardY); // top bound
+
+        if (cardX != -1)
+            cardView.setX(
+                    finalX + cardViewWidth > widthPixels
+                            ? widthPixels - cardViewWidth - DP_8
+                            : finalX); // right bound
+
+        if (cardY != -1)
+            cardView.setY(
+                    finalY + cardViewHeight > heightPixels
+                            ? heightPixels - cardViewHeight - DP_8
+                            : finalY); // bottom bound
 
         Bitmap bitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
-
-        Canvas c = new Canvas(bitmap);
-        shareView.layout(0, 0, widthPixels, heightPixels);
-        shareView.draw(c);
+        shareView.draw(new Canvas(bitmap));
 
         return bitmap;
     }
