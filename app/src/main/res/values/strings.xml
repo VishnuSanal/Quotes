@@ -170,6 +170,7 @@
 
 	<string name="about_icon_iv" translatable="false">About Icon IV</string>
 	<string name="about_fab" translatable="false">About FAB</string>
+	<string name="card_fab" translatable="false">Card FAB</string>
 	<string name="settings_fab" translatable="false">Settings FAB</string>
 	<string name="font_fab" translatable="false">Font FAB</string>
 	<string name="home_fab" translatable="false">Home FAB</string>

@@ -67,6 +67,7 @@ import java.util.List;
 import java.util.Objects;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.adapter.QuoteViewPagerAdapter;
+import phone.vishnu.quotes.fragment.AboutFragment;
 import phone.vishnu.quotes.fragment.BGOptionPickFragment;
 import phone.vishnu.quotes.fragment.ColorPickFragment;
 import phone.vishnu.quotes.fragment.CustomiseFragment;
@@ -102,7 +103,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainViewModel viewModel;
     private ArrayList<Quote> allQuotesList;
 
-    private FloatingActionButton fontFAB, aboutFAB, bgFAB, colorFAB, favFAB, settingsFAB, homeFAB;
+    private FloatingActionButton fontFAB,
+            aboutFAB,
+            cardFAB,
+            bgFAB,
+            colorFAB,
+            favFAB,
+            settingsFAB,
+            homeFAB;
 
     private CircularProgressIndicator progressIndicator;
     private ChipGroup chipGroup;
@@ -158,8 +166,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (id == R.id.favFAB) {
                 FavoriteFragment.newInstance().show(getSupportFragmentManager(), null);
             } else if (id == R.id.aboutFAB) {
-                //                AboutFragment.newInstance().show(getSupportFragmentManager(),
-                // null); FIXME
+
+                AboutFragment.newInstance().show(getSupportFragmentManager(), null);
+
+            } else if (id == R.id.cardFAB) {
 
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -236,6 +246,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.LENGTH_SHORT)
                         .show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if ("CustomiseFragment".equals(homeFAB.getTag())) {
+
+            homeFAB.setTag(null);
+            homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_menu));
+
+            updateViewPager();
+            onBackPressed();
+        } else super.onBackPressed();
     }
 
     private void setIntentListeners(Bundle savedInstanceState) {
@@ -449,6 +471,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initFABs() {
         fontFAB = findViewById(R.id.fontFAB);
         aboutFAB = findViewById(R.id.aboutFAB);
+        cardFAB = findViewById(R.id.cardFAB);
         bgFAB = findViewById(R.id.bgFAB);
         colorFAB = findViewById(R.id.colorFAB);
         favFAB = findViewById(R.id.favFAB);
@@ -462,6 +485,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         colorFAB.setOnClickListener(this);
         bgFAB.setOnClickListener(this);
         aboutFAB.setOnClickListener(this);
+        cardFAB.setOnClickListener(this);
         new SwipeListener(homeFAB);
     }
 
@@ -478,6 +502,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .alpha(0f)
                 .setInterpolator(new AccelerateInterpolator());
         aboutFAB.animate()
+                .x(homeFABX)
+                .y(homeFABY)
+                .rotation(360)
+                .alpha(0f)
+                .setInterpolator(new AccelerateInterpolator());
+        cardFAB.animate()
                 .x(homeFABX)
                 .y(homeFABY)
                 .rotation(360)
@@ -519,11 +549,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setVisibility(View.VISIBLE);
 
         int i = 120;
-        double cos36 = Math.cos(Math.toRadians(36));
-        double sin36 = Math.sin(Math.toRadians(36));
 
-        double cos72 = Math.cos(Math.toRadians(72));
-        double sin72 = Math.sin(Math.toRadians(72));
+        double cos36 = Math.cos(Math.toRadians(30));
+        double sin36 = Math.sin(Math.toRadians(30));
+
+        double cos72 = Math.cos(Math.toRadians(60));
+        double sin72 = Math.sin(Math.toRadians(60));
+
+        double cos90 = Math.cos(Math.toRadians(90));
+        double sin90 = Math.sin(Math.toRadians(90));
+
+        fontFAB.animate()
+                .translationX(DPtoPX((int) (i * cos90)))
+                .translationY(-DPtoPX((int) (i * sin90)))
+                .rotationBy(360)
+                .alpha(1f)
+                .setInterpolator(new AccelerateInterpolator());
 
         favFAB.animate()
                 .translationX(DPtoPX(i))
@@ -536,27 +577,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .alpha(1f)
                 .setInterpolator(new AccelerateInterpolator());
 
-        colorFAB.animate()
+        bgFAB.animate()
                 .translationX(DPtoPX((int) (i * cos36)))
                 .translationY(-DPtoPX((int) (i * sin36)))
                 .rotationBy(360)
                 .alpha(1f)
                 .setInterpolator(new AccelerateInterpolator());
-        settingsFAB
-                .animate()
+        cardFAB.animate()
                 .translationX(-DPtoPX((int) (i * cos36)))
                 .translationY(-DPtoPX((int) (i * sin36)))
                 .rotationBy(360)
                 .alpha(1f)
                 .setInterpolator(new AccelerateInterpolator());
 
-        bgFAB.animate()
+        colorFAB.animate()
                 .translationX(DPtoPX((int) (i * cos72)))
                 .translationY(-DPtoPX((int) (i * sin72)))
                 .rotationBy(360)
                 .alpha(1f)
                 .setInterpolator(new AccelerateInterpolator());
-        fontFAB.animate()
+        settingsFAB
+                .animate()
                 .translationX(-DPtoPX((int) (i * cos72)))
                 .translationY(-DPtoPX((int) (i * sin72)))
                 .rotationBy(360)
@@ -573,6 +614,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fontFAB.setVisibility(i);
         settingsFAB.setVisibility(i);
         aboutFAB.setVisibility(i);
+        cardFAB.setVisibility(i);
     }
 
     private int DPtoPX(int DP) {

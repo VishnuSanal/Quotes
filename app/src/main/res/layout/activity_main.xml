@@ -138,6 +138,26 @@
 		app:tint="@color/colorWhite" />
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
+		android:id="@+id/cardFAB"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:clickable="true"
+		android:contentDescription="@string/about_fab"
+		android:focusable="true"
+		android:scaleType="fitXY"
+		android:tint="@color/colorPrimaryDark"
+		android:visibility="gone"
+		app:elevation="8dp"
+		app:fabSize="mini"
+		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
+		app:layout_constraintEnd_toEndOf="@id/homeFAB"
+		app:layout_constraintStart_toStartOf="@id/homeFAB"
+		app:layout_constraintTop_toTopOf="@id/homeFAB"
+		app:srcCompat="@drawable/ic_move"
+		app:tint="@color/colorWhite" />
+
+	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/settingsFAB"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
