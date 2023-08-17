@@ -34,11 +34,11 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -161,11 +161,11 @@ public class ExportHelper {
         float cardX = sharedPreferenceHelper.getCardX();
         float cardY = sharedPreferenceHelper.getCardY();
 
-        RelativeLayout relativeLayout = shareView.findViewById(R.id.shareRelativeLayout);
+        ConstraintLayout constraintLayout = shareView.findViewById(R.id.shareConstraintLayout);
 
         String backgroundPath = sharedPreferenceHelper.getBackgroundPath();
         if (!"-1".equals(backgroundPath))
-            relativeLayout.setBackground(Drawable.createFromPath(backgroundPath));
+            constraintLayout.setBackground(Drawable.createFromPath(backgroundPath));
 
         CardView cardView = shareView.findViewById(R.id.shareCardView);
         cardView.setCardBackgroundColor(Color.parseColor(cardColor));
