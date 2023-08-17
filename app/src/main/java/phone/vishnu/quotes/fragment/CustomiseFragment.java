@@ -131,7 +131,7 @@ public class CustomiseFragment extends Fragment {
 
                     float cardX = sharedPreferenceHelper.getCardX();
                     float cardY = sharedPreferenceHelper.getCardY();
-					float cardRotation = sharedPreferenceHelper.getCardRotation();
+                    float cardRotation = sharedPreferenceHelper.getCardRotation();
 
                     if (cardX != -1)
                         cardView.setX(
@@ -140,8 +140,7 @@ public class CustomiseFragment extends Fragment {
                         cardView.setY(
                                 (constraintLayout.getHeight() - offsetViewBounds.top) / cardY);
 
-					if (cardRotation != -1) cardView.setRotation(cardRotation);
-
+                    if (cardRotation != -1) cardView.setRotation(cardRotation);
                 });
 
         AtomicReference<Float> dX = new AtomicReference<>(cardView.getX());
