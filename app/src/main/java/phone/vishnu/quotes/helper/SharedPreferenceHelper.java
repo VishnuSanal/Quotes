@@ -59,6 +59,8 @@ public class SharedPreferenceHelper {
     private final String CARD_X = "cardXFloat";
     private final String CARD_Y = "cardYFloat";
 
+    private final String CARD_ROTATION = "cardRotationFloat";
+
     private final SharedPreferences sharedPreferences;
 
     public SharedPreferenceHelper(Context context) {
@@ -194,6 +196,14 @@ public class SharedPreferenceHelper {
         return sharedPreferences.getFloat(CARD_Y, -1);
     }
 
+    public void setCardRotation(float rotation) {
+        sharedPreferences.edit().putFloat(CARD_ROTATION, rotation).apply();
+    }
+
+    public float getCardRotation() {
+        return sharedPreferences.getFloat(CARD_ROTATION, -1);
+    }
+
     public void setShareButtonAction(int action) {
         sharedPreferences.edit().putInt(SHARE_BUTTON_ACTION, action).apply();
     }
@@ -265,6 +275,7 @@ public class SharedPreferenceHelper {
         setFavActionReverse(false);
         setCardX(-1);
         setCardY(-1);
+        setCardRotation(-1);
     }
 
     public ArrayList<String> getFontListToBeRemoved() {

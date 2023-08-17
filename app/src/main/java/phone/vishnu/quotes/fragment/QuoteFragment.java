@@ -160,6 +160,7 @@ public class QuoteFragment extends Fragment {
 
                     float cardX = sharedPreferenceHelper.getCardX();
                     float cardY = sharedPreferenceHelper.getCardY();
+                    float cardRotation = sharedPreferenceHelper.getCardRotation();
 
                     if (cardX != -1)
                         cardView.setX(
@@ -167,6 +168,8 @@ public class QuoteFragment extends Fragment {
                     if (cardY != -1)
                         cardView.setY(
                                 (constraintLayout.getHeight() - offsetViewBounds.top) / cardY);
+
+                    if (cardRotation != -1) cardView.setRotation(cardRotation);
                 });
 
         shareIcon.setOnClickListener(

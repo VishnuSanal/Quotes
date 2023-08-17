@@ -160,6 +160,7 @@ public class ExportHelper {
         float fontSize = sharedPreferenceHelper.getFontSizePreference();
         float cardX = sharedPreferenceHelper.getCardX();
         float cardY = sharedPreferenceHelper.getCardY();
+        float cardRotation = sharedPreferenceHelper.getCardRotation();
 
         ConstraintLayout constraintLayout = shareView.findViewById(R.id.shareConstraintLayout);
 
@@ -229,6 +230,8 @@ public class ExportHelper {
                     finalY + cardViewHeight > heightPixels
                             ? heightPixels - cardViewHeight - DP_8
                             : finalY); // bottom bound
+
+        if (cardRotation != -1) cardView.setRotation(cardRotation);
 
         Bitmap bitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
         shareView.draw(new Canvas(bitmap));

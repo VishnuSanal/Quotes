@@ -36,6 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import com.google.android.material.slider.Slider;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicReference;
 import phone.vishnu.quotes.R;
@@ -51,6 +52,7 @@ public class CustomiseFragment extends Fragment {
     private TextView quoteTextView, authorTextView;
     private CardView cardView;
     private ImageView moveIV;
+    private Slider angleSlider;
 
     public CustomiseFragment() {}
 
@@ -79,6 +81,7 @@ public class CustomiseFragment extends Fragment {
         cardView = inflate.findViewById(R.id.customiseCardView);
 
         moveIV = inflate.findViewById(R.id.customiseMoveIV);
+        angleSlider = inflate.findViewById(R.id.customiseAngleSlider);
 
         return inflate;
     }
@@ -128,6 +131,7 @@ public class CustomiseFragment extends Fragment {
 
                     float cardX = sharedPreferenceHelper.getCardX();
                     float cardY = sharedPreferenceHelper.getCardY();
+					float cardRotation = sharedPreferenceHelper.getCardRotation();
 
                     if (cardX != -1)
                         cardView.setX(
@@ -135,6 +139,9 @@ public class CustomiseFragment extends Fragment {
                     if (cardY != -1)
                         cardView.setY(
                                 (constraintLayout.getHeight() - offsetViewBounds.top) / cardY);
+
+					if (cardRotation != -1) cardView.setRotation(cardRotation);
+
                 });
 
         AtomicReference<Float> dX = new AtomicReference<>(cardView.getX());
@@ -184,6 +191,14 @@ public class CustomiseFragment extends Fragment {
                             return false;
                     }
                     return true;
+                });
+
+        angleSlider.addOnChangeListener(
+                (slider, value, fromUser) -> {
+                    if (fromUser) {
+                        cardView.setRotation(value);
+                        sharedPreferenceHelper.setCardRotation(value);
+                    }
                 });
     }
 }
