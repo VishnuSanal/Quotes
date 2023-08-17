@@ -39,6 +39,7 @@ import androidx.fragment.app.Fragment;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicReference;
 import phone.vishnu.quotes.R;
+import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.Quote;
 
@@ -53,8 +54,15 @@ public class CustomiseFragment extends Fragment {
 
     public CustomiseFragment() {}
 
-    public static CustomiseFragment newInstance() {
-        return new CustomiseFragment();
+    public static CustomiseFragment newInstance(Quote quote) {
+        CustomiseFragment fragment = new CustomiseFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.QUOTE, quote.getQuote());
+        bundle.putString(Constants.AUTHOR, quote.getAuthor());
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 
     @Override
@@ -82,14 +90,6 @@ public class CustomiseFragment extends Fragment {
             @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Quote q =
-                new Quote(
-                        "The first principle is that you must not fool yourself — and you are the easiest person to fool",
-                        "Richard Feynman");
-
-        String quote = q.getQuote();
-        String author = q.getAuthor();
-
         String cardColor = sharedPreferenceHelper.getCardColorPreference();
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
@@ -116,8 +116,9 @@ public class CustomiseFragment extends Fragment {
         quoteTextView.setTextSize(fontSize);
         authorTextView.setTextSize((float) (fontSize / 1.2));
 
-        quoteTextView.setText(quote);
-        authorTextView.setText(author);
+        // noinspection ConstantConditions
+        quoteTextView.setText(getArguments().getString(Constants.QUOTE));
+        authorTextView.setText(String.format("-%s", getArguments().getString(Constants.AUTHOR)));
 
         constraintLayout.post(
                 () -> {

@@ -173,7 +173,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .add(R.id.constraintLayout, CustomiseFragment.newInstance(), null)
+                        .add(
+                                R.id.constraintLayout,
+                                CustomiseFragment.newInstance(
+                                        allQuotesList.get(viewPager.getCurrentItem())),
+                                null)
                         .addToBackStack(null)
                         .commit();
 
