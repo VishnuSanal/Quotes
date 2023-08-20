@@ -176,7 +176,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .add(
                                 R.id.constraintLayout,
                                 CustomiseFragment.newInstance(
-                                        allQuotesList.get(viewPager.getCurrentItem())),
+                                        allQuotesList != null
+                                                ? allQuotesList.get(viewPager.getCurrentItem())
+                                                : Utils.Companion.getSampleQuote()),
                                 null)
                         .addToBackStack(null)
                         .commit();

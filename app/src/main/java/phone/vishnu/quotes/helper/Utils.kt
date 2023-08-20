@@ -22,11 +22,17 @@ package phone.vishnu.quotes.helper
 import android.content.Context
 import android.content.res.Resources
 import android.util.DisplayMetrics
+import phone.vishnu.quotes.model.Quote
 import kotlin.math.roundToInt
 
 class Utils {
 
 	companion object {
+
+		val sampleQuote: Quote = Quote(
+			"Twenty years from now you will be more disappointed by the things that you didn’t do than by the ones you did do, so throw off the bowlines, sail away from safe harbor, catch the trade winds in your sails.  Explore, Dream, Discover",
+			"Mark Twain",
+		)
 
 		fun DPtoPX(context: Context, DP: Int): Int {
 			return (DP * (context.resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
