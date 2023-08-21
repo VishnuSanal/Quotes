@@ -35,4 +35,7 @@
 	<color name="FABColor">#32FFFFFF</color>
 	<color name="FABIconColor">@color/colorWhite</color>
 
+	<color name="FABOverlayColor">#FF6E9F</color>
+	<color name="FABOverlayBGColor">#26FFFFFF</color>
+
 </resources>
