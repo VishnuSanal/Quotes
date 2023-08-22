@@ -48,7 +48,7 @@ public class NotificationHelper {
                             NotificationCompat.Builder builder =
                                     new NotificationCompat.Builder(
                                                     context, Constants.NOTIFICATION_CHANNEL_ID)
-                                            .setSmallIcon(R.drawable.ic_quotes_round)
+                                            .setSmallIcon(R.drawable.ic_quotes)
                                             .setAutoCancel(true)
                                             .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                                             .setContentIntent(getSharePendingIntent(quote))

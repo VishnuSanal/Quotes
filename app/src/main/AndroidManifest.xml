@@ -12,9 +12,9 @@
 	<application
 		android:name=".controller.AppController"
 		android:allowBackup="true"
-		android:icon="@drawable/ic_quotes"
+		android:icon="@mipmap/ic_quotes"
 		android:label="@string/app_name"
-		android:roundIcon="@drawable/ic_quotes_round"
+		android:roundIcon="@mipmap/ic_quotes"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 
