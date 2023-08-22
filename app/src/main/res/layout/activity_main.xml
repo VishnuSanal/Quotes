@@ -89,7 +89,7 @@
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toEndOf="@id/homeSearchTIL"
 		app:layout_constraintTop_toTopOf="parent"
-		app:tint="@color/colorWhite" />
+		app:tint="@color/FABIconColor" />
 
 	<androidx.constraintlayout.widget.Guideline
 		android:id="@+id/homeGuideLineOne"
@@ -126,8 +126,8 @@
 		android:contentDescription="@string/about_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
-		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
+		app:backgroundTint="@color/FABColor"
 		app:elevation="8dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
@@ -135,7 +135,7 @@
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
 		app:srcCompat="@drawable/ic_info"
-		app:tint="@color/colorWhite" />
+		app:tint="@color/FABIconColor" />
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/cardFAB"
@@ -146,8 +146,8 @@
 		android:contentDescription="@string/about_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
-		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
+		app:backgroundTint="@color/FABColor"
 		app:elevation="8dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
@@ -155,7 +155,7 @@
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
 		app:srcCompat="@drawable/ic_move"
-		app:tint="@color/colorWhite" />
+		app:tint="@color/FABIconColor" />
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/settingsFAB"
@@ -166,15 +166,15 @@
 		android:contentDescription="@string/settings_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
-		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
+		app:backgroundTint="@color/FABColor"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
 		app:layout_constraintEnd_toEndOf="@id/homeFAB"
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
 		app:srcCompat="@drawable/ic_settings"
-		app:tint="@color/colorWhite" />
+		app:tint="@color/FABIconColor" />
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/fontFAB"
@@ -185,8 +185,8 @@
 		android:contentDescription="@string/font_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
-		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
+		app:backgroundTint="@color/FABColor"
 		app:elevation="8dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
@@ -194,7 +194,7 @@
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
 		app:srcCompat="@drawable/ic_font"
-		app:tint="@color/colorWhite" />
+		app:tint="@color/FABIconColor" />
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/homeFAB"
@@ -205,14 +205,26 @@
 		android:contentDescription="@string/home_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
-		android:tint="@color/colorPrimaryDark"
+		app:backgroundTint="@color/FABColor"
 		app:elevation="12dp"
 		app:fabSize="normal"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:srcCompat="@drawable/ic_menu"
-		app:tint="@color/colorWhite" />
+		app:tint="@color/FABIconColor" />
+
+	<ImageView
+		android:id="@+id/homeFABAnimationView"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:layout_margin="2dp"
+		android:contentDescription="@string/home_fab_overlay"
+		android:src="@drawable/circle"
+		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
+		app:layout_constraintEnd_toEndOf="@id/homeFAB"
+		app:layout_constraintStart_toStartOf="@id/homeFAB"
+		app:layout_constraintTop_toTopOf="@id/homeFAB" />
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/bgFAB"
@@ -223,8 +235,8 @@
 		android:contentDescription="@string/bg_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
-		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
+		app:backgroundTint="@color/FABColor"
 		app:elevation="8dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
@@ -232,7 +244,7 @@
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
 		app:srcCompat="@drawable/ic_insert_photo"
-		app:tint="@color/colorWhite" />
+		app:tint="@color/FABIconColor" />
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/colorFAB"
@@ -243,8 +255,8 @@
 		android:contentDescription="@string/color_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
-		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
+		app:backgroundTint="@color/FABColor"
 		app:elevation="8dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
@@ -252,7 +264,7 @@
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
 		app:srcCompat="@drawable/ic_color_lens"
-		app:tint="@color/colorWhite" />
+		app:tint="@color/FABIconColor" />
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/favFAB"
@@ -263,8 +275,8 @@
 		android:contentDescription="@string/fav_fab"
 		android:focusable="true"
 		android:scaleType="fitXY"
-		android:tint="@color/colorPrimaryDark"
 		android:visibility="gone"
+		app:backgroundTint="@color/FABColor"
 		app:elevation="8dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
@@ -272,6 +284,6 @@
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
 		app:srcCompat="@drawable/ic_favorite"
-		app:tint="@color/colorWhite" />
+		app:tint="@color/FABIconColor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,4 +32,10 @@
 	<color name="favRedColor">#FF1744</color>
 	<color name="favGreenColor">#00C853</color>
 
+	<color name="FABColor">#32FFFFFF</color>
+	<color name="FABIconColor">@color/colorWhite</color>
+
+	<color name="FABOverlayColor">#FF6E9F</color>
+	<color name="FABOverlayBGColor">#26FFFFFF</color>
+
 </resources>

@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             settingsFAB,
             homeFAB;
 
+    private ImageView homeFABOverlay;
+
     private CircularProgressIndicator progressIndicator;
     private ChipGroup chipGroup;
     private HorizontalScrollView chipGroupScrollView;
@@ -484,6 +486,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         settingsFAB = findViewById(R.id.settingsFAB);
         homeFAB = findViewById(R.id.homeFAB);
 
+        homeFABOverlay = findViewById(R.id.homeFABAnimationView);
+
         homeFAB.setOnClickListener(this);
         settingsFAB.setOnClickListener(this);
         favFAB.setOnClickListener(this);
@@ -493,6 +497,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         aboutFAB.setOnClickListener(this);
         cardFAB.setOnClickListener(this);
         new SwipeListener(homeFAB);
+
+        homeFABOverlay.startAnimation(
+                AnimationUtils.loadAnimation(this, R.anim.ripple_pulse_animation));
     }
 
     private void closeFABMenu() {
