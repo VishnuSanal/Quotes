@@ -54,7 +54,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import phone.vishnu.quotes.request.InputStreamVolleyRequest;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.BGImageRVAdapter;
@@ -62,6 +61,7 @@ import phone.vishnu.quotes.adapter.UnsplashRVAdapter;
 import phone.vishnu.quotes.controller.AppController;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.UnsplashItem;
+import phone.vishnu.quotes.request.InputStreamVolleyRequest;
 import phone.vishnu.quotes.viewmodel.BGImagePickViewModel;
 
 public class BGImagePickFragment extends BaseBottomSheetDialogFragment
