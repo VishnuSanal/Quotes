@@ -30,7 +30,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Objects;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.fragment.TourFragment;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
@@ -46,7 +45,6 @@ public class SplashActivity extends AppCompatActivity {
         checkTheme(sharedPreferenceHelper.getAppThemePreference());
 
         super.onCreate(savedInstanceState);
-        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_splash);
 
         removeFonts();
