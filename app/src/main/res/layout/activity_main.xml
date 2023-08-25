@@ -128,12 +128,13 @@
 		android:scaleType="fitXY"
 		android:visibility="gone"
 		app:backgroundTint="@color/FABColor"
-		app:elevation="8dp"
+		app:elevation="0dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
 		app:layout_constraintEnd_toEndOf="@id/homeFAB"
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
+		app:pressedTranslationZ="0dp"
 		app:srcCompat="@drawable/ic_info"
 		app:tint="@color/FABIconColor" />
 
@@ -148,12 +149,13 @@
 		android:scaleType="fitXY"
 		android:visibility="gone"
 		app:backgroundTint="@color/FABColor"
-		app:elevation="8dp"
+		app:elevation="0dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
 		app:layout_constraintEnd_toEndOf="@id/homeFAB"
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
+		app:pressedTranslationZ="0dp"
 		app:srcCompat="@drawable/ic_move"
 		app:tint="@color/FABIconColor" />
 
@@ -168,11 +170,13 @@
 		android:scaleType="fitXY"
 		android:visibility="gone"
 		app:backgroundTint="@color/FABColor"
+		app:elevation="0dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
 		app:layout_constraintEnd_toEndOf="@id/homeFAB"
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
+		app:pressedTranslationZ="0dp"
 		app:srcCompat="@drawable/ic_settings"
 		app:tint="@color/FABIconColor" />
 
@@ -187,12 +191,13 @@
 		android:scaleType="fitXY"
 		android:visibility="gone"
 		app:backgroundTint="@color/FABColor"
-		app:elevation="8dp"
+		app:elevation="0dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
 		app:layout_constraintEnd_toEndOf="@id/homeFAB"
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
+		app:pressedTranslationZ="0dp"
 		app:srcCompat="@drawable/ic_font"
 		app:tint="@color/FABIconColor" />
 
@@ -206,11 +211,12 @@
 		android:focusable="true"
 		android:scaleType="fitXY"
 		app:backgroundTint="@color/FABColor"
-		app:elevation="12dp"
+		app:elevation="0dp"
 		app:fabSize="normal"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
+		app:pressedTranslationZ="0dp"
 		app:srcCompat="@drawable/ic_menu"
 		app:tint="@color/FABIconColor" />
 
@@ -237,12 +243,13 @@
 		android:scaleType="fitXY"
 		android:visibility="gone"
 		app:backgroundTint="@color/FABColor"
-		app:elevation="8dp"
+		app:elevation="0dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
 		app:layout_constraintEnd_toEndOf="@id/homeFAB"
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
+		app:pressedTranslationZ="0dp"
 		app:srcCompat="@drawable/ic_insert_photo"
 		app:tint="@color/FABIconColor" />
 
@@ -257,12 +264,13 @@
 		android:scaleType="fitXY"
 		android:visibility="gone"
 		app:backgroundTint="@color/FABColor"
-		app:elevation="8dp"
+		app:elevation="0dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
 		app:layout_constraintEnd_toEndOf="@id/homeFAB"
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
+		app:pressedTranslationZ="0dp"
 		app:srcCompat="@drawable/ic_color_lens"
 		app:tint="@color/FABIconColor" />
 
@@ -277,12 +285,13 @@
 		android:scaleType="fitXY"
 		android:visibility="gone"
 		app:backgroundTint="@color/FABColor"
-		app:elevation="8dp"
+		app:elevation="0dp"
 		app:fabSize="mini"
 		app:layout_constraintBottom_toBottomOf="@id/homeFAB"
 		app:layout_constraintEnd_toEndOf="@id/homeFAB"
 		app:layout_constraintStart_toStartOf="@id/homeFAB"
 		app:layout_constraintTop_toTopOf="@id/homeFAB"
+		app:pressedTranslationZ="0dp"
 		app:srcCompat="@drawable/ic_favorite"
 		app:tint="@color/FABIconColor" />
 
