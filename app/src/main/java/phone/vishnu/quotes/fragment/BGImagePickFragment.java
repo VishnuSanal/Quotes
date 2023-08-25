@@ -43,19 +43,22 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.android.volley.Request;
+import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import phone.vishnu.quotes.InputStreamVolleyRequest;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.BGImageRVAdapter;
 import phone.vishnu.quotes.adapter.UnsplashRVAdapter;
-import phone.vishnu.quotes.asynctask.DownloadImageTask;
 import phone.vishnu.quotes.controller.AppController;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.model.UnsplashItem;
@@ -268,35 +271,35 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
 
         if (MainActivity.bgDialog != null) MainActivity.bgDialog.show();
 
-        String s =
+        String targetPath =
                 requireContext().getFilesDir().getPath()
                         + File.separator
                         + item.getRegularUri().getLastPathSegment()
                         + ".jpg";
 
-        new DownloadImageTask(
-                        s,
-                        () -> {
-                            sharedPreferenceHelper.setBackgroundPath(s);
+        downloadImage(
+                String.valueOf(item.getRegularUri()),
+                targetPath,
+                () -> {
+                    sharedPreferenceHelper.setBackgroundPath(targetPath);
 
-                            ((MainActivity) requireActivity())
-                                    .findViewById(R.id.constraintLayout)
-                                    .setBackground(Drawable.createFromPath(s));
+                    ((MainActivity) requireActivity())
+                            .findViewById(R.id.constraintLayout)
+                            .setBackground(Drawable.createFromPath(targetPath));
 
-                            AppController.getInstance()
-                                    .addToRequestQueue(
-                                            new StringRequest(
-                                                    Request.Method.GET,
-                                                    item.getDownloadTrigger().toString()
-                                                            + "?client_id="
-                                                            + quotesstatuscreator,
-                                                    null,
-                                                    null));
+                    AppController.getInstance()
+                            .addToRequestQueue(
+                                    new StringRequest(
+                                            Request.Method.GET,
+                                            item.getDownloadTrigger().toString()
+                                                    + "?client_id="
+                                                    + quotesstatuscreator,
+                                            null,
+                                            null));
 
-                            dismissProgressDialog();
-                            dismiss();
-                        })
-                .execute(String.valueOf(item.getRegularUri()));
+                    dismissProgressDialog();
+                    dismiss();
+                });
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -337,5 +340,34 @@ public class BGImagePickFragment extends BaseBottomSheetDialogFragment
     private void dismissProgressDialog() {
         if (MainActivity.bgDialog != null && MainActivity.bgDialog.isShowing())
             MainActivity.bgDialog.dismiss();
+    }
+
+    private void downloadImage(String url, String targetPath, Runnable onFinish) {
+        AppController.getInstance()
+                .addToRequestQueue(
+                        new InputStreamVolleyRequest(
+                                Request.Method.GET,
+                                url,
+                                (Response.Listener<byte[]>)
+                                        response -> {
+                                            try {
+
+                                                File file = new File(targetPath);
+
+                                                FileOutputStream fileOutputStream =
+                                                        new FileOutputStream(file);
+
+                                                fileOutputStream.write(response);
+                                                fileOutputStream.flush();
+                                                fileOutputStream.close();
+
+                                                onFinish.run();
+
+                                            } catch (IOException | NullPointerException e) {
+                                                e.printStackTrace();
+                                            }
+                                        },
+                                Throwable::printStackTrace,
+                                null));
     }
 }
