@@ -38,6 +38,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.slider.Slider;
 import java.io.File;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.helper.Constants;
@@ -140,7 +141,10 @@ public class CustomiseFragment extends Fragment {
                         cardView.setY(
                                 (constraintLayout.getHeight() - offsetViewBounds.top) / cardY);
 
-                    if (cardRotation != -1) cardView.setRotation(cardRotation);
+                    if (cardRotation != -1) {
+                        cardView.setRotation(cardRotation);
+                        angleSlider.setValue(cardRotation);
+                    }
                 });
 
         AtomicReference<Float> dX = new AtomicReference<>(cardView.getX());
@@ -191,6 +195,10 @@ public class CustomiseFragment extends Fragment {
                     }
                     return true;
                 });
+
+        //noinspection UnnecessaryUnicodeEscape
+        angleSlider.setLabelFormatter(
+                value -> String.format(Locale.getDefault(), "%.2f%c", value, '\u00B0'));
 
         angleSlider.addOnChangeListener(
                 (slider, value, fromUser) -> {

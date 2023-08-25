@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else if ("CustomiseFragment".equals(homeFAB.getTag())) {
 
                 homeFAB.setTag(null);
+                homeFAB.setElevation(0);
                 homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_menu));
 
                 updateViewPager();
@@ -186,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .commit();
 
                 homeFAB.setTag("CustomiseFragment");
+                homeFAB.setElevation(Utils.Companion.DPtoPX(this, 12));
                 homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_done));
             } else if (id == R.id.bgFAB) {
 
@@ -261,6 +263,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if ("CustomiseFragment".equals(homeFAB.getTag())) {
 
             homeFAB.setTag(null);
+            homeFAB.setElevation(0);
             homeFAB.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_menu));
 
             updateViewPager();
