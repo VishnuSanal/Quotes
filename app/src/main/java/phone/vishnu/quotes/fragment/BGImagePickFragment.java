@@ -54,7 +54,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import phone.vishnu.quotes.InputStreamVolleyRequest;
+import phone.vishnu.quotes.request.InputStreamVolleyRequest;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.BGImageRVAdapter;

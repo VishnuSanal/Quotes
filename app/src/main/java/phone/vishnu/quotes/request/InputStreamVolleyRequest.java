@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package phone.vishnu.quotes;
+package phone.vishnu.quotes.request;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
