@@ -92,11 +92,18 @@ public class TourFragment extends Fragment {
 
         viewPager.registerOnPageChangeCallback(
                 new ViewPager2.OnPageChangeCallback() {
+
+                    private boolean settled = false;
+
                     @Override
-                    public void onPageScrolled(
-                            int position, float positionOffset, int positionOffsetPixels) {
-                        super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                        if ((position == pageCount)) tourCompleted();
+                    public void onPageScrollStateChanged(int state) {
+                        super.onPageScrollStateChanged(state);
+
+                        if (state == ViewPager2.SCROLL_STATE_DRAGGING) settled = false;
+
+                        if (state == ViewPager2.SCROLL_STATE_SETTLING) settled = true;
+
+                        if (state == ViewPager2.SCROLL_STATE_IDLE && !settled) tourCompleted();
                     }
                 });
     }

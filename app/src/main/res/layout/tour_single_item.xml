@@ -4,8 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".fragment.TourSingleFragment"
-	>
+	tools:context=".fragment.TourSingleFragment">
 
 	<ImageView
 		android:id="@+id/tourImage"
@@ -41,7 +40,9 @@
 		android:textStyle="bold"
 		app:layout_constraintBottom_toTopOf="@id/tourDescription"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent" />
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/tourImage"
+		app:layout_constraintVertical_bias="0" />
 
 	<TextView
 		android:id="@+id/tourDescription"
@@ -57,8 +58,9 @@
 		android:textColor="@color/introTextColor"
 		android:textSize="20sp"
 		android:textStyle="bold"
-		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent" />
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/tourTitle"
+		app:layout_constraintVertical_bias="0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

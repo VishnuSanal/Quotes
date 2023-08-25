@@ -60,21 +60,19 @@ public class TourViewPagerAdapter extends FragmentStateAdapter {
                 new TourItem(
                         R.drawable.ic_tour_announcement,
                         fragmentActivity.getString(R.string.welcome),
-                        fragmentActivity.getString(R.string.welcome_to_quotes_status_creator)));
-
-        tourItems.add(
-                new TourItem(
-                        R.drawable.ic_tour_app,
-                        fragmentActivity.getString(R.string.it_works_like),
-                        fragmentActivity.getString(
-                                R.string
-                                        .quotes_status_creator_lets_you_share_quotations_as_status_images_on_social_media)));
+                        fragmentActivity.getString(R.string.welcome_desc)));
 
         tourItems.add(
                 new TourItem(
                         R.drawable.ic_tour_go,
-                        fragmentActivity.getString(R.string.spread_positivity_with_us),
-                        fragmentActivity.getString(R.string.get_started_by_sharing_a_quote)));
+                        fragmentActivity.getString(R.string.highly_customizable),
+                        fragmentActivity.getString(R.string.highly_customizable_desc)));
+
+        tourItems.add(
+                new TourItem(
+                        R.drawable.ic_tour_app,
+                        fragmentActivity.getString(R.string.feature_rich),
+                        fragmentActivity.getString(R.string.huge_collection_desc)));
 
         return tourItems;
     }

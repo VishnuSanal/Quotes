@@ -61,13 +61,11 @@
 	<string name="friend">Freund</string>
 	<string name="pick_background_color">Hintergrundfarbe auswählen</string>
 	<string name="add_to_favorites">Zu Favoriten hinzufügen</string>
-	<string name="get_started_by_sharing_a_quote">Legen Sie los, indem Sie ein Zitat teilen!</string>
 	<string name="source_code">Quellcode</string>
 	<string name="comment">Kommentar:</string>
 	<string name="pick_font_color">Schriftfarbe auswählen</string>
 	<string name="daily_reminder">Tägliche Erinnerung</string>
 	<string name="dream">Traum</string>
-	<string name="it_works_like">Es funktioniert so</string>
 	<string name="default_string">Standard</string>
 	<string name="inspiration">Inspiration</string>
 	<string name="follow_quotes_status_creator_on_instagram">Quotes Status Creator auf Instagram folgen</string>
@@ -98,7 +96,6 @@
 	<string name="motivation">Motivation</string>
 	<string name="action_cancelled">Aktion abgebrochen!</string>
 	<string name="share_the_app">App teilen</string>
-	<string name="welcome_to_quotes_status_creator">Willkommen bei Quotes Status Creator</string>
 	<string name="courage">Courage</string>
 	<string name="try_again">Erneut versuchen</string>
 	<string name="reverse_swipe_action_on_favorites">Wischaktion bei Favoriten umkehren</string>
