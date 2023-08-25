@@ -7,6 +7,7 @@
 
 	<color name="textColor">#FFFFFF</color>
 	<color name="textColorLight">#ECE4E4</color>
+	<color name="disabledTextColor">#514E4E</color>
 
 	<color name="noColorIconColor">#BDBDBD</color>
 

@@ -28,11 +28,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
+import phone.vishnu.quotes.InputStreamVolleyRequest;
 import phone.vishnu.quotes.controller.AppController;
+import phone.vishnu.quotes.response.FontItemAsyncResponse;
 import phone.vishnu.quotes.response.FontListAsyncResponse;
 
 public class FontsRepository {
@@ -42,7 +47,10 @@ public class FontsRepository {
 
     private final ArrayList<Uri> fontPathArrayList = new ArrayList<>();
 
-    public void getFontPaths(final FontListAsyncResponse callBack) {
+    public void getFontPaths(
+            final FontListAsyncResponse callBack,
+            final FontItemAsyncResponse itemResponse,
+            File filesDir) {
 
         final String url =
                 "https://raw.githubusercontent.com/VishnuSanal/Quotes/master/fonts/fonts.json";
@@ -60,9 +68,16 @@ public class FontsRepository {
                                                 response -> {
                                                     for (int i = 0; i < response.length(); i++) {
                                                         try {
-                                                            fontPathArrayList.add(
+
+                                                            Uri uri =
                                                                     Uri.parse(
-                                                                            response.getString(i)));
+                                                                            response.getString(i));
+                                                            fontPathArrayList.add(uri);
+
+                                                            downloadFont(
+                                                                    uri.getLastPathSegment(),
+                                                                    itemResponse,
+                                                                    filesDir);
                                                         } catch (JSONException e) {
                                                             e.printStackTrace();
                                                         }
@@ -142,5 +157,44 @@ public class FontsRepository {
                         });
 
         thread.start();
+    }
+
+    private void downloadFont(
+            String fontString, FontItemAsyncResponse itemResponse, File filesDir) {
+
+        final File f = new File(filesDir, fontString);
+
+        File otfFile = new File(filesDir, fontString.replace(".ttf", ".otf"));
+
+        if (f.exists() || otfFile.exists()) return;
+
+        String fontURL = fontPrefix + fontString + "?raw=true";
+
+        AppController.getInstance()
+                .addToRequestQueue(
+                        new InputStreamVolleyRequest(
+                                Request.Method.GET,
+                                fontURL,
+                                (Response.Listener<byte[]>)
+                                        response -> {
+                                            try {
+
+                                                File file = new File(f.toString());
+
+                                                FileOutputStream fileOutputStream =
+                                                        new FileOutputStream(file);
+
+                                                fileOutputStream.write(response);
+                                                fileOutputStream.flush();
+                                                fileOutputStream.close();
+
+                                                itemResponse.reportProgress();
+
+                                            } catch (IOException | NullPointerException e) {
+                                                e.printStackTrace();
+                                            }
+                                        },
+                                Throwable::printStackTrace,
+                                null));
     }
 }

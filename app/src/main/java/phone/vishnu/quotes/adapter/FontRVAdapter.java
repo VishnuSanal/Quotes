@@ -26,6 +26,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,8 +35,6 @@ import com.google.android.material.progressindicator.LinearProgressIndicator;
 import java.io.File;
 import java.util.Objects;
 import phone.vishnu.quotes.R;
-import phone.vishnu.quotes.asynctask.DownloadFontTask;
-import phone.vishnu.quotes.repository.FontsRepository;
 
 public class FontRVAdapter extends ListAdapter<String, FontRVAdapter.ViewHolder> {
 
@@ -97,31 +97,11 @@ public class FontRVAdapter extends ListAdapter<String, FontRVAdapter.ViewHolder>
                         .show();
                 e.printStackTrace();
             }
-
         } else {
-
-            new DownloadFontTask(
-                            f.toString(),
-                            () -> {
-                                holder.progressBar.setVisibility(View.GONE);
-
-                                try {
-                                    Typeface face = Typeface.createFromFile(f);
-                                    holder.fontTV.setTypeface(face);
-                                } catch (Exception e) {
-                                    Toast.makeText(
-                                                    holder.itemView.getContext(),
-                                                    holder.itemView
-                                                            .getContext()
-                                                            .getString(
-                                                                    R.string
-                                                                            .oops_something_went_wrong),
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
-                                    e.printStackTrace();
-                                }
-                            })
-                    .execute(FontsRepository.fontPrefix + fontString);
+            holder.fontTV.setTextColor(
+                    ContextCompat.getColor(
+                            holder.itemView.getContext(), R.color.disabledTextColor));
+            holder.constraintLayout.setOnClickListener(null);
         }
 
         fontString = fontString.replace(".ttf", "").replace(".otf", "");
@@ -141,11 +121,13 @@ public class FontRVAdapter extends ListAdapter<String, FontRVAdapter.ViewHolder>
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final ConstraintLayout constraintLayout;
         private final TextView fontTV;
         private final LinearProgressIndicator progressBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            constraintLayout = itemView.findViewById(R.id.fontSingleItemConstraintLayout);
             fontTV = itemView.findViewById(R.id.fontSingleItemTitle);
             progressBar = itemView.findViewById(R.id.fontSingleItemProgressBar);
 

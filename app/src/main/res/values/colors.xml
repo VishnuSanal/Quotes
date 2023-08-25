@@ -12,6 +12,7 @@
 
 	<color name="textColor">#000000</color>
 	<color name="textColorLight">#5C5C5C</color>
+	<color name="disabledTextColor">#918C8C</color>
 
 	<color name="noColorIconColor">#8B000000</color>
 

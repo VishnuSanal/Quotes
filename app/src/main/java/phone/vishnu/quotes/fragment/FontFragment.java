@@ -19,6 +19,7 @@
 
 package phone.vishnu.quotes.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -41,7 +42,6 @@ import java.util.ArrayList;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.adapter.FontRVAdapter;
-import phone.vishnu.quotes.asynctask.DownloadFontTask;
 import phone.vishnu.quotes.helper.FileUtils;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
 import phone.vishnu.quotes.repository.FontsRepository;
@@ -116,10 +116,8 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                     list.add(fontString);
                 }
             }
-            if (getContext() != null && adapter != null) {
-                adapter.submitList(list);
-                adapter.notifyDataSetChanged();
-            }
+
+            notifyDataSetChanged();
         }
 
         if (isNetworkAvailable(requireContext())) {
@@ -129,11 +127,9 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                             fontPaths -> {
                                 for (Uri fontPath : fontPaths) {
 
-                                    String fontString =
-                                            fontPath.getLastPathSegment()
-                                                    .replace(".ttf", "")
-                                                    .replace(".otf", "");
+                                    String fontString = fontPath.getLastPathSegment();
 
+                                    fontString = fontString.replace(".ttf", "").replace(".otf", "");
                                     fontString =
                                             fontString.toUpperCase().charAt(0)
                                                     + fontString.substring(1);
@@ -147,15 +143,13 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
 
                                         list.add(fontString);
 
-                                        if (getContext() != null && adapter != null) {
-                                            adapter.submitList(list);
-                                            adapter.notifyDataSetChanged();
-                                        }
+                                        notifyDataSetChanged();
                                     }
                                 }
-
                                 progressBar.setVisibility(View.GONE);
-                            });
+                            },
+                            this::notifyDataSetChanged,
+                            requireContext().getFilesDir());
         }
 
         openTV.setOnClickListener(
@@ -205,40 +199,6 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                                 .notifyDataSetChanged();
 
                         dismiss();
-
-                    } else {
-
-                        new DownloadFontTask(
-                                        f.toString(),
-                                        () -> {
-                                            if (getActivity() != null) {
-
-                                                sharedPreferenceHelper.setFontPath(f.toString());
-
-                                                Toast.makeText(
-                                                                requireContext(),
-                                                                String.format(
-                                                                        "%s\n%s",
-                                                                        getString(
-                                                                                R.string.font_set),
-                                                                        getString(
-                                                                                R.string
-                                                                                        .applying_changes)),
-                                                                Toast.LENGTH_SHORT)
-                                                        .show();
-                                                progressDialog.dismiss();
-
-                                                ((MainActivity) requireContext())
-                                                        .getQuoteViewPagerAdapter()
-                                                        .notifyDataSetChanged();
-
-                                                dismiss();
-
-                                            } else {
-                                                progressDialog.dismiss();
-                                            }
-                                        })
-                                .execute(FontsRepository.fontPrefix + fontString);
                     }
                 });
     }
@@ -291,5 +251,13 @@ public class FontFragment extends BaseBottomSheetDialogFragment {
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void notifyDataSetChanged() {
+        if (getContext() != null && adapter != null) {
+            adapter.submitList(list);
+            adapter.notifyDataSetChanged();
+        }
     }
 }
