@@ -15,7 +15,7 @@
 		android:layout_margin="8dp"
 		android:letterSpacing="0.15"
 		android:padding="8dp"
-		android:text="@string/pick_an_option"
+		android:text="@string/choose_a_background"
 		android:textColor="@color/accentTextColor"
 		android:textSize="16sp"
 		app:layout_constraintEnd_toEndOf="parent"
