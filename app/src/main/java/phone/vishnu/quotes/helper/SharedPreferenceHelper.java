@@ -177,7 +177,7 @@ public class SharedPreferenceHelper {
     }
 
     public int getShareButtonAction() {
-        return sharedPreferences.getInt(SHARE_BUTTON_ACTION, 1);
+        return sharedPreferences.getInt(SHARE_BUTTON_ACTION, 3);
     }
 
     public void setCardX(float X) {
@@ -268,7 +268,7 @@ public class SharedPreferenceHelper {
         deleteFavPreference();
         setFirstRunBoolean(true);
         setTotalQuotesCount(0);
-        setShareButtonAction(1);
+        setShareButtonAction(3);
         setFontSizePreference(24);
         setAppThemePreference(2);
         setFavHintShownCount(0);
