@@ -34,7 +34,7 @@
 				android:src="@drawable/ic_move"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
-				app:tint="@color/textColor" />
+				app:tint="@color/colorWhite" />
 
 			<ImageView
 				android:id="@+id/customiseFavoriteImageView"

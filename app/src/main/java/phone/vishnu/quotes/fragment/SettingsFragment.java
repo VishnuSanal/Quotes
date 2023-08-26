@@ -87,7 +87,8 @@ public class SettingsFragment extends BaseBottomSheetDialogFragment {
                         getString(R.string.reverse_swipe_action_on_favorites)));
         shareActionPickTV.setText(
                 getSpannableText(
-                        getString(R.string.share), getString(R.string.share_button_action)));
+                        getString(R.string.default_action),
+                        getString(R.string.share_button_behaviour)));
         darkModePickTV.setText(
                 getSpannableText(
                         getString(R.string.theme), getString(R.string.pick_a_theme_for_the_app)));

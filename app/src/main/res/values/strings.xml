@@ -138,7 +138,8 @@
 	<string name="reverse_swipe">Reverse Swipe</string>
 	<string name="reverse_swipe_action_on_favorites">Reverse Swipe Action on Favorites</string>
 	<string name="share">Share</string>
-	<string name="share_button_action">Share Button Action</string>
+	<string name="default_action">Default Action</string>
+	<string name="share_button_behaviour">Share Button Behaviour</string>
 	<string name="theme">Theme</string>
 	<string name="pick_a_theme_for_the_app">Pick a theme for the app</string>
 	<string name="settings_reset">Settings Reset</string>
