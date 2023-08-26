@@ -169,42 +169,44 @@ public class ColorPickFragment extends BaseBottomSheetDialogFragment {
     private List<String> getColorList() {
         return Arrays.asList(
                 "#00000000",
-                "#FFF36D63",
-                "#FFE91E63",
-                "#FFADD159",
                 "#FF8964CC",
                 "#FF5D6DC6",
                 "#FF61ACE8",
                 "#FF00BCD4",
                 "#FF65C069",
                 "#FF9ACA62",
+                "#FFADD159",
                 "#FFCBD755",
                 "#FFF6E973",
                 "#FFF5CD54",
                 "#FFF3A532",
                 "#FFF3754E",
+                "#FFF36D63",
+                "#FFE91E63",
                 "#FF607D8B",
+                "#FF000000",
                 "#00000000");
     }
 
     private List<String> getFontColorList() {
         return Arrays.asList(
                 "#00000000",
-                "#FFF36D63",
-                "#FFE91E63",
-                "#FFADD159",
                 "#FF8964CC",
                 "#FF5D6DC6",
                 "#FF61ACE8",
                 "#FF00BCD4",
                 "#FF65C069",
                 "#FF9ACA62",
+                "#FFADD159",
                 "#FFCBD755",
                 "#FFF6E973",
                 "#FFF5CD54",
                 "#FFF3A532",
                 "#FFF3754E",
+                "#FFF36D63",
+                "#FFE91E63",
                 "#FF607D8B",
+                "#FF000000",
                 "#FFFFFFFF");
     }
 }
