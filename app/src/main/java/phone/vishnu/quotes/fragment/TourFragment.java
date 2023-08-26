@@ -319,8 +319,6 @@ public class TourFragment extends Fragment {
 
                                             if (dialog != null && dialog.isShowing())
                                                 dialog.cancel();
-
-                                            moveToNext();
                                         },
                                 Throwable::printStackTrace,
                                 null));
