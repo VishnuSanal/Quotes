@@ -74,10 +74,6 @@ public class AboutFragment extends BaseBottomSheetDialogFragment {
                     if (position == 0) {
                         openLink("https://t.me/QuotesStatusCreator");
                     } else if (position == 1) {
-                        openLink("https://instagram.com/quotes_status_creator");
-                    } else if (position == 2) {
-                        openLink("https://t.me/DailyQuotesStatus");
-                    } else if (position == 3) {
 
                         Uri uriUrl =
                                 Uri.parse(
@@ -100,7 +96,7 @@ public class AboutFragment extends BaseBottomSheetDialogFragment {
                                                             + requireContext().getPackageName())));
                         }
 
-                    } else if (position == 4) {
+                    } else if (position == 2) {
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("text/plain");
                         intent.putExtra(
@@ -113,11 +109,11 @@ public class AboutFragment extends BaseBottomSheetDialogFragment {
                                 Intent.createChooser(
                                         intent, getString(R.string.share_quotes_status_creator));
                         startActivity(chooser);
-                    } else if (position == 5) {
+                    } else if (position == 3) {
                         openLink("https://hosted.weblate.org/engage/quotes-status-creator/");
-                    } else if (position == 6) {
+                    } else if (position == 4) {
                         openLink("https://github.com/VishnuSanal/Quotes");
-                    } else if (position == 7) {
+                    } else if (position == 5) {
                         openLink("https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md");
                     }
                 });
@@ -134,14 +130,6 @@ public class AboutFragment extends BaseBottomSheetDialogFragment {
                         R.drawable.ic_home,
                         getString(R.string.join_telegram_group),
                         getString(R.string.join_our_community_on_telegram)),
-                new TourItem(
-                        R.drawable.ic_whatshot,
-                        getString(R.string.follow_on_instagram),
-                        getString(R.string.follow_quotes_status_creator_on_instagram)),
-                new TourItem(
-                        R.drawable.ic_color_lens,
-                        getString(R.string.join_telegram_channel),
-                        getString(R.string.get_a_daily_dose_of_inspiration_on_your_inbox)),
                 new TourItem(
                         R.drawable.ic_done,
                         getString(R.string.rate_the_app),
