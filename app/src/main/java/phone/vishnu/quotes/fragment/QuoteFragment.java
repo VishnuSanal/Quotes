@@ -91,8 +91,6 @@ public class QuoteFragment extends Fragment {
         String fontColor = sharedPreferenceHelper.getFontColorPreference();
         String fontPath = sharedPreferenceHelper.getFontPath();
         float fontSize = sharedPreferenceHelper.getFontSizePreference();
-        //        float cardX = sharedPreferenceHelper.getCardX();
-        //        float cardY = sharedPreferenceHelper.getCardY();
 
         if ((!fontPath.equals("-1")) && (new File(fontPath).exists())) {
             try {
@@ -124,6 +122,11 @@ public class QuoteFragment extends Fragment {
 
         cardView.setCardBackgroundColor(Color.parseColor(hexColor));
         authorText.setBackgroundColor(Color.parseColor(hexColor));
+
+        if (hexColor.equals("#00000000")) {
+            cardView.setElevation(0);
+            cardView.setTranslationZ(0);
+        }
 
         // noinspection ConstantConditions
         quote =
