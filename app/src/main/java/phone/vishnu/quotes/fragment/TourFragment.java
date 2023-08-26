@@ -122,6 +122,15 @@ public class TourFragment extends Fragment {
 
                     private boolean settled = false;
 
+                    private int position = 0;
+
+                    @Override
+                    public void onPageScrolled(
+                            int position, float positionOffset, int positionOffsetPixels) {
+                        super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                        this.position = position;
+                    }
+
                     @Override
                     public void onPageScrollStateChanged(int state) {
                         super.onPageScrollStateChanged(state);
@@ -130,7 +139,9 @@ public class TourFragment extends Fragment {
 
                         if (state == ViewPager2.SCROLL_STATE_SETTLING) settled = true;
 
-                        if (state == ViewPager2.SCROLL_STATE_IDLE && !settled)
+                        if (state == ViewPager2.SCROLL_STATE_IDLE
+                                && !settled
+                                && position == adapter.getItemCount() - 1)
                             checkDownloadStatusAndMoveToNext();
                     }
                 });
