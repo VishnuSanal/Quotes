@@ -48,9 +48,6 @@
 	<string name="share_quotes_status_creator">Partager Quotes Status Creator</string>
 	<string name="join_telegram_group">Rejoindre le groupe Telegram</string>
 	<string name="join_our_community_on_telegram">Rejoignez notre communauté sur Telegram</string>
-	<string name="follow_on_instagram">Suivre sur Instagram</string>
-	<string name="follow_quotes_status_creator_on_instagram">Suivez Quotes Status Creator sur Instagram</string>
-	<string name="join_telegram_channel">Rejoindre le canal Telegram</string>
 	<string name="source_code">Code source</string>
 	<string name="view_source_code_on_github">Voir le code source sur GitHub</string>
 	<string name="thanks_to">Merci à</string>
@@ -80,12 +77,10 @@
 	<string name="please_wait">Veuillez patienter…</string>
 	<string name="welcome">Bienvenue !</string>
 	<string name="field_empty">Champ vide</string>
-	<string name="background_set">Arrière-plan défini</string>
 	<string name="applying_changes">Application des changements</string>
 	<string name="pick_font_color">Choisir la couleur de la police</string>
 	<string name="version">Version</string>
 	<string name="share_text">Installez Quotes Status Creator, une application à code ouvert qui vous permet de partager des citations en tant qu\'images de statut sur les médias sociaux</string>
-	<string name="get_a_daily_dose_of_inspiration_on_your_inbox">Recevez une dose quotidienne d\'inspiration dans votre boîte de réception !</string>
 	<string name="share_the_app">Partager l\'appli</string>
 	<string name="rate_the_app">Évaluez l\'application</string>
 	<string name="fail">Échec</string>

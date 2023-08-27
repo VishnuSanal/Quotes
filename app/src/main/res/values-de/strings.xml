@@ -57,8 +57,7 @@
 	<string name="swipe_right_to_share">Zum Teilen nach rechts wischen</string>
 	<string name="swipe_right_to_delete">Zum Löschen nach rechts wischen</string>
 	<string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
-	<string name="get_a_daily_dose_of_inspiration_on_your_inbox">Holen Sie sich eine tägliche Dosis an Inspiration in Ihren Posteingang!</string>
-	<string name="friend">Freund</string>
+    <string name="friend">Freund</string>
 	<string name="pick_background_color">Hintergrundfarbe auswählen</string>
 	<string name="add_to_favorites">Zu Favoriten hinzufügen</string>
 	<string name="source_code">Quellcode</string>
@@ -68,10 +67,8 @@
 	<string name="dream">Traum</string>
 	<string name="default_string">Standard</string>
 	<string name="inspiration">Inspiration</string>
-	<string name="follow_quotes_status_creator_on_instagram">Quotes Status Creator auf Instagram folgen</string>
-	<string name="oops_something_went_wrong">Ups! Etwas ist schief gelaufen!</string>
-	<string name="follow_on_instagram">Auf Instagram folgen</string>
-	<string name="added_to_favorites">Zu den Favoriten hinzugefügt</string>
+    <string name="oops_something_went_wrong">Ups! Etwas ist schief gelaufen!</string>
+    <string name="added_to_favorites">Zu den Favoriten hinzugefügt</string>
 	<string name="report_copied_to_clipboard">Bericht in Zwischenablage kopiert</string>
 	<string name="action">Aktion</string>
 	<string name="swipe_left_to_share">Zum Teilen nach links wischen</string>
@@ -80,8 +77,7 @@
 	<string name="wisdom">Weisheit</string>
 	<string name="applying_changes">Änderungen werden angewendet</string>
 	<string name="thought">Gedanke</string>
-	<string name="join_telegram_channel">Telegram-Kanal beitreten</string>
-	<string name="fear">Angst</string>
+    <string name="fear">Angst</string>
 	<string name="undo">Rückgängig</string>
 	<string name="quote_of_the_day">Zitat des Tages</string>
 	<string name="share_random_quote">Zufälliges Zitat teilen</string>

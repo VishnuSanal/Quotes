@@ -52,10 +52,6 @@
 	<string name="share_quotes_status_creator">Share Quotes Status Creator</string>
 	<string name="join_telegram_group">Join Telegram Group</string>
 	<string name="join_our_community_on_telegram">Join our community on Telegram</string>
-	<string name="follow_on_instagram">Follow on Instagram</string>
-	<string name="follow_quotes_status_creator_on_instagram">Follow Quotes Status Creator on Instagram</string>
-	<string name="join_telegram_channel">Join Telegram Channel</string>
-	<string name="get_a_daily_dose_of_inspiration_on_your_inbox">Get a daily dose of inspiration on your inbox!</string>
 	<string name="rate_the_app">Rate the App</string>
 	<string name="rate_this_app_on_google_play">Rate this app on Google Play</string>
 	<string name="share_the_app">Share the App</string>
@@ -114,7 +110,6 @@
 	<string name="field_empty">Field Empty</string>
 	<string name="quote_added_to_favorites">Quote added to Favorites</string>
 
-	<string name="background_set">Background Set</string>
 	<string name="applying_changes">Applying Changes</string>
 
 	<string name="pick_font_color">Pick Font Color</string>
