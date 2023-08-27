@@ -18,4 +18,6 @@
 	<color name="introIconColor">#00B0FF</color>
 	<color name="introTextColor">#666666</color>
 
+	<color name="sliderIconColor">@color/BGColor</color>
+
 </resources>

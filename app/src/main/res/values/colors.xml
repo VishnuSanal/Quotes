@@ -23,6 +23,8 @@
 	<color name="introIconColor">#00B0FF</color>
 	<color name="introTextColor">#5C5C5C</color>
 
+	<color name="sliderIconColor">#DCDCDC</color>
+
 
 	<color name="colorWhite">#FFFFFF</color>
 
