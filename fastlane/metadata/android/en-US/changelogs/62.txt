@@ -4,4 +4,4 @@
 - Faster downloads
 - Better initial config
 
-Full Changelog -> https://github.com/VishnuSanal/Quotes/compare/v3.0.0-alpha...v3.0.0
+Full Changelog -> https://github.com/VishnuSanal/Quotes/compare/v2.10.1...v3.0.0
