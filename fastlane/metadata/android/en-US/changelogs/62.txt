@@ -1,0 +1,7 @@
+- Complete UI/UX overhaul
+- Card customization options viz position & rotation
+- Bug fixes
+- Faster downloads
+- Better initial config
+
+Full Changelog -> https://github.com/VishnuSanal/Quotes/compare/v3.0.0-alpha...v3.0.0

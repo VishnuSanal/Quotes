@@ -2,37 +2,35 @@
 
 Quotes Status Creator lets you share quotations as status images on social media – Quotes Status Creator App
 
-    ☆ Lots of inspirational quotes that can be shared on social media as a high definition images
+    ☆ Lots of inspirational quotes that can be shared on social media as high definition images
     ☆ Quotes Status Creation without any Image Editing whatsoever — in the same user-friendly UI
-    ☆ Browse through Best Quotes → Get Inspired → Share as Status and Spread Positivity
+    ☆ Browse through Best Quotes → Get Inspired → Share as Status on Social Media & Spread Positivity!
 
-<b>⚙How it Works</b>
+<b>Features</b>
 
-Quotes Status Creator App presents you with Famous Quotations. Browse through them, get inspired, share status via social media and spread positivity!
+    • <b>Favorite Quotes</b> — Save your favorite Quotes as Favorites
+    • <b>Share Quotes</b> — Share quotes as a high definition images via social media
+    • <b>️Custom Backgrounds</b> — Customize Quotes with custom background images from Unsplash, solid background colors or images from gallery
+    • <b>Custom Card Colors</b> — Personalize Quotes with custom card colors
+    • <b>Card Rotation & Position</b> — Customize card position & rotation
+    • <b>Custom Fonts</b> — Personalize Quotes with custom fonts & font colors
+    • <b>Custom Quotes</b> — Add your own Quotes
+    • <b>Daily Notification</b> — Get notified with your daily dose of motivation
+    • <b>Multiple Sharing Options</b> — Share Quotes as image & text
+    • <b>App Shortcuts</b> — Home screen shortcuts for easy access
+    • <b>Search</b> — Search for Quotes to discover the ones you like
+    • <b>️Tags</b> — Search for quotes using tags
+    • <b>Home Screen Widget</b> — Daily updating Quote widget
+    • <b>Dark Mode</b> — It fits your soul!
+    • <b>Completely libre software</b> — Copylefted libre software, licensed GPLv3.0
+    • <b>Completely Ad Free</b> — No ads whatsoever!
 
-<b>🚀Features</b>
-
-    • <b>🔖Favorite Quotes</b> — Add quotes to favorites
-    • <b>🔀Share Quotes</b> — Share quotes as a high definition images on social media
-    • <b>🖼️Custom Backgrounds</b> — Personalized quote statuses with custom background images, solid background colors or images from gallery
-    • <b>🎨Custom Card Colors</b> — Personalized quote statuses with custom card colors
-    • <b>🔠Custom Fonts</b> — Personalize quotes statuses with custom fonts
-    • <b>🔡Custom Font Colors</b> — Personalize quotes statuses with custom font colors
-    • <b>✍🏿Custom Quotes</b> — Add your own quotes
-    • <b>🔔Daily Notification</b> — Get notified with your daily dose of motivation
-    • <b>🔁Multiple Sharing Option</b> — Multiple sharing options</b> — Share as image, as text (copy as text to the clipboard) and save to gallery
-    • <b>🚪App Shortcuts</b> — App shortcuts for easy access
-    • <b>🔍Search</b> — Search for quotes to find ones you like
-    • <b>🏷️Tags</b> — Search for quotes using tags
-    • <b>📱Home Screen Widget</b> — There is an auto-updating quote widget
-    • <b>🕶Dark Mode</b> — It fits your soul
-    • <b>👨‍💻Completely libre software</b> — Copylefted libre software, licensed GPLv3+
-    • <b>🚫Completely Ad Free</b> — No ads anywhere
-
-<b>🚀Quotes – Quotes Status Creator App → Quotes Categories</b>
+<b>Quotes – Quotes Status Creator App → Quotes Categories</b>
 
     • Inspirational Quotes
     • Success Quotes
+    • Love Quotes
+    • Action Quotes
     • Life Quotes
     • Wisdom Quotes
     • Attitude Quotes
@@ -43,31 +41,24 @@ Quotes Status Creator App presents you with Famous Quotations. Browse through th
     • Thinking Quotes
     • Optimistic Quotes
     • Creativity Quotes
+    • Perseverance Quotes
 
-<b>☕ Enjoying Quotes? Consider Supporting!</b>
+<b>Enjoying Quotes? Consider Supporting!</b>
 
-Donate to support the development. It requires a lot of time and effort to develop the copylefted libre software app, gratis and ad-free. :D - https://www.buymeacoffee.com/VishnuSanal
+Consider donating to support the development! It requires a lot of time and effort to develop the copylefted libre software app, gratis and ad-free. :D - https://www.buymeacoffee.com/VishnuSanal
 
-<b>🏠 Join Telegram Group</b>
+<b>Join Telegram Group</b>
 
 If you enjoy the app, wish to contribute or simply wish to be with like-minded people, come join us. It is fun :) - https://t.me/QuotesStatusCreator
 
-<b>🎨 Follow Instagram Page</b>
+<b>Feedback and Suggestion</b>
 
-Follow the Instagram page to get your daily dose of inspiration delivered to your feed. If you enjoy the app, you'll enjoy the Instagram page too. Follow and be inspired. - https://instagram.com/quotes_status_creator
+User feedback makes the app better! Your feedback is immensely helpful, and we love to hear from you. Send your feedback/suggestions on our community on Telegram https://t.me/QuotesStatusCreator or feel free to create an issue <a href="https://github.com/VishnuSanal/Quotes/issues/new/choose">here</a> :)
 
-<b>📜 Join Telegram Channel</b>
+<b>Source Code</b>
 
-Join the Telegram Channel to get a Quote as an image & as a text in your inbox — daily. Join it and be inspired. - https://t.me/DailyQuotesStatus
+Quotes - Quotes Status Creator App is completely open-source. Find the source code on GitHub: https://github.com/VishnuSanal/Quotes/
 
-<b>🤩Feedback and Suggestion</b>
+<b>Contribute to the project</b>
 
-Helpful advice makes the app better. Your feedback is immensely helpful, and we love to hear from you. Send your feedback/suggestions on our community on Telegram https://t.me/QuotesStatusCreator or feel free to create an issue here https://github.com/VishnuSanal/Quotes/issues/new/choose :)
-
-<b>👨‍💻Source Code</b>
-
-If you'd like to view the source code of Quotes - Quotes Status Creator App, it's available on GitHub: https://github.com/VishnuSanal/Quotes/
-
-<b>✨ Contribute to the project</b>
-
-Visit the source code on GitHub to start contributing to the project! - https://github.com/VishnuSanal/Quotes/
+Help the project by contributions! <a href="https://github.com/VishnuSanal/Quotes/blob/master/CONTRIBUTING.md">Contribution guide</a> will be a good place to start.
