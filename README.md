@@ -28,13 +28,10 @@
 <a href="https://hosted.weblate.org/engage/quotes-status-creator/">
 <img src="https://hosted.weblate.org/widgets/quotes-status-creator/-/quotes-status-creator/horizontal-auto.svg" alt="Translation status" />
 </a>
+
 <hr>
 
-<pre>
-    ☆ Lots of inspirational quotes that can be shared on social media as high definition images
-    ☆ Quotes Status Creation without any Image Editing whatsoever — in the same user-friendly UI
-    ☆ Browse through Best Quotes → Get Inspired → Share as Status on Social Media & Spread Positivity!
-</pre>
+![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/fastlane/metadata/android/en-US/images/featureGraphic.png?raw=true)
 
 ## Enjoying Quotes? Consider Supporting!
 Consider donating to support the development! It requires a lot of time and effort to develop the
@@ -55,18 +52,16 @@ If you enjoy the app, wish to contribute or simply wish to be with like-minded p
   </a>
 </p>
 
-## Many thanks to [these](https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md) awesome people
+## [Gratitude Logbook!](https://github.com/VishnuSanal/Quotes/blob/master/THANKS.md)
 These folks help & support the development and maintenance of Quotes Status Creator.
 
 ## Contribute to the project
 [CONTRIBUTING.md](https://github.com/VishnuSanal/Quotes/blob/master/CONTRIBUTING.md) would a good place to start :)
 
-## ⭐ Find this repository useful?
+## Find this repository useful?
 Support the project by [starring it](https://github.com/VishnuSanal/Quotes/stargazers) :)
 
 <hr>
-
-![Quotes Status Creator](https://github.com/VishnuSanal/Quotes/blob/master/fastlane/metadata/android/en-US/images/featureGraphic.png?raw=true)
 
 ## Features
 
