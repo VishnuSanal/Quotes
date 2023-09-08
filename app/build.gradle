@@ -35,6 +35,17 @@ android {
 	}
 }
 
+// https://gist.github.com/KenVanHoeylandt/c7a928426bce83ffab400ab1fd99054a?permalink_comment_id=4032669#gistcomment-4032669
+tasks.register('installGitHooks', Copy) {
+	from new File(rootProject.rootDir, 'pre-commit')
+	into { new File(rootProject.rootDir, '.git/hooks') }
+	fileMode 0775
+}
+
+afterEvaluate {
+	preBuild.dependsOn installGitHooks
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.6.1'
