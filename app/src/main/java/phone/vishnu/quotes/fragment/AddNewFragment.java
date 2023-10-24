@@ -107,7 +107,9 @@ public class AddNewFragment extends BaseBottomSheetDialogFragment {
 
         ClipData clipData = clipBoard.getPrimaryClip();
 
-        if (clipData == null || clipData.getItemCount() == 0) return;
+        if (clipData == null
+                || clipData.getItemCount() == 0
+                || clipData.getItemAt(0).getText() == null) return;
 
         String text = clipData.getItemAt(0).getText().toString();
 
