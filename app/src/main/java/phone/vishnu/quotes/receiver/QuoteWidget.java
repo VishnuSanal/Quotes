@@ -193,4 +193,20 @@ public class QuoteWidget extends AppWidgetProvider {
                         .setAction(Constants.WIDGET_SHARE_ACTION)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
+
+    public static void updateWidget(Context context) {
+        try {
+            PendingIntent.getBroadcast(
+                            context,
+                            0,
+                            new Intent(context, QuoteWidget.class)
+                                    .setAction(Constants.WIDGET_UPDATE_ACTION),
+                            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                                    ? PendingIntent.FLAG_IMMUTABLE
+                                    : PendingIntent.FLAG_UPDATE_CURRENT)
+                    .send();
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
+        }
+    }
 }

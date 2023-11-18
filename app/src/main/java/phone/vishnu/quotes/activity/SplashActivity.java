@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.fragment.TourFragment;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
+import phone.vishnu.quotes.receiver.QuoteWidget;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -51,6 +52,8 @@ public class SplashActivity extends AppCompatActivity {
 
         if (!sharedPreferenceHelper.isFirstRun() && sharedPreferenceHelper.isNewFirstRun())
             sharedPreferenceHelper.resetSharedPreferences();
+
+        QuoteWidget.updateWidget(this);
 
         if (sharedPreferenceHelper.isNewFirstRun() || sharedPreferenceHelper.isFirstRun())
             showNewTour();
