@@ -186,6 +186,8 @@
 	<string name="settings_screen_share_tv_hint" translatable="false">Settings Screen Share TV Hint</string>
 	<string name="quote_widget_favourite_button" translatable="false">Quote Widget Favourite Button</string>
 	<string name="quote_widget_share_button" translatable="false">Quote Widget Share Button</string>
+	<string name="quote_widget_quote_container_imageview" translatable="false">Quote Widget Quote Container ImageView</string>
+	<string name="quote_widget_author_container_imageview" translatable="false">Quote Widget Author Container ImageView</string>
 	<string name="bottom_sheet_done_indicator" translatable="false">Bottom Sheet Done Indicator</string>
 	<string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
 	<string name="home_search_image_view" translatable="false">Home Search ImageView</string>

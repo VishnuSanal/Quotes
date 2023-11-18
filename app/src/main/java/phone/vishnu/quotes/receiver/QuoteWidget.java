@@ -25,13 +25,22 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Typeface;
 import android.os.Build;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
+import android.util.Log;
 import android.widget.RemoteViews;
+import java.io.File;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.AlarmHelper;
 import phone.vishnu.quotes.helper.Constants;
 import phone.vishnu.quotes.helper.SharedPreferenceHelper;
+import phone.vishnu.quotes.helper.Utils;
 import phone.vishnu.quotes.model.Quote;
 import phone.vishnu.quotes.repository.QuotesRepository;
 
@@ -96,9 +105,13 @@ public class QuoteWidget extends AppWidgetProvider {
     private void updateQuoteWidget(Context context, Quote quote) {
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.quote_widget);
 
-        remoteViews.setTextViewText(R.id.widgetQuoteTextView, quote.getQuote());
-        remoteViews.setTextViewText(
-                R.id.widgetAuthorTextView, String.format("-%s", quote.getAuthor()));
+        remoteViews.setImageViewBitmap(
+                R.id.widgetQuoteContainerImageView,
+			buildBitmap(context, quote.getQuote(), Layout.Alignment.ALIGN_CENTER));
+
+        remoteViews.setImageViewBitmap(
+                R.id.widgetAuthorContainerImageView,
+			buildBitmap(context, "- " + quote.getAuthor(), Layout.Alignment.ALIGN_OPPOSITE));
 
         remoteViews.setOnClickPendingIntent(
                 R.id.widgetShareImageView,
@@ -114,13 +127,52 @@ public class QuoteWidget extends AppWidgetProvider {
         saveWidgetQuote(context, quote);
     }
 
-    private void initAppWidget(final Context context) {
+    public Bitmap buildBitmap(Context context, String text, Layout.Alignment alignment) {
+        TextPaint textPaint = new TextPaint();
+        textPaint.setAntiAlias(true);
+        textPaint.setTextSize(Utils.Companion.DPtoPX(context, 24));
+        textPaint.setColor(context.getResources().getColor(R.color.widgetTextColor));
 
+        SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(context);
+
+        String fontPath = sharedPreferenceHelper.getFontPath();
+
+        if (!(fontPath.equals("-1")) && (new File(fontPath).exists())) {
+            try {
+                Typeface face = Typeface.createFromFile(fontPath);
+                textPaint.setTypeface(face);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        StaticLayout staticLayout =
+                new StaticLayout(
+                        text,
+                        textPaint,
+                        Utils.Companion.getScreenWidth(),
+                        alignment,
+                        1.0f,
+                        0,
+                        false);
+
+        Bitmap bitmap =
+                Bitmap.createBitmap(
+                        Utils.Companion.getScreenWidth(),
+                        staticLayout.getHeight(),
+                        Bitmap.Config.ARGB_8888);
+
+        staticLayout.draw(new Canvas(bitmap));
+
+        return bitmap;
+    }
+
+    private void initAppWidget(final Context context) {
         new QuotesRepository()
                 .getRandomQuote(
-                        quote -> {
-                            updateQuoteWidget(context, quote);
-                        });
+                        quote ->
+							updateQuoteWidget(context, quote)
+				);
     }
 
     private void saveWidgetQuote(Context context, Quote quote) {
