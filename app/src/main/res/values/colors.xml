@@ -25,6 +25,7 @@
 
 	<color name="sliderIconColor">#DCDCDC</color>
 
+	<color name="widgetBGColor">@color/sliderIconColor</color>
 	<color name="widgetTextColor">@color/textColor</color>
 
 

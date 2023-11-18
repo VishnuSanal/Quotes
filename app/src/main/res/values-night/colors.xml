@@ -20,6 +20,7 @@
 
 	<color name="sliderIconColor">@color/BGColor</color>
 
+	<color name="widgetBGColor">@color/BGColor</color>
 	<color name="widgetTextColor">@color/textColorLight</color>
 
 </resources>

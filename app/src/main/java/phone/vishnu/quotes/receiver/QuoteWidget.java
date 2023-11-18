@@ -102,6 +102,13 @@ public class QuoteWidget extends AppWidgetProvider {
     }
 
     private void updateQuoteWidget(Context context, Quote quote) {
+
+        //		quote = new Quote(
+        //			"In the depth of winter, I finally learned that there was within me an invincible
+        // summer",
+        //			"Albert Camus"
+        //		);
+
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.quote_widget);
 
         remoteViews.setImageViewBitmap(
