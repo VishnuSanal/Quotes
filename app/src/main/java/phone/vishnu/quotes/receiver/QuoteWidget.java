@@ -32,7 +32,6 @@ import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
-import android.util.Log;
 import android.widget.RemoteViews;
 import java.io.File;
 import phone.vishnu.quotes.R;
@@ -107,11 +106,11 @@ public class QuoteWidget extends AppWidgetProvider {
 
         remoteViews.setImageViewBitmap(
                 R.id.widgetQuoteContainerImageView,
-			buildBitmap(context, quote.getQuote(), Layout.Alignment.ALIGN_CENTER));
+                buildBitmap(context, quote.getQuote(), Layout.Alignment.ALIGN_CENTER));
 
         remoteViews.setImageViewBitmap(
                 R.id.widgetAuthorContainerImageView,
-			buildBitmap(context, "- " + quote.getAuthor(), Layout.Alignment.ALIGN_OPPOSITE));
+                buildBitmap(context, "- " + quote.getAuthor(), Layout.Alignment.ALIGN_OPPOSITE));
 
         remoteViews.setOnClickPendingIntent(
                 R.id.widgetShareImageView,
@@ -168,11 +167,7 @@ public class QuoteWidget extends AppWidgetProvider {
     }
 
     private void initAppWidget(final Context context) {
-        new QuotesRepository()
-                .getRandomQuote(
-                        quote ->
-							updateQuoteWidget(context, quote)
-				);
+        new QuotesRepository().getRandomQuote(quote -> updateQuoteWidget(context, quote));
     }
 
     private void saveWidgetQuote(Context context, Quote quote) {
