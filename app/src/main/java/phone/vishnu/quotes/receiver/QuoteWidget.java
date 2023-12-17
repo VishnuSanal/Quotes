@@ -48,10 +48,26 @@ import phone.vishnu.quotes.repository.QuotesRepository;
 
 public class QuoteWidget extends AppWidgetProvider {
 
+    public static void updateWidget(Context context) {
+        try {
+            PendingIntent.getBroadcast(
+                            context,
+                            0,
+                            new Intent(context, QuoteWidget.class)
+                                    .setAction(Constants.WIDGET_UPDATE_ACTION),
+                            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                                    ? PendingIntent.FLAG_IMMUTABLE
+                                    : PendingIntent.FLAG_UPDATE_CURRENT)
+                    .send();
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onEnabled(Context context) {
         super.onEnabled(context);
-        AlarmHelper.scheduleWidgetUpdate(context, Constants.WIDGET_UPDATE_ACTION);
+        AlarmHelper.scheduleWidgetUpdate(context);
         Quote widgetQuote = new SharedPreferenceHelper(context).getWidgetQuote();
         if (widgetQuote != null) updateQuoteWidget(context, widgetQuote);
         else initAppWidget(context);
@@ -61,14 +77,14 @@ public class QuoteWidget extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
         new SharedPreferenceHelper(context).deleteWidgetQuote();
-        AlarmHelper.removeWidgetUpdate(context, Constants.WIDGET_UPDATE_ACTION);
+        AlarmHelper.removeWidgetUpdate(context);
     }
 
     @Override
     public void onDisabled(Context context) {
         super.onDisabled(context);
         new SharedPreferenceHelper(context).deleteWidgetQuote();
-        AlarmHelper.removeWidgetUpdate(context, Constants.WIDGET_UPDATE_ACTION);
+        AlarmHelper.removeWidgetUpdate(context);
     }
 
     @Override
@@ -218,21 +234,5 @@ public class QuoteWidget extends AppWidgetProvider {
                 new Intent(context, MainActivity.class)
                         .setAction(Constants.WIDGET_SHARE_ACTION)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-    }
-
-    public static void updateWidget(Context context) {
-        try {
-            PendingIntent.getBroadcast(
-                            context,
-                            0,
-                            new Intent(context, QuoteWidget.class)
-                                    .setAction(Constants.WIDGET_UPDATE_ACTION),
-                            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-                                    ? PendingIntent.FLAG_IMMUTABLE
-                                    : PendingIntent.FLAG_UPDATE_CURRENT)
-                    .send();
-        } catch (PendingIntent.CanceledException e) {
-            e.printStackTrace();
-        }
     }
 }

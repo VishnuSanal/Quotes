@@ -207,11 +207,11 @@ public class AlarmHelper {
         }
     }
 
-    public static void scheduleWidgetUpdate(Context context, String QUOTE_WIDGET_UPDATE) {
+    public static void scheduleWidgetUpdate(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(context, QuoteWidget.class);
-        intent.setAction(QUOTE_WIDGET_UPDATE);
+        intent.setAction(Constants.WIDGET_UPDATE_ACTION);
         PendingIntent pendingIntent =
                 PendingIntent.getBroadcast(
                         context,
@@ -237,11 +237,11 @@ public class AlarmHelper {
                     pendingIntent);
     }
 
-    public static void removeWidgetUpdate(Context context, String QUOTE_WIDGET_UPDATE) {
+    public static void removeWidgetUpdate(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(context, QuoteWidget.class);
-        intent.setAction(QUOTE_WIDGET_UPDATE);
+        intent.setAction(Constants.WIDGET_UPDATE_ACTION);
         PendingIntent pendingIntent =
                 PendingIntent.getBroadcast(
                         context,
