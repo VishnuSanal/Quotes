@@ -34,6 +34,9 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.widget.RemoteViews;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.MainActivity;
 import phone.vishnu.quotes.helper.AlarmHelper;
@@ -174,7 +177,23 @@ public class QuoteWidget extends AppWidgetProvider {
     }
 
     private void initAppWidget(final Context context) {
-        new QuotesRepository().getRandomQuote(quote -> updateQuoteWidget(context, quote));
+
+        String date =
+                new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
+                        .format(Calendar.getInstance().getTime());
+
+        SharedPreferenceHelper helper = new SharedPreferenceHelper(context);
+
+        Quote widgetQuote = helper.getWidgetQuote();
+
+        if (!date.equals(helper.getWidgetLastUpdated()) || widgetQuote == null)
+            new QuotesRepository()
+                    .getRandomQuote(
+                            quote -> {
+                                updateQuoteWidget(context, quote);
+                                helper.setWidgetLastUpdated(date);
+                            });
+        else updateQuoteWidget(context, widgetQuote);
     }
 
     private void saveWidgetQuote(Context context, Quote quote) {

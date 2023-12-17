@@ -44,6 +44,7 @@ public class SharedPreferenceHelper {
 
     private final String WIDGET_QUOTE_STRING = "widgetQuoteString";
     private final String WIDGET_AUTHOR_STRING = "widgetAuthorString";
+    private final String WIDGET_LAST_UPDATED = "widgetLastUpdatedString";
 
     private final String TOTAL_QUOTE_COUNT = "totalQuoteInt";
     private final String FAV_HINT_SHOWN_COUNT = "favHintShownCount";
@@ -245,6 +246,14 @@ public class SharedPreferenceHelper {
 
     private void setWidgetAuthorString(String author) {
         sharedPreferences.edit().putString(WIDGET_AUTHOR_STRING, author).apply();
+    }
+
+    public String getWidgetLastUpdated() {
+        return sharedPreferences.getString(WIDGET_LAST_UPDATED, null);
+    }
+
+    public void setWidgetLastUpdated(String lastUpdated) {
+        sharedPreferences.edit().putString(WIDGET_LAST_UPDATED, lastUpdated).apply();
     }
 
     public void deleteFontPreference() {
