@@ -1,2 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="copy_quote_to_clipboard">Kopírovat citaci do schránky</string>
+    <string name="font_size">Velikost písma</string>
+    <string name="share_random_quote">Sdílet náhodný citát</string>
+    <string name="quote_loading">Načítám citát...</string>
+    <string name="new_images">Nové obrázky</string>
+    <string name="save_to_gallery">Uložit do galerie</string>
+    <string name="your_comment">Váš komentář (volitelné)</string>
+    <string name="default_size">Výchozí</string>
+    <string name="pick_an_option">Zvolte si možnost</string>
+    <string name="share_text">Nainstalujte si \'Quotes Status Creator\', open source aplikaci, která vám umožní sdílet citáty jako stavové obrázky na sociálních sítích</string>
+    <string name="pick_font_style">Vyberte typ písma</string>
+    <string name="next">DALŠÍ</string>
+    <string name="nothing_here">Tady nic není!</string>
+    <string name="pick_card_color">Vyberte barvu karty</string>
+    <string name="report_via_github">Nahlásit přes GitHub</string>
+    <string name="change_font_color">Změna barvy písma</string>
+    <string name="report_via_telegram">Nahlásit přes Telegram</string>
+    <string name="image_from_gallery">Obraz z galerie</string>
+    <string name="submit">Odeslat</string>
+    <string name="ask_every_time">Zeptat se pokaždé</string>
+    <string name="version">Verze</string>
+    <string name="plain_color">Jednoduchá barva</string>
+    <string name="quote">Citát</string>
+    <string name="reset_settings">Obnovit nastavení</string>
+    <string name="skip">PŘESKOČIT</string>
+    <string name="about">O aplikaci</string>
+    <string name="share_quote_as_image">Sdílet citát jako obrázek</string>
+    <string name="change_font_style">Změnit typ písma</string>
+    <string name="used_images">Použité obrázky</string>
+    <string name="favorites">Oblíbené</string>
+    <string name="quotes_status_creator">Status tvůrce citatů</string>
+    <string name="error_report_note">Pro diagnostiku a následnou opravu tohoto problému, nám prosím zašlete hlášení o pádu.</string>
+    <string name="home">Úvod</string>
+    <string name="pick_background_image">Vybrat obrázek pozadí</string>
+    <string name="dark_theme">Tmavé téma</string>
+    <string name="cancel">Zrušit</string>
+    <string name="choose_a_theme">Vyberte téma</string>
+    <string name="search">Hledat</string>
+    <string name="follow_system_theme">Automaticky dle systému</string>
+    <string name="add_custom_quote">Přidat vlastní citát</string>
+    <string name="settings">Nastavení</string>
+    <string name="author">Autor</string>
+    <string name="app_name">Citáty</string>
+    <string name="default_images">Výchozí obrázky</string>
+    <string name="add">Přidat</string>
+    <string name="pick_a_color">Vyberte barvu</string>
+    <string name="light_theme">Světlé téma</string>
+    <string name="change_font_size">Změna velikosti písma</string>
+</resources>
