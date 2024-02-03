@@ -1,47 +1,25 @@
 <b>Quotes Status Creator</b>
 
-Quotes Status Creator lets you share quotations as status images on social media – Quotes Status Creator App
-
-    ☆ Lots of inspirational quotes that can be shared on social media as high definition images
-    ☆ Quotes Status Creation without any Image Editing whatsoever — in the same user-friendly UI
-    ☆ Browse through Best Quotes → Get Inspired → Share as Status on Social Media & Spread Positivity!
+Quotes Status Creator lets you share quotations as status images on social media
 
 <b>Features</b>
 
-    • <b>Favorite Quotes</b> — Save your favorite Quotes as Favorites
-    • <b>Share Quotes</b> — Share quotes as a high definition images via social media
-    • <b>️Custom Backgrounds</b> — Customize Quotes with custom background images from Unsplash, solid background colors or images from gallery
-    • <b>Custom Card Colors</b> — Personalize Quotes with custom card colors
-    • <b>Card Rotation & Position</b> — Customize card position & rotation
-    • <b>Custom Fonts</b> — Personalize Quotes with custom fonts & font colors
-    • <b>Custom Quotes</b> — Add your own Quotes
-    • <b>Daily Notification</b> — Get notified with your daily dose of motivation
-    • <b>Multiple Sharing Options</b> — Share Quotes as image & text
-    • <b>App Shortcuts</b> — Home screen shortcuts for easy access
-    • <b>Search</b> — Search for Quotes to discover the ones you like
-    • <b>️Tags</b> — Search for quotes using tags
-    • <b>Home Screen Widget</b> — Daily updating Quote widget
-    • <b>Dark Mode</b> — It fits your soul!
-    • <b>Completely libre software</b> — Copylefted libre software, licensed GPLv3.0
-    • <b>Completely Ad Free</b> — No ads whatsoever!
-
-<b>Quotes – Quotes Status Creator App → Quotes Categories</b>
-
-    • Inspirational Quotes
-    • Success Quotes
-    • Love Quotes
-    • Action Quotes
-    • Life Quotes
-    • Wisdom Quotes
-    • Attitude Quotes
-    • Philosophy Quotes
-    • Positive Quotes
-    • Greatness Quotes
-    • Business Quotes
-    • Thinking Quotes
-    • Optimistic Quotes
-    • Creativity Quotes
-    • Perseverance Quotes
+* <b>Share Quotes</b> — Share quotes as a high definition images in social media
+* <b>Favorite Quotes</b> — Save Quotes as Favorites
+* <b>️Custom Backgrounds</b> — Customize Quotes with custom background images from Unsplash, solid background colors or images from your gallery
+* <b>Custom Card Colors</b> — Personalize Quotes with custom card colors
+* <b>Card Rotation & Position</b> — Customize card position & rotation
+* <b>Custom Fonts</b> — Personalize Quotes with custom fonts & font colors
+* <b>Custom Quotes</b> — Add your own Quotes
+* <b>Daily Notification</b> — Get notified with your daily dose of motivation
+* <b>Multiple Sharing Options</b> — Share Quotes as image & text
+* <b>App Shortcuts</b> — Home screen shortcuts for easy access
+* <b>Search</b> — Search for Quotes to discover the ones you like
+* <b>️Tags</b> — Search for quotes using tags
+* <b>Home Screen Widget</b> — Daily updating Quote widget
+* <b>Dark Mode</b> — It fits your soul!
+* <b>Completely libre software</b> — Copylefted libre software, licensed GPLv3.0
+* <b>Completely Ad Free</b> — No ads whatsoever!
 
 <b>Enjoying Quotes? Consider Supporting!</b>
 
