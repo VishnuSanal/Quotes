@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "phone.vishnu.quotes"
         minSdkVersion 22
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 63
         versionName "v3.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -33,6 +33,7 @@ android {
 		checkReleaseBuilds false
 		abortOnError false
 	}
+	namespace 'phone.vishnu.quotes'
 }
 
 // https://gist.github.com/KenVanHoeylandt/c7a928426bce83ffab400ab1fd99054a?permalink_comment_id=4032669#gistcomment-4032669
@@ -48,9 +49,9 @@ afterEvaluate {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
 
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.dubsmash.volley:library:2.0.1'
@@ -63,8 +64,8 @@ dependencies {
     implementation "com.github.skydoves:colorpickerview:2.2.4"
     implementation 'com.keenencharles:androidunsplash:3.1.2'
 
-    def lifecycle_version = "2.6.1"
-    def room_version = "2.5.2"
+    def lifecycle_version = "2.8.3"
+    def room_version = "2.6.1"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -84,8 +85,8 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.2'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation 'androidx.test:rules:1.6.1'
 
 }
