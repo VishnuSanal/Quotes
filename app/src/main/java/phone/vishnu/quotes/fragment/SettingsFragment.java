@@ -19,11 +19,13 @@
 
 package phone.vishnu.quotes.fragment;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.format.DateFormat;
@@ -37,6 +39,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.ncorti.slidetoact.SlideToActView;
 import java.io.File;
 import java.text.MessageFormat;
@@ -105,37 +113,49 @@ public class SettingsFragment extends BaseBottomSheetDialogFragment {
         reminderSwitch.setOnCheckedChangeListener(
                 (buttonView, isChecked) -> {
                     if (isChecked) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            Dexter.withContext(requireContext())
+                                    .withPermission(Manifest.permission.POST_NOTIFICATIONS)
+                                    .withListener(
+                                            new PermissionListener() {
+                                                @Override
+                                                public void onPermissionGranted(
+                                                        PermissionGrantedResponse
+                                                                permissionGrantedResponse) {
+                                                    alarmTurnedOn();
+                                                }
 
-                        Calendar c = Calendar.getInstance();
+                                                @Override
+                                                public void onPermissionDenied(
+                                                        PermissionDeniedResponse
+                                                                permissionDeniedResponse) {
+                                                    Toast.makeText(
+                                                                    requireContext(),
+                                                                    requireContext()
+                                                                            .getString(
+                                                                                    R.string
+                                                                                            .permission_denied),
+                                                                    Toast.LENGTH_SHORT)
+                                                            .show();
+                                                }
 
-                        // TODO: Find a way to implement this in Bottom Sheet!
-
-                        TimePickerDialog timePickerDialog =
-                                new TimePickerDialog(
-                                        requireContext(),
-                                        getPickerTheme(requireContext()),
-                                        (view1, hourOfDay, minute) -> {
-                                            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                                            c.set(Calendar.MINUTE, minute);
-
-                                            sharedPreferenceHelper.setAlarmString(
-                                                    "At " + hourOfDay + " : " + minute + " Daily");
-
-                                            reminderSwitch.setText(
-                                                    getSwitchText(
-                                                            MessageFormat.format(
-                                                                    "At {0} : {1} Daily",
-                                                                    hourOfDay, minute)));
-
-                                            AlarmHelper.setAlarm(requireContext(), c);
-                                        },
-                                        c.get(Calendar.HOUR_OF_DAY),
-                                        c.get(Calendar.MINUTE),
-                                        DateFormat.is24HourFormat(requireContext()));
-
-                        timePickerDialog.setOnCancelListener(d -> reminderSwitch.setChecked(false));
-
-                        timePickerDialog.show();
+                                                @Override
+                                                public void onPermissionRationaleShouldBeShown(
+                                                        PermissionRequest permissionRequest,
+                                                        PermissionToken permissionToken) {
+                                                    Toast.makeText(
+                                                                    requireContext(),
+                                                                    requireContext()
+                                                                            .getString(
+                                                                                    R.string
+                                                                                            .please_accept_necessary_permissions),
+                                                                    Toast.LENGTH_SHORT)
+                                                            .show();
+                                                    permissionToken.continuePermissionRequest();
+                                                }
+                                            })
+                                    .check();
+                        } else alarmTurnedOn();
 
                     } else {
                         alarmTurnedOff(requireContext());
@@ -164,6 +184,38 @@ public class SettingsFragment extends BaseBottomSheetDialogFragment {
 
                     dismiss();
                 });
+    }
+
+    private void alarmTurnedOn() {
+        Calendar c = Calendar.getInstance();
+
+        // TODO: Find a way to implement this in Bottom Sheet!
+
+        TimePickerDialog timePickerDialog =
+                new TimePickerDialog(
+                        requireContext(),
+                        getPickerTheme(requireContext()),
+                        (view1, hourOfDay, minute) -> {
+                            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                            c.set(Calendar.MINUTE, minute);
+
+                            sharedPreferenceHelper.setAlarmString(
+                                    "At " + hourOfDay + " : " + minute + " Daily");
+
+                            reminderSwitch.setText(
+                                    getSwitchText(
+                                            MessageFormat.format(
+                                                    "At {0} : {1} Daily", hourOfDay, minute)));
+
+                            AlarmHelper.setAlarm(requireContext(), c);
+                        },
+                        c.get(Calendar.HOUR_OF_DAY),
+                        c.get(Calendar.MINUTE),
+                        DateFormat.is24HourFormat(requireContext()));
+
+        timePickerDialog.setOnCancelListener(d -> reminderSwitch.setChecked(false));
+
+        timePickerDialog.show();
     }
 
     private void alarmTurnedOff(Context context) {
