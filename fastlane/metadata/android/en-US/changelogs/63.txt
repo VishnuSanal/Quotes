@@ -1,4 +1,0 @@
-- Better home screen widget
-- Bug fixes
-
-Full Changelog -> https://github.com/VishnuSanal/Quotes/compare/v3.0.0...v3.1.0
