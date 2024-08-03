@@ -48,10 +48,9 @@ public class AppController extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-
         ACRA.init(
                 this,
-                new CoreConfigurationBuilder(this)
+                new CoreConfigurationBuilder()
                         .withBuildConfigClass(BuildConfig.class)
                         .withReportFormat(StringFormat.JSON));
     }
