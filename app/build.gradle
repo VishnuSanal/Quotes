@@ -34,6 +34,12 @@ android {
 		abortOnError false
 	}
 	namespace 'phone.vishnu.quotes'
+
+	// https://github.com/VishnuSanal/Quotes/issues/133
+	dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
 }
 
 // https://gist.github.com/KenVanHoeylandt/c7a928426bce83ffab400ab1fd99054a?permalink_comment_id=4032669#gistcomment-4032669
