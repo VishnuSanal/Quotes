@@ -1,3 +1,0 @@
-- Bug fixes
-
-Full Changelog -> https://github.com/VishnuSanal/Quotes/compare/v3.1.0...v3.1.1
