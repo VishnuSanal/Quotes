@@ -23,11 +23,11 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+		}
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 	lintOptions {
 		checkReleaseBuilds false
@@ -73,12 +73,12 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
-    implementation "ch.acra:acra-core:5.8.4"
+    implementation "ch.acra:acra-core:5.11.3"
 
 	implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
-	compileOnly "com.google.auto.service:auto-service-annotations:1.0.1"
-    annotationProcessor "com.google.auto.service:auto-service:1.0.1"
+	compileOnly "com.google.auto.service:auto-service-annotations:1.1.1"
+    annotationProcessor "com.google.auto.service:auto-service:1.1.1"
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

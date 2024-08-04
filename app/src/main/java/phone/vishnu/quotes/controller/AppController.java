@@ -51,7 +51,7 @@ public class AppController extends Application {
 
         ACRA.init(
                 this,
-                new CoreConfigurationBuilder(this)
+                new CoreConfigurationBuilder()
                         .withBuildConfigClass(BuildConfig.class)
                         .withReportFormat(StringFormat.JSON));
     }
