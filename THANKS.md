@@ -1,4 +1,4 @@
-<p align="center"> 
+<p align="center">
 	<img src="https://github.com/VishnuSanal/Quotes/blob/master/fastlane/metadata/android/en-US/images/icon.png" width=160 height=160>
 </p>
 
@@ -17,6 +17,7 @@
 - [J. Lavoie](https://hosted.weblate.org/user/Edanas/) - **French, German & Italian**
 - [Ali Gagarin](https://hosted.weblate.org/user/Gagarin/) - **Turkish**
 - [Michal Bedáň](https://hosted.weblate.org/user/Bedami/) - **Czech**
+- [tct123](https://hosted.weblate.org/user/tct123/) - **German**
 
 ### BG Images from [Unsplash](https://unsplash.com/?utm_source=Quotes%20Status%20Creator%26utm_medium=referral)
 ### Welcome tour Illustrations from [UnDraw](https://undraw.co/)
