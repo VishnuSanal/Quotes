@@ -127,4 +127,21 @@
 	<string name="theme">Thema</string>
 	<string name="daily_notifications">Tägliche Benachrichtigungen</string>
 	<string name="rate_this_app_on_google_play">Diese App auf Google Play bewerten</string>
+	<string name="settings_reset">Einstellungen zurücksetzen</string>
+	<string name="custom">Extra</string>
+	<string name="fail">Fehlgeschlagen</string>
+	<string name="share_quotes_status_creator">Quotes Status Creator teilen</string>
+	<string name="share_text">Installieren Sie Quotes Status Creator - eine Open-Source-App, mit der Sie Zitate als Statusbilder in sozialen Medien teilen können</string>
+	<string name="debug_build">Debuggen des Builds</string>
+	<string name="join_our_community_on_telegram">Treten Sie unserer Community auf Telegram bei</string>
+	<string name="feature_rich">Funktionsreich</string>
+	<string name="welcome_desc">Mit dem Quotes Status Creator können Sie Zitate in sozialen Medien teilen.</string>
+	<string name="huge_collection_desc">Quotes Status Creator bietet eine Fülle von Funktionen, die die Benutzerfreundlichkeit verbessern!</string>
+	<string name="highly_customizable">Hochgradig anpassbar</string>
+	<string name="highly_customizable_desc">Mit Quotes Status Creator können Sie Karte, Hintergrund und Schriftart anpassen.</string>
+	<string name="font_set">Schriftsatz</string>
+	<string name="default_action">Standard Aktion</string>
+	<string name="share_button_behaviour">Verhalten der Schaltfläche „Teilen“</string>
+	<string name="choose_from_device">Wählen Sie aus dem Gerät</string>
+	<string name="unsplash_credit">Alle Bilder stammen von <a href="https://unsplash.com/?utm_source=Quotes%20Status%20Creator%26utm_medium=referral">Unsplash</a></string>
 </resources>
