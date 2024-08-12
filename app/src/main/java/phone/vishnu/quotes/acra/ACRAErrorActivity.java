@@ -33,8 +33,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.GsonBuilder;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Date;
 import org.acra.ReportField;
 import org.acra.data.CrashReportData;
+import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.SplashActivity;
 import phone.vishnu.quotes.helper.Constants;
@@ -87,6 +93,9 @@ public class ACRAErrorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!checkIntent(getIntent())) moveToSplash();
+
         setContentView(R.layout.activity_acra_error);
         setTitle(
                 String.format(
@@ -104,42 +113,37 @@ public class ACRAErrorActivity extends AppCompatActivity {
         telegramButton = findViewById(R.id.errorActivityTelegramReportTV);
         userCommentTIE = findViewById(R.id.errorActivityUserCommentTIE);
 
-        Intent intent = getIntent();
+        File reportFile = (File) getIntent().getSerializableExtra(Constants.ACRA_REPORT_FILE_KEY);
 
-        if (checkIntent(intent)) {
+        String stackTrace = "Could not load stack trace";
 
-            packageNameTV.setText(
-                    String.format(
-                            "%s %s",
-                            getString(R.string.package_name),
-                            checkNullity(intent.getStringExtra(Constants.ACRA_PACKAGE_NAME))));
-            versionNameTV.setText(
-                    String.format(
-                            "%s %s",
-                            getString(R.string.app_version),
-                            checkNullity(intent.getStringExtra(Constants.ACRA_APP_VERSION_NAME))));
-            versionCodeTV.setText(
-                    String.format(
-                            "%s %s",
-                            getString(R.string.version_code),
-                            checkNullity(intent.getStringExtra(Constants.ACRA_APP_VERSION_CODE))));
-            androidVersionTV.setText(
-                    String.format(
-                            "%s %s",
-                            getString(R.string.android_version),
-                            checkNullity(intent.getStringExtra(Constants.ACRA_ANDROID_VERSION))));
-            appStartDateTV.setText(
-                    String.format(
-                            "%s %s",
-                            getString(R.string.app_start_date),
-                            checkNullity(
-                                    intent.getStringExtra(Constants.ACRA_USER_APP_START_DATE))));
-            stackTraceTV.setText(
-                    String.format(
-                            "%s\n\n%s",
-                            getString(R.string.stack_trace),
-                            checkNullity(intent.getStringExtra(Constants.ACRA_STACK_TRACE))));
+        try {
+            ACRALogFileModel acraLogFileModel =
+                    new GsonBuilder()
+                            .setLenient()
+                            .create()
+                            .fromJson(new FileReader(reportFile), ACRALogFileModel.class);
+
+            stackTrace = acraLogFileModel.getStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+
+        packageNameTV.setText(
+                String.format(
+                        "%s %s", getString(R.string.package_name), BuildConfig.APPLICATION_ID));
+        versionNameTV.setText(
+                String.format("%s %s", getString(R.string.app_version), BuildConfig.VERSION_NAME));
+        versionCodeTV.setText(
+                String.format("%s %s", getString(R.string.version_code), BuildConfig.VERSION_CODE));
+        androidVersionTV.setText(
+                String.format(
+                        "%s %s",
+                        getString(R.string.android_version), android.os.Build.VERSION.SDK_INT));
+        appStartDateTV.setText(
+                String.format("%s %s", getString(R.string.app_start_date), new Date()));
+        stackTraceTV.setText(
+                String.format("%s\n\n%s", getString(R.string.stack_trace), stackTrace));
 
         telegramButton.setOnClickListener(
                 view -> {
@@ -194,7 +198,7 @@ public class ACRAErrorActivity extends AppCompatActivity {
     private boolean checkIntent(Intent intent) {
         return intent != null
                 && intent.getExtras() != null
-                && intent.getExtras().containsKey(Constants.ACRA_STACK_TRACE);
+                && intent.getExtras().containsKey(Constants.ACRA_REPORT_FILE_KEY);
     }
 
     @Override

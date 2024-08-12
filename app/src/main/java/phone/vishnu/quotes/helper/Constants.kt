@@ -28,6 +28,7 @@ object Constants {
 	const val ACRA_APP_VERSION_NAME = "ACRA_APP_VERSION_NAME"
 	const val ACRA_PACKAGE_NAME = "ACRA_PACKAGE_NAME"
 	const val ACRA_USER_APP_START_DATE = "ACRA_USER_APP_START_DATE"
+	const val ACRA_REPORT_FILE_KEY = "REPORT_FILE"
 
 	const val DATA = "data"
 	const val QUOTE = "quote"

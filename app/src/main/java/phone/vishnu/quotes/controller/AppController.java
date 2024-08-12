@@ -26,8 +26,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import org.acra.ACRA;
 import org.acra.config.CoreConfigurationBuilder;
+import org.acra.config.DialogConfigurationBuilder;
 import org.acra.data.StringFormat;
 import phone.vishnu.quotes.BuildConfig;
+import phone.vishnu.quotes.acra.ACRAErrorActivity;
 
 public class AppController extends Application {
 
@@ -53,7 +55,11 @@ public class AppController extends Application {
                 this,
                 new CoreConfigurationBuilder()
                         .withBuildConfigClass(BuildConfig.class)
-                        .withReportFormat(StringFormat.JSON));
+                        .withReportFormat(StringFormat.JSON)
+                        .withPluginConfigurations(
+                                new DialogConfigurationBuilder()
+                                        .withReportDialogClass(ACRAErrorActivity.class)
+                                        .build()));
     }
 
     private RequestQueue getRequestQueue() {

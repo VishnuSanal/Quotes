@@ -50,8 +50,12 @@
 
 		<activity
 			android:name=".acra.ACRAErrorActivity"
-			android:exported="true"
 			android:parentActivityName=".activity.SplashActivity"
+			android:excludeFromRecents="true"
+			android:exported="true"
+			android:finishOnTaskLaunch="true"
+			android:launchMode="singleTop"
+			android:process=":acra"
 			android:screenOrientation="portrait">
 
 			<meta-data
