@@ -30,7 +30,6 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.GsonBuilder;
@@ -38,8 +37,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Date;
-import org.acra.ReportField;
-import org.acra.data.CrashReportData;
 import phone.vishnu.quotes.BuildConfig;
 import phone.vishnu.quotes.R;
 import phone.vishnu.quotes.activity.SplashActivity;
@@ -47,7 +44,8 @@ import phone.vishnu.quotes.helper.Constants;
 
 public class ACRAErrorActivity extends AppCompatActivity {
 
-    private TextView stackTraceTV,
+    private TextView errorActivityTitleTV,
+            stackTraceTV,
             packageNameTV,
             versionNameTV,
             versionCodeTV,
@@ -56,40 +54,6 @@ public class ACRAErrorActivity extends AppCompatActivity {
     private Button telegramButton, githubButton;
     private TextInputEditText userCommentTIE;
 
-    public static void openErrorActivity(
-            @NonNull Context context, @NonNull CrashReportData errorContent) {
-
-        Intent intent =
-                new Intent(context, ACRAErrorActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        intent.putExtra(
-                Constants.ACRA_STACK_TRACE,
-                checkNullity(errorContent.getString(ReportField.STACK_TRACE)));
-        intent.putExtra(
-                Constants.ACRA_ANDROID_VERSION,
-                checkNullity(errorContent.getString(ReportField.ANDROID_VERSION)));
-        intent.putExtra(
-                Constants.ACRA_APP_VERSION_CODE,
-                checkNullity(errorContent.getString(ReportField.APP_VERSION_CODE)));
-        intent.putExtra(
-                Constants.ACRA_APP_VERSION_NAME,
-                checkNullity(errorContent.getString(ReportField.APP_VERSION_NAME)));
-        intent.putExtra(
-                Constants.ACRA_PACKAGE_NAME,
-                checkNullity(errorContent.getString(ReportField.PACKAGE_NAME)));
-        intent.putExtra(
-                Constants.ACRA_USER_APP_START_DATE,
-                checkNullity(errorContent.getString(ReportField.USER_APP_START_DATE)));
-
-        context.startActivity(intent);
-    }
-
-    private static String checkNullity(String s) {
-        // TODO
-        return s == null ? "Property not found" : s;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,12 +61,10 @@ public class ACRAErrorActivity extends AppCompatActivity {
         if (!checkIntent(getIntent())) moveToSplash();
 
         setContentView(R.layout.activity_acra_error);
-        setTitle(
-                String.format(
-                        "%s %s",
-                        getString(R.string.quotes_status_creator), getString(R.string.crashed)));
+
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        errorActivityTitleTV = findViewById(R.id.errorActivityTitleTV);
         stackTraceTV = findViewById(R.id.errorActivityStackTraceTV);
         packageNameTV = findViewById(R.id.errorActivityPackageNameTV);
         versionNameTV = findViewById(R.id.errorActivityVersionNameTV);
@@ -129,6 +91,10 @@ public class ACRAErrorActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        errorActivityTitleTV.setText(
+                String.format(
+                        "%s %s",
+                        getString(R.string.quotes_status_creator), getString(R.string.crashed)));
         packageNameTV.setText(
                 String.format(
                         "%s %s", getString(R.string.package_name), BuildConfig.APPLICATION_ID));
