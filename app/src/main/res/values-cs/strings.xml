@@ -1,176 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="copy_quote_to_clipboard">Kopírovat citaci do schránky</string>
-    <string name="font_size">Velikost písma</string>
-    <string name="share_random_quote">Sdílet náhodný citát</string>
-    <string name="quote_loading">Načítám citát...</string>
-    <string name="new_images">Nové obrázky</string>
-    <string name="save_to_gallery">Uložit do galerie</string>
-    <string name="your_comment">Váš komentář (volitelné)</string>
-    <string name="default_size">Výchozí</string>
-    <string name="pick_an_option">Zvolte si možnost</string>
-    <string name="share_text">Nainstalujte si \'Quotes Status Creator\', open source aplikaci, která vám umožní sdílet citáty jako stavové obrázky na sociálních sítích</string>
-    <string name="pick_font_style">Vyberte typ písma</string>
-    <string name="next">DALŠÍ</string>
-    <string name="nothing_here">Tady nic není!</string>
-    <string name="pick_card_color">Vyberte barvu karty</string>
-    <string name="report_via_github">Nahlásit přes GitHub</string>
-    <string name="change_font_color">Změna barvy písma</string>
-    <string name="report_via_telegram">Nahlásit přes Telegram</string>
-    <string name="image_from_gallery">Obraz z galerie</string>
-    <string name="submit">Odeslat</string>
-    <string name="ask_every_time">Zeptat se pokaždé</string>
-    <string name="version">Verze</string>
-    <string name="plain_color">Jednoduchá barva</string>
-    <string name="quote">Citát</string>
-    <string name="reset_settings">Obnovit nastavení</string>
-    <string name="skip">PŘESKOČIT</string>
-    <string name="about">O aplikaci</string>
-    <string name="share_quote_as_image">Sdílet citát jako obrázek</string>
-    <string name="change_font_style">Změnit typ písma</string>
-    <string name="used_images">Použité obrázky</string>
-    <string name="favorites">Oblíbené</string>
-    <string name="quotes_status_creator">Status tvůrce citatů</string>
-    <string name="error_report_note">Pro diagnostiku a následnou opravu tohoto problému, nám prosím zašlete hlášení o pádu.</string>
-    <string name="home">Úvod</string>
-    <string name="pick_background_image">Vybrat obrázek pozadí</string>
-    <string name="dark_theme">Tmavé téma</string>
-    <string name="cancel">Zrušit</string>
-    <string name="choose_a_theme">Vyberte téma</string>
-    <string name="search">Hledat</string>
-    <string name="follow_system_theme">Automaticky dle systému</string>
-    <string name="add_custom_quote">Přidat vlastní citát</string>
-    <string name="settings">Nastavení</string>
-    <string name="author">Autor</string>
-    <string name="app_name">Citáty</string>
-    <string name="default_images">Výchozí obrázky</string>
-    <string name="add">Přidat</string>
-    <string name="pick_a_color">Vyberte barvu</string>
-    <string name="light_theme">Světlé téma</string>
-    <string name="change_font_size">Změna velikosti písma</string>
-    <string name="join_telegram_group"></string>
-    <string name="share_quotes_status_creator"></string>
-    <string name="rate_this_app_on_google_play"></string>
-    <string name="share_quotes_status_creator_with_your_friends"></string>
-    <string name="rate_the_app"></string>
-    <string name="join_our_community_on_telegram"></string>
-    <string name="help_in_localization"></string>
-    <string name="package_name"></string>
-    <string name="thanks_to"></string>
-    <string name="thanks_to_these_awesome_people"></string>
-    <string name="translate_the_app"></string>
-    <string name="view_source_code_on_github"></string>
-    <string name="source_code"></string>
-    <string name="life"></string>
-    <string name="report_copied_to_clipboard"></string>
-    <string name="action"></string>
-    <string name="perseverance"></string>
-    <string name="inspiration"></string>
-    <string name="action_cancelled"></string>
-    <string name="fear"></string>
-    <string name="please_wait"></string>
-    <string name="quote_added_to_favorites"></string>
-    <string name="highly_customizable"></string>
-    <string name="highly_customizable_desc"></string>
-    <string name="welcome"></string>
-    <string name="oops_something_went_wrong"></string>
-    <string name="feature_rich"></string>
-    <string name="applying_changes"></string>
-    <string name="pick_background_color"></string>
-    <string name="swipe_right_to_delete"></string>
-    <string name="pick_font_color"></string>
-    <string name="swipe_left_to_delete"></string>
-    <string name="swipe_left_to_share"></string>
-    <string name="swipe_right_to_share"></string>
-    <string name="default_string"></string>
-    <string name="turned_on"></string>
-    <string name="daily_reminder"></string>
-    <string name="daily_notifications"></string>
-    <string name="try_again"></string>
-    <string name="turned_off"></string>
-    <string name="debug_build"></string>
-    <string name="restarting_app_for_changes_to_take_effect"></string>
-    <string name="daily_notification_not_set"></string>
-    <string name="add_to_favorites"></string>
-    <string name="saving_to_gallery"></string>
-    <string name="app_requires_these_permissions_to_share_the_quote"></string>
-    <string name="copied_to_clipboard"></string>
-    <string name="share_via"></string>
-    <string name="quote_of_the_day"></string>
-    <string name="permission_denied"></string>
-    <string name="about_screen_app_icon" translatable="false"></string>
-    <string name="fav_fab" translatable="false"></string>
-    <string name="color_pick_single_iv" translatable="false"></string>
-    <string name="bg_fab" translatable="false"></string>
-    <string name="please_accept_necessary_permissions"></string>
-    <string name="about_fab" translatable="false"></string>
-    <string name="quote_fragment_favourite_button" translatable="false"></string>
-    <string name="quote_widget_favourite_button" translatable="false"></string>
-    <string name="settings_screen_fav_reverse_switch_hint" translatable="false"></string>
-    <string name="quote_widget_share_button" translatable="false"></string>
-    <string name="quote_widget_author_container_imageview" translatable="false"></string>
-    <string name="fav_recyclerview_empty_hint_imageview" translatable="false"></string>
-    <string name="bottom_sheet_done_indicator" translatable="false"></string>
-    <string name="home_search_image_view" translatable="false"></string>
-    <string name="unsplash_single_image" translatable="false"></string>
-    <string name="tour_fragment_imageview" translatable="false"></string>
-    <string name="custom_flag_iv" translatable="false"></string>
-    <string name="font_file_not_found"></string>
-    <string name="app_start_date"></string>
-    <string name="heart"></string>
-    <string name="fail"></string>
-    <string name="theme"></string>
-    <string name="stack_trace"></string>
-    <string name="crash_report_for"></string>
-    <string name="default_action"></string>
-    <string name="share"></string>
-    <string name="font_set"></string>
-    <string name="courage"></string>
-    <string name="mistake"></string>
-    <string name="font_fab" translatable="false"></string>
-    <string name="thought"></string>
-    <string name="home_fab" translatable="false"></string>
-    <string name="all"></string>
-    <string name="motivation"></string>
-    <string name="love"></string>
-    <string name="custom"></string>
-    <string name="field_empty"></string>
-    <string name="attitude"></string>
-    <string name="about_icon_iv" translatable="false"></string>
-    <string name="dream"></string>
-    <string name="added_to_favorites"></string>
-    <string name="huge_collection_desc"></string>
-    <string name="quote_fragment_share_button" translatable="false"></string>
-    <string name="splash_screen_app_icon" translatable="false"></string>
-    <string name="welcome_desc"></string>
-    <string name="settings_fab" translatable="false"></string>
-    <string name="settings_reset"></string>
-    <string name="choose_a_background"></string>
-    <string name="settings_screen_share_tv_hint" translatable="false"></string>
-    <string name="version_code"></string>
-    <string name="share_the_app"></string>
-    <string name="success"></string>
-    <string name="comment"></string>
-    <string name="share_button_behaviour"></string>
-    <string name="please_connect_to_the_internet"></string>
-    <string name="already_present_in_favorites"></string>
-    <string name="removed_from_favorites"></string>
-    <string name="friend"></string>
-    <string name="app_requires_these_permissions_to_run_properly"></string>
-    <string name="default_single_image" translatable="false"></string>
-    <string name="unsplash_credit"></string>
-    <string name="pick_a_theme_for_the_app"></string>
-    <string name="app_version"></string>
-    <string name="choose_from_device"></string>
-    <string name="quote_widget_quote_container_imageview" translatable="false"></string>
-    <string name="undo"></string>
-    <string name="android_version"></string>
-    <string name="home_fab_overlay" translatable="false"></string>
-    <string name="reverse_swipe"></string>
-    <string name="settings_screen_notification_switch_hint" translatable="false"></string>
-    <string name="card_fab" translatable="false"></string>
-    <string name="crashed"></string>
-    <string name="reverse_swipe_action_on_favorites"></string>
-    <string name="color_fab" translatable="false"></string>
-    <string name="wisdom"></string>
+	<string name="copy_quote_to_clipboard">Kopírovat citaci do schránky</string>
+	<string name="font_size">Velikost písma</string>
+	<string name="share_random_quote">Sdílet náhodný citát</string>
+	<string name="quote_loading">Načítám citát...</string>
+	<string name="new_images">Nové obrázky</string>
+	<string name="save_to_gallery">Uložit do galerie</string>
+	<string name="your_comment">Váš komentář (volitelné)</string>
+	<string name="default_size">Výchozí</string>
+	<string name="pick_an_option">Zvolte si možnost</string>
+	<string name="share_text">Nainstalujte si \'Quotes Status Creator\', open source aplikaci, která vám umožní sdílet citáty jako stavové obrázky na sociálních sítích</string>
+	<string name="pick_font_style">Vyberte typ písma</string>
+	<string name="next">DALŠÍ</string>
+	<string name="nothing_here">Tady nic není!</string>
+	<string name="pick_card_color">Vyberte barvu karty</string>
+	<string name="report_via_github">Nahlásit přes GitHub</string>
+	<string name="change_font_color">Změna barvy písma</string>
+	<string name="report_via_telegram">Nahlásit přes Telegram</string>
+	<string name="image_from_gallery">Obraz z galerie</string>
+	<string name="submit">Odeslat</string>
+	<string name="ask_every_time">Zeptat se pokaždé</string>
+	<string name="version">Verze</string>
+	<string name="plain_color">Jednoduchá barva</string>
+	<string name="quote">Citát</string>
+	<string name="reset_settings">Obnovit nastavení</string>
+	<string name="skip">PŘESKOČIT</string>
+	<string name="about">O aplikaci</string>
+	<string name="share_quote_as_image">Sdílet citát jako obrázek</string>
+	<string name="change_font_style">Změnit typ písma</string>
+	<string name="used_images">Použité obrázky</string>
+	<string name="favorites">Oblíbené</string>
+	<string name="quotes_status_creator">Status tvůrce citatů</string>
+	<string name="error_report_note">Pro diagnostiku a následnou opravu tohoto problému, nám prosím zašlete hlášení o pádu.</string>
+	<string name="home">Úvod</string>
+	<string name="pick_background_image">Vybrat obrázek pozadí</string>
+	<string name="dark_theme">Tmavé téma</string>
+	<string name="cancel">Zrušit</string>
+	<string name="choose_a_theme">Vyberte téma</string>
+	<string name="search">Hledat</string>
+	<string name="follow_system_theme">Automaticky dle systému</string>
+	<string name="add_custom_quote">Přidat vlastní citát</string>
+	<string name="settings">Nastavení</string>
+	<string name="author">Autor</string>
+	<string name="app_name">Citáty</string>
+	<string name="default_images">Výchozí obrázky</string>
+	<string name="add">Přidat</string>
+	<string name="pick_a_color">Vyberte barvu</string>
+	<string name="light_theme">Světlé téma</string>
+	<string name="change_font_size">Změna velikosti písma</string>
+	<string name="join_telegram_group"></string>
+	<string name="share_quotes_status_creator"></string>
+	<string name="rate_this_app_on_google_play"></string>
+	<string name="share_quotes_status_creator_with_your_friends"></string>
+	<string name="rate_the_app"></string>
+	<string name="join_our_community_on_telegram"></string>
+	<string name="help_in_localization"></string>
+	<string name="package_name"></string>
+	<string name="thanks_to"></string>
+	<string name="thanks_to_these_awesome_people"></string>
+	<string name="translate_the_app"></string>
+	<string name="view_source_code_on_github"></string>
+	<string name="source_code"></string>
+	<string name="life"></string>
+	<string name="report_copied_to_clipboard"></string>
+	<string name="action"></string>
+	<string name="perseverance"></string>
+	<string name="inspiration"></string>
+	<string name="action_cancelled"></string>
+	<string name="fear"></string>
+	<string name="please_wait"></string>
+	<string name="quote_added_to_favorites"></string>
+	<string name="highly_customizable"></string>
+	<string name="highly_customizable_desc"></string>
+	<string name="welcome"></string>
+	<string name="oops_something_went_wrong"></string>
+	<string name="feature_rich"></string>
+	<string name="applying_changes"></string>
+	<string name="pick_background_color"></string>
+	<string name="swipe_right_to_delete"></string>
+	<string name="pick_font_color"></string>
+	<string name="swipe_left_to_delete"></string>
+	<string name="swipe_left_to_share"></string>
+	<string name="swipe_right_to_share"></string>
+	<string name="default_string"></string>
+	<string name="turned_on"></string>
+	<string name="daily_reminder"></string>
+	<string name="daily_notifications"></string>
+	<string name="try_again"></string>
+	<string name="turned_off"></string>
+	<string name="debug_build"></string>
+	<string name="restarting_app_for_changes_to_take_effect"></string>
+	<string name="daily_notification_not_set"></string>
+	<string name="add_to_favorites"></string>
+	<string name="saving_to_gallery"></string>
+	<string name="app_requires_these_permissions_to_share_the_quote"></string>
+	<string name="copied_to_clipboard"></string>
+	<string name="share_via"></string>
+	<string name="quote_of_the_day"></string>
+	<string name="permission_denied"></string>
+	<string name="about_screen_app_icon" translatable="false"></string>
+	<string name="fav_fab" translatable="false"></string>
+	<string name="color_pick_single_iv" translatable="false"></string>
+	<string name="bg_fab" translatable="false"></string>
+	<string name="please_accept_necessary_permissions"></string>
+	<string name="about_fab" translatable="false"></string>
+	<string name="quote_fragment_favourite_button" translatable="false"></string>
+	<string name="quote_widget_favourite_button" translatable="false"></string>
+	<string name="settings_screen_fav_reverse_switch_hint" translatable="false"></string>
+	<string name="quote_widget_share_button" translatable="false"></string>
+	<string name="quote_widget_author_container_imageview" translatable="false"></string>
+	<string name="fav_recyclerview_empty_hint_imageview" translatable="false"></string>
+	<string name="bottom_sheet_done_indicator" translatable="false"></string>
+	<string name="home_search_image_view" translatable="false"></string>
+	<string name="unsplash_single_image" translatable="false"></string>
+	<string name="tour_fragment_imageview" translatable="false"></string>
+	<string name="custom_flag_iv" translatable="false"></string>
+	<string name="font_file_not_found"></string>
+	<string name="app_start_date"></string>
+	<string name="heart"></string>
+	<string name="fail"></string>
+	<string name="theme"></string>
+	<string name="stack_trace"></string>
+	<string name="crash_report_for"></string>
+	<string name="default_action"></string>
+	<string name="share"></string>
+	<string name="font_set"></string>
+	<string name="courage"></string>
+	<string name="mistake"></string>
+	<string name="font_fab" translatable="false"></string>
+	<string name="thought"></string>
+	<string name="home_fab" translatable="false"></string>
+	<string name="all"></string>
+	<string name="motivation"></string>
+	<string name="love"></string>
+	<string name="custom"></string>
+	<string name="field_empty"></string>
+	<string name="attitude"></string>
+	<string name="about_icon_iv" translatable="false"></string>
+	<string name="dream"></string>
+	<string name="added_to_favorites"></string>
+	<string name="huge_collection_desc"></string>
+	<string name="quote_fragment_share_button" translatable="false"></string>
+	<string name="splash_screen_app_icon" translatable="false"></string>
+	<string name="welcome_desc"></string>
+	<string name="settings_fab" translatable="false"></string>
+	<string name="settings_reset"></string>
+	<string name="choose_a_background"></string>
+	<string name="settings_screen_share_tv_hint" translatable="false"></string>
+	<string name="version_code"></string>
+	<string name="share_the_app"></string>
+	<string name="success"></string>
+	<string name="comment"></string>
+	<string name="share_button_behaviour"></string>
+	<string name="please_connect_to_the_internet"></string>
+	<string name="already_present_in_favorites"></string>
+	<string name="removed_from_favorites"></string>
+	<string name="friend"></string>
+	<string name="app_requires_these_permissions_to_run_properly"></string>
+	<string name="default_single_image" translatable="false"></string>
+	<string name="unsplash_credit"></string>
+	<string name="pick_a_theme_for_the_app"></string>
+	<string name="app_version"></string>
+	<string name="choose_from_device"></string>
+	<string name="quote_widget_quote_container_imageview" translatable="false"></string>
+	<string name="undo"></string>
+	<string name="android_version"></string>
+	<string name="home_fab_overlay" translatable="false"></string>
+	<string name="reverse_swipe"></string>
+	<string name="settings_screen_notification_switch_hint" translatable="false"></string>
+	<string name="card_fab" translatable="false"></string>
+	<string name="crashed"></string>
+	<string name="reverse_swipe_action_on_favorites"></string>
+	<string name="color_fab" translatable="false"></string>
+	<string name="wisdom"></string>
 </resources>

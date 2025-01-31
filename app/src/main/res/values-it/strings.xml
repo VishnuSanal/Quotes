@@ -1,176 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dark_theme">Tema scuro</string>
-    <string name="quote">Citazione</string>
-    <string name="favorites">Preferiti</string>
-    <string name="plain_color">Tinta unita</string>
-    <string name="change_font_color">Cambia il colore del carattere</string>
-    <string name="default_size">Predefinito</string>
-    <string name="default_images">Immagini predefinite</string>
-    <string name="add_custom_quote">Aggiungi una citazione personalizzata</string>
-    <string name="font_size">Dimensione del carattere</string>
-    <string name="ask_every_time">Chiedi ogni volta</string>
-    <string name="report_via_github">Segnala via GitHub</string>
-    <string name="home">Pagina principale</string>
-    <string name="share">Condividi una citazione casuale</string>
-    <string name="author">Autore/Autrice</string>
-    <string name="add">Aggiungi</string>
-    <string name="cancel">Annulla</string>
-    <string name="image_from_gallery">Immagine dalla galleria</string>
-    <string name="app_name">Citazioni</string>
-    <string name="reset_settings">Ripristina le impostazioni</string>
-    <string name="change_font_style">Cambia lo stile del carattere</string>
-    <string name="quotes_status_creator">Creatore di stato di citazione</string>
-    <string name="quote_loading">Caricamento della citazione…</string>
-    <string name="pick_an_option">Scegli un’opzione</string>
-    <string name="change_font_size">Cambia la dimensione del carattere</string>
-    <string name="used_images">Immagini usate</string>
-    <string name="copy_quote_to_clipboard">Copia la citazione negli appunti</string>
-    <string name="pick_background_image">Scegli un’immagine di sfondo</string>
-    <string name="new_images">Nuove immagini</string>
-    <string name="pick_card_color">Scegli il colore della carta</string>
-    <string name="choose_a_theme">Scegli un tema</string>
-    <string name="light_theme">Tema chiaro</string>
-    <string name="follow_system_theme">Segui il tema del sistema</string>
-    <string name="pick_font_style">Scegli lo stile del carattere</string>
-    <string name="next">Successivo</string>
-    <string name="share_quote_as_image">Condividi la citazione come immagine</string>
-    <string name="nothing_here">Niente qui!</string>
-    <string name="settings">Impostazioni</string>
-    <string name="skip">IGNORA</string>
-    <string name="save_to_gallery">Salva nella galleria</string>
-    <string name="search">Cerca</string>
-    <string name="report_via_telegram">Segnala via Telegram</string>
-    <string name="error_report_note">Per diagnosticare e risolvere questo problema, inviaci un signalazione di errore.</string>
-    <string name="your_comment">Il tuo commento (facoltativo)</string>
-    <string name="about">Informazioni</string>
-    <string name="action"></string>
-    <string name="crash_report_for"></string>
-    <string name="undo"></string>
-    <string name="share_the_app"></string>
-    <string name="all"></string>
-    <string name="turned_off"></string>
-    <string name="join_telegram_group"></string>
-    <string name="version_code"></string>
-    <string name="daily_notification_not_set"></string>
-    <string name="join_our_community_on_telegram"></string>
-    <string name="removed_from_favorites"></string>
-    <string name="heart"></string>
-    <string name="mistake"></string>
-    <string name="package_name"></string>
-    <string name="rate_this_app_on_google_play"></string>
-    <string name="already_present_in_favorites"></string>
-    <string name="share_random_quote"></string>
-    <string name="share_quotes_status_creator"></string>
-    <string name="default_single_image" translatable="false"></string>
-    <string name="debug_build"></string>
-    <string name="please_connect_to_the_internet"></string>
-    <string name="share_via"></string>
-    <string name="splash_screen_app_icon" translatable="false"></string>
-    <string name="color_pick_single_iv" translatable="false"></string>
-    <string name="about_screen_app_icon" translatable="false"></string>
-    <string name="about_icon_iv" translatable="false"></string>
-    <string name="font_fab" translatable="false"></string>
-    <string name="about_fab" translatable="false"></string>
-    <string name="settings_fab" translatable="false"></string>
-    <string name="quote_widget_favourite_button" translatable="false"></string>
-    <string name="quote_widget_share_button" translatable="false"></string>
-    <string name="submit"></string>
-    <string name="pick_a_color"></string>
-    <string name="rate_the_app"></string>
-    <string name="version"></string>
-    <string name="share_text"></string>
-    <string name="translate_the_app"></string>
-    <string name="swipe_right_to_share"></string>
-    <string name="swipe_right_to_delete"></string>
-    <string name="quote_added_to_favorites"></string>
-    <string name="permission_denied"></string>
-    <string name="add_to_favorites"></string>
-    <string name="choose_from_device"></string>
-    <string name="thanks_to_these_awesome_people"></string>
-    <string name="help_in_localization"></string>
-    <string name="app_start_date"></string>
-    <string name="love"></string>
-    <string name="life"></string>
-    <string name="success"></string>
-    <string name="fail"></string>
-    <string name="report_copied_to_clipboard"></string>
-    <string name="wisdom"></string>
-    <string name="courage"></string>
-    <string name="thought"></string>
-    <string name="fear"></string>
-    <string name="friend"></string>
-    <string name="attitude"></string>
-    <string name="perseverance"></string>
-    <string name="motivation"></string>
-    <string name="inspiration"></string>
-    <string name="action_cancelled"></string>
-    <string name="oops_something_went_wrong"></string>
-    <string name="welcome"></string>
-    <string name="please_wait"></string>
-    <string name="welcome_desc"></string>
-    <string name="feature_rich"></string>
-    <string name="added_to_favorites"></string>
-    <string name="choose_a_background"></string>
-    <string name="font_set"></string>
-    <string name="swipe_left_to_delete"></string>
-    <string name="pick_font_color"></string>
-    <string name="default_string"></string>
-    <string name="pick_background_color"></string>
-    <string name="swipe_left_to_share"></string>
-    <string name="reverse_swipe"></string>
-    <string name="font_file_not_found"></string>
-    <string name="reverse_swipe_action_on_favorites"></string>
-    <string name="quote_of_the_day"></string>
-    <string name="theme"></string>
-    <string name="share_button_behaviour"></string>
-    <string name="pick_a_theme_for_the_app"></string>
-    <string name="default_action"></string>
-    <string name="try_again"></string>
-    <string name="card_fab" translatable="false"></string>
-    <string name="quote_fragment_favourite_button" translatable="false"></string>
-    <string name="home_fab" translatable="false"></string>
-    <string name="color_fab" translatable="false"></string>
-    <string name="home_fab_overlay" translatable="false"></string>
-    <string name="fav_fab" translatable="false"></string>
-    <string name="bg_fab" translatable="false"></string>
-    <string name="fav_recyclerview_empty_hint_imageview" translatable="false"></string>
-    <string name="quote_fragment_share_button" translatable="false"></string>
-    <string name="settings_screen_notification_switch_hint" translatable="false"></string>
-    <string name="settings_screen_fav_reverse_switch_hint" translatable="false"></string>
-    <string name="settings_screen_share_tv_hint" translatable="false"></string>
-    <string name="bottom_sheet_done_indicator" translatable="false"></string>
-    <string name="tour_fragment_imageview" translatable="false"></string>
-    <string name="huge_collection_desc"></string>
-    <string name="view_source_code_on_github"></string>
-    <string name="android_version"></string>
-    <string name="app_requires_these_permissions_to_share_the_quote"></string>
-    <string name="custom"></string>
-    <string name="unsplash_credit"></string>
-    <string name="custom_flag_iv" translatable="false"></string>
-    <string name="highly_customizable_desc"></string>
-    <string name="app_version"></string>
-    <string name="app_requires_these_permissions_to_run_properly"></string>
-    <string name="crashed"></string>
-    <string name="field_empty"></string>
-    <string name="saving_to_gallery"></string>
-    <string name="unsplash_single_image" translatable="false"></string>
-    <string name="copied_to_clipboard"></string>
-    <string name="share_quotes_status_creator_with_your_friends"></string>
-    <string name="stack_trace"></string>
-    <string name="dream"></string>
-    <string name="thanks_to"></string>
-    <string name="quote_widget_author_container_imageview" translatable="false"></string>
-    <string name="please_accept_necessary_permissions"></string>
-    <string name="source_code"></string>
-    <string name="daily_notifications"></string>
-    <string name="settings_reset"></string>
-    <string name="highly_customizable"></string>
-    <string name="daily_reminder"></string>
-    <string name="comment"></string>
-    <string name="quote_widget_quote_container_imageview" translatable="false"></string>
-    <string name="home_search_image_view" translatable="false"></string>
-    <string name="turned_on"></string>
-    <string name="restarting_app_for_changes_to_take_effect"></string>
-    <string name="applying_changes"></string>
+	<string name="dark_theme">Tema scuro</string>
+	<string name="quote">Citazione</string>
+	<string name="favorites">Preferiti</string>
+	<string name="plain_color">Tinta unita</string>
+	<string name="change_font_color">Cambia il colore del carattere</string>
+	<string name="default_size">Predefinito</string>
+	<string name="default_images">Immagini predefinite</string>
+	<string name="add_custom_quote">Aggiungi una citazione personalizzata</string>
+	<string name="font_size">Dimensione del carattere</string>
+	<string name="ask_every_time">Chiedi ogni volta</string>
+	<string name="report_via_github">Segnala via GitHub</string>
+	<string name="home">Pagina principale</string>
+	<string name="share">Condividi una citazione casuale</string>
+	<string name="author">Autore/Autrice</string>
+	<string name="add">Aggiungi</string>
+	<string name="cancel">Annulla</string>
+	<string name="image_from_gallery">Immagine dalla galleria</string>
+	<string name="app_name">Citazioni</string>
+	<string name="reset_settings">Ripristina le impostazioni</string>
+	<string name="change_font_style">Cambia lo stile del carattere</string>
+	<string name="quotes_status_creator">Creatore di stato di citazione</string>
+	<string name="quote_loading">Caricamento della citazione…</string>
+	<string name="pick_an_option">Scegli un’opzione</string>
+	<string name="change_font_size">Cambia la dimensione del carattere</string>
+	<string name="used_images">Immagini usate</string>
+	<string name="copy_quote_to_clipboard">Copia la citazione negli appunti</string>
+	<string name="pick_background_image">Scegli un’immagine di sfondo</string>
+	<string name="new_images">Nuove immagini</string>
+	<string name="pick_card_color">Scegli il colore della carta</string>
+	<string name="choose_a_theme">Scegli un tema</string>
+	<string name="light_theme">Tema chiaro</string>
+	<string name="follow_system_theme">Segui il tema del sistema</string>
+	<string name="pick_font_style">Scegli lo stile del carattere</string>
+	<string name="next">Successivo</string>
+	<string name="share_quote_as_image">Condividi la citazione come immagine</string>
+	<string name="nothing_here">Niente qui!</string>
+	<string name="settings">Impostazioni</string>
+	<string name="skip">IGNORA</string>
+	<string name="save_to_gallery">Salva nella galleria</string>
+	<string name="search">Cerca</string>
+	<string name="report_via_telegram">Segnala via Telegram</string>
+	<string name="error_report_note">Per diagnosticare e risolvere questo problema, inviaci un signalazione di errore.</string>
+	<string name="your_comment">Il tuo commento (facoltativo)</string>
+	<string name="about">Informazioni</string>
+	<string name="action"></string>
+	<string name="crash_report_for"></string>
+	<string name="undo"></string>
+	<string name="share_the_app"></string>
+	<string name="all"></string>
+	<string name="turned_off"></string>
+	<string name="join_telegram_group"></string>
+	<string name="version_code"></string>
+	<string name="daily_notification_not_set"></string>
+	<string name="join_our_community_on_telegram"></string>
+	<string name="removed_from_favorites"></string>
+	<string name="heart"></string>
+	<string name="mistake"></string>
+	<string name="package_name"></string>
+	<string name="rate_this_app_on_google_play"></string>
+	<string name="already_present_in_favorites"></string>
+	<string name="share_random_quote"></string>
+	<string name="share_quotes_status_creator"></string>
+	<string name="default_single_image" translatable="false"></string>
+	<string name="debug_build"></string>
+	<string name="please_connect_to_the_internet"></string>
+	<string name="share_via"></string>
+	<string name="splash_screen_app_icon" translatable="false"></string>
+	<string name="color_pick_single_iv" translatable="false"></string>
+	<string name="about_screen_app_icon" translatable="false"></string>
+	<string name="about_icon_iv" translatable="false"></string>
+	<string name="font_fab" translatable="false"></string>
+	<string name="about_fab" translatable="false"></string>
+	<string name="settings_fab" translatable="false"></string>
+	<string name="quote_widget_favourite_button" translatable="false"></string>
+	<string name="quote_widget_share_button" translatable="false"></string>
+	<string name="submit"></string>
+	<string name="pick_a_color"></string>
+	<string name="rate_the_app"></string>
+	<string name="version"></string>
+	<string name="share_text"></string>
+	<string name="translate_the_app"></string>
+	<string name="swipe_right_to_share"></string>
+	<string name="swipe_right_to_delete"></string>
+	<string name="quote_added_to_favorites"></string>
+	<string name="permission_denied"></string>
+	<string name="add_to_favorites"></string>
+	<string name="choose_from_device"></string>
+	<string name="thanks_to_these_awesome_people"></string>
+	<string name="help_in_localization"></string>
+	<string name="app_start_date"></string>
+	<string name="love"></string>
+	<string name="life"></string>
+	<string name="success"></string>
+	<string name="fail"></string>
+	<string name="report_copied_to_clipboard"></string>
+	<string name="wisdom"></string>
+	<string name="courage"></string>
+	<string name="thought"></string>
+	<string name="fear"></string>
+	<string name="friend"></string>
+	<string name="attitude"></string>
+	<string name="perseverance"></string>
+	<string name="motivation"></string>
+	<string name="inspiration"></string>
+	<string name="action_cancelled"></string>
+	<string name="oops_something_went_wrong"></string>
+	<string name="welcome"></string>
+	<string name="please_wait"></string>
+	<string name="welcome_desc"></string>
+	<string name="feature_rich"></string>
+	<string name="added_to_favorites"></string>
+	<string name="choose_a_background"></string>
+	<string name="font_set"></string>
+	<string name="swipe_left_to_delete"></string>
+	<string name="pick_font_color"></string>
+	<string name="default_string"></string>
+	<string name="pick_background_color"></string>
+	<string name="swipe_left_to_share"></string>
+	<string name="reverse_swipe"></string>
+	<string name="font_file_not_found"></string>
+	<string name="reverse_swipe_action_on_favorites"></string>
+	<string name="quote_of_the_day"></string>
+	<string name="theme"></string>
+	<string name="share_button_behaviour"></string>
+	<string name="pick_a_theme_for_the_app"></string>
+	<string name="default_action"></string>
+	<string name="try_again"></string>
+	<string name="card_fab" translatable="false"></string>
+	<string name="quote_fragment_favourite_button" translatable="false"></string>
+	<string name="home_fab" translatable="false"></string>
+	<string name="color_fab" translatable="false"></string>
+	<string name="home_fab_overlay" translatable="false"></string>
+	<string name="fav_fab" translatable="false"></string>
+	<string name="bg_fab" translatable="false"></string>
+	<string name="fav_recyclerview_empty_hint_imageview" translatable="false"></string>
+	<string name="quote_fragment_share_button" translatable="false"></string>
+	<string name="settings_screen_notification_switch_hint" translatable="false"></string>
+	<string name="settings_screen_fav_reverse_switch_hint" translatable="false"></string>
+	<string name="settings_screen_share_tv_hint" translatable="false"></string>
+	<string name="bottom_sheet_done_indicator" translatable="false"></string>
+	<string name="tour_fragment_imageview" translatable="false"></string>
+	<string name="huge_collection_desc"></string>
+	<string name="view_source_code_on_github"></string>
+	<string name="android_version"></string>
+	<string name="app_requires_these_permissions_to_share_the_quote"></string>
+	<string name="custom"></string>
+	<string name="unsplash_credit"></string>
+	<string name="custom_flag_iv" translatable="false"></string>
+	<string name="highly_customizable_desc"></string>
+	<string name="app_version"></string>
+	<string name="app_requires_these_permissions_to_run_properly"></string>
+	<string name="crashed"></string>
+	<string name="field_empty"></string>
+	<string name="saving_to_gallery"></string>
+	<string name="unsplash_single_image" translatable="false"></string>
+	<string name="copied_to_clipboard"></string>
+	<string name="share_quotes_status_creator_with_your_friends"></string>
+	<string name="stack_trace"></string>
+	<string name="dream"></string>
+	<string name="thanks_to"></string>
+	<string name="quote_widget_author_container_imageview" translatable="false"></string>
+	<string name="please_accept_necessary_permissions"></string>
+	<string name="source_code"></string>
+	<string name="daily_notifications"></string>
+	<string name="settings_reset"></string>
+	<string name="highly_customizable"></string>
+	<string name="daily_reminder"></string>
+	<string name="comment"></string>
+	<string name="quote_widget_quote_container_imageview" translatable="false"></string>
+	<string name="home_search_image_view" translatable="false"></string>
+	<string name="turned_on"></string>
+	<string name="restarting_app_for_changes_to_take_effect"></string>
+	<string name="applying_changes"></string>
 </resources>
