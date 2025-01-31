@@ -1,29 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="cancel">ବାତିଲ୍ କରନ୍ତୁ</string>
-	<string name="search">ସନ୍ଧାନ କରନ୍ତୁ</string>
-	<string name="about">ବିଷୟରେ</string>
-	<string name="author">ଲେଖକ</string>
-	<string name="next">ପରବର୍ତ୍ତୀ</string>
-	<string name="default_size">ଡିଫଲ୍ଟ</string>
-	<string name="add">ଯୋଗକରନ୍ତୁ</string>
-	<string name="favorites">ପସନ୍ଦଗୁଡିକ</string>
-	<string name="home">ହୋମ୍</string>
-	<string name="app_name">କୋଟସ୍</string>
-	<string name="share">ଅନିର୍ଦ୍ଧିର୍ଷ୍ଟ କୋଟ୍ ଅଂଶୀଦାର କରନ୍ତୁ</string>
-	<string name="quote">କୋଟ</string>
-	<string name="reset_settings">ସେଟିଂ ପୁନସେଟ୍ କରନ୍ତୁ</string>
-	<string name="plain_color">ସାଧା ରଙ୍ଗ</string>
-	<string name="image_from_gallery">ଗ୍ୟାଲେରୀରୁ ପ୍ରତିଛବି</string>
-	<string name="default_images">ଡିଫଲ୍ଟ ପ୍ରତିଛବିଗୁଡ଼ିକ</string>
-	<string name="change_font_style">ଫଣ୍ଟ୍ ଷ୍ଟାଇଲ୍ ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
-	<string name="change_font_color">ଫଣ୍ଟ ରଙ୍ଗ ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
-	<string name="change_font_size">ଫଣ୍ଟ ଆକାର ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
-	<string name="quotes_status_creator">କୋଟସ୍ ସ୍ଥିତି ସୃଷ୍ଟିକର୍ତ୍ତା</string>
-	<string name="add_custom_quote">କଷ୍ଟମ୍ କୋଟ୍ ଯୋଡନ୍ତୁ</string>
-	<string name="pick_background_image">ପୃଷ୍ଠଭୂମି ପ୍ରତିଛବି ବାଛନ୍ତୁ</string>
-	<string name="new_images">ନୂତନ ପ୍ରତିଛବିଗୁଡ଼ିକ</string>
-	<string name="pick_card_color">କାର୍ଡ ରଙ୍ଗ ବାଛନ୍ତୁ</string>
-	<string name="choose_a_theme">ଏକ ଥିମ୍ ବାଛନ୍ତୁ</string>
-	<string name="used_images">ବ୍ୟବହୃତ ପ୍ରତିଛବିଗୁଡ଼ିକ</string>
+    <string name="cancel">ବାତିଲ୍ କରନ୍ତୁ</string>
+    <string name="search">ସନ୍ଧାନ କରନ୍ତୁ</string>
+    <string name="about">ବିଷୟରେ</string>
+    <string name="author">ଲେଖକ</string>
+    <string name="next">ପରବର୍ତ୍ତୀ</string>
+    <string name="default_size">ଡିଫଲ୍ଟ</string>
+    <string name="add">ଯୋଗକରନ୍ତୁ</string>
+    <string name="favorites">ପସନ୍ଦଗୁଡିକ</string>
+    <string name="home">ହୋମ୍</string>
+    <string name="app_name">କୋଟସ୍</string>
+    <string name="share">ଅନିର୍ଦ୍ଧିର୍ଷ୍ଟ କୋଟ୍ ଅଂଶୀଦାର କରନ୍ତୁ</string>
+    <string name="quote">କୋଟ</string>
+    <string name="reset_settings">ସେଟିଂ ପୁନସେଟ୍ କରନ୍ତୁ</string>
+    <string name="plain_color">ସାଧା ରଙ୍ଗ</string>
+    <string name="image_from_gallery">ଗ୍ୟାଲେରୀରୁ ପ୍ରତିଛବି</string>
+    <string name="default_images">ଡିଫଲ୍ଟ ପ୍ରତିଛବିଗୁଡ଼ିକ</string>
+    <string name="change_font_style">ଫଣ୍ଟ୍ ଷ୍ଟାଇଲ୍ ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+    <string name="change_font_color">ଫଣ୍ଟ ରଙ୍ଗ ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+    <string name="change_font_size">ଫଣ୍ଟ ଆକାର ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+    <string name="quotes_status_creator">କୋଟସ୍ ସ୍ଥିତି ସୃଷ୍ଟିକର୍ତ୍ତା</string>
+    <string name="add_custom_quote">କଷ୍ଟମ୍ କୋଟ୍ ଯୋଡନ୍ତୁ</string>
+    <string name="pick_background_image">ପୃଷ୍ଠଭୂମି ପ୍ରତିଛବି ବାଛନ୍ତୁ</string>
+    <string name="new_images">ନୂତନ ପ୍ରତିଛବିଗୁଡ଼ିକ</string>
+    <string name="pick_card_color">କାର୍ଡ ରଙ୍ଗ ବାଛନ୍ତୁ</string>
+    <string name="choose_a_theme">ଏକ ଥିମ୍ ବାଛନ୍ତୁ</string>
+    <string name="used_images">ବ୍ୟବହୃତ ପ୍ରତିଛବିଗୁଡ଼ିକ</string>
+    <string name="app_version"></string>
+    <string name="source_code"></string>
+    <string name="settings"></string>
+    <string name="motivation"></string>
+    <string name="mistake"></string>
+    <string name="daily_reminder"></string>
+    <string name="heart"></string>
+    <string name="daily_notifications"></string>
+    <string name="perseverance"></string>
+    <string name="package_name"></string>
+    <string name="turned_off"></string>
+    <string name="action_cancelled"></string>
+    <string name="please_connect_to_the_internet"></string>
+    <string name="version"></string>
+    <string name="dream"></string>
+    <string name="life"></string>
+    <string name="share_text"></string>
+    <string name="app_requires_these_permissions_to_run_properly"></string>
+    <string name="app_start_date"></string>
+    <string name="share_quotes_status_creator_with_your_friends"></string>
+    <string name="join_telegram_group"></string>
+    <string name="share_quotes_status_creator"></string>
+    <string name="android_version"></string>
+    <string name="field_empty"></string>
+    <string name="default_string"></string>
+    <string name="thanks_to_these_awesome_people"></string>
+    <string name="rate_the_app"></string>
+    <string name="fear"></string>
+    <string name="light_theme"></string>
+    <string name="wisdom"></string>
+    <string name="join_our_community_on_telegram"></string>
+    <string name="pick_font_color"></string>
+    <string name="version_code"></string>
+    <string name="fail"></string>
+    <string name="choose_a_background"></string>
+    <string name="swipe_left_to_delete"></string>
+    <string name="quote_of_the_day"></string>
+    <string name="dark_theme"></string>
+    <string name="follow_system_theme"></string>
+    <string name="font_size"></string>
+    <string name="pick_font_style"></string>
+    <string name="save_to_gallery"></string>
+    <string name="copy_quote_to_clipboard"></string>
+    <string name="share_quote_as_image"></string>
+    <string name="nothing_here"></string>
+    <string name="error_report_note"></string>
+    <string name="your_comment"></string>
+    <string name="home_fab" translatable="false"></string>
+    <string name="quote_fragment_favourite_button" translatable="false"></string>
+    <string name="about_screen_app_icon" translatable="false"></string>
+    <string name="color_pick_single_iv" translatable="false"></string>
+    <string name="fav_recyclerview_empty_hint_imageview" translatable="false"></string>
+    <string name="pick_an_option"></string>
+    <string name="ask_every_time"></string>
+    <string name="quote_loading"></string>
+    <string name="skip"></string>
+    <string name="submit"></string>
+    <string name="translate_the_app"></string>
+    <string name="pick_a_color"></string>
+    <string name="report_via_telegram"></string>
+    <string name="about_icon_iv" translatable="false"></string>
+    <string name="report_via_github"></string>
+    <string name="choose_from_device"></string>
+    <string name="help_in_localization"></string>
+    <string name="app_requires_these_permissions_to_share_the_quote"></string>
+    <string name="feature_rich"></string>
+    <string name="highly_customizable"></string>
+    <string name="welcome_desc"></string>
+    <string name="quote_added_to_favorites"></string>
+    <string name="removed_from_favorites"></string>
+    <string name="undo"></string>
+    <string name="font_set"></string>
+    <string name="swipe_left_to_share"></string>
+    <string name="all"></string>
+    <string name="pick_a_theme_for_the_app"></string>
+    <string name="share_button_behaviour"></string>
+    <string name="default_action"></string>
+    <string name="restarting_app_for_changes_to_take_effect"></string>
+    <string name="settings_reset"></string>
+    <string name="debug_build"></string>
+    <string name="share_via"></string>
+    <string name="add_to_favorites"></string>
+    <string name="permission_denied"></string>
+    <string name="card_fab" translatable="false"></string>
+    <string name="saving_to_gallery"></string>
+    <string name="please_accept_necessary_permissions"></string>
+    <string name="settings_fab" translatable="false"></string>
+    <string name="copied_to_clipboard"></string>
+    <string name="bg_fab" translatable="false"></string>
+    <string name="home_fab_overlay" translatable="false"></string>
+    <string name="font_fab" translatable="false"></string>
+    <string name="color_fab" translatable="false"></string>
+    <string name="quote_fragment_share_button" translatable="false"></string>
+    <string name="default_single_image" translatable="false"></string>
+    <string name="settings_screen_notification_switch_hint" translatable="false"></string>
+    <string name="fav_fab" translatable="false"></string>
+    <string name="quote_widget_favourite_button" translatable="false"></string>
+    <string name="settings_screen_share_tv_hint" translatable="false"></string>
+    <string name="quote_widget_share_button" translatable="false"></string>
+    <string name="bottom_sheet_done_indicator" translatable="false"></string>
+    <string name="custom_flag_iv" translatable="false"></string>
+    <string name="unsplash_single_image" translatable="false"></string>
+    <string name="about_fab" translatable="false"></string>
+    <string name="splash_screen_app_icon" translatable="false"></string>
+    <string name="unsplash_credit"></string>
+    <string name="settings_screen_fav_reverse_switch_hint" translatable="false"></string>
+    <string name="custom"></string>
+    <string name="rate_this_app_on_google_play"></string>
+    <string name="tour_fragment_imageview" translatable="false"></string>
+    <string name="action"></string>
+    <string name="theme"></string>
+    <string name="thought"></string>
+    <string name="inspiration"></string>
+    <string name="comment"></string>
+    <string name="courage"></string>
+    <string name="added_to_favorites"></string>
+    <string name="turned_on"></string>
+    <string name="font_file_not_found"></string>
+    <string name="attitude"></string>
+    <string name="friend"></string>
+    <string name="share_the_app"></string>
+    <string name="crashed"></string>
+    <string name="reverse_swipe"></string>
+    <string name="thanks_to"></string>
+    <string name="swipe_right_to_delete"></string>
+    <string name="love"></string>
+    <string name="please_wait"></string>
+    <string name="stack_trace"></string>
+    <string name="highly_customizable_desc"></string>
+    <string name="report_copied_to_clipboard"></string>
+    <string name="success"></string>
+    <string name="already_present_in_favorites"></string>
+    <string name="crash_report_for"></string>
+    <string name="quote_widget_author_container_imageview" translatable="false"></string>
+    <string name="share_random_quote"></string>
+    <string name="quote_widget_quote_container_imageview" translatable="false"></string>
+    <string name="welcome"></string>
+    <string name="daily_notification_not_set"></string>
+    <string name="reverse_swipe_action_on_favorites"></string>
+    <string name="huge_collection_desc"></string>
+    <string name="try_again"></string>
+    <string name="applying_changes"></string>
+    <string name="pick_background_color"></string>
+    <string name="home_search_image_view" translatable="false"></string>
+    <string name="view_source_code_on_github"></string>
+    <string name="oops_something_went_wrong"></string>
+    <string name="swipe_right_to_share"></string>
 </resources>
