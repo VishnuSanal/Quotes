@@ -144,4 +144,33 @@
     <string name="app_requires_these_permissions_to_run_properly">பயன்பாட்டிற்கு இந்த அனுமதிகள் சரியாக இயங்க வேண்டும்</string>
     <string name="choose_from_device">சாதனத்திலிருந்து தேர்வு செய்யவும்</string>
     <string name="unsplash_credit">எல்லா படங்களும் <a href="https://unsplash.com/?utm_source=quotes%20Status%20CREATOR%26UTM_MEDIUM=REFERRAL"> Unsplash </a></string>
+    <string name="about_fab" translatable="false"></string>
+    <string name="settings_screen_share_tv_hint" translatable="false"></string>
+    <string name="splash_screen_app_icon" translatable="false"></string>
+    <string name="about_screen_app_icon" translatable="false"></string>
+    <string name="bg_fab" translatable="false"></string>
+    <string name="about_icon_iv" translatable="false"></string>
+    <string name="home_fab" translatable="false"></string>
+    <string name="home_search_image_view" translatable="false"></string>
+    <string name="bottom_sheet_done_indicator" translatable="false"></string>
+    <string name="tour_fragment_imageview" translatable="false"></string>
+    <string name="unsplash_single_image" translatable="false"></string>
+    <string name="custom_flag_iv" translatable="false"></string>
+    <string name="quote_widget_quote_container_imageview" translatable="false"></string>
+    <string name="card_fab" translatable="false"></string>
+    <string name="home_fab_overlay" translatable="false"></string>
+    <string name="settings_screen_fav_reverse_switch_hint" translatable="false"></string>
+    <string name="quote_fragment_favourite_button" translatable="false"></string>
+    <string name="quote_fragment_share_button" translatable="false"></string>
+    <string name="quote_widget_share_button" translatable="false"></string>
+    <string name="settings_screen_notification_switch_hint" translatable="false"></string>
+    <string name="default_single_image" translatable="false"></string>
+    <string name="settings_fab" translatable="false"></string>
+    <string name="quote_widget_favourite_button" translatable="false"></string>
+    <string name="color_pick_single_iv" translatable="false"></string>
+    <string name="fav_fab" translatable="false"></string>
+    <string name="font_fab" translatable="false"></string>
+    <string name="fav_recyclerview_empty_hint_imageview" translatable="false"></string>
+    <string name="quote_widget_author_container_imageview" translatable="false"></string>
+    <string name="color_fab" translatable="false"></string>
 </resources>
