@@ -18,6 +18,7 @@
 - [Ali Gagarin](https://hosted.weblate.org/user/Gagarin/) - **Turkish**
 - [Michal Bedáň](https://hosted.weblate.org/user/Bedami/) - **Czech**
 - [tct123](https://hosted.weblate.org/user/tct123/) - **German**
+- [TamilNeram](https://hosted.weblate.org/user/TamilNeram/) - **Tamil**
 
 ### BG Images from [Unsplash](https://unsplash.com/?utm_source=Quotes%20Status%20Creator%26utm_medium=referral)
 ### Welcome tour Illustrations from [UnDraw](https://undraw.co/)
