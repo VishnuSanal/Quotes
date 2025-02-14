@@ -29,9 +29,10 @@
 				android:textSize="16sp"
 				app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
 				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintHorizontal_bias="0"
+				app:layout_constraintHorizontal_bias="0.0"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent" />
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_bias="0.0" />
 
 			<TextView
 				android:id="@+id/favAddTV"
@@ -47,9 +48,10 @@
 				app:drawableEndCompat="@drawable/ic_post_add"
 				app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
 				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintHorizontal_bias="1"
+				app:layout_constraintHorizontal_bias="1.0"
 				app:layout_constraintStart_toEndOf="@id/favTitleTV"
 				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_bias="0.0"
 				app:tint="@color/colorAccent" />
 
 			<androidx.constraintlayout.widget.Guideline
@@ -57,7 +59,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:orientation="horizontal"
-				app:layout_constraintGuide_begin="48dp" />
+				app:layout_constraintGuide_begin="100dp" />
 
 			<com.google.android.material.textfield.TextInputLayout
 				android:id="@+id/favSearchTIL"
@@ -171,6 +173,26 @@
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toBottomOf="@id/favProgressBar"
 				tools:listitem="@layout/favorite_single_item" />
+
+			<TextView
+				android:id="@+id/clearAllButton"
+				android:layout_width="175dp"
+				android:layout_height="40dp"
+				android:layout_marginTop="4dp"
+				android:layout_marginBottom="16dp"
+				android:background="#FFFFFF"
+				android:gravity="center"
+				android:text="Clear All"
+				android:textColor="@android:color/black"
+				android:textSize="16sp"
+				android:visibility="visible"
+				app:layout_constraintBottom_toTopOf="@+id/favSearchTIL"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.937"
+				app:layout_constraintStart_toEndOf="@+id/favTitleTV"
+				app:layout_constraintTop_toBottomOf="@+id/favAddTV"
+				app:layout_constraintVertical_bias="1.0" />
+
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 

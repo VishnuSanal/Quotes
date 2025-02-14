@@ -75,6 +75,8 @@ public class FavoriteFragment extends BaseBottomSheetDialogFragment {
     private FavoritesRVAdapter adapter;
     private RecyclerView recyclerView;
 
+    private TextView clearAllButton;
+
     private ImageView emptyHintIV;
     private TextView emptyHintTV, addTV, countTV;
     private LinearProgressIndicator progressBar;
@@ -106,6 +108,7 @@ public class FavoriteFragment extends BaseBottomSheetDialogFragment {
         coordinatorLayout = inflate.findViewById(R.id.favCoordinatorLayout);
         textInputEditText = inflate.findViewById(R.id.favSearchTIE);
         textInputLayout = inflate.findViewById(R.id.favSearchTIL);
+        clearAllButton = inflate.findViewById(R.id.clearAllButton);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(requireContext());
 
@@ -176,6 +179,16 @@ public class FavoriteFragment extends BaseBottomSheetDialogFragment {
                     if (!hasFocus) {
                         hideKeyboard(v);
                         chipGroup.requestFocus();
+                    }
+                });
+
+        clearAllButton.setOnClickListener(
+                v -> {
+                    if (!favArrayList.isEmpty()) {
+                        viewModel.deleteAll();
+                        favArrayList.clear();
+                        submitList(new ArrayList<>());
+                        sharedPreferenceHelper.deleteFavPreference();
                     }
                 });
     }
