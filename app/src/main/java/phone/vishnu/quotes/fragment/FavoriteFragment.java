@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Filter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,7 +76,7 @@ public class FavoriteFragment extends BaseBottomSheetDialogFragment {
     private FavoritesRVAdapter adapter;
     private RecyclerView recyclerView;
 
-    private TextView clearAllButton;
+    private ImageButton clearAllButton;
 
     private ImageView emptyHintIV;
     private TextView emptyHintTV, addTV, countTV;
