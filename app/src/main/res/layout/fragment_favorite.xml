@@ -59,7 +59,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:orientation="horizontal"
-				app:layout_constraintGuide_begin="55dp" />
+				app:layout_constraintGuide_begin="48dp" />
 
 			<com.google.android.material.textfield.TextInputLayout
 				android:id="@+id/favSearchTIL"
@@ -108,7 +108,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_margin="8dp"
-				android:layout_marginEnd="7dp"
 				android:fontFamily="serif"
 				android:padding="2dp"
 				android:textColor="@color/textColor"
@@ -120,13 +119,13 @@
 
 			<ImageButton
 				android:id="@+id/clearAllButton"
-				android:layout_width="40dp"
-				android:layout_height="40dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:layout_margin="8dp"
 				android:background="?attr/selectableItemBackgroundBorderless"
 				android:contentDescription="@string/clear_all"
 				android:src="@drawable/ic_round_clear_all_24"
-				android:tint="@color/textColor"
+				app:tint="@color/textColor"
 				app:layout_constraintBottom_toBottomOf="@id/favCountTV"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintTop_toTopOf="@id/favCountTV" />
