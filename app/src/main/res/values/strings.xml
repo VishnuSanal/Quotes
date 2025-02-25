@@ -127,6 +127,7 @@
 	<string name="all">All</string>
 	<string name="default_string">Default</string>
 	<string name="custom">Custom</string>
+	<string name="clear_all">Clear All</string>
 
 	<string name="font_file_not_found">Font file not found</string>
 

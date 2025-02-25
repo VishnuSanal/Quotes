@@ -46,6 +46,10 @@ public class FavViewModel extends AndroidViewModel {
         repository.deleteFav(quote);
     }
 
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
     public LiveData<List<Quote>> getAllFav() {
         return allFavList;
     }

@@ -29,9 +29,10 @@
 				android:textSize="16sp"
 				app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
 				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintHorizontal_bias="0"
+				app:layout_constraintHorizontal_bias="0.0"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent" />
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_bias="0.0" />
 
 			<TextView
 				android:id="@+id/favAddTV"
@@ -47,9 +48,10 @@
 				app:drawableEndCompat="@drawable/ic_post_add"
 				app:layout_constraintBottom_toTopOf="@id/favGuideLineOne"
 				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintHorizontal_bias="1"
+				app:layout_constraintHorizontal_bias="1.0"
 				app:layout_constraintStart_toEndOf="@id/favTitleTV"
 				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_bias="0.0"
 				app:tint="@color/colorAccent" />
 
 			<androidx.constraintlayout.widget.Guideline
@@ -112,8 +114,21 @@
 				android:textSize="16sp"
 				android:textStyle="bold"
 				app:layout_constraintBottom_toBottomOf="@id/favChipGroup"
-				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintEnd_toStartOf="@+id/clearAllButton"
 				app:layout_constraintTop_toTopOf="@id/favChipGroup" />
+
+			<ImageButton
+				android:id="@+id/clearAllButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="8dp"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:contentDescription="@string/clear_all"
+				android:src="@drawable/ic_round_clear_all_24"
+				app:tint="@color/textColor"
+				app:layout_constraintBottom_toBottomOf="@id/favCountTV"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="@id/favCountTV" />
 
 			<com.google.android.material.progressindicator.LinearProgressIndicator
 				android:id="@+id/favProgressBar"
@@ -171,6 +186,7 @@
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toBottomOf="@id/favProgressBar"
 				tools:listitem="@layout/favorite_single_item" />
+
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
