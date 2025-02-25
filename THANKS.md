@@ -60,6 +60,7 @@
 - [Abhiram V](https://github.com/abhiram-anand)
 - [Ayush I](https://github.com/AyushIyankan)
 - [Allan Nordhøy](https://github.com/comradekingu)
+- [S Mohana Vamsi](https://github.com/mohanvamsi06)
 
 ### Other awesome people who helped!
 
