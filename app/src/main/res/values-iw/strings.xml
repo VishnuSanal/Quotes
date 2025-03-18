@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="favorites">מועדפים</string>
-    <string name="home">בית</string>
-    <string name="cancel">בטל</string>
-    <string name="submit">שלח</string>
-    <string name="default_size">ברירת מחדל</string>
-    <string name="reset_settings">אפס הגדרות</string>
+	<string name="favorites">מועדפים</string>
+	<string name="home">בית</string>
+	<string name="cancel">בטל</string>
+	<string name="submit">שלח</string>
+	<string name="default_size">ברירת מחדל</string>
+	<string name="reset_settings">אפס הגדרות</string>
 </resources>
