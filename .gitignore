@@ -41,7 +41,7 @@ captures/
 # IntelliJ
 *.iml
 
-.idea/*
+.idea/
 
 .idea/workspace.xml
 .idea/tasks.xml
@@ -198,5 +198,7 @@ fabric.properties
 ### AndroidStudio Patch ###
 
 !/gradle/wrapper/gradle-wrapper.jar
+
+app/release/*
 
 # End of https://www.gitignore.io/api/android,androidstudio
