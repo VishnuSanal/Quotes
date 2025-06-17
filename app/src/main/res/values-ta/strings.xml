@@ -101,7 +101,7 @@
 	<string name="feature_rich">நற்பொருத்தம் பணக்காரர்</string>
 	<string name="huge_collection_desc">மேற்கோள்கள் நிலை உருவாக்கியவர் பயன்பாட்டின் எளிமையை மேம்படுத்தும் அம்சங்களின் ஏராளமான பொதிகள்!</string>
 	<string name="highly_customizable">மிகவும் தனிப்பயனாக்கக்கூடியது</string>
-	<string name="highly_customizable_desc">மேற்கோள்கள் நிலை உருவாக்கியவர் அட்டை, பின்னணி மற்றும் எழுத்துருவைத் தனிப்பயனாக்க உங்களை அனுமதிக்கிறது.</string>
+	<string name="highly_customizable_desc"><![CDATA[மேற்கோள்கள் நிலை உருவாக்கியவர் அட்டை, பின்னணி மற்றும் எழுத்துருவைத் தனிப்பயனாக்க உங்களை அனுமதிக்கிறது.]]></string>
 	<string name="field_empty">புலம் காலியாக உள்ளது</string>
 	<string name="quote_added_to_favorites">பிடித்தவைகளில் மேற்கோள் சேர்க்கப்பட்டது</string>
 	<string name="applying_changes">மாற்றங்களைப் பயன்படுத்துதல்</string>
@@ -143,5 +143,6 @@
 	<string name="please_accept_necessary_permissions">தேவையான அனுமதிகளை ஏற்றுக்கொள்ளுங்கள்</string>
 	<string name="app_requires_these_permissions_to_run_properly">பயன்பாட்டிற்கு இந்த அனுமதிகள் சரியாக இயங்க வேண்டும்</string>
 	<string name="choose_from_device">சாதனத்திலிருந்து தேர்வு செய்யவும்</string>
-	<string name="unsplash_credit">எல்லா படங்களும் <a href="https://unsplash.com/?utm_source=quotes%20Status%20CREATOR%26UTM_MEDIUM=REFERRAL"> Unsplash </a></string>
+	<string name="unsplash_credit">எல்லா படங்களும் <a href="https://unsplash.com/?utm_source=Quotes%20Status%20Creator%26utm_medium=referral"> Unsplash </a></string>
+	<string name="clear_all">அனைத்தையும் அழி</string>
 </resources>
