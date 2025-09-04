@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     defaultConfig {
         applicationId "phone.vishnu.quotes"
         minSdkVersion 22
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode 65
         versionName "v3.1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
