@@ -1,0 +1,5 @@
+- update translations
+- bug fixes
+- slight UI changes
+
+Full Changelog -> https://github.com/VishnuSanal/Quotes/compare/v3.1.2...v3.1.3
