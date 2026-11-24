@@ -138,10 +138,40 @@
     <string name="welcome_desc">Mit dem Quotes Status Creator können Sie Zitate in sozialen Medien teilen.</string>
     <string name="huge_collection_desc">Quotes Status Creator bietet eine Fülle von Funktionen, die die Benutzerfreundlichkeit verbessern!</string>
     <string name="highly_customizable">Hochgradig anpassbar</string>
-    <string name="highly_customizable_desc">Mit Quotes Status Creator können Sie Karte, Hintergrund und Schriftart anpassen.</string>
+    <string name="highly_customizable_desc"><![CDATA[Mit Quotes Status Creator können Sie Karte, Hintergrund und Schriftart anpassen.]]></string>
     <string name="font_set">Schriftsatz</string>
     <string name="default_action">Standard Aktion</string>
     <string name="share_button_behaviour">Verhalten der Schaltfläche „Teilen“</string>
     <string name="choose_from_device">Wählen Sie aus dem Gerät</string>
     <string name="unsplash_credit">Alle Bilder stammen von <a href="https://unsplash.com/?utm_source=Quotes%20Status%20Creator%26utm_medium=referral">Unsplash</a></string>
+    <string name="default_single_image" translatable="false"></string>
+    <string name="quote_widget_quote_container_imageview" translatable="false"></string>
+    <string name="clear_all"></string>
+    <string name="fav_fab" translatable="false"></string>
+    <string name="bottom_sheet_done_indicator" translatable="false"></string>
+    <string name="quote_widget_favourite_button" translatable="false"></string>
+    <string name="tour_fragment_imageview" translatable="false"></string>
+    <string name="bg_fab" translatable="false"></string>
+    <string name="color_pick_single_iv" translatable="false"></string>
+    <string name="color_fab" translatable="false"></string>
+    <string name="custom_flag_iv" translatable="false"></string>
+    <string name="home_fab" translatable="false"></string>
+    <string name="about_fab" translatable="false"></string>
+    <string name="quote_fragment_favourite_button" translatable="false"></string>
+    <string name="unsplash_single_image" translatable="false"></string>
+    <string name="home_fab_overlay" translatable="false"></string>
+    <string name="about_screen_app_icon" translatable="false"></string>
+    <string name="settings_fab" translatable="false"></string>
+    <string name="splash_screen_app_icon" translatable="false"></string>
+    <string name="settings_screen_fav_reverse_switch_hint" translatable="false"></string>
+    <string name="font_fab" translatable="false"></string>
+    <string name="home_search_image_view" translatable="false"></string>
+    <string name="settings_screen_notification_switch_hint" translatable="false"></string>
+    <string name="fav_recyclerview_empty_hint_imageview" translatable="false"></string>
+    <string name="settings_screen_share_tv_hint" translatable="false"></string>
+    <string name="about_icon_iv" translatable="false"></string>
+    <string name="quote_widget_author_container_imageview" translatable="false"></string>
+    <string name="quote_widget_share_button" translatable="false"></string>
+    <string name="quote_fragment_share_button" translatable="false"></string>
+    <string name="card_fab" translatable="false"></string>
 </resources>
