@@ -1,198 +1,198 @@
 <resources>
-	<string name="app_name">Quotes</string>
+    <string name="app_name">Quotes</string>
 
-	<string name="home">Home</string>
-	<string name="favorites">Favorites</string>
-	<string name="share_random_quote">Share Random Quote</string>
-	<string name="quote">Quote</string>
-	<string name="author">Author</string>
-	<string name="add">Add</string>
-	<string name="cancel">Cancel</string>
-	<string name="submit">Submit</string>
-	<string name="default_size">Default</string>
-	<string name="reset_settings">Reset Settings</string>
-	<string name="plain_color">Plain Color</string>
-	<string name="image_from_gallery">Image From Gallery</string>
-	<string name="default_images">Default Images</string>
-	<string name="change_font_style">Change Font Style</string>
-	<string name="change_font_color">Change Font Color</string>
-	<string name="change_font_size">Change Font Size</string>
-	<string name="quotes_status_creator">Quotes Status Creator</string>
-	<string name="add_custom_quote">Add Custom Quote</string>
-	<string name="pick_background_image">Pick Background Image</string>
-	<string name="used_images">Used Images</string>
-	<string name="new_images">New Images</string>
-	<string name="pick_card_color">Pick Card Color</string>
-	<string name="pick_a_color">Pick a Color</string>
-	<string name="choose_a_theme">Choose a Theme</string>
-	<string name="light_theme">Light Theme</string>
-	<string name="dark_theme">Dark Theme</string>
-	<string name="follow_system_theme">Follow System Theme</string>
-	<string name="pick_font_style">Pick Font Style</string>
-	<string name="font_size">Font Size</string>
-	<string name="settings">Settings</string>
-	<string name="skip">SKIP</string>
-	<string name="next">NEXT</string>
-	<string name="quote_loading">Quote Loading...</string>
-	<string name="pick_an_option">Pick an Option</string>
-	<string name="copy_quote_to_clipboard">Copy Quote to Clipboard</string>
-	<string name="share_quote_as_image">Share Quote as Image</string>
-	<string name="save_to_gallery">Save to Gallery</string>
-	<string name="ask_every_time">Ask every time</string>
-	<string name="nothing_here">Nothing Here!</string>
-	<string name="search">Search</string>
-	<string name="report_via_telegram">Report via Telegram</string>
-	<string name="report_via_github">Report via GitHub</string>
-	<string name="error_report_note">To diagnose and fix this issue, please send us a crash report.</string>
-	<string name="your_comment">Your comment (optional)</string>
-	<string name="about">About</string>
+    <string name="home">Home</string>
+    <string name="favorites">Favorites</string>
+    <string name="share_random_quote">Share Random Quote</string>
+    <string name="quote">Quote</string>
+    <string name="author">Author</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="default_size">Default</string>
+    <string name="reset_settings">Reset Settings</string>
+    <string name="plain_color">Plain Color</string>
+    <string name="image_from_gallery">Image From Gallery</string>
+    <string name="default_images">Default Images</string>
+    <string name="change_font_style">Change Font Style</string>
+    <string name="change_font_color">Change Font Color</string>
+    <string name="change_font_size">Change Font Size</string>
+    <string name="quotes_status_creator">Quotes Status Creator</string>
+    <string name="add_custom_quote">Add Custom Quote</string>
+    <string name="pick_background_image">Pick Background Image</string>
+    <string name="used_images">Used Images</string>
+    <string name="new_images">New Images</string>
+    <string name="pick_card_color">Pick Card Color</string>
+    <string name="pick_a_color">Pick a Color</string>
+    <string name="choose_a_theme">Choose a Theme</string>
+    <string name="light_theme">Light Theme</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="follow_system_theme">Follow System Theme</string>
+    <string name="pick_font_style">Pick Font Style</string>
+    <string name="font_size">Font Size</string>
+    <string name="settings">Settings</string>
+    <string name="skip">SKIP</string>
+    <string name="next">NEXT</string>
+    <string name="quote_loading">Quote Loading...</string>
+    <string name="pick_an_option">Pick an Option</string>
+    <string name="copy_quote_to_clipboard">Copy Quote to Clipboard</string>
+    <string name="share_quote_as_image">Share Quote as Image</string>
+    <string name="save_to_gallery">Save to Gallery</string>
+    <string name="ask_every_time">Ask every time</string>
+    <string name="nothing_here">Nothing Here!</string>
+    <string name="search">Search</string>
+    <string name="report_via_telegram">Report via Telegram</string>
+    <string name="report_via_github">Report via GitHub</string>
+    <string name="error_report_note">To diagnose and fix this issue, please send us a crash report.</string>
+    <string name="your_comment">Your comment (optional)</string>
+    <string name="about">About</string>
 
-	<string name="version">Version</string>
-	<string name="share_text">Install Quotes Status Creator - an open source app that lets you share quotations as status images on social media</string>
-	<string name="share_quotes_status_creator">Share Quotes Status Creator</string>
-	<string name="join_telegram_group">Join Telegram Group</string>
-	<string name="join_our_community_on_telegram">Join our community on Telegram</string>
-	<string name="rate_the_app">Rate the App</string>
-	<string name="rate_this_app_on_google_play">Rate this app on Google Play</string>
-	<string name="share_the_app">Share the App</string>
-	<string name="share_quotes_status_creator_with_your_friends">Share Quotes Status Creator with your friends</string>
-	<string name="source_code">Source Code</string>
-	<string name="view_source_code_on_github">View source code on GitHub</string>
-	<string name="thanks_to">Thanks To</string>
-	<string name="thanks_to_these_awesome_people">Thanks to these awesome people</string>
-	<string name="translate_the_app">Translate the app</string>
-	<string name="help_in_localization">Help in localization by adding translations in your language</string>
+    <string name="version">Version</string>
+    <string name="share_text">Install Quotes Status Creator - an open source app that lets you share quotations as status images on social media</string>
+    <string name="share_quotes_status_creator">Share Quotes Status Creator</string>
+    <string name="join_telegram_group">Join Telegram Group</string>
+    <string name="join_our_community_on_telegram">Join our community on Telegram</string>
+    <string name="rate_the_app">Rate the App</string>
+    <string name="rate_this_app_on_google_play">Rate this app on Google Play</string>
+    <string name="share_the_app">Share the App</string>
+    <string name="share_quotes_status_creator_with_your_friends">Share Quotes Status Creator with your friends</string>
+    <string name="source_code">Source Code</string>
+    <string name="view_source_code_on_github">View source code on GitHub</string>
+    <string name="thanks_to">Thanks To</string>
+    <string name="thanks_to_these_awesome_people">Thanks to these awesome people</string>
+    <string name="translate_the_app">Translate the app</string>
+    <string name="help_in_localization">Help in localization by adding translations in your language</string>
 
-	<string name="crashed"> crashed</string>
-	<string name="package_name">Package Name:</string>
-	<string name="app_version">App Version:</string>
-	<string name="version_code">Version Code:</string>
-	<string name="android_version">Android Version:</string>
-	<string name="app_start_date">App Start Date:</string>
-	<string name="stack_trace">Stack Trace:</string>
-	<string name="comment">Comment:</string>
-	<string name="crash_report_for">Crash report for</string>
-	<string name="report_copied_to_clipboard">Report Copied to Clipboard</string>
+    <string name="crashed"> crashed</string>
+    <string name="package_name">Package Name:</string>
+    <string name="app_version">App Version:</string>
+    <string name="version_code">Version Code:</string>
+    <string name="android_version">Android Version:</string>
+    <string name="app_start_date">App Start Date:</string>
+    <string name="stack_trace">Stack Trace:</string>
+    <string name="comment">Comment:</string>
+    <string name="crash_report_for">Crash report for</string>
+    <string name="report_copied_to_clipboard">Report Copied to Clipboard</string>
 
-	<string name="life">Life</string>
-	<string name="success">Success</string>
-	<string name="love">Love</string>
-	<string name="action">Action</string>
-	<string name="dream">Dream</string>
-	<string name="fail">Fail</string>
-	<string name="thought">Thought</string>
-	<string name="heart">Heart</string>
-	<string name="mistake">Mistake</string>
-	<string name="wisdom">Wisdom</string>
-	<string name="fear">Fear</string>
-	<string name="courage">Courage</string>
-	<string name="friend">Friend</string>
-	<string name="attitude">Attitude</string>
-	<string name="perseverance">Perseverance</string>
-	<string name="motivation">Motivation</string>
-	<string name="inspiration">Inspiration</string>
+    <string name="life">Life</string>
+    <string name="success">Success</string>
+    <string name="love">Love</string>
+    <string name="action">Action</string>
+    <string name="dream">Dream</string>
+    <string name="fail">Fail</string>
+    <string name="thought">Thought</string>
+    <string name="heart">Heart</string>
+    <string name="mistake">Mistake</string>
+    <string name="wisdom">Wisdom</string>
+    <string name="fear">Fear</string>
+    <string name="courage">Courage</string>
+    <string name="friend">Friend</string>
+    <string name="attitude">Attitude</string>
+    <string name="perseverance">Perseverance</string>
+    <string name="motivation">Motivation</string>
+    <string name="inspiration">Inspiration</string>
 
-	<string name="action_cancelled">Action Cancelled!</string>
-	<string name="oops_something_went_wrong">Oops! Something went wrong!</string>
-	<string name="please_connect_to_the_internet">Please Connect to the Internet</string>
-	<string name="choose_a_background">Choose a background</string>
-	<string name="already_present_in_favorites">Already Present in Favorites</string>
-	<string name="added_to_favorites">Added to Favorites</string>
-	<string name="please_wait">Please Wait....</string>
+    <string name="action_cancelled">Action Cancelled!</string>
+    <string name="oops_something_went_wrong">Oops! Something went wrong!</string>
+    <string name="please_connect_to_the_internet">Please Connect to the Internet</string>
+    <string name="choose_a_background">Choose a background</string>
+    <string name="already_present_in_favorites">Already Present in Favorites</string>
+    <string name="added_to_favorites">Added to Favorites</string>
+    <string name="please_wait">Please Wait....</string>
 
-	<string name="welcome">Welcome!</string>
-	<string name="welcome_desc">Quotes Status Creator lets you share quotations on social media.</string>
-	<string name="feature_rich">Feature Rich</string>
-	<string name="huge_collection_desc">Quotes Status Creator packs plethora of features enhancing the ease of use!</string>
-	<string name="highly_customizable">Highly Customizable</string>
-	<string name="highly_customizable_desc"><![CDATA[Quotes Status Creator lets you customize the card, background & font.]]></string>
+    <string name="welcome">Welcome!</string>
+    <string name="welcome_desc">Quotes Status Creator lets you share quotations on social media.</string>
+    <string name="feature_rich">Feature Rich</string>
+    <string name="huge_collection_desc">Quotes Status Creator packs plethora of features enhancing the ease of use!</string>
+    <string name="highly_customizable">Highly Customizable</string>
+    <string name="highly_customizable_desc"><![CDATA[Quotes Status Creator lets you customize the card, background & font.]]></string>
 
-	<string name="field_empty">Field Empty</string>
-	<string name="quote_added_to_favorites">Quote added to Favorites</string>
+    <string name="field_empty">Field Empty</string>
+    <string name="quote_added_to_favorites">Quote added to Favorites</string>
 
-	<string name="applying_changes">Applying Changes</string>
+    <string name="applying_changes">Applying Changes</string>
 
-	<string name="pick_font_color">Pick Font Color</string>
-	<string name="pick_background_color">Pick Background Color</string>
+    <string name="pick_font_color">Pick Font Color</string>
+    <string name="pick_background_color">Pick Background Color</string>
 
-	<string name="swipe_right_to_share">Swipe Right to Share</string>
-	<string name="swipe_left_to_delete">Swipe Left to Delete</string>
-	<string name="swipe_right_to_delete">Swipe Right to Delete</string>
-	<string name="swipe_left_to_share">Swipe Left to Share</string>
+    <string name="swipe_right_to_share">Swipe Right to Share</string>
+    <string name="swipe_left_to_delete">Swipe Left to Delete</string>
+    <string name="swipe_right_to_delete">Swipe Right to Delete</string>
+    <string name="swipe_left_to_share">Swipe Left to Share</string>
 
-	<string name="font_set">Font set</string>
+    <string name="font_set">Font set</string>
 
-	<string name="removed_from_favorites">Removed from Favorites</string>
-	<string name="undo">Undo</string>
-	<string name="all">All</string>
-	<string name="default_string">Default</string>
-	<string name="custom">Custom</string>
-	<string name="clear_all">Clear All</string>
+    <string name="removed_from_favorites">Removed from Favorites</string>
+    <string name="undo">Undo</string>
+    <string name="all">All</string>
+    <string name="default_string">Default</string>
+    <string name="custom">Custom</string>
+    <string name="clear_all">Clear All</string>
 
-	<string name="font_file_not_found">Font file not found</string>
+    <string name="font_file_not_found">Font file not found</string>
 
-	<string name="reverse_swipe">Reverse Swipe</string>
-	<string name="reverse_swipe_action_on_favorites">Reverse Swipe Action on Favorites</string>
-	<string name="share">Share</string>
-	<string name="default_action">Default Action</string>
-	<string name="share_button_behaviour">Share Button Behaviour</string>
-	<string name="theme">Theme</string>
-	<string name="pick_a_theme_for_the_app">Pick a theme for the app</string>
-	<string name="settings_reset">Settings Reset</string>
-	<string name="restarting_app_for_changes_to_take_effect">Restarting App for changes to take effect</string>
-	<string name="daily_reminder">Daily Reminder</string>
+    <string name="reverse_swipe">Reverse Swipe</string>
+    <string name="reverse_swipe_action_on_favorites">Reverse Swipe Action on Favorites</string>
+    <string name="share">Share</string>
+    <string name="default_action">Default Action</string>
+    <string name="share_button_behaviour">Share Button Behaviour</string>
+    <string name="theme">Theme</string>
+    <string name="pick_a_theme_for_the_app">Pick a theme for the app</string>
+    <string name="settings_reset">Settings Reset</string>
+    <string name="restarting_app_for_changes_to_take_effect">Restarting App for changes to take effect</string>
+    <string name="daily_reminder">Daily Reminder</string>
 
-	<string name="daily_notifications">Daily notifications</string>
-	<string name="turned_on">Turned on</string>
-	<string name="turned_off">Turned off</string>
-	<string name="daily_notification_not_set">Daily Notification not set</string>
-	<string name="try_again">Try again</string>
+    <string name="daily_notifications">Daily notifications</string>
+    <string name="turned_on">Turned on</string>
+    <string name="turned_off">Turned off</string>
+    <string name="daily_notification_not_set">Daily Notification not set</string>
+    <string name="try_again">Try again</string>
 
-	<string name="debug_build">Debug build</string>
+    <string name="debug_build">Debug build</string>
 
-	<string name="add_to_favorites">Add to Favorites</string>
-	<string name="quote_of_the_day">Quote of the day</string>
+    <string name="add_to_favorites">Add to Favorites</string>
+    <string name="quote_of_the_day">Quote of the day</string>
 
-	<string name="share_via">Share via</string>
-	<string name="copied_to_clipboard">Copied to Clipboard</string>
-	<string name="saving_to_gallery">Saving to Gallery</string>
-	<string name="app_requires_these_permissions_to_share_the_quote">App requires these permissions to share the quote</string>
-	<string name="permission_denied">Permission Denied</string>
-	<string name="please_accept_necessary_permissions">Please Accept Necessary Permissions</string>
-	<string name="app_requires_these_permissions_to_run_properly">App requires these permissions to run properly</string>
-	<string name="choose_from_device">Choose from device</string>
-	<string name="unsplash_credit">All images are from <a href="https://unsplash.com/?utm_source=Quotes%20Status%20Creator%26utm_medium=referral">Unsplash</a></string>
+    <string name="share_via">Share via</string>
+    <string name="copied_to_clipboard">Copied to Clipboard</string>
+    <string name="saving_to_gallery">Saving to Gallery</string>
+    <string name="app_requires_these_permissions_to_share_the_quote">App requires these permissions to share the quote</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="please_accept_necessary_permissions">Please Accept Necessary Permissions</string>
+    <string name="app_requires_these_permissions_to_run_properly">App requires these permissions to run properly</string>
+    <string name="choose_from_device">Choose from device</string>
+    <string name="unsplash_credit">All images are from <a href="https://unsplash.com/?utm_source=Quotes%20Status%20Creator%26utm_medium=referral">Unsplash</a></string>
 
-	<!--Content Descriptions-->
+    <!--Content Descriptions-->
 
-	<string name="about_icon_iv" translatable="false">About Icon IV</string>
-	<string name="about_fab" translatable="false">About FAB</string>
-	<string name="card_fab" translatable="false">Card FAB</string>
-	<string name="settings_fab" translatable="false">Settings FAB</string>
-	<string name="font_fab" translatable="false">Font FAB</string>
-	<string name="home_fab" translatable="false">Home FAB</string>
-	<string name="home_fab_overlay" translatable="false">Home FAB Overlay</string>
-	<string name="bg_fab" translatable="false">BG FAB</string>
-	<string name="color_fab" translatable="false">Color FAB</string>
-	<string name="fav_fab" translatable="false">Fav FAB</string>
-	<string name="splash_screen_app_icon" translatable="false">Splash Screen App Icon</string>
-	<string name="default_single_image" translatable="false">Default Single Image</string>
-	<string name="color_pick_single_iv" translatable="false">Color Pick Single IV</string>
-	<string name="about_screen_app_icon" translatable="false">About Screen App Icon</string>
-	<string name="fav_recyclerview_empty_hint_imageview" translatable="false">Fav RecyclerView Empty Hint ImageView</string>
-	<string name="quote_fragment_favourite_button" translatable="false">Quote Fragment Favourite Button</string>
-	<string name="quote_fragment_share_button" translatable="false">Quote Fragment Share Button</string>
-	<string name="settings_screen_notification_switch_hint" translatable="false">Settings Screen Notification Switch Hint</string>
-	<string name="settings_screen_fav_reverse_switch_hint" translatable="false">Settings Screen Fav Reverse Switch Hint</string>
-	<string name="settings_screen_share_tv_hint" translatable="false">Settings Screen Share TV Hint</string>
-	<string name="quote_widget_favourite_button" translatable="false">Quote Widget Favourite Button</string>
-	<string name="quote_widget_share_button" translatable="false">Quote Widget Share Button</string>
-	<string name="quote_widget_quote_container_imageview" translatable="false">Quote Widget Quote Container ImageView</string>
-	<string name="quote_widget_author_container_imageview" translatable="false">Quote Widget Author Container ImageView</string>
-	<string name="bottom_sheet_done_indicator" translatable="false">Bottom Sheet Done Indicator</string>
-	<string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
-	<string name="home_search_image_view" translatable="false">Home Search ImageView</string>
-	<string name="custom_flag_iv" translatable="false">Custom Flag IV</string>
-	<string name="unsplash_single_image" translatable="false">Unsplash single image</string>
+    <string name="about_icon_iv" translatable="false">About Icon IV</string>
+    <string name="about_fab" translatable="false">About FAB</string>
+    <string name="card_fab" translatable="false">Card FAB</string>
+    <string name="settings_fab" translatable="false">Settings FAB</string>
+    <string name="font_fab" translatable="false">Font FAB</string>
+    <string name="home_fab" translatable="false">Home FAB</string>
+    <string name="home_fab_overlay" translatable="false">Home FAB Overlay</string>
+    <string name="bg_fab" translatable="false">BG FAB</string>
+    <string name="color_fab" translatable="false">Color FAB</string>
+    <string name="fav_fab" translatable="false">Fav FAB</string>
+    <string name="splash_screen_app_icon" translatable="false">Splash Screen App Icon</string>
+    <string name="default_single_image" translatable="false">Default Single Image</string>
+    <string name="color_pick_single_iv" translatable="false">Color Pick Single IV</string>
+    <string name="about_screen_app_icon" translatable="false">About Screen App Icon</string>
+    <string name="fav_recyclerview_empty_hint_imageview" translatable="false">Fav RecyclerView Empty Hint ImageView</string>
+    <string name="quote_fragment_favourite_button" translatable="false">Quote Fragment Favourite Button</string>
+    <string name="quote_fragment_share_button" translatable="false">Quote Fragment Share Button</string>
+    <string name="settings_screen_notification_switch_hint" translatable="false">Settings Screen Notification Switch Hint</string>
+    <string name="settings_screen_fav_reverse_switch_hint" translatable="false">Settings Screen Fav Reverse Switch Hint</string>
+    <string name="settings_screen_share_tv_hint" translatable="false">Settings Screen Share TV Hint</string>
+    <string name="quote_widget_favourite_button" translatable="false">Quote Widget Favourite Button</string>
+    <string name="quote_widget_share_button" translatable="false">Quote Widget Share Button</string>
+    <string name="quote_widget_quote_container_imageview" translatable="false">Quote Widget Quote Container ImageView</string>
+    <string name="quote_widget_author_container_imageview" translatable="false">Quote Widget Author Container ImageView</string>
+    <string name="bottom_sheet_done_indicator" translatable="false">Bottom Sheet Done Indicator</string>
+    <string name="tour_fragment_imageview" translatable="false">Tour Fragment ImageView</string>
+    <string name="home_search_image_view" translatable="false">Home Search ImageView</string>
+    <string name="custom_flag_iv" translatable="false">Custom Flag IV</string>
+    <string name="unsplash_single_image" translatable="false">Unsplash single image</string>
 
 </resources>
