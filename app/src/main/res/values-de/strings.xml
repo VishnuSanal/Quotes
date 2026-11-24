@@ -31,7 +31,7 @@
     <string name="next">Nächste</string>
     <string name="settings">Einstellungen</string>
     <string name="skip">Überspringen</string>
-    <string name="quote_loading">Zitat wird geladen …</string>
+    <string name="quote_loading">Zitat wird geladen …</string>
     <string name="pick_an_option">Wählen Sie eine Option</string>
     <string name="copy_quote_to_clipboard">Zitat in Zwischenablage kopieren</string>
     <string name="share_quote_as_image">Zitat als Bild teilen</string>
